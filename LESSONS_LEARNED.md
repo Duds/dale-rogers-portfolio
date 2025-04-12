@@ -25,3 +25,59 @@
 ## Build Process
 
 - The warning about `getStaticPaths()` being ignored in dynamic pages is normal in server output mode - these pages will be rendered on-demand rather than pre-generated
+
+## Design System
+
+### Component Theming
+
+1. **Centralized Theme Configuration**
+
+   - Moving theme variables to a central location improves maintainability
+   - Using CSS custom properties provides flexibility
+   - Component-specific theme variables enhance modularity
+   - Clear naming conventions are crucial
+
+2. **Responsive Typography**
+
+   - Clamp() function is powerful for fluid typography
+   - Viewport units need careful consideration
+   - Breaking points should align with content
+   - Type scale needs testing across devices
+
+3. **Layout Patterns**
+   - Full-width designs need careful spacing
+   - Edge-to-edge layouts enhance visual impact
+   - Container constraints can limit design
+   - Consistent spacing systems are important
+
+## Future Considerations
+
+### Scalability
+
+1. **Theme System**
+
+   - Plan for theme expansion
+   - Consider dark mode implementation
+   - Document theme structure
+   - Maintain consistent patterns
+
+2. **Component Library**
+   - Build reusable components
+   - Document usage patterns
+   - Consider edge cases
+   - Test across contexts
+
+### Maintenance
+
+1. **Documentation**
+
+   - Keep documentation current
+   - Use automated tools
+   - Maintain clear structure
+   - Document decisions
+
+2. **Code Quality**
+   - Follow consistent patterns
+   - Use type safety
+   - Consider performance
+   - Test thoroughly

@@ -160,6 +160,8 @@ chore: update tooling
 /* Colors */
 --colour-nav-bg: var(--colour-bg);
 --colour-nav-text: var(--colour-black);
+--colour-nav-border: rgba(16, 16, 15, 0.1);
+--colour-nav-link-hover: var(--colour-purple);
 ```
 
 ### Component Classes
@@ -184,6 +186,7 @@ We use themed component classes for consistent styling:
 - Uses CSS animation for rotation
 - Responsive sizing with breakpoints
 - Color inheritance through currentColor
+- Geometric shape-based design
 
 ### Navigation
 
@@ -191,6 +194,17 @@ We use themed component classes for consistent styling:
 - Themed component classes
 - Mobile-first responsive approach
 - Consistent interactive states
+- Outline button styling
+
+### Footer
+
+- Edge-to-edge layout
+- Decorative oversized text
+- Responsive column layout
+- Themed typography scale
+- Consistent spacing system
+
+## Best Practices
 
 ### Animation
 
@@ -198,6 +212,7 @@ We use themed component classes for consistent styling:
 - Keep animations subtle and purposeful
 - Provide reduced-motion alternatives
 - Test performance on mobile devices
+- Maintain consistent timing
 
 ### Responsive Design
 
@@ -205,3 +220,20 @@ We use themed component classes for consistent styling:
 - Test all breakpoints thoroughly
 - Ensure touch targets are adequate
 - Maintain visual hierarchy across sizes
+- Consider viewport-based units
+
+### Documentation
+
+- Use AI-powered updates with `update-docs`
+- Keep changelog entries concise
+- Document architectural decisions
+- Maintain development guidelines
+- Track lessons learned
+
+### Theme Usage
+
+- Use custom properties for consistency
+- Implement component-specific classes
+- Follow naming conventions
+- Maintain centralized configuration
+- Document theme structure
