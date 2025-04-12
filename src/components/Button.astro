@@ -1,0 +1,26 @@
+---
+interface Props {
+  href?: string
+  variant?: "primary" | "secondary"
+  class?: string
+  target?: string
+  rel?: string
+}
+
+const { href, variant = "primary", class: customClass = "", target, rel, ...rest } = Astro.props
+
+const baseClass = variant === "primary" ? "btn-primary" : "btn-secondary"
+const classes = `${baseClass} ${customClass}`
+
+const TagName = href ? "a" : "button"
+---
+
+<TagName
+  href={href}
+  class={`inline-flex items-center justify-center px-4 py-2 rounded-button transition-colors ${classes}`}
+  target={target}
+  rel={rel}
+  {...rest}
+>
+  <slot />
+</TagName>

@@ -1,0 +1,24 @@
+// This is the dynamic case study template that will render individual case studies
+import Layout from "../../layouts/Layout.astro"
+import Button from "../../components/Button.astro"
+
+// Define what paths to be prerendered
+export async function getStaticPaths() {
+  // In a real project, this data would come from files in a content collection or a CMS
+  return [
+    {
+      params: { slug: 'developing-a-bespoke-pmo-as-a-service-for-rio-tinto-aluminiu' },
+      props: {
+        title: 'Developing a Bespoke PMO as a Service for Rio Tinto Aluminium',
+        description: 'In the second half of 2023, I developed the PMO as a Service concept to deliver a tailored Project Management Office (PMO) solution for Rio Tinto Aluminium.',
+        tags: ['Agile', 'customer personas', 'service blueprint', 'speculative design', 'user journeys'],
+        date: 'Monday, 18 December 2023',
+        content: `
+          <h3>Introduction</h3>
+          <p>To secure the contract, I crafted a speculative design that illustrated our understanding of Rio Tinto Aluminium's needs and our ability to deliver a bespoke solution.</p>
+          
+          <h3>Key Objectives</h3>
+          <ul>
+            <li><strong>Speculative Design for Success:</strong> Create compelling personas, user journeys, and service blueprints tailored to Rio Tinto Aluminium's requirements.</li>
+            <li><strong>Showcase Expertise
+tsx file="src/pages/case-studies/[slug].astro"

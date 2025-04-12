@@ -1,0 +1,24 @@
+{
+    "name": "dale-rogers-portfolio",
+    "type": "module",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "dev": "astro dev",
+        "start": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "dependencies": {
+        "@astrojs/tailwind": "^5.0.0",
+        "@types/nodemailer": "^6.4.17",
+        "astro": "^5.6.1",
+        "nodemailer": "^6.10.0"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.14",
+        "postcss": "^8.4.24",
+        "tailwindcss": "^3.3.0"
+    }
+}

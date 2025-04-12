@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout title="Colophon">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="font-display text-4xl text-text mb-6">Colophon</h1>
+    
+    <div class="prose prose-invert max-w-none">
+      <section class="mb-8">
+        <h2 class="text-2xl font-display mb-4">About This Site</h2>
+        <p>Want to take a look under the hood of this website? Wonder no more!</p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-display mb-4">Technology Stack</h2>
+        <ul>
+          <li><strong>Framework:</strong> Built with <a href="https://astro.build" class="text-primary hover:text-primary-light transition-colors">Astro</a>, a modern static site generator that delivers lightning-fast performance. I chose Astro over WordPress as it provides better performance and security for a portfolio site.</li>
+          <li><strong>Styling:</strong> <a href="https://tailwindcss.com" class="text-primary hover:text-primary-light transition-colors">Tailwind CSS</a> for utility-first styling and consistent design</li>
+          <li><strong>Typography:</strong> Custom font stack using system fonts for optimal performance</li>
+          <li><strong>Icons:</strong> Custom SVG icon system for crisp, scalable graphics</li>
+          <li><strong>Contact Form:</strong> Server-side email handling using <a href="https://nodemailer.com" class="text-primary hover:text-primary-light transition-colors">Nodemailer</a> with Gmail SMTP</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-display mb-4">Hosting</h2>
+        <p>This site is hosted by <a href="https://crazydomains.com.au" class="text-primary hover:text-primary-light transition-colors">CrazyDomains</a> using their Linux hosting package. Since moving to Astro, the site is now statically generated and deployed, making it faster and more secure than the previous PHP-based setup. The contact form is handled server-side using <a href="https://nodejs.org" class="text-primary hover:text-primary-light transition-colors">Node.js</a>, allowing for seamless email integration while maintaining the site's performance.</p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-display mb-4">Development Tools</h2>
+        <ul>
+          <li><strong>Version Control:</strong> <a href="https://git-scm.com" class="text-primary hover:text-primary-light transition-colors">Git</a> for source control management</li>
+          <li><strong>Code Quality:</strong> <a href="https://eslint.org" class="text-primary hover:text-primary-light transition-colors">ESLint</a> and <a href="https://prettier.io" class="text-primary hover:text-primary-light transition-colors">Prettier</a> for consistent code style</li>
+          <li><strong>Development:</strong> <a href="https://code.visualstudio.com" class="text-primary hover:text-primary-light transition-colors">VS Code</a> with custom extensions for enhanced productivity</li>
+          <li><strong>Deployment:</strong> Automated deployment pipeline for seamless updates</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-display mb-4">Design Tools</h2>
+        <p>I swapped out the Adobe Creative Suite two years ago because I wasn't happy with the continuous and ongoing subscription fees. I now use <a href="https://affinity.serif.com/designer" class="text-primary hover:text-primary-light transition-colors">Affinity Designer</a> and <a href="https://affinity.serif.com/photo" class="text-primary hover:text-primary-light transition-colors">Affinity Photo</a> for all my image editing needs. I'm also a big fan of <a href="https://www.omnigroup.com/omnigraffle" class="text-primary hover:text-primary-light transition-colors">OmniGraffle</a> when creating design artefacts. Finally, I must attribute <a href="https://thenounproject.com" class="text-primary hover:text-primary-light transition-colors">the noun project</a>; it is a never-ending source of inspiration and procrastination.</p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-display mb-4">Design Principles</h2>
+        <ul>
+          <li><strong>Accessibility:</strong> <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" class="text-primary hover:text-primary-light transition-colors">WCAG 2.1</a> guidelines followed for inclusive design</li>
+          <li><strong>Performance:</strong> Optimized assets and minimal JavaScript for fast loading</li>
+          <li><strong>Responsive:</strong> Mobile-first approach ensuring great experience on all devices</li>
+          <li><strong>Dark Mode:</strong> Carefully crafted dark theme for reduced eye strain</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-display mb-4">Web Analytics</h2>
+        <p>I use <a href="https://umami.is" class="text-primary hover:text-primary-light transition-colors">Umami Analytics</a> to check if my mum has visited the site lately. It's a privacy-focused, open-source alternative to Google Analytics that I self-host alongside the website. No cookies, no personal data collection, just simple, ethical analytics.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-display mb-4">Open Source</h2>
+        <p>This site's source code is available on <a href="https://github.com/dale-rogers/dale-rogers-portfolio" class="text-primary hover:text-primary-light transition-colors">GitHub</a>. Feel free to explore how it's built or use it as inspiration for your own projects.</p>
+      </section>
+    </div>
+  </div>
+</Layout> 

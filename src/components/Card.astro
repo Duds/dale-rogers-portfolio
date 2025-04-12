@@ -1,0 +1,17 @@
+---
+interface Props {
+  title?: string
+  class?: string
+  clickable?: boolean
+  href?: string
+}
+
+const { title, class: customClass = "", clickable = false, href } = Astro.props
+
+const classes = `bg-background rounded-card shadow-card p-6 ${clickable ? "hover:shadow-lg cursor-pointer transform transition-transform hover:-translate-y-1" : ""} ${customClass}`
+---
+
+<div class={classes}>
+  {title && <h3 class="font-display text-xl text-text mb-4">{title}</h3>}
+  <slot />
+</div>

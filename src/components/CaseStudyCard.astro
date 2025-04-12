@@ -1,0 +1,36 @@
+---
+interface Props {
+  title: string
+  description: string
+  client: string
+  industry: string
+  duration: string
+  tags: string[]
+  href: string
+}
+
+const { title, description, client, industry, duration, tags, href } = Astro.props
+---
+
+<article class="bg-background rounded-card shadow-card overflow-hidden">
+  <div class="p-6">
+    <h3 class="font-display text-xl text-text mb-2">
+      <a href={href} class="hover:text-primary transition-colors">
+        {title}
+      </a>
+    </h3>
+    <p class="text-text-secondary mb-2">{description}</p>
+    <div class="text-sm text-text-secondary mb-4">
+      <p><span class="font-medium">Client:</span> {client}</p>
+      <p><span class="font-medium">Industry:</span> {industry}</p>
+      <p><span class="font-medium">Duration:</span> {duration}</p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <span class="px-2 py-1 bg-secondary text-text-secondary text-sm rounded-button">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+</article>

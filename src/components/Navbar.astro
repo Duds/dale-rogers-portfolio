@@ -1,0 +1,92 @@
+---
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1); // Remove the leading "/"
+
+// Define active link class
+const activeClass = "text-primary dark:text-primary border-b-2 border-primary";
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Articles', href: '/articles' },
+  { label: 'Capabilities', href: '/capabilities' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Colophon', href: '/colophon' },
+];
+---
+
+<nav class="border-b border-border" role="navigation" aria-label="Main navigation">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo/Site Title -->
+      <a href="/" class="font-display text-2xl text-text hover:text-primary transition-colors">
+        Dale Rogers
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="md:hidden p-2 rounded-button hover:bg-secondary"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="navbar-menu"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex space-x-6">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class={`text-text hover:text-primary transition-colors ${currentPath === item.href.slice(1) ? activeClass : ''}`}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div
+      id="navbar-menu"
+      class="md:hidden hidden mt-4 space-y-2"
+      role="menu"
+    >
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class={`block py-2 text-text hover:text-primary transition-colors ${currentPath === item.href.slice(1) ? activeClass : ''}`}
+          role="menuitem"
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle functionality
+  const menuButton = document.querySelector('button[aria-controls="navbar-menu"]');
+  const menu = document.getElementById('navbar-menu');
+  
+  menuButton?.addEventListener('click', () => {
+    const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', !isExpanded);
+    menu?.classList.toggle('hidden');
+  });
+</script>
