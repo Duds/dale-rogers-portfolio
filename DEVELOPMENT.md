@@ -147,3 +147,61 @@ chore: update tooling
 - Reference related issues
 - Include testing steps
 - Update documentation
+
+## Theme System
+
+### CSS Custom Properties
+
+```css
+/* Typography */
+--text-nav: clamp(1.25rem, 1.75vw, 1.5rem);
+--text-nav-logo: clamp(2rem, 2.5vw, 3rem);
+
+/* Colors */
+--colour-nav-bg: var(--colour-bg);
+--colour-nav-text: var(--colour-black);
+```
+
+### Component Classes
+
+We use themed component classes for consistent styling:
+
+```css
+.nav-base {
+  @apply fixed top-0 left-0 w-full z-50;
+}
+
+.nav-link {
+  @apply font-heading text-xl md:text-2xl px-6 py-2 border-2;
+}
+```
+
+## Components
+
+### SpinningLogo
+
+- SVG-based logo component
+- Uses CSS animation for rotation
+- Responsive sizing with breakpoints
+- Color inheritance through currentColor
+
+### Navigation
+
+- Full viewport width design
+- Themed component classes
+- Mobile-first responsive approach
+- Consistent interactive states
+
+### Animation
+
+- Use CSS transforms for performance
+- Keep animations subtle and purposeful
+- Provide reduced-motion alternatives
+- Test performance on mobile devices
+
+### Responsive Design
+
+- Use clamp() for fluid typography
+- Test all breakpoints thoroughly
+- Ensure touch targets are adequate
+- Maintain visual hierarchy across sizes

@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Environment variable management
 - LESSONS_LEARNED.md documenting key insights
 - Australian English spell checking configuration
+- Spinning logo component in navbar center
+- Theme-based navigation styling with outline buttons
+- Full-width layout for navigation and footer
+- Responsive typography scaling system
 
 ### Changed
 
@@ -31,6 +35,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed Node adapter configuration in astro.config.mjs
 - Updated content collection naming conventions
 - Standardized on npm as package manager
+- Enhanced navigation design with bolder typography
+- Updated footer to use theme variables
+- Improved mobile menu styling
+- Standardized component class naming
 
 ### Fixed
 
@@ -52,6 +60,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Contact form functionality
 - Dark mode support
 - Responsive design implementation
+
+### Technical
+
+- Added CSS custom properties for consistent theming
+- Implemented slow spin animation using CSS
+- Improved responsive breakpoints
+- Added SVG logo with geometric design
 
 [Unreleased]: https://github.com/Duds/dale-rogers-portfolio/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/Duds/dale-rogers-portfolio/releases/tag/v1.0.0

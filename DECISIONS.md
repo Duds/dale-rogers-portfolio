@@ -1,3 +1,50 @@
+# Design & Technical Decisions
+
+## Navigation & Layout
+
+### Full-Width Design
+
+- Removed container constraints for edge-to-edge design
+- Increased visual impact with full viewport width
+- Better alignment with modern web design trends
+
+### Component Theming
+
+- Moved to CSS custom properties for consistent styling
+- Created component-specific theme variables
+- Standardized class naming conventions
+- Improved maintainability through centralized theming
+
+### Typography System
+
+- Implemented responsive font scaling using clamp()
+- Created hierarchical type scale
+- Used viewport units for fluid typography
+- Maintained readability across devices
+
+### Interactive Elements
+
+- Added outline buttons for clear call-to-actions
+- Implemented hover states with color transitions
+- Created consistent animation durations
+- Used geometric shapes for brand identity
+
+## Animation & Performance
+
+### Logo Animation
+
+- Chose CSS animation for performance
+- Set 12-second rotation for subtle effect
+- Used transform for smooth rendering
+- Implemented responsive scaling
+
+### Mobile Considerations
+
+- Enhanced touch targets for better accessibility
+- Improved mobile menu interactions
+- Maintained performance on lower-end devices
+- Ensured smooth transitions on all platforms
+
 # Technical Decisions Log
 
 ## [2024-04-12] Package Manager: Standardized on npm

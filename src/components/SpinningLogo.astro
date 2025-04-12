@@ -1,0 +1,63 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div class={`spinning-logo ${className}`}>
+  <svg
+    width="64"
+    height="64"
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="animate-spin-slow w-16 h-16 md:w-20 md:h-20"
+  >
+    <!-- Outer circle -->
+    <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="2"
+    ></circle>
+
+    <!-- Inner geometric shapes -->
+    <path d="M24 8L32 20H16L24 8Z" fill="currentColor" class="opacity-80"
+    ></path>
+    <circle
+      cx="24"
+      cy="28"
+      r="8"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      class="opacity-90"></circle>
+    <path
+      d="M20 28L28 28"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"></path>
+    <path
+      d="M24 24L24 32"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"></path>
+  </svg>
+</div>
+
+<style>
+  .spinning-logo {
+    @apply relative inline-flex items-center justify-center scale-100 md:scale-110;
+  }
+
+  .animate-spin-slow {
+    animation: spin 12s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>

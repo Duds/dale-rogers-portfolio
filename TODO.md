@@ -101,3 +101,26 @@ For better AI context and collaboration, maintain these documentation files:
 // TODO: Add error handling here
 // FIXME: This needs optimization
 // [ ] Implement this feature
+
+# TODO
+
+## High Priority
+
+- [ ] Add prefers-reduced-motion support for logo animation
+- [ ] Implement dark mode for navigation and logo
+- [ ] Add aria-labels for improved accessibility
+- [ ] Test navigation on all major browsers
+
+## Medium Priority
+
+- [ ] Create hover animations for logo
+- [ ] Add page transition animations
+- [ ] Optimize SVG paths for logo
+- [ ] Add loading states for navigation
+
+## Low Priority
+
+- [ ] Create alternative logo variations
+- [ ] Add micro-interactions to buttons
+- [ ] Implement scroll-triggered animations
+- [ ] Add keyboard navigation enhancements

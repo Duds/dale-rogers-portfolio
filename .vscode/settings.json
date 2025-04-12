@@ -46,5 +46,27 @@
   "todo-tree.tree.showInActivityBar": true,
   "todo-tree.tree.showInStatusBar": true,
   "todo-tree.tree.showInPanel": true,
-  "todo-tree.tree.showInView": true
+  "todo-tree.tree.showInView": true,
+  "todo-tree.tree.view": "default",
+  "todo-tree.tree.defaultView": "default",
+  "todo-tree.tree.views": {
+    "default": {
+      "name": "Todo Tree",
+      "visibility": "visible"
+    }
+  },
+  "cSpell.words": ["colour", "Fraunces", "prerendered", "Umami"],
+  "cSpell.language": "en,en-AU",
+  "cSpell.enabledLanguageIds": [
+    "markdown",
+    "plaintext",
+    "typescript",
+    "typescriptreact",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "jsonc",
+    "astro"
+  ],
+  "npm.packageManager": "npm"
 }

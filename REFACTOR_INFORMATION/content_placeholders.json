@@ -1,0 +1,112 @@
+{
+  "hero": {
+    "heading": "Design that builds trust",
+    "intro": "Dale Rogers is a service designer helping orgs define, improve, and align their services.",
+    "ctaLabel": "View my work"
+  },
+  "caseStrip": [
+    {
+      "imageUrl": "/img/bidwriter.jpg",
+      "title": "BidWriter",
+      "href": "/projects/bidwriter"
+    },
+    {
+      "imageUrl": "/img/cv360.jpg",
+      "title": "CriticalView360",
+      "href": "/projects/cv360"
+    },
+    {
+      "imageUrl": "/img/omcanvas.jpg",
+      "title": "OMCanvas",
+      "href": "/projects/omcanvas"
+    },
+    {
+      "imageUrl": "/img/ntr.jpg",
+      "title": "NTR Redesign",
+      "href": "/projects/ntr"
+    }
+  ],
+  "textIntro": [
+    "Human-centred design with clarity, care, and commitment to the actual problem.",
+    "Design isn’t just delivery – it’s strategy, structure, and service intelligence."
+  ],
+  "projectGrid": [
+    {
+      "title": "BidWriter",
+      "tags": ["AI Automation", "Tendering", "Proposal Tools"],
+      "imageUrl": "/img/bidwriter-preview.jpg",
+      "meta": "Streamlined bid creation for service-based RFTs"
+    },
+    {
+      "title": "CriticalView360",
+      "tags": ["Risk Management", "Safety", "AI Detection"],
+      "imageUrl": "/img/cv360-preview.jpg",
+      "meta": "Visualise and manage controls in high-risk operations"
+    },
+    {
+      "title": "OMCanvas",
+      "tags": ["Operating Models", "Drag-and-Drop", "Web App"],
+      "imageUrl": "/img/omcanvas-preview.jpg",
+      "meta": "Build and document enterprise service operating models"
+    }
+  ],
+  "services": [
+    {
+      "title": "Service Design",
+      "description": "End-to-end service alignment using human-centred tools.",
+      "bgColor": "#C09B80",
+      "imageUrl": "/icons/service-design.svg"
+    },
+    {
+      "title": "UX Research",
+      "description": "Synthesis and evidence for decision-making.",
+      "bgColor": "#B6A4C3",
+      "imageUrl": "/icons/ux-research.svg"
+    },
+    {
+      "title": "Prototyping",
+      "description": "Figma, clickable demos, and flow mapping.",
+      "bgColor": "#A2C3B2",
+      "imageUrl": "/icons/prototyping.svg"
+    },
+    {
+      "title": "Bid Strategy",
+      "description": "RFT structuring, response writing, and win themes.",
+      "bgColor": "#DBBC8B",
+      "imageUrl": "/icons/bid-strategy.svg"
+    }
+  ],
+  "belief": {
+    "statement": "Good design is strategy made visible.",
+    "emoji": "🧠"
+  },
+  "clients": [
+    "Atturra",
+    "ASCA",
+    "NSW Education",
+    "Training.gov.au",
+    "Southern Cross AI"
+  ],
+  "finalCta": {
+    "title": "Let’s make something practical.",
+    "ctaLabel": "Get in touch"
+  },
+  "footer": {
+    "socials": [
+      { "name": "GitHub", "href": "https://github.com/Duds" },
+      {
+        "name": "LinkedIn",
+        "href": "https://www.linkedin.com/in/dale-rogers-au"
+      }
+    ],
+    "sitemap": [
+      { "label": "Projects", "href": "/projects" },
+      { "label": "About", "href": "/about" },
+      { "label": "Contact", "href": "/contact" }
+    ],
+    "legal": [
+      { "label": "Privacy", "href": "/privacy" },
+      { "label": "Terms", "href": "/terms" }
+    ]
+  }
+}

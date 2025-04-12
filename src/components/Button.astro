@@ -1,11 +1,18 @@
 ---
-interface Props {
-  href: string;
+import type { HTMLAttributes } from "astro/types";
+
+// Combine attributes for both <a> and <button>, excluding 'class'
+// as Astro handles it specially.
+interface BaseProps
+  extends Omit<HTMLAttributes<"a"> & HTMLAttributes<"button">, "class"> {}
+
+interface Props extends BaseProps {
+  href?: string;
   variant?: "primary" | "secondary" | "outline";
-  class?: string;
+  class?: string; // For Astro's class:list directive and standard class
 }
 
-const { href, variant = "primary", class: className } = Astro.props;
+const { href, variant = "primary", class: className, ...rest } = Astro.props;
 
 const baseStyles =
   "inline-flex items-center justify-center px-6 py-3 rounded-[var(--radius-md)] font-medium transition-all duration-200 ease-in-out";
@@ -18,33 +25,19 @@ const variantStyles = {
     "border-2 border-[var(--colour-button-outline)] text-[var(--colour-text)] hover:bg-[var(--colour-button-outline-hover)]",
 };
 
-const classes = [baseStyles, variantStyles[variant], className]
+const combinedClasses = [baseStyles, variantStyles[variant], className]
   .filter(Boolean)
   .join(" ");
 ---
 
-<a href={href} class={classes}>
-  <slot />
-</a>
-
-<style>
-  .button-primary {
-    display: inline-block;
-    background-color: var(--colour-button-bg);
-    color: var(--colour-button-text);
-    padding: 0.75rem 1.75rem;
-    font-size: 1rem;
-    font-weight: 500;
-    font-family: var(--font-body);
-    border-radius: var(--radius-pill);
-    box-shadow: 0 2px 6px var(--colour-shadow);
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  .button-primary:hover {
-    background-color: var(--colour-button-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px var(--colour-shadow);
-  }
-</style>
+{
+  href ? (
+    <a href={href} class={combinedClasses} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button class={combinedClasses} {...rest}>
+      <slot />
+    </button>
+  )
+}
