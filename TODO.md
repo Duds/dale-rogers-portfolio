@@ -1,5 +1,13 @@
 # Portfolio TODO List
 
+## Completed Items ✓
+
+- [x] Standardize package manager (npm)
+- [x] Fix Node adapter configuration
+- [x] Resolve content collection naming issues
+- [x] Add Australian English spell checking
+- [x] Create LESSONS_LEARNED.md
+
 ## Analytics Setup
 
 - [ ] Deploy Umami Analytics
@@ -15,89 +23,64 @@ For better AI context and collaboration, maintain these documentation files:
 
 ### DECISIONS.md
 
-- Document important technical decisions
-- Include context, alternatives considered, and reasoning
-- Example format:
-
-  ```markdown
-  ## [Date] Analytics: Chose Umami over Google Analytics
-
-  - Context: Needed privacy-focused, lightweight analytics
-  - Options Considered:
-    1. Google Analytics
-    2. Plausible
-    3. Umami
-  - Decision: Umami
-  - Reasoning:
-    - Open source and self-hostable
-    - Lightweight (1KB)
-    - No cookies required
-    - Simple deployment
-  ```
+- [x] Document package manager decision
+- [x] Document adapter configuration decision
+- [ ] Add more technical decisions as they arise
 
 ### ARCHITECTURE.md
 
-- Document system architecture
-- Include component relationships
-- API integrations
-- Data flow diagrams
+- [ ] Document system architecture
+- [ ] Include component relationships
+- [ ] API integrations
+- [ ] Data flow diagrams
 
 ### DEVELOPMENT.md
 
-- Development environment setup
-- Local development workflows
-- Testing procedures
-- Deployment processes
+- [x] Update with npm-specific instructions
+- [x] Add content collection guidelines
+- [x] Add adapter troubleshooting section
+- [ ] Add more detailed testing procedures
 
 ### .env.example
 
-- Keep updated with all environment variables
-- Include descriptions for each variable
-- Document any required third-party credentials
+- [x] Keep updated with all environment variables
+- [x] Include descriptions for each variable
+- [x] Document any required third-party credentials
 
 ### CHANGELOG.md
 
-- Track significant changes
-- Link to relevant issue/PR numbers
-- Include migration notes if needed
+- [x] Track significant changes
+- [x] Link to relevant issue/PR numbers
+- [x] Include migration notes if needed
 
 ## Best Practices for AI Context
 
 1. Use consistent file naming:
 
-   - Component files: PascalCase (e.g., `ContactForm.astro`)
-   - Utility files: camelCase (e.g., `emailUtils.ts`)
-   - Documentation: UPPERCASE.md
+   - [x] Component files: PascalCase (e.g., `ContactForm.astro`)
+   - [x] Utility files: camelCase (e.g., `emailUtils.ts`)
+   - [x] Documentation: UPPERCASE.md
 
 2. Add JSDoc comments for important functions:
 
-   ```typescript
-   /**
-    * Sends contact form email using Nodemailer
-    * @param {FormData} data - Form data from contact submission
-    * @returns {Promise<void>} - Resolves when email is sent
-    * @throws {Error} - If email fails to send
-    */
-   ```
+   - [x] Document email sending functions
+   - [x] Document content collection utilities
+   - [ ] Document more utility functions
 
 3. Create README files in major directories:
 
-   - `/src/components/README.md`
-   - `/src/layouts/README.md`
-   - `/src/pages/README.md`
+   - [ ] `/src/components/README.md`
+   - [ ] `/src/layouts/README.md`
+   - [ ] `/src/pages/README.md`
 
 4. Use conventional commits:
-   ```
-   feat: add contact form email functionality
-   fix: correct email template formatting
-   docs: update deployment instructions
-   ```
+   - [x] Implement commit message guidelines
+   - [ ] Add commit message validation
 
 ## Current Development Tasks
 
 - [ ] Set up Umami Analytics
-- [ ] Create initial DECISIONS.md file
-- [ ] Add directory README files
+- [ ] Create directory README files
 - [ ] Update documentation with current architecture
 - [ ] Component Theme Improvements
   - [ ] Create theme documentation with color palette and usage guidelines

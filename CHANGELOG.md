@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Colophon page detailing site architecture
 - Comprehensive documentation structure
 - Environment variable management
+- LESSONS_LEARNED.md documenting key insights
+- Australian English spell checking configuration
 
 ### Changed
 
@@ -26,6 +28,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Standardized Footer styling with new theme tokens
   - Implemented consistent container classes
   - Added TypeScript improvements across components
+- Fixed Node adapter configuration in astro.config.mjs
+- Updated content collection naming conventions
+- Standardized on npm as package manager
+
+### Fixed
+
+- Resolved TypeScript errors in dynamic routes
+- Corrected content collection name mismatches
+- Fixed adapter configuration issues
 
 ### Planned
 
