@@ -8,17 +8,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Contact form with Nodemailer integration
 - Colophon page detailing site architecture
 - Comprehensive documentation structure
 - Environment variable management
 
 ### Changed
+
 - Migrated from PHP/MySQL to Astro
 - Updated hosting configuration for static deployment
 - Improved email handling with Gmail SMTP
+- Refactored components to use CSS design tokens
+  - Updated Button component with variant support
+  - Improved Card component with dynamic element rendering
+  - Enhanced Navbar with proper ARIA attributes
+  - Standardized Footer styling with new theme tokens
+  - Implemented consistent container classes
+  - Added TypeScript improvements across components
 
 ### Planned
+
 - Integration of Umami Analytics
 - Directory-specific README files
 - Enhanced documentation coverage
@@ -26,7 +36,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2024-04-12
 
 ### Added
+
 - Initial release of Astro-based portfolio
 - Contact form functionality
 - Dark mode support
-- Responsive design implementation 
+- Responsive design implementation
+
+[Unreleased]: https://github.com/Duds/dale-rogers-portfolio/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/Duds/dale-rogers-portfolio/releases/tag/v1.0.0

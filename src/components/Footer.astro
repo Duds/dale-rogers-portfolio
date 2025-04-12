@@ -1,45 +1,49 @@
 ---
-import Icon from "./Icon.astro"
+import Icon from "./Icon.astro";
 
 const currentYear = new Date().getFullYear();
 
 const socialLinks = [
   {
-    name: 'LinkedIn',
-    href: 'https://linkedin.com/in/dale-rogers',
-    icon: 'linkedin',
+    name: "LinkedIn",
+    href: "https://linkedin.com/in/dale-rogers",
+    icon: "linkedin" as const,
   },
   {
-    name: 'GitHub',
-    href: 'https://github.com/dale-rogers',
-    icon: 'github',
+    name: "GitHub",
+    href: "https://github.com/dale-rogers",
+    icon: "github" as const,
   },
   {
-    name: 'Email',
-    href: 'mailto:dale@example.com',
-    icon: 'mail',
+    name: "Email",
+    href: "mailto:dale@example.com",
+    icon: "mail" as const,
   },
 ];
 ---
 
-<footer class="bg-secondary py-8">
-  <div class="container mx-auto px-4">
+<footer class="bg-[var(--colour-footer-bg)] py-8">
+  <div class="container-default">
     <div class="flex flex-col md:flex-row justify-between items-center">
       <div class="mb-4 md:mb-0">
-        <p class="text-text-secondary">&copy; {currentYear} Dale Rogers. All rights reserved.</p>
+        <p class="text-[var(--colour-footer-text)]">
+          &copy; {currentYear} Dale Rogers. All rights reserved.
+        </p>
       </div>
       <div class="flex space-x-4">
-        {socialLinks.map((link) => (
-          <a
-            href={link.href}
-            class="text-text hover:text-primary transition-colors"
-            aria-label={link.name}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon name={link.icon} />
-          </a>
-        ))}
+        {
+          socialLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-[var(--colour-footer-text)] hover:text-accent transition-colors"
+              aria-label={link.name}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name={link.icon} />
+            </a>
+          ))
+        }
       </div>
     </div>
   </div>

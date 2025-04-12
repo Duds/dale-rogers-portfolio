@@ -1,17 +1,25 @@
 ---
 interface Props {
-  title?: string
-  class?: string
-  clickable?: boolean
-  href?: string
+  title?: string;
+  class?: string;
+  clickable?: boolean;
+  href?: string;
 }
 
-const { title, class: customClass = "", clickable = false, href } = Astro.props
+const { title, class: className = "", clickable = false, href } = Astro.props;
 
-const classes = `bg-background rounded-card shadow-card p-6 ${clickable ? "hover:shadow-lg cursor-pointer transform transition-transform hover:-translate-y-1" : ""} ${customClass}`
+const baseClasses = "bg-background rounded-[var(--radius-lg)] shadow-soft p-6";
+const hoverClasses = clickable
+  ? "hover:shadow-lg cursor-pointer transition-all duration-300 hover:-translate-y-1"
+  : "";
+const classes = [baseClasses, hoverClasses, className]
+  .filter(Boolean)
+  .join(" ");
+
+const Element = href ? "a" : "div";
 ---
 
-<div class={classes}>
-  {title && <h3 class="font-display text-xl text-text mb-4">{title}</h3>}
+<Element href={href} class={classes}>
+  {title && <h3 class="heading-3 mb-4">{title}</h3>}
   <slot />
-</div>
+</Element>

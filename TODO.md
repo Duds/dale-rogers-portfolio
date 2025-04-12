@@ -1,6 +1,7 @@
 # Portfolio TODO List
 
 ## Analytics Setup
+
 - [ ] Deploy Umami Analytics
   - Recommended: Deploy separately from main site for better maintainability
   - Options: Vercel, Railway, or existing hosting
@@ -9,14 +10,18 @@
   - Document deployment details in DEPLOYMENT.md
 
 ## Documentation Improvements
+
 For better AI context and collaboration, maintain these documentation files:
 
 ### DECISIONS.md
+
 - Document important technical decisions
 - Include context, alternatives considered, and reasoning
 - Example format:
+
   ```markdown
   ## [Date] Analytics: Chose Umami over Google Analytics
+
   - Context: Needed privacy-focused, lightweight analytics
   - Options Considered:
     1. Google Analytics
@@ -31,34 +36,41 @@ For better AI context and collaboration, maintain these documentation files:
   ```
 
 ### ARCHITECTURE.md
+
 - Document system architecture
 - Include component relationships
 - API integrations
 - Data flow diagrams
 
 ### DEVELOPMENT.md
+
 - Development environment setup
 - Local development workflows
 - Testing procedures
 - Deployment processes
 
 ### .env.example
+
 - Keep updated with all environment variables
 - Include descriptions for each variable
 - Document any required third-party credentials
 
 ### CHANGELOG.md
+
 - Track significant changes
 - Link to relevant issue/PR numbers
 - Include migration notes if needed
 
 ## Best Practices for AI Context
+
 1. Use consistent file naming:
+
    - Component files: PascalCase (e.g., `ContactForm.astro`)
    - Utility files: camelCase (e.g., `emailUtils.ts`)
    - Documentation: UPPERCASE.md
 
 2. Add JSDoc comments for important functions:
+
    ```typescript
    /**
     * Sends contact form email using Nodemailer
@@ -69,6 +81,7 @@ For better AI context and collaboration, maintain these documentation files:
    ```
 
 3. Create README files in major directories:
+
    - `/src/components/README.md`
    - `/src/layouts/README.md`
    - `/src/pages/README.md`
@@ -81,7 +94,27 @@ For better AI context and collaboration, maintain these documentation files:
    ```
 
 ## Current Development Tasks
+
 - [ ] Set up Umami Analytics
 - [ ] Create initial DECISIONS.md file
 - [ ] Add directory README files
-- [ ] Update documentation with current architecture 
+- [ ] Update documentation with current architecture
+- [ ] Component Theme Improvements
+  - [ ] Create theme documentation with color palette and usage guidelines
+  - [ ] Add theme toggle functionality
+  - [ ] Implement theme preview in Colophon page
+  - [ ] Add unit tests for themed components
+  - [ ] Create theme migration guide for future updates
+- [ ] Accessibility Enhancements
+  - [ ] Add ARIA labels to all interactive elements
+  - [ ] Implement keyboard navigation for mobile menu
+  - [ ] Add skip-to-content link
+  - [ ] Test with screen readers
+- [ ] Performance Optimization
+  - [ ] Audit CSS custom property usage
+  - [ ] Consider extracting common styles to utility classes
+  - [ ] Implement critical CSS loading
+
+// TODO: Add error handling here
+// FIXME: This needs optimization
+// [ ] Implement this feature
