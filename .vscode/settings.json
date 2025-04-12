@@ -41,5 +41,10 @@
     "**/node_modules/**",
     "**/dist/**",
     "**/.git/**"
-  ]
+  ],
+  "todo-tree.tree.showInExplorer": true,
+  "todo-tree.tree.showInActivityBar": true,
+  "todo-tree.tree.showInStatusBar": true,
+  "todo-tree.tree.showInPanel": true,
+  "todo-tree.tree.showInView": true
 }
