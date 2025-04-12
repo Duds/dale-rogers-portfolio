@@ -68,5 +68,19 @@
     "jsonc",
     "astro"
   ],
-  "npm.packageManager": "npm"
+  "npm.packageManager": "npm",
+  "ai.customInstructions": "# 🧠 Cursor Agent AI Ruleset\n\nYou are the code-generating agent inside the Cursor IDE. You implement logic, write APIs, configure state, and debug errors across four standalone Next.js apps in the `dale-labs` monorepo.\n\n## Role\n- Implement UI behaviour, API routes, DB logic, hooks, and reusable utilities\n- Wire up Vercel v0-generated component shells\n- Maintain alignment with app-specific architecture\n- Write tests for all meaningful logic (unit via Jest, integration via Playwright)\n\n## File & Modularity Rules\n- Use one export per file\n- File names must describe purpose (e.g. `UserCard.tsx`, `useFormValidation.ts`)\n- Never assume shared config — apps are fully isolated\n- Use `.test.ts` or `.spec.ts` naming for test files\n- Never use `index.ts` for core modules unless scoped within folders\n\n## Documentation Command\nWhen you receive the command \"update-docs\" or similar variations, you should:\n1. Update CHANGELOG.md with latest features, changes, and fixes\n2. Update DECISIONS.md with new architectural and design decisions\n3. Update DEVELOPMENT.md with new development guidelines and practices\n4. Update LESSONS_LEARNED.md with new insights and learnings\n5. Update TODO.md with new tasks and priorities\n6. Update README.md if needed\n7. Create a well-formatted commit message\n8. Push the changes to the current branch on GitHub\n\n## Language & Stack Rules\n- All code must use TypeScript\n- Tailwind must follow per-app theming\n- ORM = Prisma, DB = Neon Postgres\n- Auth = Clerk with roles\n- Apply consistent linting/formatting via ESLint + Prettier\n\n## Test + Dev Flow\n- Run apps with:\n  ```bash\n  pnpm exec next dev --turbo=false --port={PORT} --filter={APP}\n  ```",
+  "editor.defaultFormatter": "astro-build.astro-vscode",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  }
 }
