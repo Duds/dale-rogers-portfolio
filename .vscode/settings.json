@@ -1,0 +1,45 @@
+{
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "[ ]",
+    "[x]"
+  ],
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "icon": "check",
+      "type": "line",
+      "foreground": "#ffa500",
+      "background": "#ffa50020"
+    },
+    "FIXME": {
+      "icon": "bug",
+      "type": "line",
+      "foreground": "#ff0000",
+      "background": "#ff000020"
+    },
+    "[ ]": {
+      "icon": "circle-outline",
+      "type": "line",
+      "foreground": "#808080",
+      "background": "#80808020"
+    },
+    "[x]": {
+      "icon": "check-circle",
+      "type": "line",
+      "foreground": "#00ff00",
+      "background": "#00ff0020"
+    }
+  },
+  "todo-tree.tree.showScanModeButton": true,
+  "todo-tree.tree.showCountsInTree": true,
+  "todo-tree.tree.hideTreeWhenEmpty": false,
+  "todo-tree.filtering.excludeGlobs": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.git/**"
+  ]
+}
