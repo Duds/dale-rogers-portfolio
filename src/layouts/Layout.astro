@@ -1,17 +1,32 @@
 ---
-import Navbar from "../components/Navbar.astro"
-import Footer from "../components/Footer.astro"
-import "../styles/global.css"
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
 
 interface Props {
-  title: string
-  description?: string
+  title: string;
+  description?: string;
 }
 
-const { title, description = "Dale Rogers - Service Designer based in Canberra, Australia" } = Astro.props
+const {
+  title,
+  description = "Dale Rogers - Service Designer based in Canberra, Australia",
+} = Astro.props;
+
+// Theme initialization script that runs before page loads to prevent flashing
+const themeScript = `
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const storedTheme = localStorage.getItem('theme');
+
+  if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+`;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -20,9 +35,11 @@ const { title, description = "Dale Rogers - Service Designer based in Canberra, 
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <!-- Inject the theme script early to avoid flashing -->
+    <script set:html={themeScript} />
   </head>
   <body class="font-body text-text bg-background min-h-screen flex flex-col">
-    <Navbar />
+    <Navigation />
     <main class="flex-grow">
       <slot />
     </main>

@@ -1,11 +1,28 @@
 ---
+/**
+ * @fileoverview Button component that can render as either a button or anchor element.
+ * Supports multiple variants and inherits all standard HTML button/anchor attributes.
+ */
+
 import type { HTMLAttributes } from "astro/types";
 
-// Combine attributes for both <a> and <button>, excluding 'class'
-// as Astro handles it specially.
+/**
+ * Base props interface that combines attributes for both <a> and <button> elements.
+ * Excludes 'class' as it's handled specially by Astro.
+ * @typedef {Object} BaseProps
+ * @extends {Omit<HTMLAttributes<"a"> & HTMLAttributes<"button">, "class">}
+ */
 interface BaseProps
   extends Omit<HTMLAttributes<"a"> & HTMLAttributes<"button">, "class"> {}
 
+/**
+ * Props interface for the Button component
+ * @typedef {Object} ButtonProps
+ * @property {string} [href] - URL for anchor tag, if provided renders as <a> instead of <button>
+ * @property {('primary'|'secondary'|'outline')} [variant='primary'] - Visual style variant
+ * @property {string} [class] - Additional CSS classes to apply
+ * @extends {BaseProps}
+ */
 interface Props extends BaseProps {
   href?: string;
   variant?: "primary" | "secondary" | "outline";
@@ -14,8 +31,17 @@ interface Props extends BaseProps {
 
 const { href, variant = "primary", class: className, ...rest } = Astro.props;
 
+/**
+ * Base styles applied to all button variants
+ * @type {string}
+ */
 const baseStyles =
   "inline-flex items-center justify-center px-6 py-3 rounded-[var(--radius-md)] font-medium transition-all duration-200 ease-in-out";
+
+/**
+ * Style variants for different button types
+ * @type {Record<string, string>}
+ */
 const variantStyles = {
   primary:
     "bg-[var(--colour-button-primary)] text-white hover:bg-[var(--colour-button-primary-hover)]",
@@ -25,6 +51,10 @@ const variantStyles = {
     "border-2 border-[var(--colour-button-outline)] text-[var(--colour-text)] hover:bg-[var(--colour-button-outline-hover)]",
 };
 
+/**
+ * Combines base styles, variant styles, and any additional classes
+ * @type {string}
+ */
 const combinedClasses = [baseStyles, variantStyles[variant], className]
   .filter(Boolean)
   .join(" ");

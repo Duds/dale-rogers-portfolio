@@ -20,6 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full-width layout for navigation and footer
 - Responsive typography scaling system
 - Custom documentation update command in Cursor AI
+- LogoSalad component for displaying client logos in a responsive grid layout
+  - Features responsive grid layout with hover effects
+  - Supports dark mode
+  - Includes lazy loading and external links
+  - Documentation added to THEME.md
 
 ### Changed
 

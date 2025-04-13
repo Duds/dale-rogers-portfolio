@@ -204,6 +204,27 @@ We use themed component classes for consistent styling:
 - Themed typography scale
 - Consistent spacing system
 
+### LogoSalad
+
+The LogoSalad component (`src/components/LogoSalad.astro`) provides a responsive grid layout for displaying client logos. It features:
+
+- Responsive grid layout (2-4 columns based on viewport)
+- Hover effects with scale and shadow
+- Dark mode support
+- Lazy loading for images
+- External links to client websites
+- Accessibility features
+
+Usage:
+
+```astro
+---
+import LogoSalad from '../components/LogoSalad.astro';
+---
+
+<LogoSalad />
+```
+
 ## Best Practices
 
 ### Animation

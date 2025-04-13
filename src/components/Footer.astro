@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+import Container from "./Container.astro";
 
 const currentYear = new Date().getFullYear();
 
@@ -35,97 +36,155 @@ const infoLinks = [
 ---
 
 <footer class="footer-base">
-  <div class="footer-container">
-    <!-- Left side: CTA -->
-    <div class="footer-cta">
-      <h2 class="footer-heading">Let's design experiences that matter.</h2>
-      <a href="/contact" class="footer-button">
-        Start a conversation
-        <svg
-          class="ml-3 w-5 h-5 md:w-6 md:h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-        </svg>
-      </a>
-    </div>
-
-    <!-- Right side: Three columns -->
-    <div class="footer-columns">
-      <div class="footer-grid">
-        <!-- Column 1: Socials -->
-        <div>
-          <h3 class="footer-column-heading">Socials</h3>
-          <ul class="space-y-2">
-            {
-              socialLinks.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class="footer-social-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Icon name={link.icon} class="w-5 h-5 mr-2" />
-                    {link.name}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <!-- Column 2: Sitemap -->
-        <div>
-          <h3 class="footer-column-heading">Sitemap</h3>
-          <ul class="space-y-2">
-            {
-              sitemapLinks.map((link) => (
-                <li>
-                  <a href={link.href} class="footer-link">
-                    {link.name}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <!-- Column 3: Info -->
-        <div>
-          <h3 class="footer-column-heading">Info</h3>
-          <ul class="space-y-2">
-            {
-              infoLinks.map((link) => (
-                <li>
-                  <a href={link.href} class="footer-link">
-                    {link.name}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+  <Container padding="md">
+    <div class="footer-content">
+      <!-- Left side: CTA -->
+      <div class="footer-cta">
+        <h2 class="footer-heading">Let's design experiences that matter.</h2>
+        <a href="/contact" class="footer-button">
+          Start a conversation
+          <svg
+            class="ml-3 w-5 h-5 md:w-6 md:h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
       </div>
 
-      <!-- Copyright & Logo -->
-      <div class="footer-copyright">
-        <p class="footer-copyright-text">
-          &copy; {currentYear} Dale Rogers. All rights reserved.
-        </p>
+      <!-- Right side: Three columns -->
+      <div class="footer-columns">
+        <div class="footer-grid">
+          <!-- Column 1: Socials -->
+          <div>
+            <h3 class="footer-column-heading">Socials</h3>
+            <ul class="space-y-2">
+              {
+                socialLinks.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="footer-social-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Icon name={link.icon} class="w-5 h-5 mr-2" />
+                      {link.name}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <!-- Column 2: Sitemap -->
+          <div>
+            <h3 class="footer-column-heading">Sitemap</h3>
+            <ul class="space-y-2">
+              {
+                sitemapLinks.map((link) => (
+                  <li>
+                    <a href={link.href} class="footer-link">
+                      {link.name}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <!-- Column 3: Info -->
+          <div>
+            <h3 class="footer-column-heading">Info</h3>
+            <ul class="space-y-2">
+              {
+                infoLinks.map((link) => (
+                  <li>
+                    <a href={link.href} class="footer-link">
+                      {link.name}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <!-- Copyright & Logo -->
+        <div class="footer-copyright">
+          <p class="footer-copyright-text">
+            &copy; {currentYear} Dale Rogers. All rights reserved.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
+  </Container>
 
   <!-- Oversized decorative text -->
   <div class="footer-decorative-text" aria-hidden="true">
     <p style="width: 100vw;">Dale Rogers</p>
   </div>
 </footer>
+
+<style>
+  .footer-base {
+    @apply relative bg-black text-white py-20 overflow-hidden;
+  }
+
+  .footer-content {
+    @apply flex flex-col md:flex-row justify-between gap-12 md:gap-24;
+  }
+
+  .footer-cta {
+    @apply md:w-3/5;
+  }
+
+  .footer-heading {
+    @apply text-4xl md:text-6xl font-heading mb-8;
+  }
+
+  .footer-button {
+    @apply inline-flex items-center justify-center rounded-pill px-8 py-4 text-xl md:text-2xl font-medium transition-colors duration-200
+           bg-white text-black hover:bg-purple-500 hover:text-white;
+  }
+
+  .footer-columns {
+    @apply md:w-2/5;
+  }
+
+  .footer-grid {
+    @apply grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12;
+  }
+
+  .footer-column-heading {
+    @apply text-xl font-heading mb-4;
+  }
+
+  .footer-link {
+    @apply text-white hover:text-purple-500 transition-colors;
+  }
+
+  .footer-social-link {
+    @apply inline-flex items-center text-white hover:text-purple-500 transition-colors;
+  }
+
+  .footer-copyright {
+    @apply pt-8 border-t border-white/10;
+  }
+
+  .footer-copyright-text {
+    @apply text-white/50 text-sm;
+  }
+
+  .footer-decorative-text {
+    @apply absolute bottom-0 left-0 w-screen text-left select-none pointer-events-none whitespace-nowrap
+           font-heading text-[18vw] leading-none text-white/5 translate-y-[45%] tracking-[-.02em];
+  }
+</style>

@@ -1,5 +1,14 @@
 import { defineCollection, z } from "astro:content";
 
+/**
+ * @fileoverview Content collection configuration for the portfolio site.
+ * Defines schemas for articles and case studies collections.
+ */
+
+/**
+ * Schema for articles collection
+ * @type {import('astro:content').CollectionConfig}
+ */
 const articlesCollection = defineCollection({
   type: "content",
   schema: z.object({
@@ -11,6 +20,10 @@ const articlesCollection = defineCollection({
   }),
 });
 
+/**
+ * Schema for case studies collection
+ * @type {import('astro:content').CollectionConfig}
+ */
 const caseStudiesCollection = defineCollection({
   type: "content",
   schema: z.object({
@@ -27,6 +40,10 @@ const caseStudiesCollection = defineCollection({
   }),
 });
 
+/**
+ * Exported collections configuration
+ * @type {Record<string, import('astro:content').CollectionConfig>}
+ */
 export const collections = {
   articles: articlesCollection,
   "case-studies": caseStudiesCollection,

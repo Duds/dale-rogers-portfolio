@@ -1,0 +1,44 @@
+---
+import Container from "../Container.astro";
+
+// TODO: Move this content to a CMS or content collection
+const content = {
+  story: [
+    "With over a decade in service design, I bridge the gap between user needs and organizational strategy.",
+    "My approach combines human-centered design principles with practical business acumen, creating services that are both user-friendly and sustainable.",
+    "I've worked with organizations across various sectors, from government agencies to private enterprises, helping them transform their services into experiences that people love.",
+    "When I'm not designing services, you might find me exploring new coffee shops, reading about behavioral psychology, or mentoring emerging designers.",
+  ],
+};
+---
+
+<section class="who-is-dale w-full py-20">
+  <Container>
+    <div class="space-y-2 mb-12">
+      {
+        content.story.map((paragraph) => (
+          <p class="text-2xl md:text-3xl leading-relaxed text-gray-700 dark:text-gray-300 font-medium">
+            {paragraph}
+          </p>
+        ))
+      }
+    </div>
+    <a
+      href="/about"
+      class="btn-primary inline-flex items-center gap-2 rounded-pill text-xl px-8 py-4"
+    >
+      Get to know me
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </a>
+  </Container>
+</section>

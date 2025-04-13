@@ -4,87 +4,20 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Typography */
-  --font-heading: "Fraunces", serif;
-  --font-body: "DM Sans", sans-serif;
-
-  /* Primary Color Palette */
-  --colour-purple: #af8abf;
-  --colour-black: #10100f;
-  --colour-green: #36a96a;
-  --colour-orange: #fa8a58;
-  --colour-yellow: #eaf205;
-
-  /* Semantic Colors */
-  --colour-bg: #ffffff;
-  --colour-text: var(--colour-black);
-  --colour-accent: var(--colour-orange);
-
-  /* Card Colors with Opacity */
-  --colour-card-purple: rgba(175, 138, 191, 0.15);
-  --colour-card-black: var(--colour-black);
-  --colour-card-green: rgba(54, 169, 106, 0.15);
-  --colour-card-orange: rgba(250, 138, 88, 0.15);
-
-  /* UI Colors */
-  --colour-button-bg: var(--colour-black);
-  --colour-button-text: #ffffff;
-  --colour-button-hover: var(--colour-purple);
-  --colour-highlight: var(--colour-yellow);
-  --colour-shadow: rgba(16, 16, 15, 0.08);
-  --colour-section-alt: rgba(175, 138, 191, 0.05);
-  --colour-footer-bg: var(--colour-black);
-  --colour-footer-text: #ffffff;
-  --colour-footer-muted: rgba(255, 255, 255, 0.05);
-  --colour-footer-border: rgba(255, 255, 255, 0.1);
-  --colour-footer-link-hover: var(--colour-purple);
-  --colour-nav-bg: var(--colour-bg);
-  --colour-nav-text: var(--colour-black);
-  --colour-nav-border: rgba(16, 16, 15, 0.1);
-  --colour-nav-link-hover: var(--colour-purple);
-
-  /* Typography Scale */
-  --text-footer-display: clamp(4rem, 18vw, 20rem);
-  --text-footer-heading: clamp(2.5rem, 7vw, 5rem);
-  --text-nav: clamp(1.25rem, 1.75vw, 1.5rem);
-  --text-nav-logo: clamp(2rem, 2.5vw, 3rem);
-
-  /* Border Radius */
-  --radius-pill: 9999px;
-  --radius-lg: 1.5rem;
-  --radius-md: 1rem;
-  --radius-sm: 0.5rem;
-
-  /* Spacing Scale */
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 2rem;
-  --space-lg: 4rem;
-  --space-xl: 6rem;
-  --space-2xl: 8rem;
-}
-
-@layer base {
-  html {
-    @apply scroll-smooth;
-  }
-
-  body {
-    @apply font-body text-text bg-background leading-relaxed;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-heading tracking-tight;
-  }
-}
-
 @layer components {
+  /* Button Components */
+  .btn-base {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-md font-medium transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply btn-base bg-black text-white hover:bg-purple-500 hover:-translate-y-0.5 dark:bg-white dark:text-black dark:hover:bg-purple-500 dark:hover:text-white;
+  }
+
+  .btn-secondary {
+    @apply btn-base border border-text text-text hover:bg-black/5 dark:hover:bg-white/5;
+  }
+
   /* Layout Components */
   .container-default {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
@@ -127,19 +60,6 @@
     @apply bg-card-orange;
   }
 
-  /* Button Components */
-  .btn-base {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-md font-medium transition-all duration-300;
-  }
-
-  .btn-primary {
-    @apply btn-base bg-button-bg text-button-text hover:bg-button-hover hover:-translate-y-0.5;
-  }
-
-  .btn-secondary {
-    @apply btn-base border border-text text-text hover:bg-black/5;
-  }
-
   /* Typography Components */
   .heading-1 {
     @apply font-heading text-4xl md:text-5xl lg:text-6xl tracking-tight;
@@ -151,6 +71,10 @@
 
   .heading-3 {
     @apply font-heading text-2xl md:text-3xl tracking-tight;
+  }
+
+  .heading-xxl {
+    @apply font-heading text-6xl md:text-8xl lg:text-10xl tracking-tight font-black;
   }
 
   .body-large {
@@ -172,7 +96,7 @@
 
   /* Footer Components */
   .footer-base {
-    @apply bg-primary-black text-white py-16 w-full relative overflow-hidden;
+    @apply bg-footer-bg text-footer-text py-16 w-full relative overflow-hidden;
   }
 
   .footer-container {
@@ -188,7 +112,7 @@
   }
 
   .footer-button {
-    @apply btn-primary bg-white text-primary-black hover:bg-primary-purple hover:text-white
+    @apply btn-primary bg-white text-black hover:bg-purple-500 hover:text-white
            inline-flex items-center text-xl md:text-2xl px-8 py-4;
   }
 
@@ -205,19 +129,19 @@
   }
 
   .footer-link {
-    @apply hover:text-primary-purple transition-colors;
+    @apply text-white hover:text-purple-500 transition-colors;
   }
 
   .footer-social-link {
-    @apply inline-flex items-center hover:text-primary-purple transition-colors;
+    @apply inline-flex items-center text-white hover:text-purple-500 transition-colors;
   }
 
   .footer-copyright {
-    @apply pt-8 border-t border-gray-800;
+    @apply pt-8 border-t border-white/10;
   }
 
   .footer-copyright-text {
-    @apply text-gray-400 text-sm;
+    @apply text-white/50 text-sm;
   }
 
   .footer-decorative-text {
@@ -243,7 +167,7 @@
   }
 
   .nav-link {
-    @apply font-heading text-xl md:text-2xl px-6 py-2 border-2 border-black rounded-full
+    @apply font-heading text-xl md:text-2xl px-6 py-2 border-2 border-black dark:border-white rounded-full
            hover:bg-primary-purple hover:text-white hover:border-primary-purple transition-all duration-300;
   }
 
@@ -252,11 +176,195 @@
   }
 
   .nav-scrolled {
-    @apply bg-white/90 backdrop-blur-sm;
+    @apply bg-white/90 dark:bg-black/90 backdrop-blur-sm;
   }
 
   .nav-mobile-menu {
-    @apply md:hidden p-3 rounded-full border-2 border-black hover:bg-section-alt transition-colors;
+    @apply md:hidden p-3 rounded-full border-2 border-black dark:border-white hover:bg-section-alt transition-colors;
+  }
+}
+
+:root {
+  /* Typography */
+  --font-heading: "Fraunces", serif;
+  --font-body: "DM Sans", sans-serif;
+
+  /* Primary Color Palette */
+  --colour-purple: #af8abf;
+  --colour-black: #10100f;
+  --colour-green: #36a96a;
+  --colour-orange: #fa8a58;
+  --colour-yellow: #eaf205;
+
+  /* Semantic Colors */
+  --colour-bg: #ffffff;
+  --colour-text: var(--colour-black);
+  --colour-accent: var(--colour-orange);
+
+  /* UI Colors */
+  --colour-button-bg: var(--colour-black);
+  --colour-button-text: #ffffff;
+  --colour-button-hover: var(--colour-purple);
+  --colour-highlight: var(--colour-yellow);
+  --colour-shadow: rgba(16, 16, 15, 0.08);
+  --colour-section-alt: rgba(175, 138, 191, 0.05);
+
+  /* Card Colors with Opacity */
+  --colour-card-purple: rgba(175, 138, 191, 0.15);
+  --colour-card-black: var(--colour-black);
+  --colour-card-green: rgba(54, 169, 106, 0.15);
+  --colour-card-orange: rgba(250, 138, 88, 0.15);
+
+  /* Navigation */
+  --colour-nav-bg: var(--colour-bg);
+  --colour-nav-text: var(--colour-black);
+  --colour-nav-border: rgba(16, 16, 15, 0.1);
+  --colour-nav-link-hover: var(--colour-purple);
+
+  /* Footer */
+  --colour-footer-bg: var(--colour-black);
+  --colour-footer-text: #ffffff;
+  --colour-footer-muted: rgba(255, 255, 255, 0.05);
+  --colour-footer-border: rgba(255, 255, 255, 0.1);
+  --colour-footer-link-hover: var(--colour-purple);
+
+  /* Typography Scale */
+  --text-footer-display: clamp(4rem, 18vw, 20rem);
+  --text-footer-heading: clamp(2.5rem, 7vw, 5rem);
+  --text-nav: clamp(1.25rem, 1.75vw, 1.5rem);
+  --text-nav-logo: clamp(2rem, 2.5vw, 3rem);
+
+  /* Border Radius */
+  --radius-pill: 9999px;
+  --radius-lg: 1.5rem;
+  --radius-md: 1rem;
+  --radius-sm: 0.5rem;
+
+  /* Spacing Scale */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-2xl: 8rem;
+
+  /* Typography Scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
+  --text-8xl: 6rem;
+  --text-9xl: 8rem;
+  --text-10xl: 10rem;
+
+  /* Border Radius */
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* Transitions */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+
+  /* Z-index */
+  --z-0: 0;
+  --z-10: 10;
+  --z-20: 20;
+  --z-30: 30;
+  --z-40: 40;
+  --z-50: 50;
+  --z-auto: auto;
+}
+
+/* Dark mode overrides */
+.dark {
+  /* Semantic Colors */
+  --colour-bg: var(--colour-black);
+  --colour-text: #ffffff;
+  --colour-accent: var(--colour-orange);
+
+  /* UI Colors */
+  --colour-button-bg: #ffffff;
+  --colour-button-text: var(--colour-black);
+  --colour-button-hover: var(--colour-purple);
+  --colour-shadow: rgba(255, 255, 255, 0.08);
+  --colour-section-alt: rgba(255, 255, 255, 0.05);
+
+  /* Navigation */
+  --colour-nav-bg: var(--colour-black);
+  --colour-nav-text: #ffffff;
+  --colour-nav-border: rgba(255, 255, 255, 0.1);
+  --colour-nav-link-hover: var(--colour-purple);
+
+  /* Card Colors with Opacity */
+  --colour-card-purple: rgba(175, 138, 191, 0.3);
+  --colour-card-black: #ffffff;
+  --colour-card-green: rgba(54, 169, 106, 0.3);
+  --colour-card-orange: rgba(250, 138, 88, 0.3);
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+    font-family: var(--font-body);
+    background-color: var(--colour-bg);
+    color: var(--colour-text);
+  }
+
+  body {
+    @apply font-body text-text bg-background leading-relaxed;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading tracking-tight;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  h1 { font-size: var(--text-4xl); }
+  h2 { font-size: var(--text-3xl); }
+  h3 { font-size: var(--text-2xl); }
+  h4 { font-size: var(--text-xl); }
+  h5 { font-size: var(--text-lg); }
+  h6 { font-size: var(--text-base); }
+
+  p {
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  a {
+    color: var(--colour-text);
+    text-decoration: none;
+    transition: color var(--transition-fast) ease;
+  }
+
+  a:hover {
+    color: var(--colour-accent);
   }
 }
 

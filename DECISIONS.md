@@ -139,3 +139,68 @@
   - Using contact@dalerogers.com.au alias
   - Server-side implementation in Astro API route
   - Custom email templates with HTML/text versions
+
+## [2024-04-12] Testing Strategy: Manual Testing with Future Automation
+
+- Context: Need to establish testing approach for portfolio site
+- Options Considered:
+  1. Manual testing only
+  2. Full automated testing suite
+  3. Hybrid approach with selective automation
+- Decision: Manual testing with future automation
+- Reasoning:
+  - Portfolio site has relatively simple functionality
+  - Quick development cycles benefit from manual testing
+  - Critical paths can be automated later if needed
+  - Focus on rapid iteration and visual feedback
+- Implementation:
+  - Manual testing of all features during development
+  - Regular review of testing needs
+  - Documentation of test procedures in DEVELOPMENT.md
+  - Open to adding automated tests for critical paths in future
+
+## LogoSalad Component
+
+### Grid Layout
+
+- **Decision**: Use CSS Grid with responsive column counts
+- **Rationale**: Provides better control over spacing and alignment compared to flexbox
+- **Implementation**:
+  - 2 columns on mobile
+  - 3 columns on tablet
+  - 4 columns on desktop
+  - Uses `grid-cols-2 md:grid-cols-3 lg:grid-cols-4`
+
+### Hover Effects
+
+- **Decision**: Implement subtle scale and shadow effects
+- **Rationale**: Provides visual feedback without being distracting
+- **Implementation**:
+  - Scale: `hover:scale-105`
+  - Shadow: `hover:shadow-lg`
+  - Transition: `transition-all duration-300`
+
+### Dark Mode
+
+- **Decision**: Use Tailwind's dark mode classes
+- **Rationale**: Consistent with site-wide dark mode implementation
+- **Implementation**:
+  - Background: `dark:bg-gray-800`
+  - Border: `dark:border-gray-700`
+  - Shadow: `dark:shadow-gray-900`
+
+### Image Loading
+
+- **Decision**: Implement lazy loading
+- **Rationale**: Improves initial page load performance
+- **Implementation**:
+  - `loading="lazy"`
+  - `fetchpriority="low"`
+
+### Accessibility
+
+- **Decision**: Include descriptive alt text and ARIA labels
+- **Rationale**: Ensures screen reader compatibility
+- **Implementation**:
+  - `alt="Logo of {client}"`
+  - `aria-label="Visit {client}'s website"`

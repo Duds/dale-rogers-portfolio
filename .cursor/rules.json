@@ -1,0 +1,9 @@
+{
+  "rules": [
+    {
+      "name": "Theming Responsibilities",
+      "description": "When working on theming, focus on implementing robust, repeatable, and functional standards. Do not make design decisions about fonts, colors, or other visual elements unless specifically asked. The role is to implement the existing design system, not to modify it without explicit direction."
+    }
+    // ... existing rules ...
+  ]
+}

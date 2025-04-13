@@ -1,0 +1,149 @@
+---
+import Container from "../Container.astro";
+
+interface CaseStudy {
+  title: string;
+  client: string;
+  coverImage: string;
+  tags: string[];
+  slug: string;
+}
+
+// TODO: Replace with actual case studies from content collection
+const featuredCaseStudies: CaseStudy[] = [
+  {
+    title: "Developing a Bespoke PMO for Rio Tinto Aluminium",
+    client: "Rio Tinto",
+    coverImage: "https://picsum.photos/seed/rio-tinto/1600/900",
+    tags: ["Service Design", "Enterprise", "PMO"],
+    slug: "/case-studies/rio-tinto-pmo",
+  },
+  {
+    title: "Making Travel Simple",
+    client: "University of Canberra",
+    coverImage: "https://picsum.photos/seed/uc-travel/800/600",
+    tags: ["User Research", "Service Design", "Higher Education"],
+    slug: "/case-studies/uc-travel",
+  },
+  {
+    title: "A Better Fit and Proper Person Test",
+    client: "Commonwealth Government",
+    coverImage: "https://picsum.photos/seed/fit-proper/800/600",
+    tags: ["Government", "Service Blueprint", "Process Improvement"],
+    slug: "/case-studies/fit-proper",
+  },
+];
+---
+
+<section class="case-studies-bento w-full py-20">
+  <Container>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2
+          class="text-2xl font-semibold text-gray-600 dark:text-gray-400 mb-4"
+        >
+          Case Studies
+        </h2>
+        <h3
+          class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white"
+        >
+          Transforming Ideas into Digital Reality
+        </h3>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 gap-8">
+      <!-- First case study - full width -->
+      <a href={featuredCaseStudies[0].slug} class="group">
+        <div class="relative aspect-[16/9] rounded-3xl overflow-hidden mb-4">
+          <img
+            src={featuredCaseStudies[0].coverImage}
+            alt={featuredCaseStudies[0].title}
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </div>
+        <div class="space-y-2">
+          <span class="text-sm font-medium text-gray-600">
+            {featuredCaseStudies[0].client}
+          </span>
+          <h3
+            class="text-2xl font-bold group-hover:text-primary transition-colors"
+          >
+            {featuredCaseStudies[0].title}
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {
+              featuredCaseStudies[0].tags.map((tag) => (
+                <span class="text-xs bg-gray-100 px-2 py-1 rounded-full">
+                  {tag}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+      </a>
+
+      <!-- Second and third case studies in a row -->
+      <div class="grid grid-cols-12 gap-8">
+        <!-- Second case study - 3/5 width -->
+        <a href={featuredCaseStudies[1].slug} class="group col-span-7">
+          <div class="relative aspect-[4/3] rounded-3xl overflow-hidden mb-4">
+            <img
+              src={featuredCaseStudies[1].coverImage}
+              alt={featuredCaseStudies[1].title}
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
+          <div class="space-y-2">
+            <span class="text-sm font-medium text-gray-600">
+              {featuredCaseStudies[1].client}
+            </span>
+            <h3
+              class="text-xl font-bold group-hover:text-primary transition-colors"
+            >
+              {featuredCaseStudies[1].title}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {
+                featuredCaseStudies[1].tags.map((tag) => (
+                  <span class="text-xs bg-gray-100 px-2 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))
+              }
+            </div>
+          </div>
+        </a>
+
+        <!-- Third case study - 2/5 width -->
+        <a href={featuredCaseStudies[2].slug} class="group col-span-5">
+          <div class="relative aspect-[4/3] rounded-3xl overflow-hidden mb-4">
+            <img
+              src={featuredCaseStudies[2].coverImage}
+              alt={featuredCaseStudies[2].title}
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
+          <div class="space-y-2">
+            <span class="text-sm font-medium text-gray-600">
+              {featuredCaseStudies[2].client}
+            </span>
+            <h3
+              class="text-xl font-bold group-hover:text-primary transition-colors"
+            >
+              {featuredCaseStudies[2].title}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {
+                featuredCaseStudies[2].tags.map((tag) => (
+                  <span class="text-xs bg-gray-100 px-2 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))
+              }
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </Container>
+</section>

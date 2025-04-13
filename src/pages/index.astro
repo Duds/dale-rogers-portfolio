@@ -1,14 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Button from "../components/Button.astro";
-import CaseStudyCard from "../components/CaseStudyCard.astro";
+import Hero from "../components/sections/Hero.astro";
+import CaseStudyImages from "../components/sections/CaseStudyImages.astro";
+import WhoIsDale from "../components/sections/WhoIsDale.astro";
+import CaseStudiesBento from "../components/sections/CaseStudiesBento.astro";
+import Services from "../components/sections/Services.astro";
+import MyValues from "../components/sections/MyValues.astro";
+import LogoSalad from "../components/sections/LogoSalad.astro";
 
-// Content from content_placeholders.json
-const hero = {
-  heading: "Design that builds trust",
-  intro:
-    "Dale Rogers is a service designer helping orgs define, improve, and align their services.",
-  ctaLabel: "View my work",
+// TODO: Move all content to CMS or content collections
+// TEMPORARY CONTENT PLACEHOLDERS
+const heroContent = {
+  title: "Service Design That Builds Trust",
+  subtitle: "Dale Rogers - Aligning services with human needs",
+  ctaText: "View Case Studies",
 };
 
 const textIntro = [
@@ -75,82 +80,11 @@ const featuredCaseStudies = [
 ---
 
 <Layout title="Home">
-  <!-- Hero Section -->
-  <section class="section-default min-h-[80vh] flex items-center">
-    <div class="container-default">
-      <h1 class="heading-1 mb-6">
-        {hero.heading}
-      </h1>
-      <p class="body-large max-w-2xl mb-8">
-        {hero.intro}
-      </p>
-      <Button href="/projects" variant="primary">
-        {hero.ctaLabel}
-      </Button>
-    </div>
-  </section>
-
-  <!-- Text Intro Section -->
-  <section class="section-default section-alt">
-    <div class="container-default">
-      <div class="max-w-3xl mx-auto">
-        {
-          textIntro.map((paragraph) => (
-            <p class="body-large mb-6">{paragraph}</p>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Grid -->
-  <section class="section-default">
-    <div class="container-default">
-      <h2 class="heading-2 text-center mb-12">How I Can Help</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {
-          services.map((service) => (
-            <div class={`card-service card-service-${service.variant}`}>
-              <img
-                src={service.imageUrl}
-                alt={service.title}
-                class="w-12 h-12 mb-4"
-              />
-              <h3 class="heading-3 mb-2">{service.title}</h3>
-              <p class="body-default">{service.description}</p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Belief Statement -->
-  <section class="section-default section-alt">
-    <div class="container-default text-center">
-      <div class="text-4xl mb-4">{belief.emoji}</div>
-      <p class="heading-2">
-        {belief.statement}
-      </p>
-    </div>
-  </section>
-
-  <!-- Featured Case Studies -->
-  <section class="section-default">
-    <div class="container-default">
-      <h2 class="heading-2 text-center mb-12">Featured Work</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {
-          featuredCaseStudies.map((caseStudy) => (
-            <CaseStudyCard
-              title={caseStudy.title}
-              summary={caseStudy.summary}
-              tags={caseStudy.tags}
-              slug={caseStudy.slug}
-            />
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <Hero {...heroContent} />
+  <CaseStudyImages />
+  <WhoIsDale />
+  <CaseStudiesBento />
+  <Services />
+  <MyValues />
+  <LogoSalad />
 </Layout>

@@ -1,0 +1,158 @@
+---
+interface CaseStudy {
+  title: string;
+  coverImage: string;
+  slug: string;
+}
+
+// TODO: Replace with actual case studies from content collection
+const placeholderCaseStudies: CaseStudy[] = [
+  {
+    title: "Project Alpha",
+    coverImage: "/images/placeholder-1.jpg",
+    slug: "/case-studies/project-alpha",
+  },
+  {
+    title: "Project Beta",
+    coverImage: "/images/placeholder-2.jpg",
+    slug: "/case-studies/project-beta",
+  },
+  {
+    title: "Project Gamma",
+    coverImage: "/images/placeholder-3.jpg",
+    slug: "/case-studies/project-gamma",
+  },
+  {
+    title: "Project Delta",
+    coverImage: "/images/placeholder-4.jpg",
+    slug: "/case-studies/project-delta",
+  },
+  {
+    title: "Project Epsilon",
+    coverImage: "/images/placeholder-5.jpg",
+    slug: "/case-studies/project-epsilon",
+  },
+  {
+    title: "Project Zeta",
+    coverImage: "/images/placeholder-6.jpg",
+    slug: "/case-studies/project-zeta",
+  },
+  {
+    title: "Project Eta",
+    coverImage: "/images/placeholder-7.jpg",
+    slug: "/case-studies/project-eta",
+  },
+  {
+    title: "Project Theta",
+    coverImage: "/images/placeholder-8.jpg",
+    slug: "/case-studies/project-theta",
+  },
+];
+---
+
+<section
+  class="case-study-images min-h-[60vh] md:min-h-[70vh] relative overflow-hidden py-16"
+  id="case-study-images"
+>
+  <div class="slider-viewport w-full overflow-hidden">
+    <div
+      class="slider-container flex gap-6 md:gap-8 w-max transition-transform duration-200 ease-out"
+    >
+      {
+        placeholderCaseStudies.map((study: CaseStudy) => (
+          <a
+            href={study.slug}
+            class="case-study-card w-[60vw] md:w-[40vw] lg:w-[30vw] h-[70vh] md:h-[60vh] relative rounded-lg overflow-hidden group flex-shrink-0 shadow-xl"
+          >
+            <img
+              src={study.coverImage}
+              alt={study.title}
+              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+            <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+              <h3 class="text-white text-xl md:text-2xl font-semibold">
+                {study.title}
+              </h3>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get elements with type assertions
+    const section = document.querySelector(".case-study-images") as HTMLElement;
+    const sliderContainer = document.querySelector(
+      ".slider-container"
+    ) as HTMLElement;
+    const sliderViewport = document.querySelector(
+      ".slider-viewport"
+    ) as HTMLElement;
+
+    if (!section || !sliderContainer || !sliderViewport) {
+      console.error("Elements not found");
+      return;
+    }
+
+    // Initialize variables
+    let maxScroll = 0;
+
+    // Calculate how far we can scroll horizontally
+    function updateMaxScroll() {
+      maxScroll = sliderContainer.scrollWidth - sliderViewport.clientWidth;
+    }
+
+    // Update values on resize
+    window.addEventListener("resize", () => {
+      updateMaxScroll();
+      updateSliderPosition();
+    });
+
+    // Calculate initial values
+    updateMaxScroll();
+
+    // Handle scroll event
+    function updateSliderPosition() {
+      // Get the section's position relative to the viewport
+      const rect = section.getBoundingClientRect();
+
+      // Calculate progress through the section (0 to 1)
+      // Start when section enters viewport from bottom, end when it leaves from top
+      let progress = 0;
+      const viewportHeight = window.innerHeight;
+
+      // If section is in view
+      if (rect.top < viewportHeight && rect.bottom > 0) {
+        // Map the section's position to a 0-1 range
+        // When section enters viewport: progress = 0
+        // When section leaves viewport: progress = 1
+        progress = 1 - rect.bottom / (rect.height + viewportHeight);
+        progress = Math.max(0, Math.min(1, progress));
+      } else if (rect.bottom <= 0) {
+        // Section has scrolled past viewport
+        progress = 1;
+      }
+
+      // Apply the transform with the calculated offset
+      const offset = -progress * maxScroll;
+      sliderContainer.style.transform = `translateX(${offset}px)`;
+    }
+
+    // Listen for scroll events
+    window.addEventListener("scroll", updateSliderPosition, { passive: true });
+
+    // Initial position update
+    updateSliderPosition();
+
+    // Recalculate after images might have loaded
+    setTimeout(() => {
+      updateMaxScroll();
+      updateSliderPosition();
+    }, 1000);
+  });
+</script>

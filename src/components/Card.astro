@@ -1,4 +1,17 @@
 ---
+/**
+ * @fileoverview Card component for displaying content in a consistent, styled container.
+ * Can be rendered as a div or anchor element with optional hover effects.
+ */
+
+/**
+ * Props interface for the Card component
+ * @typedef {Object} CardProps
+ * @property {string} [title] - Optional title to display at the top of the card
+ * @property {string} [class] - Additional CSS classes to apply
+ * @property {boolean} [clickable=false] - Whether to apply hover effects
+ * @property {string} [href] - URL for anchor tag, if provided renders as <a> instead of <div>
+ */
 interface Props {
   title?: string;
   class?: string;
@@ -8,14 +21,32 @@ interface Props {
 
 const { title, class: className = "", clickable = false, href } = Astro.props;
 
+/**
+ * Base styles applied to all cards
+ * @type {string}
+ */
 const baseClasses = "bg-background rounded-[var(--radius-lg)] shadow-soft p-6";
+
+/**
+ * Hover effects applied when clickable is true
+ * @type {string}
+ */
 const hoverClasses = clickable
   ? "hover:shadow-lg cursor-pointer transition-all duration-300 hover:-translate-y-1"
   : "";
+
+/**
+ * Combines base styles, hover effects, and any additional classes
+ * @type {string}
+ */
 const classes = [baseClasses, hoverClasses, className]
   .filter(Boolean)
   .join(" ");
 
+/**
+ * Determines whether to render as an anchor or div element
+ * @type {string}
+ */
 const Element = href ? "a" : "div";
 ---
 
