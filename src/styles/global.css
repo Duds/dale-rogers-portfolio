@@ -155,7 +155,7 @@
   }
 
   .nav-container {
-    @apply flex items-center justify-between py-8 px-12;
+    @apply flex items-center justify-between py-8;
   }
 
   .nav-logo {
@@ -376,4 +376,41 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Section Layout */
+.section-full {
+  @apply w-full;
+}
+
+.section-content {
+  @apply max-w-7xl px-12;
+}
+
+.section-content-narrow {
+  @apply max-w-4xl px-12;
+}
+
+.section-content-wide {
+  @apply max-w-[90rem] px-12;
+}
+
+/* Content Widths */
+.content-width {
+  width: 66.666667%;
+}
+
+/* Typography Emphasis */
+.emphasis {
+  font-style: italic;
+  color: var(--colour-purple);
+}
+
+.strong {
+  font-weight: 700;
+  color: var(--colour-black);
+}
+
+.dark .strong {
+  color: #ffffff;
 }

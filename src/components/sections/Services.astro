@@ -49,20 +49,20 @@ const services: Service[] = [
 const marketingCopy = {
   title: "How I Work",
   paragraphs: [
-    "I believe in a practical, no-nonsense approach to service design. While I take my work seriously, I don't take myself too seriously.",
-    "My process is collaborative and transparent. I work closely with stakeholders to understand their needs and constraints, then design solutions that are both innovative and implementable.",
-    "I'm not just a designer - I'm a strategist, researcher, and facilitator. I help organizations build the capacity to design better services themselves.",
+    "I believe in a <span class='strong'>practical, no-nonsense</span> approach to service design. While I take my work seriously, I don't take myself too seriously.",
+    "My process is <span class='emphasis'>collaborative and transparent</span>. I work closely with stakeholders to understand their needs and constraints, then design solutions that are both innovative and implementable.",
+    "I'm not just a designer - I'm a <span class='strong'>strategist, researcher, and facilitator</span>. I help organizations build the capacity to design better services themselves.",
   ],
 };
 ---
 
-<section class="services py-20 bg-white dark:bg-gray-950">
+<section class="services w-full py-20 bg-white dark:bg-gray-950">
   <Container>
-    <h2
-      class="text-4xl md:text-6xl font-bold mb-12 text-center text-gray-900 dark:text-white"
-    >
-      Services
-    </h2>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+      <h2 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white">
+        Services
+      </h2>
+    </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
       {
@@ -97,14 +97,14 @@ const marketingCopy = {
       }
     </div>
 
-    <div class="max-w-3xl mx-auto text-center">
-      <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-        {marketingCopy.title}
-      </h3>
-      <div class="space-y-4">
+    <div class="w-2/3">
+      <div class="space-y-2 mb-12">
         {
           marketingCopy.paragraphs.map((paragraph: string) => (
-            <p class="text-lg text-gray-700 dark:text-gray-300">{paragraph}</p>
+            <p
+              class="text-2xl md:text-3xl leading-relaxed text-gray-700 dark:text-gray-300 font-medium"
+              set:html={paragraph}
+            />
           ))
         }
       </div>
@@ -124,6 +124,11 @@ const marketingCopy = {
     right: 0;
     bottom: 0;
     left: 0;
+  }
+
+  /* Content width class */
+  .content-width {
+    width: 66.666667%;
   }
 
   /* Tailwind cannot dynamically generate classes like bg-${variable}-XXX */

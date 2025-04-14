@@ -258,3 +258,78 @@ import LogoSalad from '../components/LogoSalad.astro';
 - Follow naming conventions
 - Maintain centralized configuration
 - Document theme structure
+
+## Layout Patterns
+
+### Standardized Section Classes
+
+The following classes are available for consistent layout implementation:
+
+```css
+.section-full {
+  @apply w-full;
+}
+
+.section-content {
+  @apply max-w-3xl mx-auto;
+}
+
+.section-content-narrow {
+  @apply max-w-2xl mx-auto;
+}
+
+.section-content-wide {
+  @apply max-w-4xl mx-auto;
+}
+```
+
+### Implementation Examples
+
+1. **Full-Width Section with Centered Heading**
+
+```astro
+<section class="section-full">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2>Section Heading</h2>
+  </div>
+  <div class="section-content-narrow">
+    <!-- Content here -->
+  </div>
+</section>
+```
+
+2. **Full-Width Section with Full-Width Image**
+
+```astro
+<section class="section-full">
+  <div class="section-content">
+    <h2>Section Heading</h2>
+    <p>Content text</p>
+  </div>
+  <div class="w-full">
+    <img src="image.jpg" alt="Description" />
+  </div>
+</section>
+```
+
+### Usage Guidelines
+
+1. **Section Structure**
+
+   - Always use `.section-full` for the outer container
+   - Apply appropriate content width class for text content
+   - Use full width for images and other visual elements
+   - Maintain consistent padding with `.px-4 sm:px-6 lg:px-8`
+
+2. **Responsive Considerations**
+
+   - Test layouts at all breakpoints
+   - Ensure proper spacing on mobile
+   - Consider content readability
+   - Maintain visual hierarchy
+
+3. **Accessibility**
+   - Use semantic HTML
+   - Maintain proper heading structure
+   - Ensure sufficient contrast
+   - Consider screen reader navigation

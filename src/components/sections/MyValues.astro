@@ -1,8 +1,11 @@
 ---
+import Container from "../Container.astro";
+
 // Temporary values section with marketing copy
 const content = {
   title: "Core Principles That Guide My Work",
-  image: "/images/values-hero.jpg",
+  image:
+    "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop",
   values: [
     {
       name: "Human-Centered",
@@ -33,54 +36,51 @@ interface Value {
 }
 ---
 
-<section class="my-values py-20 bg-gray-50 dark:bg-gray-900">
-  <div class="container mx-auto px-4">
-    <h2
-      class="text-4xl md:text-5xl font-bold mb-12 text-center text-gray-900 dark:text-white"
-    >
-      {content.title}
-    </h2>
-
-    <div class="grid md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
-      {
-        content.values.map((value: Value) => (
-          <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-soft dark:shadow-soft-dark border border-gray-200 dark:border-gray-700">
-            <h3 class="text-2xl font-bold mb-3 text-primary dark:text-primary-light">
-              {value.name}
-            </h3>
-            <p class="text-lg text-gray-600 dark:text-gray-300">
-              {value.description}
-            </p>
-          </div>
-        ))
-      }
+<section class="my-values w-full py-20">
+  <Container>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+      <h2 class="text-2xl font-semibold text-gray-600 dark:text-gray-400 mb-4">
+        My Values
+      </h2>
+      <h3
+        class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white"
+      >
+        {content.title}
+      </h3>
     </div>
 
-    <div class="mt-16 max-w-4xl mx-auto text-center">
-      <p class="text-xl mb-6 text-gray-700 dark:text-gray-300">
-        These principles guide every project I undertake, ensuring solutions
-        that are:
-      </p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <span
-          class="px-4 py-2 bg-primary/10 text-primary dark:bg-primary-dark/20 dark:text-primary-light rounded-full text-sm font-medium"
-          >User-Friendly</span
-        >
-        <span
-          class="px-4 py-2 bg-primary/10 text-primary dark:bg-primary-dark/20 dark:text-primary-light rounded-full text-sm font-medium"
-          >Sustainable</span
-        >
-        <span
-          class="px-4 py-2 bg-primary/10 text-primary dark:bg-primary-dark/20 dark:text-primary-light rounded-full text-sm font-medium"
-          >Measurable</span
-        >
-        <span
-          class="px-4 py-2 bg-primary/10 text-primary dark:bg-primary-dark/20 dark:text-primary-light rounded-full text-sm font-medium"
-          >Impactful</span
-        >
+    <div class="w-full mb-8">
+      <div class="relative aspect-[16/9] rounded-3xl overflow-hidden">
+        <img
+          src={content.image}
+          alt="Values in action"
+          class="w-full h-full object-cover"
+        />
       </div>
     </div>
-  </div>
+
+    <div class="w-2/3">
+      <div class="text-left">
+        <a
+          href="/values"
+          class="btn-primary inline-flex items-center gap-2 rounded-pill text-xl px-8 py-4"
+        >
+          Explore My Values
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </Container>
 </section>
 
 <style>

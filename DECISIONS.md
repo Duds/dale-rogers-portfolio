@@ -204,3 +204,44 @@
 - **Implementation**:
   - `alt="Logo of {client}"`
   - `aria-label="Visit {client}'s website"`
+
+## [2024-04-12] Standardized Layout Patterns
+
+- Context: Inconsistent full-width section implementations across components
+- Options Considered:
+  1. Component-specific implementations
+  2. Container component approach
+  3. Global CSS classes
+- Decision: Global CSS classes with standardized patterns
+- Reasoning:
+  - Consistent implementation across components
+  - Reduced code duplication
+  - Easier maintenance
+  - Clearer documentation
+- Implementation:
+  - Created `.section-full` for full-width sections
+  - Added `.section-content` for constrained content
+  - Implemented `.section-content-narrow` and `.section-content-wide` variants
+  - Updated components to use new classes
+  - Documented in DEVELOPMENT.md
+
+### Layout Pattern Rules
+
+1. **Full-Width Sections**
+
+   - Use `.section-full` for edge-to-edge sections
+   - Maintain consistent padding with `.px-4 sm:px-6 lg:px-8`
+   - Center headings with `.max-w-7xl mx-auto text-center`
+
+2. **Content Width**
+
+   - Use `.section-content` for standard width
+   - Apply `.section-content-narrow` for 2/3 width
+   - Implement `.section-content-wide` for wider content
+   - Remove container constraints for full-width elements
+
+3. **Typography**
+   - Maintain consistent heading hierarchy
+   - Use standardized text sizes
+   - Implement responsive scaling
+   - Ensure proper spacing

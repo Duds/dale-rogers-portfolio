@@ -1,0 +1,82 @@
+---
+import Container from "../components/Container.astro";
+import Layout from "../layouts/Layout.astro";
+
+const content = {
+  title: "Core Principles That Guide My Work",
+  values: [
+    {
+      name: "Human-Centered",
+      description:
+        "Services should solve real problems for real people. I prioritize user needs over organizational convenience.",
+    },
+    {
+      name: "Evidence-Based",
+      description:
+        "Decisions grounded in research and data, not assumptions. I validate every design choice with user testing.",
+    },
+    {
+      name: "Practical Innovation",
+      description:
+        "Solutions must be both visionary and implementable. I balance creativity with technical feasibility.",
+    },
+    {
+      name: "Collaborative Approach",
+      description:
+        "Great design happens together. I work transparently with stakeholders at every level.",
+    },
+  ],
+};
+
+interface Value {
+  name: string;
+  description: string;
+}
+---
+
+<Layout title="My Values">
+  <Container>
+    <div class="py-20">
+      <div class="text-center mb-16">
+        <h2
+          class="text-2xl font-semibold text-gray-600 dark:text-gray-400 mb-4"
+        >
+          My Values
+        </h2>
+        <h3
+          class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white"
+        >
+          {content.title}
+        </h3>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
+        {
+          content.values.map((value: Value) => (
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-soft dark:shadow-soft-dark border border-gray-200 dark:border-gray-700">
+              <h3 class="text-2xl font-bold mb-3 text-primary dark:text-primary-light">
+                {value.name}
+              </h3>
+              <p class="text-lg text-gray-600 dark:text-gray-300">
+                {value.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</Layout>
+
+<style>
+  .shadow-soft {
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.05),
+      0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  }
+  .shadow-soft-dark {
+    box-shadow:
+      0 4px 6px -1px rgba(255, 255, 255, 0.05),
+      0 2px 4px -1px rgba(255, 255, 255, 0.03);
+  }
+</style>
