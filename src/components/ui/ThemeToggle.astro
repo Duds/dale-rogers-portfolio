@@ -1,0 +1,38 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+  <Icon name="sun" class="theme-icon-light w-6 h-6" />
+  <Icon name="moon" class="theme-icon-dark w-6 h-6" />
+</button>
+
+<style>
+  .theme-toggle {
+    @apply p-2 rounded-full border-2 border-black dark:border-white hover:bg-section-alt transition-colors
+           flex items-center justify-center;
+  }
+
+  .theme-icon-light {
+    @apply block dark:hidden;
+  }
+
+  .theme-icon-dark {
+    @apply hidden dark:block;
+  }
+</style>
+
+<script>
+  const themeToggle = document.querySelector("#theme-toggle");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const currentTheme =
+    localStorage.getItem("theme") || (prefersDark ? "dark" : "light");
+
+  // Set initial theme
+  document.documentElement.classList.toggle("dark", currentTheme === "dark");
+
+  themeToggle?.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+</script>

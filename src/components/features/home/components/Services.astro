@@ -1,58 +1,65 @@
 ---
-import Container from "../Container.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Container from "@/components/layout/Container.astro";
 
-// Services section component
-interface Service {
+/**
+ * Services Section Component
+ *
+ * Displays a grid of services offered, each with an image, icon, title, and description.
+ * Also includes marketing content below the services grid.
+ *
+ * @component
+ * @example
+ * ```astro
+ * <Services />
+ * ```
+ *
+ * @remarks
+ * This component fetches data from two collections:
+ * 1. "services" - For the service cards
+ * 2. "site-content" - For the marketing content
+ */
+
+interface ServiceData {
   title: string;
   description: string;
-  icon: string;
   variant: "purple" | "black" | "green" | "orange";
-  image: string;
+  imageUrl: string;
+  icon: string;
 }
 
-// TODO: Move to content collection
-const services: Service[] = [
-  {
-    title: "Service Design",
-    description: "End-to-end service alignment using human-centred tools.",
-    icon: "/icons/service-design.svg",
-    variant: "purple",
-    image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "UX Research",
-    description: "Synthesis and evidence for decision-making.",
-    icon: "/icons/ux-research.svg",
-    variant: "black",
-    image:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "Prototyping",
-    description: "Figma, clickable demos, and flow mapping.",
-    icon: "/icons/prototyping.svg",
-    variant: "green",
-    image:
-      "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "Bid Strategy",
-    description: "RFT structuring, response writing, and win themes.",
-    icon: "/icons/bid-strategy.svg",
-    variant: "orange",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
-  },
-];
+interface MarketingContent {
+  paragraphs: string[];
+}
 
-const marketingCopy = {
-  title: "How I Work",
-  paragraphs: [
-    "I believe in a <span class='strong'>practical, no-nonsense</span> approach to service design. While I take my work seriously, I don't take myself too seriously.",
-    "My process is <span class='emphasis'>collaborative and transparent</span>. I work closely with stakeholders to understand their needs and constraints, then design solutions that are both innovative and implementable.",
-    "I'm not just a designer - I'm a <span class='strong'>strategist, researcher, and facilitator</span>. I help organizations build the capacity to design better services themselves.",
-  ],
+interface SiteContent {
+  section: string;
+  content: MarketingContent;
+}
+
+// Fetch services data within this component
+const services = await getCollection("services");
+
+// Fetch marketing content
+const siteContent = await getCollection("site-content");
+const homeEntry = siteContent.find((entry) => entry.id === "home");
+
+if (!homeEntry?.data) {
+  throw new Error("Home content not found");
+}
+
+// Get marketing content from home data
+const marketingContent = (homeEntry.data as unknown as SiteContent[]).find(
+  (section) => section.section === "marketing"
+)?.content;
+
+if (!marketingContent) {
+  throw new Error("Marketing content not found");
+}
+
+type Service = CollectionEntry<"services"> & {
+  data: ServiceData;
 };
 ---
 
@@ -66,31 +73,29 @@ const marketingCopy = {
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
       {
-        services.map((service: Service) => (
+        (services as Service[]).map(({ data }) => (
           <div
-            class={`service-card group relative overflow-hidden rounded-lg bg-${service.variant}-100 dark:bg-${service.variant}-900/30 border border-${service.variant}-200 dark:border-${service.variant}-800/50 shadow-sm`}
+            class={`service-card group relative overflow-hidden rounded-lg bg-${data.variant}-100 dark:bg-${data.variant}-900/30 border border-${data.variant}-200 dark:border-${data.variant}-800/50 shadow-sm`}
           >
             <div class="relative h-48 w-full">
               <img
-                src={service.image}
-                alt={service.title}
+                src={data.imageUrl}
+                alt={data.title}
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
             <div class="p-6">
               <img
-                src={service.icon}
+                src={data.icon}
                 alt=""
                 class="w-10 h-10 mb-4 filter dark:invert"
               />
               <h3
-                class={`text-xl font-bold mb-2 text-${service.variant}-800 dark:text-${service.variant}-200`}
+                class={`text-xl font-bold mb-2 text-${data.variant}-800 dark:text-${data.variant}-200`}
               >
-                {service.title}
+                {data.title}
               </h3>
-              <p class="text-gray-600 dark:text-gray-400">
-                {service.description}
-              </p>
+              <p class="text-gray-600 dark:text-gray-400">{data.description}</p>
             </div>
           </div>
         ))
@@ -100,7 +105,7 @@ const marketingCopy = {
     <div class="w-2/3">
       <div class="space-y-2 mb-12">
         {
-          marketingCopy.paragraphs.map((paragraph: string) => (
+          marketingContent.paragraphs?.map((paragraph: string) => (
             <p
               class="text-2xl md:text-3xl leading-relaxed text-gray-700 dark:text-gray-300 font-medium"
               set:html={paragraph}
@@ -132,8 +137,9 @@ const marketingCopy = {
   }
 
   /* Tailwind cannot dynamically generate classes like bg-${variable}-XXX */
-  /* Define the background/text colors explicitly if dynamic generation is needed */
-  /* Example (add more variants as needed): */
+  /* Define the background/text colors explicitly for each variant */
+
+  /* Purple variant */
   .bg-purple-100 {
     --tw-bg-opacity: 1;
     background-color: rgb(233 213 255 / var(--tw-bg-opacity));
@@ -156,10 +162,10 @@ const marketingCopy = {
     color: #c084fc;
   }
 
-  /* Add similar definitions for black, green, orange variants */
+  /* Black variant */
   .bg-black-100 {
     background-color: #f3f4f6;
-  } /* Using gray-100 for black variant */
+  }
   .dark .dark\:bg-black-900\/30 {
     background-color: rgba(55, 65, 81, 0.3);
   }
@@ -176,6 +182,7 @@ const marketingCopy = {
     color: #d1d5db;
   }
 
+  /* Green variant */
   .bg-green-100 {
     background-color: #d1fae5;
   }
@@ -195,6 +202,7 @@ const marketingCopy = {
     color: #6ee7b7;
   }
 
+  /* Orange variant */
   .bg-orange-100 {
     background-color: #ffedd5;
   }

@@ -1,0 +1,42 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Component Organization Standards
+
+@context {
+    "type": "guidelines",
+    "purpose": "component_organization",
+    "format_version": "1.0.0"
+}
+
+# Your rule content
+
+Components must follow a strict feature-based directory structure to prevent duplication and maintain organization:
+
+1. Feature-Based Structure:
+   - UI components in `src/components/ui/`
+   - Layout components in `src/components/layout/`
+   - Feature components in `src/components/features/<feature>/components/`
+   - No components in root of `src/components/`
+
+2. Component Requirements:
+   - TypeScript types
+   - JSDoc documentation
+   - Consistent styling
+   - Dark mode support (if applicable)
+
+3. Prevention Checklist:
+   - Check for existing similar components
+   - Verify correct directory location
+   - Follow naming conventions
+   - Add required documentation
+   - Implement proper typing
+
+4. Import Conventions:
+   ```typescript
+   import Button from '@/components/ui/Button.astro';
+   import Container from '@/components/layout/Container.astro';
+   import Feature from '@/components/features/feature-name/components/Component.astro';
+   ```

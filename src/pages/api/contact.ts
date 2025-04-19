@@ -45,9 +45,9 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     console.log("Creating transporter with config:", {
-      host: import.meta.env.SMTP_HOST,
-      port: import.meta.env.SMTP_PORT,
-      user: import.meta.env.SMTP_USER,
+      host: import.meta.env["SMTP_HOST"],
+      port: import.meta.env["SMTP_PORT"],
+      user: import.meta.env["SMTP_USER"],
     });
 
     /**
@@ -55,12 +55,12 @@ export const POST: APIRoute = async ({ request }) => {
      * @type {import('nodemailer').Transporter}
      */
     const transporter = nodemailer.createTransport({
-      host: import.meta.env.SMTP_HOST,
-      port: import.meta.env.SMTP_PORT,
+      host: import.meta.env["SMTP_HOST"],
+      port: import.meta.env["SMTP_PORT"],
       secure: false, // true for 465, false for other ports
       auth: {
-        user: import.meta.env.SMTP_USER,
-        pass: import.meta.env.SMTP_PASS,
+        user: import.meta.env["SMTP_USER"],
+        pass: import.meta.env["SMTP_PASS"],
       },
     });
 
@@ -78,10 +78,10 @@ export const POST: APIRoute = async ({ request }) => {
      * @type {import('nodemailer').SendMailOptions}
      */
     const mailOptions = {
-      from: `"${name}" <${import.meta.env.EMAIL_FROM}>`,
-      to: import.meta.env.EMAIL_TO,
+      from: `"${name}" <${import.meta.env["EMAIL_FROM"]}>`,
+      to: import.meta.env["EMAIL_TO"],
       replyTo: email as string,
-      sender: import.meta.env.EMAIL_FROM,
+      sender: import.meta.env["EMAIL_FROM"],
       subject: `[PORTFOLIO-CONTACT-FORM] New message from ${name}`,
       headers: {
         "X-Gmail-Labels": "Portfolio/Contact",
@@ -89,7 +89,7 @@ export const POST: APIRoute = async ({ request }) => {
         "X-MSMail-Priority": "High",
         Importance: "high",
         "List-Unsubscribe": `<mailto:${
-          import.meta.env.EMAIL_FROM
+          import.meta.env["EMAIL_FROM"]
         }?subject=unsubscribe>`,
       },
       text: `

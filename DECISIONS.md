@@ -28,7 +28,7 @@
 ### Interactive Elements
 
 - Added outline buttons for clear call-to-actions
-- Implemented hover states with color transitions
+- Implemented hover states with colour transitions
 - Created consistent animation durations
 - Used geometric shapes for brand identity
 - Enhanced touch targets for mobile
@@ -231,7 +231,7 @@
 
    - Use `.section-full` for edge-to-edge sections
    - Maintain consistent padding with `.px-4 sm:px-6 lg:px-8`
-   - Center headings with `.max-w-7xl mx-auto text-center`
+   - centre headings with `.max-w-7xl mx-auto text-centre`
 
 2. **Content Width**
 
@@ -245,3 +245,55 @@
    - Use standardized text sizes
    - Implement responsive scaling
    - Ensure proper spacing
+
+## Component Organization
+
+### Feature-Based Architecture [2024-03-XX]
+
+**Decision:** Implement a feature-based component architecture
+
+**Context:**
+
+- Multiple instances of components found in different locations
+- Inconsistent component placement leading to confusion
+- Need for better organization and maintainability
+
+**Solution:**
+
+- UI components in `src/components/ui/`
+- Layout components in `src/components/layout/`
+- Feature components in `src/components/features/<feature>/components/`
+- No components in root of `src/components/`
+
+**Benefits:**
+
+- Better code organization
+- Reduced component duplication
+- Clearer import paths
+- Improved maintainability
+
+## Australian English Standards
+
+### Australian English Configuration [2024-03-XX]
+
+**Decision:** Implement comprehensive Australian English standards across the project
+
+**Context:**
+
+- Need for consistent Australian English usage
+- Mix of American and Australian spellings
+- Requirement for proper localisation
+
+**Solution:**
+
+- Configured Code Spell Checker for Australian English
+- Added comprehensive word lists
+- Implemented spelling flagging
+- Set up project-specific terms
+
+**Benefits:**
+
+- Consistent Australian English usage
+- Automated spelling checks
+- Better regional compliance
+- Improved documentation quality

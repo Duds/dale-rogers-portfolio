@@ -1,0 +1,47 @@
+---
+import Container from "@/components/layout/Container.astro";
+
+// Define the expected prop type based on your config.ts Logo interface
+interface Logo {
+  name: string;
+  url: string;
+  alt: string;
+}
+
+interface Props {
+  logos: Logo[];
+}
+
+const { logos } = Astro.props;
+
+// Removed hardcoded clients array
+---
+
+<section class="logo-salad py-20 bg-gray-50 dark:bg-gray-900">
+  <Container>
+    <h2
+      class="text-2xl font-semibold text-gray-600 dark:text-gray-400 mb-4 text-center"
+    >
+      Trusted by
+    </h2>
+    <div class="flex flex-wrap justify-center items-center gap-12 md:gap-16">
+      {
+        logos.map((logo) => (
+          <a
+            href={logo.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="opacity-60 hover:opacity-100 transition-opacity duration-300"
+          >
+            <img
+              src={logo.url}
+              alt={logo.alt}
+              class="h-12 md:h-16 w-auto filter dark:invert"
+              loading="lazy"
+            />
+          </a>
+        ))
+      }
+    </div>
+  </Container>
+</section>

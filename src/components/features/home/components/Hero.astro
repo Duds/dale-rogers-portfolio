@@ -1,13 +1,10 @@
 ---
 // Hero section component
-import Button from "../Button.astro";
-import Container from "../Container.astro";
+import type { HeroProps } from "../types";
+import Button from "@/components/ui/Button.astro";
+import Container from "@/components/layout/Container.astro";
 
-interface Props {
-  title: string;
-  subtitle: string;
-  ctaText: string;
-}
+type Props = HeroProps;
 
 const { title, subtitle, ctaText } = Astro.props;
 ---

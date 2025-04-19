@@ -1,27 +1,31 @@
 ---
-import Layout from "@/layouts/Layout.astro"
-import Button from "@/components/Button.astro"
-import Card from "@/components/Card.astro"
+import Layout from "@/layouts/Layout.astro";
+import Button from "@/components/ui/Button.astro";
+import Card from "@/components/ui/Card.astro";
 ---
 
 <Layout title="About">
   <div class="container mx-auto px-4 py-8">
     <h1 class="font-display text-4xl text-text mb-6">About Me</h1>
-    
+
     <div class="grid md:grid-cols-2 gap-8 mb-12">
       <div>
         <p class="text-text-secondary mb-4">
-          I'm a Service Designer based in Canberra, Australia, with a passion for creating user-centered solutions that drive meaningful change.
+          I'm a Service Designer based in Canberra, Australia, with a passion
+          for creating user-centreed solutions that drive meaningful change.
         </p>
         <p class="text-text-secondary mb-4">
-          With expertise in user research, service blueprinting, and co-design, I help organizations transform their services to better meet user needs.
+          With expertise in user research, service blueprinting, and co-design,
+          I help organizations transform their services to better meet user
+          needs.
         </p>
         <Button href="/contact" variant="primary">Get in Touch</Button>
       </div>
       <div>
         <Card title="My Approach">
           <p class="text-text-secondary mb-4">
-            I believe in a collaborative, evidence-based approach to service design. My process typically involves:
+            I believe in a collaborative, evidence-based approach to service
+            design. My process typically involves:
           </p>
           <ul class="list-disc pl-5 text-text-secondary space-y-2">
             <li>Understanding user needs through research</li>
@@ -39,12 +43,14 @@ import Card from "@/components/Card.astro"
       <div class="grid md:grid-cols-2 gap-8">
         <Card title="Service Design Consultant">
           <p class="text-text-secondary mb-4">
-            Working with clients across government, education, and private sectors to improve service delivery and user experience.
+            Working with clients across government, education, and private
+            sectors to improve service delivery and user experience.
           </p>
         </Card>
         <Card title="UX Researcher">
           <p class="text-text-secondary mb-4">
-            Conducting user research and usability testing to inform design decisions and validate solutions.
+            Conducting user research and usability testing to inform design
+            decisions and validate solutions.
           </p>
         </Card>
       </div>

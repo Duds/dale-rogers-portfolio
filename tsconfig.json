@@ -6,7 +6,45 @@
             "@/*": [
                 "./src/*"
             ]
-        }
+        },
+        // Strict Type Checking
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictBindCallApply": true,
+        "strictPropertyInitialization": true,
+        "noImplicitThis": true,
+        "useUnknownInCatchVariables": true,
+        "alwaysStrict": true,
+
+        // Additional Checks
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
+        "noImplicitOverride": true,
+        "noPropertyAccessFromIndexSignature": true,
+
+        // Module Resolution
+        "module": "Node16",
+        "moduleResolution": "node16",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+
+        // Enhanced Error Reporting
+        "forceConsistentCasingInFileNames": true,
+
+        // Source Maps and Debugging
+        "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true,
+
+        // Latest Language Features
+        "target": "ESNext",
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "jsx": "preserve"
     },
     "include": [
         "src/**/*.ts",
@@ -14,6 +52,7 @@
         "src/**/*.astro"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "dist"
     ]
 }

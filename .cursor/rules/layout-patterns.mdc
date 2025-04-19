@@ -1,0 +1,90 @@
+---
+description: Standards for implementing consistent layout patterns across the site
+globs: 
+alwaysApply: false
+---
+ ---
+description: Standards for implementing consistent layout patterns across the site
+globs: ["**/*.astro"]
+---
+
+# Layout Pattern Standards
+
+@context {
+    "type": "guidelines",
+    "purpose": "layout_standards",
+    "format_version": "1.0.0"
+}
+
+@structure {
+    "required_sections": [
+        "section_structure",
+        "implementation_examples"
+    ]
+}
+
+## Section Structure
+
+@rules [
+    {
+        "id": "full_width_sections",
+        "rule": "Use .section-full for edge-to-edge sections",
+        "severity": "error"
+    },
+    {
+        "id": "content_width",
+        "rule": "Use appropriate content width classes",
+        "severity": "error"
+    },
+    {
+        "id": "typography",
+        "rule": "Maintain consistent heading hierarchy",
+        "severity": "warning"
+    }
+]
+
+### 1. Full-Width Sections
+- Use `.section-full` for edge-to-edge sections
+- Maintain consistent padding with `.px-4 sm:px-6 lg:px-8`
+- Center headings with `.max-w-7xl mx-auto text-center`
+
+### 2. Content Width
+- Use `.section-content` for standard width
+- Apply `.section-content-narrow` for 2/3 width
+- Implement `.section-content-wide` for wider content
+- Remove container constraints for full-width elements
+
+### 3. Typography
+- Maintain consistent heading hierarchy
+- Use standardized text sizes
+- Implement responsive scaling
+- Ensure proper spacing
+
+## Implementation Examples
+
+@examples [
+    {
+        "type": "full_width_heading",
+        "code": ```astro
+        <section class="section-full">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2>Section Heading</h2>
+          </div>
+          <div class="section-content-narrow">
+            <!-- Content here -->
+          </div>
+        </section>
+        ```
+    },
+    {
+        "type": "full_width_image",
+        "code": ```astro
+        <section class="section-full">
+          <div class="section-content">
+            <h2>Section Heading</h2>
+            <p>Content text</p>
+          </div>
+          <div class="w-full">
+            <img src="image.jpg" alt="Description" />
+          </div>
+        </sec

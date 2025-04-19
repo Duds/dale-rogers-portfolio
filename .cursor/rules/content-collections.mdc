@@ -1,0 +1,36 @@
+---
+description: Content Collections Handling
+globs:
+alwaysApply: false
+---
+# Content Collection Best Practices
+
+This document outlines the standards and best practices for managing content collections in the portfolio site.
+
+## Collection Types
+
+### Content Collections (`type: "content"`)
+Use for Markdown or MDX content that requires frontmatter:
+- Articles
+- Case Studies
+- Documentation
+
+### Data Collections (`type: "data"`)
+Use for structured data in JSON format:
+- Services
+- Site Content
+- Configuration
+
+## Directory Structure
+
+```
+src/content/
+├── config.ts           # Collection configuration
+├── articles/          # Markdown content
+│   └── *.md
+├── case-studies/      # Markdown content
+│   └── *.md
+├── services/         # JSON data
+│   └── *.json
+└── site-content/    # JSON data
+    └── *.json

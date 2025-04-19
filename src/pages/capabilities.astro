@@ -1,65 +1,79 @@
-+++ Add frontmatter delimiters at the top and after the JS code
-
 ---
-import Layout from "../layouts/Layout.astro"
-import Icon from "../components/Icon.astro"
-import Card from "../components/Card.astro"
-import Button from "../components/Button.astro"
+import Layout from "@/layouts/Layout.astro";
+import Icon from "@/components/ui/Icon.astro";
+import Card from "@/components/ui/Card.astro";
+import Button from "@/components/ui/Button.astro";
 
-const capabilities = [
+interface Capability {
+  title: string;
+  description: string;
+  icon: "strategy" | "research" | "blueprint" | "codesign" | "evaluation";
+}
+
+const capabilities: Capability[] = [
   {
     title: "Service Strategy",
-    description: "Developing service visions and strategies that align with business goals and user needs.",
-    icon: "strategy"
+    description:
+      "Developing service visions and strategies that align with business goals and user needs.",
+    icon: "strategy",
   },
   {
     title: "User Research",
-    description: "Conducting qualitative and quantitative research to understand user needs and behaviors.",
-    icon: "research"
+    description:
+      "Conducting qualitative and quantitative research to understand user needs and behaviors.",
+    icon: "research",
   },
   {
     title: "Service Blueprinting",
-    description: "Mapping service experiences to identify pain points and opportunities for improvement.",
-    icon: "blueprint"
+    description:
+      "Mapping service experiences to identify pain points and opportunities for improvement.",
+    icon: "blueprint",
   },
   {
     title: "Co-design",
-    description: "Facilitating collaborative design sessions with stakeholders and users.",
-    icon: "codesign"
+    description:
+      "Facilitating collaborative design sessions with stakeholders and users.",
+    icon: "codesign",
   },
   {
     title: "Evaluation",
-    description: "Measuring service performance and impact through metrics and user feedback.",
-    icon: "evaluation"
-  }
-]
+    description:
+      "Measuring service performance and impact through metrics and user feedback.",
+    icon: "evaluation",
+  },
+];
 ---
 
 <Layout title="Capabilities">
   <div class="container mx-auto px-4 py-8">
     <h1 class="font-display text-4xl text-text mb-6">Capabilities</h1>
-    
+
     <div class="grid md:grid-cols-2 gap-8 mb-12">
       <div>
         <p class="text-text-secondary mb-4">
-          I offer a comprehensive range of service design capabilities to help organizations create better experiences for their users.
+          I offer a comprehensive range of service design capabilities to help
+          organizations create better experiences for their users.
         </p>
         <p class="text-text-secondary mb-4">
-          From research to implementation, I work closely with clients to understand their needs and deliver solutions that drive meaningful change.
+          From research to implementation, I work closely with clients to
+          understand their needs and deliver solutions that drive meaningful
+          change.
         </p>
         <Button href="/contact" variant="primary">Get in Touch</Button>
       </div>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {capabilities.map((capability) => (
-        <Card title={capability.title}>
-          <div class="flex items-start space-x-4">
-            <Icon name={capability.icon} class="w-8 h-8 text-primary" />
-            <p class="text-text-secondary">{capability.description}</p>
-          </div>
-        </Card>
-      ))}
+      {
+        capabilities.map((capability) => (
+          <Card title={capability.title}>
+            <div class="flex items-start space-x-4">
+              <Icon name={capability.icon} class="w-8 h-8 text-primary" />
+              <p class="text-text-secondary">{capability.description}</p>
+            </div>
+          </Card>
+        ))
+      }
     </div>
   </div>
 </Layout>

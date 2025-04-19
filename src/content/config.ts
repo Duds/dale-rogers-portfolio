@@ -2,12 +2,71 @@ import { defineCollection, z } from "astro:content";
 
 /**
  * @fileoverview Content collection configuration for the portfolio site.
- * Defines schemas for articles and case studies collections.
+ * Defines schemas for various content types.
  */
+
+const variant = z.enum(["purple", "black", "green", "orange"]);
+
+const serviceSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  variant: variant,
+  imageUrl: z.string(),
+  icon: z.string(),
+});
+
+/**
+ * Schema for services collection
+ * Expects an array of services in a single file
+ */
+const servicesCollection = defineCollection({
+  type: "data",
+  schema: z.array(serviceSchema),
+});
+
+const siteSectionSchema = z.object({
+  section: z.enum(["hero", "values", "about", "marketing"]),
+  content: z.object({
+    title: z.string().optional(),
+    subtitle: z.string().optional(),
+    ctaText: z.string().optional(),
+    statement: z.string().optional(),
+    emoji: z.string().optional(),
+    paragraphs: z.array(z.string()).optional(),
+    image: z.string().optional(),
+    skills: z.array(z.string()).optional(),
+    values: z
+      .array(
+        z.object({
+          title: z.string(),
+          description: z.string(),
+          icon: z.string(),
+        })
+      )
+      .optional(),
+    logos: z
+      .array(
+        z.object({
+          name: z.string(),
+          url: z.string(),
+          alt: z.string(),
+        })
+      )
+      .optional(),
+  }),
+});
+
+/**
+ * Schema for site content collection
+ * Now expects an array of sections in a single file
+ */
+const siteContentCollection = defineCollection({
+  type: "data",
+  schema: z.array(siteSectionSchema),
+});
 
 /**
  * Schema for articles collection
- * @type {import('astro:content').CollectionConfig}
  */
 const articlesCollection = defineCollection({
   type: "content",
@@ -22,7 +81,6 @@ const articlesCollection = defineCollection({
 
 /**
  * Schema for case studies collection
- * @type {import('astro:content').CollectionConfig}
  */
 const caseStudiesCollection = defineCollection({
   type: "content",
@@ -42,9 +100,10 @@ const caseStudiesCollection = defineCollection({
 
 /**
  * Exported collections configuration
- * @type {Record<string, import('astro:content').CollectionConfig>}
  */
 export const collections = {
   articles: articlesCollection,
   "case-studies": caseStudiesCollection,
+  services: servicesCollection,
+  "site-content": siteContentCollection,
 };

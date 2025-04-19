@@ -1,0 +1,166 @@
+---
+description: Standards for implementing accessibility across the site
+globs: 
+alwaysApply: false
+---
+# Accessibility Standards
+
+@context {
+    "type": "guidelines",
+    "purpose": "accessibility_standards",
+    "format_version": "1.0.0"
+}
+
+@structure {
+    "required_sections": [
+        "semantic_html",
+        "interactive_elements",
+        "images_media",
+        "forms"
+    ]
+}
+
+## Semantic HTML
+
+@rules [
+    {
+        "id": "semantic_structure",
+        "rule": "Use appropriate HTML5 elements",
+        "severity": "error"
+    },
+    {
+        "id": "heading_hierarchy",
+        "rule": "Maintain proper heading hierarchy",
+        "severity": "error"
+    },
+    {
+        "id": "aria_labels",
+        "rule": "Implement ARIA labels when needed",
+        "severity": "warning"
+    }
+]
+
+### 1. Structure
+- Use appropriate HTML5 elements
+- Maintain proper heading hierarchy
+- Implement ARIA labels when needed
+- Ensure proper document outline
+
+### 2. Examples
+```astro
+<section aria-labelledby="section-title">
+  <h2 id="section-title">Section Title</h2>
+  <!-- Content -->
+</section>
+```
+
+## Interactive Elements
+
+@rules [
+    {
+        "id": "button_semantics",
+        "rule": "Use semantic <button> for actions",
+        "severity": "error"
+    },
+    {
+        "id": "link_semantics",
+        "rule": "Use <a> for navigation",
+        "severity": "error"
+    },
+    {
+        "id": "focus_states",
+        "rule": "Implement focus states",
+        "severity": "warning"
+    }
+]
+
+### 1. Buttons and Links
+- Use semantic `<button>` for actions
+- Use `<a>` for navigation
+- Implement focus states
+- Ensure sufficient contrast
+
+### 2. Implementation
+```astro
+<button 
+  class="btn-primary"
+  aria-label="Submit form"
+>
+  Submit
+</button>
+```
+
+## Images and Media
+
+@rules [
+    {
+        "id": "alt_text",
+        "rule": "Provide descriptive alt text",
+        "severity": "error"
+    },
+    {
+        "id": "decorative_images",
+        "rule": "Use empty alt for decorative images",
+        "severity": "warning"
+    },
+    {
+        "id": "dimensions",
+        "rule": "Specify image dimensions",
+        "severity": "error"
+    }
+]
+
+### 1. Alt Text
+- Provide descriptive alt text
+- Use empty alt for decorative images
+- Consider context in descriptions
+- Maintain consistency
+
+### 2. Examples
+```astro
+<img 
+  src="logo.jpg" 
+  alt="Dale Rogers Portfolio Logo"
+  width="200"
+  height="100"
+/>
+```
+
+## Forms
+
+@rules [
+    {
+        "id": "form_labels",
+        "rule": "Use proper form labels",
+        "severity": "error"
+    },
+    {
+        "id": "error_messages",
+        "rule": "Implement error messages",
+        "severity": "error"
+    },
+    {
+        "id": "keyboard_navigation",
+        "rule": "Ensure keyboard navigation",
+        "severity": "error"
+    }
+]
+
+### 1. Implementation
+- Use proper form labels
+- Implement error messages
+- Provide clear instructions
+- Ensure keyboard navigation
+
+### 2. Example
+```astro
+<form>
+  <label for="email">Email Address</label>
+  <input 
+    type="email" 
+    id="email" 
+    name="email"
+    aria-required="true"
+  />
+  <div class="error-message" role="alert">
+    Please enter a valid 

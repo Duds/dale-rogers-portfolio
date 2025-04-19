@@ -125,3 +125,36 @@ For any questions or suggestions, please open an issue or contact me directly.
 - [ ] Performance optimizations
 - [ ] Analytics integration
 - [ ] Newsletter subscription
+
+## Development Standards
+
+### Component Organization
+
+We follow a feature-based component architecture:
+
+- UI components: `src/components/ui/`
+- Layout components: `src/components/layout/`
+- Feature components: `src/components/features/<feature>/components/`
+
+For more details, see [DEVELOPMENT.md](DEVELOPMENT.md).
+
+### Australian English Standards
+
+This project follows Australian English standards:
+
+- Australian spelling (e.g., colour, organisation)
+- Australian date format (DD/MM/YYYY)
+- 24-hour time format
+- Australian time zones
+- Metric measurements
+
+VS Code Setup:
+
+```json
+{
+  "cSpell.language": "en,en-AU",
+  "cSpell.words": ["colour", "organisation", ...]
+}
+```
+
+For full configuration, see [DEVELOPMENT.md](DEVELOPMENT.md).

@@ -1,0 +1,167 @@
+---
+description: Performance Optimisation Standards
+globs: 
+alwaysApply: false
+---
+# Performance Optimization Standards
+
+@context {
+    "type": "guidelines",
+    "purpose": "performance_standards",
+    "format_version": "1.0.0"
+}
+
+@structure {
+    "required_sections": [
+        "image_optimization",
+        "css_optimization",
+        "javascript_optimization",
+        "asset_loading"
+    ]
+}
+
+## Image Optimization
+
+@rules [
+    {
+        "id": "image_formats",
+        "rule": "Use appropriate image formats",
+        "severity": "error"
+    },
+    {
+        "id": "lazy_loading",
+        "rule": "Implement lazy loading",
+        "severity": "error"
+    },
+    {
+        "id": "image_dimensions",
+        "rule": "Specify image dimensions",
+        "severity": "error"
+    }
+]
+
+### 1. Implementation
+- Use appropriate image formats
+- Implement lazy loading
+- Specify image dimensions
+- Use responsive images
+
+### 2. Examples
+```astro
+<img 
+  src="image.webp"
+  alt="Description"
+  width="800"
+  height="600"
+  loading="lazy"
+  fetchpriority="low"
+/>
+```
+
+## CSS Optimization
+
+@rules [
+    {
+        "id": "tailwind_purge",
+        "rule": "Use Tailwind's purge feature",
+        "severity": "error"
+    },
+    {
+        "id": "css_nesting",
+        "rule": "Minimize CSS nesting",
+        "severity": "warning"
+    },
+    {
+        "id": "custom_properties",
+        "rule": "Use CSS custom properties",
+        "severity": "error"
+    }
+]
+
+### 1. Best Practices
+- Use Tailwind's purge feature
+- Minimize CSS nesting
+- Implement critical CSS
+- Use CSS custom properties
+
+### 2. Implementation
+```css
+/* Use custom properties for theming */
+:root {
+  --colour-primary: #6B46C1;
+  --colour-secondary: #805AD5;
+}
+```
+
+## JavaScript Optimization
+
+@rules [
+    {
+        "id": "js_usage",
+        "rule": "Minimize JavaScript usage",
+        "severity": "warning"
+    },
+    {
+        "id": "native_apis",
+        "rule": "Use native browser APIs",
+        "severity": "error"
+    },
+    {
+        "id": "event_handling",
+        "rule": "Implement proper event handling",
+        "severity": "error"
+    }
+]
+
+### 1. Implementation
+- Minimize JavaScript usage
+- Use native browser APIs
+- Implement proper event handling
+- Consider performance impact
+
+### 2. Example
+```typescript
+// Use IntersectionObserver for lazy loading
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // Load content
+    }
+  });
+});
+```
+
+## Asset Loading
+
+@rules [
+    {
+        "id": "resource_hints",
+        "rule": "Use proper resource hints",
+        "severity": "warning"
+    },
+    {
+        "id": "preloading",
+        "rule": "Implement preloading",
+        "severity": "error"
+    },
+    {
+        "id": "loading_priorities",
+        "rule": "Consider loading priorities",
+        "severity": "error"
+    }
+]
+
+### 1. Best Practices
+- Use proper resource hints
+- Implement preloading
+- Consider loading priorities
+- Optimize font loading
+
+### 2. Implementation
+```astro
+<!-- Preload critical assets -->
+<link 
+  rel="preload" 
+  href="/fonts/custom.woff2" 
+  as="font" 
+  t

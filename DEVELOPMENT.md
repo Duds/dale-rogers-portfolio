@@ -157,7 +157,7 @@ chore: update tooling
 --text-nav: clamp(1.25rem, 1.75vw, 1.5rem);
 --text-nav-logo: clamp(2rem, 2.5vw, 3rem);
 
-/* Colors */
+/* colours */
 --colour-nav-bg: var(--colour-bg);
 --colour-nav-text: var(--colour-black);
 --colour-nav-border: rgba(16, 16, 15, 0.1);
@@ -185,7 +185,7 @@ We use themed component classes for consistent styling:
 - SVG-based logo component
 - Uses CSS animation for rotation
 - Responsive sizing with breakpoints
-- Color inheritance through currentColor
+- colour inheritance through currentcolour
 - Geometric shape-based design
 
 ### Navigation
@@ -285,11 +285,11 @@ The following classes are available for consistent layout implementation:
 
 ### Implementation Examples
 
-1. **Full-Width Section with Centered Heading**
+1. **Full-Width Section with centreed Heading**
 
 ```astro
 <section class="section-full">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-centre">
     <h2>Section Heading</h2>
   </div>
   <div class="section-content-narrow">
@@ -333,3 +333,57 @@ The following classes are available for consistent layout implementation:
    - Maintain proper heading structure
    - Ensure sufficient contrast
    - Consider screen reader navigation
+
+## Component Development
+
+### Component Organization
+
+Components must follow the feature-based directory structure:
+
+```
+src/
+└── components/
+    ├── ui/           # Shared UI components (Button, Card, etc.)
+    ├── layout/       # Layout components (Header, Footer, etc.)
+    └── features/     # Feature-specific components
+        └── feature-name/
+            └── components/
+                └── Component.astro
+```
+
+Import components using the following conventions:
+
+```typescript
+import Button from "@/components/ui/Button.astro";
+import Container from "@/components/layout/Container.astro";
+import Feature from "@/components/features/feature-name/components/Component.astro";
+```
+
+### Australian English Standards
+
+All code and documentation must follow Australian English standards:
+
+1. **Spelling Configuration**
+
+   - Use VS Code Code Spell Checker extension
+   - Enable Australian English: `"cSpell.language": "en,en-AU"`
+   - Add project-specific terms to `cSpell.words`
+
+2. **Common Australian Spellings**
+
+   - Use '-our' endings: colour, behaviour, favour
+   - Use '-ise' endings: customise, realise
+   - Use '-re' endings: centre, metre
+   - Use Australian terms: organisation, catalogue
+
+3. **Date and Time Formats**
+
+   - Dates: DD/MM/YYYY
+   - Time: 24-hour format
+   - Time zones: Australian time zones
+
+4. **Documentation**
+   - Use Australian English in comments
+   - Use Australian terminology
+   - Include Australian examples
+   - Follow Australian standards

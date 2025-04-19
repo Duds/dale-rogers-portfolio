@@ -1,8 +1,7 @@
 ---
-import Icon from "./Icon.astro";
-import ThemeToggle from "./ThemeToggle.astro";
-import SpinningLogo from "./SpinningLogo.astro";
-import Container from "./Container.astro";
+import ThemeToggle from "@/components/ui/ThemeToggle.astro";
+import SpinningLogo from "@/components/features/portfolio/components/SpinningLogo.astro";
+import Container from "@/components/layout/Container.astro";
 
 // Get current path and determine active page
 const pathname = new URL(Astro.request.url).pathname;

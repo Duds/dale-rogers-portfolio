@@ -1,5 +1,10 @@
 ---
-import Container from "../Container.astro";
+import Container from "@/components/layout/Container.astro";
+
+interface Value {
+  name: string;
+  description: string;
+}
 
 // Temporary values section with marketing copy
 const content = {
@@ -27,13 +32,8 @@ const content = {
       description:
         "Great design happens together. I work transparently with stakeholders at every level.",
     },
-  ],
+  ] satisfies Value[],
 };
-
-interface Value {
-  name: string;
-  description: string;
-}
 ---
 
 <section class="my-values w-full py-20">
@@ -50,7 +50,9 @@ interface Value {
     </div>
 
     <div class="w-full mb-8">
-      <div class="relative aspect-[16/9] rounded-3xl overflow-hidden">
+      <div
+        class="relative aspect-[16/9] rounded-3xl overflow-hidden shadow-soft"
+      >
         <img
           src={content.image}
           alt="Values in action"
@@ -63,7 +65,7 @@ interface Value {
       <div class="text-left">
         <a
           href="/values"
-          class="btn-primary inline-flex items-center gap-2 rounded-pill text-xl px-8 py-4"
+          class="btn-primary inline-flex items-center gap-2 rounded-pill text-xl px-8 py-4 shadow-soft-hover"
         >
           Explore My Values
           <svg
@@ -84,15 +86,5 @@ interface Value {
 </section>
 
 <style>
-  .shadow-soft {
-    box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.05),
-      0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  }
-  .shadow-soft-dark {
-    box-shadow:
-      0 4px 6px -1px rgba(255, 255, 255, 0.05),
-      0 2px 4px -1px rgba(255, 255, 255, 0.03);
-  }
-  /* Removed animation styles */
+  /* Component-specific styles can go here */
 </style>

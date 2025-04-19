@@ -1,90 +1,95 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Hero from "../components/sections/Hero.astro";
-import CaseStudyImages from "../components/sections/CaseStudyImages.astro";
-import WhoIsDale from "../components/sections/WhoIsDale.astro";
-import CaseStudiesBento from "../components/sections/CaseStudiesBento.astro";
-import Services from "../components/sections/Services.astro";
-import MyValues from "../components/sections/MyValues.astro";
-import LogoSalad from "../components/sections/LogoSalad.astro";
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/features/home/components/Hero.astro";
+import WhoIsDale from "@/components/features/values/components/WhoIsDale.astro";
+import CaseStudiesBento from "@/components/features/case-studies/components/CaseStudiesBento.astro";
+import Services from "@/components/features/home/components/Services.astro";
+import MyValues from "@/components/features/values/components/MyValues.astro";
+import LogoSalad from "@/components/features/home/components/LogoSalad.astro";
 
-// TODO: Move all content to CMS or content collections
-// TEMPORARY CONTENT PLACEHOLDERS
-const heroContent = {
-  title: "Service Design That Builds Trust",
-  subtitle: "Dale Rogers - Aligning services with human needs",
-  ctaText: "View Case Studies",
-};
+// Define interfaces based on your config.ts schemas
+interface Logo {
+  name: string;
+  url: string;
+  alt: string;
+}
 
-const textIntro = [
-  "Human-centred design with clarity, care, and commitment to the actual problem.",
-  "Design isn't just delivery – it's strategy, structure, and service intelligence.",
-];
+interface ValueItem {
+  title: string;
+  description: string;
+  icon: string;
+}
 
-const services = [
-  {
-    title: "Service Design",
-    description: "End-to-end service alignment using human-centred tools.",
-    variant: "purple",
-    imageUrl: "/icons/service-design.svg",
-  },
-  {
-    title: "UX Research",
-    description: "Synthesis and evidence for decision-making.",
-    variant: "black",
-    imageUrl: "/icons/ux-research.svg",
-  },
-  {
-    title: "Prototyping",
-    description: "Figma, clickable demos, and flow mapping.",
-    variant: "green",
-    imageUrl: "/icons/prototyping.svg",
-  },
-  {
-    title: "Bid Strategy",
-    description: "RFT structuring, response writing, and win themes.",
-    variant: "orange",
-    imageUrl: "/icons/bid-strategy.svg",
-  },
-];
+interface HomeSectionContent {
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  paragraphs?: string[];
+  image?: string;
+  skills?: string[];
+  values?: ValueItem[];
+  logos?: Logo[];
+  [key: string]: unknown;
+}
 
-const belief = {
-  statement: "Good design is strategy made visible.",
-  emoji: "🧠",
-};
+interface HomeSection {
+  section: string;
+  content: HomeSectionContent;
+}
 
-// Featured case studies
-const featuredCaseStudies = [
-  {
-    title: "Developing a Bespoke PMO for Rio Tinto Aluminium",
-    summary:
-      "Created a tailored Project Management Office solution for Rio Tinto Aluminium",
-    tags: ["Service Design", "Enterprise", "PMO"],
-    slug: "developing-a-bespoke-pmo-as-a-service-for-rio-tinto-aluminiu",
-  },
-  {
-    title: "Making Travel Simple",
-    summary:
-      "Streamlined travel administration processes for the University of Canberra",
-    tags: ["User Research", "Service Design", "Higher Education"],
-    slug: "making-travel-simple",
-  },
-  {
-    title: "A Better Fit and Proper Person Test",
-    summary:
-      "Redesigned verification process for a Commonwealth government agency",
-    tags: ["Government", "Service Blueprint", "Process Improvement"],
-    slug: "a-better-fit-and-proper-person-test",
-  },
-];
+// Fetch content, rely on inference but check structure
+const siteContent = await getCollection("site-content");
+const homeEntry = siteContent.find(
+  (entry) => entry.id === "home" // Use ID for data collections (filename)
+);
+
+// More robust check for data structure
+if (
+  !homeEntry?.data ||
+  typeof homeEntry.data !== "object" ||
+  !Array.isArray(homeEntry.data)
+) {
+  throw new Error(
+    "Home content not found or invalid format: Expected an array"
+  );
+}
+
+// Assert type after check - data is the array of sections
+const homeSections = homeEntry.data as HomeSection[];
+
+const heroContent = homeSections.find(
+  (section) => section.section === "hero"
+)?.content;
+const aboutContent = homeSections.find(
+  (section) => section.section === "about"
+)?.content;
+const valuesContent = homeSections.find(
+  (section) => section.section === "values"
+)?.content;
+
+if (!heroContent || !aboutContent || !valuesContent) {
+  throw new Error("Required content sections (hero, about, values) not found");
+}
+
+// Removed hardcoded whoIsDaleContent
+
+// Removed the actual declarations for services, myValuesContent, logos
 ---
 
 <Layout title="Home">
-  <Hero {...heroContent} />
-  <CaseStudyImages />
-  <WhoIsDale />
-  <CaseStudiesBento />
+  <Hero
+    title={heroContent.title || ""}
+    subtitle={heroContent.subtitle || ""}
+    ctaText={heroContent.ctaText || ""}
+  />
+  <WhoIsDale
+    image={aboutContent["image"] || "/images/placeholder.jpg"}
+    bio={aboutContent["paragraphs"]?.join("\n\n") || ""}
+    skills={aboutContent["skills"] || []}
+  />
+  <CaseStudiesBento featured={true} />
   <Services />
-  <MyValues />
-  <LogoSalad />
+  <MyValues values={valuesContent["values"] || []} />
+  <LogoSalad logos={valuesContent["logos"] || []} />
 </Layout>

@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Environment variable management
 - LESSONS_LEARNED.md documenting key insights
 - Australian English spell checking configuration
-- Spinning logo component in navbar center with geometric design
+- Spinning logo component in navbar centre with geometric design
 - Theme-based navigation styling with outline buttons
 - Full-width layout for navigation and footer
 - Responsive typography scaling system
@@ -25,6 +25,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Supports dark mode
   - Includes lazy loading and external links
   - Documentation added to THEME.md
+- Enhanced Code Spell Checker configuration for Australian English
+  - Added comprehensive Australian spelling dictionary
+  - Configured flagging of American spellings
+  - Added project-specific Australian terms
+- Implemented feature-based component organization
+  - Moved UI components to `src/components/ui/`
+  - Updated import paths in about.astro
+  - Fixed component reference errors
 
 ### Changed
 
@@ -47,12 +55,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Standardized component class naming
 - Added decorative oversized text to footer
 - Increased padding and spacing in navigation
+- Refactored Button and Card components to ui directory
+- Updated import paths to follow new component organization
+- Enhanced VS Code settings for better Australian English support
 
 ### Fixed
 
 - Resolved TypeScript errors in dynamic routes
 - Corrected content collection name mismatches
 - Fixed adapter configuration issues
+- Resolved import errors in about.astro
+- Fixed component path references
+- Corrected American English spellings to Australian English
 
 ### Planned
 

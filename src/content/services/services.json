@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Service Design",
+    "description": "End-to-end service alignment using human-centred tools.",
+    "variant": "purple",
+    "imageUrl": "/images/services/service-design.jpg",
+    "icon": "/icons/service-design.svg"
+  },
+  {
+    "title": "UX Research",
+    "description": "Synthesis and evidence for decision-making.",
+    "variant": "black",
+    "imageUrl": "/images/services/ux-research.jpg",
+    "icon": "/icons/ux-research.svg"
+  },
+  {
+    "title": "Prototyping",
+    "description": "Figma, clickable demos, and flow mapping.",
+    "variant": "green",
+    "imageUrl": "/images/services/prototyping.jpg",
+    "icon": "/icons/prototyping.svg"
+  },
+  {
+    "title": "Bid Strategy",
+    "description": "RFT structuring, response writing, and win themes.",
+    "variant": "orange",
+    "imageUrl": "/images/services/bid-strategy.jpg",
+    "icon": "/icons/bid-strategy.svg"
+  }
+]

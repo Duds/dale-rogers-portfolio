@@ -1,0 +1,49 @@
+[
+  {
+    "section": "hero",
+    "content": {
+      "title": "Service Design That Builds Trust",
+      "subtitle": "Good design is strategy made visible. 🧠 Dale Rogers - Aligning services with human needs",
+      "ctaText": "View Case Studies"
+    }
+  },
+  {
+    "section": "about",
+    "content": {
+      "paragraphs": [
+        "Human-centred design with clarity, care, and commitment to the actual problem.",
+        "Design isn't just delivery – it's strategy, structure, and service intelligence."
+      ],
+      "image": "/images/dale-rogers.jpg",
+      "skills": ["Service Design", "UX Research", "Prototyping", "Bid Strategy"]
+    }
+  },
+  {
+    "section": "marketing",
+    "content": {
+      "title": "How I Work",
+      "paragraphs": [
+        "I believe in a <span class='strong'>practical, no-nonsense</span> approach to service design. While I take my work seriously, I don't take myself too seriously.",
+        "My process is <span class='emphasis'>collaborative and transparent</span>. I work closely with stakeholders to understand their needs and constraints, then design solutions that are both innovative and implementable.",
+        "I'm not just a designer - I'm a <span class='strong'>strategist, researcher, and facilitator</span>. I help organizations build the capacity to design better services themselves."
+      ]
+    }
+  },
+  {
+    "section": "values",
+    "content": {
+      "logos": [
+        {
+          "name": "Rio Tinto",
+          "url": "/logos/rio-tinto.svg",
+          "alt": "Rio Tinto logo"
+        },
+        {
+          "name": "University of Canberra",
+          "url": "/logos/uc.svg",
+          "alt": "University of Canberra logo"
+        }
+      ]
+    }
+  }
+]

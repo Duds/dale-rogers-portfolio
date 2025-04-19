@@ -1,0 +1,55 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  client: string;
+  industry: string;
+  duration: string;
+  tags: string[];
+  href: string;
+}
+
+const { title, description, client, industry, duration, tags, href } =
+  Astro.props;
+---
+
+<article
+  class="bg-[var(--colour-bg)] rounded-[var(--radius-lg)] shadow-soft overflow-hidden transition-transform hover:scale-[1.02]"
+>
+  <div class="p-6">
+    <h3 class="text-heading text-xl text-[var(--colour-text)] mb-2">
+      <a
+        href={href}
+        class="hover:text-[var(--colour-accent)] transition-colours"
+      >
+        {title}
+      </a>
+    </h3>
+    <p class="text-body text-[var(--colour-text)] mb-4">{description}</p>
+    <div
+      class="flex flex-wrap gap-4 mb-4 text-sm text-[var(--colour-text-secondary)]"
+    >
+      <div>
+        <span class="font-semibold">Client:</span>
+        {client}
+      </div>
+      <div>
+        <span class="font-semibold">Industry:</span>
+        {industry}
+      </div>
+      <div>
+        <span class="font-semibold">Duration:</span>
+        {duration}
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      {
+        tags.map((tag) => (
+          <span class="px-3 py-1 bg-[var(--colour-section-alt)] text-[var(--colour-text)] text-sm rounded-[var(--radius-pill)]">
+            {tag}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</article>

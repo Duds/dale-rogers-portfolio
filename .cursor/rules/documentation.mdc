@@ -1,0 +1,196 @@
+---
+description:
+globs: **/*.md", "**/*.astro", "**/*.tsx
+alwaysApply: false
+---
+ ---
+description: Standards for implementing documentation across the site
+globs: ["**/*.md", "**/*.astro", "**/*.tsx"]
+---
+
+# Documentation Standards
+
+@context {
+    "type": "guidelines",
+    "purpose": "documentation_standards",
+    "format_version": "1.0.0"
+}
+
+@structure {
+    "required_sections": [
+        "code_comments",
+        "component_documentation",
+        "api_documentation",
+        "readme_standards"
+    ]
+}
+
+## Code Comments
+
+@rules [
+    {
+        "id": "comment_style",
+        "rule": "Use consistent comment style",
+        "severity": "error"
+    },
+    {
+        "id": "complex_logic",
+        "rule": "Document complex logic",
+        "severity": "error"
+    },
+    {
+        "id": "todo_comments",
+        "rule": "Use TODO comments",
+        "severity": "warning"
+    }
+]
+
+### 1. Implementation
+- Use consistent comment style
+- Document complex logic
+- Use TODO comments
+- Explain non-obvious code
+
+### 2. Examples
+```typescript
+/**
+ * Calculates the total price including tax
+ * @param price - Base price in AUD
+ * @param taxRate - Tax rate as decimal (e.g. 0.1 for 10%)
+ * @returns Total price including tax
+ */
+function calculateTotal(price: number, taxRate: number): number {
+  return price * (1 + taxRate);
+}
+```
+
+## Component Documentation
+
+@rules [
+    {
+        "id": "component_description",
+        "rule": "Document component purpose",
+        "severity": "error"
+    },
+    {
+        "id": "props_documentation",
+        "rule": "Document all props",
+        "severity": "error"
+    },
+    {
+        "id": "usage_examples",
+        "rule": "Include usage examples",
+        "severity": "warning"
+    }
+]
+
+### 1. Implementation
+- Document component purpose
+- Document all props
+- Include usage examples
+- Show variants
+
+### 2. Example
+```astro
+---
+/**
+ * Button component for primary actions
+ *
+ * @prop {string} variant - Button style variant
+ * @prop {string} size - Button size
+ * @prop {boolean} disabled - Disabled state
+ */
+interface Props {
+  variant: 'primary' | 'secondary' | 'outline';
+  size: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+}
+---
+```
+
+## API Documentation
+
+@rules [
+    {
+        "id": "endpoint_documentation",
+        "rule": "Document all endpoints",
+        "severity": "error"
+    },
+    {
+        "id": "request_response",
+        "rule": "Document request/response format",
+        "severity": "error"
+    },
+    {
+        "id": "error_handling",
+        "rule": "Document error handling",
+        "severity": "warning"
+    }
+]
+
+### 1. Implementation
+- Document all endpoints
+- Document request/response format
+- Document error handling
+- Include examples
+
+### 2. Example
+```typescript
+/**
+ * @api {get} /api/users/:id Get user by ID
+ * @apiName GetUser
+ * @apiGroup Users
+ *
+ * @apiParam {Number} id User's unique ID
+ *
+ * @apiSuccess {String} name User's name
+ * @apiSuccess {String} email User's email
+ *
+ * @apiError UserNotFound The user was not found
+ */
+```
+
+## README Standards
+
+@rules [
+    {
+        "id": "project_overview",
+        "rule": "Include project overview",
+        "severity": "error"
+    },
+    {
+        "id": "installation",
+        "rule": "Document installation steps",
+        "severity": "error"
+    },
+    {
+        "id": "usage_guide",
+        "rule": "Include usage guide",
+        "severity": "warning"
+    }
+]
+
+### 1. Implementation
+- Include project overview
+- Document installation steps
+- Include usage guide
+- Document configuration
+
+### 2. Example
+```markdown
+# Project Name
+
+## Overview
+Brief description of the project and its purpose.
+
+## Installation
+```bash
+npm install
+npm run dev
+```
+
+## Usage
+Detailed usage instructions and examples.
+
+## Configuration
+Environment variables and confi

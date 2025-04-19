@@ -1,0 +1,118 @@
+---
+description: 
+globs: **/*.astro", "**/*.css
+alwaysApply: false
+---
+ ---
+description: Standards for implementing consistent component theming across the site
+globs: ["**/*.astro", "**/*.css"]
+---
+
+# Component Theming Standards
+
+@context {
+    "type": "guidelines",
+    "purpose": "component_theming",
+    "format_version": "1.0.0"
+}
+
+@structure {
+    "required_sections": [
+        "css_custom_properties",
+        "component_classes",
+        "dark_mode"
+    ]
+}
+
+## CSS Custom Properties
+
+@rules [
+    {
+        "id": "theme_variables",
+        "rule": "Use CSS custom properties for consistent styling",
+        "severity": "error"
+    },
+    {
+        "id": "naming_convention",
+        "rule": "Follow standard naming conventions for theme variables",
+        "severity": "error"
+    }
+]
+
+### 1. Theme Variables
+- Use CSS custom properties for consistent styling
+- Create component-specific theme variables
+- Standardize class naming conventions
+- Maintain centralized theming
+
+### 2. Implementation
+```css
+/* Typography */
+--text-nav: clamp(1.25rem, 1.75vw, 1.5rem);
+--text-nav-logo: clamp(2rem, 2.5vw, 3rem);
+
+/* Colors */
+--colour-nav-bg: var(--colour-bg);
+--colour-nav-text: var(--colour-black);
+--colour-nav-border: rgba(16, 16, 15, 0.1);
+--colour-nav-link-hover: var(--colour-purple);
+```
+
+## Component Classes
+
+@rules [
+    {
+        "id": "base_classes",
+        "rule": "Use themed component classes for consistent styling",
+        "severity": "error"
+    },
+    {
+        "id": "naming_convention",
+        "rule": "Follow component-base naming convention",
+        "severity": "error"
+    }
+]
+
+### 1. Base Classes
+- Use themed component classes for consistent styling
+- Follow naming convention: `component-base`
+- Implement proper spacing and layout
+- Maintain accessibility
+
+### 2. Example Implementation
+```css
+.nav-base {
+  @apply fixed top-0 left-0 w-full z-50;
+}
+
+.nav-link {
+  @apply font-heading text-xl md:text-2xl px-6 py-2 border-2;
+}
+```
+
+## Dark Mode
+
+@rules [
+    {
+        "id": "dark_mode_implementation",
+        "rule": "Use Tailwind's dark mode classes",
+        "severity": "error"
+    },
+    {
+        "id": "contrast",
+        "rule": "Ensure sufficient contrast in dark mode",
+        "severity": "warning"
+    }
+]
+
+### 1. Implementation
+- Use Tailwind's dark mode classes
+- Consider contrast and readability
+- Test across all components
+- Maintain consistent theming
+
+### 2. Example
+```css
+.component {
+  @apply bg-white dark:bg-gray-800;
+  @apply text-bla
