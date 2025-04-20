@@ -88,11 +88,27 @@ export default {
         "2xl": "var(--space-2xl)",
       },
       boxShadow: {
-        soft: "var(--shadow-soft)",
+        soft: "0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)",
+        "soft-dark":
+          "0 4px 6px -1px rgba(255, 255, 255, 0.05), 0 2px 4px -1px rgba(255, 255, 255, 0.03)",
+        "soft-hover":
+          "0 6px 8px -2px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03)",
+        "soft-hover-dark":
+          "0 6px 8px -2px rgba(255, 255, 255, 0.05), 0 4px 6px -2px rgba(255, 255, 255, 0.03)",
         "button-hover": "0 4px 14px -2px rgba(139, 92, 246, 0.4)",
         card: "0 8px 30px rgba(139, 92, 246, 0.15)",
+        elevated:
+          "0 10px 20px -5px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.05)",
+        "elevated-dark":
+          "0 10px 20px -5px rgba(255, 255, 255, 0.08), 0 4px 12px -2px rgba(255, 255, 255, 0.05)",
+        floating: "0 24px 48px -12px rgba(0, 0, 0, 0.18)",
+        "floating-dark": "0 24px 48px -12px rgba(255, 255, 255, 0.18)",
+        focus: "0 0 0 3px rgba(139, 92, 246, 0.45)",
+        "focus-dark": "0 0 0 3px rgba(139, 92, 246, 0.45)",
+        inner: "inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)",
+        "inner-dark": "inset 0 2px 4px 0 rgba(255, 255, 255, 0.06)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("./src/plugins/shadows.js")],
 };

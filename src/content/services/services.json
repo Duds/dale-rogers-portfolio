@@ -1,30 +1,34 @@
 [
   {
     "title": "Service Design",
-    "description": "End-to-end service alignment using human-centred tools.",
+    "description": "Crafting seamless experiences that put people first. We map journeys, identify opportunities, and design services that create lasting connections.",
     "variant": "purple",
-    "imageUrl": "/images/services/service-design.jpg",
-    "icon": "/icons/service-design.svg"
+    "imageUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&fit=crop",
+    "icon": "/icons/service-design.svg",
+    "link": "/services/service-design"
   },
   {
     "title": "UX Research",
-    "description": "Synthesis and evidence for decision-making.",
+    "description": "Understanding the heart of human behaviour. Through deep research and analysis, we uncover insights that drive meaningful innovation.",
     "variant": "black",
-    "imageUrl": "/images/services/ux-research.jpg",
-    "icon": "/icons/ux-research.svg"
+    "imageUrl": "https://images.unsplash.com/photo-1553028826-f4804a6dba3b?q=80&w=2940&fit=crop",
+    "icon": "/icons/ux-research.svg",
+    "link": "/services/ux-research"
   },
   {
     "title": "Prototyping",
-    "description": "Figma, clickable demos, and flow mapping.",
+    "description": "Turning ideas into tangible experiences. We create interactive prototypes that validate concepts and bring your vision to life with confidence.",
     "variant": "green",
-    "imageUrl": "/images/services/prototyping.jpg",
-    "icon": "/icons/prototyping.svg"
+    "imageUrl": "https://images.unsplash.com/photo-1618788372246-79faff0c3742?q=80&w=2940&fit=crop",
+    "icon": "/icons/prototyping.svg",
+    "link": "/services/prototyping"
   },
   {
-    "title": "Bid Strategy",
-    "description": "RFT structuring, response writing, and win themes.",
+    "title": "Strategic Design",
+    "description": "Aligning design with business goals. We help organisations create purposeful experiences that drive growth and foster meaningful relationships.",
     "variant": "orange",
-    "imageUrl": "/images/services/bid-strategy.jpg",
-    "icon": "/icons/bid-strategy.svg"
+    "imageUrl": "https://images.unsplash.com/photo-1664575198308-3959904fa430?q=80&w=2940&fit=crop",
+    "icon": "/icons/strategic-design.svg",
+    "link": "/services/strategic-design"
   }
 ]

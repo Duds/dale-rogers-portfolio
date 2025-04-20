@@ -1,24 +1,20 @@
 ---
-import { getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
 import Container from "@/components/layout/Container.astro";
+import Button from "@/components/ui/Button.astro";
+// Use a simple relative path
+import servicesData from "../../../../content/services/services.json";
 
 /**
  * Services Section Component
  *
- * Displays a grid of services offered, each with an image, icon, title, and description.
- * Also includes marketing content below the services grid.
+ * Displays a grid of services offered with solid color backgrounds,
+ * each with an image, title, and description.
  *
  * @component
  * @example
  * ```astro
  * <Services />
  * ```
- *
- * @remarks
- * This component fetches data from two collections:
- * 1. "services" - For the service cards
- * 2. "site-content" - For the marketing content
  */
 
 interface ServiceData {
@@ -27,198 +23,96 @@ interface ServiceData {
   variant: "purple" | "black" | "green" | "orange";
   imageUrl: string;
   icon: string;
+  link: string;
 }
 
-interface MarketingContent {
-  paragraphs: string[];
-}
+// Cast the imported data to our interface type
+const services = servicesData as ServiceData[];
 
-interface SiteContent {
-  section: string;
-  content: MarketingContent;
-}
+// For debugging purposes
+console.log("Services count:", services.length);
 
-// Fetch services data within this component
-const services = await getCollection("services");
-
-// Fetch marketing content
-const siteContent = await getCollection("site-content");
-const homeEntry = siteContent.find((entry) => entry.id === "home");
-
-if (!homeEntry?.data) {
-  throw new Error("Home content not found");
-}
-
-// Get marketing content from home data
-const marketingContent = (homeEntry.data as unknown as SiteContent[]).find(
-  (section) => section.section === "marketing"
-)?.content;
-
-if (!marketingContent) {
-  throw new Error("Marketing content not found");
-}
-
-type Service = CollectionEntry<"services"> & {
-  data: ServiceData;
+const getVariantClasses = (variant: ServiceData["variant"]) => {
+  const variants = {
+    purple:
+      "bg-primary-purple/95 hover:bg-primary-purple dark:bg-primary-purple/90 dark:hover:bg-primary-purple",
+    black:
+      "bg-primary-black/95 hover:bg-primary-black dark:bg-primary-black/90 dark:hover:bg-primary-black",
+    green:
+      "bg-primary-green/95 hover:bg-primary-green dark:bg-primary-green/90 dark:hover:bg-primary-green",
+    orange:
+      "bg-primary-orange/95 hover:bg-primary-orange dark:bg-primary-orange/90 dark:hover:bg-primary-orange",
+  };
+  return variants[variant];
 };
+
+// Section content
+const smallHeading = "Services";
+const heading = "Our expertise at your service";
+const description =
+  "We transform human experiences through thoughtful design, deep research, and strategic innovation.";
 ---
 
-<section class="services w-full py-20 bg-white dark:bg-gray-950">
+<section class="w-full py-20 bg-background">
   <Container>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
-      <h2 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white">
-        Services
-      </h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-      {
-        (services as Service[]).map(({ data }) => (
-          <div
-            class={`service-card group relative overflow-hidden rounded-lg bg-${data.variant}-100 dark:bg-${data.variant}-900/30 border border-${data.variant}-200 dark:border-${data.variant}-800/50 shadow-sm`}
+    <div class="mb-12">
+      <div class="flex justify-between items-start mb-8">
+        <div class="max-w-2xl">
+          <p class="text-sm font-medium text-muted-foreground mb-3">
+            {smallHeading}
+          </p>
+          <h2 class="text-4xl font-heading font-bold mb-4 text-foreground">
+            {heading}
+          </h2>
+          <p class="text-xl text-muted-foreground">
+            {description}
+          </p>
+        </div>
+        <div class="mt-1">
+          <Button
+            href="/services"
+            class="bg-primary-black text-white hover:bg-primary-black/90 rounded-full px-8 py-3 group"
           >
-            <div class="relative h-48 w-full">
-              <img
-                src={data.imageUrl}
-                alt={data.title}
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div class="p-6">
-              <img
-                src={data.icon}
-                alt=""
-                class="w-10 h-10 mb-4 filter dark:invert"
-              />
-              <h3
-                class={`text-xl font-bold mb-2 text-${data.variant}-800 dark:text-${data.variant}-200`}
-              >
-                {data.title}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-400">{data.description}</p>
-            </div>
-          </div>
-        ))
-      }
+            Learn more about our services
+            <span
+              class="ml-2 transition-transform duration-200 group-hover:translate-x-1"
+              >→</span
+            >
+          </Button>
+        </div>
+      </div>
     </div>
 
-    <div class="w-2/3">
-      <div class="space-y-2 mb-12">
-        {
-          marketingContent.paragraphs?.map((paragraph: string) => (
-            <p
-              class="text-2xl md:text-3xl leading-relaxed text-gray-700 dark:text-gray-300 font-medium"
-              set:html={paragraph}
-            />
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {
+        services && services.length > 0 ? (
+          services.map((service: ServiceData) => (
+            <a
+              href={service.link}
+              class={`group relative overflow-hidden rounded-lg transition-all duration-300 h-[600px] flex flex-col ${getVariantClasses(service.variant)} hover:shadow-elevated dark:hover:shadow-elevated-dark`}
+            >
+              <div class="relative h-[400px] w-full overflow-hidden">
+                <img
+                  src={service.imageUrl}
+                  alt={service.title}
+                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50 group-hover:to-black/60 transition-opacity duration-300" />
+              </div>
+              <div class="p-8 flex flex-col flex-grow">
+                <h3 class="text-2xl font-heading font-bold mb-3 text-white">
+                  {service.title}
+                </h3>
+                <p class="text-white/90">{service.description}</p>
+              </div>
+            </a>
           ))
-        }
-      </div>
+        ) : (
+          <div class="col-span-4 p-8 text-center">
+            <p>No services found.</p>
+          </div>
+        )
+      }
     </div>
   </Container>
 </section>
-
-<style is:global>
-  .aspect-w-16 {
-    position: relative;
-    padding-bottom: 56.25%;
-  }
-
-  .aspect-h-9 {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-
-  /* Content width class */
-  .content-width {
-    width: 66.666667%;
-  }
-
-  /* Tailwind cannot dynamically generate classes like bg-${variable}-XXX */
-  /* Define the background/text colors explicitly for each variant */
-
-  /* Purple variant */
-  .bg-purple-100 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(233 213 255 / var(--tw-bg-opacity));
-  }
-  .dark .dark\:bg-purple-900\/30 {
-    background-color: rgba(126, 34, 206, 0.3);
-  }
-  .border-purple-200 {
-    --tw-border-opacity: 1;
-    border-color: rgb(216 180 254 / var(--tw-border-opacity));
-  }
-  .dark .dark\:border-purple-800\/50 {
-    border-color: rgba(168, 85, 247, 0.5);
-  }
-  .text-purple-800 {
-    --tw-text-opacity: 1;
-    color: rgb(107 33 168 / var(--tw-text-opacity));
-  }
-  .dark .dark\:text-purple-200 {
-    color: #c084fc;
-  }
-
-  /* Black variant */
-  .bg-black-100 {
-    background-color: #f3f4f6;
-  }
-  .dark .dark\:bg-black-900\/30 {
-    background-color: rgba(55, 65, 81, 0.3);
-  }
-  .border-black-200 {
-    border-color: #e5e7eb;
-  }
-  .dark .dark\:border-black-800\/50 {
-    border-color: rgba(75, 85, 99, 0.5);
-  }
-  .text-black-800 {
-    color: #1f2937;
-  }
-  .dark .dark\:text-black-200 {
-    color: #d1d5db;
-  }
-
-  /* Green variant */
-  .bg-green-100 {
-    background-color: #d1fae5;
-  }
-  .dark .dark\:bg-green-900\/30 {
-    background-color: rgba(5, 150, 105, 0.3);
-  }
-  .border-green-200 {
-    border-color: #a7f3d0;
-  }
-  .dark .dark\:border-green-800\/50 {
-    border-color: rgba(6, 182, 212, 0.5);
-  }
-  .text-green-800 {
-    color: #065f46;
-  }
-  .dark .dark\:text-green-200 {
-    color: #6ee7b7;
-  }
-
-  /* Orange variant */
-  .bg-orange-100 {
-    background-color: #ffedd5;
-  }
-  .dark .dark\:bg-orange-900\/30 {
-    background-color: rgba(234, 88, 12, 0.3);
-  }
-  .border-orange-200 {
-    border-color: #fed7aa;
-  }
-  .dark .dark\:border-orange-800\/50 {
-    border-color: rgba(249, 115, 22, 0.5);
-  }
-  .text-orange-800 {
-    color: #9a3412;
-  }
-  .dark .dark\:text-orange-200 {
-    color: #fdba74;
-  }
-</style>

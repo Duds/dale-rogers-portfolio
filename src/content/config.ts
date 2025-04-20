@@ -13,6 +13,7 @@ const serviceSchema = z.object({
   variant: variant,
   imageUrl: z.string(),
   icon: z.string(),
+  link: z.string(),
 });
 
 /**
@@ -25,7 +26,7 @@ const servicesCollection = defineCollection({
 });
 
 const siteSectionSchema = z.object({
-  section: z.enum(["hero", "values", "about", "marketing"]),
+  section: z.enum(["hero", "values", "about", "marketing", "services-text"]),
   content: z.object({
     title: z.string().optional(),
     subtitle: z.string().optional(),

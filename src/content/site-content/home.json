@@ -11,11 +11,19 @@
     "section": "about",
     "content": {
       "paragraphs": [
-        "Human-centred design with clarity, care, and commitment to the actual problem.",
-        "Design isn't just delivery – it's strategy, structure, and service intelligence."
-      ],
-      "image": "/images/dale-rogers.jpg",
-      "skills": ["Service Design", "UX Research", "Prototyping", "Bid Strategy"]
+        "Dale Rogers is a service design consultancy that helps organisations <span class='strong'>create meaningful connections</span> with their audiences through <span class='emphasis'>strategic design thinking</span>. We believe in the <span class='strong'>transformative power of human-centred design</span> to shape services that resonate, engage, and deliver lasting value.",
+        "With a focus on <span class='emphasis'>evidence-based methodologies</span> and <span class='strong'>collaborative approaches</span>, we partner with clients to uncover insights, identify opportunities, and craft solutions that make a <span class='emphasis'>real difference in people's lives</span>."
+      ]
+    }
+  },
+  {
+    "section": "services-text",
+    "content": {
+      "paragraphs": [
+        "We're <span class='strong'>practical, direct, and refreshingly different</span>. Our approach strips away the complexity to focus on what truly matters—your service's impact on real people.",
+        "We don't hide behind <span class='emphasis'>fancy jargon or buzzwords</span>. Instead, we roll up our sleeves and work alongside you, making the design process <span class='strong'>collaborative, engaging, and genuinely enjoyable</span>.",
+        "Because when we're truly invested and <span class='emphasis'>passionate about what we do</span>, that's when the magic happens—creating services that people actually want to use."
+      ]
     }
   },
   {

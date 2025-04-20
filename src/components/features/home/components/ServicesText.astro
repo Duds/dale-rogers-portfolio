@@ -1,0 +1,51 @@
+---
+import Container from "@/components/layout/Container.astro";
+import Button from "@/components/ui/Button.astro";
+
+interface Props {
+  content: string[];
+}
+
+const { content } = Astro.props;
+---
+
+<section class="services-text py-20 bg-white dark:bg-gray-950">
+  <Container>
+    <div class="w-3/5">
+      {
+        content.map((paragraph) => (
+          <p
+            class="text-2xl md:text-3xl text-gray-700 dark:text-gray-300 leading-relaxed mb-6"
+            set:html={paragraph}
+          />
+        ))
+      }
+      <div class="mt-12">
+        <Button variant="primary" href="/contact">Let's Talk</Button>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  /* Ensure consistent spacing and alignment */
+  .services-text {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Emphasis styles */
+  :global(.services-text .emphasis) {
+    @apply text-primary-600 dark:text-primary-400 font-medium;
+    font-style: italic;
+  }
+
+  :global(.services-text .strong) {
+    @apply text-gray-900 dark:text-white font-bold;
+  }
+
+  /* Ensure proper text flow */
+  :global(.services-text p) {
+    @apply space-y-6;
+  }
+</style>

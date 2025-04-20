@@ -4,7 +4,9 @@ import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/features/home/components/Hero.astro";
 import WhoIsDale from "@/components/features/values/components/WhoIsDale.astro";
 import CaseStudiesBento from "@/components/features/case-studies/components/CaseStudiesBento.astro";
+import FeaturedCaseStudiesSlider from "@/components/features/case-studies/components/FeaturedCaseStudiesSlider.astro";
 import Services from "@/components/features/home/components/Services.astro";
+import ServicesText from "@/components/features/home/components/ServicesText.astro";
 import MyValues from "@/components/features/values/components/MyValues.astro";
 import LogoSalad from "@/components/features/home/components/LogoSalad.astro";
 
@@ -64,17 +66,16 @@ const heroContent = homeSections.find(
 const aboutContent = homeSections.find(
   (section) => section.section === "about"
 )?.content;
+const servicesTextContent = homeSections.find(
+  (section) => section.section === "services-text"
+)?.content;
 const valuesContent = homeSections.find(
   (section) => section.section === "values"
 )?.content;
 
-if (!heroContent || !aboutContent || !valuesContent) {
-  throw new Error("Required content sections (hero, about, values) not found");
+if (!heroContent || !aboutContent || !servicesTextContent || !valuesContent) {
+  throw new Error("Required content sections not found");
 }
-
-// Removed hardcoded whoIsDaleContent
-
-// Removed the actual declarations for services, myValuesContent, logos
 ---
 
 <Layout title="Home">
@@ -83,13 +84,11 @@ if (!heroContent || !aboutContent || !valuesContent) {
     subtitle={heroContent.subtitle || ""}
     ctaText={heroContent.ctaText || ""}
   />
-  <WhoIsDale
-    image={aboutContent["image"] || "/images/placeholder.jpg"}
-    bio={aboutContent["paragraphs"]?.join("\n\n") || ""}
-    skills={aboutContent["skills"] || []}
-  />
-  <CaseStudiesBento featured={true} />
+  <FeaturedCaseStudiesSlider />
+  <WhoIsDale bio={aboutContent["paragraphs"]?.join("\n\n") || ""} />
   <Services />
+  <ServicesText content={servicesTextContent["paragraphs"] || []} />
+  <CaseStudiesBento featured={true} />
   <MyValues values={valuesContent["values"] || []} />
   <LogoSalad logos={valuesContent["logos"] || []} />
 </Layout>
