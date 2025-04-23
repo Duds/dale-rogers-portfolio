@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Digital Strategy",
+    "description": "Creating comprehensive digital roadmaps that align with your business objectives",
+    "variant": "purple",
+    "imageUrl": "/images/services/digital-strategy.jpg",
+    "icon": "strategy",
+    "link": "/services/digital-strategy"
+  },
+  {
+    "title": "Service Design",
+    "description": "Designing seamless end-to-end services that delight users and drive business value",
+    "variant": "black",
+    "imageUrl": "/images/services/service-design.jpg",
+    "icon": "design",
+    "link": "/services/service-design"
+  },
+  {
+    "title": "Digital Transformation",
+    "description": "Guiding organisations through digital change with proven methodologies",
+    "variant": "green",
+    "imageUrl": "/images/services/digital-transformation.jpg",
+    "icon": "transform",
+    "link": "/services/digital-transformation"
+  },
+  {
+    "title": "Innovation Consulting",
+    "description": "Helping businesses innovate and stay ahead in the digital age",
+    "variant": "orange",
+    "imageUrl": "/images/services/innovation.jpg",
+    "icon": "innovate",
+    "link": "/services/innovation-consulting"
+  }
+]
