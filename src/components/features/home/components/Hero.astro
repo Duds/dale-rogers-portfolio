@@ -12,7 +12,7 @@ const { title, subtitle, ctaText } = Astro.props;
 <section
   class="hero min-h-[50vh] flex flex-col justify-center items-center text-center py-20"
 >
-  <Container>
+  <Container fullWidth={true}>
     <h1 class="text-4xl md:text-6xl font-bold mb-4">{title}</h1>
     <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">{subtitle}</p>
     <Button variant="primary" href="/case-studies">{ctaText}</Button>

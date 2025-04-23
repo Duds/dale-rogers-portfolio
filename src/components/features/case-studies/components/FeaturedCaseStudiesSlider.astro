@@ -4,7 +4,8 @@
  *
  * A horizontal slider component that smoothly translates based on scroll position.
  * Designed to showcase featured case studies on the landing page with a smooth,
- * engaging animation that responds to the user's scroll position.
+ * engaging animation that responds to the user's scroll position. The slider starts
+ * with the first card partially visible (50% off-screen) to indicate scrollability.
  *
  * @component
  * @example
@@ -25,8 +26,18 @@
  * @performance
  * - Uses RequestAnimationFrame for smooth animations
  * - Implements passive scroll listeners
- * - Uses hardware acceleration with transform3d
+ * - Uses pixel-based transforms for consistent rendering
  * - Includes proper cleanup and memory management
+ * - Handles window resize and visibility changes
+ * - Optimises initial render to prevent flickering
+ * - Recalculates positions after images load
+ *
+ * @behaviour
+ * - Starts with first card 50% off-screen to indicate scrollability
+ * - Smoothly scrolls based on viewport position
+ * - Adapts to different screen sizes
+ * - Maintains consistent scroll behaviour across devices
+ * - Cleans up event listeners and animation frames on unmount
  */
 
 interface CaseStudy {
@@ -99,12 +110,12 @@ const featuredCaseStudies: CaseStudy[] = [
 ---
 
 <section
-  class="featured-case-studies min-h-[60vh] md:min-h-[70vh] relative overflow-hidden py-16"
+  class="featured-case-studies min-h-[60vh] md:min-h-[70vh] relative overflow-hidden py-16 w-full"
   id="featured-case-studies"
 >
   <div class="slider-viewport w-full overflow-hidden">
     <div
-      class="slider-container flex gap-4 md:gap-6 w-max transition-all duration-700 ease-out will-change-transform"
+      class="slider-container flex gap-4 md:gap-6 w-max transition-all duration-700 ease-out will-change-transform pl-4 md:pl-8"
     >
       {
         featuredCaseStudies.map((study: CaseStudy) => (
@@ -156,10 +167,24 @@ const featuredCaseStudies: CaseStudy[] = [
     let ticking = false;
     let animationFrameId: number | null = null;
 
+    // Initial offset for the slider (50% of first card)
+    const getInitialOffset = () => {
+      // Get initial card width
+      const firstCard = sliderContainer.querySelector(".case-study-card");
+      if (!firstCard) return -35;
+
+      const cardWidth = firstCard.getBoundingClientRect().width;
+      return -(cardWidth / 2);
+    };
+
     // Calculate how far we can scroll horizontally
     function updateMaxScroll() {
       maxScroll = sliderContainer.scrollWidth - sliderViewport.clientWidth;
+      console.log("Max scroll updated:", maxScroll);
     }
+
+    // Set initial transform immediately to avoid flicker
+    sliderContainer.style.transform = `translateX(${getInitialOffset()}px)`;
 
     // Debounced resize handler
     let resizeTimeout: number | null = null;
@@ -173,8 +198,11 @@ const featuredCaseStudies: CaseStudy[] = [
       }, 100);
     });
 
-    // Calculate initial values
-    updateMaxScroll();
+    // Calculate initial values after a short delay to ensure layout is complete
+    setTimeout(() => {
+      updateMaxScroll();
+      updateSliderPosition();
+    }, 100);
 
     // Smooth progress calculation
     function calculateProgress(rect: DOMRect): number {
@@ -191,10 +219,12 @@ const featuredCaseStudies: CaseStudy[] = [
         animationFrameId = requestAnimationFrame(() => {
           const rect = section.getBoundingClientRect();
           const progress = calculateProgress(rect);
-          const offset = -progress * maxScroll;
 
-          // Use transform3d for better performance
-          sliderContainer.style.transform = `translate3d(${offset}px, 0, 0)`;
+          // Use initial offset in pixels and remaining scroll in pixels too
+          const offset = getInitialOffset() - progress * maxScroll;
+
+          // Use transform with px units for consistency
+          sliderContainer.style.transform = `translateX(${offset}px)`;
           ticking = false;
         });
         ticking = true;
@@ -228,6 +258,7 @@ const featuredCaseStudies: CaseStudy[] = [
       if (document.hidden) {
         cleanup();
       } else {
+        updateMaxScroll();
         updateSliderPosition();
       }
     });

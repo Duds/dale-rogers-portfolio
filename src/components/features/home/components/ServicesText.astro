@@ -10,7 +10,7 @@ const { content } = Astro.props;
 ---
 
 <section class="services-text py-20 bg-white dark:bg-gray-950">
-  <Container>
+  <Container fullWidth={true}>
     <div class="w-3/5">
       {
         content.map((paragraph) => (
