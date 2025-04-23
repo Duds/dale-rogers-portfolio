@@ -7,6 +7,10 @@
                 "./src/*"
             ]
         },
+        "types": ["astro/client", "astro/env"],
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+
         // Strict Type Checking
         "strict": true,
         "noImplicitAny": true,
@@ -44,7 +48,8 @@
         // Latest Language Features
         "target": "ESNext",
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
-        "jsx": "preserve"
+        "jsx": "preserve",
+        "verbatimModuleSyntax": true
     },
     "include": [
         "src/**/*.ts",
