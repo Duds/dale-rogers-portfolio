@@ -13,6 +13,17 @@ A modern, performant portfolio website built with Astro, TypeScript, and Tailwin
 - Added Australian English language support across the site
 - Implemented proper date formatting (DD/MM/YYYY)
 
+## Core Documentation
+
+- [Architecture](./docs/ARCHITECTURE.md) - System design and architecture decisions
+- [Development](./docs/DEVELOPMENT.md) - Development setup and workflows
+- [Components](./docs/COMPONENTS.md) - Component standards and guidelines
+- [Content](./docs/CONTENT.md) - Content management and guidelines
+- [Testing](./docs/TESTING.md) - Testing strategy and procedures
+- [Security](./docs/SECURITY.md) - Security policies and procedures
+- [Decisions](./docs/DECISIONS.md) - Architecture and technical decisions
+- [Changelog](./docs/CHANGELOG.md) - Version history and changes
+
 ## Features
 
 - 🚀 Built with Astro for optimal performance
@@ -60,12 +71,27 @@ src/
 └── styles/          # Global styles
 ```
 
-## Documentation
+## Development Standards
 
-- [Component Standards](./docs/COMPONENTS.md)
-- [Content Guidelines](./docs/CONTENT.md)
-- [Development Guide](./docs/DEVELOPMENT.md)
-- [Accessibility](./docs/ACCESSIBILITY.md)
+### Australian English Standards
+
+This project follows Australian English standards:
+
+- Australian spelling (e.g., colour, organisation)
+- Date format: DD/MM/YYYY
+- 24-hour time format
+- Australian time zones (AEST/AEDT)
+- Metric measurements
+
+### Component Organisation
+
+We follow a feature-based component architecture:
+
+- UI components: `src/components/ui/`
+- Layout components: `src/components/layout/`
+- Feature components: `src/components/features/<feature>/components/`
+
+For more details, see [DEVELOPMENT.md](docs/DEVELOPMENT.md).
 
 ## Contributing
 
@@ -74,163 +100,63 @@ src/
 3. Submit a pull request
 4. Request code review
 
-## License
+See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for detailed guidelines.
 
-MIT License - See [LICENSE](./LICENSE) for details
-
-## 🚀 Features
-
-- **Modern Tech Stack**: Built with Astro, TypeScript, and Tailwind CSS
-- **Performance Optimized**: Fast loading times and excellent Lighthouse scores
-- **Responsive Design**: Looks great on all devices
-- **Content Management**: Easy-to-update content structure
-- **SEO Friendly**: Built with search engine optimization in mind
-
-## 📦 Tech Stack
-
-- [Astro](https://astro.build/) - Modern static site generator
-- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [PostCSS](https://postcss.org/) - CSS processing
-- [ESLint](https://eslint.org/) - Code linting
-- [Prettier](https://prettier.io/) - Code formatting
-
-## 🛠️ Development
-
-### Prerequisites
-
-- Node.js 18+
-- npm or pnpm
-
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/Duds/dale-rogers-portfolio.git
-   cd dale-rogers-portfolio
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   # or
-   pnpm install
-   ```
-
-3. Create a `.env` file:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-4. Start the development server:
-   ```bash
-   npm run dev
-   # or
-   pnpm dev
-   ```
-
-### Project Structure
-
-```
-├── src/
-│   ├── components/     # Reusable UI components
-│   ├── content/        # Markdown content
-│   ├── layouts/        # Page layouts
-│   ├── pages/          # Route components
-│   └── styles/         # Global styles
-├── public/             # Static assets
-└── astro.config.mjs    # Astro configuration
-```
-
-## 📝 Content Management
-
-Content is managed through Markdown files in the `src/content/` directory:
-
-- Articles: `src/content/articles/`
-- Case Studies: `src/content/case-studies/`
-
-## 🧪 Testing
-
-Run the test suite:
+## Testing
 
 ```bash
-npm test
-# or
+# Run all tests
 pnpm test
+
+# Run specific test suites
+pnpm test:unit
+pnpm test:integration
+pnpm test:e2e
 ```
 
-## 🚀 Deployment
+See [TESTING.md](docs/TESTING.md) for detailed testing guidelines.
 
-The site is configured for deployment on Vercel. Push to the `main` branch to trigger a deployment.
+## Deployment
 
-## 📄 License
+The site is deployed on Vercel. Push to the `main` branch to trigger a deployment.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+See [DEPLOYMENT.md](docs/DEPLOYMENT.md) for detailed deployment procedures.
 
-## 🤝 Contributing
+## Security
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+For security concerns or vulnerability reports, please see our [Security Policy](docs/SECURITY.md).
 
-## 📫 Contact
+## License
 
-For any questions or suggestions, please open an issue or contact me directly.
+MIT License - See [LICENSE](./LICENSE) for details.
 
-## ✅ Project Status
+## Contact
 
-### MVP Features
+For any questions or suggestions:
+
+- Email: contact@dalerogers.dev
+- GitHub Issues: [Create an issue](https://github.com/Duds/dale-rogers-portfolio/issues)
+
+## Project Status
+
+### Current Features
 
 - [x] Basic portfolio structure
 - [x] Responsive design
-- [x] Content management setup
-- [ ] Case studies section
-- [ ] Blog/articles section
-- [ ] Contact form integration
-- [ ] SEO optimization
+- [x] Content management system
+- [x] Case studies section
+- [x] Blog/articles section
+- [x] Contact form
+- [x] SEO optimisation
+- [x] Dark mode support
+- [x] Performance optimisation
 
-### Future Enhancements
+### Upcoming Features
 
-- [ ] Dark mode support
-- [ ] Internationalization
-- [ ] Performance optimizations
-- [ ] Analytics integration
 - [ ] Newsletter subscription
+- [ ] Analytics dashboard
+- [ ] Advanced search functionality
+- [ ] Project showcase timeline
+- [ ] Integrated blog comments
 
-## Development Standards
-
-### Component Organization
-
-We follow a feature-based component architecture:
-
-- UI components: `src/components/ui/`
-- Layout components: `src/components/layout/`
-- Feature components: `src/components/features/<feature>/components/`
-
-For more details, see [DEVELOPMENT.md](DEVELOPMENT.md).
-
-### Australian English Standards
-
-This project follows Australian English standards:
-
-- Australian spelling (e.g., colour, organisation)
-- Australian date format (DD/MM/YYYY)
-- 24-hour time format
-- Australian time zones
-- Metric measurements
-
-VS Code Setup:
-
-```json
-{
-  "cSpell.language": "en,en-AU",
-  "cSpell.words": ["colour", "organisation", ...]
-}
-```
-
-For full configuration, see [DEVELOPMENT.md](DEVELOPMENT.md).
+For detailed progress and plans, see our [Project Board](https://github.com/Duds/dale-rogers-portfolio/projects/1).
