@@ -1,6 +1,82 @@
 # Dale Rogers Portfolio
 
-A modern, performant portfolio website built with Astro, TypeScript, and Tailwind CSS. This site showcases my professional work, case studies, and articles on service design and technology.
+A modern, performant portfolio website built with Astro, TypeScript, and TailwindCSS.
+
+## Recent Updates
+
+### 23/03/2024
+
+- Added Privacy Policy page with comprehensive data handling information
+- Enhanced case studies content structure with MDX support
+- Improved scratch posts layout with status indicators
+- Updated documentation for FeaturedCaseStudiesSlider component
+- Added Australian English language support across the site
+- Implemented proper date formatting (DD/MM/YYYY)
+
+## Features
+
+- 🚀 Built with Astro for optimal performance
+- 💪 TypeScript for type safety
+- 🎨 TailwindCSS for styling
+- 📱 Fully responsive design
+- ♿ WCAG 2.1 AA compliant
+- 🇦🇺 Australian English and regional settings
+- 📝 MDX support for rich content
+- 🎯 Case studies and articles
+- ⚡ Optimised images and assets
+- 🔍 SEO optimised
+- 🌙 Dark mode support
+
+## Getting Started
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Preview production build
+pnpm preview
+```
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── features/      # Feature-specific components
+│   ├── layout/        # Layout components
+│   └── ui/           # Reusable UI components
+├── content/
+│   ├── case-studies/  # Case study MDX files
+│   ├── articles/      # Article MDX files
+│   └── scratch/       # Scratch post MDX files
+├── layouts/          # Page layouts
+├── pages/           # Route pages
+└── styles/          # Global styles
+```
+
+## Documentation
+
+- [Component Standards](./docs/COMPONENTS.md)
+- [Content Guidelines](./docs/CONTENT.md)
+- [Development Guide](./docs/DEVELOPMENT.md)
+- [Accessibility](./docs/ACCESSIBILITY.md)
+
+## Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Submit a pull request
+4. Request code review
+
+## License
+
+MIT License - See [LICENSE](./LICENSE) for details
 
 ## 🚀 Features
 

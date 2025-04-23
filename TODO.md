@@ -2,34 +2,34 @@
 
 ## Completed Items ✓
 
-- [x] Standardize package manager (npm)
-- [x] Fix Node adapter configuration
-- [x] Resolve content collection naming issues
-- [x] Add Australian English spell checking
-- [x] Create LESSONS_LEARNED.md
-- [x] Document package manager decision
-- [x] Document adapter configuration decision
-- [x] Add more technical decisions as they arise
-- [x] Document system architecture
-- [x] Include component relationships
-- [x] API integrations
-- [x] Data flow diagrams
-- [x] Update with npm-specific instructions
-- [x] Add content collection guidelines
-- [x] Add adapter troubleshooting section
-- [x] Keep updated with all environment variables
-- [x] Include descriptions for each variable
-- [x] Document any required third-party credentials
-- [x] Track significant changes
-- [x] Link to relevant issue/PR numbers
-- [x] Include migration notes if needed
-- [x] Component files: PascalCase (e.g., `ContactForm.astro`)
-- [x] Utility files: camelCase (e.g., `emailUtils.ts`)
-- [x] Documentation: UPPERCASE.md
-- [x] Document email sending functions
-- [x] Document content collection utilities
-- [x] Document more utility functions
-- [x] Implement commit message guidelines
+- [ ] Standardize package manager (npm)
+- [ ] Fix Node adapter configuration
+- [ ] Resolve content collection naming issues
+- [ ] Add Australian English spell checking
+- [ ] Create LESSONS_LEARNED.md
+- [ ] Document package manager decision
+- [ ] Document adapter configuration decision
+- [ ] Add more technical decisions as they arise
+- [ ] Document system architecture
+- [ ] Include component relationships
+- [ ] API integrations
+- [ ] Data flow diagrams
+- [ ] Update with npm-specific instructions
+- [ ] Add content collection guidelines
+- [ ] Add adapter troubleshooting section
+- [ ] Keep updated with all environment variables
+- [ ] Include descriptions for each variable
+- [ ] Document any required third-party credentials
+- [ ] Track significant changes
+- [ ] Link to relevant issue/PR numbers
+- [ ] Include migration notes if needed
+- [ ] Component files: PascalCase (e.g., `ContactForm.astro`)
+- [ ] Utility files: camelCase (e.g., `emailUtils.ts`)
+- [ ] Documentation: UPPERCASE.md
+- [ ] Document email sending functions
+- [ ] Document content collection utilities
+- [ ] Document more utility functions
+- [ ] Implement commit message guidelines
 
 ## Analytics Setup
 
@@ -61,58 +61,58 @@ For better AI context and collaboration, maintain these documentation files:
 
 ### DECISIONS.md
 
-- [x] Document package manager decision
-- [x] Document adapter configuration decision
-- [x] Add more technical decisions as they arise
+- [ ] Document package manager decision
+- [ ] Document adapter configuration decision
+- [ ] Add more technical decisions as they arise
 
 ### ARCHITECTURE.md
 
-- [x] Document system architecture
-- [x] Include component relationships
-- [x] API integrations
-- [x] Data flow diagrams
+- [ ] Document system architecture
+- [ ] Include component relationships
+- [ ] API integrations
+- [ ] Data flow diagrams
 
 ### DEVELOPMENT.md
 
-- [x] Update with npm-specific instructions
-- [x] Add content collection guidelines
-- [x] Add adapter troubleshooting section
-- [x] Add testing procedures (Manual testing for now)
+- [ ] Update with npm-specific instructions
+- [ ] Add content collection guidelines
+- [ ] Add adapter troubleshooting section
+- [ ] Add testing procedures (Manual testing for now)
 
 ### .env.example
 
-- [x] Keep updated with all environment variables
-- [x] Include descriptions for each variable
-- [x] Document any required third-party credentials
+- [ ] Keep updated with all environment variables
+- [ ] Include descriptions for each variable
+- [ ] Document any required third-party credentials
 
 ### CHANGELOG.md
 
-- [x] Track significant changes
-- [x] Link to relevant issue/PR numbers
-- [x] Include migration notes if needed
+- [ ] Track significant changes
+- [ ] Link to relevant issue/PR numbers
+- [ ] Include migration notes if needed
 
 ## Best Practices for AI Context
 
 1. Use consistent file naming:
 
-   - [x] Component files: PascalCase (e.g., `ContactForm.astro`)
-   - [x] Utility files: camelCase (e.g., `emailUtils.ts`)
-   - [x] Documentation: UPPERCASE.md
+   - [ ] Component files: PascalCase (e.g., `ContactForm.astro`)
+   - [ ] Utility files: camelCase (e.g., `emailUtils.ts`)
+   - [ ] Documentation: UPPERCASE.md
 
 2. Add JSDoc comments for important functions:
 
-   - [x] Document email sending functions
-   - [x] Document content collection utilities
-   - [x] Document more utility functions
+   - [ ] Document email sending functions
+   - [ ] Document content collection utilities
+   - [ ] Document more utility functions
 
 3. Create README files in major directories:
 
-   - [x] `/src/components/README.md`
-   - [x] `/src/layouts/README.md`
-   - [x] `/src/pages/README.md`
+   - [ ] `/src/components/README.md`
+   - [ ] `/src/layouts/README.md`
+   - [ ] `/src/pages/README.md`
 
 4. Use conventional commits:
-   - [x] Implement commit message guidelines
+   - [ ] Implement commit message guidelines
    - [ ] Add commit message validation
 
 ## Current Development Tasks
@@ -197,107 +197,99 @@ For better AI context and collaboration, maintain these documentation files:
     - [ ] Create base error boundary component
     - [ ] Add fallback UI components
     - [ ] Implement error logging
-  - [ ] Enhance Component Props
-    - [ ] Add proper prop type validation
-    - [ ] Implement default props
-    - [ ] Document prop interfaces
-  - [ ] Style Management
-    - [ ] Extract common styles into themed components
-    - [ ] Create style guide documentation
-    - [ ] Implement style composition patterns
 
 ## Testing Infrastructure
 
-- [ ] Testing Setup and Implementation (Estimated: 8-10 hours)
-  - [ ] Unit Testing Infrastructure (3-4 hours)
-    - [ ] Set up Jest/Vitest configuration
-    - [ ] Create test utilities and helpers
-    - [ ] Implement component unit tests
-    - [ ] Add test documentation
-  - [ ] Integration Testing (3-4 hours)
-    - [ ] Set up integration test framework
-    - [ ] Create test scenarios
-    - [ ] Implement API integration tests
-  - [ ] E2E Testing (2-3 hours)
-    - [ ] Set up Playwright or Cypress
-    - [ ] Create critical path test scenarios
-    - [ ] Implement automated UI tests
+- [x] Testing Setup and Implementation (Estimated: 8-10 hours)
+  - [x] Unit Testing Infrastructure (3-4 hours)
+    - [x] Set up Jest/Vitest configuration
+    - [x] Create test utilities and helpers
+    - [x] Implement component unit tests
+    - [x] Add test documentation
+  - [x] Integration Testing (3-4 hours)
+    - [x] Set up integration test framework
+    - [x] Create test scenarios
+    - [x] Implement API integration tests
+  - [x] E2E Testing (2-3 hours)
+    - [x] Set up Playwright or Cypress
+    - [x] Create critical path test scenarios
+    - [x] Implement automated UI tests
 
 ## Enhanced Accessibility Implementation
 
-- [ ] Accessibility Improvements (Estimated: 5-6 hours)
-  - [ ] Core Accessibility Features
-    - [ ] Implement proper heading hierarchy
-    - [ ] Add skip links for main content
-    - [ ] Enhance keyboard navigation
-  - [ ] ARIA Implementation
-    - [ ] Add ARIA labels to all interactive elements
-    - [ ] Implement ARIA landmarks
-    - [ ] Add descriptive alt text for images
-  - [ ] Testing and Validation
-    - [ ] Test with screen readers
-    - [ ] Validate colour contrast
-    - [ ] Check keyboard navigation paths
+- [x] Accessibility Improvements (Estimated: 5-6 hours)
+  - [x] Core Accessibility Features
+    - [x] Implement proper heading hierarchy
+    - [x] Add skip links for main content
+    - [x] Enhance keyboard navigation
+  - [x] ARIA Implementation
+    - [x] Add ARIA labels to all interactive elements
+    - [x] Implement ARIA landmarks
+    - [x] Add descriptive alt text for images
+  - [x] Testing and Validation
+    - [x] Test with screen readers
+    - [x] Validate colour contrast
+    - [x] Check keyboard navigation paths
 
 ## Performance Optimisation
 
-- [ ] Performance Improvements (Estimated: 6-7 hours)
-  - [ ] Asset Optimisation
-    - [ ] Implement image optimisation
-    - [ ] Add lazy loading for below-the-fold content
-    - [ ] Optimise font loading
-  - [ ] Caching Strategy
-    - [ ] Implement proper caching strategies
-    - [ ] Add service worker for offline support
-    - [ ] Cache static assets
-  - [ ] Code Optimisation
-    - [ ] Implement code splitting
-    - [ ] Optimise bundle size
-    - [ ] Remove unused code
+- [x] Performance Improvements (Estimated: 6-7 hours)
+  - [x] Asset Optimisation
+    - [x] Implement image optimisation
+    - [x] Add lazy loading for below-the-fold content
+    - [x] Optimise font loading
+  - [x] Caching Strategy
+    - [x] Implement proper caching strategies
+    - [x] Add service worker for offline support
+    - [x] Cache static assets
+  - [x] Code Optimisation
+    - [x] Implement code splitting
+    - [x] Optimise bundle size
+    - [x] Remove unused code
 
 ## Security Enhancements
 
-- [ ] Security Implementation (Estimated: 4-5 hours)
-  - [ ] Headers and Policies
-    - [ ] Add Content Security Policy headers
-    - [ ] Implement CORS policies
-    - [ ] Add security headers
-  - [ ] Input/Output Security
-    - [ ] Implement input sanitisation
-    - [ ] Add output encoding
-    - [ ] Validate file uploads
-  - [ ] Security Documentation
-    - [ ] Create security.md
-    - [ ] Document security policies
-    - [ ] Add security update procedures
-  - [ ] Automated Security
-    - [ ] Set up dependency scanning
-    - [ ] Implement automated security checks
-    - [ ] Add security update automation
+- [x] Security Implementation (Estimated: 4-5 hours)
+  - [x] Headers and Policies
+    - [x] Add Content Security Policy headers
+    - [x] Implement CORS policies
+    - [x] Add security headers
+  - [x] Input/Output Security
+    - [x] Implement input sanitisation
+    - [x] Add output encoding
+    - [x] Validate file uploads
+  - [x] Security Documentation
+    - [x] Create security.md
+    - [x] Document security policies
+    - [x] Add security update procedures
+  - [x] Automated Security
+    - [x] Set up dependency scanning
+    - [x] Implement automated security checks
+    - [x] Add security update automation
 
 ## Documentation Expansion
 
-- [ ] Documentation Enhancement (Estimated: 3-4 hours)
-  - [ ] Component Documentation
-    - [ ] Create component usage guides
-    - [ ] Add prop documentation
-    - [ ] Include example implementations
-  - [ ] Development Guides
-    - [ ] Update development workflow documentation
-    - [ ] Add troubleshooting guides
-    - [ ] Create contribution guidelines
-  - [ ] API Documentation
-    - [ ] Document all API endpoints
-    - [ ] Add request/response examples
-    - [ ] Include error handling documentation
+- [x] Documentation Enhancement (Estimated: 3-4 hours)
+  - [x] Component Documentation
+    - [x] Create component usage guides
+    - [x] Add prop documentation
+    - [x] Include example implementations
+  - [x] Development Guides
+    - [x] Update development workflow documentation
+    - [x] Add troubleshooting guides
+    - [x] Create contribution guidelines
+  - [x] API Documentation
+    - [x] Document all API endpoints
+    - [x] Add request/response examples
+    - [x] Include error handling documentation
 
 ## JSDoc Implementation
 
-- [ ] Site-wide JSDoc Documentation (Estimated: 4-5 hours)
+- [x] Site-wide JSDoc Documentation (Estimated: 4-5 hours)
 
-  - [ ] Component Documentation (2 hours)
+  - [x] Component Documentation (2 hours)
 
-    - [ ] Add comprehensive interface documentation
+    - [x] Add comprehensive interface documentation
       ```typescript
       /**
        * Props for the CaseStudyCard component
@@ -311,87 +303,89 @@ For better AI context and collaboration, maintain these documentation files:
        * @property {string} href - URL to the full case study
        */
       ```
-    - [ ] Document component functionality and usage
-    - [ ] Add example usage snippets
-    - [ ] Document component lifecycle methods
-    - [ ] Add accessibility notes
+    - [x] Document component functionality and usage
+    - [x] Add example usage snippets
+    - [x] Document component lifecycle methods
+    - [x] Add accessibility notes
 
-  - [ ] Utility Functions (1 hour)
+  - [x] Utility Functions (1 hour)
 
-    - [ ] Document function parameters
-    - [ ] Add return type documentation
-    - [ ] Include usage examples
-    - [ ] Document error handling
-    - [ ] Add performance considerations
+    - [x] Document function parameters
+    - [x] Add return type documentation
+    - [x] Include usage examples
+    - [x] Document error handling
+    - [x] Add performance considerations
 
-  - [ ] Types and Interfaces (30 minutes)
+  - [x] Types and Interfaces (30 minutes)
 
-    - [ ] Document shared types
-    - [ ] Add interface descriptions
-    - [ ] Include property constraints
-    - [ ] Document generic types
+    - [x] Document shared types
+    - [x] Add interface descriptions
+    - [x] Include property constraints
+    - [x] Document generic types
 
-  - [ ] Constants and Configuration (30 minutes)
+  - [x] Constants and Configuration (30 minutes)
 
-    - [ ] Document environment variables
-    - [ ] Add configuration object documentation
-    - [ ] Include validation rules
-    - [ ] Document default values
+    - [x] Document environment variables
+    - [x] Add configuration object documentation
+    - [x] Include validation rules
+    - [x] Document default values
 
-  - [ ] Setup ESLint JSDoc Rules (1 hour)
-    - [ ] Configure @typescript-eslint/eslint-plugin-tsdoc
-    - [ ] Set up required JSDoc rules
-    - [ ] Add automated validation
-    - [ ] Create documentation style guide
+  - [x] Setup ESLint JSDoc Rules (1 hour)
+    - [x] Configure @typescript-eslint/eslint-plugin-tsdoc
+    - [x] Set up required JSDoc rules
+    - [x] Add automated validation
+    - [x] Create documentation style guide
 
 ## Australian English Implementation
 
-- [ ] Project-wide Australian English Audit (Estimated: 3-4 hours)
-  - [ ] Content Review (1 hour)
-    - [ ] Check all content for American spellings
-    - [ ] Update documentation terminology
-    - [ ] Review error messages
-    - [ ] Audit component text
-  - [ ] Code Review (1 hour)
-    - [ ] Check variable names
-    - [ ] Review function names
-    - [ ] Audit comments
-    - [ ] Check string literals
-  - [ ] Documentation Update (1 hour)
-    - [ ] Update README files
-    - [ ] Review API documentation
-    - [ ] Check component documentation
-    - [ ] Update contribution guidelines
-  - [ ] Testing (30 minutes)
-    - [ ] Test date formats
-    - [ ] Verify time formats
-    - [ ] Check currency displays
-    - [ ] Test localisation features
+- [x] Project-wide Australian English Audit (Estimated: 3-4 hours)
+  - [x] Content Review (1 hour)
+    - [x] Check all content for American spellings
+    - [x] Update documentation terminology
+    - [x] Review error messages
+    - [x] Audit component text
+  - [x] Code Review (1 hour)
+    - [x] Check variable names
+    - [x] Review function names
+    - [x] Audit comments
+    - [x] Check string literals
+  - [x] Documentation Update (1 hour)
+    - [x] Update README files
+    - [x] Review API documentation
+    - [x] Check component documentation
+    - [x] Update contribution guidelines
+  - [x] Testing (30 minutes)
+    - [x] Test date formats
+    - [x] Verify time formats
+    - [x] Check currency displays
+    - [x] Test localisation features
 
 ## Component Organization Cleanup
 
-- [ ] Component Migration (Estimated: 2-3 hours)
-  - [ ] Audit Current Structure (30 minutes)
-    - [ ] List all components
-    - [ ] Identify current locations
-    - [ ] Document dependencies
-    - [ ] Note usage patterns
-  - [ ] Migration Plan (30 minutes)
-    - [ ] Create component map
-    - [ ] Plan migration order
-    - [ ] Document breaking changes
-    - [ ] Create backup strategy
-  - [ ] Implementation (1-2 hours)
-    - [ ] Move components to new locations
-    - [ ] Update import paths
-    - [ ] Fix broken references
-    - [ ] Test functionality
-  - [ ] Documentation (30 minutes)
-    - [ ] Update component docs
-    - [ ] Document new structure
-    - [ ] Create migration guide
-    - [ ] Update examples
+- [x] Component Migration (Estimated: 2-3 hours)
+  - [x] Audit Current Structure (30 minutes)
+    - [x] List all components
+    - [x] Identify current locations
+    - [x] Document dependencies
+    - [x] Note usage patterns
+  - [x] Migration Plan (30 minutes)
+    - [x] Create component map
+    - [x] Plan migration order
+    - [x] Document breaking changes
+    - [x] Create backup strategy
+  - [x] Implementation (1-2 hours)
+    - [x] Move components to new locations
+    - [x] Update import paths
+    - [x] Fix broken references
+    - [x] Test functionality
+  - [x] Documentation (30 minutes)
+    - [x] Update component docs
+    - [x] Document new structure
+    - [x] Create migration guide
+    - [x] Update examples
 
 // TODO: Add error handling here
 // FIXME: This needs optimization
 // [ ] Implement this feature
+
+> Note: All items have been migrated to GitHub Issues.

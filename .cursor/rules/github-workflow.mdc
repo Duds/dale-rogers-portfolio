@@ -1,0 +1,209 @@
+---
+description: Github Workflow Rules and Github Issue Rules
+globs:
+alwaysApply: false
+---
+# GitHub Workflow Rules
+
+## Issue Management
+
+1. **TODO to Issue Migration**
+   - All TODOs should be migrated to GitHub Issues
+   - Format: `TODO(#issue_number): Brief description`
+   - Link issues in code comments using `#issue_number`
+   - Add labels: `enhancement`, `bug`, `documentation`, etc.
+   - Include:
+     - Clear description
+     - Acceptance criteria
+     - Related files/components
+     - Estimated effort
+
+2. **Issue Templates**
+   ```markdown
+   ## Description
+   [Detailed description]
+
+   ## Acceptance Criteria
+   - [ ] Criterion 1
+   - [ ] Criterion 2
+
+   ## Technical Notes
+   - Implementation details
+   - Related components
+   - Dependencies
+
+   ## Effort Estimate
+   - [ ] Small (< 2 hours)
+   - [ ] Medium (2-4 hours)
+   - [ ] Large (4-8 hours)
+   - [ ] XLarge (> 8 hours)
+   ```
+
+## Pull Request Standards
+
+1. **Branch Naming**
+   - Feature: `feature/issue-number-brief-description`
+   - Bug: `fix/issue-number-brief-description`
+   - Documentation: `docs/topic-name`
+   - Refactor: `refactor/component-name`
+
+2. **PR Template**
+   ```markdown
+   ## Related Issue
+   Fixes #[issue_number]
+
+   ## Changes
+   - [Change 1]
+   - [Change 2]
+
+   ## Testing
+   - [ ] Unit tests
+   - [ ] Integration tests
+   - [ ] Manual testing
+
+   ## Screenshots
+   [If applicable]
+
+   ## Checklist
+   - [ ] Code follows style guidelines
+   - [ ] Tests added/updated
+   - [ ] Documentation updated
+   - [ ] Accessibility verified
+   ```
+
+3. **Review Process**
+   - Request reviews from relevant team members
+   - Address all comments
+   - Squash commits before merge
+   - Delete branch after merge
+
+## Commit Standards
+
+1. **Commit Message Format**
+   ```
+   type(scope): description
+
+   [optional body]
+
+   [optional footer]
+   ```
+
+2. **Types**
+   - `feat`: New feature
+   - `fix`: Bug fix
+   - `docs`: Documentation changes
+   - `style`: Code style changes
+   - `refactor`: Code refactoring
+   - `test`: Test updates
+   - `chore`: Build/config updates
+
+3. **Scope Examples**
+   - `ui`: UI components
+   - `api`: API changes
+   - `db`: Database changes
+   - `auth`: Authentication
+   - `perf`: Performance improvements
+
+## MCP Server Integration
+
+1. **Tool Usage**
+   ```typescript
+   // Create Issue
+   await cursor.mcp.github.createIssue({
+     title: "Feature: Add user authentication",
+     body: "Implement user authentication using Clerk",
+     labels: ["enhancement", "auth"]
+   });
+
+   // Create PR
+   await cursor.mcp.github.createPullRequest({
+     title: "feat(auth): implement user authentication",
+     body: "Adds Clerk authentication integration",
+     head: "feature/123-user-auth",
+     base: "main"
+   });
+
+   // Add PR Review
+   await cursor.mcp.github.createPullRequestReview({
+     body: "LGTM! 🚀",
+     event: "APPROVE"
+   });
+   ```
+
+2. **Automation Rules**
+   - Auto-create issues from TODOs
+   - Auto-link PRs to issues
+   - Auto-label based on file changes
+   - Auto-assign reviewers
+   - Auto-merge on approval
+
+## Security
+
+1. **Token Management**
+   - Store tokens in `.env`
+   - Never commit tokens
+   - Rotate tokens regularly
+   - Use minimal required permissions
+
+2. **Access Control**
+   - Use branch protection rules
+   - Require PR reviews
+   - Enable status checks
+   - Sign commits
+
+## Best Practices
+
+1. **Code Review**
+   - Review all changes
+   - Use inline comments
+   - Provide constructive feedback
+   - Follow up on changes
+
+2. **Documentation**
+   - Update docs with changes
+   - Include code examples
+   - Document breaking changes
+   - Keep README current
+
+3. **Testing**
+   - Write tests for new features
+   - Update affected tests
+   - Maintain test coverage
+   - Document test cases
+
+## Workflow Commands
+
+1. **Issue Management**
+   ```bash
+   # Create issue
+   gh issue create --title "Feature: New component" --body "Description"
+
+   # List issues
+   gh issue list --label enhancement
+
+   # Close issue
+   gh issue close 123
+   ```
+
+2. **PR Management**
+   ```bash
+   # Create PR
+   gh pr create --title "feat: add feature" --body "Description"
+
+   # Review PR
+   gh pr review 123 --approve
+
+   # Merge PR
+   gh pr merge 123 --squash
+   ```
+
+3. **Branch Management**
+   ```bash
+   # Create branch
+   gh repo clone owner/repo
+   git checkout -b feature/123-description
+
+   # Update branch
+   git pull origin main
+   git push origin feature/123-description
+   ```
