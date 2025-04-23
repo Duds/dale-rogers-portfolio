@@ -1,17 +1,11 @@
 ---
 /* This is the dynamic case study template that will render individual case studies */
+
+// TODO: Fix linter error - Investigate and resolve the issue with unused CaseStudyEntry interface
+// and potential type mismatches between CollectionEntry and CaseStudyEntry
+
 import { getCollection, type CollectionEntry } from "astro:content";
 import CaseStudyLayout from "@/layouts/CaseStudyLayout.astro";
-
-/* Insert type definition for case studies */
-interface CaseStudyEntry {
-  slug: string;
-  body: string;
-  data: {
-    title: string;
-    description: string;
-  };
-}
 
 // Add prerender directive to generate static pages
 export const prerender = true;
@@ -32,8 +26,9 @@ interface Props {
 const { caseStudy } = Astro.props;
 const { Content } = await caseStudy.render();
 
-if (!caseStudy) {
-  throw new Error(`Case study not found for slug: ${caseStudy.slug}`);
+// Type-safe error handling
+if (!caseStudy || typeof caseStudy.slug !== "string") {
+  throw new Error("Invalid case study data");
 }
 ---
 
