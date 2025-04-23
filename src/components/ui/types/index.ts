@@ -1,16 +1,24 @@
-export interface ButtonProps {
-  variant?: "primary" | "secondary" | "ghost";
-  href?: string;
-  type?: "button" | "submit" | "reset";
-  disabled?: boolean;
+import type { HTMLAttributes } from "astro/types";
+
+export interface BaseProps
+  extends Omit<HTMLAttributes<"a"> & HTMLAttributes<"button">, "class"> {
   class?: string;
 }
 
-export interface CardProps {
-  title?: string;
-  description?: string;
+export interface ButtonProps extends BaseProps {
   href?: string;
-  class?: string;
+  variant?: "primary" | "secondary" | "outline";
+}
+
+export interface CardProps extends BaseProps {
+  title?: string;
+  clickable?: boolean;
+  href?: string;
+}
+
+export interface TagListProps extends BaseProps {
+  tags: string[];
+  currentTag?: string;
 }
 
 export interface IconProps {

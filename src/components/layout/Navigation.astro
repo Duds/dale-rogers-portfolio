@@ -1,58 +1,70 @@
 ---
 import ThemeToggle from "@/components/ui/ThemeToggle.astro";
 import SpinningLogo from "@/components/features/portfolio/components/SpinningLogo.astro";
-import Container from "@/components/layout/Container.astro";
+
+interface NavItem {
+  label: string;
+  href: string;
+}
 
 // Get current path and determine active page
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // Remove the leading "/"
 
-// Define active link class
-const activeClass = "nav-link-active";
-
-// Simplified nav items - Removed Home as it's redundant with the logo
-const navItems = [
+// Navigation items
+const navItems: NavItem[] = [
   { label: "Work", href: "/work" },
   { label: "Articles", href: "/articles" },
 ];
 
 // Function to determine if a link is active
 const isActive = (href: string): boolean => {
-  if (href === "/") {
-    return pathname === "/";
-  }
-  // Check if the current path starts with the href (for section pages)
+  if (href === "/") return pathname === "/";
   return currentPath.startsWith(href.slice(1));
 };
 ---
 
 <nav
   id="main-nav"
-  class="nav-base"
+  class="fixed w-full top-0 z-50 bg-white dark:bg-black transition-all duration-300"
   role="navigation"
   aria-label="Main navigation"
 >
-  <Container fullWidth={true} class="py-4 md:py-6">
-    <div class="nav-container">
+  <div class="px-6 md:px-12 py-4 md:py-6">
+    <div class="flex items-center justify-between relative">
       <!-- Left Section -->
-      <a href="/" class="nav-logo" aria-label="Dale Rogers - Home">
+      <a
+        href="/"
+        class="font-heading text-3xl md:text-4xl font-bold text-black dark:text-white hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
+        aria-label="Dale Rogers - Home"
+      >
         Dale Rogers
       </a>
 
-      <!-- Center Logo (flex container) -->
-      <div class="flex-1 flex justify-center">
+      <!-- Center Logo -->
+      <div class="absolute left-1/2 -translate-x-1/2">
         <SpinningLogo
-          class="text-black dark:text-white hover:text-primary-purple transition-colors duration-500 mx-4"
+          class="text-black dark:text-white hover:text-purple-500 dark:hover:text-purple-400 transition-colors duration-500"
         />
       </div>
 
       <!-- Right Section -->
-      <div class="hidden md:flex items-center gap-6">
+      <div class="hidden md:flex items-center gap-8">
         {
           navItems.map((item) => (
             <a
               href={item.href}
-              class={`nav-link ${isActive(item.href) ? activeClass : ""}`}
+              class:list={[
+                "font-heading text-xl md:text-2xl font-bold px-6 py-2 rounded-full",
+                "text-black dark:text-white border-2 border-black dark:border-white",
+                "hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black",
+                "transition-all duration-300",
+                {
+                  "bg-black text-white dark:bg-white dark:text-black": isActive(
+                    item.href
+                  ),
+                },
+              ]}
             >
               {item.label}
             </a>
@@ -60,143 +72,152 @@ const isActive = (href: string): boolean => {
         }
         <ThemeToggle />
       </div>
-    </div>
-  </Container>
 
-  <!-- Mobile Menu Button -->
-  <button
-    class="md:hidden nav-mobile-menu"
-    aria-label="Toggle menu"
-    aria-expanded="false"
-    aria-controls="navbar-menu"
-  >
-    <svg
-      class="w-6 h-6"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M4 6h16M4 12h16M4 18h16"></path>
-    </svg>
-  </button>
+      <!-- Mobile Menu Button -->
+      <button
+        class="md:hidden p-2 text-black dark:text-white hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="navbar-menu"
+      >
+        <svg
+          class="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
 
   <!-- Mobile Navigation -->
   <div
     id="navbar-menu"
-    class="md:hidden hidden px-12 py-6 border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-black/95"
+    class="hidden md:hidden border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-black/95 backdrop-blur-sm"
     role="menu"
   >
-    {
-      navItems.map((item) => (
-        <a
-          href={item.href}
-          class={`block py-3 nav-link ${isActive(item.href) ? activeClass : ""}`}
-          role="menuitem"
-        >
-          {item.label}
-        </a>
-      ))
-    }
-    <div class="py-3">
-      <ThemeToggle />
+    <div class="px-6 md:px-12 py-4 space-y-4">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "block font-heading text-2xl font-bold px-6 py-2 rounded-full",
+              "text-black dark:text-white border-2 border-black dark:border-white",
+              "hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black",
+              "transition-all duration-300",
+              {
+                "bg-black text-white dark:bg-white dark:text-black": isActive(
+                  item.href
+                ),
+              },
+            ]}
+            role="menuitem"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <div class="py-2">
+        <ThemeToggle />
+      </div>
     </div>
   </div>
 </nav>
 
-<!-- Add padding to account for fixed navbar -->
-<div class="h-[100px]"></div>
-
-<style>
-  .nav-base {
-    @apply fixed top-0 left-0 w-full z-50 transition-all duration-300;
-  }
-
-  .nav-container {
-    @apply flex items-center justify-between py-8 relative;
-  }
-
-  .nav-logo {
-    @apply font-heading text-4xl md:text-5xl hover:text-primary-purple transition-colors tracking-tight;
-  }
-
-  .nav-links {
-    @apply items-center gap-6;
-  }
-
-  .nav-link {
-    @apply font-heading text-xl md:text-2xl px-6 py-2 border-2
-           text-gray-900 dark:text-white
-           border-black dark:border-white
-           hover:bg-black dark:hover:bg-white
-           hover:text-white dark:hover:text-black
-           rounded-full
-           transition-all duration-300;
-  }
-
-  .nav-link-active {
-    @apply bg-black dark:bg-white
-           text-white dark:text-black
-           shadow-button-hover;
-  }
-
-  .nav-scrolled {
-    @apply bg-white/95 dark:bg-black/95 backdrop-blur-sm shadow-md;
-  }
-
-  .nav-mobile-menu {
-    @apply p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5;
-  }
-</style>
-
 <script>
   // Mobile menu toggle functionality
-  const menuButton = document.querySelector(
-    'button[aria-controls="navbar-menu"]'
-  );
-  const menu = document.getElementById("navbar-menu");
-  const navbar = document.getElementById("main-nav");
+  const initMobileMenu = () => {
+    const menuButton = document.querySelector(
+      'button[aria-controls="navbar-menu"]'
+    );
+    const menu = document.getElementById("navbar-menu");
+    const navbar = document.getElementById("main-nav");
 
-  menuButton?.addEventListener("click", () => {
-    const isExpanded = menuButton.getAttribute("aria-expanded") === "true";
-    menuButton.setAttribute("aria-expanded", String(!isExpanded));
-    menu?.classList.toggle("hidden");
+    menuButton?.addEventListener("click", () => {
+      const isExpanded = menuButton.getAttribute("aria-expanded") === "true";
+      menuButton.setAttribute("aria-expanded", String(!isExpanded));
+      menu?.classList.toggle("hidden");
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!navbar?.contains(e.target as Node)) {
+        menu?.classList.add("hidden");
+        menuButton?.setAttribute("aria-expanded", "false");
+      }
+    });
+  };
+
+  // Scroll functionality
+  const initScrollBehavior = () => {
+    const navbar = document.getElementById("main-nav");
+    if (!navbar) return;
+
+    let lastScrollY = window.scrollY;
+    const scrollThreshold = 50;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Add backdrop when scrolled
+      if (currentScrollY > 0) {
+        navbar.classList.add(
+          "bg-white/80",
+          "dark:bg-black/80",
+          "backdrop-blur-sm"
+        );
+      } else {
+        navbar.classList.remove(
+          "bg-white/80",
+          "dark:bg-black/80",
+          "backdrop-blur-sm"
+        );
+      }
+
+      // Show nav at the top of the page
+      if (currentScrollY < scrollThreshold) {
+        navbar.style.transform = "translateY(0)";
+        return;
+      }
+
+      // Hide nav when scrolling down, show when scrolling up
+      if (currentScrollY > lastScrollY) {
+        navbar.style.transform = "translateY(-100%)";
+      } else {
+        navbar.style.transform = "translateY(0)";
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    // Throttle scroll events for better performance
+    let ticking = false;
+    document.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  };
+
+  // Initialize on page load and navigation
+  document.addEventListener("astro:page-load", () => {
+    initMobileMenu();
+    initScrollBehavior();
   });
 
-  // Scroll functionality for navbar
-  let lastScrollTop = 0;
-  const scrollThreshold = 100; // Distance to scroll before hiding nav
-
-  window.addEventListener("scroll", () => {
-    const currentScroll =
-      window.pageYOffset || document.documentElement.scrollTop;
-
-    // Add scrolled class when scrolling
-    if (currentScroll > 0) {
-      navbar?.classList.add("nav-scrolled");
-    } else {
-      navbar?.classList.remove("nav-scrolled");
-    }
-
-    // Check if past threshold for hiding
-    if (currentScroll > scrollThreshold) {
-      // Scrolling down
-      if (currentScroll > lastScrollTop) {
-        navbar?.classList.add("-translate-y-full");
-      }
-      // Scrolling up
-      else {
-        navbar?.classList.remove("-translate-y-full");
-      }
-    } else {
-      // Always show navbar at the top of the page
-      navbar?.classList.remove("-translate-y-full");
-    }
-
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  });
+  // Also initialize immediately in case the script loads after DOMContentLoaded
+  initMobileMenu();
+  initScrollBehavior();
 </script>

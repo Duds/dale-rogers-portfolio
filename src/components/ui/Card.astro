@@ -4,6 +4,8 @@
  * Can be rendered as a div or anchor element with optional hover effects.
  */
 
+import type { CardProps } from "./types";
+
 /**
  * Props interface for the Card component
  * @typedef {Object} CardProps
@@ -12,12 +14,7 @@
  * @property {boolean} [clickable=false] - Whether to apply hover effects
  * @property {string} [href] - URL for anchor tag, if provided renders as <a> instead of <div>
  */
-interface Props {
-  title?: string;
-  class?: string;
-  clickable?: boolean;
-  href?: string;
-}
+interface Props extends CardProps {}
 
 const { title, class: className = "", clickable = false, href } = Astro.props;
 
@@ -25,14 +22,24 @@ const { title, class: className = "", clickable = false, href } = Astro.props;
  * Base styles applied to all cards
  * @type {string}
  */
-const baseClasses = "bg-background rounded-[var(--radius-lg)] shadow-soft p-6";
+const baseClasses = [
+  "bg-[var(--colour-bg)]",
+  "rounded-[var(--radius-lg)]",
+  "p-6",
+  "shadow-soft dark:shadow-soft-dark",
+  "transition-all duration-[var(--transition-normal)] ease-[var(--transition-timing)]",
+].join(" ");
 
 /**
  * Hover effects applied when clickable is true
  * @type {string}
  */
 const hoverClasses = clickable
-  ? "hover:shadow-lg cursor-pointer transition-all duration-300 hover:-translate-y-1"
+  ? [
+      "hover:shadow-elevated dark:hover:shadow-elevated-dark",
+      "cursor-pointer",
+      "hover:-translate-y-1",
+    ].join(" ")
   : "";
 
 /**

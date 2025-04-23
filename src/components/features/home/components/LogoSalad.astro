@@ -1,14 +1,21 @@
 ---
 import Container from "@/components/layout/Container.astro";
 
-// Define the expected prop type based on your config.ts Logo interface
+/**
+ * Represents a client logo with associated metadata
+ * @interface Logo
+ */
 interface Logo {
+  /** The name of the client company */
   name: string;
+  /** URL to the logo image */
   url: string;
+  /** Alt text for accessibility */
   alt: string;
 }
 
 interface Props {
+  /** Array of client logos to display */
   logos: Logo[];
 }
 
@@ -17,10 +24,10 @@ const { logos } = Astro.props;
 // Removed hardcoded clients array
 ---
 
-<section class="logo-salad py-20 bg-gray-50 dark:bg-gray-900">
-  <Container fullWidth={true}>
+<section class="py-20 bg-neutral-100 dark:bg-neutral-900">
+  <Container>
     <h2
-      class="text-2xl font-semibold text-gray-600 dark:text-gray-400 mb-4 text-center"
+      class="text-2xl font-display text-neutral-600 dark:text-neutral-400 mb-8 text-center"
     >
       Trusted by
     </h2>
@@ -32,12 +39,15 @@ const { logos } = Astro.props;
             target="_blank"
             rel="noopener noreferrer"
             class="opacity-60 hover:opacity-100 transition-opacity duration-300"
+            aria-label={`Visit ${logo.name}'s website`}
           >
             <img
               src={logo.url}
-              alt={logo.alt}
-              class="h-12 md:h-16 w-auto filter dark:invert"
+              alt={`${logo.name} logo`}
+              class="h-12 md:h-16 w-auto dark:invert"
               loading="lazy"
+              width="auto"
+              height="64"
             />
           </a>
         ))

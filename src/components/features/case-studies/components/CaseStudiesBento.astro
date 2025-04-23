@@ -1,12 +1,29 @@
 ---
 import Container from "@/components/layout/Container.astro";
+import type { HTMLAttributes } from "astro/types";
 
+/**
+ * Interface for case study data
+ */
 interface CaseStudy {
+  /** Title of the case study */
   title: string;
+  /** Client name */
   client: string;
+  /** URL of the cover image */
   coverImage: string;
+  /** Array of tags describing the case study */
   tags: string[];
+  /** URL slug for the case study */
   slug: string;
+}
+
+/**
+ * Props for the CaseStudiesBento component
+ */
+interface Props extends HTMLAttributes<"section"> {
+  /** Array of featured case studies */
+  featuredCaseStudies?: CaseStudy[];
 }
 
 // TODO: Replace with actual case studies from content collection
@@ -38,19 +55,21 @@ const featuredCaseStudies: CaseStudy[] = [
 ];
 
 const [firstStudy, secondStudy, thirdStudy] = featuredCaseStudies;
+
+const { class: className, ...props } = Astro.props;
 ---
 
-<section class="case-studies-bento w-full py-20">
+<section class:list={["case-studies-bento w-full py-20", className]} {...props}>
   <Container fullWidth={true}>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16">
       <div class="text-center mb-16">
         <h2
-          class="text-2xl font-semibold text-gray-600 dark:text-gray-400 mb-4"
+          class="font-body text-2xl font-semibold text-neutral-600 dark:text-neutral-400 mb-4"
         >
           Case Studies
         </h2>
         <h3
-          class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white"
+          class="font-display text-4xl md:text-6xl lg:text-7xl font-black text-neutral-900 dark:text-white"
         >
           Transforming Ideas into Digital Reality
         </h3>
@@ -59,24 +78,32 @@ const [firstStudy, secondStudy, thirdStudy] = featuredCaseStudies;
     <div class="grid grid-cols-1 gap-8">
       {
         firstStudy && (
-          <a href={firstStudy.slug} class="group">
+          <a
+            href={firstStudy.slug}
+            class="group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-3xl"
+            aria-label={`View case study: ${firstStudy.title}`}
+          >
             <div class="relative aspect-[16/9] rounded-3xl overflow-hidden mb-4">
               <img
                 src={firstStudy.coverImage}
-                alt={firstStudy.title}
+                alt=""
+                aria-hidden="true"
+                width="1600"
+                height="900"
                 class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="eager"
               />
             </div>
             <div class="space-y-2">
-              <span class="text-sm font-medium text-gray-600">
+              <span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">
                 {firstStudy.client}
               </span>
-              <h3 class="text-2xl font-bold group-hover:text-primary transition-colors">
+              <h3 class="text-2xl font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
                 {firstStudy.title}
               </h3>
               <div class="flex flex-wrap gap-2">
                 {firstStudy.tags.map((tag) => (
-                  <span class="text-xs bg-gray-100 px-2 py-1 rounded-full">
+                  <span class="text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 px-2 py-1 rounded-full">
                     {tag}
                   </span>
                 ))}
@@ -86,27 +113,35 @@ const [firstStudy, secondStudy, thirdStudy] = featuredCaseStudies;
         )
       }
 
-      <div class="grid grid-cols-12 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
         {
           secondStudy && (
-            <a href={secondStudy.slug} class="group col-span-7">
+            <a
+              href={secondStudy.slug}
+              class="group md:col-span-7 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-3xl"
+              aria-label={`View case study: ${secondStudy.title}`}
+            >
               <div class="relative aspect-[4/3] rounded-3xl overflow-hidden mb-4">
                 <img
                   src={secondStudy.coverImage}
-                  alt={secondStudy.title}
+                  alt=""
+                  aria-hidden="true"
+                  width="800"
+                  height="600"
                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
                 />
               </div>
               <div class="space-y-2">
-                <span class="text-sm font-medium text-gray-600">
+                <span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   {secondStudy.client}
                 </span>
-                <h3 class="text-xl font-bold group-hover:text-primary transition-colors">
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
                   {secondStudy.title}
                 </h3>
                 <div class="flex flex-wrap gap-2">
                   {secondStudy.tags.map((tag) => (
-                    <span class="text-xs bg-gray-100 px-2 py-1 rounded-full">
+                    <span class="text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 px-2 py-1 rounded-full">
                       {tag}
                     </span>
                   ))}
@@ -118,24 +153,32 @@ const [firstStudy, secondStudy, thirdStudy] = featuredCaseStudies;
 
         {
           thirdStudy && (
-            <a href={thirdStudy.slug} class="group col-span-5">
+            <a
+              href={thirdStudy.slug}
+              class="group md:col-span-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-3xl"
+              aria-label={`View case study: ${thirdStudy.title}`}
+            >
               <div class="relative aspect-[4/3] rounded-3xl overflow-hidden mb-4">
                 <img
                   src={thirdStudy.coverImage}
-                  alt={thirdStudy.title}
+                  alt=""
+                  aria-hidden="true"
+                  width="800"
+                  height="600"
                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
                 />
               </div>
               <div class="space-y-2">
-                <span class="text-sm font-medium text-gray-600">
+                <span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   {thirdStudy.client}
                 </span>
-                <h3 class="text-xl font-bold group-hover:text-primary transition-colors">
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors">
                   {thirdStudy.title}
                 </h3>
                 <div class="flex flex-wrap gap-2">
                   {thirdStudy.tags.map((tag) => (
-                    <span class="text-xs bg-gray-100 px-2 py-1 rounded-full">
+                    <span class="text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 px-2 py-1 rounded-full">
                       {tag}
                     </span>
                   ))}

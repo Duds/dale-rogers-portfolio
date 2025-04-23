@@ -1,0 +1,223 @@
+---
+/**
+ * FeaturedServicesSlider Component
+ *
+ * A horizontal slider component that smoothly translates based on scroll position.
+ * Designed to showcase featured services with engaging animations.
+ *
+ * @component FeaturedServicesSlider
+ */
+
+import type { Service } from "../../../../types/services";
+
+// Using Unsplash images that represent each service theme
+const featuredServices: Service[] = [
+  {
+    title: "Service Design for Health",
+    coverImage:
+      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80",
+    slug: "/services/health-service",
+    description:
+      "Transforming healthcare delivery through human-centred design",
+  },
+  {
+    title: "Digital Transformation",
+    coverImage:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80",
+    slug: "/services/digital-transform",
+    description: "Modernising legacy systems with user-first approach",
+  },
+  {
+    title: "Citizen Services Portal",
+    coverImage:
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80",
+    slug: "/services/citizen-portal",
+    description: "Creating accessible digital services for all Australians",
+  },
+  {
+    title: "Service Blueprint",
+    coverImage:
+      "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80",
+    slug: "/services/service-blueprint",
+    description: "Mapping complex service ecosystems for better outcomes",
+  },
+  {
+    title: "UX Research Study",
+    coverImage:
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80",
+    slug: "/services/ux-research",
+    description: "Deep dive into user needs and behaviours",
+  },
+  {
+    title: "Service Integration",
+    coverImage:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80",
+    slug: "/services/service-integration",
+    description: "Connecting systems for seamless experiences",
+  },
+  {
+    title: "Design System",
+    coverImage:
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80",
+    slug: "/services/design-system",
+    description: "Building consistent user experiences at scale",
+  },
+  {
+    title: "Accessibility Audit",
+    coverImage:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80",
+    slug: "/services/accessibility",
+    description: "Ensuring digital inclusion for all users",
+  },
+];
+---
+
+<section
+  class="min-h-[60vh] md:min-h-[70vh] relative overflow-hidden py-16 w-full bg-white dark:bg-neutral-900"
+  id="featured-services"
+>
+  <div class="slider-viewport w-full overflow-hidden">
+    <div
+      class="slider-container flex gap-4 md:gap-6 w-max transition-all duration-700 ease-out will-change-transform pl-4 md:pl-8"
+    >
+      {
+        featuredServices.map((service: Service) => (
+          <a
+            href={service.slug}
+            class="group w-[70vw] md:w-[35vw] lg:w-[25vw] h-[60vh] relative rounded-2xl overflow-hidden flex-shrink-0 bg-neutral-200 dark:bg-neutral-800"
+          >
+            <img
+              src={service.coverImage}
+              alt=""
+              aria-hidden="true"
+              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+              loading="lazy"
+              width="800"
+              height="600"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/80 via-neutral-900/40 to-transparent" />
+            <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+              <h3 class="text-xl md:text-2xl font-display text-white mb-2">
+                {service.title}
+              </h3>
+              <p class="text-neutral-200/90 text-base md:text-lg">
+                {service.description}
+              </p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  class FeaturedServicesSlider {
+    private section: HTMLElement;
+    private sliderContainer: HTMLElement;
+    private sliderViewport: HTMLElement;
+    private maxScroll: number = 0;
+    private ticking: boolean = false;
+    private animationFrameId: number | null = null;
+    private resizeTimeout: number | null = null;
+
+    constructor() {
+      const section = document.querySelector("#featured-services");
+      const sliderContainer = section?.querySelector(".slider-container");
+      const sliderViewport = section?.querySelector(".slider-viewport");
+
+      if (!section || !sliderContainer || !sliderViewport) {
+        throw new Error("Required slider elements not found");
+      }
+
+      this.section = section as HTMLElement;
+      this.sliderContainer = sliderContainer as HTMLElement;
+      this.sliderViewport = sliderViewport as HTMLElement;
+
+      this.init();
+    }
+
+    private init(): void {
+      // Set initial transform
+      this.sliderContainer.style.transform = `translateX(${this.getInitialOffset()}px)`;
+
+      // Event listeners
+      window.addEventListener("resize", this.handleResize.bind(this));
+      window.addEventListener("scroll", this.handleScroll.bind(this), {
+        passive: true,
+      });
+
+      // Initial calculations
+      setTimeout(() => {
+        this.updateMaxScroll();
+        this.updateSliderPosition();
+      }, 100);
+    }
+
+    private getInitialOffset(): number {
+      const firstCard = this.sliderContainer.querySelector("a");
+      if (!firstCard) return -35;
+      return -(firstCard.getBoundingClientRect().width / 2);
+    }
+
+    private updateMaxScroll(): void {
+      this.maxScroll =
+        this.sliderContainer.scrollWidth - this.sliderViewport.clientWidth;
+    }
+
+    private calculateProgress(rect: DOMRect): number {
+      const viewportHeight = window.innerHeight;
+      const totalDistance = rect.height + viewportHeight;
+      const distanceFromTop = viewportHeight - rect.top;
+      return Math.max(0, Math.min(1, distanceFromTop / totalDistance));
+    }
+
+    private handleResize(): void {
+      if (this.resizeTimeout) {
+        window.clearTimeout(this.resizeTimeout);
+      }
+      this.resizeTimeout = window.setTimeout(() => {
+        this.updateMaxScroll();
+        this.updateSliderPosition();
+      }, 100);
+    }
+
+    private handleScroll(): void {
+      this.updateSliderPosition();
+    }
+
+    private updateSliderPosition(): void {
+      if (!this.ticking) {
+        this.animationFrameId = requestAnimationFrame(() => {
+          const rect = this.section.getBoundingClientRect();
+          const progress = this.calculateProgress(rect);
+          const offset = this.getInitialOffset() - progress * this.maxScroll;
+          this.sliderContainer.style.transform = `translateX(${offset}px)`;
+          this.ticking = false;
+        });
+        this.ticking = true;
+      }
+    }
+
+    public cleanup(): void {
+      if (this.animationFrameId) {
+        cancelAnimationFrame(this.animationFrameId);
+      }
+      if (this.resizeTimeout) {
+        window.clearTimeout(this.resizeTimeout);
+      }
+      window.removeEventListener("resize", this.handleResize.bind(this));
+      window.removeEventListener("scroll", this.handleScroll.bind(this));
+    }
+  }
+
+  // Initialize on page load and navigation
+  document.addEventListener("astro:page-load", () => {
+    const slider = new FeaturedServicesSlider();
+
+    // Cleanup on page unload
+    document.addEventListener("astro:before-swap", () => {
+      slider.cleanup();
+    });
+  });
+</script>

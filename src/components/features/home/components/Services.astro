@@ -1,114 +1,128 @@
 ---
 import Container from "@/components/layout/Container.astro";
 import Button from "@/components/ui/Button.astro";
-// Use a simple relative path
-import servicesData from "../../../../content/services/services.json";
 
-/**
- * Services Section Component
- *
- * Displays a grid of services offered with solid color backgrounds,
- * each with an image, title, and description.
- *
- * @component
- * @example
- * ```astro
- * <Services />
- * ```
- */
-
-interface ServiceData {
+interface Service {
   title: string;
   description: string;
-  variant: "purple" | "black" | "green" | "orange";
   imageUrl: string;
-  icon: string;
   link: string;
 }
 
-// Cast the imported data to our interface type
-const services = servicesData as ServiceData[];
-
-// For debugging purposes
-console.log("Services count:", services.length);
+interface ServiceData extends Service {
+  variant: "purple" | "black" | "green" | "orange";
+}
 
 const getVariantClasses = (variant: ServiceData["variant"]) => {
   const variants = {
-    purple:
-      "bg-primary-purple/95 hover:bg-primary-purple dark:bg-primary-purple/90 dark:hover:bg-primary-purple",
-    black:
-      "bg-primary-black/95 hover:bg-primary-black dark:bg-primary-black/90 dark:hover:bg-primary-black",
-    green:
-      "bg-primary-green/95 hover:bg-primary-green dark:bg-primary-green/90 dark:hover:bg-primary-green",
-    orange:
-      "bg-primary-orange/95 hover:bg-primary-orange dark:bg-primary-orange/90 dark:hover:bg-primary-orange",
+    purple: "bg-primary-purple/95 hover:bg-primary-purple",
+    black: "bg-primary-black/95 hover:bg-primary-black",
+    green: "bg-primary-green/95 hover:bg-primary-green",
+    orange: "bg-primary-orange/95 hover:bg-primary-orange",
   };
   return variants[variant];
 };
 
-// Section content
-const smallHeading = "Services";
-const heading = "Our expertise at your service";
-const description =
-  "We transform human experiences through thoughtful design, deep research, and strategic innovation.";
+// Define services with their variants and Unsplash images
+const services: ServiceData[] = [
+  {
+    title: "Service Design",
+    description:
+      "Creating seamless experiences that work for users and organisations",
+    imageUrl:
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&fit=crop",
+    link: "/services/service-design",
+    variant: "purple",
+  },
+  {
+    title: "Digital Strategy",
+    description: "Aligning technology with your business objectives",
+    imageUrl:
+      "https://images.unsplash.com/photo-1553484771-047a44eee27a?q=80&w=2940&fit=crop",
+    link: "/services/digital-strategy",
+    variant: "black",
+  },
+  {
+    title: "Research & Testing",
+    description: "Understanding your users through evidence-based insights",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2940&fit=crop",
+    link: "/services/research",
+    variant: "green",
+  },
+  {
+    title: "Training & Capability",
+    description: "Building design capability in your organisation",
+    imageUrl:
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2940&fit=crop",
+    link: "/services/training",
+    variant: "orange",
+  },
+];
 ---
 
-<section class="w-full py-20 bg-background">
+<section class="w-full bg-white dark:bg-neutral-950">
   <Container fullWidth={true}>
-    <div class="mb-12">
-      <div class="flex justify-between items-start mb-8">
-        <div class="max-w-2xl">
-          <p class="text-sm font-medium text-muted-foreground mb-3">
-            {smallHeading}
-          </p>
-          <h2 class="text-4xl font-heading font-bold mb-4 text-foreground">
-            {heading}
-          </h2>
-          <p class="text-xl text-muted-foreground">
-            {description}
-          </p>
-        </div>
-        <div class="mt-1">
-          <Button
-            href="/services"
-            class="bg-primary-black text-white hover:bg-primary-black/90 rounded-full px-8 py-3 group"
+    <div class="grid grid-cols-12 gap-8 mb-16">
+      <div class="col-span-12 lg:col-span-4">
+        <h2
+          class="font-body text-2xl font-semibold text-neutral-600 dark:text-neutral-400 mb-4"
+        >
+          Services
+        </h2>
+        <p class="text-4xl text-neutral-900 dark:text-white leading-tight">
+          Designing services that people trust and teams can deliver.
+        </p>
+      </div>
+      <div class="col-span-12 lg:col-span-8 flex items-end justify-end">
+        <Button variant="primary" href="/services">
+          See how it works
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            viewBox="0 0 20 20"
+            fill="currentColor"
           >
-            Learn more about our services
-            <span
-              class="ml-2 transition-transform duration-200 group-hover:translate-x-1"
-              >→</span
-            >
-          </Button>
-        </div>
+            <path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </Button>
       </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {
-        services && services.length > 0 ? (
-          services.map((service: ServiceData) => (
-            <a
-              href={service.link}
-              class={`group relative overflow-hidden rounded-lg transition-all duration-300 h-[600px] flex flex-col ${getVariantClasses(service.variant)} hover:shadow-elevated dark:hover:shadow-elevated-dark`}
-            >
-              <div class="relative h-[400px] w-full overflow-hidden">
-                <img
-                  src={service.imageUrl}
-                  alt={service.title}
-                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50 group-hover:to-black/60 transition-opacity duration-300" />
-              </div>
-              <div class="p-8 flex flex-col flex-grow">
-                <h3 class="text-2xl font-heading font-bold mb-3 text-white">
-                  {service.title}
-                </h3>
-                <p class="text-white/90">{service.description}</p>
-              </div>
-            </a>
-          ))
-        ) : (
-          <div class="col-span-4 p-8 text-center">
+        services?.map((service: ServiceData) => (
+          <a
+            href={service.link}
+            class={`group relative overflow-hidden rounded-2xl transition-all duration-300 h-[600px] flex flex-col ${getVariantClasses(service.variant)}`}
+          >
+            <div class="relative h-[400px] w-full overflow-hidden">
+              <img
+                src={service.imageUrl}
+                alt=""
+                aria-hidden="true"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                width="400"
+                height="400"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50 group-hover:to-black/60 transition-opacity duration-300" />
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+              <h3 class="text-2xl font-display text-white mb-3">
+                {service.title}
+              </h3>
+              <p class="text-white/90">{service.description}</p>
+            </div>
+          </a>
+        ))
+      }
+      {
+        !services?.length && (
+          <div class="col-span-full p-8 text-center text-neutral-600 dark:text-neutral-400">
             <p>No services found.</p>
           </div>
         )

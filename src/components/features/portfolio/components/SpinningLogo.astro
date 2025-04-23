@@ -42,22 +42,3 @@ const { class: className = "" } = Astro.props;
       stroke-linecap="round"></path>
   </svg>
 </div>
-
-<style>
-  .spinning-logo {
-    @apply relative inline-flex items-center justify-center scale-100 md:scale-110;
-  }
-
-  .animate-spin-slow {
-    animation: spin 12s linear infinite;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-</style>

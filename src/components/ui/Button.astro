@@ -4,57 +4,36 @@
  * Supports multiple variants and inherits all standard HTML button/anchor attributes.
  */
 
-import type { HTMLAttributes } from "astro/types";
+import type { ButtonProps } from "./types";
 
-/**
- * Base props interface that combines attributes for both <a> and <button> elements.
- * Excludes 'class' as it's handled specially by Astro.
- * @typedef {Object} BaseProps
- * @extends {Omit<HTMLAttributes<"a"> & HTMLAttributes<"button">, "class">}
- */
-interface BaseProps
-  extends Omit<HTMLAttributes<"a"> & HTMLAttributes<"button">, "class"> {}
-
-/**
- * Props interface for the Button component
- * @typedef {Object} ButtonProps
- * @property {string} [href] - URL for anchor tag, if provided renders as <a> instead of <button>
- * @property {('primary'|'secondary'|'outline')} [variant='primary'] - Visual style variant
- * @property {string} [class] - Additional CSS classes to apply
- * @extends {BaseProps}
- */
-interface Props extends BaseProps {
-  href?: string;
-  variant?: "primary" | "secondary" | "outline";
-  class?: string; // For Astro's class:list directive and standard class
-}
+interface Props extends ButtonProps {}
 
 const { href, variant = "primary", class: className, ...rest } = Astro.props;
 
-/**
- * Base styles applied to all button variants
- * @type {string}
- */
-const baseStyles =
-  "inline-flex items-center justify-center px-6 py-3 rounded-[var(--radius-md)] font-medium transition-all duration-200 ease-in-out";
+const baseStyles = [
+  "inline-flex items-center gap-2",
+  "px-8 py-4",
+  "text-xl font-medium",
+  "rounded-pill",
+  "transition-all duration-[var(--transition-normal)] ease-[var(--transition-timing)]",
+].join(" ");
 
-/**
- * Style variants for different button types
- * @type {Record<string, string>}
- */
-const variantStyles = {
-  primary:
-    "bg-[var(--colour-button-primary)] text-white hover:bg-[var(--colour-button-primary-hover)]",
+const variantStyles: Record<NonNullable<Props["variant"]>, string> = {
+  primary: [
+    "bg-black text-white",
+    "hover:bg-purple-500 hover:text-orange-500",
+    "hover:-translate-y-0.5",
+    "shadow-soft dark:shadow-soft-dark",
+    "hover:shadow-soft-hover dark:hover:shadow-soft-hover-dark",
+    "dark:bg-white dark:text-black",
+    "dark:hover:bg-purple-500 dark:hover:text-orange-500",
+  ].join(" "),
   secondary:
     "bg-[var(--colour-button-secondary)] text-[var(--colour-text)] hover:bg-[var(--colour-button-secondary-hover)]",
   outline:
     "border-2 border-[var(--colour-button-outline)] text-[var(--colour-text)] hover:bg-[var(--colour-button-outline-hover)]",
 };
 
-/**
- * Combines base styles, variant styles, and any additional classes
- * @type {string}
- */
 const combinedClasses = [baseStyles, variantStyles[variant], className]
   .filter(Boolean)
   .join(" ");

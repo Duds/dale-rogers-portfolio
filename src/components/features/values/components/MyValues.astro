@@ -1,86 +1,107 @@
 ---
 import Container from "@/components/layout/Container.astro";
+import Button from "@/components/ui/Button.astro";
 
 interface Value {
+  /** Name of the value */
   name: string;
+  /** Description of the value */
   description: string;
+  /** Optional icon identifier */
+  icon?: string;
 }
 
-// Temporary values section with marketing copy
+interface Props {
+  /** Array of values to display */
+  values: Value[];
+}
+
+// Content for the values section
 const content = {
   title: "Core Principles That Guide My Work",
   image:
     "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop",
   values: [
     {
-      name: "Human-Centered",
+      name: "Human-Centred",
       description:
-        "Services should solve real problems for real people. I prioritize user needs over organizational convenience.",
+        "Services should solve real problems for real people. I prioritise user needs over organisational convenience.",
+      icon: "user-focus",
     },
     {
       name: "Evidence-Based",
       description:
         "Decisions grounded in research and data, not assumptions. I validate every design choice with user testing.",
+      icon: "data",
     },
     {
       name: "Practical Innovation",
       description:
         "Solutions must be both visionary and implementable. I balance creativity with technical feasibility.",
+      icon: "lightbulb",
     },
     {
       name: "Collaborative Approach",
       description:
         "Great design happens together. I work transparently with stakeholders at every level.",
+      icon: "team",
     },
   ] satisfies Value[],
 };
 ---
 
-<section class="my-values w-full py-20">
-  <Container fullWidth={true}>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
-      <h2 class="text-2xl font-semibold text-gray-600 dark:text-gray-400 mb-4">
+<section class="w-full py-20 bg-neutral-100 dark:bg-neutral-900">
+  <Container>
+    <div class="max-w-7xl mx-auto text-center mb-16">
+      <p
+        class="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-3"
+      >
         My Values
-      </h2>
-      <h3
-        class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white"
+      </p>
+      <h2
+        class="text-4xl md:text-5xl font-display text-neutral-900 dark:text-neutral-50 mb-8"
       >
         {content.title}
-      </h3>
+      </h2>
     </div>
 
-    <div class="w-full mb-8">
-      <div
-        class="relative aspect-[16/9] rounded-3xl overflow-hidden shadow-soft"
-      >
-        <img
-          src={content.image}
-          alt="Values in action"
-          class="w-full h-full object-cover"
-        />
-      </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+      {
+        content.values.map((value) => (
+          <div class="p-8 bg-white dark:bg-neutral-800 rounded-2xl">
+            {value.icon && (
+              <div class="w-12 h-12 mb-6">
+                <img
+                  src={`/icons/${value.icon}.svg`}
+                  alt=""
+                  aria-hidden="true"
+                  class="w-full h-full text-primary-600 dark:text-primary-400"
+                  width="48"
+                  height="48"
+                />
+              </div>
+            )}
+            <h3 class="text-xl font-display text-neutral-900 dark:text-neutral-50 mb-4">
+              {value.name}
+            </h3>
+            <p class="text-neutral-600 dark:text-neutral-400">
+              {value.description}
+            </p>
+          </div>
+        ))
+      }
     </div>
 
-    <div class="w-2/3">
-      <div class="text-left">
-        <a
-          href="/values"
-          class="btn-primary inline-flex items-center gap-2 rounded-pill text-xl px-8 py-4 shadow-soft-hover"
+    <div class="flex justify-center">
+      <Button variant="secondary" href="/values" class="group">
+        Explore My Values
+        <span
+          class="ml-2 transition-transform duration-200 group-hover:translate-x-1"
+          aria-hidden="true"
         >
-          Explore My Values
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"></path>
-          </svg>
-        </a>
-      </div>
+          →
+        </span>
+      </Button>
     </div>
   </Container>
 </section>

@@ -7,8 +7,8 @@ interface Props {
 const { class: className = "", fullWidth = false } = Astro.props;
 
 const containerClass = fullWidth
-  ? "w-full px-4 sm:px-6 lg:px-8"
-  : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
+  ? "w-full px-4 sm:px-12 lg:px-16"
+  : "max-w-7xl mx-auto px-4 sm:px-12 lg:px-16";
 ---
 
 <div class:list={[containerClass, className]}>
