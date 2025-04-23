@@ -66,45 +66,67 @@ const siteContentCollection = defineCollection({
   schema: z.array(siteSectionSchema),
 });
 
-/**
- * Schema for articles collection
- */
-const articlesCollection = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    pubDate: z.date(),
-    tags: z.array(z.string()),
-    author: z.string().default("Dale Rogers"),
-  }),
+// Base schema for common fields
+const baseSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  pubDate: z.coerce.date(),
+  author: z.string(),
+  featured: z.boolean().optional().default(false),
+  coverImage: z.string().optional(),
+  tags: z.array(z.string()),
 });
 
-/**
- * Schema for case studies collection
- */
-const caseStudiesCollection = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    client: z.string(),
-    industry: z.string(),
-    duration: z.string(),
-    tags: z.array(z.string()),
-    challenge: z.string(),
-    solution: z.string(),
-    results: z.array(z.string()),
-    featured: z.boolean().default(false),
-  }),
+// Schema for case studies
+const caseStudySchema = baseSchema.extend({
+  client: z.string(),
+  industry: z.string(),
+  duration: z.string(),
+  challenge: z.string(),
+  solution: z.string(),
+  results: z.union([z.string(), z.array(z.string())]),
+});
+
+// Schema for articles
+const articleSchema = baseSchema.extend({
+  draft: z.boolean().optional().default(false),
+});
+
+// Schema for scratch posts (drafts/works in progress)
+const scratchSchema = baseSchema.extend({
+  status: z
+    .enum(["draft", "in-progress", "abandoned", "complete"])
+    .default("draft"),
+  originalContent: z.string().optional(),
+  githubUrl: z.string().url().optional(),
+  liveUrl: z.string().url().optional(),
+  files: z
+    .array(
+      z.object({
+        name: z.string(),
+        type: z.string(),
+        content: z.string(),
+      })
+    )
+    .optional(),
 });
 
 /**
  * Exported collections configuration
  */
 export const collections = {
-  articles: articlesCollection,
-  "case-studies": caseStudiesCollection,
+  "case-studies": defineCollection({
+    type: "content",
+    schema: caseStudySchema,
+  }),
+  articles: defineCollection({
+    type: "content",
+    schema: articleSchema,
+  }),
+  scratch: defineCollection({
+    type: "content",
+    schema: scratchSchema,
+  }),
   services: servicesCollection,
   "site-content": siteContentCollection,
 };

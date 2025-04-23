@@ -1,6 +1,7 @@
 ---
 /* This is the dynamic case study template that will render individual case studies */
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
+import CaseStudyLayout from "@/layouts/CaseStudyLayout.astro";
 
 /* Insert type definition for case studies */
 interface CaseStudyEntry {
@@ -12,41 +13,30 @@ interface CaseStudyEntry {
   };
 }
 
+// Add prerender directive to generate static pages
+export const prerender = true;
+
 // Define what paths to be prerendered
 export async function getStaticPaths() {
-  const caseStudies = (await getCollection(
-    "case-studies" as any
-  )) as unknown as Array<{
-    slug: string;
-  }>;
-  return caseStudies.map((study) => ({ params: { slug: study.slug } }));
+  const caseStudies = await getCollection("case-studies");
+  return caseStudies.map((caseStudy) => ({
+    params: { slug: caseStudy.slug },
+    props: { caseStudy },
+  }));
 }
 
-const { slug } = Astro.params;
-const caseStudies = (await getCollection(
-  "case-studies" as any
-)) as unknown as Array<CaseStudyEntry>;
-const caseStudy = caseStudies.find((study) => study.slug === slug);
+interface Props {
+  caseStudy: CollectionEntry<"case-studies">;
+}
+
+const { caseStudy } = Astro.props;
+const { Content } = await caseStudy.render();
 
 if (!caseStudy) {
-  throw new Error(`Case study not found for slug: ${slug}`);
+  throw new Error(`Case study not found for slug: ${caseStudy.slug}`);
 }
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{caseStudy.data.title}</title>
-  </head>
-  <body class="bg-gray-50 text-gray-900">
-    <main class="container mx-auto py-10 px-4">
-      <h1 class="text-4xl font-bold mb-4">{caseStudy.data.title}</h1>
-      <p class="mb-6">{caseStudy.data.description}</p>
-      <article class="prose max-w-none">
-        {caseStudy.body}
-      </article>
-    </main>
-  </body>
-</html>
+<CaseStudyLayout caseStudy={caseStudy}>
+  <Content />
+</CaseStudyLayout>

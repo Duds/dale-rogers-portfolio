@@ -1,0 +1,99 @@
+---
+title: "Portfolio Website v2"
+description: "Building my new portfolio site with Astro, React, and TailwindCSS"
+pubDate: 2023-09-15
+status: "complete"
+author: "Dale Rogers"
+tags: ["astro", "tailwindcss", "web-development", "portfolio"]
+coverImage: "/images/portfolio-v2.jpg"
+files:
+  - name: "tailwind.config.js"
+    path: "/tailwind.config.js"
+    type: "javascript"
+    content: |
+      /** @type {import('tailwindcss').Config} */
+      module.exports = {
+        content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'primary-purple': '#6D28D9',
+              'primary-purple-dark': '#5B21B6',
+            },
+            fontFamily: {
+              sans: ['Inter var', 'sans-serif'],
+              heading: ['Lexend', 'sans-serif'],
+            },
+          },
+        },
+        plugins: [require('@tailwindcss/typography')],
+      }
+  - name: "astro.config.mjs"
+    path: "/astro.config.mjs"
+    type: "javascript"
+    content: |
+      import { defineConfig } from 'astro/config';
+      import tailwind from '@astrojs/tailwind';
+      import mdx from '@astrojs/mdx';
+
+      export default defineConfig({
+        integrations: [
+          tailwind(),
+          mdx(),
+        ],
+      });
+---
+
+# Portfolio Website v2
+
+This is my new portfolio website built with Astro, React, and TailwindCSS. I wanted to create a modern, fast, and accessible website that showcases my work and skills.
+
+## Technologies Used
+
+- **Astro**: For static site generation and content management
+- **React**: For interactive components
+- **TailwindCSS**: For styling
+- **TypeScript**: For type safety
+- **Vercel**: For hosting and deployment
+
+## Features
+
+- Dark/light mode toggle
+- Content collection for case studies, articles, and projects
+- Responsive design for all device sizes
+- Fast page loads with minimal JavaScript
+- SEO optimized
+
+## Project Structure
+
+The project follows a modular structure:
+
+```
+src/
+├── components/  # Reusable UI components
+├── content/     # Markdown content
+├── layouts/     # Page layouts
+├── pages/       # Astro pages
+└── styles/      # Global styles
+```
+
+## Design Choices
+
+For the design, I wanted a clean, minimalist aesthetic that puts the focus on the content. I used a limited color palette with high contrast for accessibility.
+
+The typography is designed for readability, using a sans-serif font for headings and a serif font for body text.
+
+## Performance
+
+One of my key goals was performance. By using Astro's partial hydration approach, the site sends minimal JavaScript to the client, resulting in fast load times and a great user experience.
+
+## What I Learned
+
+Building this portfolio taught me a lot about:
+
+- Working with Astro's content collections
+- Creating flexible layouts with TailwindCSS
+- Implementing dark mode with persistent user preferences
+- Optimizing images and assets for performance
+- Setting up a CI/CD pipeline for continuous deployment

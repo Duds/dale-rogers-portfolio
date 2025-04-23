@@ -1,0 +1,197 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/layout/Container.astro";
+import { getCollection } from "astro:content";
+import FormattedDate from "@/components/ui/FormattedDate.astro";
+import TagList from "@/components/ui/TagList.astro";
+
+// Add prerender directive to generate static pages
+export const prerender = true;
+
+type ContentType = "article" | "case-study" | "scratch";
+type ContentCollection = "articles" | "case-studies" | "scratch";
+
+// Define a common data shape that all content types share
+interface CommonData {
+  title: string;
+  pubDate: Date;
+  description: string;
+  author: string;
+  tags: string[];
+  coverImage?: string;
+  status?: "in-progress" | "complete" | "abandoned";
+}
+
+// Create a proper type for enhanced entries
+interface EnhancedEntry {
+  id: string;
+  slug: string;
+  body: string;
+  collection: ContentCollection;
+  data: CommonData;
+  type: ContentType;
+}
+
+export async function getStaticPaths() {
+  const articles = await getCollection("articles");
+  const caseStudies = await getCollection("case-studies");
+  const scratchPosts = await getCollection("scratch");
+
+  // Combine all content with proper typing
+  const allContent = [
+    ...articles.map((entry) => ({
+      id: entry.id,
+      slug: entry.slug,
+      body: entry.body,
+      data: {
+        ...entry.data,
+        tags: entry.data.tags || [],
+      },
+      type: "article" as const,
+      collection: "articles" as const,
+    })),
+    ...caseStudies.map((entry) => ({
+      id: entry.id,
+      slug: entry.slug,
+      body: entry.body,
+      data: {
+        ...entry.data,
+        tags: entry.data.tags || [],
+      },
+      type: "case-study" as const,
+      collection: "case-studies" as const,
+    })),
+    ...scratchPosts.map((entry) => ({
+      id: entry.id,
+      slug: entry.slug,
+      body: entry.body,
+      data: {
+        ...entry.data,
+        tags: entry.data.tags || [],
+      },
+      type: "scratch" as const,
+      collection: "scratch" as const,
+    })),
+  ] as EnhancedEntry[];
+
+  // Get unique tags
+  const uniqueTags = [
+    ...new Set(allContent.flatMap((entry) => entry.data.tags)),
+  ];
+
+  // Create paths for each tag
+  return uniqueTags.map((tag) => ({
+    params: { tag: tag.toLowerCase() },
+    props: {
+      tag,
+      entries: allContent.filter((entry) =>
+        entry.data.tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
+      ),
+    },
+  }));
+}
+
+const { tag, entries } = Astro.props;
+
+// Sort entries by date
+const sortedEntries = entries.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Group entries by type
+const groupedEntries = sortedEntries.reduce(
+  (acc, entry) => {
+    if (!acc[entry.type]) {
+      acc[entry.type] = [];
+    }
+    acc[entry.type].push(entry);
+    return acc;
+  },
+  {} as Record<ContentType, EnhancedEntry[]>
+);
+
+const typeLabels: Record<ContentType, string> = {
+  article: "Articles",
+  "case-study": "Case Studies",
+  scratch: "Scratch Posts",
+};
+
+const typeOrder: ContentType[] = ["case-study", "article", "scratch"];
+---
+
+<BaseLayout
+  title={`Posts tagged with ${tag}`}
+  description={`All posts tagged with ${tag}`}
+>
+  <Container class="py-16">
+    <h1 class="text-4xl font-bold mb-4">
+      Posts tagged with <span class="text-blue-600 dark:text-blue-400"
+        >{tag}</span
+      >
+    </h1>
+
+    <div class="mb-10">
+      <p class="text-lg mb-2">Browse all tags:</p>
+      <TagList
+        tags={Array.from(new Set(entries.flatMap((entry) => entry.data.tags)))}
+        currentTag={tag}
+      />
+    </div>
+
+    {
+      entries.length === 0 ? (
+        <p class="text-gray-600">No content found for this tag.</p>
+      ) : (
+        <div class="py-10">
+          {typeOrder.map((type) => {
+            const entries = groupedEntries[type] || [];
+            if (entries.length === 0) return null;
+
+            return (
+              <div class="mb-12">
+                <h2 class="text-2xl font-semibold mb-6">{typeLabels[type]}</h2>
+                <div class="space-y-6">
+                  {entries.map((entry) => (
+                    <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
+                      <a
+                        href={`/${entry.collection === "case-studies" ? "work" : entry.collection}/${entry.slug}`}
+                      >
+                        <h3 class="text-xl font-medium mb-2 hover:text-blue-500">
+                          {entry.data.title}
+                        </h3>
+                      </a>
+
+                      <div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                        <FormattedDate date={entry.data.pubDate} />
+                        <span>•</span>
+                        <span>{entry.data.author}</span>
+                        {entry.data.status && (
+                          <>
+                            <span>•</span>
+                            <span
+                              class={`
+                            ${entry.data.status === "in-progress" ? "text-amber-600" : ""}
+                            ${entry.data.status === "complete" ? "text-green-600" : ""}
+                            ${entry.data.status === "abandoned" ? "text-red-600" : ""}
+                          `}
+                            >
+                              {entry.data.status.replace("-", " ")}
+                            </span>
+                          </>
+                        )}
+                      </div>
+
+                      <p class="text-gray-600 mb-4">{entry.data.description}</p>
+
+                      <TagList tags={entry.data.tags} currentTag={tag} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )
+    }
+  </Container>
+</BaseLayout>

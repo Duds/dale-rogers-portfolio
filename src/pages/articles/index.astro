@@ -1,34 +1,57 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import { getCollection } from 'astro:content';
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/layout/Container.astro";
+import { getCollection } from "astro:content";
+import FormattedDate from "@/components/ui/FormattedDate.astro";
+import TagList from "@/components/ui/TagList.astro";
 
-const articles = await getCollection('articles');
+const articles = await getCollection("articles", ({ data }) => {
+  return !data.draft;
+});
+
+// Sort articles by date in descending order
+const sortedArticles = articles.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
-<Layout title="Articles">
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="font-display text-4xl text-text mb-6">Articles</h1>
-    
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {articles.map((article) => (
-        <a 
-          href={`/articles/${article.slug}`}
-          class="block bg-background rounded-card shadow-card p-6 hover:shadow-lg transition-shadow"
-        >
-          <h2 class="font-display text-xl text-text mb-2">{article.data.title}</h2>
-          <p class="text-text-secondary mb-4">{article.data.description}</p>
-          <div class="flex flex-wrap gap-2">
-            {article.data.tags.map((tag) => (
-              <span class="px-2 py-1 bg-secondary text-text-secondary text-sm rounded-button">
-                {tag}
-              </span>
-            ))}
-          </div>
-          <p class="text-text-secondary text-sm mt-4">
-            {article.data.pubDate.toLocaleDateString()}
-          </p>
-        </a>
-      ))}
+<BaseLayout
+  title="Articles | Dale Rogers"
+  description="Thoughts and insights on service design, digital strategy, and technology"
+>
+  <Container>
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold mb-8">Articles</h1>
+      <div class="space-y-12">
+        {
+          sortedArticles.map((article) => (
+            <article class="group">
+              <a href={`/articles/${article.slug}`} class="block">
+                {article.data.coverImage && (
+                  <img
+                    src={article.data.coverImage}
+                    alt={article.data.title}
+                    class="w-full h-64 object-cover rounded-lg mb-4 transition-transform group-hover:scale-[1.02]"
+                  />
+                )}
+                <div class="space-y-2">
+                  <h2 class="text-2xl font-bold group-hover:text-primary transition-colors">
+                    {article.data.title}
+                  </h2>
+                  <div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
+                    <FormattedDate date={article.data.pubDate} />
+                    <span>by {article.data.author}</span>
+                  </div>
+                  {article.data.tags && <TagList tags={article.data.tags} />}
+                  <p class="text-gray-600 dark:text-gray-400 line-clamp-3">
+                    {article.data.description}
+                  </p>
+                </div>
+              </a>
+            </article>
+          ))
+        }
+      </div>
     </div>
-  </div>
-</Layout> 
+  </Container>
+</BaseLayout>
