@@ -1,0 +1,147 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Container from "@/components/layout/Container.astro";
+import { type CollectionEntry } from "astro:content";
+import TagList from "@/components/ui/TagList.astro";
+import FormattedDate from "@/components/ui/FormattedDate.astro";
+
+interface Props {
+  caseStudy: CollectionEntry<"case-studies">;
+}
+
+const { caseStudy } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  tags,
+  coverImage,
+  client,
+  industry,
+  duration,
+  challenge,
+  solution,
+  results,
+  author,
+} = caseStudy.data;
+---
+
+<BaseLayout title={title} description={description} image={coverImage}>
+  <Container>
+    <article class="prose prose-lg dark:prose-invert mx-auto">
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold mb-4">{title}</h1>
+        <div
+          class="flex items-center gap-4 text-gray-600 dark:text-gray-400 mb-4"
+        >
+          <FormattedDate date={pubDate} />
+          <span>by {author}</span>
+        </div>
+        {tags && <TagList tags={tags} class="mb-6" />}
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg"
+        >
+          <div>
+            <h2 class="text-xl font-semibold mb-2">Project Details</h2>
+            <dl class="space-y-2">
+              <div>
+                <dt class="font-medium">Client</dt>
+                <dd>{client}</dd>
+              </div>
+              <div>
+                <dt class="font-medium">Industry</dt>
+                <dd>{industry}</dd>
+              </div>
+              <div>
+                <dt class="font-medium">Duration</dt>
+                <dd>{duration}</dd>
+              </div>
+            </dl>
+          </div>
+          <div>
+            <h2 class="text-xl font-semibold mb-2">Overview</h2>
+            <dl class="space-y-2">
+              <div>
+                <dt class="font-medium">Challenge</dt>
+                <dd>{challenge}</dd>
+              </div>
+              <div>
+                <dt class="font-medium">Solution</dt>
+                <dd>{solution}</dd>
+              </div>
+              <div>
+                <dt class="font-medium">Results</dt>
+                <dd>
+                  {
+                    Array.isArray(results) ? (
+                      <ul class="list-disc list-inside">
+                        {results.map((result) => (
+                          <li>{result}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      results
+                    )
+                  }
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </header>
+
+      {
+        coverImage && (
+          <img
+            src={coverImage}
+            alt={`${client} - ${title}`}
+            class="w-full h-[400px] object-cover rounded-lg mb-8"
+          />
+        )
+      }
+
+      <div class="case-study-content">
+        <slot />
+      </div>
+    </article>
+  </Container>
+</BaseLayout>
+
+<style>
+  .case-study-content :global(img) {
+    @apply rounded-lg my-8;
+  }
+
+  .case-study-content :global(blockquote) {
+    @apply border-l-4 border-blue-500 pl-4 italic my-8;
+  }
+
+  .case-study-content :global(pre) {
+    @apply p-4 rounded-lg overflow-x-auto my-8;
+  }
+
+  .case-study-content :global(h2) {
+    @apply text-3xl font-bold mt-12 mb-6;
+  }
+
+  .case-study-content :global(h3) {
+    @apply text-2xl font-bold mt-8 mb-4;
+  }
+
+  .case-study-content :global(p) {
+    @apply mb-6 leading-relaxed;
+  }
+
+  .case-study-content :global(ul) {
+    @apply list-disc list-inside mb-6;
+  }
+
+  .case-study-content :global(ol) {
+    @apply list-decimal list-inside mb-6;
+  }
+
+  .case-study-content :global(a) {
+    @apply text-blue-500 hover:underline;
+  }
+</style>

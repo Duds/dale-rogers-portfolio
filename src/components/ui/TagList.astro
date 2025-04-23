@@ -1,0 +1,31 @@
+---
+interface Props {
+  tags: string[];
+  class?: string;
+  currentTag?: string;
+}
+
+const { tags, class: className = "", currentTag } = Astro.props;
+---
+
+<div class:list={["flex flex-wrap gap-2", className]}>
+  {
+    tags.map((tag) => {
+      const isCurrentTag =
+        currentTag && tag.toLowerCase() === currentTag.toLowerCase();
+      return (
+        <a
+          href={`/tags/${tag.toLowerCase()}`}
+          class:list={[
+            "inline-flex items-center px-3 py-1 rounded-full text-sm transition-colors",
+            isCurrentTag
+              ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+              : "bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700",
+          ]}
+        >
+          {tag}
+        </a>
+      );
+    })
+  }
+</div>

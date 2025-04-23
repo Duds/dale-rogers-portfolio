@@ -1,0 +1,32 @@
+---
+interface Props {
+  status: "in-progress" | "completed" | "abandoned";
+}
+
+const { status } = Astro.props;
+
+const statusColors = {
+  "in-progress":
+    "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
+  completed:
+    "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+  abandoned: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+};
+
+const statusMessages = {
+  "in-progress": "This project is actively being worked on",
+  completed: "This project has been completed",
+  abandoned: "This project has been abandoned",
+};
+---
+
+<div class="flex items-center gap-2 my-4">
+  <span
+    class={`px-3 py-1 rounded-full text-sm font-medium ${statusColors[status]}`}
+  >
+    {status}
+  </span>
+  <span class="text-gray-600 dark:text-gray-400 text-sm">
+    {statusMessages[status]}
+  </span>
+</div>

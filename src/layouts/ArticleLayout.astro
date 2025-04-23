@@ -1,0 +1,81 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Container from "@/components/layout/Container.astro";
+import { type CollectionEntry } from "astro:content";
+import TagList from "@/components/ui/TagList.astro";
+import FormattedDate from "@/components/ui/FormattedDate.astro";
+
+interface Props {
+  article: CollectionEntry<"articles">;
+}
+
+const { article } = Astro.props;
+const { title, description, pubDate, tags, coverImage, author } = article.data;
+---
+
+<BaseLayout title={title} description={description} image={coverImage}>
+  <Container>
+    <article class="prose prose-lg dark:prose-invert mx-auto">
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold mb-4">{title}</h1>
+        <div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
+          <FormattedDate date={pubDate} />
+          <span>by {author}</span>
+        </div>
+        {tags && <TagList tags={tags} class="mt-4" />}
+      </header>
+
+      {
+        coverImage && (
+          <img
+            src={coverImage}
+            alt={title}
+            class="w-full h-[400px] object-cover rounded-lg mb-8"
+          />
+        )
+      }
+
+      <div class="article-content">
+        <slot />
+      </div>
+    </article>
+  </Container>
+</BaseLayout>
+
+<style>
+  .article-content :global(img) {
+    @apply rounded-lg my-8;
+  }
+
+  .article-content :global(blockquote) {
+    @apply border-l-4 border-blue-500 pl-4 italic my-8;
+  }
+
+  .article-content :global(pre) {
+    @apply p-4 rounded-lg overflow-x-auto my-8;
+  }
+
+  .article-content :global(h2) {
+    @apply text-3xl font-bold mt-12 mb-6;
+  }
+
+  .article-content :global(h3) {
+    @apply text-2xl font-bold mt-8 mb-4;
+  }
+
+  .article-content :global(p) {
+    @apply mb-6 leading-relaxed;
+  }
+
+  .article-content :global(ul) {
+    @apply list-disc list-inside mb-6;
+  }
+
+  .article-content :global(ol) {
+    @apply list-decimal list-inside mb-6;
+  }
+
+  .article-content :global(a) {
+    @apply text-blue-500 hover:underline;
+  }
+</style>

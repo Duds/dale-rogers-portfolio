@@ -1,5 +1,4 @@
 ---
-import Icon from "@/components/ui/Icon.astro";
 import Container from "@/components/layout/Container.astro";
 
 const currentYear = new Date().getFullYear();
@@ -7,85 +6,49 @@ const currentYear = new Date().getFullYear();
 // Socials column
 const socialLinks = [
   {
-    name: "Instagram",
-    href: "https://instagram.com/dale-rogers",
-    icon: "instagram" as const,
-  },
-  {
     name: "LinkedIn",
     href: "https://linkedin.com/in/dale-rogers",
-    icon: "linkedin" as const,
+    icon: "linkedin",
+  },
+  {
+    name: "Instagram",
+    href: "https://instagram.com/dale.rogers",
+    icon: "instagram",
   },
 ];
 
 // Sitemap column
 const sitemapLinks = [
   { name: "Home", href: "/" },
-  { name: "Projects", href: "/case-studies" },
+  { name: "Work", href: "/work" },
+  { name: "Articles", href: "/articles" },
+  { name: "Scratch", href: "/scratch" },
   { name: "About", href: "/about" },
-  { name: "Values", href: "/values" },
   { name: "Contact", href: "/contact" },
 ];
 
 // Info column
 const infoLinks = [
-  { name: "General Terms and Conditions", href: "/terms" },
+  { name: "Colophon", href: "/colophon" },
+  { name: "Terms and Conditions", href: "/terms" },
   { name: "Privacy Policy", href: "/privacy" },
   { name: "Cookie Policy", href: "/cookie-policy" },
-  { name: "Colophon", href: "/colophon" },
 ];
 ---
 
 <footer class="footer-base">
-  <Container padding="md">
+  <Container fullWidth={true}>
     <div class="footer-content">
-      <!-- Left side: CTA -->
+      <!-- Left side with CTA -->
       <div class="footer-cta">
-        <h2 class="footer-heading">Let's design experiences that matter.</h2>
-        <a href="/contact" class="footer-button">
-          Start a conversation
-          <svg
-            class="ml-3 w-5 h-5 md:w-6 md:h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-          </svg>
-        </a>
+        <h2 class="footer-heading">Let's create something<br />together</h2>
+        <a href="/contact" class="footer-button">Get in touch</a>
       </div>
 
-      <!-- Right side: Three columns -->
+      <!-- Right side with columns -->
       <div class="footer-columns">
         <div class="footer-grid">
-          <!-- Column 1: Socials -->
-          <div>
-            <h3 class="footer-column-heading">Socials</h3>
-            <ul class="space-y-2">
-              {
-                socialLinks.map((link) => (
-                  <li>
-                    <a
-                      href={link.href}
-                      class="footer-social-link"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Icon name={link.icon} class="w-5 h-5 mr-2" />
-                      {link.name}
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-
-          <!-- Column 2: Sitemap -->
+          <!-- Sitemap Column -->
           <div>
             <h3 class="footer-column-heading">Sitemap</h3>
             <ul class="space-y-2">
@@ -101,9 +64,35 @@ const infoLinks = [
             </ul>
           </div>
 
-          <!-- Column 3: Info -->
+          <!-- Social Links Column -->
           <div>
-            <h3 class="footer-column-heading">Info</h3>
+            <h3 class="footer-column-heading">Connect</h3>
+            <ul class="space-y-2">
+              {
+                socialLinks.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="footer-social-link"
+                    >
+                      <img
+                        src={`/icons/${link.icon}.svg`}
+                        alt={link.name}
+                        class="w-5 h-5 mr-2"
+                      />
+                      {link.name}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <!-- Legal Column -->
+          <div>
+            <h3 class="footer-column-heading">Legal</h3>
             <ul class="space-y-2">
               {
                 infoLinks.map((link) => (
@@ -118,7 +107,6 @@ const infoLinks = [
           </div>
         </div>
 
-        <!-- Copyright & Logo -->
         <div class="footer-copyright">
           <p class="footer-copyright-text">
             &copy; {currentYear} Dale Rogers. All rights reserved.
@@ -128,10 +116,8 @@ const infoLinks = [
     </div>
   </Container>
 
-  <!-- Oversized decorative text -->
-  <div class="footer-decorative-text" aria-hidden="true">
-    <p style="width: 100vw;">Dale Rogers</p>
-  </div>
+  <!-- Decorative background text -->
+  <div class="footer-decorative-text">DESIGN • STRATEGY • INNOVATION</div>
 </footer>
 
 <style>

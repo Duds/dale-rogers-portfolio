@@ -1,0 +1,32 @@
+---
+import Navigation from "./Navigation.astro";
+---
+
+<header class="bg-transparent">
+  <Navigation />
+</header>
+
+<script>
+  // Add dark mode toggle functionality if not already handled by ThemeToggle component
+  document.addEventListener("astro:page-load", () => {
+    // Initialize theme on page load to prevent flash
+    const theme = (() => {
+      if (
+        typeof localStorage !== "undefined" &&
+        localStorage.getItem("theme")
+      ) {
+        return localStorage.getItem("theme");
+      }
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        return "dark";
+      }
+      return "light";
+    })();
+
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  });
+</script>

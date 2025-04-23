@@ -2,33 +2,15 @@
 interface Props {
   class?: string;
   fullWidth?: boolean;
-  padding?: "none" | "sm" | "md" | "lg" | "xl";
 }
 
-const {
-  class: className = "",
-  fullWidth = false,
-  padding = "md",
-} = Astro.props;
+const { class: className = "", fullWidth = false } = Astro.props;
 
-const paddingClasses = {
-  none: "",
-  sm: "px-12",
-  md: "px-24",
-  lg: "px-32",
-  xl: "px-40",
-};
-
-const containerClasses = [
-  "w-full",
-  fullWidth ? "max-w-full" : "max-w-[100%]",
-  paddingClasses[padding],
-  className,
-]
-  .filter(Boolean)
-  .join(" ");
+const containerClass = fullWidth
+  ? "w-full px-4 sm:px-6 lg:px-8"
+  : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8";
 ---
 
-<div class={containerClasses}>
+<div class:list={[containerClass, className]}>
   <slot />
 </div>

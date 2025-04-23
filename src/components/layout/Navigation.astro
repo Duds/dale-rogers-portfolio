@@ -12,10 +12,18 @@ const activeClass = "nav-link-active";
 
 // Simplified nav items - Removed Home as it's redundant with the logo
 const navItems = [
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Work", href: "/work" },
+  { label: "Articles", href: "/articles" },
 ];
+
+// Function to determine if a link is active
+const isActive = (href: string): boolean => {
+  if (href === "/") {
+    return pathname === "/";
+  }
+  // Check if the current path starts with the href (for section pages)
+  return currentPath.startsWith(href.slice(1));
+};
 ---
 
 <nav
@@ -24,7 +32,7 @@ const navItems = [
   role="navigation"
   aria-label="Main navigation"
 >
-  <Container padding="md">
+  <Container fullWidth={true} class="py-4 md:py-6">
     <div class="nav-container">
       <!-- Left Section -->
       <a href="/" class="nav-logo" aria-label="Dale Rogers - Home">
@@ -44,7 +52,7 @@ const navItems = [
           navItems.map((item) => (
             <a
               href={item.href}
-              class={`nav-link ${item.href === "/" ? (pathname === "/" ? activeClass : "") : currentPath === item.href.slice(1) ? activeClass : ""}`}
+              class={`nav-link ${isActive(item.href) ? activeClass : ""}`}
             >
               {item.label}
             </a>
@@ -87,7 +95,7 @@ const navItems = [
       navItems.map((item) => (
         <a
           href={item.href}
-          class={`block py-3 nav-link ${item.href === "/" ? (pathname === "/" ? activeClass : "") : currentPath === item.href.slice(1) ? activeClass : ""}`}
+          class={`block py-3 nav-link ${isActive(item.href) ? activeClass : ""}`}
           role="menuitem"
         >
           {item.label}

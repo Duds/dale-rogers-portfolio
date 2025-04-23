@@ -1,0 +1,24 @@
+---
+interface Props {
+  heading: string;
+  subheading?: string;
+  alignment?: "left" | "center" | "right";
+}
+
+const { heading, subheading, alignment = "left" } = Astro.props;
+
+const alignmentClasses = {
+  left: "text-left",
+  center: "text-center mx-auto",
+  right: "text-right ml-auto",
+};
+---
+
+<div class={`max-w-4xl ${alignmentClasses[alignment]}`}>
+  <h1 class="text-4xl md:text-5xl font-heading mb-4">{heading}</h1>
+  {
+    subheading && (
+      <p class="text-lg text-neutral-500 dark:text-neutral-400">{subheading}</p>
+    )
+  }
+</div>

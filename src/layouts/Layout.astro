@@ -1,49 +1,21 @@
 ---
-// Remove unused import: import { ViewTransitions } from "astro:transitions";
-import Footer from "@/components/layout/Footer.astro";
-import Navigation from "@/components/layout/Navigation.astro";
-import "../styles/global.css";
+import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  canonicalURL?: string;
 }
 
-const {
-  title,
-  description = "Dale Rogers - Service Designer based in Canberra, Australia",
-} = Astro.props;
-
-// Theme initialization script that runs before page loads to prevent flashing
-const themeScript = `
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const storedTheme = localStorage.getItem('theme');
-
-  if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
-    document.documentElement.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
-  }
-`;
+const { title, description, image, canonicalURL } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <!-- Inject the theme script early to avoid flashing -->
-    <script set:html={themeScript} />
-  </head>
-  <body class="font-body text-text bg-background min-h-screen flex flex-col">
-    <Navigation />
-    <main class="flex-grow">
-      <slot />
-    </main>
-    <Footer />
-  </body>
-</html>
+<BaseLayout
+  title={title}
+  description={description}
+  image={image}
+  canonicalURL={canonicalURL}
+>
+  <slot />
+</BaseLayout>
