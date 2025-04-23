@@ -52,24 +52,70 @@ actions:
          - Write comprehensive tests
          - Monitor performance
 
-      4. Accessibility:
+      4. Linter Error Prevention:
+         - Define complete component interfaces before use
+         - Only import what you use
+         - Use type guards for conditional logic
+         - Validate component props against documentation
+         - Fix one error at a time, test each fix
+
+      5. Accessibility:
          - Document ARIA attributes
          - Test with screen readers
          - Implement keyboard navigation
          - Consider regional requirements
 
-      5. Australian Standards:
+      6. Australian Standards:
          - Use Australian English spelling
          - Follow DD/MM/YYYY date format
          - Use 24-hour time format
          - Implement Australian time zones
          - Use metric measurements
 
-      6. Component Evolution:
+      7. Component Evolution:
          - Start with minimal interface
          - Document breaking changes
          - Use optional props for new features
          - Provide migration guides
+
+      ## Common Linter Error Patterns
+
+      ### Props Interface Mismatches
+      ```typescript
+      // Bad: Using undeclared props
+      const { padding } = Astro.props;
+      <Container padding="md">
+
+      // Good: Check component interface first
+      interface Props {
+        class?: string;
+      }
+      const { class: className } = Astro.props;
+      <Container class="py-4 md:py-6">
+      ```
+
+      ### Type-Safe Conditionals
+      ```typescript
+      // Bad: Complex ternary with potential type issues
+      class={`nav-link ${item.href === "/" ? (pathname === "/" ? activeClass : "") : currentPath === item.href.slice(1) ? activeClass : ""}`}
+
+      // Good: Helper function with clear types
+      const isActive = (href: string): boolean => {
+        if (href === "/") return pathname === "/";
+        return currentPath.startsWith(href.slice(1));
+      }
+      class={`nav-link ${isActive(item.href) ? activeClass : ""}`}
+      ```
+
+      ### Unused Imports
+      ```typescript
+      // Bad: Importing unused components
+      import Container from "./Container.astro";
+      import ThemeToggle from "@/components/ui/ThemeToggle.astro";
+
+      // Good: Only import what you use
+      import Navigation from "./Navigation.astro";
+      ```
 
 examples:
   - input: |
@@ -92,6 +138,24 @@ examples:
       }
     output: "Well-documented component with clear props"
 
+  - input: |
+      // Bad: Using props without checking interface
+      const { padding } = Astro.props;
+
+      function Component() {
+        return <Container padding="md" />;
+      }
+    output: |
+      // Good: Define props interface and validate
+      interface Props {
+        class?: string;
+      }
+      const { class: className } = Astro.props;
+
+      function Component() {
+        return <Container class="py-4 md:py-6" />;
+      }
+
 metadata:
   priority: high
   version: 1.0
@@ -101,4 +165,389 @@ metadata:
     - accessibility
     - australian-standards
     - component-design
+    - linter-errors
+    - code-quality
 </rule>
+
+## Lessons Learned from Linter Errors
+
+From our experience with fixing linter errors in the navigation and layout components, we've identified several key insights:
+
+1. **Anticipate Props Requirements**: Always check the component's interface before passing props. For instance, in our Navigation component, we passed a `padding` prop to the Container component that wasn't in its interface.
+
+2. **Interface Evolution**: Components evolve over time. When making changes to a component's interface, ensure all instances of that component are updated.
+
+3. **Consistent Syntax for Conditionals**: Type errors often occur in conditional rendering. Use consistent patterns and helper functions for conditional logic.
+
+4. **Unused Imports Create Noise**: Regularly clean up unused imports as they add confusion and generate unnecessary linter errors.
+
+5. **Semi-Automated Fixes Can Be Incomplete**: When using IDE or linter auto-fixes, always review the changes as they may not fully resolve the underlying issue.
+
+## Error Resolution Process
+
+1. **Identify the Error Source**: Understand exactly where and why the error is occurring.
+
+2. **Check Component Interface**: Verify the component's props interface.
+
+3. **Make Minimal Changes**: Fix only what's necessary to resolve the error.
+
+4. **Test the Fix**: Verify that the fix works without introducing new issues.
+
+5. **Document the Solution**: If the fix involved a pattern that might be reused, document it for future reference.
+
+## Code Style
+
+1. **TypeScript Configuration**
+   ```json
+   {
+     "compilerOptions": {
+       "strict": true,
+       "noImplicitAny": true,
+       "strictNullChecks": true
+     }
+   }
+   ```
+
+2. **Import Order**
+   ```typescript
+   // 1. React/Framework imports
+   import { useState } from 'react';
+
+   // 2. Third-party libraries
+   import clsx from 'clsx';
+
+   // 3. Local components
+   import Button from '@/components/ui/Button';
+
+   // 4. Types
+   import type { Props } from './types';
+
+   // 5. Styles
+   import '@/styles/components/component.css';
+   ```
+
+## Documentation
+
+1. **Component Documentation**
+   ```typescript
+   /**
+    * A reusable button component with multiple variants
+    * @component Button
+    *
+    * @example
+    * ```tsx
+    * <Button variant="primary" size="md">
+    *   Click me
+    * </Button>
+    * ```
+    *
+    * @accessibility
+    * - Role: button
+    * - Keyboard: Enter, Space
+    * - ARIA: aria-label, aria-pressed
+    */
+   ```
+
+2. **Type Documentation**
+   ```typescript
+   interface Props {
+     /** The visual style variant of the button */
+     variant: 'primary' | 'secondary';
+
+     /** The size of the button */
+     size: 'sm' | 'md' | 'lg';
+
+     /** Optional click handler */
+     onClick?: () => void;
+   }
+   ```
+
+## Error Handling
+
+1. **Custom Error Classes**
+   ```typescript
+   class ValidationError extends Error {
+     constructor(message: string) {
+       super(`Validation Error: ${message}`);
+       this.name = 'ValidationError';
+     }
+   }
+   ```
+
+2. **Error Boundaries**
+   ```typescript
+   import { Component, ErrorInfo } from 'react';
+
+   class ErrorBoundary extends Component {
+     componentDidCatch(error: Error, info: ErrorInfo) {
+       console.error('Error caught:', error, info);
+     }
+   }
+   ```
+
+## Testing
+
+1. **Unit Tests**
+   ```typescript
+   describe('Button', () => {
+     it('renders with default props', () => {
+       const { getByRole } = render(<Button>Click me</Button>);
+       expect(getByRole('button')).toBeInTheDocument();
+     });
+   });
+   ```
+
+2. **Integration Tests**
+   ```typescript
+   describe('Form submission', () => {
+     it('submits successfully', async () => {
+       const { getByRole } = render(<Form />);
+       await userEvent.click(getByRole('button'));
+       expect(onSubmit).toHaveBeenCalled();
+     });
+   });
+   ```
+
+## Performance
+
+1. **Code Splitting**
+   ```typescript
+   const HeavyComponent = lazy(() => import('./HeavyComponent'));
+   ```
+
+2. **Memoisation**
+   ```typescript
+   const MemoizedComponent = memo(({ data }) => (
+     <div>{data.map(renderItem)}</div>
+   ));
+   ```
+
+## Security
+
+1. **Input Validation**
+   ```typescript
+   function validateInput(data: unknown): asserts data is string {
+     if (typeof data !== 'string') {
+       throw new ValidationError('Input must be a string');
+     }
+   }
+   ```
+
+2. **Output Sanitisation**
+   ```typescript
+   import DOMPurify from 'dompurify';
+
+   function sanitiseHTML(html: string): string {
+     return DOMPurify.sanitize(html);
+   }
+   ```
+
+## Australian Standards
+
+1. **Date Formatting**
+   ```typescript
+   function formatDate(date: Date): string {
+     return date.toLocaleDateString('en-AU', {
+       day: '2-digit',
+       month: '2-digit',
+       year: 'numeric'
+     });
+   }
+   ```
+
+2. **Currency Formatting**
+   ```typescript
+   function formatCurrency(amount: number): string {
+     return amount.toLocaleString('en-AU', {
+       style: 'currency',
+       currency: 'AUD'
+     });
+   }
+   ```
+
+## Checklist
+
+Before committing:
+- [ ] TypeScript types complete
+- [ ] Documentation updated
+- [ ] Tests passing
+- [ ] Linter errors fixed
+- [ ] Performance checked
+- [ ] Security validated
+- [ ] Accessibility tested
+- [ ] Australian standards met
+
+## Common Issues
+
+1. **Type Safety**
+   ```typescript
+   // ❌ Avoid
+   const data: any = fetchData();
+
+   // ✅ Use proper types
+   interface Data {
+     id: string;
+     name: string;
+   }
+   const data: Data = await fetchData();
+   ```
+
+2. **Error Handling**
+   ```typescript
+   // ❌ Avoid
+   try {
+     doSomething();
+   } catch (e) {
+     console.error(e);
+   }
+
+   // ✅ Use proper error handling
+   try {
+     doSomething();
+   } catch (e) {
+     if (e instanceof ValidationError) {
+       handleValidationError(e);
+     } else {
+       reportError(e);
+     }
+   }
+   ```
+
+## Migration Notes
+
+1. When updating existing code:
+   - Add missing types
+   - Update documentation
+   - Add tests
+   - Fix security issues
+   - Implement error handling
+
+2. When writing new code:
+   - Follow TypeScript best practices
+   - Write tests first
+   - Document thoroughly
+   - Consider performance
+   - Implement security measures
+
+## Lessons Learned: SVG Theming and Hover States
+
+### Theme Toggle Case Study
+
+When implementing theme toggles with SVG icons that need to change color on hover, we discovered several key insights:
+
+1. **Direct SVG Color Control**
+   ```css
+   /* Most reliable approach for SVG color control */
+   .theme-toggle svg {
+     color: black !important;
+     fill: black !important;
+   }
+
+   .dark .theme-toggle svg {
+     color: white !important;
+     fill: white !important;
+   }
+   ```
+
+2. **Hover State Management**
+   - Using `currentColor` alone is not reliable for SVG hover states
+   - Explicit color declarations with `!important` ensure proper specificity
+   - Separate hover rules for light and dark modes are necessary
+   ```css
+   .theme-toggle:hover svg {
+     color: white !important;
+     fill: white !important;
+   }
+
+   .dark .theme-toggle:hover svg {
+     color: black !important;
+     fill: black !important;
+   }
+   ```
+
+3. **Component Structure**
+   - Keep SVG markup simple and avoid unnecessary nesting
+   - Use semantic class names (e.g., `theme-icon-light`, `theme-icon-dark`)
+   - Apply styles to the container rather than individual SVG elements
+
+4. **Common Pitfalls**
+   - Relying on CSS inheritance for SVG colors
+   - Using JavaScript to manage hover states
+   - Over-complicating the component structure
+   - Mixing Tailwind utilities with SVG color properties
+
+5. **Best Practices**
+   - Use a dedicated style block for SVG-specific rules
+   - Keep JavaScript minimal and focused on theme toggling
+   - Test hover states in both light and dark modes
+   - Ensure smooth transitions match navigation elements
+
+### Implementation Guidelines
+
+1. **Component Structure**
+   ```astro
+   <button class="theme-toggle">
+     <span class="theme-icon-light">
+       <svg>...</svg>
+     </span>
+     <span class="theme-icon-dark">
+       <svg>...</svg>
+     </span>
+   </button>
+   ```
+
+2. **Style Organization**
+   ```css
+   /* Base styles */
+   .theme-toggle {
+     @apply font-heading text-xl font-bold border-2 rounded-full transition-all;
+   }
+
+   /* SVG colors */
+   .theme-toggle svg {
+     @apply w-8 h-8;
+     color: black !important;
+   }
+
+   /* Hover states */
+   .theme-toggle:hover {
+     background-color: black !important;
+   }
+   ```
+
+3. **JavaScript Simplicity**
+   ```javascript
+   const initTheme = () => {
+     const toggle = document.getElementById("theme-toggle");
+     const root = document.documentElement;
+
+     toggle?.addEventListener("click", () => {
+       root.classList.toggle("dark");
+     });
+   };
+   ```
+
+### Key Takeaways
+
+1. **Simplicity Over Complexity**
+   - Simple, direct styling approaches are more reliable
+   - Avoid complex JavaScript solutions for styling
+   - Use explicit rules rather than relying on inheritance
+
+2. **Testing Requirements**
+   - Test hover states in both themes
+   - Verify transitions are smooth
+   - Check for any specificity conflicts
+   - Ensure consistent behavior across browsers
+
+3. **Documentation**
+   - Document SVG color control patterns
+   - Note any browser-specific issues
+   - Include examples of working implementations
+   - Explain the reasoning behind style decisions
+
+4. **Maintenance**
+   - Keep styles modular and well-organized
+   - Use consistent naming conventions
+   - Document any required `!important` rules
+   - Regular testing after theme system updates

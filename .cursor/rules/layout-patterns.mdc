@@ -1,6 +1,6 @@
 ---
 description: Standards for implementing consistent layout patterns across the site
-globs: 
+globs:
 alwaysApply: false
 ---
  ---
@@ -45,7 +45,7 @@ globs: ["**/*.astro"]
 
 ### 1. Full-Width Sections
 - Use `.section-full` for edge-to-edge sections
-- Maintain consistent padding with `.px-4 sm:px-6 lg:px-8`
+- Maintain consistent padding with `.px-4 sm:px-12 lg:px-16`
 - Center headings with `.max-w-7xl mx-auto text-center`
 
 ### 2. Content Width
@@ -67,7 +67,7 @@ globs: ["**/*.astro"]
         "type": "full_width_heading",
         "code": ```astro
         <section class="section-full">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div class="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16 text-center">
             <h2>Section Heading</h2>
           </div>
           <div class="section-content-narrow">

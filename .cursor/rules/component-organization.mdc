@@ -3,40 +3,125 @@ description:
 globs:
 alwaysApply: true
 ---
-# Component Organization Standards
+# Component Organization Rules
 
-@context {
-    "type": "guidelines",
-    "purpose": "component_organization",
-    "format_version": "1.0.0"
-}
+## Directory Structure
 
-# Your rule content
-
-Components must follow a strict feature-based directory structure to prevent duplication and maintain organization:
-
-1. Feature-Based Structure:
-   - UI components in `src/components/ui/`
-   - Layout components in `src/components/layout/`
-   - Feature components in `src/components/features/<feature>/components/`
-   - No components in root of `src/components/`
-
-2. Component Requirements:
-   - TypeScript types
-   - JSDoc documentation
-   - Consistent styling
-   - Dark mode support (if applicable)
-
-3. Prevention Checklist:
-   - Check for existing similar components
-   - Verify correct directory location
-   - Follow naming conventions
-   - Add required documentation
-   - Implement proper typing
-
-4. Import Conventions:
-   ```typescript
-   import Button from '@/components/ui/Button.astro';
-   import Container from '@/components/layout/Container.astro';
-   import Feature from '@/components/features/feature-name/components/Component.astro';
+1. **Base Components**
    ```
+   src/components/
+   ├── ui/           # Reusable UI components
+   ├── layout/       # Layout components
+   └── features/     # Feature-specific components
+       └── home/
+           ├── components/
+           └── types/
+   ```
+
+2. **Component Files**
+   - One component per file
+   - Named exports for types
+   - Default export for component
+   - Styles in separate CSS file
+
+## Component Requirements
+
+1. **TypeScript Types**
+   ```typescript
+   import type { BaseProps } from '@/types';
+
+   export interface ComponentProps extends BaseProps {
+     /** Description of prop */
+     prop: string;
+   }
+   ```
+
+2. **Documentation**
+   ```typescript
+   /**
+    * Component description in Australian English
+    * @component ComponentName
+    * @example
+    * ```tsx
+    * <ComponentName prop="value" />
+    * ```
+    */
+   ```
+
+3. **Style Implementation**
+   ```typescript
+   // Import component styles
+   import '@/styles/components/component.css';
+
+   // Use theme tokens
+   const classes = [
+     'component-base',
+     variant && variantStyles[variant]
+   ].filter(Boolean).join(' ');
+   ```
+
+## Best Practices
+
+1. **Component Design**
+   - Single responsibility
+   - Composable
+   - Accessible by default
+   - Dark mode support
+   - Mobile-first responsive
+
+2. **Props Interface**
+   - Clear prop names
+   - Required vs optional
+   - Default values
+   - Type safety
+
+3. **Performance**
+   - Lazy loading when needed
+   - Optimised assets
+   - Minimal re-renders
+   - Bundle size awareness
+
+## Checklist
+
+Before committing:
+- [ ] Component in correct directory
+- [ ] TypeScript types defined
+- [ ] Documentation complete
+- [ ] Styles in CSS file
+- [ ] Tests written
+- [ ] Accessibility checked
+- [ ] Dark mode supported
+- [ ] Mobile responsive
+
+## Examples
+
+### ✅ Correct Structure
+```
+src/components/ui/Button/
+├── Button.astro
+├── Button.test.ts
+└── types.ts
+
+src/styles/components/
+└── button.css
+```
+
+### ❌ Incorrect Structure
+```
+src/components/
+└── Button.astro  # Loose in components directory
+```
+
+## Migration Notes
+
+1. When moving components:
+   - Update import paths
+   - Move related files
+   - Update documentation
+   - Test all instances
+
+2. When creating components:
+   - Follow directory structure
+   - Include all required files
+   - Add to component index
+   - Update documentation

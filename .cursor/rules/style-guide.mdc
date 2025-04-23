@@ -1,0 +1,138 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Style Guide Standards
+
+@context {
+    "type": "guidelines",
+    "purpose": "style_standards",
+    "format_version": "1.0.0"
+}
+
+## Style Organization
+
+### 1. Global Styles Location
+- All global styles MUST be in `src/styles/global.css`
+- Component-specific styles should ONLY be used for truly unique, one-off styling needs
+- Reusable styles MUST be moved to global.css
+
+### 2. Style Categories in global.css
+```css
+@layer components {
+  /* Button Components */
+  /* Layout Components */
+  /* Card Components */
+  /* Typography Components */
+  /* Tag Components */
+  /* Footer Components */
+  /* Navigation Components */
+  /* Theme Toggle Components */
+}
+
+@layer utilities {
+  /* Animation Utilities */
+  /* Theme Utilities */
+  /* Layout Utilities */
+}
+```
+
+### 3. Component Style Rules
+- Components should NOT duplicate styles from global.css
+- Use composition over custom styles
+- Inline styles are prohibited unless dynamically generated
+- Component-specific styles must be justified with comments
+
+## Implementation Guidelines
+
+### 1. Class Naming
+- Use kebab-case for class names
+- Prefix component-specific classes with component name
+- Use BEM methodology for component variants
+
+### 2. Tailwind Usage
+- Prefer Tailwind utility classes for one-off styles
+- Extract common patterns into global components
+- Use @apply for complex, reusable styles
+- Follow mobile-first responsive design
+
+### 3. Dark Mode
+- Use dark: variant consistently
+- Test all components in both modes
+- Maintain consistent color schemes
+
+### 4. Performance
+- Minimize CSS-in-JS usage
+- Avoid nested selectors beyond 3 levels
+- Use CSS custom properties for theming
+- Implement critical CSS strategies
+
+## Examples
+
+### Good Practice
+```astro
+<!-- Using global styles -->
+<div class="card-base">
+  <h2 class="heading-2">Title</h2>
+  <p class="body-default">Content</p>
+</div>
+```
+
+### Bad Practice
+```astro
+<!-- Duplicating styles in component -->
+<div>
+  <style>
+    div {
+      @apply rounded-lg shadow-md p-6;
+    }
+  </style>
+</div>
+```
+
+## Style Hierarchy
+
+1. Global Styles (global.css)
+   - Base styles
+   - Component styles
+   - Utility classes
+
+2. Layout Patterns
+   - Section structures
+   - Grid systems
+   - Spacing utilities
+
+3. Component Styles (rare cases)
+   - Unique animations
+   - Complex interactions
+   - Dynamic styles
+
+## Maintenance
+
+1. Regular Audits
+   - Check for style duplication
+   - Verify dark mode consistency
+   - Test responsive behavior
+   - Review accessibility compliance
+
+2. Documentation
+   - Update this guide when patterns change
+   - Document complex style solutions
+   - Maintain a style inventory
+
+3. Performance Monitoring
+   - Track CSS bundle size
+   - Monitor style specificity
+   - Check render performance
+
+## Migration Guide
+
+When moving styles to global.css:
+
+1. Identify reusable patterns
+2. Extract to appropriate @layer
+3. Remove component-level styles
+4. Update component classes
+5. Test in all contexts
+6. Document changes
