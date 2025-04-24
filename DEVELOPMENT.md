@@ -204,9 +204,9 @@ We use themed component classes for consistent styling:
 - Themed typography scale
 - Consistent spacing system
 
-### LogoSalad
+### PartnerLogos
 
-The LogoSalad component (`src/components/LogoSalad.astro`) provides a responsive grid layout for displaying client logos. It features:
+The PartnerLogos component (`src/components/PartnerLogos.astro`) provides a responsive grid layout for displaying client logos. It features:
 
 - Responsive grid layout (2-4 columns based on viewport)
 - Hover effects with scale and shadow
@@ -219,10 +219,10 @@ Usage:
 
 ```astro
 ---
-import LogoSalad from '../components/LogoSalad.astro';
+import PartnerLogos from '../components/PartnerLogos.astro';
 ---
 
-<LogoSalad />
+<PartnerLogos />
 ```
 
 ## Best Practices

@@ -159,7 +159,7 @@
   - Documentation of test procedures in DEVELOPMENT.md
   - Open to adding automated tests for critical paths in future
 
-## LogoSalad Component
+## PartnerLogos Component
 
 ### Grid Layout
 

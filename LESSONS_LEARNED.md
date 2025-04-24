@@ -56,7 +56,7 @@
    - Container constraints can limit design
    - Consistent spacing systems are important
 
-## LogoSalad Component Implementation
+## PartnerLogos Component Implementation
 
 1. **Grid Layout**
 

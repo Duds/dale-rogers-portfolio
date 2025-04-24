@@ -1,6 +1,6 @@
 ---
 description: Standards for implementing accessibility across the site
-globs: 
+globs:
 alwaysApply: false
 ---
 # Accessibility Standards
@@ -20,39 +20,295 @@ alwaysApply: false
     ]
 }
 
+## Core Requirements
+
+1. **WCAG 2.1 Level AA Compliance**
+   - Perceivable
+   - Operable
+   - Understandable
+   - Robust
+
+2. **Keyboard Navigation**
+   ```typescript
+   // ✅ Ensure interactive elements are focusable
+   <button
+     tabIndex={0}
+     onKeyDown={(e) => {
+       if (e.key === 'Enter' || e.key === ' ') {
+         handleClick();
+       }
+     }}
+   >
+     Click me
+   </button>
+   ```
+
 ## Semantic HTML
 
-@rules [
-    {
-        "id": "semantic_structure",
-        "rule": "Use appropriate HTML5 elements",
-        "severity": "error"
-    },
-    {
-        "id": "heading_hierarchy",
-        "rule": "Maintain proper heading hierarchy",
-        "severity": "error"
-    },
-    {
-        "id": "aria_labels",
-        "rule": "Implement ARIA labels when needed",
-        "severity": "warning"
-    }
-]
+1. **Document Structure**
+   ```html
+   <header role="banner">
+     <nav role="navigation">
+       <!-- Navigation content -->
+     </nav>
+   </header>
 
-### 1. Structure
-- Use appropriate HTML5 elements
-- Maintain proper heading hierarchy
-- Implement ARIA labels when needed
-- Ensure proper document outline
+   <main role="main">
+     <article>
+       <h1>Main Content</h1>
+       <!-- Article content -->
+     </article>
+   </main>
 
-### 2. Examples
-```astro
-<section aria-labelledby="section-title">
-  <h2 id="section-title">Section Title</h2>
-  <!-- Content -->
-</section>
-```
+   <footer role="contentinfo">
+     <!-- Footer content -->
+   </footer>
+   ```
+
+2. **Headings Hierarchy**
+   ```html
+   <h1>Page Title</h1>
+   <section>
+     <h2>Section Title</h2>
+     <article>
+       <h3>Article Title</h3>
+     </article>
+   </section>
+   ```
+
+## ARIA Implementation
+
+1. **Landmarks**
+   ```html
+   <div role="search">
+     <label for="search">Search</label>
+     <input
+       id="search"
+       type="search"
+       aria-label="Search site content"
+     />
+   </div>
+   ```
+
+2. **Live Regions**
+   ```html
+   <div
+     role="alert"
+     aria-live="assertive"
+     aria-atomic="true"
+   >
+     <!-- Dynamic content -->
+   </div>
+   ```
+
+## Forms
+
+1. **Labels and Instructions**
+   ```html
+   <div role="form">
+     <label for="name">Full Name</label>
+     <input
+       id="name"
+       type="text"
+       aria-required="true"
+       aria-describedby="name-help"
+     />
+     <span id="name-help">
+       Enter your first and last name
+     </span>
+   </div>
+   ```
+
+2. **Error Handling**
+   ```html
+   <div role="form">
+     <label for="email">Email</label>
+     <input
+       id="email"
+       type="email"
+       aria-invalid={hasError}
+       aria-describedby="email-error"
+     />
+     {hasError && (
+       <span
+         id="email-error"
+         role="alert"
+       >
+         Please enter a valid email address
+       </span>
+     )}
+   </div>
+   ```
+
+## Images and Media
+
+1. **Alternative Text**
+   ```html
+   <img
+     src="logo.png"
+     alt="Company Logo"
+     role="img"
+   />
+   ```
+
+2. **Decorative Images**
+   ```html
+   <img
+     src="decoration.png"
+     alt=""
+     role="presentation"
+   />
+   ```
+
+## Focus Management
+
+1. **Focus Trapping**
+   ```typescript
+   function Modal({ isOpen, onClose }) {
+     useEffect(() => {
+       if (isOpen) {
+         // Trap focus within modal
+         const focusable = modalRef.current.querySelectorAll(
+           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+         );
+
+         const firstFocusable = focusable[0];
+         const lastFocusable = focusable[focusable.length - 1];
+
+         // Handle tab key
+         const handleTab = (e: KeyboardEvent) => {
+           if (e.key === 'Tab') {
+             if (e.shiftKey) {
+               if (document.activeElement === firstFocusable) {
+                 lastFocusable.focus();
+                 e.preventDefault();
+               }
+             } else {
+               if (document.activeElement === lastFocusable) {
+                 firstFocusable.focus();
+                 e.preventDefault();
+               }
+             }
+           }
+         };
+
+         document.addEventListener('keydown', handleTab);
+         return () => document.removeEventListener('keydown', handleTab);
+       }
+     }, [isOpen]);
+
+     return (
+       <div
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="modal-title"
+       >
+         {/* Modal content */}
+       </div>
+     );
+   }
+   ```
+
+## Colour and Contrast
+
+1. **Contrast Ratios**
+   ```css
+   /* Ensure text meets WCAG AA standards */
+   .text-normal {
+     /* Normal text (4.5:1) */
+     color: #595959;
+     background-color: #ffffff;
+   }
+
+   .text-large {
+     /* Large text (3:1) */
+     color: #767676;
+     background-color: #ffffff;
+   }
+   ```
+
+2. **Colour Independence**
+   ```html
+   <button class="error-button">
+     <span class="error-icon" aria-hidden="true">⚠️</span>
+     <span class="error-text">Error: Invalid input</span>
+   </button>
+   ```
+
+## Testing
+
+1. **Automated Testing**
+   ```typescript
+   describe('Accessibility', () => {
+     it('meets WCAG 2.1 AA standards', async () => {
+       const { container } = render(<Component />);
+       const results = await axe(container);
+       expect(results).toHaveNoViolations();
+     });
+   });
+   ```
+
+2. **Manual Testing**
+   - Screen reader testing
+   - Keyboard navigation testing
+   - High contrast mode testing
+   - Zoom testing (up to 200%)
+
+## Checklist
+
+Before deployment:
+- [ ] Semantic HTML used appropriately
+- [ ] ARIA attributes implemented correctly
+- [ ] Keyboard navigation working
+- [ ] Focus management implemented
+- [ ] Colour contrast meeting standards
+- [ ] Error states accessible
+- [ ] Images have appropriate alt text
+- [ ] Forms properly labeled
+- [ ] Automated tests passing
+- [ ] Manual testing completed
+
+## Common Issues
+
+1. **Missing Labels**
+   ```html
+   <!-- ❌ Avoid -->
+   <input type="text" placeholder="Enter name" />
+
+   <!-- ✅ Use -->
+   <label for="name">Name</label>
+   <input
+     id="name"
+     type="text"
+     aria-label="Enter your name"
+   />
+   ```
+
+2. **Improper Heading Structure**
+   ```html
+   <!-- ❌ Avoid -->
+   <h3>First Heading</h3>
+   <h1>Main Heading</h1>
+
+   <!-- ✅ Use -->
+   <h1>Main Heading</h1>
+   <h2>Subheading</h2>
+   <h3>Section Heading</h3>
+   ```
+
+## Resources
+
+1. **Testing Tools**
+   - WAVE
+   - axe-core
+   - Lighthouse
+   - NVDA
+   - VoiceOver
+
+2. **Guidelines**
+   - WCAG 2.1
+   - WAI-ARIA
+   - Section 508
 
 ## Interactive Elements
 
@@ -82,7 +338,7 @@ alwaysApply: false
 
 ### 2. Implementation
 ```astro
-<button 
+<button
   class="btn-primary"
   aria-label="Submit form"
 >
@@ -118,8 +374,8 @@ alwaysApply: false
 
 ### 2. Examples
 ```astro
-<img 
-  src="logo.jpg" 
+<img
+  src="logo.jpg"
   alt="Dale Rogers Portfolio Logo"
   width="200"
   height="100"
@@ -156,11 +412,11 @@ alwaysApply: false
 ```astro
 <form>
   <label for="email">Email Address</label>
-  <input 
-    type="email" 
-    id="email" 
+  <input
+    type="email"
+    id="email"
     name="email"
     aria-required="true"
   />
   <div class="error-message" role="alert">
-    Please enter a valid 
+    Please enter a valid
