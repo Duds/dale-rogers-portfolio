@@ -8,7 +8,7 @@ import FeaturedServicesSlider from "@/components/features/services/components/Fe
 import Services from "@/components/features/home/components/Services.astro";
 import ServicesText from "@/components/features/home/components/ServicesText.astro";
 import MyValues from "@/components/features/values/components/MyValues.astro";
-import LogoSalad from "@/components/features/home/components/LogoSalad.astro";
+import PartnerLogos from "@/components/features/home/components/PartnerLogos.astro";
 
 // Define interfaces based on your config.ts schemas
 interface Logo {
@@ -89,6 +89,6 @@ if (!heroContent || !aboutContent || !servicesTextContent || !valuesContent) {
   <CaseStudiesBento />
   <Services />
   <ServicesText content={servicesTextContent["paragraphs"] || []} />
-  <MyValues values={valuesContent["values"] || []} />
-  <LogoSalad logos={valuesContent["logos"] || []} />
+  <MyValues />
+  <PartnerLogos logos={valuesContent["logos"] || []} />
 </Layout>

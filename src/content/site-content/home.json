@@ -42,14 +42,29 @@
     "content": {
       "logos": [
         {
+          "name": "Tasmanian Department of Education Children and Young People",
+          "url": "/images/logos/tas-education-children-young-people.svg",
+          "alt": "Tasmanian Department of Education Children and Young People logo"
+        },
+        {
+          "name": "BHP",
+          "url": "/images/logos/bhp.svg",
+          "alt": "BHP logo"
+        },
+        {
+          "name": "Holden",
+          "url": "/images/logos/holden.svg",
+          "alt": "Holden logo"
+        },
+        {
           "name": "Rio Tinto",
-          "url": "/logos/rio-tinto.svg",
+          "url": "/images/logos/rio-tinto.svg",
           "alt": "Rio Tinto logo"
         },
         {
-          "name": "University of Canberra",
-          "url": "/logos/uc.svg",
-          "alt": "University of Canberra logo"
+          "name": "Transport for NSW",
+          "url": "/images/logos/transport-nsw.svg",
+          "alt": "Transport for NSW logo"
         }
       ]
     }
