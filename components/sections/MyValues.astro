@@ -1,7 +1,51 @@
 ---
-// Animated values section component
+import Container from "../../src/components/layout/Container.astro";
+import Button from "../../src/components/ui/Button.astro";
+
+// Component props
+interface Props {
+  title?: string;
+  description?: string;
+  imageUrl?: string;
+  buttonText?: string;
+  buttonLink?: string;
+}
+
+// Default values
+const {
+  title = "My Values",
+  description = "Designing with empathy, accessibility and inclusivity at the forefront of everything I do.",
+  imageUrl = "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2940&auto=format&fit=crop",
+  buttonText = "Learn about my values",
+  buttonLink = "/values",
+} = Astro.props;
 ---
 
-<div class="my-values">
-  <!-- Animated values content will go here -->
-</div>
+<section class="w-full relative my-24">
+  <!-- Full-width background image with overlay -->
+  <div class="absolute inset-0 w-full h-full">
+    <img
+      src={imageUrl}
+      alt=""
+      class="w-full h-full object-cover"
+      aria-hidden="true"
+      width="1920"
+      height="600"
+    />
+    <div class="absolute inset-0 bg-black/60"></div>
+  </div>
+
+  <Container>
+    <div class="relative z-10 py-32 max-w-2xl">
+      <h2 class="font-heading text-4xl md:text-5xl text-white mb-6">
+        {title}
+      </h2>
+      <p class="text-xl text-white/90 mb-8">
+        {description}
+      </p>
+      <Button variant="primary" href={buttonLink}>
+        {buttonText}
+      </Button>
+    </div>
+  </Container>
+</section>

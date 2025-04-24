@@ -2,105 +2,70 @@
 import Container from "@/components/layout/Container.astro";
 import Button from "@/components/ui/Button.astro";
 
-interface Value {
-  /** Name of the value */
-  name: string;
-  /** Description of the value */
-  description: string;
-  /** Optional icon identifier */
-  icon?: string;
-}
-
 interface Props {
-  /** Array of values to display */
-  values: Value[];
+  /** Title for the values card (h2) */
+  title?: string;
+  /** Subtitle for the values card (h3) */
+  subtitle?: string;
+  /** Image URL for the photocard */
+  imageUrl?: string;
+  /** Button text */
+  buttonText?: string;
+  /** Button link destination */
+  buttonLink?: string;
 }
 
-// Content for the values section
-const content = {
-  title: "Core Principles That Guide My Work",
-  image:
-    "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop",
-  values: [
-    {
-      name: "Human-Centred",
-      description:
-        "Services should solve real problems for real people. I prioritise user needs over organisational convenience.",
-      icon: "user-focus",
-    },
-    {
-      name: "Evidence-Based",
-      description:
-        "Decisions grounded in research and data, not assumptions. I validate every design choice with user testing.",
-      icon: "data",
-    },
-    {
-      name: "Practical Innovation",
-      description:
-        "Solutions must be both visionary and implementable. I balance creativity with technical feasibility.",
-      icon: "lightbulb",
-    },
-    {
-      name: "Collaborative Approach",
-      description:
-        "Great design happens together. I work transparently with stakeholders at every level.",
-      icon: "team",
-    },
-  ] satisfies Value[],
-};
+// Default values
+const {
+  title = "My Values",
+  subtitle = "Designing with empathy, accessibility and inclusivity at the forefront of everything I do.",
+  imageUrl = "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2940&auto=format&fit=crop",
+  buttonText = "Explore My Values",
+  buttonLink = "/values",
+} = Astro.props;
 ---
 
-<section class="w-full py-20 bg-neutral-100 dark:bg-neutral-900">
-  <Container>
-    <div class="max-w-7xl mx-auto text-center mb-16">
-      <p
-        class="text-sm font-medium text-neutral-600 dark:text-neutral-400 mb-3"
-      >
-        My Values
-      </p>
+<section class="w-full py-24">
+  <Container fullWidth={true}>
+    <!-- Headings above the card -->
+    <div class="mb-8 text-left">
       <h2
-        class="text-4xl md:text-5xl font-display text-neutral-900 dark:text-neutral-50 mb-8"
+        class="font-body text-2xl font-semibold text-neutral-600 dark:text-neutral-400 mb-4"
       >
-        {content.title}
+        {title}
       </h2>
+      <h3 class="text-4xl text-neutral-900 dark:text-white leading-tight">
+        {subtitle}
+      </h3>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-      {
-        content.values.map((value) => (
-          <div class="p-8 bg-white dark:bg-neutral-800 rounded-2xl">
-            {value.icon && (
-              <div class="w-12 h-12 mb-6">
-                <img
-                  src={`/icons/${value.icon}.svg`}
-                  alt=""
-                  aria-hidden="true"
-                  class="w-full h-full text-primary-600 dark:text-primary-400"
-                  width="48"
-                  height="48"
-                />
-              </div>
-            )}
-            <h3 class="text-xl font-display text-neutral-900 dark:text-neutral-50 mb-4">
-              {value.name}
-            </h3>
-            <p class="text-neutral-600 dark:text-neutral-400">
-              {value.description}
-            </p>
-          </div>
-        ))
-      }
+    <!-- Photo card - full width, no text -->
+    <div class="w-full overflow-hidden rounded-2xl shadow-lg mb-8">
+      <img
+        src={imageUrl}
+        alt=""
+        class="w-full h-auto object-cover"
+        aria-hidden="true"
+        width="1920"
+        height="1080"
+      />
     </div>
 
-    <div class="flex justify-center">
-      <Button variant="secondary" href="/values" class="group">
-        Explore My Values
-        <span
-          class="ml-2 transition-transform duration-200 group-hover:translate-x-1"
-          aria-hidden="true"
+    <!-- Button beneath the card -->
+    <div class="text-left mt-6">
+      <Button variant="primary" href={buttonLink}>
+        {buttonText}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          viewBox="0 0 20 20"
+          fill="currentColor"
         >
-          →
-        </span>
+          <path
+            fill-rule="evenodd"
+            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
       </Button>
     </div>
   </Container>
