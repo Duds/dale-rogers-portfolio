@@ -3,9 +3,9 @@ import Container from "@/components/layout/Container.astro";
 
 /**
  * Represents a client logo with associated metadata
- * @interface Logo
+ * @interface PartnerLogo
  */
-interface Logo {
+interface PartnerLogo {
   /** The name of the client company */
   name: string;
   /** URL to the logo image */
@@ -16,7 +16,7 @@ interface Logo {
 
 interface Props {
   /** Array of client logos to display */
-  logos: Logo[];
+  logos: PartnerLogo[];
 }
 
 const { logos } = Astro.props;
@@ -24,7 +24,7 @@ const { logos } = Astro.props;
 // Removed hardcoded clients array
 ---
 
-<section class="py-20 bg-neutral-100 dark:bg-neutral-900">
+<section class="py-20 bg-white">
   <Container>
     <h2
       class="text-2xl font-display text-neutral-600 dark:text-neutral-400 mb-8 text-center"
