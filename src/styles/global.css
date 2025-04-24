@@ -4,6 +4,34 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .shadow-hover {
+    @apply transition-shadow duration-300 hover:shadow-lg;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Animation Utilities */
+  .spinning-logo {
+    @apply relative inline-flex items-center justify-center scale-100 md:scale-110;
+  }
+
+  .animate-spin-slow {
+    animation: spin 12s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
 @layer components {
   /* Button Components */
   .btn-base {
@@ -19,6 +47,10 @@
 
   .btn-secondary {
     @apply btn-base border-2 border-black text-black hover:bg-black hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black;
+  }
+
+  .btn-footer {
+    @apply inline-flex items-center gap-2 px-8 py-4 text-xl font-medium rounded-pill transition-all duration-[var(--transition-normal)] ease-[var(--transition-timing)] bg-white text-black hover:bg-purple-500 hover:text-orange-500 hover:-translate-y-0.5 shadow-md hover:shadow-lg;
   }
 
   /* Layout Components */
@@ -419,34 +451,6 @@
   /* HR styles */
   hr {
     @apply border-gray-200 dark:border-gray-700;
-  }
-}
-
-@layer utilities {
-  .shadow-hover {
-    @apply transition-shadow duration-300 hover:shadow-lg;
-  }
-
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* Animation Utilities */
-  .spinning-logo {
-    @apply relative inline-flex items-center justify-center scale-100 md:scale-110;
-  }
-
-  .animate-spin-slow {
-    animation: spin 12s linear infinite;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
   }
 }
 

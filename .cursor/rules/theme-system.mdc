@@ -3,3 +3,99 @@ description:
 globs:
 alwaysApply: false
 ---
+# Theme System Rules
+
+## Token Usage
+
+1. **Design Tokens**
+   - All design values must come from theme tokens
+   - No hardcoded colors, spacing, or shadows
+   - Use `src/styles/theme` as single source of truth
+
+2. **Component Styles**
+   - Component-specific styles in `src/styles/components`
+   - Use Tailwind classes with theme tokens
+   - Follow component style naming convention
+
+3. **Global Styles**
+   - Only global styles in `global.css`
+   - No component-specific styles in global files
+   - Use `@layer` directives appropriately
+
+## Implementation
+
+### Theme Token Structure
+```typescript
+// src/styles/theme/colors.ts
+export const colors = {
+  primary: {
+    black: '#10100F',
+    purple: '#AF8ABF',
+    // ...
+  }
+} as const;
+```
+
+### Component Style Structure
+```css
+/* src/styles/components/button.css */
+@layer components {
+  .btn-base {
+    @apply inline-flex items-center gap-2 px-8 py-4;
+  }
+}
+```
+
+### Component Implementation
+```typescript
+// src/components/ui/Button.astro
+const variantStyles = {
+  primary: [
+    "bg-primary-black",
+    "text-white",
+    "hover:bg-primary-purple"
+  ].join(" ")
+};
+```
+
+## Checklist
+
+Before committing changes:
+- [ ] Using theme tokens for all design values
+- [ ] Component styles in correct location
+- [ ] No hardcoded values
+- [ ] Dark mode support
+- [ ] TypeScript types updated
+- [ ] Documentation updated
+
+## Examples
+
+### ✅ Correct Usage
+```typescript
+// Using theme tokens
+"bg-primary-black text-white"
+"shadow-soft hover:shadow-elevated"
+"p-4 md:p-6"
+```
+
+### ❌ Incorrect Usage
+```typescript
+// Hardcoded values
+"bg-[#000000]"
+"shadow-[0_4px_6px_rgba(0,0,0,0.1)]"
+"padding: 16px"
+```
+
+## Migration Notes
+
+1. When updating existing components:
+   - Move styles to component CSS file
+   - Replace hardcoded values with tokens
+   - Add dark mode support
+   - Update documentation
+
+2. When creating new components:
+   - Use theme tokens from start
+   - Create component CSS file
+   - Add to component index
+   - Include documentation

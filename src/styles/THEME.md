@@ -282,7 +282,7 @@ The site uses a consistent shadow system with support for both light and dark mo
 
 ## Components
 
-### LogoSalad
+### PartnerLogos
 
 A responsive component that displays client logos in a grid layout with hover effects.
 
@@ -290,10 +290,10 @@ A responsive component that displays client logos in a grid layout with hover ef
 
 ```astro
 ---
-import LogoSalad from "./components/sections/LogoSalad.astro";
+import PartnerLogos from "./components/sections/PartnerLogos.astro";
 ---
 
-<LogoSalad />
+<PartnerLogos />
 ```
 
 **Features:**
