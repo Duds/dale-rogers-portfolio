@@ -1,162 +1,96 @@
 # Dale Rogers Portfolio
 
-A modern, performant portfolio website built with Astro, TypeScript, and TailwindCSS.
+A modern, performant portfolio website built with Astro, showcasing case studies, articles, and technical experiments.
 
-## Recent Updates
-
-### 23/03/2024
-
-- Added Privacy Policy page with comprehensive data handling information
-- Enhanced case studies content structure with MDX support
-- Improved scratch posts layout with status indicators
-- Updated documentation for FeaturedCaseStudiesSlider component
-- Added Australian English language support across the site
-- Implemented proper date formatting (DD/MM/YYYY)
-
-## Core Documentation
-
-- [Architecture](./docs/ARCHITECTURE.md) - System design and architecture decisions
-- [Development](./docs/DEVELOPMENT.md) - Development setup and workflows
-- [Components](./docs/COMPONENTS.md) - Component standards and guidelines
-- [Content](./docs/CONTENT.md) - Content management and guidelines
-- [Testing](./docs/TESTING.md) - Testing strategy and procedures
-- [Security](./docs/SECURITY.md) - Security policies and procedures
-- [Decisions](./docs/DECISIONS.md) - Architecture and technical decisions
-- [Changelog](./docs/CHANGELOG.md) - Version history and changes
-
-## Features
-
-- 🚀 Built with Astro for optimal performance
-- 💪 TypeScript for type safety
-- 🎨 TailwindCSS for styling
-- 📱 Fully responsive design
-- ♿ WCAG 2.1 AA compliant
-- 🇦🇺 Australian English and regional settings
-- 📝 MDX support for rich content
-- 🎯 Case studies and articles
-- ⚡ Optimised images and assets
-- 🔍 SEO optimised
-- 🌙 Dark mode support
-
-## Getting Started
+## Quick Start
 
 ```bash
 # Install dependencies
-pnpm install
+npm install
 
 # Start development server
-pnpm dev
+npm run dev
 
 # Build for production
-pnpm build
+npm run build
 
 # Preview production build
-pnpm preview
+npm run preview
 ```
+
+## Features
+
+- 🚀 Built with Astro v5.7.4
+- 💅 Styled with TailwindCSS
+- 🌙 Dark mode support
+- 📱 Fully responsive design
+- 🎨 Custom design system
+- 📝 MDX support for rich content
+- 🔍 SEO optimised
+- ♿ WCAG 2.1 AA compliant
+- 🇦🇺 Australian English localisation
 
 ## Project Structure
 
 ```
-src/
-├── components/
-│   ├── features/      # Feature-specific components
-│   ├── layout/        # Layout components
-│   └── ui/           # Reusable UI components
-├── content/
-│   ├── case-studies/  # Case study MDX files
-│   ├── articles/      # Article MDX files
-│   └── scratch/       # Scratch post MDX files
-├── layouts/          # Page layouts
-├── pages/           # Route pages
-└── styles/          # Global styles
+dale-rogers-portfolio/
+├── src/
+│   ├── components/    # Reusable UI components
+│   ├── content/       # Content collections
+│   ├── layouts/       # Page layouts
+│   ├── pages/         # Route components
+│   └── styles/        # Global styles
+├── public/           # Static assets
+└── docs/            # Project documentation
 ```
 
-## Development Standards
+## Documentation
 
-### Australian English Standards
+Comprehensive documentation is available in the [docs](./docs) directory:
 
-This project follows Australian English standards:
+- [Getting Started](./docs/DEVELOPMENT.md)
+- [Architecture](./docs/ARCHITECTURE.md)
+- [Components](./docs/COMPONENTS.md)
+- [Deployment](./docs/DEPLOYMENT.md)
+- [Contributing](./docs/CONTRIBUTING.md)
 
-- Australian spelling (e.g., colour, organisation)
-- Date format: DD/MM/YYYY
-- 24-hour time format
-- Australian time zones (AEST/AEDT)
-- Metric measurements
+See the [documentation index](./docs/README.md) for a complete list of available documentation.
 
-### Component Organisation
+## Development
 
-We follow a feature-based component architecture:
+### Prerequisites
 
-- UI components: `src/components/ui/`
-- Layout components: `src/components/layout/`
-- Feature components: `src/components/features/<feature>/components/`
+- Node.js 18+
+- npm 9+
+- VS Code with recommended extensions
 
-For more details, see [DEVELOPMENT.md](docs/DEVELOPMENT.md).
+### Environment Setup
+
+1. Clone the repository
+2. Copy `.env.example` to `.env`
+3. Install dependencies
+4. Start the development server
+
+For detailed setup instructions, see [DEVELOPMENT.md](./docs/DEVELOPMENT.md).
 
 ## Contributing
 
-1. Create a feature branch
-2. Make your changes
-3. Submit a pull request
-4. Request code review
+We welcome contributions! Please see our [Contributing Guide](./docs/CONTRIBUTING.md) for details.
 
-See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for detailed guidelines.
+### Development Standards
 
-## Testing
-
-```bash
-# Run all tests
-pnpm test
-
-# Run specific test suites
-pnpm test:unit
-pnpm test:integration
-pnpm test:e2e
-```
-
-See [TESTING.md](docs/TESTING.md) for detailed testing guidelines.
-
-## Deployment
-
-The site is deployed on Vercel. Push to the `main` branch to trigger a deployment.
-
-See [DEPLOYMENT.md](docs/DEPLOYMENT.md) for detailed deployment procedures.
-
-## Security
-
-For security concerns or vulnerability reports, please see our [Security Policy](docs/SECURITY.md).
+- TypeScript for type safety
+- Australian English for content and documentation
+- Component-driven architecture
+- Accessibility-first development
+- Comprehensive documentation
 
 ## License
 
-MIT License - See [LICENSE](./LICENSE) for details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
 ## Contact
 
-For any questions or suggestions:
+Dale Rogers - [contact@dalerogers.com.au](mailto:contact@dalerogers.com.au)
 
-- Email: contact@dalerogers.dev
-- GitHub Issues: [Create an issue](https://github.com/Duds/dale-rogers-portfolio/issues)
-
-## Project Status
-
-### Current Features
-
-- [x] Basic portfolio structure
-- [x] Responsive design
-- [x] Content management system
-- [x] Case studies section
-- [x] Blog/articles section
-- [x] Contact form
-- [x] SEO optimisation
-- [x] Dark mode support
-- [x] Performance optimisation
-
-### Upcoming Features
-
-- [ ] Newsletter subscription
-- [ ] Analytics dashboard
-- [ ] Advanced search functionality
-- [ ] Project showcase timeline
-- [ ] Integrated blog comments
-
-For detailed progress and plans, see our [Project Board](https://github.com/Duds/dale-rogers-portfolio/projects/1).
+Project Link: [https://github.com/Duds/dale-rogers-portfolio](https://github.com/Duds/dale-rogers-portfolio)

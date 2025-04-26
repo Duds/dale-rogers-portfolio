@@ -2,58 +2,194 @@
 import Layout from "@/layouts/Layout.astro";
 import Button from "@/components/ui/Button.astro";
 import Card from "@/components/ui/Card.astro";
+import Container from "@/components/layout/Container.astro";
+
+// Image imports can be added here once we have them
+const profileImage =
+  "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2940&auto=format&fit=crop"; // TODO: Replace with actual profile image
 ---
 
-<Layout title="About">
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="font-display text-4xl text-text mb-6">About Me</h1>
+<Layout title="About Me | Dale Rogers">
+  <main class="pt-32 md:pt-40">
+    <!-- Hero Section -->
+    <Container class="mb-24">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1
+            class="font-display text-5xl md:text-6xl lg:text-7xl text-primary-950 dark:text-primary-50 mb-6"
+          >
+            About me
+          </h1>
+          <p
+            class="text-2xl md:text-3xl text-neutral-600 dark:text-neutral-300 mb-8"
+          >
+            I'm a dreamer, designer, tinkerer and doer. I fell in love with
+            service and strategic design because it is the place, I can create
+            impact.
+          </p>
+          <p class="text-xl text-neutral-600 dark:text-neutral-300">
+            I dig into an idea to determine what is authentic, human, and
+            relevant. Then I use all the tools of tech and design to bring it to
+            life. To create a solution and design that is tangible,
+            experiential, supportive and sustainable.
+          </p>
+        </div>
+        <div
+          class="relative aspect-square rounded-2xl overflow-hidden shadow-2xl"
+        >
+          <img
+            src={profileImage}
+            alt="Dale Rogers"
+            class="object-cover w-full h-full"
+            width="800"
+            height="800"
+          />
+        </div>
+      </div>
+    </Container>
 
-    <div class="grid md:grid-cols-2 gap-8 mb-12">
-      <div>
-        <p class="text-text-secondary mb-4">
-          I'm a Service Designer based in Canberra, Australia, with a passion
-          for creating user-centreed solutions that drive meaningful change.
-        </p>
-        <p class="text-text-secondary mb-4">
-          With expertise in user research, service blueprinting, and co-design,
-          I help organizations transform their services to better meet user
-          needs.
-        </p>
-        <Button href="/contact" variant="primary">Get in Touch</Button>
+    <!-- Location Section -->
+    <Container class="mb-24">
+      <div
+        class="bg-neutral-100 dark:bg-neutral-800/50 rounded-3xl p-8 md:p-12"
+      >
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2
+              class="font-display text-3xl md:text-4xl text-primary-950 dark:text-primary-50 mb-6"
+            >
+              I'm in Canberra, Australia
+            </h2>
+            <p class="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
+              But I'm not constrained by geography or time zones. Collaboration
+              is key! I've helped organisations in Australia, and the US use the
+              power of design to create a positive social impact with
+              technology.
+            </p>
+            <Button variant="primary" href="/contact">Get in touch</Button>
+          </div>
+          <div class="relative aspect-video rounded-2xl overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1591944900066-2b52169560c2?q=80&w=2940&auto=format&fit=crop"
+              alt="Canberra cityscape with Parliament House and Lake Burley Griffin"
+              class="object-cover w-full h-full"
+              width="800"
+              height="450"
+            />
+          </div>
+        </div>
       </div>
-      <div>
-        <Card title="My Approach">
-          <p class="text-text-secondary mb-4">
-            I believe in a collaborative, evidence-based approach to service
-            design. My process typically involves:
-          </p>
-          <ul class="list-disc pl-5 text-text-secondary space-y-2">
-            <li>Understanding user needs through research</li>
-            <li>Mapping current service experiences</li>
-            <li>Co-designing solutions with stakeholders</li>
-            <li>Prototyping and testing improvements</li>
-            <li>Implementing and evaluating changes</li>
-          </ul>
-        </Card>
-      </div>
-    </div>
+    </Container>
 
-    <div class="mb-12">
-      <h2 class="font-display text-3xl text-text mb-6">Experience</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        <Card title="Service Design Consultant">
-          <p class="text-text-secondary mb-4">
-            Working with clients across government, education, and private
-            sectors to improve service delivery and user experience.
+    <!-- Values Section -->
+    <Container class="mb-24">
+      <h2
+        class="font-display text-4xl md:text-5xl text-primary-950 dark:text-primary-50 mb-12 text-center"
+      >
+        What I care about
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Card>
+          <h3
+            class="font-display text-2xl text-primary-950 dark:text-primary-50 mb-4"
+          >
+            Collaboration builds quality
+          </h3>
+          <p class="text-neutral-600 dark:text-neutral-300">
+            Every day, I practice genuine collaboration—building on one
+            another's concepts and sketches until it's impossible to say where
+            the idea came from in the first place.
           </p>
         </Card>
-        <Card title="UX Researcher">
-          <p class="text-text-secondary mb-4">
-            Conducting user research and usability testing to inform design
-            decisions and validate solutions.
+        <Card>
+          <h3
+            class="font-display text-2xl text-primary-950 dark:text-primary-50 mb-4"
+          >
+            Push a little further
+          </h3>
+          <p class="text-neutral-600 dark:text-neutral-300">
+            I constantly push boundaries, challenge standards, and redefine
+            what's possible. Yes, that makes my job a lot of work—but it's also
+            what makes it so worthwhile.
+          </p>
+        </Card>
+        <Card>
+          <h3
+            class="font-display text-2xl text-primary-950 dark:text-primary-50 mb-4"
+          >
+            Be good to work with
+          </h3>
+          <p class="text-neutral-600 dark:text-neutral-300">
+            Be nice. Be optimistic. Be supportive. Treat tough problems as
+            interesting challenges. Be critical, not cynical. That's the
+            attitude I bring to my work every day.
+          </p>
+        </Card>
+        <Card>
+          <h3
+            class="font-display text-2xl text-primary-950 dark:text-primary-50 mb-4"
+          >
+            Details make the difference
+          </h3>
+          <p class="text-neutral-600 dark:text-neutral-300">
+            I care about all the little things—the stuff no one else will
+            notice—because that meticulous commitment to excellence is exactly
+            what sets me apart.
+          </p>
+        </Card>
+        <Card>
+          <h3
+            class="font-display text-2xl text-primary-950 dark:text-primary-50 mb-4"
+          >
+            Work with only the brightest
+          </h3>
+          <p class="text-neutral-600 dark:text-neutral-300">
+            In my collaborators, partners, and clients, I seek out people who
+            take pride in their work and genuinely excel at it.
+          </p>
+        </Card>
+        <Card>
+          <h3
+            class="font-display text-2xl text-primary-950 dark:text-primary-50 mb-4"
+          >
+            Always get it done
+          </h3>
+          <p class="text-neutral-600 dark:text-neutral-300">
+            When I say I'll deliver, I do. When Plan A doesn't work, I don't
+            make excuses I start executing Plan B. You won't see me in a suit
+            very often, but my work ethic is 100% professional.
           </p>
         </Card>
       </div>
-    </div>
-  </div>
+    </Container>
+
+    <!-- CTA Section -->
+    <Container class="mb-24">
+      <div
+        class="bg-primary-950 dark:bg-primary-900 text-primary-50 rounded-3xl p-8 md:p-12 text-center"
+      >
+        <h2 class="font-display text-3xl md:text-4xl mb-6">
+          Ready to collaborate?
+        </h2>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">
+          Let's work together to create impactful solutions that transform how
+          your organisation delivers value.
+        </p>
+        <Button variant="secondary" href="/contact">
+          Start a conversation
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </Button>
+      </div>
+    </Container>
+  </main>
 </Layout>

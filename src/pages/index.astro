@@ -29,6 +29,9 @@ interface HomeSectionContent {
   ctaText?: string;
   paragraphs?: string[];
   image?: string;
+  imageUrl?: string;
+  buttonText?: string;
+  buttonLink?: string;
   skills?: string[];
   values?: Value[];
   logos?: Logo[];
@@ -72,8 +75,17 @@ const servicesTextContent = homeSections.find(
 const valuesContent = homeSections.find(
   (section) => section.section === "values"
 )?.content;
+const partnersContent = homeSections.find(
+  (section) => section.section === "partners"
+)?.content;
 
-if (!heroContent || !aboutContent || !servicesTextContent || !valuesContent) {
+if (
+  !heroContent ||
+  !aboutContent ||
+  !servicesTextContent ||
+  !valuesContent ||
+  !partnersContent
+) {
   throw new Error("Required content sections not found");
 }
 ---
@@ -89,6 +101,15 @@ if (!heroContent || !aboutContent || !servicesTextContent || !valuesContent) {
   <CaseStudiesBento />
   <Services />
   <ServicesText content={servicesTextContent["paragraphs"] || []} />
-  <MyValues />
-  <PartnerLogos logos={valuesContent["logos"] || []} />
+  <MyValues
+    title={valuesContent.title}
+    subtitle={valuesContent.subtitle}
+    imageUrl={valuesContent.imageUrl}
+    buttonText={valuesContent.buttonText}
+    buttonLink={valuesContent.buttonLink}
+  />
+  <PartnerLogos
+    title={partnersContent.title}
+    logos={partnersContent.logos || []}
+  />
 </Layout>

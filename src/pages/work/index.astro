@@ -1,60 +1,12 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import Container from "@/components/layout/Container.astro";
-import { getCollection } from "astro:content";
-import FormattedDate from "@/components/ui/FormattedDate.astro";
-import TagList from "@/components/ui/TagList.astro";
+// src/pages/work/index.astro
+export const prerender = true;
 
-const caseStudies = await getCollection("case-studies");
-
-// Sort case studies by date in descending order
-const sortedCaseStudies = caseStudies.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+// Add layout and define a redirect
+import Layout from "@/layouts/Layout.astro";
 ---
 
-<BaseLayout
-  title="Work | Dale Rogers"
-  description="Case studies and projects in service design and digital strategy"
->
-  <Container>
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl font-bold mb-8">Work</h1>
-      <div class="space-y-16">
-        {
-          sortedCaseStudies.map((study) => (
-            <article class="group">
-              <a href={`/work/${study.slug}`} class="block">
-                {study.data.coverImage && (
-                  <img
-                    src={study.data.coverImage}
-                    alt={study.data.title}
-                    class="w-full h-80 object-cover rounded-lg mb-6 transition-transform group-hover:scale-[1.02]"
-                  />
-                )}
-                <div class="space-y-4">
-                  <div class="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
-                    <span class="font-medium">{study.data.client}</span>
-                    <span>•</span>
-                    <span>{study.data.industry}</span>
-                  </div>
-                  <h2 class="text-3xl font-bold group-hover:text-primary transition-colors">
-                    {study.data.title}
-                  </h2>
-                  <div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
-                    <FormattedDate date={study.data.pubDate} />
-                    <span>by {study.data.author}</span>
-                  </div>
-                  {study.data.tags && <TagList tags={study.data.tags} />}
-                  <p class="text-gray-600 dark:text-gray-400">
-                    {study.data.description}
-                  </p>
-                </div>
-              </a>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </Container>
-</BaseLayout>
+<Layout title="Redirecting to Work">
+  <meta http-equiv="refresh" content="0;url=/work/1" />
+  <p>Redirecting to <a href="/work/1">Work</a>...</p>
+</Layout>

@@ -25,7 +25,7 @@ export const prerender = false;
  *
  * @throws {Error} If email configuration is invalid or sending fails
  */
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request }: { request: Request }) => {
   try {
     const formData = await request.formData();
     const name = formData.get("name");

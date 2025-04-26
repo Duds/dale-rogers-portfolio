@@ -1,0 +1,121 @@
+---
+/**
+ * A pagination component for navigating through multi-page content
+ * @component Pagination
+ *
+ * @description
+ * Provides Previous and Next buttons for page navigation with proper accessibility
+ * attributes and styling consistent with the project's design system. The component
+ * handles disabled states and includes visual indicators for navigation direction.
+ *
+ * @example
+ * ```astro
+ * <Pagination
+ *   currentPage={1}
+ *   totalPages={5}
+ *   getPageUrl={(page) => `/blog/${page}`}
+ * />
+ * ```
+ *
+ * @prop {number} currentPage - The current active page number
+ * @prop {number} totalPages - The total number of available pages
+ * @prop {function} getPageUrl - Function that returns the URL for a given page number
+ *
+ * @accessibility
+ * - Uses semantic nav element with aria-label
+ * - Proper disabled states with aria-disabled
+ * - Keyboard navigation support with tabindex
+ * - Clear visual indicators with icons
+ *
+ * @style
+ * - Matches project's button styling from global.css
+ * - Supports dark mode
+ * - Includes hover and focus states
+ * - Uses consistent spacing and typography
+ *
+ * @author Dale Rogers
+ * @version 1.0.0
+ */
+interface Props {
+  /** Current page number */
+  currentPage: number;
+  /** Total number of pages */
+  totalPages: number;
+  /** Function to get the URL for a specific page */
+  getPageUrl: (page: number) => string;
+}
+
+const { currentPage, totalPages, getPageUrl } = Astro.props;
+
+// Determine if Previous/Next buttons should be disabled
+const hasPrevious = currentPage > 1;
+const hasNext = currentPage < totalPages;
+
+// URLs for Previous and Next buttons
+const previousUrl = hasPrevious ? getPageUrl(currentPage - 1) : "#";
+const nextUrl = hasNext ? getPageUrl(currentPage + 1) : "#";
+---
+
+<nav
+  aria-label="Pagination"
+  class="flex justify-center items-center gap-6 my-12"
+>
+  <a
+    href={previousUrl}
+    class={`btn-base inline-flex items-center gap-2 px-6 py-3 rounded-full text-lg font-medium transition-all duration-300
+      ${
+        hasPrevious
+          ? "bg-white text-black hover:bg-primary-purple hover:text-white dark:bg-gray-800 dark:text-white dark:hover:bg-primary-purple dark:hover:text-white shadow-soft hover:shadow-lg hover:-translate-y-0.5"
+          : "bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-600"
+      }`}
+    aria-disabled={!hasPrevious}
+    tabindex={hasPrevious ? 0 : -1}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L4.414 9H17a1 1 0 110 2H4.414l5.293 5.293a1 1 0 010 1.414z"
+        clip-rule="evenodd"></path>
+    </svg>
+    Previous
+  </a>
+
+  <span
+    class="text-lg font-medium text-gray-700 dark:text-gray-300"
+    aria-live="polite"
+  >
+    Page {currentPage} of {totalPages}
+  </span>
+
+  <a
+    href={nextUrl}
+    class={`btn-base inline-flex items-center gap-2 px-6 py-3 rounded-full text-lg font-medium transition-all duration-300
+      ${
+        hasNext
+          ? "bg-white text-black hover:bg-primary-purple hover:text-white dark:bg-gray-800 dark:text-white dark:hover:bg-primary-purple dark:hover:text-white shadow-soft hover:shadow-lg hover:-translate-y-0.5"
+          : "bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-600"
+      }`}
+    aria-disabled={!hasNext}
+    tabindex={hasNext ? 0 : -1}
+  >
+    Next
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L15.586 11H3a1 1 0 110-2h12.586l-5.293-5.293a1 1 0 010-1.414z"
+        clip-rule="evenodd"></path>
+    </svg>
+  </a>
+</nav>

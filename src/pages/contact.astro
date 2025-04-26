@@ -2,156 +2,300 @@
 import Layout from "@/layouts/Layout.astro";
 import Icon from "@/components/ui/Icon.astro";
 import Button from "@/components/ui/Button.astro";
+import Container from "@/components/layout/Container.astro";
+
+// Base64 encode the email to prevent scraping while keeping it accessible
 ---
 
-<Layout title="Contact">
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="font-display text-4xl text-text mb-6">Get in Touch</h1>
-
-    <div class="grid md:grid-cols-2 gap-8">
-      <div>
-        <p class="text-text-secondary mb-6">
-          Interested in working together? Have a question about service design?
-          I'd love to hear from you.
-        </p>
-
-        <div class="space-y-4 mb-8">
-          <div class="flex items-center space-x-4">
-            <Icon name="mail" class="w-6 h-6 text-primary" />
-            <a
-              id="contact-email"
-              href="#"
-              class="text-text hover:text-primary transition-colors"
+<Layout title="Contact | Dale Rogers">
+  <main class="pt-32 md:pt-40">
+    <!-- Hero Section -->
+    <Container fullWidth class="mb-16">
+      <div class="relative overflow-hidden rounded-3xl bg-neutral-950">
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-neutral-900/70 to-neutral-900/50 z-10"
+        >
+        </div>
+        <img
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2940&auto=format&fit=crop"
+          alt="Modern minimalist office interior"
+          class="absolute inset-0 w-full h-full object-cover opacity-75"
+        />
+        <div
+          class="relative z-20 min-h-[400px] px-8 py-12 lg:px-12 lg:py-16 flex flex-col justify-end"
+        >
+          <div class="max-w-3xl">
+            <h1
+              class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6"
             >
-              [email protected]
-            </a>
-          </div>
-          <div class="flex items-center space-x-4">
-            <Icon name="linkedin" class="w-6 h-6 text-primary" />
-            <a
-              href="https://linkedin.com/in/dale-rogers"
-              class="text-text hover:text-primary transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              linkedin.com/in/dale-rogers
-            </a>
+              Ready to transform your service delivery? Get in touch and let me
+              help you achieve your goals.
+            </h1>
+            <p class="text-xl text-neutral-200 max-w-2xl">
+              Ready to transform your service delivery? Whether you're looking
+              for strategic guidance, service design expertise, or support with
+              digital transformation, I'm here to help turn your vision into
+              reality.
+            </p>
           </div>
         </div>
-
-        <Button id="contact-email-button" href="#" variant="primary">
-          Send an Email
-        </Button>
-
-        <script is:inline>
-          document.addEventListener("DOMContentLoaded", () => {
-            const encodedEmail = "aGVsbG9AZGFsZXJvZ2Vycy5jb20uYXU=";
-            const email = atob(encodedEmail);
-            const emailLink = document.getElementById("contact-email");
-            if (emailLink) {
-              emailLink.href = "mailto:" + email;
-              emailLink.textContent = email;
-            }
-            const emailButton = document.getElementById("contact-email-button");
-            if (emailButton) {
-              emailButton.href = "mailto:" + email;
-            }
-          });
-        </script>
       </div>
+    </Container>
 
-      <div class="bg-secondary p-6 rounded-card">
-        <h2 class="font-display text-2xl text-text mb-4">Location</h2>
-        <p class="text-text-secondary mb-4">
-          Based in Canberra, Australia<br />
-          Available for remote work worldwide
-        </p>
-        <p class="text-text-secondary">
-          I work with clients across various sectors, including government,
-          education, and private organizations.
-        </p>
+    <!-- Content Section -->
+    <Container class="mb-16">
+      <div class="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+        <!-- Left Column: Info -->
+        <div class="space-y-8">
+          <div class="prose prose-lg dark:prose-invert space-y-8">
+            <p
+              class="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 mb-8"
+            >
+              Ready to transform your service delivery? Whether you're looking
+              for strategic guidance, service design expertise, or support with
+              digital transformation, I'm here to help turn your vision into
+              reality.
+            </p>
+            <p class="text-neutral-600 dark:text-neutral-300">
+              With expertise in service design and a track record of successful
+              projects across government, education, and private sectors, I
+              bring a strategic approach to every collaboration.
+            </p>
+          </div>
+
+          <div class="space-y-6 pt-4">
+            <div class="flex items-center space-x-4">
+              <Icon
+                name="mail"
+                class="w-6 h-6 text-neutral-900 dark:text-neutral-100"
+              />
+              <a
+                id="contact-email"
+                href="#"
+                class="text-neutral-900 dark:text-neutral-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              >
+                [Loading email...]
+              </a>
+            </div>
+            <div class="flex items-center space-x-4">
+              <Icon
+                name="linkedin"
+                class="w-6 h-6 text-neutral-900 dark:text-neutral-100"
+              />
+              <a
+                href="https://linkedin.com/in/dale-rogers"
+                class="text-neutral-900 dark:text-neutral-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                linkedin.com/in/dale-rogers
+              </a>
+            </div>
+            <div class="flex items-center space-x-4">
+              <Icon
+                name="medium"
+                class="w-6 h-6 text-neutral-900 dark:text-neutral-100"
+              />
+              <a
+                href="https://medium.com/@dale-rogers"
+                class="text-neutral-900 dark:text-neutral-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                medium.com/@dale-rogers
+              </a>
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <h2
+              class="font-display text-2xl text-primary-950 dark:text-primary-50 mb-4"
+            >
+              Availability
+            </h2>
+            <div class="space-y-4">
+              <div>
+                <h3 class="font-medium text-neutral-900 dark:text-neutral-100">
+                  Office Hours (AEST)
+                </h3>
+                <p class="text-neutral-600 dark:text-neutral-300">
+                  Monday - Friday: 09:00 - 17:00
+                </p>
+              </div>
+              <div>
+                <h3 class="font-medium text-neutral-900 dark:text-neutral-100">
+                  Response Time
+                </h3>
+                <p class="text-neutral-600 dark:text-neutral-300">
+                  Same-day response during business hours<br />
+                  24-hour response for urgent matters
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Contact Form -->
+        <div
+          class="bg-neutral-50 dark:bg-neutral-800/50 rounded-3xl p-8 lg:p-12"
+        >
+          <h2
+            class="font-display text-3xl text-primary-950 dark:text-primary-50 mb-8"
+          >
+            Send a Message
+          </h2>
+          <form
+            method="POST"
+            action="/api/contact"
+            class="space-y-6"
+            id="contact-form"
+          >
+            <div>
+              <label
+                for="name"
+                class="block text-neutral-900 dark:text-neutral-100 mb-2 text-sm"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="w-full px-4 py-3 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-primary-600 dark:focus:ring-primary-400 focus:border-transparent"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="email"
+                class="block text-neutral-900 dark:text-neutral-100 mb-2 text-sm"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full px-4 py-3 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-primary-600 dark:focus:ring-primary-400 focus:border-transparent"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="message"
+                class="block text-neutral-900 dark:text-neutral-100 mb-2 text-sm"
+                >Message</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                class="w-full px-4 py-3 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-primary-600 dark:focus:ring-primary-400 focus:border-transparent"
+                required></textarea>
+            </div>
+            <div id="form-message" class="hidden rounded-xl p-4"></div>
+            <Button type="submit" variant="primary" class="w-full">
+              Send Message
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </Button>
+          </form>
+        </div>
       </div>
-    </div>
+    </Container>
 
-    <section class="mt-12">
-      <h2 class="text-3xl font-display mb-4">Send a Message</h2>
-      <form
-        method="POST"
-        action="/api/contact"
-        class="space-y-4"
-        id="contact-form"
-      >
-        <div>
-          <label for="name" class="block text-text mb-1">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            class="w-full px-4 py-2 border rounded"
-            required
-          />
+    <!-- Map Section -->
+    <Container class="mb-24" fullWidth>
+      <div class="bg-neutral-50 dark:bg-neutral-800/50 rounded-3xl p-8 lg:p-12">
+        <h2
+          class="font-display text-3xl text-primary-950 dark:text-primary-50 mb-6"
+        >
+          Location & Collaboration
+        </h2>
+        <p class="text-neutral-600 dark:text-neutral-300 mb-8 max-w-2xl">
+          Strategically based in Canberra, Australia's capital, I'm perfectly
+          positioned to serve both government and private sector clients. While
+          I conduct most client meetings virtually, I'm available for in-person
+          workshops and critical sessions across Australia.
+        </p>
+        <div
+          class="rounded-2xl overflow-hidden h-[400px] bg-neutral-100 dark:bg-neutral-800/50"
+        >
+          <iframe
+            width="100%"
+            height="100%"
+            style="border:0"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env["PUBLIC_GOOGLE_MAPS_API_KEY"]}&q=Canberra,Australian+Capital+Territory&zoom=11&language=en&region=AU`}
+          >
+          </iframe>
         </div>
-        <div>
-          <label for="email" class="block text-text mb-1">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="w-full px-4 py-2 border rounded"
-            required
-          />
-        </div>
-        <div>
-          <label for="message" class="block text-text mb-1">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            rows="5"
-            class="w-full px-4 py-2 border rounded"
-            required></textarea>
-        </div>
-        <div id="form-message" class="hidden"></div>
-        <Button type="submit" variant="primary"> Send Message </Button>
-      </form>
-
-      <script>
-        document
-          .getElementById("contact-form")
-          ?.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const form = e.target as HTMLFormElement;
-            const formMessage = document.getElementById("form-message");
-
-            try {
-              const response = await fetch(form.action, {
-                method: "POST",
-                body: new FormData(form),
-              });
-
-              const data = await response.json();
-
-              if (formMessage) {
-                formMessage.classList.remove("hidden");
-                if (response.ok) {
-                  formMessage.textContent = "Message sent successfully!";
-                  formMessage.className = "text-green-600";
-                  form.reset();
-                } else {
-                  formMessage.textContent =
-                    data.error || "Failed to send message. Please try again.";
-                  formMessage.className = "text-red-600";
-                }
-              }
-            } catch (error) {
-              if (formMessage) {
-                formMessage.classList.remove("hidden");
-                formMessage.textContent =
-                  "An error occurred. Please try again.";
-                formMessage.className = "text-red-600";
-              }
-            }
-          });
-      </script>
-    </section>
-  </div>
+      </div>
+    </Container>
+  </main>
 </Layout>
+
+<script>
+  // Handle form submission
+  document
+    .getElementById("contact-form")
+    ?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target as HTMLFormElement;
+      const formMessage = document.getElementById("form-message");
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+        });
+
+        const data = await response.json();
+
+        if (formMessage) {
+          formMessage.classList.remove("hidden");
+          if (response.ok) {
+            formMessage.textContent = "Message sent successfully!";
+            formMessage.className =
+              "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 p-4 rounded-xl";
+            form.reset();
+          } else {
+            formMessage.textContent =
+              data.error || "Failed to send message. Please try again.";
+            formMessage.className =
+              "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 p-4 rounded-xl";
+          }
+        }
+      } catch (error) {
+        if (formMessage) {
+          formMessage.classList.remove("hidden");
+          formMessage.textContent = "An error occurred. Please try again.";
+          formMessage.className =
+            "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 p-4 rounded-xl";
+        }
+      }
+    });
+
+  // Handle email display
+  document.addEventListener("DOMContentLoaded", () => {
+    const email = atob("aGVsbG9AZGFsZXJvZ2Vycy5jb20uYXU=");
+
+    // Update email link
+    const emailLink = document.getElementById(
+      "contact-email"
+    ) as HTMLAnchorElement;
+    if (emailLink) {
+      emailLink.href = "mailto:" + email;
+      emailLink.textContent = email;
+    }
+  });
+</script>

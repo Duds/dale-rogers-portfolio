@@ -19,40 +19,43 @@ interface Props {
 const {
   title = "My Values",
   subtitle = "Designing with empathy, accessibility and inclusivity at the forefront of everything I do.",
-  imageUrl = "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2940&auto=format&fit=crop",
+  imageUrl = "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   buttonText = "Explore My Values",
   buttonLink = "/values",
 } = Astro.props;
 ---
 
-<section class="w-full py-24">
-  <Container fullWidth={true}>
+<section class="w-full h-screen flex flex-col justify-between py-12 md:py-16">
+  <Container fullWidth={true} class="flex flex-col h-full">
     <!-- Headings above the card -->
-    <div class="mb-8 text-left">
+    <div class="mb-4 md:mb-6 text-left">
       <h2
-        class="font-body text-2xl font-semibold text-neutral-600 dark:text-neutral-400 mb-4"
+        class="font-body text-xl md:text-2xl font-semibold text-neutral-600 dark:text-neutral-400 mb-2 md:mb-4"
       >
         {title}
       </h2>
-      <h3 class="text-4xl text-neutral-900 dark:text-white leading-tight">
+      <h3
+        class="text-3xl md:text-4xl text-neutral-900 dark:text-white leading-tight"
+      >
         {subtitle}
       </h3>
     </div>
 
-    <!-- Photo card - full width, no text -->
-    <div class="w-full overflow-hidden rounded-2xl shadow-lg mb-8">
+    <!-- Photo card - full width, fills available space -->
+    <div
+      class="w-full flex-grow overflow-hidden rounded-2xl shadow-lg mb-4 md:mb-6"
+    >
       <img
         src={imageUrl}
-        alt=""
-        class="w-full h-auto object-cover"
-        aria-hidden="true"
+        alt="A group of people collaborating and brainstorming together, symbolizing inclusive design and shared values"
+        class="w-full h-full object-cover"
         width="1920"
         height="1080"
       />
     </div>
 
     <!-- Button beneath the card -->
-    <div class="text-left mt-6">
+    <div class="text-left mt-4">
       <Button variant="primary" href={buttonLink}>
         {buttonText}
         <svg

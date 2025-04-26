@@ -1,0 +1,78 @@
+---
+description: Content Changes vs Styling Changes vs Code Changes
+globs:
+alwaysApply: false
+---
+# Content Changes vs Styling Changes vs Code Changes
+
+## Core Rule
+
+When making content changes:
+- DO NOT modify any styling unless explicitly requested
+- DO NOT change font sizes, colors, spacing, or other visual properties
+- DO NOT modify HTML/CSS classes or structure
+- DO NOT add or remove styling-related tags or attributes
+- PRESERVE all existing styling classes and markup
+
+## Examples
+
+### ✅ Correct: Content Change Only
+```json
+// Original
+"text": "<span class='emphasis'>old content here</span>"
+
+// Modified (preserving styling)
+"text": "<span class='emphasis'>new content here</span>"
+```
+
+### ❌ Incorrect: Unintended Style Changes
+```json
+// Original
+"text": "<span class='emphasis'>old content here</span>"
+
+// Wrong - removes styling
+"text": "new content here"
+
+// Wrong - changes class
+"text": "<span class='strong'>new content here</span>"
+```
+
+## Guidelines
+
+1. **Content Only**
+   - Only change the text content
+   - Keep all existing HTML structure
+   - Maintain all class names
+   - Preserve all styling attributes
+
+2. **Markup Preservation**
+   - Keep all `<span>`, `<div>`, and other structural elements
+   - Maintain all class assignments
+   - Keep all style-related attributes
+
+3. **Class Preservation**
+   - Never remove existing classes
+   - Never add new classes
+   - Never modify class names
+
+4. **Styling Requests**
+   - Only make styling changes when explicitly requested
+   - Require separate, specific requests for styling changes
+   - Keep styling changes in separate commits
+
+## Implementation
+
+When editing content:
+1. First identify all styling elements
+2. Copy and preserve all styling markers
+3. Replace only the text content
+4. Verify no styling was modified
+5. Double-check class preservation
+
+## Validation
+
+Before submitting changes:
+- Confirm all original classes remain
+- Verify no styling attributes were modified
+- Check that HTML structure is unchanged
+- Ensure only text content was updated

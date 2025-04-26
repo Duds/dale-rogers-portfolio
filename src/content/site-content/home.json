@@ -11,7 +11,7 @@
     "section": "about",
     "content": {
       "paragraphs": [
-        "Dale Rogers is a service design consultancy that helps organisations <span class='strong'>create meaningful connections</span> with their audiences through <span class='emphasis'>strategic design thinking</span>. We believe in the <span class='strong'>transformative power of human-centred design</span> to shape services that resonate, engage, and deliver lasting value.",
+        "I'm a service designer who helps organisations <span class='strong'>create meaningful connections</span> with their audiences through <span class='emphasis'>strategic design thinking</span>. We believe in the <span class='strong'>transformative power of human-centred design</span> to shape services that resonate, engage, and deliver lasting value.",
         "With a focus on <span class='emphasis'>evidence-based methodologies</span> and <span class='strong'>collaborative approaches</span>, we partner with clients to uncover insights, identify opportunities, and craft solutions that make a <span class='emphasis'>real difference in people's lives</span>."
       ]
     }
@@ -20,9 +20,9 @@
     "section": "services-text",
     "content": {
       "paragraphs": [
-        "We're <span class='strong'>practical, direct, and refreshingly different</span>. Our approach strips away the complexity to focus on what truly matters—your service's impact on real people.",
-        "We don't hide behind <span class='emphasis'>fancy jargon or buzzwords</span>. Instead, we roll up our sleeves and work alongside you, making the design process <span class='strong'>collaborative, engaging, and genuinely enjoyable</span>.",
-        "Because when we're truly invested and <span class='emphasis'>passionate about what we do</span>, that's when the magic happens—creating services that people actually want to use."
+        "I'm <span class='strong'>practical and direct</span>. My approach strips away the complexity to focus on what truly matters—your service's impact on real people.",
+        "No hiding behind <span class='emphasis'>fancy jargon or buzzwords</span>. Instead, I roll up my sleeves and work alongside you, making the design process <span class='strong'>collaborative, engaging, and genuinely enjoyable</span>.",
+        "Because when you're truly invested and <span class='emphasis'>passionate about what you do</span>, that's when the magic happens—creating services that people actually want to use."
       ]
     }
   },
@@ -40,6 +40,17 @@
   {
     "section": "values",
     "content": {
+      "title": "My Values",
+      "subtitle": "Designing with empathy, accessibility and inclusivity at the forefront of everything I do.",
+      "imageUrl": "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2940&auto=format&fit=crop",
+      "buttonText": "Explore My Values",
+      "buttonLink": "/values"
+    }
+  },
+  {
+    "section": "partners",
+    "content": {
+      "title": "Trusted by",
       "logos": [
         {
           "name": "Tasmanian Department of Education Children and Young People",
@@ -65,6 +76,11 @@
           "name": "Transport for NSW",
           "url": "/images/logos/transport-nsw.svg",
           "alt": "Transport for NSW logo"
+        },
+        {
+          "name": "University of Canberra",
+          "url": "/images/logos/university-of-canberra.png",
+          "alt": "University of Canberra logo"
         }
       ]
     }

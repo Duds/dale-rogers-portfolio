@@ -12,46 +12,91 @@ interface PartnerLogo {
   url: string;
   /** Alt text for accessibility */
   alt: string;
+  /** Optional website URL */
+  website?: string;
 }
 
 interface Props {
+  /** Section title */
+  title?: string;
   /** Array of client logos to display */
-  logos: PartnerLogo[];
+  logos?: PartnerLogo[];
 }
 
-const { logos } = Astro.props;
+// Default logos array with all partners
+const defaultLogos: PartnerLogo[] = [
+  {
+    name: "University of Canberra",
+    url: "/images/logos/uc_logo_inline.png",
+    alt: "University of Canberra logo",
+    website: "https://www.canberra.edu.au",
+  },
+  {
+    name: "Tasmanian Department of Education",
+    url: "/images/logos/tas-education-children-young-people.svg",
+    alt: "Tasmanian Department of Education, Children and Young People logo",
+    website: "https://www.education.tas.gov.au",
+  },
+  {
+    name: "BHP",
+    url: "/images/logos/bhp.svg",
+    alt: "BHP logo",
+    website: "https://www.bhp.com",
+  },
+  {
+    name: "Holden",
+    url: "/images/logos/holden.svg",
+    alt: "Holden logo",
+  },
+  {
+    name: "Rio Tinto",
+    url: "/images/logos/rio-tinto.svg",
+    alt: "Rio Tinto logo",
+    website: "https://www.riotinto.com",
+  },
+  {
+    name: "Transport for NSW",
+    url: "/images/logos/transport-nsw.svg",
+    alt: "Transport for NSW logo",
+    website: "https://www.transport.nsw.gov.au",
+  },
+];
 
-// Removed hardcoded clients array
+const { title = "Trusted by", logos = defaultLogos } = Astro.props;
 ---
 
-<section class="py-20 bg-white">
-  <Container>
-    <h2
-      class="text-2xl font-display text-neutral-600 dark:text-neutral-400 mb-8 text-center"
-    >
-      Trusted by
-    </h2>
-    <div class="flex flex-wrap justify-center items-center gap-12 md:gap-16">
-      {
-        logos.map((logo) => (
-          <a
-            href={logo.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="opacity-60 hover:opacity-100 transition-opacity duration-300"
-            aria-label={`Visit ${logo.name}'s website`}
-          >
-            <img
-              src={logo.url}
-              alt={`${logo.name} logo`}
-              class="h-12 md:h-16 w-auto dark:invert"
-              loading="lazy"
-              width="auto"
-              height="64"
-            />
-          </a>
-        ))
-      }
+<section class="py-12 md:py-16 bg-white">
+  <Container fullWidth={true}>
+    <div class="flex flex-col items-center">
+      <h2
+        class="text-xl md:text-2xl font-display text-neutral-600 dark:text-neutral-400 mb-6 md:mb-8 text-center"
+      >
+        {title}
+      </h2>
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+        {
+          logos.map((logo) => (
+            <a
+              href={logo.website || "#"}
+              target={logo.website ? "_blank" : "_self"}
+              rel={logo.website ? "noopener noreferrer" : ""}
+              class={`opacity-60 hover:opacity-100 transition-opacity duration-300 ${!logo.website ? "pointer-events-none" : ""}`}
+              aria-label={
+                logo.website ? `Visit ${logo.name}'s website` : logo.name
+              }
+            >
+              <img
+                src={logo.url}
+                alt={logo.alt}
+                class="h-10 md:h-12 w-auto dark:invert"
+                loading="lazy"
+                width="auto"
+                height="48"
+              />
+            </a>
+          ))
+        }
+      </div>
     </div>
   </Container>
 </section>

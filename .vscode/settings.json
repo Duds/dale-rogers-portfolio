@@ -40,7 +40,8 @@
   "todo-tree.filtering.excludeGlobs": [
     "**/node_modules/**",
     "**/dist/**",
-    "**/.git/**"
+    "**/.git/**",
+    "**/TEMP_MARKDOWN_FILES/**"
   ],
   "todo-tree.tree.showInExplorer": true,
   "todo-tree.tree.showInActivityBar": true,
@@ -136,5 +137,11 @@
   "files.associations": {
     "*.mcp.json": "jsonc"
   },
-  "cursor.mcp.enabled": true
+  "cursor.mcp.enabled": true,
+  "problems.excludePatterns": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.git/**",
+    "**/TEMP_MARKDOWN_FILES/**"
+  ]
 }

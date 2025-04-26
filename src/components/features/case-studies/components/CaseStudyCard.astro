@@ -7,27 +7,58 @@ interface Props {
   duration: string;
   tags: string[];
   href: string;
+  coverImage?: string;
 }
 
-const { title, description, client, industry, duration, tags, href } =
-  Astro.props;
+const {
+  title,
+  description,
+  client,
+  industry,
+  duration,
+  tags,
+  href,
+  coverImage,
+} = Astro.props;
+
+import TagList from "@/components/ui/TagList.astro";
 ---
 
 <article
-  class="bg-[var(--colour-bg)] rounded-[var(--radius-lg)] shadow-soft overflow-hidden transition-transform hover:scale-[1.02]"
+  class="group bg-white dark:bg-gray-800 rounded-2xl shadow-soft dark:shadow-soft-dark overflow-hidden transition-all duration-300 hover:shadow-lg dark:hover:shadow-lg-dark hover:-translate-y-1"
 >
+  {
+    coverImage && (
+      <div class="relative aspect-[16/9] w-full overflow-hidden">
+        <img
+          src={coverImage}
+          alt={`Cover image for ${title}`}
+          class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          width="800"
+          height="450"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+      </div>
+    )
+  }
+
   <div class="p-6">
-    <h3 class="text-heading text-xl text-[var(--colour-text)] mb-2">
+    <h3
+      class="text-2xl font-heading font-bold text-gray-900 dark:text-white mb-2"
+    >
       <a
         href={href}
-        class="hover:text-[var(--colour-accent)] transition-colours"
+        class="hover:text-primary-purple dark:hover:text-primary-400 transition-colors"
       >
         {title}
       </a>
     </h3>
-    <p class="text-body text-[var(--colour-text)] mb-4">{description}</p>
+
+    <p class="text-gray-600 dark:text-gray-300 mb-4">{description}</p>
+
     <div
-      class="flex flex-wrap gap-4 mb-4 text-sm text-[var(--colour-text-secondary)]"
+      class="flex flex-wrap gap-4 mb-6 text-sm text-gray-500 dark:text-gray-400"
     >
       <div>
         <span class="font-semibold">Client:</span>
@@ -42,14 +73,7 @@ const { title, description, client, industry, duration, tags, href } =
         {duration}
       </div>
     </div>
-    <div class="flex flex-wrap gap-2">
-      {
-        tags.map((tag) => (
-          <span class="px-3 py-1 bg-[var(--colour-section-alt)] text-[var(--colour-text)] text-sm rounded-[var(--radius-pill)]">
-            {tag}
-          </span>
-        ))
-      }
-    </div>
+
+    <TagList tags={tags} />
   </div>
 </article>

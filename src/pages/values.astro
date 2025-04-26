@@ -1,29 +1,86 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Container from "@/components/layout/Container.astro";
+import Button from "@/components/ui/Button.astro";
 
 const content = {
-  title: "Core Principles That Guide My Work",
+  title: "Values That Drive Impact",
+  subtitle:
+    "Principles that shape how I approach every project and collaboration",
   values: [
     {
-      name: "Human-Centered",
+      name: "Human-Centred Design",
       description:
-        "Services should solve real problems for real people. I prioritize user needs over organizational convenience.",
-    },
-    {
-      name: "Evidence-Based",
-      description:
-        "Decisions grounded in research and data, not assumptions. I validate every design choice with user testing.",
+        "Every decision starts with understanding real people's needs, challenges, and aspirations. I prioritise user research and evidence-based insights over assumptions.",
+      icon: "👥",
     },
     {
       name: "Practical Innovation",
       description:
-        "Solutions must be both visionary and implementable. I balance creativity with technical feasibility.",
+        "Balancing creative vision with real-world constraints. I deliver solutions that are both forward-thinking and immediately implementable.",
+      icon: "💡",
     },
     {
-      name: "Collaborative Approach",
+      name: "Collaborative Excellence",
       description:
-        "Great design happens together. I work transparently with stakeholders at every level.",
+        "Great design emerges from diverse perspectives. I foster open dialogue and genuine partnerships with stakeholders at every level.",
+      icon: "🤝",
+    },
+    {
+      name: "Evidence-Based Decisions",
+      description:
+        "Data and research guide every choice. I validate design decisions through rigorous testing and user feedback to ensure measurable impact.",
+      icon: "📊",
+    },
+    {
+      name: "Sustainable Solutions",
+      description:
+        "Creating lasting value means thinking long-term. I design systems and services that can evolve and scale with your organisation's needs.",
+      icon: "🌱",
+    },
+    {
+      name: "Pragmatic Execution",
+      description:
+        "Getting things done without compromising on quality. I maintain high standards while ensuring timely, efficient delivery of solutions.",
+      icon: "🎯",
+    },
+  ],
+  caseStudies: [
+    {
+      title: "Department of Education Portal Redesign",
+      description:
+        "Applied human-centred design and evidence-based decision making to transform a complex educational portal into an intuitive platform serving over 50,000 users.",
+      values: ["Human-Centred Design", "Evidence-Based Decisions"],
+      metrics: ["92% user satisfaction", "45% reduction in support tickets"],
+      image:
+        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2940&auto=format&fit=crop",
+    },
+    {
+      title: "BHP Safety Systems Integration",
+      description:
+        "Balanced innovation with practicality to deliver a unified safety reporting system that scales across multiple mining sites while meeting strict compliance requirements.",
+      values: ["Practical Innovation", "Sustainable Solutions"],
+      metrics: ["30% faster incident reporting", "100% compliance maintained"],
+      image:
+        "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=2940&auto=format&fit=crop",
+    },
+  ],
+  testimonials: [
+    {
+      quote:
+        "Dale's pragmatic approach to service design helped us navigate complex stakeholder requirements while delivering real value to our users.",
+      author: "Sarah Thompson",
+      role: "Digital Transformation Lead",
+      organisation: "Transport for NSW",
+      values: ["Pragmatic Execution", "Collaborative Excellence"],
+    },
+    {
+      quote:
+        "The evidence-based methodology Dale brought to our project ensured we made decisions based on real user needs rather than assumptions.",
+      author: "Michael Chen",
+      role: "Head of Product",
+      organisation: "University of Canberra",
+      values: ["Evidence-Based Decisions", "Human-Centred Design"],
     },
   ],
 };
@@ -31,41 +88,178 @@ const content = {
 interface Value {
   name: string;
   description: string;
+  icon: string;
+}
+
+interface CaseStudy {
+  title: string;
+  description: string;
+  values: string[];
+  metrics: string[];
+  image: string;
+}
+
+interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  organisation: string;
+  values: string[];
 }
 ---
 
-<Layout title="My Values">
-  <Container>
-    <div class="py-20">
-      <div class="text-center mb-16">
-        <h2
-          class="text-2xl font-semibold text-gray-600 dark:text-gray-400 mb-4"
-        >
-          My Values
-        </h2>
-        <h3
-          class="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white"
+<Layout title="My Values | Dale Rogers">
+  <main class="pt-32 md:pt-40">
+    <Container>
+      <div class="max-w-4xl mx-auto text-center mb-16">
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-black text-primary-950 dark:text-primary-50 mb-6"
         >
           {content.title}
-        </h3>
+        </h1>
+        <p class="text-xl md:text-2xl text-neutral-600 dark:text-neutral-300">
+          {content.subtitle}
+        </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
         {
           content.values.map((value: Value) => (
-            <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-soft dark:shadow-soft-dark border border-gray-200 dark:border-gray-700">
-              <h3 class="text-2xl font-bold mb-3 text-primary dark:text-primary-light">
+            <div class="p-8 bg-white dark:bg-neutral-800/50 rounded-2xl shadow-soft dark:shadow-soft-dark border border-neutral-200 dark:border-neutral-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300">
+              <div class="text-4xl mb-4">{value.icon}</div>
+              <h3 class="text-2xl font-bold mb-3 text-primary-950 dark:text-primary-50">
                 {value.name}
               </h3>
-              <p class="text-lg text-gray-600 dark:text-gray-300">
+              <p class="text-lg text-neutral-600 dark:text-neutral-300">
                 {value.description}
               </p>
             </div>
           ))
         }
       </div>
-    </div>
-  </Container>
+
+      <div class="mb-24">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-950 dark:text-primary-50 text-center mb-16"
+        >
+          Values in Action
+        </h2>
+        <div class="space-y-16">
+          {
+            content.caseStudies.map((study: CaseStudy) => (
+              <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <div class="order-2 lg:order-1">
+                  <h3 class="text-2xl font-bold text-primary-950 dark:text-primary-50 mb-4">
+                    {study.title}
+                  </h3>
+                  <p class="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
+                    {study.description}
+                  </p>
+                  <div class="mb-6">
+                    <h4 class="font-semibold text-primary-950 dark:text-primary-50 mb-2">
+                      Values Applied:
+                    </h4>
+                    <div class="flex flex-wrap gap-2">
+                      {study.values.map((value) => (
+                        <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-950 dark:text-primary-50 rounded-full text-sm">
+                          {value}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-primary-950 dark:text-primary-50 mb-2">
+                      Key Outcomes:
+                    </h4>
+                    <ul class="list-disc list-inside space-y-1 text-neutral-600 dark:text-neutral-300">
+                      {study.metrics.map((metric) => (
+                        <li>{metric}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                  <img
+                    src={study.image}
+                    alt={study.title}
+                    class="rounded-2xl shadow-lg w-full h-64 object-cover"
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="mb-24">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-950 dark:text-primary-50 text-center mb-16"
+        >
+          What Clients Say
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          {
+            content.testimonials.map((testimonial: Testimonial) => (
+              <div class="bg-white dark:bg-neutral-800/50 rounded-2xl shadow-soft dark:shadow-soft-dark border border-neutral-200 dark:border-neutral-700 p-8">
+                <div class="text-4xl text-primary-500 dark:text-primary-400 mb-6">
+                  "
+                </div>
+                <blockquote class="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
+                  {testimonial.quote}
+                </blockquote>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <cite class="not-italic font-semibold text-primary-950 dark:text-primary-50">
+                      {testimonial.author}
+                    </cite>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-300">
+                      {testimonial.role}
+                    </p>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-300">
+                      {testimonial.organisation}
+                    </p>
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    {testimonial.values.map((value) => (
+                      <span class="px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-950 dark:text-primary-50 rounded-full text-xs">
+                        {value}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div
+        class="bg-primary-950 dark:bg-primary-900 text-primary-50 rounded-3xl p-8 md:p-12 text-center"
+      >
+        <h2 class="font-display text-3xl md:text-4xl mb-6">
+          Ready to create impact together?
+        </h2>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">
+          Let's collaborate to build services that align with your values and
+          deliver real results.
+        </p>
+        <Button variant="secondary" href="/contact">
+          Start a conversation
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 ml-2"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </Button>
+      </div>
+    </Container>
+  </main>
 </Layout>
 
 <style>

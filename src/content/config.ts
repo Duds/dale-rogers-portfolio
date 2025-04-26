@@ -26,7 +26,14 @@ const servicesCollection = defineCollection({
 });
 
 const siteSectionSchema = z.object({
-  section: z.enum(["hero", "values", "about", "marketing", "services-text"]),
+  section: z.enum([
+    "hero",
+    "values",
+    "about",
+    "marketing",
+    "services-text",
+    "partners",
+  ]),
   content: z.object({
     title: z.string().optional(),
     subtitle: z.string().optional(),
@@ -35,6 +42,9 @@ const siteSectionSchema = z.object({
     emoji: z.string().optional(),
     paragraphs: z.array(z.string()).optional(),
     image: z.string().optional(),
+    imageUrl: z.string().optional(),
+    buttonText: z.string().optional(),
+    buttonLink: z.string().optional(),
     skills: z.array(z.string()).optional(),
     values: z
       .array(
@@ -51,6 +61,7 @@ const siteSectionSchema = z.object({
           name: z.string(),
           url: z.string(),
           alt: z.string(),
+          website: z.string().optional(),
         })
       )
       .optional(),
@@ -85,6 +96,10 @@ const caseStudySchema = baseSchema.extend({
   challenge: z.string(),
   solution: z.string(),
   results: z.union([z.string(), z.array(z.string())]),
+  image: z.object({
+    src: z.string(),
+    alt: z.string(),
+  }),
 });
 
 // Schema for articles
