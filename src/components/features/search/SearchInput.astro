@@ -1,0 +1,119 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+---
+
+<div class="relative w-full max-w-xl">
+  <div class="relative flex items-center">
+    <Icon
+      name="search"
+      class="absolute left-4 w-6 h-6 text-black dark:text-white pointer-events-none"
+    />
+    <input
+      type="text"
+      placeholder="Search articles and case studies..."
+      class="w-full h-12 pl-22 pr-4 font-sans text-xl md:text-2xl font-bold bg-white dark:bg-neutral-900 border-2 border-black dark:border-white rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+      id="search-input"
+      aria-label="Search"
+      aria-expanded="false"
+      aria-controls="search-results"
+      role="combobox"
+      style="box-sizing: border-box;"
+    />
+  </div>
+  <div
+    id="search-results"
+    class="absolute z-50 w-full mt-2 bg-white dark:bg-neutral-900 border-2 border-black dark:border-white rounded-2xl shadow-lg hidden"
+    role="listbox"
+  >
+    <!-- Results will be populated here -->
+  </div>
+</div>
+
+<script>
+  import { useSearch } from "./hooks/useSearch.js";
+
+  // Initialize search functionality
+  const searchInput = document.getElementById(
+    "search-input"
+  ) as HTMLInputElement;
+  const searchResults = document.getElementById(
+    "search-results"
+  ) as HTMLDivElement;
+
+  if (searchInput && searchResults) {
+    const { handleSearch, handleKeyDown } = useSearch(
+      searchInput,
+      searchResults
+    );
+
+    // Handle input events
+    searchInput.addEventListener("input", handleSearch);
+    searchInput.addEventListener("keydown", handleKeyDown);
+
+    // Handle click outside to close results
+    document.addEventListener("click", (event) => {
+      if (
+        !searchInput.contains(event.target as Node) &&
+        !searchResults.contains(event.target as Node)
+      ) {
+        searchResults.classList.add("hidden");
+        searchInput.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // Handle focus to show results if there's a query
+    searchInput.addEventListener("focus", () => {
+      if (searchInput.value.length >= 2) {
+        searchResults.classList.remove("hidden");
+        searchInput.setAttribute("aria-expanded", "true");
+      }
+    });
+  }
+</script>
+
+<style>
+  /* Ensure the search input maintains its styling */
+  #search-input {
+    @apply h-12 pl-12 pr-4 font-sans text-xl md:text-2xl font-bold bg-white dark:bg-neutral-900 border-2 border-black dark:border-white rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent w-full;
+    /* If @apply doesn't work in your setup, use plain CSS: */
+    height: 3rem !important;
+    padding-left: 3rem !important;
+    padding-right: 1rem !important;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    border-radius: 9999px !important;
+    border-width: 2px !important;
+    border-color: #000 !important;
+    background: #fff !important;
+  }
+
+  .dark #search-input {
+    background: #171717 !important;
+    border-color: #fff !important;
+    color: #fff !important;
+  }
+
+  /* Style the search results */
+  #search-results {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  /* Style the search results items */
+  #search-results a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  #search-results a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .dark #search-results a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+</style>

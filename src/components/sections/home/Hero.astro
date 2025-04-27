@@ -8,14 +8,49 @@ const description =
   "I'm Dale Rogers, a service designer and strategist helping organisations transform how they deliver value. With over a decade of experience, I bridge the gap between human needs and organisational goals.";
 ---
 
+<style>
+  .gradient-heading {
+    background: linear-gradient(
+      45deg,
+      #af8abf 0%,
+      #fa8a58 35%,
+      #36a96a 70%,
+      #af8abf 100%
+    );
+    background-size: 200% 100%;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradientRotate 8s linear infinite;
+    will-change: background-position;
+    padding: 0.1em 0;
+    margin: -0.1em 0;
+    line-height: 1.2;
+  }
+
+  @keyframes gradientRotate {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
+</style>
+
 <section class="pt-32 md:pt-40 flex items-center py-20 px-6 md:px-12">
   <div class="grid grid-cols-6 gap-8 lg:gap-12 w-full">
     <!-- Left Column -->
     <div class="col-span-6 lg:col-span-4">
-      <h1
-        class="text-[clamp(4rem,12vw,12rem)] leading-[0.95] tracking-tight whitespace-pre-line font-display text-primary dark:text-primary"
-      >
-        {slogan}
+      <h1 class="gradient-heading text-6xl md:text-8xl font-bold">
+        {
+          slogan.split("\n").map((line, i) => (
+            <>
+              {i > 0 && <br />}
+              {line}
+            </>
+          ))
+        }
       </h1>
     </div>
 

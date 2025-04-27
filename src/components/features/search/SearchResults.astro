@@ -1,0 +1,64 @@
+---
+interface SearchResult {
+  title: string;
+  description: string;
+  category: string;
+  url: string;
+}
+
+interface Props {
+  results: SearchResult[];
+}
+
+const { results } = Astro.props;
+
+// Group results by category
+const groupedResults = results.reduce(
+  (acc, result) => {
+    const category = result.category;
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(result);
+    return acc;
+  },
+  {} as Record<string, SearchResult[]>
+);
+---
+
+<div
+  class="w-full max-w-xl bg-white/80 dark:bg-neutral-900/80 border border-gray-200 dark:border-neutral-800 rounded-lg shadow-lg backdrop-blur-sm"
+  role="listbox"
+>
+  {
+    results.length === 0 ? (
+      <div class="p-4 text-sm text-gray-500 dark:text-gray-400">
+        No matching articles or case studies found.
+      </div>
+    ) : (
+      <div class="divide-y divide-gray-100 dark:divide-neutral-800">
+        {Object.entries(groupedResults).map(([category, categoryResults]) => (
+          <div class="p-2">
+            <h3 class="px-2 py-1 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
+              {category}
+            </h3>
+            {categoryResults.map((result) => (
+              <a
+                href={result.url}
+                class="block p-2 hover:bg-gray-50 dark:hover:bg-neutral-800 rounded-md transition-colors duration-150"
+                role="option"
+              >
+                <div class="font-medium text-gray-900 dark:text-gray-100">
+                  {result.title}
+                </div>
+                <div class="text-sm text-gray-500 dark:text-gray-400">
+                  {result.description}
+                </div>
+              </a>
+            ))}
+          </div>
+        ))}
+      </div>
+    )
+  }
+</div>
