@@ -1,5 +1,10 @@
+/* Import fonts first */
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap");
 
+/* Import base component styles */
+@import './components/base.css';
+
+/* Tailwind layers */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -473,12 +478,9 @@
 
 /* Text Styles */
 .emphasis {
-  @apply text-primary-600 dark:text-primary-400 font-medium italic;
+  @apply text-primary dark:text-primary font-medium italic;
 }
 
 .strong {
   @apply text-neutral-900 dark:text-white font-bold;
 }
-
-/* Import component styles */
-@import './components/base.css';

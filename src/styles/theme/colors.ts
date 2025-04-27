@@ -1,16 +1,22 @@
 export const colors = {
   primary: {
-    50: "hsl(216, 100%, 97%)",
-    100: "hsl(214, 95%, 93%)",
-    200: "hsl(213, 97%, 87%)",
-    300: "hsl(212, 96%, 78%)",
-    400: "hsl(213, 94%, 68%)",
-    500: "hsl(217, 91%, 60%)",
-    600: "hsl(221, 83%, 53%)",
-    700: "hsl(224, 76%, 48%)",
-    800: "hsl(226, 71%, 40%)",
-    900: "hsl(224, 64%, 33%)",
-    950: "hsl(226, 57%, 21%)",
+    light: "#A78BFA", // light purple
+    DEFAULT: "#8B5CF6", // main purple
+    dark: "#7C3AED", // dark purple
+  },
+  secondary: {
+    green: "#10B981", // primary green
+    orange: "#F97316", // primary orange
+    black: "#111111", // strong black
+  },
+  neutral: {
+    white: "#FFFFFF",
+    black: "#000000",
+    background: "#F9FAFB",
+    cardPurple: "#F3F0FF",
+    cardGreen: "#ECFDF5",
+    cardOrange: "#FFF7ED",
+    cardBlack: "#111111",
   },
   grey: {
     50: "hsl(210, 20%, 98%)",
@@ -26,55 +32,20 @@ export const colors = {
     950: "hsl(224, 71%, 4%)",
   },
   success: {
-    50: "hsl(138, 76%, 97%)",
-    100: "hsl(141, 84%, 93%)",
-    200: "hsl(141, 79%, 85%)",
-    300: "hsl(142, 77%, 73%)",
-    400: "hsl(142, 69%, 58%)",
-    500: "hsl(142, 71%, 45%)",
-    600: "hsl(142, 76%, 36%)",
-    700: "hsl(142, 72%, 29%)",
-    800: "hsl(143, 64%, 24%)",
-    900: "hsl(144, 61%, 20%)",
-    950: "hsl(145, 80%, 10%)",
+    light: "#BBF7D0", // soft green
+    DEFAULT: "#22C55E", // main green
+    dark: "#16A34A", // dark green
   },
   warning: {
-    50: "hsl(48, 100%, 96%)",
-    100: "hsl(48, 96%, 89%)",
-    200: "hsl(48, 97%, 77%)",
-    300: "hsl(46, 97%, 65%)",
-    400: "hsl(44, 96%, 55%)",
-    500: "hsl(38, 92%, 50%)",
-    600: "hsl(32, 95%, 44%)",
-    700: "hsl(26, 90%, 37%)",
-    800: "hsl(23, 83%, 31%)",
-    900: "hsl(22, 78%, 26%)",
-    950: "hsl(21, 91%, 15%)",
+    light: "#FEF9C3", // soft yellow
+    DEFAULT: "#EAB308", // main yellow
+    dark: "#CA8A04", // dark yellow
   },
   error: {
-    50: "hsl(0, 86%, 97%)",
-    100: "hsl(0, 93%, 94%)",
-    200: "hsl(0, 96%, 89%)",
-    300: "hsl(0, 94%, 82%)",
-    400: "hsl(0, 91%, 71%)",
-    500: "hsl(0, 84%, 60%)",
-    600: "hsl(0, 72%, 51%)",
-    700: "hsl(0, 74%, 42%)",
-    800: "hsl(0, 70%, 35%)",
-    900: "hsl(0, 63%, 31%)",
-    950: "hsl(0, 58%, 16%)",
+    light: "#FECACA", // soft red
+    DEFAULT: "#EF4444", // main red
+    dark: "#DC2626", // dark red
   },
-  white: "hsl(0, 0%, 100%)",
-  black: "hsl(0, 0%, 0%)",
 } as const;
 
 export type ColorToken = keyof typeof colors;
-export type ColorShade = keyof typeof colors.primary;
-
-export type ThemeColors = {
-  [K in ColorToken]: K extends "white" | "black"
-    ? string
-    : {
-        [S in ColorShade]: string;
-      };
-};

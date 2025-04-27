@@ -113,7 +113,7 @@ interface Testimonial {
     <Container>
       <div class="max-w-4xl mx-auto text-center mb-16">
         <h1
-          class="text-4xl md:text-5xl lg:text-6xl font-black text-primary-950 dark:text-primary-50 mb-6"
+          class="text-4xl md:text-5xl lg:text-6xl font-black text-primary dark:text-primary mb-6"
         >
           {content.title}
         </h1>
@@ -127,7 +127,7 @@ interface Testimonial {
           content.values.map((value: Value) => (
             <div class="p-8 bg-white dark:bg-neutral-800/50 rounded-2xl shadow-soft dark:shadow-soft-dark border border-neutral-200 dark:border-neutral-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300">
               <div class="text-4xl mb-4">{value.icon}</div>
-              <h3 class="text-2xl font-bold mb-3 text-primary-950 dark:text-primary-50">
+              <h3 class="text-2xl font-bold mb-3 text-primary dark:text-primary">
                 {value.name}
               </h3>
               <p class="text-lg text-neutral-600 dark:text-neutral-300">
@@ -140,7 +140,7 @@ interface Testimonial {
 
       <div class="mb-24">
         <h2
-          class="text-3xl md:text-4xl font-bold text-primary-950 dark:text-primary-50 text-center mb-16"
+          class="text-3xl md:text-4xl font-bold text-primary dark:text-primary text-center mb-16"
         >
           Values in Action
         </h2>
@@ -149,26 +149,26 @@ interface Testimonial {
             content.caseStudies.map((study: CaseStudy) => (
               <div class="grid lg:grid-cols-2 gap-8 items-center">
                 <div class="order-2 lg:order-1">
-                  <h3 class="text-2xl font-bold text-primary-950 dark:text-primary-50 mb-4">
+                  <h3 class="text-2xl font-bold text-primary dark:text-primary mb-4">
                     {study.title}
                   </h3>
                   <p class="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
                     {study.description}
                   </p>
                   <div class="mb-6">
-                    <h4 class="font-semibold text-primary-950 dark:text-primary-50 mb-2">
+                    <h4 class="font-semibold text-primary dark:text-primary mb-2">
                       Values Applied:
                     </h4>
                     <div class="flex flex-wrap gap-2">
                       {study.values.map((value) => (
-                        <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-950 dark:text-primary-50 rounded-full text-sm">
+                        <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary dark:text-primary rounded-full text-sm">
                           {value}
                         </span>
                       ))}
                     </div>
                   </div>
                   <div>
-                    <h4 class="font-semibold text-primary-950 dark:text-primary-50 mb-2">
+                    <h4 class="font-semibold text-primary dark:text-primary mb-2">
                       Key Outcomes:
                     </h4>
                     <ul class="list-disc list-inside space-y-1 text-neutral-600 dark:text-neutral-300">
@@ -193,7 +193,7 @@ interface Testimonial {
 
       <div class="mb-24">
         <h2
-          class="text-3xl md:text-4xl font-bold text-primary-950 dark:text-primary-50 text-center mb-16"
+          class="text-3xl md:text-4xl font-bold text-primary dark:text-primary text-center mb-16"
         >
           What Clients Say
         </h2>
@@ -201,7 +201,7 @@ interface Testimonial {
           {
             content.testimonials.map((testimonial: Testimonial) => (
               <div class="bg-white dark:bg-neutral-800/50 rounded-2xl shadow-soft dark:shadow-soft-dark border border-neutral-200 dark:border-neutral-700 p-8">
-                <div class="text-4xl text-primary-500 dark:text-primary-400 mb-6">
+                <div class="text-4xl text-primary dark:text-primary mb-6">
                   "
                 </div>
                 <blockquote class="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
@@ -209,7 +209,7 @@ interface Testimonial {
                 </blockquote>
                 <div class="flex items-center justify-between">
                   <div>
-                    <cite class="not-italic font-semibold text-primary-950 dark:text-primary-50">
+                    <cite class="not-italic font-semibold text-primary dark:text-primary">
                       {testimonial.author}
                     </cite>
                     <p class="text-sm text-neutral-600 dark:text-neutral-300">
@@ -221,7 +221,7 @@ interface Testimonial {
                   </div>
                   <div class="flex flex-wrap gap-2">
                     {testimonial.values.map((value) => (
-                      <span class="px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-950 dark:text-primary-50 rounded-full text-xs">
+                      <span class="px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary dark:text-primary rounded-full text-xs">
                         {value}
                       </span>
                     ))}
@@ -234,7 +234,7 @@ interface Testimonial {
       </div>
 
       <div
-        class="bg-primary-950 dark:bg-primary-900 text-primary-50 rounded-3xl p-8 md:p-12 text-center"
+        class="bg-primary-950 dark:bg-primary-900 text-primary rounded-3xl p-8 md:p-12 text-center"
       >
         <h2 class="font-display text-3xl md:text-4xl mb-6">
           Ready to create impact together?

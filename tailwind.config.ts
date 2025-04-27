@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import { theme } from "./src/styles/theme/index.js";
+import { colors } from "./src/styles/theme/colors";
 
 const config: Config = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -7,24 +7,34 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ...theme.colors,
-        background: "#FFFFFF",
-        "card-purple": "#F3F0FF",
-        "card-black": "#111111",
-        "card-green": "#ECFDF5",
-        "card-orange": "#FFF7ED",
+        background: colors.neutral.background,
+        white: colors.neutral.white,
+        black: colors.neutral.black,
+        grey: { ...colors.grey },
+        success: { ...colors.success },
+        warning: { ...colors.warning },
+        error: { ...colors.error },
         primary: {
-          400: "#A78BFA",
-          500: "#8B5CF6",
-          600: "#7C3AED",
+          light: colors.primary.light,
+          DEFAULT: colors.primary.DEFAULT,
+          dark: colors.primary.dark,
         },
-        "primary-purple": "#8B5CF6",
-        "primary-black": "#111111",
-        "primary-green": "#10B981",
-        "primary-orange": "#F97316",
-        "section-alt": "#F9FAFB",
+        secondary: {
+          green: colors.secondary.green,
+          orange: colors.secondary.orange,
+          black: colors.secondary.black,
+        },
+        "primary-purple": colors.primary.DEFAULT, // legacy utility
+        "primary-black": colors.secondary.black,
+        "primary-green": colors.secondary.green,
+        "primary-orange": colors.secondary.orange,
+        "card-purple": colors.neutral.cardPurple,
+        "card-green": colors.neutral.cardGreen,
+        "card-orange": colors.neutral.cardOrange,
+        "card-black": colors.neutral.cardBlack,
+        "section-alt": colors.neutral.background,
       },
-      spacing: theme.spacing,
+      spacing: {}, // (optional: later hook into your spacing.ts if you want)
       fontFamily: {
         sans: ["DM Sans", "system-ui", "-apple-system", "sans-serif"],
         heading: ["Fraunces", "serif"],
@@ -32,12 +42,12 @@ const config: Config = {
         display: ["Fraunces", "serif"],
         mono: ["monospace"],
       },
-      fontWeight: theme.fontWeight,
-      lineHeight: theme.lineHeight,
-      letterSpacing: theme.letterSpacing,
-      transitionProperty: theme.transitionProperty,
-      transitionTimingFunction: theme.transitionTimingFunction,
-      transitionDuration: theme.transitionDuration,
+      fontWeight: {}, // (ready for future hook-in from typography.ts)
+      lineHeight: {},
+      letterSpacing: {},
+      transitionProperty: {},
+      transitionTimingFunction: {},
+      transitionDuration: {},
       boxShadow: {
         sm: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
         DEFAULT:
@@ -49,7 +59,6 @@ const config: Config = {
         inner: "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)",
         none: "none",
         soft: "0 4px 20px rgba(0, 0, 0, 0.08)",
-        // Dark mode shadows
         "dark-sm": "0 1px 2px 0 rgb(255 255 255 / 0.15)",
         "dark-DEFAULT":
           "0 1px 3px 0 rgb(255 255 255 / 0.2), 0 1px 2px -1px rgb(255 255 255 / 0.2)",
@@ -68,17 +77,16 @@ const config: Config = {
     },
   },
   plugins: [
-    function ({ addBase, addUtilities, theme }) {
-      // Define custom utility classes
+    function ({ addUtilities, theme }) {
       const customUtilities = {
         ".font-heading": {
-          fontFamily: '"Fraunces", serif',
+          fontFamily: theme("fontFamily.heading"),
         },
         ".font-body": {
-          fontFamily: '"DM Sans", system-ui, -apple-system, sans-serif',
+          fontFamily: theme("fontFamily.body"),
         },
         ".font-display": {
-          fontFamily: '"Fraunces", serif',
+          fontFamily: theme("fontFamily.display"),
         },
         ".bg-background": {
           backgroundColor: theme("colors.background"),
@@ -111,7 +119,7 @@ const config: Config = {
           backgroundColor: theme("colors.primary-orange"),
         },
         ".rounded-pill": {
-          borderRadius: "9999px",
+          borderRadius: theme("borderRadius.pill"),
         },
         ".shadow-soft": {
           boxShadow: theme("boxShadow.soft"),

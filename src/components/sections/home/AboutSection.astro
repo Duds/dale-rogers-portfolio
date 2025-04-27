@@ -8,8 +8,8 @@
  * @component AboutSection
  */
 
-import Container from "../../../../components/layout/Container.astro";
-import Button from "../../../../components/ui/Button.astro";
+import Container from "@/components/layout/Container.astro";
+import Button from "@/components/ui/Button.astro";
 
 interface Props {
   /** Biography text with HTML markup for emphasis and strong styling */
@@ -28,7 +28,7 @@ const { bio } = Astro.props;
       <div class="col-span-6 lg:col-span-4">
         <h2 id="about-heading" class="sr-only">About</h2>
         <div
-          class="text-2xl text-neutral-600 dark:text-neutral-300 leading-relaxed [&>.emphasis]:text-primary-600 [&>.emphasis]:dark:text-primary-400 [&>.emphasis]:font-medium [&>.emphasis]:italic [&>.strong]:text-neutral-900 [&>.strong]:dark:text-white [&>.strong]:font-bold space-y-6 mb-8"
+          class="text-2xl text-neutral-600 dark:text-neutral-300 leading-relaxed [&>.emphasis]:text-primary [&>.emphasis]:dark:text-primary [&>.emphasis]:font-medium [&>.emphasis]:italic [&>.strong]:text-neutral-900 [&>.strong]:dark:text-white [&>.strong]:font-bold space-y-6 mb-8"
           set:html={bio}
         />
         <div>
@@ -55,7 +55,7 @@ const { bio } = Astro.props;
 <style>
   /* Emphasis styles */
   :global(.about-section .emphasis) {
-    @apply text-primary-600 dark:text-primary-400 font-medium;
+    @apply text-primary dark:text-primary font-medium;
     font-style: italic;
   }
 
