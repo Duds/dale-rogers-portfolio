@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+
+import Layout from "@/layouts/BaseLayout.astro";
+import ArticleCard from "@/components/features/articles/components/ArticleCard.astro";
+import Pagination from "@/components/ui/Pagination.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+
+export const prerender = true;
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const ITEMS_PER_PAGE = 6;
+
+  const articles = await getCollection("articles", ({ data }) => !data.draft);
+
+  const sortedArticles = articles.sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+
+  return paginate(sortedArticles, {
+    pageSize: ITEMS_PER_PAGE,
+  });
+};
+
+interface Props {
+  page: {
+    data: CollectionEntry<"articles">[];
+    currentPage: number;
+    lastPage: number;
+  };
+}
+
+const { page } = Astro.props as Props;
+
+const getPageUrl = (pageNum: number) => {
+  return pageNum === 1 ? "/articles" : `/articles/${pageNum}`;
+};
+---
+
+<Layout title="Articles | Dale Rogers">
+  <PageHeader
+    title="Articles"
+    description="Thoughts and insights on service design, digital strategy, and technology"
+  />
+
+  <div class="container mx-auto px-4 py-12">
+    <div
+      class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+      id="articles-grid"
+    >
+      {
+        page.data.map((article) => (
+          <ArticleCard
+            title={article.data.title}
+            description={article.data.description}
+            pubDate={article.data.pubDate}
+            author={article.data.author}
+            tags={article.data.tags}
+            href={`/articles/${article.slug}`}
+            coverImage={article.data.coverImage}
+          />
+        ))
+      }
+    </div>
+
+    <Pagination
+      currentPage={page.currentPage}
+      totalPages={page.lastPage}
+      getPageUrl={getPageUrl}
+    />
+  </div>
+</Layout>
+
+<style>
+  /* Hover effect for article cards */
+  .group:hover h3 {
+    @apply text-purple-600 dark:text-purple-400;
+  }
+</style>

@@ -15,9 +15,9 @@ const { title, description, pubDate, tags, coverImage, author } = article.data;
 
 <BaseLayout title={title} description={description} image={coverImage}>
   <Container>
-    <article class="prose prose-lg dark:prose-invert mx-auto">
-      <header class="mb-8">
-        <h1 class="text-4xl font-bold mb-4">{title}</h1>
+    <article class="prose prose-lg dark:prose-invert mx-auto pt-24">
+      <header class="mb-12">
+        <h1 class="text-4xl font-bold mb-6">{title}</h1>
         <div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
           <FormattedDate date={pubDate} />
           <span>by {author}</span>
@@ -30,7 +30,7 @@ const { title, description, pubDate, tags, coverImage, author } = article.data;
           <img
             src={coverImage}
             alt={title}
-            class="w-full h-[400px] object-cover rounded-lg mb-8"
+            class="w-full h-[400px] object-cover rounded-lg mb-12"
           />
         )
       }

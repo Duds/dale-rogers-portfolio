@@ -13,7 +13,17 @@ const articles = await getCollection("articles", ({ data }) => {
 const sortedArticles = articles.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+export const prerender = true;
+
+// Add layout and define a redirect
+import Layout from "@/layouts/BaseLayout.astro";
 ---
+
+<Layout title="Redirecting to Articles">
+  <meta http-equiv="refresh" content="0;url=/articles/1" />
+  <p>Redirecting to <a href="/articles/1">Articles</a>...</p>
+</Layout>
 
 <BaseLayout
   title="Articles | Dale Rogers"
