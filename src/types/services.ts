@@ -13,7 +13,7 @@ export interface Service {
   /** Icon identifier for the service */
   icon?: string;
   /** Link to the service's page */
-  link: string;
+  link?: string;
   /** Slug for the service URL path */
   slug?: string;
 }

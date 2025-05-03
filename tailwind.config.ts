@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import { colors } from "./src/styles/theme/colors";
+import typography from "@tailwindcss/typography";
 
 const config: Config = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -124,10 +125,17 @@ const config: Config = {
         ".shadow-soft": {
           boxShadow: theme("boxShadow.soft"),
         },
+        ".hover-lift-shadow": {
+          "@apply shadow-md transition-all duration-300 ease-in-out": {},
+          "&:hover": {
+            "@apply shadow-lg -translate-y-0.5": {},
+          },
+        },
       };
 
       addUtilities(customUtilities);
     },
+    typography(),
   ],
 };
 

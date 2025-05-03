@@ -5,26 +5,6 @@ import { defineCollection, z } from "astro:content";
  * Defines schemas for various content types.
  */
 
-const variant = z.enum(["purple", "black", "green", "orange"]);
-
-const serviceSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  variant: variant,
-  imageUrl: z.string(),
-  icon: z.string(),
-  link: z.string(),
-});
-
-/**
- * Schema for services collection
- * Expects an array of services in a single file
- */
-const servicesCollection = defineCollection({
-  type: "data",
-  schema: z.array(serviceSchema),
-});
-
 const siteSectionSchema = z.object({
   section: z.enum([
     "hero",
@@ -126,6 +106,40 @@ const scratchSchema = baseSchema.extend({
     .optional(),
 });
 
+// Schema for service detail pages
+const serviceDetailSchema = baseSchema.extend({
+  serviceType: z.string(),
+  coverImage: z.string(),
+  icon: z.string().optional(),
+  benefits: z
+    .array(
+      z.object({
+        text: z.string(),
+        icon: z.string(),
+      })
+    )
+    .optional(),
+  process: z
+    .array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+      })
+    )
+    .optional(),
+  examples: z
+    .array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+        image: z.string().optional(),
+        link: z.string().optional(),
+      })
+    )
+    .optional(),
+  relatedCaseStudies: z.array(z.string()).optional(),
+});
+
 /**
  * Exported collections configuration
  */
@@ -142,6 +156,9 @@ export const collections = {
     type: "content",
     schema: scratchSchema,
   }),
-  services: servicesCollection,
+  services: defineCollection({
+    type: "content",
+    schema: serviceDetailSchema,
+  }),
   "site-content": siteContentCollection,
 };
