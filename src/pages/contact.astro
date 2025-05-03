@@ -5,6 +5,13 @@ import Button from "@/components/ui/Button.astro";
 import Container from "@/components/layout/Container.astro";
 
 // Base64 encode the email to prevent scraping while keeping it accessible
+const encodedEmail = "aGVsbG9AZGFsZXJvZ2Vycy5jb20uYXU="; // hello@dalerogers.com.au
+
+// Define brand color classes (adjust if your theme uses different names)
+const purpleColor = "text-purple-600 dark:text-purple-400";
+const orangeColor = "text-orange-600 dark:text-orange-400";
+const greenColor = "text-green-600 dark:text-green-400";
+const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware black/white
 ---
 
 <Layout title="Contact | Dale Rogers">
@@ -26,12 +33,12 @@ import Container from "@/components/layout/Container.astro";
         >
           <div class="max-w-3xl">
             <h1
-              class="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6"
+              class:list={["text-white", "font-display text-5xl md:text-6xl lg:text-7xl mb-6"]}
             >
               Ready to transform your service delivery? Get in touch and let me
               help you achieve your goals.
             </h1>
-            <p class="text-xl text-neutral-200 max-w-2xl">
+            <p class="text-xl md:text-2xl text-neutral-200 max-w-2xl">
               Ready to transform your service delivery? Whether you're looking
               for strategic guidance, service design expertise, or support with
               digital transformation, I'm here to help turn your vision into
@@ -47,58 +54,58 @@ import Container from "@/components/layout/Container.astro";
       <div class="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
         <!-- Left Column: Info -->
         <div class="space-y-8">
-          <div class="prose prose-lg dark:prose-invert space-y-8">
+          <div class="prose prose-xl dark:prose-invert max-w-none space-y-8">
             <p
-              class="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 mb-8"
+              class="lead"
             >
               Ready to transform your service delivery? Whether you're looking
               for strategic guidance, service design expertise, or support with
               digital transformation, I'm here to help turn your vision into
               reality.
             </p>
-            <p class="text-neutral-600 dark:text-neutral-300">
+            <p>
               With expertise in service design and a track record of successful
               projects across government, education, and private sectors, I
               bring a strategic approach to every collaboration.
             </p>
           </div>
 
-          <div class="space-y-6 pt-4">
-            <div class="flex items-center space-x-4">
+          <div class="prose prose-xl dark:prose-invert max-w-none space-y-6 pt-4">
+            <div class="flex items-center space-x-4 not-prose">
               <Icon
                 name="mail"
-                class="w-6 h-6 text-neutral-900 dark:text-neutral-100"
+                class:list={["w-6 h-6 flex-shrink-0", purpleColor]}
               />
               <a
                 id="contact-email"
                 href="#"
-                class="text-neutral-900 dark:text-neutral-100 hover:text-primary dark:hover:text-primary transition-colors"
+                class="hover:text-primary dark:hover:text-primary transition-colors break-all"
               >
                 [Loading email...]
               </a>
             </div>
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-4 not-prose">
               <Icon
                 name="linkedin"
-                class="w-6 h-6 text-neutral-900 dark:text-neutral-100"
+                class:list={["w-6 h-6 flex-shrink-0", orangeColor]}
               />
               <a
                 href="https://linkedin.com/in/dale-rogers"
-                class="text-neutral-900 dark:text-neutral-100 hover:text-primary dark:hover:text-primary transition-colors"
+                class="hover:text-primary dark:hover:text-primary transition-colors break-all"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 linkedin.com/in/dale-rogers
               </a>
             </div>
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-4 not-prose">
               <Icon
                 name="medium"
-                class="w-6 h-6 text-neutral-900 dark:text-neutral-100"
+                class:list={["w-6 h-6 flex-shrink-0", greenColor]}
               />
               <a
                 href="https://medium.com/@dale-rogers"
-                class="text-neutral-900 dark:text-neutral-100 hover:text-primary dark:hover:text-primary transition-colors"
+                class="hover:text-primary dark:hover:text-primary transition-colors break-all"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -107,26 +114,26 @@ import Container from "@/components/layout/Container.astro";
             </div>
           </div>
 
-          <div class="pt-4">
+          <div class="pt-4 prose prose-xl dark:prose-invert max-w-none">
             <h2
-              class="font-display text-2xl text-primary dark:text-primary mb-4"
+              class:list={[blackColor, "!mb-4"]}
             >
               Availability
             </h2>
-            <div class="space-y-4">
+            <div class="space-y-4 not-prose">
               <div>
-                <h3 class="font-medium text-neutral-900 dark:text-neutral-100">
+                <h3 class:list={[blackColor, "font-medium"]}>
                   Office Hours (AEST)
                 </h3>
-                <p class="text-neutral-600 dark:text-neutral-300">
+                <p class="text-lg text-neutral-600 dark:text-neutral-300">
                   Monday - Friday: 09:00 - 17:00
                 </p>
               </div>
               <div>
-                <h3 class="font-medium text-neutral-900 dark:text-neutral-100">
+                <h3 class:list={[blackColor, "font-medium"]}>
                   Response Time
                 </h3>
-                <p class="text-neutral-600 dark:text-neutral-300">
+                <p class="text-lg text-neutral-600 dark:text-neutral-300">
                   Same-day response during business hours<br />
                   24-hour response for urgent matters
                 </p>
@@ -139,12 +146,10 @@ import Container from "@/components/layout/Container.astro";
         <div
           class="bg-neutral-50 dark:bg-neutral-800/50 rounded-3xl p-8 lg:p-12"
         >
-          <h2 class="font-display text-3xl text-primary dark:text-primary mb-8">
+          <h2 class:list={[blackColor, "font-display text-3xl mb-8"]}>
             Send a Message
           </h2>
           <form
-            method="POST"
-            action="/api/contact"
             class="space-y-6"
             id="contact-form"
           >
@@ -191,7 +196,6 @@ import Container from "@/components/layout/Container.astro";
                 class="w-full px-4 py-3 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 focus:ring-2 focus:ring-primary-600 dark:focus:ring-primary-400 focus:border-transparent"
                 required></textarea>
             </div>
-            <div id="form-message" class="hidden rounded-xl p-4"></div>
             <Button type="submit" variant="primary" class="w-full">
               Send Message
               <svg
@@ -214,15 +218,17 @@ import Container from "@/components/layout/Container.astro";
     <!-- Map Section -->
     <Container class="mb-24" fullWidth>
       <div class="bg-neutral-50 dark:bg-neutral-800/50 rounded-3xl p-8 lg:p-12">
-        <h2 class="font-display text-3xl text-primary dark:text-primary mb-6">
-          Location & Collaboration
-        </h2>
-        <p class="text-neutral-600 dark:text-neutral-300 mb-8 max-w-2xl">
-          Strategically based in Canberra, Australia's capital, I'm perfectly
-          positioned to serve both government and private sector clients. While
-          I conduct most client meetings virtually, I'm available for in-person
-          workshops and critical sessions across Australia.
-        </p>
+        <div class="prose prose-xl dark:prose-invert max-w-none">
+          <h2 class:list={[blackColor, "!mb-6"]}>
+            Location & Collaboration
+          </h2>
+          <p class="!mb-8">
+            Strategically based in Canberra, Australia's capital, I'm perfectly
+            positioned to serve both government and private sector clients. While
+            I conduct most client meetings virtually, I'm available for in-person
+            workshops and critical sessions across Australia.
+          </p>
+        </div>
         <div
           class="rounded-2xl overflow-hidden h-[400px] bg-neutral-100 dark:bg-neutral-800/50"
         >
@@ -240,106 +246,218 @@ import Container from "@/components/layout/Container.astro";
       </div>
     </Container>
   </main>
+
+  <!-- Toast Notification Container -->
+  <div
+    id="toast-notification"
+    class="fixed bottom-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg text-white text-center transition-all duration-300 ease-in-out opacity-0 invisible z-50 flex items-center gap-2"
+    role="alert"
+    aria-live="assertive"
+  >
+    <div id="toast-icon" class="flex-shrink-0 w-5 h-5"></div>
+    <span id="toast-message"></span>
+  </div>
+
 </Layout>
 
 <script>
-  // Handle form submission
-  document
-    .getElementById("contact-form")
-    ?.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const form = e.target as HTMLFormElement;
-      const formMessage = document.getElementById("form-message");
+  // Base64 encoded email to prevent scraping
+  const encodedEmail = "aGVsbG9AZGFsZXJvZ2Vycy5jb20uYXU="; // hello@dalerogers.com.au
 
-      // Validate email
-      const emailInput = form.querySelector('#email') as HTMLInputElement;
-      const emailValue = emailInput?.value || '';
+  // Toast handling
+  let toastTimeout: number | null = null;
 
-      // Email validation function
-      const isValidEmail = (email: string): boolean => {
-        // Basic pattern matching
-        const basicPattern = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+  // Validate email function
+  function isValidEmail(email: string): boolean {
+    // Basic pattern matching
+    const basicPattern = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
 
-        if (!basicPattern.test(email)) {
-          return false;
-        }
+    if (!basicPattern.test(email)) {
+      return false;
+    }
 
-        // Additional checks for common invalid patterns
-        const invalidPatterns = [
-          /@example\.com$/i,         // Example domain
-          /@test\.com$/i,            // Test domain
-          /^noreply@/i,              // No-reply addresses
-          /^info@/i,                 // Generic info addresses
-          /^[a-z]{1,2}@/i,           // Single/double letter usernames
-          /^(admin|user|test)@/i,    // Generic usernames
-          /^.+@(gmail|yahoo|hotmail|outlook)\.(ru|cn)$/i, // Common spam domains
-        ];
+    // Additional checks for common invalid patterns
+    const invalidPatterns = [
+      /@example\.com$/i,         // Example domain
+      /@test\.com$/i,            // Test domain
+      /^noreply@/i,              // No-reply addresses
+      /^info@/i,                 // Generic info addresses
+      /^[a-z]{1,2}@/i,           // Single/double letter usernames
+      /^(admin|user|test)@/i,    // Generic usernames
+      /^.+@(gmail|yahoo|hotmail|outlook)\.(ru|cn)$/i, // Common spam domains
+    ];
 
-        // Check if email matches any invalid pattern
-        for (const pattern of invalidPatterns) {
-          if (pattern.test(email)) {
-            console.log(`Email rejected: matched pattern ${pattern}`);
-            return false;
-          }
-        }
+    // Check if email matches any invalid pattern
+    for (const pattern of invalidPatterns) {
+      if (pattern.test(email)) {
+        console.log(`Email rejected: matched pattern ${pattern}`);
+        return false;
+      }
+    }
 
-        return true;
-      };
+    return true;
+  }
 
-      // Check email and display error if invalid
-      if (!isValidEmail(emailValue)) {
-        if (formMessage) {
-          formMessage.classList.remove("hidden");
-          formMessage.textContent = "Please enter a valid email address. Generic or disposable email addresses are not accepted.";
-          formMessage.className = "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 p-4 rounded-xl";
-        }
-        emailInput.focus();
+  // Function to display toast messages
+  function showToast(message: string, isSuccess: boolean = true, type: 'success' | 'error' | 'info' | 'loading' = 'success'): void {
+    const toastEl = document.getElementById("toast-notification");
+    const toastMessageEl = document.getElementById("toast-message");
+    const toastIconEl = document.getElementById("toast-icon");
+
+    if (!toastEl || !toastMessageEl || !toastIconEl) return;
+
+    // Clear existing timeout
+    if (toastTimeout) {
+      clearTimeout(toastTimeout);
+      toastTimeout = null;
+    }
+
+    // Set message
+    toastMessageEl.textContent = message;
+
+    // Set icon based on type
+    let iconSvg = '';
+    let colorClass = '';
+
+    switch (type) {
+      case 'success':
+        // Checkmark icon
+        iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>`;
+        colorClass = "bg-green-600 dark:bg-green-700";
+        break;
+
+      case 'error':
+        // X icon
+        iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+        </svg>`;
+        colorClass = "bg-red-600 dark:bg-red-700";
+        break;
+
+      case 'info':
+        // Information icon
+        iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clip-rule="evenodd" />
+        </svg>`;
+        colorClass = "bg-blue-600 dark:bg-blue-700";
+        break;
+
+      case 'loading':
+        // Loading spinner icon
+        iconSvg = `<svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>`;
+        colorClass = "bg-purple-600 dark:bg-purple-700";
+        break;
+
+      default:
+        colorClass = isSuccess ? "bg-green-600 dark:bg-green-700" : "bg-red-600 dark:bg-red-700";
+    }
+
+    // Set the icon
+    toastIconEl.innerHTML = iconSvg;
+
+    // Apply appropriate styles
+    const baseClasses = "fixed bottom-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg text-white text-center transition-all duration-300 ease-in-out opacity-100 visible z-50 flex items-center gap-2";
+
+    toastEl.className = `${baseClasses} ${colorClass}`;
+
+    // Auto-hide after delay (except for loading)
+    if (type !== 'loading') {
+      toastTimeout = window.setTimeout(() => {
+        toastEl.className = toastEl.className.replace("opacity-100 visible", "opacity-0 invisible");
+      }, 4000);
+    }
+  }
+
+  // Function to decode and display email
+  function initializeEmail(): void {
+    try {
+      const emailLink = document.getElementById("contact-email") as HTMLAnchorElement | null;
+      if (!emailLink) {
+        console.error("Email link element not found");
         return;
       }
 
+      // Decode the Base64 email address
+      const decodedEmail = atob(encodedEmail);
+
+      // Update the email link
+      emailLink.href = `mailto:${decodedEmail}`;
+      emailLink.textContent = decodedEmail;
+    } catch (error) {
+      console.error("Failed to decode email:", error);
+      const emailLink = document.getElementById("contact-email");
+      if (emailLink) {
+        emailLink.textContent = "[Error loading email]";
+      }
+    }
+  }
+
+  // Function to handle form submission
+  function initializeContactForm(): void {
+    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+
+    if (!form) {
+      console.error("Contact form not found");
+      return;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      // Prevent default form submission behavior
+      event.preventDefault();
+      event.stopPropagation();
+
       try {
-        const response = await fetch(form.action, {
+        // Get email value for validation
+        const emailInput = form.querySelector('#email') as HTMLInputElement;
+        const emailValue = emailInput?.value || '';
+
+        // Validate email
+        if (!isValidEmail(emailValue)) {
+          showToast("Please enter a valid email address. Generic or disposable email addresses are not accepted.", false, 'error');
+          emailInput.focus();
+          return false;
+        }
+
+        showToast("Sending message...", true, 'loading');
+
+        // Send form data via fetch
+        const response = await fetch("/api/contact", {
           method: "POST",
-          body: new FormData(form),
+          body: new FormData(form)
         });
 
         const data = await response.json();
 
-        if (formMessage) {
-          formMessage.classList.remove("hidden");
-          if (response.ok) {
-            formMessage.textContent = "Message sent successfully!";
-            formMessage.className =
-              "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 p-4 rounded-xl";
-            form.reset();
-          } else {
-            formMessage.textContent =
-              data.error || "Failed to send message. Please try again.";
-            formMessage.className =
-              "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 p-4 rounded-xl";
-          }
+        if (response.ok) {
+          showToast("Message sent successfully!", true, 'success');
+          form.reset();
+        } else {
+          showToast(data.error || "Failed to send message", false, 'error');
         }
       } catch (error) {
-        if (formMessage) {
-          formMessage.classList.remove("hidden");
-          formMessage.textContent = "An error occurred. Please try again.";
-          formMessage.className =
-            "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 p-4 rounded-xl";
-        }
+        console.error("Error submitting form:", error);
+        showToast("An error occurred. Please try again.", false, 'error');
       }
+
+      return false; // Extra prevention of form submission
     });
+  }
 
-  // Handle email display
-  document.addEventListener("DOMContentLoaded", () => {
-    const email = atob("aGVsbG9AZGFsZXJvZ2Vycy5jb20uYXU=");
+  // Initialize everything when DOM is ready
+  function initializePage(): void {
+    initializeEmail();
+    initializeContactForm();
+  }
 
-    // Update email link
-    const emailLink = document.getElementById(
-      "contact-email"
-    ) as HTMLAnchorElement;
-    if (emailLink) {
-      emailLink.href = "mailto:" + email;
-      emailLink.textContent = email;
-    }
-  });
+  // Run initialization when the DOM is loaded
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializePage);
+  } else {
+    initializePage();
+  }
 </script>
