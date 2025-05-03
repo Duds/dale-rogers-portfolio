@@ -40,12 +40,46 @@ export const useSearch = (
       }
 
       const results = data.results as SearchResult[];
+      const apology = data.apology as string | undefined;
+      const suggestions = data.suggestions as SearchResult[] | undefined;
+      const suggestionMessage = data.suggestionMessage as string | undefined;
 
       if (results.length === 0) {
         resultsContainer.innerHTML = `
           <div class="p-4 text-sm text-gray-500 dark:text-gray-400">
-            No matching articles or case studies found.
+            ${apology || "Sorry, no results found."}
           </div>
+          ${
+            suggestions && suggestions.length > 0
+              ? `
+            <div class="p-4">
+              <div class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                ${suggestionMessage || "You might like..."}
+              </div>
+              <div class="divide-y divide-gray-100 dark:divide-neutral-800">
+                ${suggestions
+                  .map(
+                    (result) => `
+                      <a
+                        href="${result.url}"
+                        class="block p-2 hover:bg-gray-50 dark:hover:bg-neutral-800 rounded-md transition-colors duration-150"
+                        role="option"
+                      >
+                        <div class="font-medium text-gray-900 dark:text-gray-100">
+                          ${result.title}
+                        </div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">
+                          ${result.description}
+                        </div>
+                      </a>
+                    `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          `
+              : ""
+          }
         `;
         return;
       }

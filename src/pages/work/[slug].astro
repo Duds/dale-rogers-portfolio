@@ -1,0 +1,35 @@
+---
+/* This is the dynamic case study template that will render individual case studies */
+
+import { getCollection, type CollectionEntry } from "astro:content";
+import CaseStudyLayout from "@/layouts/CaseStudyLayout.astro";
+
+// Add prerender directive to generate static pages
+export const prerender = true;
+
+// Define what paths to be prerendered
+export async function getStaticPaths() {
+  const caseStudies = await getCollection("case-studies");
+  return caseStudies.map((caseStudy) => ({
+    params: { slug: caseStudy.slug },
+    props: { caseStudy },
+  }));
+}
+
+interface Props {
+  caseStudy: CollectionEntry<"case-studies">;
+}
+
+const { caseStudy } = Astro.props;
+
+// Error handling for when the case study doesn't exist
+if (!caseStudy) {
+  return Astro.redirect("/work");
+}
+
+const { Content } = await caseStudy.render();
+---
+
+<CaseStudyLayout caseStudy={caseStudy}>
+  <Content />
+</CaseStudyLayout>

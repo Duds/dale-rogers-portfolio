@@ -1,53 +1,31 @@
 ---
+import { getCollection } from "astro:content";
+
 interface CaseStudy {
   title: string;
   coverImage: string;
   slug: string;
 }
 
-// TODO: Replace with actual case studies from content collection
-const placeholderCaseStudies: CaseStudy[] = [
-  {
-    title: "Project Alpha",
-    coverImage: "/images/placeholder-1.jpg",
-    slug: "/case-studies/project-alpha",
-  },
-  {
-    title: "Project Beta",
-    coverImage: "/images/placeholder-2.jpg",
-    slug: "/case-studies/project-beta",
-  },
-  {
-    title: "Project Gamma",
-    coverImage: "/images/placeholder-3.jpg",
-    slug: "/case-studies/project-gamma",
-  },
-  {
-    title: "Project Delta",
-    coverImage: "/images/placeholder-4.jpg",
-    slug: "/case-studies/project-delta",
-  },
-  {
-    title: "Project Epsilon",
-    coverImage: "/images/placeholder-5.jpg",
-    slug: "/case-studies/project-epsilon",
-  },
-  {
-    title: "Project Zeta",
-    coverImage: "/images/placeholder-6.jpg",
-    slug: "/case-studies/project-zeta",
-  },
-  {
-    title: "Project Eta",
-    coverImage: "/images/placeholder-7.jpg",
-    slug: "/case-studies/project-eta",
-  },
-  {
-    title: "Project Theta",
-    coverImage: "/images/placeholder-8.jpg",
-    slug: "/case-studies/project-theta",
-  },
-];
+// Get case studies from content collection
+const caseStudies = await getCollection("case-studies");
+const randomizedCaseStudies = [...caseStudies]
+  .sort(() => 0.5 - Math.random()) // Randomize the order
+  .slice(0, 8) // Take 8 case studies
+  .map((study) => ({
+    title: study.data.title,
+    coverImage: study.data.coverImage || "/images/placeholder.jpg",
+    slug: `/work/${study.slug}`,
+  }));
+
+// If we don't have enough case studies, add placeholders to make it 8
+while (randomizedCaseStudies.length < 8) {
+  randomizedCaseStudies.push({
+    title: `Featured Project ${randomizedCaseStudies.length + 1}`,
+    coverImage: `/images/placeholder-${(randomizedCaseStudies.length % 4) + 1}.jpg`,
+    slug: "/work",
+  });
+}
 ---
 
 <section
@@ -59,7 +37,7 @@ const placeholderCaseStudies: CaseStudy[] = [
       class="slider-container flex gap-6 md:gap-8 w-max transition-transform duration-200 ease-out"
     >
       {
-        placeholderCaseStudies.map((study: CaseStudy) => (
+        randomizedCaseStudies.map((study: CaseStudy) => (
           <a
             href={study.slug}
             class="case-study-card w-[60vw] md:w-[40vw] lg:w-[30vw] h-[70vh] md:h-[60vh] relative rounded-lg overflow-hidden group flex-shrink-0 shadow-xl"

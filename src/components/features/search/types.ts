@@ -9,7 +9,9 @@ export interface SearchResult {
 
 export type SearchableContent =
   | CollectionEntry<"articles">
-  | CollectionEntry<"case-studies">;
+  | CollectionEntry<"case-studies">
+  | CollectionEntry<"services">
+  | CollectionEntry<"scratch">;
 
 export interface SearchOptions {
   minQueryLength?: number;

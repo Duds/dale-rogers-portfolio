@@ -8,29 +8,17 @@
  * @component FeaturedServicesSlider
  */
 
-import type { Service } from "../../../../types/services";
+import type { Service } from "../../../types/services.ts";
 
 // Using Unsplash images that represent each service theme
 const featuredServices: Service[] = [
-  {
-    title: "Service Design for Health",
-    coverImage:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80",
-    imageUrl:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80",
-    slug: "/services/health-service",
-    link: "/services/health-service",
-    description:
-      "Transforming healthcare delivery through human-centred design",
-  },
   {
     title: "Digital Transformation",
     coverImage:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80",
     imageUrl:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80",
-    slug: "/services/digital-transform",
-    link: "/services/digital-transform",
+    slug: "digital-transform",
     description: "Modernising legacy systems with user-first approach",
   },
   {
@@ -39,8 +27,7 @@ const featuredServices: Service[] = [
       "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80",
     imageUrl:
       "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80",
-    slug: "/services/citizen-portal",
-    link: "/services/citizen-portal",
+    slug: "citizen-portal",
     description: "Creating accessible digital services for all Australians",
   },
   {
@@ -49,8 +36,7 @@ const featuredServices: Service[] = [
       "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80",
     imageUrl:
       "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&q=80",
-    slug: "/services/service-blueprint",
-    link: "/services/service-blueprint",
+    slug: "service-blueprint",
     description: "Mapping complex service ecosystems for better outcomes",
   },
   {
@@ -59,8 +45,7 @@ const featuredServices: Service[] = [
       "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80",
     imageUrl:
       "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80",
-    slug: "/services/ux-research",
-    link: "/services/ux-research",
+    slug: "ux-research",
     description: "Deep dive into user needs and behaviours",
   },
   {
@@ -69,8 +54,7 @@ const featuredServices: Service[] = [
       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80",
     imageUrl:
       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80",
-    slug: "/services/service-integration",
-    link: "/services/service-integration",
+    slug: "service-integration",
     description: "Connecting systems for seamless experiences",
   },
   {
@@ -79,8 +63,7 @@ const featuredServices: Service[] = [
       "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80",
     imageUrl:
       "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80",
-    slug: "/services/design-system",
-    link: "/services/design-system",
+    slug: "design-system",
     description: "Building consistent user experiences at scale",
   },
   {
@@ -89,8 +72,7 @@ const featuredServices: Service[] = [
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80",
     imageUrl:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80",
-    slug: "/services/accessibility",
-    link: "/services/accessibility",
+    slug: "accessibility",
     description: "Ensuring digital inclusion for all users",
   },
 ];
@@ -105,9 +87,9 @@ const featuredServices: Service[] = [
       class="slider-container flex gap-4 md:gap-6 w-max transition-all duration-700 ease-out will-change-transform pl-4 md:pl-8"
     >
       {
-        featuredServices.map((service: Service) => (
+        featuredServices.map((service) => (
           <a
-            href={service.slug}
+            href={`/services/${service.slug}`}
             class="group w-[70vw] md:w-[35vw] lg:w-[25vw] h-[60vh] relative rounded-2xl overflow-hidden flex-shrink-0 bg-neutral-200 dark:bg-neutral-800"
           >
             <img

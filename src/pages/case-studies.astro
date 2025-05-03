@@ -25,7 +25,7 @@ const caseStudies = await getCollection("case-studies");
             industry={caseStudy.data.industry}
             duration={caseStudy.data.duration}
             tags={caseStudy.data.tags}
-            href={`/case-studies/${caseStudy.slug}`}
+            href={`/work/${caseStudy.slug}`}
           />
         ))
       }

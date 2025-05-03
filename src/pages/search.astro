@@ -1,0 +1,194 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { searchUtils } from "@/components/features/search/utils/searchUtils.js";
+import Container from "@/components/layout/Container.astro";
+import type { SearchResult } from "@/components/features/search/types.js";
+
+// Get search query from URL
+const query = Astro.url.searchParams.get("q")?.trim() || "";
+
+// Empty array by default
+let results: SearchResult[] = [];
+let noResultsSuggestions: SearchResult[] = [];
+let error: string | null = null;
+
+if (query.length >= 2) {
+  try {
+    // Get search results
+    const allResults = await searchUtils.search(query);
+    results = allResults;
+
+    // If no results, get some suggestions
+    if (results.length === 0) {
+      noResultsSuggestions = (await searchUtils.search("")).slice(0, 3);
+    }
+  } catch (err) {
+    console.error("Search error:", err);
+    error = "An error occurred while searching. Please try again.";
+  }
+}
+
+// Group results by category
+const groupedResults = results.reduce(
+  (acc, result) => {
+    const category = result.category;
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(result);
+    return acc;
+  },
+  {} as Record<string, SearchResult[]>
+);
+
+// Count total results
+const totalResults = results.length;
+
+// Page metadata
+const title = query
+  ? `Search Results for "${query}" | Dale Rogers`
+  : "Search | Dale Rogers";
+const description = query
+  ? `Search results for "${query}" on Dale Rogers' portfolio site.`
+  : "Search for articles, case studies, and projects on Dale Rogers' portfolio site.";
+---
+
+<Layout title={title} description={description}>
+  <main class="pt-32 md:pt-40">
+    <Container>
+      <div class="max-w-4xl mx-auto mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold font-heading mb-6">
+          {query ? `Search Results for "${query}"` : "Search"}
+        </h1>
+
+        <!-- Search form -->
+        <form action="/search" method="get" class="mb-8">
+          <div class="flex flex-col md:flex-row gap-4">
+            <div class="flex-grow">
+              <input
+                type="text"
+                name="q"
+                value={query}
+                placeholder="Search articles and case studies..."
+                class="w-full px-4 py-3 h-12 border-2 border-black dark:border-white rounded-full font-bold focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white dark:bg-neutral-900 text-black dark:text-white"
+                style="border-radius: 9999px;"
+                autofocus
+              />
+            </div>
+            <div>
+              <button
+                type="submit"
+                class="w-full md:w-auto h-12 px-6 py-0 bg-black text-white dark:bg-white dark:text-black font-bold rounded-full hover:bg-purple-700 dark:hover:bg-purple-400 transition-colors"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Results section -->
+        <div class="search-results">
+          {
+            error && (
+              <div class="bg-red-100 dark:bg-red-900 border-l-4 border-red-500 text-red-700 dark:text-red-300 p-4 mb-8">
+                <p>{error}</p>
+              </div>
+            )
+          }
+
+          {
+            !error && query.length < 2 && (
+              <div class="bg-blue-100 dark:bg-blue-900 border-l-4 border-blue-500 text-blue-700 dark:text-blue-300 p-4 mb-8">
+                <p>Please enter at least 2 characters to search.</p>
+              </div>
+            )
+          }
+
+          {
+            !error && query.length >= 2 && (
+              <div class="mb-4">
+                <p class="text-neutral-600 dark:text-neutral-300">
+                  {totalResults === 0
+                    ? "No results found"
+                    : `${totalResults} result${totalResults === 1 ? "" : "s"} found`}
+                </p>
+              </div>
+            )
+          }
+
+          {/* Display grouped results */}
+          {
+            Object.entries(groupedResults).map(
+              ([category, categoryResults]) => (
+                <div class="mb-10">
+                  <h2 class="text-2xl font-bold font-heading mb-4">
+                    {category}
+                  </h2>
+                  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {categoryResults.map((result: SearchResult) => (
+                      <a
+                        href={result.url}
+                        class="block p-6 border-2 border-black dark:border-white rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                      >
+                        <h3 class="text-xl font-bold mb-2">{result.title}</h3>
+                        <p class="text-neutral-600 dark:text-neutral-300 line-clamp-3">
+                          {result.description}
+                        </p>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )
+            )
+          }
+
+          {/* No results */}
+          {
+            query.length >= 2 && totalResults === 0 && (
+              <div class="mt-8">
+                <div class="mb-4 pb-4 border-b border-neutral-200 dark:border-neutral-700">
+                  <p class="text-neutral-600 dark:text-neutral-300">
+                    Sorry, we couldn't find any articles or case studies
+                    matching your search.
+                  </p>
+                </div>
+
+                {noResultsSuggestions.length > 0 && (
+                  <div>
+                    <h2 class="text-2xl font-bold font-heading mb-4">
+                      You might like these instead:
+                    </h2>
+                    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                      {noResultsSuggestions.map((suggestion: SearchResult) => (
+                        <a
+                          href={suggestion.url}
+                          class="block p-6 border-2 border-black dark:border-white rounded-2xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                        >
+                          <h3 class="text-xl font-bold mb-2">
+                            {suggestion.title}
+                          </h3>
+                          <p class="text-neutral-600 dark:text-neutral-300 line-clamp-3">
+                            {suggestion.description}
+                          </p>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </Container>
+  </main>
+</Layout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

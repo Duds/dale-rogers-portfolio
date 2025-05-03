@@ -1,30 +1,58 @@
 ---
-import Icon from "@/components/ui/Icon.astro";
+
 ---
 
-<div class="relative w-full max-w-xl">
-  <div class="relative flex items-center">
-    <Icon
-      name="search"
-      class="absolute left-4 w-6 h-6 text-black dark:text-white pointer-events-none"
-    />
-    <input
-      type="text"
-      placeholder="Search articles and case studies..."
-      class="w-full h-12 pl-22 pr-4 font-sans text-xl md:text-2xl font-bold bg-white dark:bg-neutral-900 border-2 border-black dark:border-white rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-      id="search-input"
-      aria-label="Search"
-      aria-expanded="false"
-      aria-controls="search-results"
-      role="combobox"
-      style="box-sizing: border-box;"
-    />
-  </div>
-  <div
-    id="search-results"
-    class="absolute z-50 w-full mt-2 bg-white dark:bg-neutral-900 border-2 border-black dark:border-white rounded-2xl shadow-lg hidden"
-    role="listbox"
+<div class="search-bar-container">
+  <form
+    class="search-form"
+    role="search"
+    aria-label="Site search"
+    autocomplete="off"
+    id="search-form"
+    action="/search"
+    method="get"
   >
+    <!-- Main search button with magnifying glass icon -->
+    <button
+      type="button"
+      id="search-toggle"
+      class="search-toggle"
+      aria-label="Toggle search"
+      tabindex="0"
+    >
+      <svg
+        class="search-icon"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </button>
+
+    <!-- Search input that appears when the button is clicked -->
+    <div class="search-input-container">
+      <input
+        type="text"
+        placeholder="Search articles and case studies..."
+        class="search-input"
+        id="search-input"
+        name="q"
+        aria-label="Search"
+        aria-expanded="false"
+        aria-controls="search-results"
+        role="combobox"
+        autocomplete="off"
+      />
+    </div>
+  </form>
+  <div id="search-results" class="search-results hidden" role="listbox">
     <!-- Results will be populated here -->
   </div>
 </div>
@@ -32,88 +60,228 @@ import Icon from "@/components/ui/Icon.astro";
 <script>
   import { useSearch } from "./hooks/useSearch.js";
 
-  // Initialize search functionality
   const searchInput = document.getElementById(
     "search-input"
-  ) as HTMLInputElement;
+  ) as HTMLInputElement | null;
   const searchResults = document.getElementById(
     "search-results"
-  ) as HTMLDivElement;
+  ) as HTMLDivElement | null;
+  const searchToggle = document.getElementById(
+    "search-toggle"
+  ) as HTMLButtonElement | null;
+  const searchForm = document.getElementById(
+    "search-form"
+  ) as HTMLFormElement | null;
+  const searchInputContainer = document.querySelector(
+    ".search-input-container"
+  ) as HTMLDivElement | null;
 
-  if (searchInput && searchResults) {
-    const { handleSearch, handleKeyDown } = useSearch(
-      searchInput,
-      searchResults
-    );
+  let expanded = false;
 
-    // Handle input events
-    searchInput.addEventListener("input", handleSearch);
-    searchInput.addEventListener("keydown", handleKeyDown);
-
-    // Handle click outside to close results
-    document.addEventListener("click", (event) => {
-      if (
-        !searchInput.contains(event.target as Node) &&
-        !searchResults.contains(event.target as Node)
-      ) {
-        searchResults.classList.add("hidden");
-        searchInput.setAttribute("aria-expanded", "false");
-      }
-    });
-
-    // Handle focus to show results if there's a query
-    searchInput.addEventListener("focus", () => {
-      if (searchInput.value.length >= 2) {
-        searchResults.classList.remove("hidden");
-        searchInput.setAttribute("aria-expanded", "true");
-      }
-    });
+  function expandSearch() {
+    if (!searchForm || !searchInput || !searchInputContainer) return;
+    expanded = true;
+    searchForm.classList.add("expanded");
+    searchInputContainer.classList.add("expanded");
+    searchInput.focus();
   }
+
+  function collapseSearch() {
+    if (!searchForm || !searchInput || !searchResults || !searchInputContainer)
+      return;
+    expanded = false;
+    searchForm.classList.remove("expanded");
+    searchInputContainer.classList.remove("expanded");
+    searchInput.value = "";
+    searchResults.classList.add("hidden");
+    searchInput.setAttribute("aria-expanded", "false");
+  }
+
+  function handleSearchToggle(e: Event) {
+    e.preventDefault();
+
+    if (!expanded) {
+      expandSearch();
+    } else if (searchInput && searchInput.value.trim() !== "") {
+      // If expanded and has input, submit the form
+      if (searchForm) {
+        searchForm.submit();
+      }
+    } else {
+      // If expanded but no input, collapse
+      collapseSearch();
+    }
+  }
+
+  // Wait for DOM to fully load
+  document.addEventListener("DOMContentLoaded", () => {
+    if (searchToggle && searchInput && searchForm) {
+      // Handle toggle button click
+      searchToggle.addEventListener("click", handleSearchToggle);
+
+      searchInput.addEventListener("focus", expandSearch);
+
+      // Handle Enter key in input field
+      searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          // Allow normal form submission to the search page
+          // We don't need to prevent default here
+        }
+      });
+
+      document.addEventListener("click", (event) => {
+        const target = event.target as Node | null;
+        if (
+          expanded &&
+          target &&
+          !searchForm.contains(target) &&
+          !searchResults?.contains(target)
+        ) {
+          collapseSearch();
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && expanded) {
+          collapseSearch();
+        }
+      });
+    }
+
+    if (searchInput && searchResults && searchForm) {
+      const { handleSearch, handleKeyDown } = useSearch(
+        searchInput,
+        searchResults
+      );
+      searchInput.addEventListener("input", handleSearch);
+      searchInput.addEventListener("keydown", handleKeyDown);
+    }
+  });
 </script>
 
 <style>
-  /* Ensure the search input maintains its styling */
-  #search-input {
-    @apply h-12 pl-12 pr-4 font-sans text-xl md:text-2xl font-bold bg-white dark:bg-neutral-900 border-2 border-black dark:border-white rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent w-full;
-    /* If @apply doesn't work in your setup, use plain CSS: */
-    height: 3rem !important;
-    padding-left: 3rem !important;
-    padding-right: 1rem !important;
-    font-family: "DM Sans", sans-serif !important;
-    font-size: 1.25rem !important;
-    font-weight: 700 !important;
-    border-radius: 9999px !important;
-    border-width: 2px !important;
-    border-color: #000 !important;
-    background: #fff !important;
+  .search-bar-container {
+    position: relative;
+    height: 3rem;
+    width: 3rem;
+    z-index: 50; /* Ensure it's above other elements */
   }
 
-  .dark #search-input {
-    background: #171717 !important;
-    border-color: #fff !important;
-    color: #fff !important;
+  .search-form {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 
-  /* Style the search results */
-  #search-results {
+  .search-form.expanded {
+    width: auto;
+  }
+
+  /* Main search button styling to match navigation buttons */
+  .search-toggle {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: transparent; /* Match nav buttons with transparent bg */
+    border: 2px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: var(--color-text);
+    z-index: 20;
+    padding: 0;
+    position: relative; /* Ensure position is established for z-index */
+  }
+
+  /* Match hover style of other navigation buttons */
+  .search-toggle:hover {
+    background-color: var(--color-text);
+    color: var(--color-background);
+  }
+
+  /* Direct SVG styling */
+  .search-icon {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+  }
+
+  .search-input-container {
+    position: absolute;
+    right: calc(100% + 0.75rem); /* Restore original positioning */
+    top: 0;
+    display: flex;
+    align-items: center;
+    width: 0;
+    height: 100%;
+    overflow: hidden;
+    transition:
+      width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .search-input-container.expanded {
+    width: 16rem;
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .search-input {
+    flex: 1;
+    height: 3rem;
+    border: 2px solid currentColor;
+    border-radius: 1.5rem;
+    background: var(--color-background);
+    padding: 0 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    outline: none;
+    color: var(--color-text);
+  }
+
+  .search-results {
+    position: absolute;
+    top: 3.5rem;
+    right: 0;
+    width: 20rem;
+    z-index: 10;
+    background: var(--color-background);
+    border: 2px solid var(--color-text);
+    border-radius: 1rem;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
     max-height: 80vh;
     overflow-y: auto;
   }
 
-  /* Style the search results items */
-  #search-results a {
-    display: block;
-    padding: 0.5rem 1rem;
-    color: inherit;
-    text-decoration: none;
-    transition: background-color 0.2s;
+  /* Dark mode is now handled by CSS variables */
+
+  :root {
+    --color-text: #000;
+    --color-background: #fff;
   }
 
-  #search-results a:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+  .dark {
+    --color-text: #fff;
+    --color-background: #171717;
   }
 
-  .dark #search-results a:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+  @media (max-width: 768px) {
+    .search-input-container.expanded {
+      width: 70vw;
+      right: 100%; /* Restore original positioning */
+    }
+
+    .search-results {
+      width: 100%;
+      left: -50%; /* Restore original positioning */
+      min-width: 16rem;
+    }
   }
 </style>
