@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { getCollection } from "astro:content";
+import { searchUtils } from "@/components/features/search/utils/searchUtils";
 
 export const GET: APIRoute = async ({ url }) => {
   const query = url.searchParams.get("q")?.toLowerCase() || "";
@@ -14,37 +14,30 @@ export const GET: APIRoute = async ({ url }) => {
   }
 
   try {
-    // Fetch all content
-    const articles = await getCollection("articles");
-    const caseStudies = await getCollection("case-studies");
+    // Use semantic search and limit to 10 smart results
+    const allResults = await searchUtils.search(query);
+    const results = allResults.slice(0, 10);
 
-    // Search through content
-    const results = [
-      ...articles
-        .filter((article) => {
-          const searchableText =
-            `${article.data.title} ${article.data.description}`.toLowerCase();
-          return searchableText.includes(query);
-        })
-        .map((article) => ({
-          title: article.data.title,
-          description: article.data.description,
-          category: "Articles",
-          url: `/articles/${article.slug}`,
-        })),
-      ...caseStudies
-        .filter((caseStudy) => {
-          const searchableText =
-            `${caseStudy.data.title} ${caseStudy.data.description}`.toLowerCase();
-          return searchableText.includes(query);
-        })
-        .map((caseStudy) => ({
-          title: caseStudy.data.title,
-          description: caseStudy.data.description,
-          category: "Case Studies",
-          url: `/case-studies/${caseStudy.slug}`,
-        })),
-    ];
+    // If no results, provide apology and smart suggestions
+    if (results.length === 0) {
+      // Suggest up to 3 semantically interesting items (not just random)
+      const fallbackResults = (await searchUtils.search("")).slice(0, 3);
+      return new Response(
+        JSON.stringify({
+          results: [],
+          apology:
+            "Sorry, we couldn't find any articles or case studies matching your search.",
+          suggestions: fallbackResults,
+          suggestionMessage: "You might like these instead:",
+        }),
+        {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
 
     return new Response(JSON.stringify({ results }), {
       status: 200,
