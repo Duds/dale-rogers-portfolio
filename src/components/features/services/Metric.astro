@@ -1,0 +1,15 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+const { value, label, icon, class: iconClass } = Astro.props;
+---
+<div class="metric flex items-center gap-4 my-8 p-6 bg-neutral-50 dark:bg-neutral-900/40 rounded-xl border border-neutral-200 dark:border-neutral-700">
+  {icon && (
+    <span class="shrink-0">
+      <Icon name={icon} class={`w-10 h-10 ${iconClass ? iconClass : 'text-secondary-green'}`} />
+    </span>
+  )}
+  <div>
+    <div class="text-4xl md:text-5xl font-black text-neutral-900 dark:text-white">{value}</div>
+    <div class="text-2xl text-neutral-600 dark:text-neutral-300 font-semibold">{label}</div>
+  </div>
+</div>
