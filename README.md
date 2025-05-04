@@ -46,13 +46,16 @@ dale-rogers-portfolio/
 
 ## Documentation
 
-Comprehensive documentation is available in the [docs](./docs) directory:
+Comprehensive documentation is available in the project:
 
-- [Getting Started](./docs/DEVELOPMENT.md)
-- [Architecture](./docs/ARCHITECTURE.md)
-- [Components](./docs/COMPONENTS.md)
-- [Deployment](./docs/DEPLOYMENT.md)
-- [Contributing](./docs/CONTRIBUTING.md)
+- [Development Guide](./DEVELOPMENT.md) - Setup and workflow
+- [Architecture](./ARCHITECTURE.md) - System design and architecture
+- [Components](./docs/COMPONENTS.md) - UI component library
+- [Deployment](./docs/DEPLOYMENT.md) - Deployment procedures
+- [Contributing](./docs/CONTRIBUTING.md) - How to contribute
+- [Search Features](./docs/SEARCH.md) - Search implementation
+- [Testing](./docs/TESTING.md) - Testing strategies
+- [Theme System](./src/styles/THEME.md) - Theming documentation
 
 See the [documentation index](./docs/README.md) for a complete list of available documentation.
 

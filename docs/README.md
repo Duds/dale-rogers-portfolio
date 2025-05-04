@@ -7,11 +7,12 @@ Welcome to the Dale Rogers Portfolio documentation. This directory contains comp
 ### Core Documentation
 
 - [README.md](../README.md) - Project overview and quick start
-- [ARCHITECTURE.md](./ARCHITECTURE.md) - System architecture and design decisions
-- [DEVELOPMENT.md](./DEVELOPMENT.md) - Development setup and workflows
+- [ARCHITECTURE.md](../ARCHITECTURE.md) - System architecture and design decisions
+- [DEVELOPMENT.md](../DEVELOPMENT.md) - Development setup and workflows
 - [DEPLOYMENT.md](./DEPLOYMENT.md) - Deployment procedures and environments
 - [SECURITY.md](./SECURITY.md) - Security policies and procedures
 - [TESTING.md](./TESTING.md) - Testing strategies and requirements
+- [SEARCH.md](./SEARCH.md) - Search functionality documentation
 
 ### Project History and Decisions
 
@@ -23,6 +24,7 @@ Welcome to the Dale Rogers Portfolio documentation. This directory contains comp
 
 - [COMPONENTS.md](./COMPONENTS.md) - Component library documentation
 - [CONTENT.md](./CONTENT.md) - Content management system documentation
+- [Theme System](../src/styles/THEME.md) - Theming documentation and styles
 
 ### Contributing
 
@@ -46,7 +48,7 @@ Welcome to the Dale Rogers Portfolio documentation. This directory contains comp
 
 ### File Organization
 
-- Core documentation in `/docs`
+- Core documentation in project root and `/docs`
 - Component-specific documentation alongside components
 - API documentation in `/docs/api`
 - Development guides in `/docs/guides`
@@ -74,8 +76,8 @@ Welcome to the Dale Rogers Portfolio documentation. This directory contains comp
 For new developers, we recommend reading the documentation in this order:
 
 1. [README.md](../README.md) - Project overview
-2. [DEVELOPMENT.md](./DEVELOPMENT.md) - Development setup
-3. [ARCHITECTURE.md](./ARCHITECTURE.md) - System architecture
+2. [DEVELOPMENT.md](../DEVELOPMENT.md) - Development setup
+3. [ARCHITECTURE.md](../ARCHITECTURE.md) - System architecture
 4. [COMPONENTS.md](./COMPONENTS.md) - Component library
 5. [CONTRIBUTING.md](./CONTRIBUTING.md) - How to contribute
 

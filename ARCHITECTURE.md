@@ -1,5 +1,15 @@
 # Portfolio Architecture
 
+## Related Documentation
+
+- [Development Guide](./DEVELOPMENT.md) - Setup and workflow information
+- [Components Documentation](./docs/COMPONENTS.md) - Detailed component specifications
+- [Deployment](./docs/DEPLOYMENT.md) - Deployment procedures and environments
+- [Theme System](./src/styles/THEME.md) - Theming and styling documentation
+- [Content Management](./docs/CONTENT.md) - Content collections and data flow
+- [Search Features](./docs/SEARCH.md) - Search implementation details
+- [Documentation Index](./docs/README.md) - Complete documentation list
+
 ## System Overview
 
 The portfolio is built as a server-side rendered Astro application with static pages and dynamic API routes for form handling.
