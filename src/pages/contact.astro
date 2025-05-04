@@ -4,9 +4,6 @@ import Icon from "@/components/ui/Icon.astro";
 import Button from "@/components/ui/Button.astro";
 import Container from "@/components/layout/Container.astro";
 
-// Base64 encode the email to prevent scraping while keeping it accessible
-const encodedEmail = "aGVsbG9AZGFsZXJvZ2Vycy5jb20uYXU="; // hello@dalerogers.com.au
-
 // Define brand color classes (adjust if your theme uses different names)
 const purpleColor = "text-purple-600 dark:text-purple-400";
 const orangeColor = "text-orange-600 dark:text-orange-400";
@@ -33,7 +30,10 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
         >
           <div class="max-w-3xl">
             <h1
-              class:list={["text-white", "font-display text-5xl md:text-6xl lg:text-7xl mb-6"]}
+              class:list={[
+                "text-white",
+                "font-display text-5xl md:text-6xl lg:text-7xl mb-6",
+              ]}
             >
               Ready to transform your service delivery? Get in touch and let me
               help you achieve your goals.
@@ -55,9 +55,7 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
         <!-- Left Column: Info -->
         <div class="space-y-8">
           <div class="prose prose-xl dark:prose-invert max-w-none space-y-8">
-            <p
-              class="lead"
-            >
+            <p class="lead">
               Ready to transform your service delivery? Whether you're looking
               for strategic guidance, service design expertise, or support with
               digital transformation, I'm here to help turn your vision into
@@ -70,7 +68,9 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
             </p>
           </div>
 
-          <div class="prose prose-xl dark:prose-invert max-w-none space-y-6 pt-4">
+          <div
+            class="prose prose-xl dark:prose-invert max-w-none space-y-6 pt-4"
+          >
             <div class="flex items-center space-x-4 not-prose">
               <Icon
                 name="mail"
@@ -115,11 +115,7 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
           </div>
 
           <div class="pt-4 prose prose-xl dark:prose-invert max-w-none">
-            <h2
-              class:list={[blackColor, "!mb-4"]}
-            >
-              Availability
-            </h2>
+            <h2 class:list={[blackColor, "!mb-4"]}>Availability</h2>
             <div class="space-y-4 not-prose">
               <div>
                 <h3 class:list={[blackColor, "font-medium"]}>
@@ -130,9 +126,7 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
                 </p>
               </div>
               <div>
-                <h3 class:list={[blackColor, "font-medium"]}>
-                  Response Time
-                </h3>
+                <h3 class:list={[blackColor, "font-medium"]}>Response Time</h3>
                 <p class="text-lg text-neutral-600 dark:text-neutral-300">
                   Same-day response during business hours<br />
                   24-hour response for urgent matters
@@ -149,10 +143,7 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
           <h2 class:list={[blackColor, "font-display text-3xl mb-8"]}>
             Send a Message
           </h2>
-          <form
-            class="space-y-6"
-            id="contact-form"
-          >
+          <form class="space-y-6" id="contact-form">
             <div>
               <label
                 for="name"
@@ -219,14 +210,12 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
     <Container class="mb-24" fullWidth>
       <div class="bg-neutral-50 dark:bg-neutral-800/50 rounded-3xl p-8 lg:p-12">
         <div class="prose prose-xl dark:prose-invert max-w-none">
-          <h2 class:list={[blackColor, "!mb-6"]}>
-            Location & Collaboration
-          </h2>
+          <h2 class:list={[blackColor, "!mb-6"]}>Location & Collaboration</h2>
           <p class="!mb-8">
             Strategically based in Canberra, Australia's capital, I'm perfectly
-            positioned to serve both government and private sector clients. While
-            I conduct most client meetings virtually, I'm available for in-person
-            workshops and critical sessions across Australia.
+            positioned to serve both government and private sector clients.
+            While I conduct most client meetings virtually, I'm available for
+            in-person workshops and critical sessions across Australia.
           </p>
         </div>
         <div
@@ -257,7 +246,6 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
     <div id="toast-icon" class="flex-shrink-0 w-5 h-5"></div>
     <span id="toast-message"></span>
   </div>
-
 </Layout>
 
 <script>
@@ -278,12 +266,12 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
 
     // Additional checks for common invalid patterns
     const invalidPatterns = [
-      /@example\.com$/i,         // Example domain
-      /@test\.com$/i,            // Test domain
-      /^noreply@/i,              // No-reply addresses
-      /^info@/i,                 // Generic info addresses
-      /^[a-z]{1,2}@/i,           // Single/double letter usernames
-      /^(admin|user|test)@/i,    // Generic usernames
+      /@example\.com$/i, // Example domain
+      /@test\.com$/i, // Test domain
+      /^noreply@/i, // No-reply addresses
+      /^info@/i, // Generic info addresses
+      /^[a-z]{1,2}@/i, // Single/double letter usernames
+      /^(admin|user|test)@/i, // Generic usernames
       /^.+@(gmail|yahoo|hotmail|outlook)\.(ru|cn)$/i, // Common spam domains
     ];
 
@@ -299,7 +287,11 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
   }
 
   // Function to display toast messages
-  function showToast(message: string, isSuccess: boolean = true, type: 'success' | 'error' | 'info' | 'loading' = 'success'): void {
+  function showToast(
+    message: string,
+    isSuccess: boolean = true,
+    type: "success" | "error" | "info" | "loading" = "success"
+  ): void {
     const toastEl = document.getElementById("toast-notification");
     const toastMessageEl = document.getElementById("toast-message");
     const toastIconEl = document.getElementById("toast-icon");
@@ -316,11 +308,11 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
     toastMessageEl.textContent = message;
 
     // Set icon based on type
-    let iconSvg = '';
-    let colorClass = '';
+    let iconSvg = "";
+    let colorClass = "";
 
     switch (type) {
-      case 'success':
+      case "success":
         // Checkmark icon
         iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
@@ -328,7 +320,7 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
         colorClass = "bg-green-600 dark:bg-green-700";
         break;
 
-      case 'error':
+      case "error":
         // X icon
         iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
@@ -336,7 +328,7 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
         colorClass = "bg-red-600 dark:bg-red-700";
         break;
 
-      case 'info':
+      case "info":
         // Information icon
         iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -344,7 +336,7 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
         colorClass = "bg-blue-600 dark:bg-blue-700";
         break;
 
-      case 'loading':
+      case "loading":
         // Loading spinner icon
         iconSvg = `<svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -354,21 +346,27 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
         break;
 
       default:
-        colorClass = isSuccess ? "bg-green-600 dark:bg-green-700" : "bg-red-600 dark:bg-red-700";
+        colorClass = isSuccess
+          ? "bg-green-600 dark:bg-green-700"
+          : "bg-red-600 dark:bg-red-700";
     }
 
     // Set the icon
     toastIconEl.innerHTML = iconSvg;
 
     // Apply appropriate styles
-    const baseClasses = "fixed bottom-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg text-white text-center transition-all duration-300 ease-in-out opacity-100 visible z-50 flex items-center gap-2";
+    const baseClasses =
+      "fixed bottom-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg text-white text-center transition-all duration-300 ease-in-out opacity-100 visible z-50 flex items-center gap-2";
 
     toastEl.className = `${baseClasses} ${colorClass}`;
 
     // Auto-hide after delay (except for loading)
-    if (type !== 'loading') {
+    if (type !== "loading") {
       toastTimeout = window.setTimeout(() => {
-        toastEl.className = toastEl.className.replace("opacity-100 visible", "opacity-0 invisible");
+        toastEl.className = toastEl.className.replace(
+          "opacity-100 visible",
+          "opacity-0 invisible"
+        );
       }, 4000);
     }
   }
@@ -376,7 +374,9 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
   // Function to decode and display email
   function initializeEmail(): void {
     try {
-      const emailLink = document.getElementById("contact-email") as HTMLAnchorElement | null;
+      const emailLink = document.getElementById(
+        "contact-email"
+      ) as HTMLAnchorElement | null;
       if (!emailLink) {
         console.error("Email link element not found");
         return;
@@ -399,7 +399,9 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
 
   // Function to handle form submission
   function initializeContactForm(): void {
-    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+    const form = document.getElementById(
+      "contact-form"
+    ) as HTMLFormElement | null;
 
     if (!form) {
       console.error("Contact form not found");
@@ -413,35 +415,39 @@ const blackColor = "text-neutral-900 dark:text-neutral-100"; // Theme-aware blac
 
       try {
         // Get email value for validation
-        const emailInput = form.querySelector('#email') as HTMLInputElement;
-        const emailValue = emailInput?.value || '';
+        const emailInput = form.querySelector("#email") as HTMLInputElement;
+        const emailValue = emailInput?.value || "";
 
         // Validate email
         if (!isValidEmail(emailValue)) {
-          showToast("Please enter a valid email address. Generic or disposable email addresses are not accepted.", false, 'error');
+          showToast(
+            "Please enter a valid email address. Generic or disposable email addresses are not accepted.",
+            false,
+            "error"
+          );
           emailInput.focus();
           return false;
         }
 
-        showToast("Sending message...", true, 'loading');
+        showToast("Sending message...", true, "loading");
 
         // Send form data via fetch
         const response = await fetch("/api/contact", {
           method: "POST",
-          body: new FormData(form)
+          body: new FormData(form),
         });
 
         const data = await response.json();
 
         if (response.ok) {
-          showToast("Message sent successfully!", true, 'success');
+          showToast("Message sent successfully!", true, "success");
           form.reset();
         } else {
-          showToast(data.error || "Failed to send message", false, 'error');
+          showToast(data.error || "Failed to send message", false, "error");
         }
       } catch (error) {
         console.error("Error submitting form:", error);
-        showToast("An error occurred. Please try again.", false, 'error');
+        showToast("An error occurred. Please try again.", false, "error");
       }
 
       return false; // Extra prevention of form submission

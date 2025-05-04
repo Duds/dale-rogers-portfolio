@@ -1,9 +1,16 @@
 import type { APIRoute } from "astro";
-import { searchUtils } from "@/components/features/search/utils/searchUtils";
+import { searchUtils } from "@/components/features/search/utils/searchUtils.js";
+import type { SearchResult } from "@/components/features/search/types.js";
 
+/**
+ * Search API endpoint for portfolio content
+ * Performs semantic search across articles, case studies, services and scratch posts
+ * @route GET /api/search
+ */
 export const GET: APIRoute = async ({ url }) => {
   const query = url.searchParams.get("q")?.toLowerCase() || "";
 
+  // Require at least 2 characters for search
   if (query.length < 2) {
     return new Response(JSON.stringify({ results: [] }), {
       status: 200,
@@ -16,7 +23,7 @@ export const GET: APIRoute = async ({ url }) => {
   try {
     // Use semantic search and limit to 10 smart results
     const allResults = await searchUtils.search(query);
-    const results = allResults.slice(0, 10);
+    const results: SearchResult[] = allResults.slice(0, 10);
 
     // If no results, provide apology and smart suggestions
     if (results.length === 0) {
@@ -46,12 +53,23 @@ export const GET: APIRoute = async ({ url }) => {
       },
     });
   } catch (error) {
-    console.error("Search error:", error);
-    return new Response(JSON.stringify({ error: "Search failed" }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    console.error(
+      "Search error:",
+      error instanceof Error ? error.message : String(error)
+    );
+
+    return new Response(
+      JSON.stringify({
+        error: "Search failed",
+        message:
+          "Sorry, there was an issue processing your search. Please try again.",
+      }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   }
 };
