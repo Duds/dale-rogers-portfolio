@@ -4,78 +4,243 @@ import Container from "@/components/layout/Container.astro";
 import { type CollectionEntry } from "astro:content";
 import TagList from "@/components/ui/TagList.astro";
 import FormattedDate from "@/components/ui/FormattedDate.astro";
+import ArticleAuthor from "@/components/features/articles/components/ArticleAuthor.astro";
+import ArticleTableOfContents from "@/components/features/articles/components/ArticleTableOfContents.astro";
+import ArticleShareButtons from "@/components/features/articles/components/ArticleShareButtons.astro";
+import ArticleRelated from "@/components/features/articles/components/ArticleRelated.astro";
+import ReadingTime from "@/components/ui/ReadingTime.astro";
+import Icon from "@/components/ui/Icon.astro";
 
+/**
+ * Enhanced Article Layout component
+ * @component ArticleLayout
+ * @prop {CollectionEntry<"articles">} article - The article entry from the content collection
+ * @prop {string} [content] - Raw content for calculating reading time
+ */
 interface Props {
   article: CollectionEntry<"articles">;
+  content?: string;
 }
 
-const { article } = Astro.props;
-const { title, description, pubDate, tags, coverImage, author } = article.data;
+const { article, content = "" } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  tags,
+  coverImage,
+  author,
+  authorImage,
+  authorBio,
+  metaKeywords,
+  lastModified,
+  readingTime: explicitReadingTime,
+} = article.data;
+
+// Calculate reading time if not explicitly provided
+const readingTime =
+  explicitReadingTime || Math.ceil(content.split(/\s+/).length / 200);
+
+// Additional meta data for SEO
+const metaDescription = description;
+const metaTitle = `${title} | Dale Rogers`;
+
+// Handle keywords properly - both metaKeywords and tags are arrays
+const keywordsString = metaKeywords ? metaKeywords.join(", ") : "";
+const tagString = tags ? tags.join(", ") : "";
+const keywords = keywordsString || tagString;
+
+const publishDate = pubDate.toISOString();
+const modifiedDate = lastModified
+  ? new Date(lastModified).toISOString()
+  : publishDate;
 ---
 
-<BaseLayout title={title} description={description} image={coverImage}>
+<BaseLayout
+  title={metaTitle}
+  description={metaDescription}
+  image={coverImage}
+  keywords={keywords}
+  article={{
+    publishDate,
+    modifiedDate,
+    tags: tags || [],
+    author: {
+      name: author,
+      image: authorImage || "/images/profile.jpg",
+    },
+  }}
+>
   <Container>
-    <article class="prose prose-lg dark:prose-invert mx-auto pt-24">
-      <header class="mb-12">
-        <h1 class="text-4xl font-bold mb-6">{title}</h1>
-        <div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
-          <FormattedDate date={pubDate} />
-          <span>by {author}</span>
+    <div
+      class="article-wrapper pt-28 pb-16 max-w-none flex flex-col xl:flex-row xl:gap-16"
+    >
+      <!-- Main Content Column -->
+      <article class="max-w-5xl xl:flex-1">
+        <!-- Article Header -->
+        <header class="mb-14">
+          <!-- Back Link -->
+          <a
+            href="/articles"
+            class="inline-flex items-center text-base tracking-tight text-neutral-600 dark:text-neutral-400 mb-8 hover:text-primary-purple dark:hover:text-primary-purple transition-colors"
+          >
+            <Icon name="chevron-left" class="w-4 h-4 mr-2" /> Back to Articles
+          </a>
+
+          <!-- Title and Meta -->
+          <h1
+            class="text-5xl md:text-6xl font-black font-heading mb-8 tracking-tight leading-tight"
+          >
+            {title}
+          </h1>
+          <p
+            class="text-2xl text-neutral-700 dark:text-neutral-300 mb-8 leading-relaxed max-w-3xl tracking-normal"
+          >
+            {description}
+          </p>
+
+          <div
+            class="flex flex-wrap items-center gap-x-8 gap-y-3 text-neutral-600 dark:text-neutral-400 mb-8"
+          >
+            <FormattedDate
+              date={pubDate}
+              class="flex items-center"
+              icon="calendar"
+            />
+            {
+              lastModified && (
+                <FormattedDate
+                  date={new Date(lastModified)}
+                  prefix="Updated:"
+                  class="flex items-center"
+                  icon="refresh"
+                />
+              )
+            }
+            <ReadingTime minutes={readingTime} />
+          </div>
+
+          {tags && <TagList tags={tags} class="mb-10" />}
+
+          <!-- Author Section -->
+          {
+            author && (
+              <ArticleAuthor
+                name={author}
+                image={authorImage}
+                bio={authorBio}
+              />
+            )
+          }
+        </header>
+
+        <!-- Cover Image -->
+        {
+          coverImage && (
+            <div class="relative mb-14 rounded-2xl overflow-hidden">
+              <img
+                src={coverImage}
+                alt={`Cover image for ${title}`}
+                class="w-full aspect-[16/9] object-cover"
+                width="1200"
+                height="675"
+                loading="eager"
+              />
+            </div>
+          )
+        }
+
+        <!-- Article Content -->
+        <div class="article-content prose-article max-w-none">
+          <slot />
         </div>
-        {tags && <TagList tags={tags} class="mt-4" />}
-      </header>
 
-      {
-        coverImage && (
-          <img
-            src={coverImage}
-            alt={title}
-            class="w-full h-[400px] object-cover rounded-lg mb-12"
-          />
-        )
-      }
+        <!-- Footer -->
+        <footer
+          class="mt-20 pt-10 border-t border-neutral-200 dark:border-neutral-800"
+        >
+          <ArticleShareButtons title={title} />
 
-      <div class="article-content">
-        <slot />
+          <div class="mt-16">
+            <h2 class="text-3xl font-bold mb-8 font-heading">
+              Continue Reading
+            </h2>
+            <ArticleRelated currentArticle={article} maxArticles={3} />
+          </div>
+        </footer>
+      </article>
+
+      <!-- Table of Contents - Desktop Version -->
+      <aside class="hidden xl:block xl:w-72 h-fit pt-28">
+        <div class="sticky top-32">
+          <ArticleTableOfContents />
+        </div>
+      </aside>
+
+      <!-- Mobile Table of Contents -->
+      <div
+        class="xl:hidden mt-14 pt-10 border-t border-neutral-200 dark:border-neutral-800"
+      >
+        <details
+          class="bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-4 mb-8"
+        >
+          <summary class="text-lg font-bold cursor-pointer"
+            >Table of Contents</summary
+          >
+          <div class="pt-4">
+            <ArticleTableOfContents />
+          </div>
+        </details>
       </div>
-    </article>
+    </div>
   </Container>
 </BaseLayout>
 
 <style>
-  .article-content :global(img) {
-    @apply rounded-lg my-8;
+  /* Enhanced Article Content Styling */
+  .prose-article {
+    @apply prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:tracking-tight prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-p:text-lg prose-li:my-2 prose-p:leading-relaxed prose-p:tracking-normal prose-ul:pl-6 prose-ol:pl-6 prose-img:rounded-xl prose-img:my-10 prose-img:border prose-img:border-neutral-200 dark:prose-img:border-neutral-800 prose-blockquote:pl-8 prose-blockquote:py-2 prose-blockquote:my-10 prose-blockquote:rounded-r-xl prose-blockquote:border-l-4 prose-blockquote:border-primary-purple prose-blockquote:bg-neutral-50 dark:prose-blockquote:bg-neutral-800/50 prose-blockquote:text-xl prose-blockquote:font-medium prose-blockquote:italic prose-blockquote:text-neutral-700 dark:prose-blockquote:text-neutral-300;
   }
-
-  .article-content :global(blockquote) {
-    @apply border-l-4 border-blue-500 pl-4 italic my-8;
+  .prose-article h1,
+  .prose-article h2,
+  .prose-article h3,
+  .prose-article h4 {
+    @apply text-balance;
   }
-
-  .article-content :global(pre) {
-    @apply p-4 rounded-lg overflow-x-auto my-8;
+  .prose-article p:first-of-type {
+    @apply text-balance;
   }
-
-  .article-content :global(h2) {
-    @apply text-3xl font-bold mt-12 mb-6;
+  .prose-article pre,
+  .prose-article code {
+    @apply font-mono bg-neutral-900 dark:bg-neutral-950 text-neutral-100 rounded-lg p-4 my-8;
   }
-
-  .article-content :global(h3) {
-    @apply text-2xl font-bold mt-8 mb-4;
+  .prose-article table {
+    @apply w-full my-8 text-left border-collapse;
   }
-
-  .article-content :global(p) {
-    @apply mb-6 leading-relaxed;
+  .prose-article th {
+    @apply p-3 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700;
   }
-
-  .article-content :global(ul) {
-    @apply list-disc list-inside mb-6;
+  .prose-article td {
+    @apply p-3 border border-neutral-200 dark:border-neutral-700;
   }
-
-  .article-content :global(ol) {
-    @apply list-decimal list-inside mb-6;
+  .prose-article figure {
+    @apply my-8;
   }
-
-  .article-content :global(a) {
-    @apply text-blue-500 hover:underline;
+  .prose-article figcaption {
+    @apply text-sm text-center italic text-neutral-600 dark:text-neutral-400 mt-2;
+  }
+  .prose-article .note,
+  .prose-article .tip,
+  .prose-article .warning {
+    @apply p-4 my-6 rounded-lg border-l-4 shadow-soft;
+  }
+  .prose-article .note {
+    @apply bg-blue-50 dark:bg-blue-900/20 border-blue-500;
+  }
+  .prose-article .tip {
+    @apply bg-green-50 dark:bg-green-900/20 border-green-500;
+  }
+  .prose-article .warning {
+    @apply bg-amber-50 dark:bg-amber-900/20 border-amber-500;
   }
 </style>

@@ -1,10 +1,18 @@
 ---
+import Icon from "./Icon.astro";
+
+/**
+ * Displays a formatted date with an optional icon and prefix
+ * @component FormattedDate
+ */
 interface Props {
   date: Date;
   class?: string;
+  icon?: string;
+  prefix?: string;
 }
 
-const { date, class: className = "" } = Astro.props;
+const { date, class: className = "", icon, prefix } = Astro.props;
 
 // Format date according to Australian standards (DD/MM/YYYY)
 const formattedDate = new Date(date).toLocaleDateString("en-AU", {
@@ -14,6 +22,11 @@ const formattedDate = new Date(date).toLocaleDateString("en-AU", {
 });
 ---
 
-<time datetime={date.toISOString()} class:list={["text-sm", className]}>
+<time
+  datetime={date.toISOString()}
+  class:list={["inline-flex items-center gap-1", className]}
+>
+  {icon && <Icon name={icon} class="w-4 h-4" />}
+  {prefix && <span>{prefix}&nbsp;</span>}
   {formattedDate}
 </time>

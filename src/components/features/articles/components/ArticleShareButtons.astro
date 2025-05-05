@@ -1,0 +1,112 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+
+/**
+ * Article sharing buttons component
+ * @component ArticleShareButtons
+ */
+interface Props {
+  title: string;
+  url?: string;
+}
+
+const { title, url = Astro.url.href } = Astro.props;
+
+// Encode the URL and title for sharing
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+
+// Define social sharing links
+const shareLinks = [
+  {
+    name: "X",
+    icon: "x",
+    url: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
+    label: "Share on X",
+    color: "bg-black hover:bg-neutral-800",
+  },
+  {
+    name: "LinkedIn",
+    icon: "linkedin",
+    url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    label: "Share on LinkedIn",
+    color: "bg-[#0077B5] hover:bg-[#006ba2]",
+  },
+  {
+    name: "Facebook",
+    icon: "facebook",
+    url: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    label: "Share on Facebook",
+    color: "bg-[#1877F2] hover:bg-[#1670e0]",
+  },
+  {
+    name: "Email",
+    icon: "mail",
+    url: `mailto:?subject=${encodedTitle}&body=${encodedUrl}`,
+    label: "Share via Email",
+    color: "bg-neutral-700 hover:bg-neutral-800",
+  },
+];
+---
+
+<div>
+  <h3 class="text-lg font-bold mb-4">Share this article</h3>
+
+  <div class="flex flex-wrap gap-3">
+    {
+      shareLinks.map((link) => (
+        <a
+          href={link.url}
+          class={`${link.color} text-white p-2 rounded-full aspect-square w-10 h-10 flex items-center justify-center transition-transform hover:scale-110 active:scale-95`}
+          aria-label={link.label}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name={link.icon} class="w-5 h-5" />
+        </a>
+      ))
+    }
+
+    <button
+      id="copy-link-btn"
+      class="bg-neutral-200 dark:bg-neutral-700 p-2 rounded-full aspect-square w-10 h-10 flex items-center justify-center hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-transform hover:scale-110 active:scale-95"
+      aria-label="Copy link to clipboard"
+    >
+      <Icon name="link" class="w-5 h-5" />
+    </button>
+  </div>
+</div>
+
+<script>
+  // Find the copy link button
+  const copyLinkBtn = document.getElementById("copy-link-btn");
+  if (copyLinkBtn) {
+    copyLinkBtn.addEventListener("click", () => {
+      // Get the current URL
+      const url = window.location.href;
+
+      // Copy to clipboard
+      navigator.clipboard
+        .writeText(url)
+        .then(() => {
+          // Provide visual feedback
+          copyLinkBtn.classList.add("bg-green-500", "dark:bg-green-600");
+          copyLinkBtn.classList.remove("bg-neutral-200", "dark:bg-neutral-700");
+
+          // Add checkmark icon
+          const originalIcon = copyLinkBtn.innerHTML;
+          copyLinkBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+
+          // Reset after 2 seconds
+          setTimeout(() => {
+            copyLinkBtn.classList.remove("bg-green-500", "dark:bg-green-600");
+            copyLinkBtn.classList.add("bg-neutral-200", "dark:bg-neutral-700");
+            copyLinkBtn.innerHTML = originalIcon;
+          }, 2000);
+        })
+        .catch((err) => {
+          console.error("Could not copy text: ", err);
+        });
+    });
+  }
+</script>

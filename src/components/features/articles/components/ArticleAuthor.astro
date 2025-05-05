@@ -1,0 +1,35 @@
+---
+/**
+ * Article author component that displays author information
+ * @component ArticleAuthor
+ */
+interface Props {
+  name: string;
+  image?: string;
+  bio?: string;
+}
+
+const { name, image = "/images/profile.jpg", bio } = Astro.props;
+---
+
+<div
+  class="flex items-center gap-4 p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl bg-neutral-50 dark:bg-neutral-800/50"
+>
+  <div
+    class="w-16 h-16 flex-shrink-0 rounded-full overflow-hidden border-2 border-neutral-200 dark:border-neutral-700"
+  >
+    <img
+      src={image}
+      alt={`Photo of ${name}`}
+      class="w-full h-full object-cover"
+      width="64"
+      height="64"
+      loading="lazy"
+    />
+  </div>
+
+  <div>
+    <div class="font-medium text-lg">{name}</div>
+    {bio && <p class="text-sm text-neutral-600 dark:text-neutral-400">{bio}</p>}
+  </div>
+</div>

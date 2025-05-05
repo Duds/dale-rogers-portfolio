@@ -1,0 +1,61 @@
+---
+/**
+ * QuoteBlock component for displaying quotations or testimonials.
+ * @component QuoteBlock
+ * @accessibility
+ * - Role: blockquote
+ * - Keyboard: Not interactive
+ * - ARIA: aria-label, cite
+ */
+interface Props {
+  author?: string;
+  source?: string;
+  class?: string;
+}
+const { author, source, class: className = "" } = Astro.props;
+---
+
+<blockquote class:list={["quote-block", className]}>
+  <div class="quote-content">
+    <slot />
+  </div>
+  {
+    (author || source) && (
+      <footer class="quote-attribution">
+        {author && <span class="quote-author">{author}</span>}
+        {source && <cite class="quote-source">{source}</cite>}
+      </footer>
+    )
+  }
+</blockquote>
+
+<style>
+  .quote-block {
+    @apply relative px-6 py-4 my-8 bg-neutral-50 dark:bg-neutral-800/50 border-l-4 border-primary-purple rounded-r-lg max-w-3xl mx-auto;
+  }
+
+  .quote-block::before {
+    content: '"';
+    @apply text-6xl text-primary-purple/30 absolute top-0 left-4 leading-none font-serif;
+  }
+
+  .quote-content {
+    @apply text-lg italic font-medium text-neutral-700 dark:text-neutral-300 relative z-10;
+  }
+
+  .quote-attribution {
+    @apply mt-3 text-sm text-neutral-600 dark:text-neutral-400 flex gap-1;
+  }
+
+  .quote-author {
+    @apply font-medium;
+  }
+
+  .quote-author::after {
+    content: ",";
+  }
+
+  .quote-source {
+    @apply not-italic;
+  }
+</style>

@@ -1,0 +1,87 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import ArticleCard from "./ArticleCard.astro";
+
+/**
+ * Displays related articles based on tags
+ * @component ArticleRelated
+ */
+interface Props {
+  currentArticle: CollectionEntry<"articles">;
+  maxArticles?: number;
+}
+
+const { currentArticle, maxArticles = 3 } = Astro.props;
+const { tags } = currentArticle.data;
+
+// Get all articles
+const allArticles = await getCollection("articles", (article) => {
+  // Don't include drafts or the current article
+  return !article.data.draft && article.slug !== currentArticle.slug;
+});
+
+// Score articles by tag overlap
+const scoredArticles = allArticles.map((article) => {
+  const articleTags = article.data.tags || [];
+  // Score based on number of matching tags
+  let score = 0;
+
+  if (tags && tags.length > 0) {
+    // Each matching tag gives a point
+    tags.forEach((tag) => {
+      if (articleTags.includes(tag)) {
+        score += 1;
+      }
+    });
+  }
+
+  return { article, score };
+});
+
+// Sort by score (highest first)
+scoredArticles.sort((a, b) => b.score - a.score);
+
+// Get top related articles (maxArticles)
+const relatedArticles = scoredArticles
+  .slice(0, maxArticles)
+  .map((item) => item.article);
+
+// If we don't have enough related articles, fill with most recent
+if (relatedArticles.length < maxArticles) {
+  const recentArticles = allArticles
+    .filter(
+      (article) =>
+        !relatedArticles.some((related) => related.slug === article.slug)
+    )
+    .sort(
+      (a, b) =>
+        new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+    )
+    .slice(0, maxArticles - relatedArticles.length);
+
+  relatedArticles.push(...recentArticles);
+}
+---
+
+{
+  relatedArticles.length > 0 ? (
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+      {relatedArticles.map((article) => (
+        <ArticleCard
+          title={article.data.title}
+          description={article.data.description}
+          pubDate={article.data.pubDate}
+          author={article.data.author}
+          tags={article.data.tags || []}
+          href={`/articles/${article.slug}`}
+          coverImage={article.data.coverImage}
+        />
+      ))}
+    </div>
+  ) : (
+    <p class="text-center text-neutral-600 dark:text-neutral-400 italic">
+      No related articles found.
+    </p>
+  )
+}

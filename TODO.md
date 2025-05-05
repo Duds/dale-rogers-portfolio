@@ -539,6 +539,7 @@ Dependencies and Notes:
 ## Search Feature Improvements
 
 - [ ] Enhanced Search Functionality (Estimated: 12-15 hours)
+
   - [ ] Smarter Search Algorithm (4-5 hours)
     - [ ] Implement semantic search capabilities
     - [ ] Add fuzzy matching for typo tolerance
@@ -563,3 +564,5 @@ Dependencies and Notes:
     - [ ] Implement "no results" tracking to identify content gaps
     - [ ] Add user feedback mechanism for search results
     - [ ] Create dashboard for search analytics
+
+- [ ] Add prominent links to "our resources page" in relevant articles and sections (including "Best Practices for Implementation").

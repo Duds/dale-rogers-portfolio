@@ -18,9 +18,12 @@ interface Props {
 }
 
 const { article } = Astro.props;
-const { Content } = await article.render();
+const { Content, remarkPluginFrontmatter } = await article.render();
+
+// Get raw content for reading time calculation
+const rawContent = remarkPluginFrontmatter["rawContent"] || "";
 ---
 
-<ArticleLayout article={article}>
+<ArticleLayout article={article} content={rawContent}>
   <Content />
 </ArticleLayout>

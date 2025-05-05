@@ -97,3 +97,14 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 Dale Rogers - [contact@dalerogers.com.au](mailto:contact@dalerogers.com.au)
 
 Project Link: [https://github.com/Duds/dale-rogers-portfolio](https://github.com/Duds/dale-rogers-portfolio)
+
+## MDX Article & Component Standards
+
+All MDX articles and UI components must:
+
+- Use accessible, reusable components (see `src/components/ui`)
+- Follow Australian English spelling, date (DD/MM/YYYY), and $AUD currency formats
+- Be tested for rendering, theming, and accessibility (see `docs/TESTING.md`)
+- Be responsive and mobile-friendly
+
+See `docs/TESTING.md` and `src/components/ui/README.md` for full requirements and contributor checklists.

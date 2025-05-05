@@ -1,0 +1,12 @@
+{
+  "overrides": [
+    {
+      "files": "*.mdx",
+      "options": {
+        "proseWrap": "never",
+        "parser": "mdx",
+        "embeddedLanguageFormatting": "off"
+      }
+    }
+  ]
+}

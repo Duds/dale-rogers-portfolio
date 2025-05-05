@@ -1,0 +1,55 @@
+---
+/**
+ * A component for displaying images with captions
+ * @component ImageWithCaption
+ */
+interface Props {
+  src: string;
+  alt: string;
+  caption: string;
+  class?: string;
+  width?: number;
+  height?: number;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  class: className = "",
+  width = 1200,
+  height = 675,
+} = Astro.props;
+---
+
+<figure class:list={["image-with-caption", className]}>
+  <div class="image-container">
+    <img
+      src={src}
+      alt={alt}
+      class="image"
+      width={width}
+      height={height}
+      loading="lazy"
+    />
+  </div>
+  <figcaption class="caption">{caption}</figcaption>
+</figure>
+
+<style>
+  .image-with-caption {
+    @apply my-8 mx-auto max-w-3xl;
+  }
+
+  .image-container {
+    @apply rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700;
+  }
+
+  .image {
+    @apply w-full h-auto object-cover;
+  }
+
+  .caption {
+    @apply text-sm text-center text-neutral-600 dark:text-neutral-400 mt-2 italic;
+  }
+</style>

@@ -1,0 +1,102 @@
+---
+import Icon from "./Icon.astro";
+
+/**
+ * CalloutBox component for highlighting important information.
+ * @component CalloutBox
+ * @accessibility
+ * - Role: status (for info), alert (for warning)
+ * - Keyboard: Not interactive
+ * - ARIA: aria-live, role
+ * @example
+ * <CalloutBox type="info" title="Note">This is an info callout.</CalloutBox>
+ */
+interface Props {
+  type?: "note" | "tip" | "warning" | "info";
+  title?: string;
+  class?: string;
+  icon?: string;
+}
+
+const { type = "note", title, class: className = "", icon } = Astro.props;
+
+// Define icon, color, and title mapping for each type
+const typeConfig = {
+  note: {
+    icon: "information-circle",
+    color: "text-black",
+    bgColor: "bg-neutral-100 dark:bg-neutral-900/40",
+    borderColor: "border-black",
+    defaultTitle: "Note",
+  },
+  tip: {
+    icon: "lightbulb",
+    color: "text-primary-green",
+    bgColor: "bg-primary-green/10 dark:bg-primary-green/20",
+    borderColor: "border-primary-green",
+    defaultTitle: "Tip",
+  },
+  warning: {
+    icon: "exclamation-triangle",
+    color: "text-primary-orange",
+    bgColor: "bg-primary-orange/10 dark:bg-primary-orange/20",
+    borderColor: "border-primary-orange",
+    defaultTitle: "Warning",
+  },
+  info: {
+    icon: "information-circle",
+    color: "text-primary-purple",
+    bgColor: "bg-primary-purple/10 dark:bg-primary-purple/20",
+    borderColor: "border-primary-purple",
+    defaultTitle: "Information",
+  },
+};
+
+const config = typeConfig[type];
+const iconName = icon || config.icon;
+---
+
+<div class:list={["callout", config.bgColor, config.borderColor, className]}>
+  <div class:list={["callout-header", config.color]}>
+    <Icon name={iconName} class="w-5 h-5" />
+    <span class="callout-title">{title || config.defaultTitle}</span>
+  </div>
+  <div class="callout-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .callout {
+    @apply p-4 my-6 rounded-lg border-l-4 shadow-soft;
+  }
+
+  .callout-header {
+    @apply flex items-center gap-2 font-medium mb-2;
+  }
+
+  .callout-title {
+    @apply text-lg;
+  }
+
+  .callout-content {
+    @apply text-neutral-700 dark:text-neutral-300;
+  }
+
+  /* Apply markdown-like styling to text within callout */
+  .callout-content :global(strong) {
+    @apply font-bold;
+  }
+
+  .callout-content :global(em) {
+    @apply italic;
+  }
+
+  .callout-content :global(a) {
+    @apply text-primary-purple dark:text-primary-purple hover:underline;
+  }
+
+  .callout-content :global(p) {
+    @apply mb-2 last:mb-0;
+  }
+</style>

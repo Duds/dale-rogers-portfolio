@@ -85,6 +85,22 @@ const caseStudySchema = baseSchema.extend({
 // Schema for articles
 const articleSchema = baseSchema.extend({
   draft: z.boolean().optional().default(false),
+  // Enhanced meta information for SEO
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
+  metaKeywords: z.array(z.string()).optional(),
+  canonicalUrl: z.string().url().optional(),
+  // Enhanced author information
+  authorImage: z.string().optional(),
+  authorBio: z.string().optional(),
+  // Content information
+  readingTime: z.number().optional(),
+  lastModified: z.coerce.date().optional(),
+  // Social sharing
+  twitterHandle: z.string().optional(),
+  ogImage: z.string().optional(),
+  // Related content
+  relatedArticles: z.array(z.string()).optional(),
 });
 
 // Schema for scratch posts (drafts/works in progress)

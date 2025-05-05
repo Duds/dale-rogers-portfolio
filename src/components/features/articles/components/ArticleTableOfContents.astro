@@ -1,0 +1,139 @@
+---
+/**
+ * Generates a table of contents from article headings
+ * @component ArticleTableOfContents
+ */
+---
+
+<div
+  class="toc-container bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-4 shadow-sm"
+>
+  <h2
+    class="text-lg font-bold mb-3 text-primary-purple dark:text-primary-purple"
+  >
+    Table of Contents
+  </h2>
+  <div id="toc-content" class="text-sm">
+    <p class="text-neutral-600 dark:text-neutral-400 italic">
+      Loading contents...
+    </p>
+  </div>
+</div>
+
+<script>
+  // This script runs on the client to extract headings and build a TOC
+  document.addEventListener("DOMContentLoaded", () => {
+    const tocContent = document.getElementById("toc-content");
+    if (!tocContent) return;
+
+    // Find all h2 and h3 headings in the article content
+    const articleContent = document.querySelector(".article-content");
+    if (!articleContent) return;
+
+    // Get all headings
+    const headings = articleContent.querySelectorAll("h2, h3, h4");
+    if (headings.length === 0) {
+      tocContent.innerHTML =
+        '<p class="text-neutral-600 dark:text-neutral-400 italic">No table of contents available for this article.</p>';
+      return;
+    }
+
+    // Create a list of links
+    const tocList = document.createElement("ul");
+    tocList.className = "space-y-2 list-none";
+
+    headings.forEach((heading, index) => {
+      // Add IDs to headings if they don't have them
+      if (!heading.id) {
+        heading.id = `heading-${index}`;
+      }
+
+      const listItem = document.createElement("li");
+      const link = document.createElement("a");
+
+      // Apply different styling based on heading level
+      if (heading.tagName === "H3") {
+        listItem.className = "ml-4";
+      } else if (heading.tagName === "H4") {
+        listItem.className = "ml-6";
+      }
+
+      link.href = `#${heading.id}`;
+      link.textContent = heading.textContent;
+      link.className =
+        "text-neutral-800 dark:text-neutral-200 hover:text-primary-purple dark:hover:text-primary-purple transition-colors inline-block py-1";
+
+      // Add active state handling
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        // Smooth scroll to heading
+        heading.scrollIntoView({ behavior: "smooth" });
+
+        // Update URL without full page reload
+        history.pushState(null, "", link.href);
+      });
+
+      listItem.appendChild(link);
+      tocList.appendChild(listItem);
+    });
+
+    // Replace loading message with the TOC
+    tocContent.innerHTML = "";
+    tocContent.appendChild(tocList);
+
+    // Highlight active section on scroll
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px 0px -80% 0px",
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.getAttribute("id");
+        if (id) {
+          const tocLink = tocList.querySelector(`a[href="#${id}"]`);
+          if (tocLink) {
+            if (entry.isIntersecting) {
+              // Remove active class from all links
+              tocList.querySelectorAll("a").forEach((a) => {
+                a.classList.remove(
+                  "font-bold",
+                  "text-primary-purple",
+                  "dark:text-primary-purple"
+                );
+              });
+
+              // Add active class to current link
+              tocLink.classList.add(
+                "font-bold",
+                "text-primary-purple",
+                "dark:text-primary-purple"
+              );
+            }
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe all headings
+    headings.forEach((heading) => {
+      observer.observe(heading);
+    });
+  });
+</script>
+
+<style>
+  .toc-container {
+    border-left: 3px solid var(--color-primary-purple, #af8abf);
+    max-width: 100%;
+    width: 100%;
+  }
+
+  @media (min-width: 1280px) {
+    .toc-container {
+      width: 260px;
+    }
+  }
+</style>

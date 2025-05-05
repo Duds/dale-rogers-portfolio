@@ -233,3 +233,60 @@ TEST_DATABASE_URL=your_test_db_url
 - [ESLint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 - [Husky](https://typicode.github.io/husky/)
+
+## Testing MDX Articles and Embedded Components
+
+All MDX articles that use JSX/MDX components (e.g., CalloutBox, QuoteBlock, ImageWithCaption, Card) must be tested for:
+
+- Correct rendering of all embedded components
+- Theming (light/dark mode) and typography consistency
+- Accessibility (ARIA roles, keyboard navigation, colour contrast)
+- Australian English spelling, date, and currency formats
+- Responsive layout and mobile support
+
+### How to Test
+
+1. **Unit Test Rendering**
+
+   - Use your preferred test runner (e.g., Jest, Vitest) with a compatible MDX/JSX renderer (e.g., @astrojs/mdx, @testing-library/react for MDX-to-React).
+   - Render the MDX file and check for the presence of all expected components and content.
+
+2. **Accessibility**
+
+   - Use automated tools (e.g., axe-core, pa11y) and manual screen reader checks.
+   - Ensure all interactive elements are keyboard accessible.
+
+3. **Theming**
+
+   - Test in both light and dark mode.
+   - Check that all components adapt to theme changes and maintain contrast.
+
+4. **Australian Standards**
+
+   - Verify all dates use DD/MM/YYYY format.
+   - Check for Australian English spelling and $AUD currency formatting.
+
+5. **Responsive Design**
+   - Test on multiple screen sizes.
+   - Ensure no content overflows or breaks on mobile.
+
+### Example Test (Vitest + React Testing Library)
+
+```tsx
+import { render, screen } from "@testing-library/react";
+import Article from "../src/content/articles/considerations-for-trauma-informed-design.mdx";
+
+test("renders all key sections and components", () => {
+  render(<Article />);
+  expect(
+    screen.getByText("Considerations for Trauma-Informed Design"),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole("heading", { name: /Why Trauma-Informed Design/i }),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByText(/First Nations-led Service Design/),
+  ).toBeInTheDocument();
+  // Add more assertions for CalloutBox, Card, etc.
+});
+```

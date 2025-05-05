@@ -27,7 +27,7 @@ The `ThemeToggle` component provides a user interface for switching between ligh
 
    ```typescript
    const prefersDark = window.matchMedia(
-     "(prefers-color-scheme: dark)"
+     "(prefers-color-scheme: dark)",
    ).matches;
    const currentTheme =
      localStorage.getItem("theme") || (prefersDark ? "dark" : "light");
@@ -226,13 +226,35 @@ import Button from '@/components/ui/Button.astro';
 <Button variant="primary">Click Me</Button>
 ```
 
-## Testing
+## Testing and Accessibility Requirements
 
-All UI components should have:
+All UI components must:
 
-- Unit tests for functionality
-- Visual regression tests
-- Accessibility tests
+- Be fully accessible (ARIA roles, keyboard navigation, colour contrast)
+- Support both light and dark mode theming
+- Use Australian English spelling and date/currency formats
+- Be responsive and mobile-friendly
+- Have unit tests for rendering and accessibility
+
+### Contributor Checklist
+
+- [ ] Component is documented with usage and props
+- [ ] Accessibility features are implemented and documented
+- [ ] Theming (light/dark) is supported and tested
+- [ ] Australian standards are followed (spelling, date, currency)
+- [ ] Unit tests cover rendering and error states
+- [ ] Responsive design is verified
+
+### Example Accessibility Implementation
+
+```astro
+---
+// Example for CalloutBox
+---
+<div role="status" aria-live="polite" class="callout-box">
+  <slot />
+</div>
+```
 
 ## Contributing
 

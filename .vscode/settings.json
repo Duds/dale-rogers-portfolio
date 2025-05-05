@@ -143,5 +143,8 @@
     "**/dist/**",
     "**/.git/**",
     "**/TEMP_MARKDOWN_FILES/**"
-  ]
+  ],
+  "[mdx]": {
+    "editor.formatOnSave": false
+  }
 }

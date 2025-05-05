@@ -1,0 +1,127 @@
+---
+title: "Articles Style Guide (Reference Only)"
+description: "Internal style guide for writing, structuring, and maintaining articles. Not for publication."
+pubDate: 2024-06-01
+lastModified: 2024-06-01
+author: "Dale Rogers"
+tags:
+  - style guide
+  - internal
+  - reference
+featured: false
+coverImage: ""
+draft: true
+hidden: true
+---
+
+<!-- This file is for internal reference only. It should not be displayed as an article or included in site search, navigation, or feeds. -->
+
+# 📝 Articles Style Guide
+
+## 1. File Naming & Structure
+
+- Use lowercase, hyphenated filenames (e.g., `first-nations-led-service-design.mdx`).
+- Place articles in `src/content/articles/`.
+- Avoid spaces or special characters in filenames.
+
+## 2. Frontmatter Standards
+
+- Always include: `title`, `description`, `pubDate`, `lastModified`, `author`, `tags`, `featured`, `coverImage`.
+- Use `authorBio` and `authorImage` for richer author cards.
+- Use block YAML for arrays (e.g., tags).
+- Dates: `DD/MM/YYYY` (Australian format) in display, ISO in frontmatter.
+
+## 3. Component Usage
+
+- Use custom components for structure and emphasis:
+  - `CalloutBox` for info, tips, warnings, and final thoughts.
+  - `QuoteBlock` for genuine, attributed quotes (with source URLs).
+  - `ImageWithCaption` for all images.
+  - `Card` for case studies, examples, and challenges.
+  - `Icon` for visual cues (ensure icon exists in `Icon.astro`).
+- Use semantic HTML and accessible markup for all content.
+
+## 4. Typography & Layout
+
+- Use consistent font size and appearance for paragraphs and lists.
+- Add vertical spacing (`<div class="mb-6"></div>`, `<div class="my-14"></div>`) between sections, intros, and lists for readability.
+- Avoid inline utility classes in MDX unless necessary for layout.
+
+## 5. Callouts & Quotes
+
+- Use `CalloutBox` for summaries, info, and final thoughts. Differentiate types (`info`, `note`, `tip`, `warning`) and use custom icons where appropriate.
+- Use `QuoteBlock` only for genuine, attributed quotations. Always provide a source URL.
+- **Always look for genuine quotes from experts in the specific context.**
+
+## 6. Links & References
+
+- Use descriptive anchor text for all links.
+- Internal links: `/articles/slug` or `/case-studies/slug`.
+- External links: `target="_blank" rel="noopener noreferrer"`.
+- Reference original sources for quotes, frameworks, and statistics.
+- **Always look for opportunities for internal cross-links or external linked validation of concepts.**
+- **Actively seek out opportunities to link to other relevant articles, case studies, or resources within the site.**
+- **Where possible, add external links to authoritative sources, frameworks, or further reading.**
+- **Always seek out genuine, attributed expert quotations relevant to the article's context.**
+
+## 7. Accessibility
+
+- All images must have meaningful `alt` text.
+- Use accessible colour contrast and semantic headings.
+- Test with screen readers and keyboard navigation.
+
+## 8. Australian Standards
+
+- Use Australian English spelling.
+- Use metric units and $AUD for currency.
+- Use Australian date and time formats.
+- Reference Australian public holidays and time zones where relevant.
+
+## 9. Content Hygiene
+
+- Remove unused imports and classes.
+- Avoid broken or split inline elements (watch for auto-formatting issues).
+- Use block YAML for arrays in frontmatter.
+- Add TODOs as MDX comments: `{/* TODO: ... */}`
+
+## 10. Testing & Review
+
+- Preview articles in both light and dark mode.
+- Check for broken links and missing images.
+- Run accessibility and performance checks.
+- Ensure all custom components render as intended.
+
+## 11. Documentation & Changelog
+
+- Document any new components or patterns in the project README.
+- Update the changelog for major content or style changes.
+
+---
+
+### Lessons Learned
+
+- Always check that referenced icons exist in `Icon.astro`.
+- Use block YAML for arrays to avoid markdown linter errors.
+- Use MDX comments, not HTML comments, for TODOs.
+- Use custom components for all non-trivial content blocks.
+- Add vertical spacing between sections for readability.
+- Use genuine, attributed quotes with source URLs.
+- Test for accessibility and theming in both light and dark modes.
+- Avoid inline utility classes unless necessary for layout.
+- **Always look for opportunities for internal cross-links and external validation.**
+- **Always seek genuine expert quotes relevant to the article's context.**
+- **Proactively seek linking and quotation opportunities during drafting and review.**
+
+---
+
+### Refactoring Workflow
+
+1. Review frontmatter for completeness and block YAML.
+2. Replace markdown-native blocks with custom components.
+3. Ensure all lists and paragraphs use consistent typography.
+4. Add vertical spacing between sections and lists.
+5. Replace all quotes with `QuoteBlock` and provide attribution.
+6. Use `CalloutBox` for info, tips, and final thoughts, with custom icons as needed.
+7. Check all links, images, and icons for correctness.
+8. Test for accessibility, theming, and responsiveness.
+9. Add or update documentation and changelog.
