@@ -102,18 +102,26 @@
   /* Typography styles */
   .heading-1 {
     @apply text-4xl font-bold tracking-tight text-grey-900 dark:text-white sm:text-5xl;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .heading-2 {
     @apply text-3xl font-bold tracking-tight text-grey-900 dark:text-white sm:text-4xl;
+    margin-top: 2rem;
+    margin-bottom: 1.25rem;
   }
 
   .heading-3 {
     @apply text-2xl font-bold tracking-tight text-grey-900 dark:text-white sm:text-3xl;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .heading-4 {
     @apply text-xl font-bold tracking-tight text-grey-900 dark:text-white sm:text-2xl;
+    margin-top: 1.25rem;
+    margin-bottom: 0.75rem;
   }
 
   .body-large {
@@ -144,5 +152,23 @@
   /* Focus styles */
   .focus-ring {
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-grey-900;
+  }
+
+  /*
+   * Standardised spacing for lists and paragraphs
+   * Ensures consistent margin and padding before/after ul, ol, li, and p
+   * Used across all components for better readability and vertical rhythm
+   */
+  ul, ol {
+    @apply my-6 pl-6;
+  }
+  ul > li, ol > li {
+    @apply mb-2;
+  }
+  p {
+    @apply mb-5;
+  }
+  p + ul, p + ol {
+    @apply mt-6;
   }
 }

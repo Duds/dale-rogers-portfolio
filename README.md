@@ -108,3 +108,40 @@ All MDX articles and UI components must:
 - Be responsive and mobile-friendly
 
 See `docs/TESTING.md` and `src/components/ui/README.md` for full requirements and contributor checklists.
+
+# Portfolio Content & Layout Updates
+
+## Article: Designing Intentional Culture
+
+### Recent Enhancements
+
+- **Prominent Callout:**
+
+  - The key statement 'Quality culture = human experiences × defined culture.' is now displayed in a highly visible CalloutBox with a highlight style and a direct link to further reading on quality culture.
+
+- **Column Layouts:**
+
+  - Large slabs of text, especially in the 'A brief history of change' and 'Three helpful toolsets' sections, are now split into columns using responsive flexbox classes (e.g., `md:flex gap-8`, `md:w-1/2`).
+  - This improves readability, visual interest, and accessibility, especially on larger screens.
+
+- **Inline Expertise Links:**
+  - Key terms such as 'design thinking', 'needfinding', 'ideation', and 'action' now include inline links to reputable external resources (e.g., IDEO, NN/g) for further learning.
+
+### Rationale
+
+- **Accessibility:**
+  - Improved content structure and visual separation make the article easier to navigate for all users, including those using assistive technologies.
+- **Engagement:**
+  - Prominent callouts and columns break up dense content, making it more inviting and easier to scan.
+- **Resource Linking:**
+  - Inline links provide readers with direct access to authoritative sources, supporting deeper learning and best practice alignment.
+
+### Implementation Notes
+
+- Used `<CalloutBox type="highlight" ...>` for the key statement.
+- Used `<div class="md:flex gap-8">` and `<div class="md:w-1/2">` for column layouts.
+- Added `target="_blank" rel="noopener noreferrer"` to all external links for security and best practice.
+
+---
+
+For further details or to contribute to content structure improvements, see the `src/content/articles/designing-intentional-culture.mdx` file.

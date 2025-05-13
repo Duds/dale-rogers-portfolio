@@ -1,49 +1,170 @@
 ---
 title: "How the design thinking process works in government"
-description: "Design thinking works much the same in government services as it does for any other organisation. But working with governments can be challenging here's some ..."
+description: "A practical guide to applying the Double Diamond design thinking process in Australian government and public sector organisations, with real-world case studies, tips, and accessible best practices."
 pubDate: "2025-04-22"
 author: "Dale Rogers"
+authorBio: "Award-winning service designer and digital strategist, passionate about accessible, user-centred public services and continuous improvement in the Australian public sector."
+authorImage: "/images/dale-rogers.jpeg"
 tags: ["Design-Thinking", "Government"]
 ---
 
+import CalloutBox from "@/components/ui/CalloutBox.astro";
+import QuoteBlock from "@/components/ui/QuoteBlock.astro";
+import ImageWithCaption from "@/components/ui/ImageWithCaption.astro";
+import Table from "@/components/ui/Table.astro";
+import Icon from "@/components/ui/Icon.astro";
+import Card from "@/components/ui/Card.astro";
+import DiamondExplorer from "@/components/features/articles/components/ArticleDiamondExplorer";
+
 # How the design thinking process works in government
 
-Governments and other large-scale organizations use the Design Thinking Double Diamond process to improve the quality of their services. The process starts with discovering problems that need to be solved. Then, the team analyzes those problems. They come up with a solution and then implement it. In government, this often means helping citizens with issues like homelessness or crime. Still, other organizations may use the process to address issues like customer satisfaction or employee retention and engagement.
+<div class="my-14 py-2"><hr /></div>
 
-Government improvement efforts like this often fail because people don't know how to apply the process in an effective way. You can make it easier by using the Design Thinking Double Diamond Template. It's a simple tool that will show you which steps you need to complete and in what order to conquer challenges in your organization.
+<ImageWithCaption
+  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+  alt="Double Diamond process diagram"
+  caption="The Double Diamond process, as used in government service design."
+  class="mb-8"
+/>
 
-## Discover
+Governments and public sector teams use the [Design Council's Double Diamond process](https://www.designcouncil.org.uk/our-resources/the-double-diamond/history-of-the-double-diamond/) to deliver clearer, more effective services. The process helps teams avoid jumping to solutions by first exploring the real problem space and validating options with users.
 
-The first phase in the Discover phase is to research and understand user needs and challenges through various research methods such as interviews, surveys and observations. Understanding your challenges will help you define the project's scope and scale. It will also help you identify opportunities to improve existing public services.
+In Australia, design thinking has been used across areas like homelessness, digital identity, compliance, and licensing reform.
 
-This phase will focus on defining the vision and goals of your project and the services needed to achieve those goals. To ensure maximum user value, your digital services must be designed with input from your users and customers.
+<div class="my-10"></div>
 
-Discovery considerations should include user persona development, journey mapping, requirements definition and design thinking principles such as empathy.
+## What is the Double Diamond?
 
-## Define
+The Double Diamond is a visual model used to guide design thinking. It consists of four stages:
 
-Once you have collected user insights, define your solution and craft a compelling vision representing digital technology's role in achieving your goals. A good vision should focus on the user's needs, be unique and communicate the value of digital services. Your vision should be concise and memorable if people are to engage with it.
+- **Discover** – understand user needs
+- **Define** – frame the right problem
+- **Design** – explore potential solutions
+- **Deliver** – implement and improve
 
-Define questions such as:
+These stages alternate between diverging (broad exploration) and converging (focused resolution). In government, this approach supports structured innovation.
 
-1. Who are your users?
-2. What does your solution do for them?
-3. What are they trying to do?
+<div class="my-10"></div>
 
-The Define phase involves gathering requirements and drafting business cases. It helps identify necessary partnerships and stakeholders for your pilot project. In addition, it identifies how your organization will manage the implementation process and acquire the necessary skills to successfully deliver your project.
+## Explore each phase
 
-## Design
+<DiamondExplorer client:load />
 
-The design phase focuses on the problem definition and the questions you defined in the previous phase. It leverages agile development's power to ideate, conceptualise and prototype. Rapid prototypes let you test and refine your ideas before investing time and money in fully-developed products.
+<div class="my-10"></div>
 
-Design considerations include user research, customer journey mapping; interaction design (site map, wireframe, site map) and user stories (product backlog). Iterative designs are used to prototype features, test with users and refine the design iteratively before launching the final product.
+## Design thinking with constraints
 
-The design phase also enables you to discuss the risks associated with the delivery and build process with your teams to identify mitigation strategies for each. You aren't just designing solutions and products. You are designing the methods and frameworks for delivery.
+Design in government is shaped by context. Common challenges include:
 
-## Delivery
+- **Procurement** rules delaying engagement of vendors
+- **Security classifications** that restrict data access
+- **Legacy systems** limiting delivery methods
+- **Multiple approval layers** across departments
 
-The Deliver phase is the most exciting part of the project life cycle. It's where you turn your prototype into a working product. The Deliver phase involves the final product delivery, project management and production support.
+Good design thinking doesn't eliminate these — it helps teams work through them.
 
-The Deliver phase may involve the development of code delivery and version control; road map creation, project management and operations support. It may include physical services, road trips, training, and provision of field staff and customer service officers.
+<div class="my-10"></div>
 
-Once your product is finished and launched, you will deliver training and support to users and customers to help them start using your digital service. The success of the Deliver phase relies on a certain amount of planning and preparation. You must pre-empt and mitigate risks as you embark on your project. For example, a poorly planned launch can disrupt your service operations and damage your agency's reputation with citizens and partners.
+## Where users fit in the process
+
+<Table
+  caption="User engagement across the Double Diamond stages"
+  headers={["Stage", "User Involvement"]}
+  rows={[
+    ["Discover", "Listening and observing: interviews, surveys, field visits"],
+    ["Define", "Sense-checking insights and validating problem framing"],
+    ["Design", "Prototyping and usability testing with target users"],
+    ["Deliver", "Piloting and feedback during live rollout"],
+  ]}
+/>
+
+<div class="my-10"></div>
+
+## Case study: Australia Post
+
+<Card title="Australia Post's Digital Reinvention" class="border-l-4 border-primary-green bg-primary-green/10 dark:bg-primary-green/20 my-8">
+Australia Post responded to the collapse in letter volumes by investing in digital design capability. From 2012, its Digital Division scaled from 15 to 270 people.
+
+They embraced rapid prototyping, continuous delivery, and a user-first approach — enabling a 100× increase in annual releases and 98% cost reduction.
+
+[Read the full case study →](https://napawash.org/grand-challenges-blog/australia-post-case-study)
+
+</Card>
+
+<div class="my-10"></div>
+
+## Case study: Service NSW
+
+<Card title="Service NSW: Simplifying Government" class="border-l-4 border-primary-orange bg-primary-orange/10 dark:bg-primary-orange/20 my-8">
+Service NSW unified fragmented public services into one trusted experience. Their approach used end-to-end service design: from mapping complex user journeys to restructuring how departments cooperated.
+
+Outcomes included faster licence renewals, integrated support centres, and mobile-first public portals.
+
+[Learn more →](https://www.nsw.gov.au/customer-service)
+
+</Card>
+
+<div class="my-10"></div>
+
+## Key takeaways
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+  <Card>
+    <div class="flex items-center gap-3 mb-4">
+      <Icon name="squares-2x2" class="w-10 h-10 text-primary" />
+      <h3 class="heading-3 m-0">Design for complexity</h3>
+    </div>
+    The Double Diamond gives structure to ambiguous, political, and high-stakes problems.
+  </Card>
+
+  <Card>
+    <div class="flex items-center gap-3 mb-4">
+      <Icon name="users" class="w-10 h-10 text-primary" />
+      <h3 class="heading-3 m-0">Start with people</h3>
+    </div>
+    Policy intentions mean little if the service doesn't work for real users. Test early, test often.
+  </Card>
+
+  <Card>
+    <div class="flex items-center gap-3 mb-4">
+      <Icon name="flag" class="w-10 h-10 text-primary" />
+      <h3 class="heading-3 m-0">Work with the system</h3>
+    </div>
+    Government design is influenced by law, legacy, and limits. Designing around them is part of the work.
+  </Card>
+
+  <Card>
+    <div class="flex items-center gap-3 mb-4">
+      <Icon name="accessibility" class="w-10 h-10 text-primary" />
+      <h3 class="heading-3 m-0">Accessibility is design</h3>
+    </div>
+    Align with [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/) and [DTA guidelines](https://www.dta.gov.au/help-and-advice/digital-service-standard/criteria/criterion-9-make-it-accessible) — not just for compliance, but for reach.
+  </Card>
+</div>
+
+<div class="my-10"></div>
+
+## What's next?
+
+<Card title="Keep learning" icon="academic-cap" class="mb-8">
+Explore more:
+- [Continuous improvement in practice](/articles/continuous-improvement-in-practice)
+- [Problem solving in practice](/articles/problem-solving-in-practice)
+- [Customer behaviour in service design](/articles/customer-behaviour-in-service-design)
+- [Service design principles](/articles/service-design-principles)
+</Card>
+
+<Card title="Join the discussion" icon="users" class="mb-8">
+Want to share your insights or challenges? Connect with others working in design-led transformation on our [community page](/community).
+</Card>
+
+<div class="my-10"></div>
+
+## Further reading
+
+- [DTA – Digital Service Standard](https://www.dta.gov.au/help-and-advice/digital-service-standard)
+- [Design Council – Double Diamond](https://www.designcouncil.org.uk/our-resources/the-double-diamond/history-of-the-double-diamond/)
+- [IDEO – Empathy in Design Thinking](https://www.ideou.com/blogs/inspiration/empathy-in-design-thinking)
+- [Service NSW](https://www.nsw.gov.au/customer-service)
+- [NAPAWash – Australia Post Case Study](https://napawash.org/grand-challenges-blog/australia-post-case-study)
+- [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/)

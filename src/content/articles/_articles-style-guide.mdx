@@ -43,19 +43,33 @@ hidden: true
 
 ## 4. Typography & Layout
 
-- Use consistent font size and appearance for paragraphs and lists.
-- Add vertical spacing (`<div class="mb-6"></div>`, `<div class="my-14"></div>`) between sections, intros, and lists for readability.
+- Use consistent font size and appearance for paragraphs, lists, and tables.
+- Add vertical spacing (`<div class="mb-6"></div>`, `<div class="my-14"></div>`) between sections, intros, lists, and tables for readability.
+- **When a paragraph (`<p>`) is immediately followed by a list or table, always insert `<div class="mb-6"></div>` between them for consistent vertical rhythm.**
+- Use `<div class="my-14"></div>` between major sections and after key content blocks (e.g., after images, callouts, cards, or tables) to maintain clear separation and flow.
+- All lists should use `class="list-disc pl-6 mb-8"` for bullet points, indentation, and spacing.
+- All links should use `class="text-primary underline hover:text-primary/80"` for consistent styling and accessibility.
 - Avoid inline utility classes in MDX unless necessary for layout.
 
-## 5. Callouts & Quotes
+## 5. Tables
+
+- Use the custom `Table` component for all article tables.
+- Keep tables simple, accessible, and theme-aware (light/dark support).
+- Do not place tables inside Cards or Callouts; tables should be standalone elements.
+- Use clear, minimal styling: plain backgrounds, bold headers, standard borders.
+- Always provide a caption for accessibility and context.
+- Place actionable callouts after tables when relevant.
+
+## 6. Callouts & Quotes
 
 - Use `CalloutBox` for summaries, info, and final thoughts. Differentiate types (`info`, `note`, `tip`, `warning`) and use custom icons where appropriate.
 - Use `QuoteBlock` only for genuine, attributed quotations. Always provide a source URL.
 - **Always look for genuine quotes from experts in the specific context.**
 
-## 6. Links & References
+## 7. Links & References
 
-- Use descriptive anchor text for all links.
+- All links must follow the Three R's: Real, Relevant, and Reachable.
+- Cite authoritative frameworks (e.g., AIATSIS, Designing with Country) when discussing cultural or ethical design tensions.
 - Internal links: `/articles/slug` or `/case-studies/slug`.
 - External links: `target="_blank" rel="noopener noreferrer"`.
 - Reference original sources for quotes, frameworks, and statistics.
@@ -64,34 +78,44 @@ hidden: true
 - **Where possible, add external links to authoritative sources, frameworks, or further reading.**
 - **Always seek out genuine, attributed expert quotations relevant to the article's context.**
 
-## 7. Accessibility
+### The Three R's of Linking: Real, Relevant, and Reachable
 
+> All links must be:
+>
+> - **Real:** Point to actual, existing resources (not placeholders or broken URLs)
+> - **Relevant:** Directly related to the context and content in which they appear
+> - **Reachable:** Working URLs that load successfully for users
+>
+> Validate all links during drafting and review. If a link is not real, relevant, and reachable, it must be fixed or removed before publication.
+
+## 8. Components
+
+- Use custom components (`ImageWithCaption`, `CalloutBox`, `QuoteBlock`, `Card`, `Table`) for all non-trivial content blocks.
+- Maintain consistent vertical spacing and section flow as in the showcase articles.
+
+## 9. Accessibility & Testing
+
+- Test all articles for accessibility, theming, and responsiveness before publishing.
+- Ensure all tables, images, and links are accessible and work in both light and dark modes.
 - All images must have meaningful `alt` text.
 - Use accessible colour contrast and semantic headings.
 - Test with screen readers and keyboard navigation.
 
-## 8. Australian Standards
+## 10. Australian Standards
 
 - Use Australian English spelling.
 - Use metric units and $AUD for currency.
 - Use Australian date and time formats.
 - Reference Australian public holidays and time zones where relevant.
 
-## 9. Content Hygiene
+## 11. Content Hygiene
 
 - Remove unused imports and classes.
 - Avoid broken or split inline elements (watch for auto-formatting issues).
 - Use block YAML for arrays in frontmatter.
 - Add TODOs as MDX comments: `{/* TODO: ... */}`
 
-## 10. Testing & Review
-
-- Preview articles in both light and dark mode.
-- Check for broken links and missing images.
-- Run accessibility and performance checks.
-- Ensure all custom components render as intended.
-
-## 11. Documentation & Changelog
+## 12. Documentation & Changelog
 
 - Document any new components or patterns in the project README.
 - Update the changelog for major content or style changes.
@@ -125,3 +149,12 @@ hidden: true
 7. Check all links, images, and icons for correctness.
 8. Test for accessibility, theming, and responsiveness.
 9. Add or update documentation and changelog.
+
+- Use internal links to related articles wherever relevant (cross-linking).
+- Add external links to authoritative sources or frameworks when referencing established concepts (e.g., design thinking, safety culture, ergonomics).
+- Always use the correct link classes and attributes for accessibility and style.
+- Use custom components (ImageWithCaption, CalloutBox, QuoteBlock, Card, Table) for all non-trivial content blocks, including for narrative, not just data.
+- Maintain consistent vertical spacing and section flow as in the modernised article.
+- Place actionable callouts and final thoughts at the end of major sections.
+- Test all links for the Three R's: Real, Relevant, Reachable.
+- Document the use of Unsplash or other open-licensed images for illustrative purposes, with meaningful alt text and captions.

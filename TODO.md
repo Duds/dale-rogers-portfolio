@@ -566,3 +566,15 @@ Dependencies and Notes:
     - [ ] Create dashboard for search analytics
 
 - [ ] Add prominent links to "our resources page" in relevant articles and sections (including "Best Practices for Implementation").
+
+## New Articles
+
+- [ ] Write article: problem-solving-in-practice.mdx
+- [ ] Write article: customer-behaviour-in-service-design.mdx
+- [ ] Write article: innovation-in-service-design.mdx
+- [ ] Write article: continuous-improvement-in-practice.mdx
+- [ ] Write article: continuous improvement in practice
+
+## New Item
+
+- [ ] Create Community page for user engagement and discussion
