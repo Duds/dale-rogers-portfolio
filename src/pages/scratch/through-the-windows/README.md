@@ -119,7 +119,7 @@ Part of the main portfolio project. See main repository for license information.
 
 ## Changelog
 
-### [Unreleased]
+#### Latest Changes
 
 - Initial project setup
 - Basic tram movement
@@ -127,7 +127,7 @@ Part of the main portfolio project. See main repository for license information.
 - Window interaction system
 - Scene management
 
-### [0.1.0] - YYYY-MM-DD
+#### Version 0.1.0 (2024-03-19)
 
 - Initial release
 - Basic tram mechanics
