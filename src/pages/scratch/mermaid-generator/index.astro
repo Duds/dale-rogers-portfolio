@@ -15,6 +15,10 @@ const scratchEntries = await getCollection(
 const project = scratchEntries.find(
   (entry) => entry.slug === "mermaid-generator"
 );
+
+// Build the standalone URL
+const standalonePath = "/scratch/mermaid-generator/standalone/index.html";
+const standaloneUrl = new URL(standalonePath, Astro.site).toString();
 ---
 
 <ScratchStandaloneLayout
@@ -38,12 +42,39 @@ const project = scratchEntries.find(
                 <p class="mt-4 text-lg text-grey-600 dark:text-grey-400">
                   {project.data.description}
                 </p>
+                <div class="mt-4 flex gap-2">
+                  <a
+                    href={standalonePath}
+                    target="_blank"
+                    class="inline-flex items-center gap-1 px-4 py-2 text-sm font-medium bg-primary text-white rounded-md hover:bg-primary-dark"
+                  >
+                    Open Standalone Version
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="7" y1="17" x2="17" y2="7" />
+                      <polyline points="7 7 17 7 17 17" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             )}
 
-            <div class="grid gap-8 md:grid-cols-2">
-              <MermaidEditor />
-              <MermaidPreview />
+            <div class="border-2 border-grey-200 dark:border-grey-700 rounded-lg overflow-hidden">
+              <iframe
+                src={standalonePath}
+                id="mermaid-generator-frame"
+                title="Mermaid Generator"
+                class="w-full h-[600px] border-0"
+              />
             </div>
           </>
         ) : (
@@ -67,20 +98,28 @@ const project = scratchEntries.find(
 </style>
 
 <script>
-  // Initialize Mermaid
-  async function waitForStyles(): Promise<void> {
-    return new Promise((resolve) => {
-      const styles = Array.from(document.styleSheets);
-      if (styles.every((sheet) => (sheet.href ? sheet.href : true))) {
-        resolve();
-      } else {
-        window.addEventListener("load", () => resolve());
-      }
-    });
+  // Handle iframe resizing and communication if needed
+  const iframe = document.getElementById(
+    "mermaid-generator-frame"
+  ) as HTMLIFrameElement;
+
+  // Adjust iframe height based on content if necessary
+  function adjustIframeHeight() {
+    if (!iframe) return;
+
+    try {
+      // Listen for messages from the iframe if needed
+      window.addEventListener("message", (event) => {
+        // Handle any messages from the iframe
+        // For example, you could adjust height based on content size
+        if (event.data && event.data.type === "resize") {
+          iframe.style.height = `${event.data.height}px`;
+        }
+      });
+    } catch (error) {
+      console.error("Error setting up iframe communication:", error);
+    }
   }
 
-  // Initialize after styles are loaded
-  waitForStyles().then(() => {
-    // Mermaid initialization will be handled by the preview component
-  });
+  document.addEventListener("DOMContentLoaded", adjustIframeHeight);
 </script>
