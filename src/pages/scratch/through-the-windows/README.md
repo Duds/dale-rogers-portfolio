@@ -1,125 +1,113 @@
 # Through The Windows
 
-A creative exploration game where players interact with scenes through windows, experiencing different perspectives and narratives.
+An interactive tram journey through a poetic landscape, exploring storytelling through windows and ambient scenes.
 
 ## Project Description
 
-Through The Windows is an interactive web-based game that explores storytelling through the metaphor of windows. Players can interact with various scenes, each offering unique perspectives and narratives. The game combines elements of visual storytelling, interactive fiction, and creative exploration.
+Through The Windows is an interactive web-based experience built in Astro.js with Canvas. It invites users to control a tram through a carefully crafted landscape filled with silhouette characters, parallax layers, and subtle interactions. The game combines elements of visual storytelling, ambient exploration, and creative discovery.
 
-## Setup Instructions
+## Key Features
 
-1. **Prerequisites**
+- **Interactive Tram Journey**: Control a tram through various zones using arrow keys
+- **Ambient Storytelling**: Discover micro-events and environmental storytelling
+- **Visual Style**: Layered paper-cut aesthetic with silhouette figures and parallax movement
+- **Dynamic Scenes**: 10 unique zones with their own atmosphere and events
+- **Interactive Elements**:
+  - Arrow keys for tram control
+  - Spacebar for tram bell
+  - Proximity-based interactions
+  - Velocity-based environmental reactions
+  - Idle time discoveries
 
-   - Node.js (v18 or higher)
-   - npm (v9 or higher)
-   - Git
+## Development
 
-2. **Installation**
+The game is part of the main portfolio project and runs within its development environment.
 
-   ```bash
-   # Clone the repository (if not already done)
-   git clone <repository-url>
-   cd dale-rogers-portfolio
+### Prerequisites
 
-   # Install dependencies
-   npm install
+- Node.js (v18 or higher)
+- npm (v9 or higher)
+- Git
 
-   # Start development server
-   npm run dev
-   ```
+### Running the Game
 
-3. **Development**
-   - The game is located at `/scratch/through-the-windows`
-   - Main entry point: `index.astro`
-   - Game components: `components/`
-   - Types: `types/`
-   - Styles: `styles/`
+```bash
+# From the main portfolio directory
+npm run dev
+```
 
-## Development Guidelines
+The game will be available at `/scratch/through-the-windows`
 
-1. **Component Structure**
-
-   - `Game.tsx` - Main game component
-   - `GameControls.tsx` - Player controls
-   - `GameStats.tsx` - Game statistics
-   - `GameWindow.tsx` - Window rendering
-
-2. **State Management**
-
-   - Use React hooks for local state
-   - Implement proper state management
-   - Handle game state transitions
-
-3. **Testing**
-
-   - Write unit tests for components
-   - Test game logic
-   - Ensure accessibility
-   - Test user interactions
-
-4. **Styling**
-   - Use Tailwind CSS
-   - Follow design system
-   - Ensure responsive design
-   - Maintain accessibility
-
-## Dependencies
-
-- React
-- TypeScript
-- Tailwind CSS
-- Astro
-- [Other specific dependencies]
-
-## Build Process
-
-1. **Development**
-
-   ```bash
-   npm run dev
-   ```
-
-2. **Production**
-
-   ```bash
-   npm run build
-   ```
-
-3. **Preview**
-   ```bash
-   npm run preview
-   ```
-
-## Project Structure
+### Project Structure
 
 ```
 through-the-windows/
 ├── components/
-│   ├── Game.tsx
-│   ├── GameControls.tsx
-│   ├── GameStats.tsx
-│   └── GameWindow.tsx
+│   ├── Game.tsx           # Main game component
+│   ├── GameControls.tsx   # Tram controls
+│   ├── GameStats.tsx      # Journey statistics
+│   └── GameWindow.tsx     # Scene rendering
 ├── types/
-│   └── index.ts
-├── styles/
-│   └── game.css
+│   └── index.ts          # TypeScript definitions
 ├── __tests__/
-│   └── game.test.tsx
-├── index.astro
-├── README.md
-├── package.json
-└── tsconfig.json
+│   ├── Game.test.tsx     # Component tests
+│   └── setup.ts          # Test configuration
+├── index.astro           # Main entry point
+└── README.md             # This file
 ```
+
+### Testing
+
+Tests are run from the main portfolio's test environment:
+
+```bash
+# From the main portfolio directory
+npm test
+```
+
+To run tests specifically for the game:
+
+```bash
+npm test -- through-the-windows
+```
+
+## Game Zones
+
+1. **Depot** (600px) - Quiet platform with birds and waiting passenger
+2. **Fields** (1200px) - Open countryside with trees and windmills
+3. **Station A** (200px) - Rural stop with farmer and goat
+4. **Village** (1200px) - Houses and street life
+5. **Hill Climb** (700px) - Ascending slope with sparks
+6. **Station B** (300px) - Mountain-top platform
+7. **Descent** (700px) - Downhill journey
+8. **Industrial** (1000px) - Urban industrial area
+9. **Station C** (300px) - Urban station
+10. **Urban End** (1000px) - Dusk scene with fading tram
+
+## Interaction System
+
+- **Proximity**: Objects react when the tram is near
+- **Velocity**: Environmental reactions based on speed
+- **Idle Time**: Special events after waiting
+- **Bell**: Spacebar triggers the tram bell with scene-specific reactions
+
+## Visual Style
+
+- Layered paper-cut aesthetic
+- Parallax movement (0.2 to 1.2 depth layers)
+- Silhouette figures
+- Muted tones with occasional color accents
+- Soft shadows and hand-cut look
 
 ## Documentation
 
-- [Game Design Document](./through_the_windows_gdd.md)
-- [Scene Map](./through_the_windows_scene_map.md)
-- [Backlog](./tram_sketch_backlog.md)
+- [Game Design Document](./through_the_windows_gdd.md) - Detailed game mechanics and design
+- [Scene Map](./through_the_windows_scene_map.md) - Zone descriptions and events
+- [Backlog](./tram_sketch_backlog.md) - Development tasks and future features
 
 ## Contributing
 
-1. Create a feature branch
+1. Create a feature branch from `develop`
 2. Make your changes
 3. Write tests
 4. Update documentation
@@ -127,19 +115,21 @@ through-the-windows/
 
 ## License
 
-[License information]
+Part of the main portfolio project. See main repository for license information.
 
 ## Changelog
 
 ### [Unreleased]
 
 - Initial project setup
-- Basic game structure
+- Basic tram movement
+- Zone system implementation
 - Window interaction system
 - Scene management
 
 ### [0.1.0] - YYYY-MM-DD
 
 - Initial release
-- Basic game mechanics
-- First scene implementation
+- Basic tram mechanics
+- First three zones implemented
+- Core interaction system
