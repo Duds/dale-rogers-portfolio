@@ -4,21 +4,50 @@ import Container from "@/components/layout/Container.astro";
 import { type CollectionEntry } from "astro:content";
 import TagList from "@/components/ui/TagList.astro";
 import FormattedDate from "@/components/ui/FormattedDate.astro";
+import { getCollection } from "astro:content";
 
 interface Props {
   scratch: CollectionEntry<"scratch">;
+  title: string;
+  description: string;
+  showNavigation?: boolean;
 }
 
 const { scratch } = Astro.props;
-const { title, description, pubDate, tags, coverImage, status, author } =
-  scratch.data;
+const {
+  title: scratchTitle,
+  description: scratchDescription,
+  pubDate,
+  tags,
+  coverImage,
+  status,
+  author,
+} = scratch.data;
+
+const {
+  title: propsTitle,
+  description: propsDescription,
+  showNavigation = true,
+} = Astro.props;
+
+// Only fetch scratch projects if navigation is enabled
+let scratchProjects: CollectionEntry<"scratch">[] = [];
+if (showNavigation) {
+  scratchProjects = await getCollection("scratch", ({ data }) => {
+    return data.status !== "draft";
+  });
+}
 ---
 
-<BaseLayout title={title} description={description} image={coverImage}>
+<BaseLayout
+  title={propsTitle}
+  description={propsDescription}
+  image={coverImage}
+>
   <Container>
     <article class="prose prose-lg dark:prose-invert mx-auto">
       <header class="mb-8">
-        <h1 class="text-4xl font-bold mb-4">{title}</h1>
+        <h1 class="text-4xl font-bold mb-4">{scratchTitle}</h1>
         <div
           class="flex items-center gap-4 text-gray-600 dark:text-gray-400 mb-4"
         >
@@ -49,7 +78,7 @@ const { title, description, pubDate, tags, coverImage, status, author } =
         coverImage && (
           <img
             src={coverImage}
-            alt={title}
+            alt={scratchTitle}
             class="w-full h-[400px] object-cover rounded-lg mb-8"
           />
         )

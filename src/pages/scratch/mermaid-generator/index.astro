@@ -1,0 +1,86 @@
+---
+import ScratchStandaloneLayout from "../../../layouts/ScratchStandaloneLayout.astro";
+import { getCollection } from "astro:content";
+import MermaidEditor from "./components/MermaidEditor.astro";
+import MermaidPreview from "./components/MermaidPreview.astro";
+
+// Check if we're in standalone mode (no navigation)
+const isStandalone = Astro.url.searchParams.has("standalone");
+
+// Get the project content
+const scratchEntries = await getCollection(
+  "scratch",
+  ({ data }) => data.status !== "draft"
+);
+const project = scratchEntries.find(
+  (entry) => entry.slug === "mermaid-generator"
+);
+---
+
+<ScratchStandaloneLayout
+  title={project
+    ? `${project.data.title} | Scratch | Dale Rogers`
+    : "Content Not Found | Scratch | Dale Rogers"}
+  description={project
+    ? project.data.description
+    : "The requested content could not be found."}
+>
+  <main class="container mx-auto px-4 py-8">
+    <div class="mx-auto max-w-4xl">
+      {
+        project ? (
+          <>
+            {!isStandalone && (
+              <div class="mb-8">
+                <h1 class="text-3xl font-bold tracking-tight text-grey-900 dark:text-grey-100 sm:text-4xl">
+                  {project.data.title}
+                </h1>
+                <p class="mt-4 text-lg text-grey-600 dark:text-grey-400">
+                  {project.data.description}
+                </p>
+              </div>
+            )}
+
+            <div class="grid gap-8 md:grid-cols-2">
+              <MermaidEditor />
+              <MermaidPreview />
+            </div>
+          </>
+        ) : (
+          <div class="mb-8">
+            <h1 class="text-3xl font-bold tracking-tight text-grey-900 dark:text-grey-100 sm:text-4xl">
+              Content Not Found
+            </h1>
+            <p class="mt-4 text-lg text-grey-600 dark:text-grey-400">
+              The Mermaid Generator content could not be found. Please check the
+              content collection.
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </main>
+</ScratchStandaloneLayout>
+
+<style>
+  /* Add any component-specific styles here */
+</style>
+
+<script>
+  // Initialize Mermaid
+  async function waitForStyles(): Promise<void> {
+    return new Promise((resolve) => {
+      const styles = Array.from(document.styleSheets);
+      if (styles.every((sheet) => (sheet.href ? sheet.href : true))) {
+        resolve();
+      } else {
+        window.addEventListener("load", () => resolve());
+      }
+    });
+  }
+
+  // Initialize after styles are loaded
+  waitForStyles().then(() => {
+    // Mermaid initialization will be handled by the preview component
+  });
+</script>

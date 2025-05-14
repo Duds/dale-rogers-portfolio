@@ -1,0 +1,120 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Mermaid Library -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"
+    ></script>
+    <script>
+      // TypeScript declarations
+      /** @type {{
+        initialize: (config: {
+          startOnLoad?: boolean;
+          theme?: string;
+          securityLevel?: string;
+          themeVariables?: Record<string, string>;
+        }) => void;
+        run: (options: { nodes: HTMLElement[]; suppressErrors: boolean }) => Promise<void>;
+      }} */
+      const mermaid = window.mermaid;
+
+      // Initialize Mermaid
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "default",
+        securityLevel: "loose",
+        themeVariables: {
+          fontFamily: '"Poppins", sans-serif',
+          fontSize: "14px",
+          primaryColor: "#E0F2F1",
+          primaryTextColor: "#004c45",
+          primaryBorderColor: "#004c45",
+          lineColor: "#00796B",
+          secondaryColor: "#F5F5F5",
+          tertiaryColor: "#B2DFDB",
+          mainBkg: "#E0F2F1",
+          nodeTextColor: "#004c45",
+          clusterBkg: "#F5F5F5",
+          clusterBorder: "#004c45",
+          titleColor: "#004c45",
+          edgeLabelBackground: "#ffffff",
+          edgeLabelColor: "#004c45",
+        },
+      });
+
+      // Run Mermaid on any existing diagrams
+      const mermaidNodes = Array.from(
+        document.querySelectorAll(".mermaid")
+      ).filter((node): node is HTMLElement => node instanceof HTMLElement);
+
+      if (mermaidNodes.length > 0) {
+        mermaid.run({
+          nodes: mermaidNodes,
+          suppressErrors: true,
+        });
+      }
+    </script>
+
+    <!-- Theme initialization script -->
+    <script>
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      const storedTheme = localStorage.getItem("theme");
+
+      if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </head>
+  <body
+    class="font-body text-grey-900 dark:text-white bg-white dark:bg-grey-900 min-h-screen"
+  >
+    <!-- Back to portfolio button -->
+    <div class="fixed top-4 right-4 z-50">
+      <a
+        href="/scratch"
+        class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-grey-800 text-grey-700 dark:text-grey-300 border border-grey-300 dark:border-grey-600 rounded-lg hover:bg-grey-50 dark:hover:bg-grey-700 transition-colors text-sm font-medium shadow-lg"
+      >
+        <svg viewBox="0 0 24 24" class="w-5 h-5">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+          ></path>
+        </svg>
+        Back to Portfolio
+      </a>
+    </div>
+
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  /* Import global styles */
+  @import "@/styles/global.css";
+</style>
