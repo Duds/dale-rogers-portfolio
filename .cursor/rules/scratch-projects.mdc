@@ -1,0 +1,160 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Scratch Projects Management
+
+## Project Structure
+
+1. **Location**
+   - All scratch projects must be located in `src/pages/scratch/<project-name>/`
+   - Each project must be self-contained within its directory
+   - Project components should be co-located with the project
+
+2. **Required Files**
+   - `index.astro` - Main entry point
+   - `README.md` - Project documentation
+   - `package.json` - Project-specific dependencies (if any)
+   - `.gitignore` - Project-specific git ignores
+   - `tsconfig.json` - Project-specific TypeScript config (if needed)
+
+3. **Component Organization**
+   - Components should be in `src/pages/scratch/<project-name>/components/`
+   - Types should be in `src/pages/scratch/<project-name>/types/`
+   - Styles should be in `src/pages/scratch/<project-name>/styles/`
+   - Tests should be in `src/pages/scratch/<project-name>/__tests__/`
+
+4. **Documentation**
+   - Each project must have a README.md with:
+     - Project description
+     - Setup instructions
+     - Development guidelines
+     - Dependencies
+     - Build/deployment process
+   - Include a changelog for significant updates
+   - Document any external dependencies or requirements
+
+5. **Dependencies**
+   - Use project-specific package.json for unique dependencies
+   - Share common dependencies with main portfolio where appropriate
+   - Document all external dependencies
+   - Use exact versions for dependencies
+
+6. **Code Quality**
+   - Follow TypeScript best practices
+   - Implement proper error handling
+   - Include unit tests
+   - Follow accessibility guidelines
+   - Document complex logic
+
+7. **Build Process**
+   - Each project should be independently buildable
+   - Include build scripts in package.json
+   - Document build requirements
+   - Include development and production builds
+
+8. **Version Control**
+   - Use semantic versioning
+   - Include .gitignore for project-specific files
+   - Document branching strategy
+   - Include contribution guidelines
+
+9. **Security**
+   - Follow security best practices
+   - Document security considerations
+   - Include security testing
+   - Handle sensitive data appropriately
+
+10. **Performance**
+    - Optimize for performance
+    - Document performance considerations
+    - Include performance testing
+    - Monitor resource usage
+
+## Migration Process
+
+When moving components from main portfolio to scratch project:
+
+1. **Component Migration**
+   - Move components to project-specific directory
+   - Update imports and dependencies
+   - Ensure self-containment
+   - Update documentation
+
+2. **Dependency Management**
+   - Identify shared vs. project-specific dependencies
+   - Create project-specific package.json
+   - Update import paths
+   - Document dependency changes
+
+3. **Testing**
+   - Move relevant tests
+   - Update test paths
+   - Ensure test coverage
+   - Document test requirements
+
+4. **Documentation**
+   - Update all documentation
+   - Include migration notes
+   - Document breaking changes
+   - Update README.md
+
+## Best Practices
+
+1. **Development**
+   - Use TypeScript
+   - Follow React best practices
+   - Implement proper error handling
+   - Use proper state management
+   - Follow component composition
+
+2. **Testing**
+   - Write unit tests
+   - Include integration tests
+   - Add E2E tests
+   - Maintain test coverage
+
+3. **Documentation**
+   - Keep documentation up to date
+   - Document API changes
+   - Add code comments
+   - Update architecture docs
+
+4. **Security**
+   - Validate all inputs
+   - Sanitize outputs
+   - Follow security best practices
+   - Document security considerations
+
+5. **Performance**
+   - Optimize renders
+   - Use proper caching
+   - Implement lazy loading
+   - Monitor memory usage
+
+## Project Lifecycle
+
+1. **Creation**
+   - Create project directory
+   - Set up required files
+   - Initialize dependencies
+   - Set up build process
+
+2. **Development**
+   - Follow development guidelines
+   - Maintain documentation
+   - Write tests
+   - Review code quality
+
+3. **Maintenance**
+   - Update dependencies
+   - Fix bugs
+   - Improve performance
+   - Update documentation
+
+4. **Archival**
+   - Document final state
+   - Archive dependencies
+   - Update portfolio documentation
+   - Remove from active development
