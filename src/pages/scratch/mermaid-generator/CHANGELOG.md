@@ -22,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Test setup with Vitest
 - Project documentation
 - Cursor rules for development
+- Enhanced build-standalone.js script with comprehensive portability transformations
+- Added automatic README.md generation in standalone build
+- Improved SEO with proper meta tags in the standalone version
 
 ### Changed
 
@@ -29,6 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved standalone version generation
 - Enhanced error handling with custom error types
 - Added proper TypeScript types for all components
+- Completely refactored standalone version to work with file:// protocol
+- Improved JavaScript transformations for better browser compatibility
+- Removed Astro-specific code from standalone version
+- Standardized file-naming conventions across the project
 
 ### Fixed
 
@@ -36,6 +43,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed style loading in Astro version
 - Fixed linter errors in index.astro
 - Fixed keyboard navigation in editor
+- Fixed CORS issues in standalone version when opened directly from file system
+- Fixed template literal syntax in transformed JavaScript for older browsers
+- Fixed module import/export syntax in standalone version
+- Fixed file path references in standalone HTML
 
 ### Security
 
@@ -43,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added output sanitization
 - Implemented secure file handling
 - Added proper error boundaries
+- Enhanced standalone version to work with local file security restrictions
 
 ### Accessibility
 
@@ -58,6 +70,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved event handling
 - Added proper cleanup for event listeners
 - Implemented efficient DOM updates
+- Reduced file size in standalone version by removing commented code
+- Improved load time by avoiding unnecessary imports
 
 ## [0.1.0] - 2024-03-19
 
