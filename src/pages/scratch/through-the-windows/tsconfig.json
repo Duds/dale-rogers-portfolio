@@ -11,12 +11,14 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "module": "Node16",
-    "moduleResolution": "node16"
+    "moduleResolution": "node16",
+    "typeRoots": ["./types", "../../../node_modules/@types"]
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "**/*.astro"
+    "**/*.astro",
+    "types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules",
