@@ -60,18 +60,23 @@ dale-rogers-portfolio/
 
 ## Documentation
 
-Comprehensive documentation is available in the project:
+All project documentation is now consolidated in the [`/docs/`](./docs/) directory:
 
-- [Development Guide](./DEVELOPMENT.md) - Setup and workflow
-- [Architecture](./ARCHITECTURE.md) - System design and architecture
-- [Components](./docs/COMPONENTS.md) - UI component library
-- [Deployment](./docs/DEPLOYMENT.md) - Deployment procedures
-- [Contributing](./docs/CONTRIBUTING.md) - How to contribute
-- [Search Features](./docs/SEARCH.md) - Search implementation
-- [Testing](./docs/TESTING.md) - Testing strategies
-- [Theme System](./src/styles/THEME.md) - Theming documentation
+- [Development Guide](./docs/DEVELOPMENT.md) – Setup and workflow
+- [Architecture](./docs/ARCHITECTURE.md) – System design and architecture
+- [Components](./docs/COMPONENTS.md) – UI component library
+- [Deployment](./docs/DEPLOYMENT.md) – Deployment procedures
+- [Contributing](./docs/CONTRIBUTING.md) – How to contribute
+- [Search Features](./docs/SEARCH.md) – Search implementation
+- [Testing](./docs/TESTING.md) – Testing strategies
+- [Theme System](./docs/THEME.md) – Theming documentation
+- [Lessons Learned](./docs/LESSONS_LEARNED.md)
+- [Migration Notes](./docs/MIGRATION.md)
+- [Backlog](./docs/BACKLOG.md) – **Single source of truth for all actionable TODOs**
 
 See the [documentation index](./docs/README.md) for a complete list of available documentation.
+
+> **Note:** All actionable TODOs are now tracked in [`/docs/BACKLOG.md`](./docs/BACKLOG.md). Please add new tasks there and reference it for project priorities.
 
 ## Development
 
