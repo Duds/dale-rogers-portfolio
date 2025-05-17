@@ -35,6 +35,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - UI components in `src/components/ui/`
   - Updated import paths
   - Fixed component references
+- `lint:css` script and `lint-css.ts` for auditing CSS `@apply` utilities across stylesheets and Astro components
+- `check-token-usage.ts` script to report missing Tailwind utilities and enforce semantic token usage
+- `card` colour group in `tailwind.config.ts` generating `bg-card-purple`, `bg-card-green`, `bg-card-orange`, and `bg-card-black` utilities
+- Custom Tailwind plugin to auto-generate semantic utilities (`.bg-*`, `.text-*`, `.border-*`, `.ring-*`, spacing, sizing) from CSS variables
+- `generate-css-vars.ts` script ensuring CSS custom properties are generated from TypeScript theme tokens
 
 ### Changed
 
@@ -56,6 +61,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced navigation design with bolder typography
 - Improved mobile menu styling and interactions
 - Added decorative oversized text to footer
+- Updated `global.css` import ordering to satisfy PostCSS `@import` rules and suppress Vite warnings
+- Refactored `ThemeToggle.astro` and other components to replace arbitrary `[var(...)]` classes with semantic utilities like `border-text`
+- Updated migration and documentation: `MIGRATION.md`, `THEME.md`, and `TODO.md` to reflect design token migration progress
 
 ### Fixed
 
@@ -68,6 +76,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed adapter configuration issues
 - Resolved import errors
 - Corrected American English spellings to Australian English
+- Extended Tailwind config to include `card` colour utilities, resolving missing `bg-card-*` errors
+- Removed invalid `border-border` and `dark:border-border-dark` classes in `ThemeToggle.astro`, replacing with `border-text`
 
 ### Security
 

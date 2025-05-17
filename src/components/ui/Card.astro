@@ -23,11 +23,11 @@ const { title, class: className = "", clickable = false, href } = Astro.props;
  * @type {string}
  */
 const baseClasses = [
-  "bg-[var(--colour-bg)]",
-  "rounded-[var(--radius-lg)]",
+  "bg-bg",
+  "rounded-lg",
   "p-6",
   "shadow-soft dark:shadow-soft-dark",
-  "transition-all duration-[var(--transition-normal)] ease-[var(--transition-timing)]",
+  "transition-all duration-normal ease-in-out",
 ].join(" ");
 
 /**

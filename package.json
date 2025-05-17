@@ -4,6 +4,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "check-tokens": "tsx src/scripts/check-token-usage.ts",
+    "predev": "npm run generate-css-vars",
+    "prebuild": "npm run generate-css-vars",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
@@ -13,8 +16,9 @@
     "test": "vitest",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
-    "generate-css-vars": "tsx scripts/generate-css-vars.ts",
-    "test:tokens": "vitest run scripts/generate-css-vars.test.ts"
+    "generate-css-vars": "tsx src/scripts/generate-css-vars.ts",
+    "test:tokens": "vitest run src/scripts/generate-css-vars.test.ts",
+    "lint:css": "tsx src/scripts/lint-css.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -40,6 +44,7 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "glob": "^8.1.0",
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -55,5 +60,8 @@
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "vitest": "^1.3.1"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

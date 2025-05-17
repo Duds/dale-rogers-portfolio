@@ -12,10 +12,10 @@ const description =
   .gradient-heading {
     background: linear-gradient(
       45deg,
-      #af8abf 0%,
-      #fa8a58 35%,
-      #36a96a 70%,
-      #af8abf 100%
+      var(--colour-hero-gradient-1, #af8abf) 0%,
+      var(--colour-hero-gradient-2, #fa8a58) 35%,
+      var(--colour-hero-gradient-3, #36a96a) 70%,
+      var(--colour-hero-gradient-1, #af8abf) 100%
     );
     background-size: 200% 100%;
     color: transparent;
@@ -56,7 +56,7 @@ const description =
 
     <!-- Right Column -->
     <div class="col-span-6 lg:col-span-2 flex flex-col justify-end">
-      <p class="text-2xl text-neutral-600 dark:text-neutral-300 mb-8 max-w-2xl">
+      <p class={`text-2xl text-text mb-8 max-w-2xl`}>
         {description}
       </p>
       <div>

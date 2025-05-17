@@ -376,3 +376,13 @@
    - Performance monitoring
    - Accessibility audits
    - Code quality reviews
+
+## Theme Token Migration Lessons
+
+- Centralised theme tokens in TypeScript and successfully generated CSS custom properties for robust theming.
+- Migrated Tailwind configuration to consume design tokens directly, ensuring consistency across colours, spacing, typography, shadows, radius, transitions, and z-index.
+- Developed a PostCSS linting script (`lint:css`) to audit `@apply` usage and catch missing utility classes across CSS files and Astro `<style>` blocks.
+- Discovered that `@import` directives must appear before all other rules (except `@charset`), and adjusted import ordering in `global.css` to eliminate PostCSS warnings.
+- Built a custom Tailwind plugin to auto-generate semantic utilities (e.g. `.bg-text`, `.border-text`, `.p-4`) from CSS variables, replacing arbitrary `[var(...)]` patterns.
+- Replaced hard-coded Tailwind arbitrary values (`text-[var(--…)]`, `bg-[var(--…)]`, etc.) with semantic utilities, streamlining component styles and improving maintainability.
+- Recorded migration progress in `MIGRATION.md`, updated documentation in `THEME.md` and `TODO.md`, and tracked changes in `CHANGELOG.md` for complete traceability.

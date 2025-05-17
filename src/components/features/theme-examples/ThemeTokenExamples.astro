@@ -1,0 +1,137 @@
+---
+import { transitionDurationTokens } from "../../../styles/theme/transitions.ts";
+import { zIndex } from "../../../styles/theme/zIndex.ts";
+import { uiColours } from "../../../styles/theme/colors.ts";
+import { spacing } from "../../../styles/theme/spacing.ts";
+import { shadows } from "../../../styles/theme/shadows.ts";
+import { fontSize } from "../../../styles/theme/typography.ts";
+import { radius } from "../../../styles/theme/radius.ts";
+import "../../../styles/components/theme-token-examples.css";
+
+/**
+ * Visual demonstration of theme token usage
+ * @component ThemeTokenExamples
+ *
+ * @example
+ * ```astro
+ * <ThemeTokenExamples />
+ * ```
+ *
+ * @accessibility
+ * - ARIA roles: presentation
+ * - Keyboard navigation: not interactive
+ */
+
+const colourEntries: [string, string][] = Object.entries(uiColours);
+const spacingEntries: [string, string][] = Object.entries(spacing);
+const shadowEntries: [string, string][] = Object.entries(shadows);
+const fontSizeEntries: [string, string | number][] = Object.entries(fontSize);
+const radiusEntries: [string, string][] = Object.entries(radius);
+const transitionEntries: [string, string][] = Object.entries(
+  transitionDurationTokens
+);
+const zIndexEntries: [string, string | number][] = Object.entries(zIndex);
+---
+
+<section aria-label="Theme Token Usage Examples">
+  <h2>Colour Tokens</h2>
+  <div class="token-demo">
+    {
+      colourEntries.map(([name, value]: [string, string]) => (
+        <div class={`token-demo__swatch bg-${name}`}>
+          <span class="token-demo__label">
+            {name}
+            <br />
+            {value}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2>Spacing Tokens</h2>
+  <div class="token-demo">
+    {
+      spacingEntries.map(([name, value]: [string, string]) => (
+        <div class={`token-demo__swatch w-${name} h-${name} bg-surface`}>
+          <span class="token-demo__label">
+            {name}
+            <br />
+            {value}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2>Shadow Tokens</h2>
+  <div class="token-demo">
+    {
+      shadowEntries.map(([name, value]: [string, string]) => (
+        <div class={`token-demo__shadow shadow-${name}`}>
+          <span class="token-demo__label">
+            {name}
+            <br />
+            {value}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2>Typography Tokens</h2>
+  <div class="token-demo">
+    {
+      fontSizeEntries.map(([name, value]: [string, string | number]) => (
+        <span class={`token-demo__typography text-${name}`}>
+          {name}: {value}
+        </span>
+      ))
+    }
+  </div>
+
+  <h2>Radius Tokens</h2>
+  <div class="token-demo">
+    {
+      radiusEntries.map(([name, value]: [string, string]) => (
+        <div class={`token-demo__radius rounded-${name}`}>
+          <span class="token-demo__label">
+            {name}
+            <br />
+            {value}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2>Transition Tokens</h2>
+  <div class="token-demo">
+    {
+      transitionEntries.map(([name, value]: [string, string]) => (
+        <div class={`token-demo__transition duration-${name}`}>
+          <span class="token-demo__label">
+            {name}
+            <br />
+            {value}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2>Z-Index Tokens</h2>
+  <div class="token-demo">
+    {
+      zIndexEntries.map(([name, value]: [string, string | number]) => (
+        <div class={`token-demo__zindex z-${name}`}>
+          <span class="token-demo__label">
+            {name}
+            <br />
+            {value}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+</section>

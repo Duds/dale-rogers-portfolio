@@ -1,10 +1,10 @@
-import { uiColours } from "../src/styles/theme/colors";
-import { shadows } from "../src/styles/theme/shadows";
-import { spacing } from "../src/styles/theme/spacing";
-import { fontSize } from "../src/styles/theme/typography";
-import { radius } from "../src/styles/theme/radius";
-import { transitionDurationTokens } from "../src/styles/theme/transitions";
-import { zIndex } from "../src/styles/theme/zIndex";
+import { uiColours } from "../styles/theme/colors.ts";
+import { shadows } from "../styles/theme/shadows.ts";
+import { spacing } from "../styles/theme/spacing.ts";
+import { fontSize } from "../styles/theme/typography.ts";
+import { radius } from "../styles/theme/radius.ts";
+import { transitionDurationTokens } from "../styles/theme/transitions.ts";
+import { zIndex } from "../styles/theme/zIndex.ts";
 import * as fs from "fs";
 import * as path from "path";
 import { fileURLToPath } from "url";
@@ -41,7 +41,7 @@ ${cssVarsFromObject(zIndex, "z", true)}
 `;
 
 fs.writeFileSync(
-  path.join(__dirname, "../src/styles/generated-tokens.css"),
+  path.join(__dirname, "../styles/generated-tokens.css"),
   css.trim() + "\n"
 );
 
