@@ -12,7 +12,9 @@
     "astro": "astro",
     "test": "vitest",
     "test:watch": "vitest watch",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "generate-css-vars": "tsx scripts/generate-css-vars.ts",
+    "test:tokens": "vitest run scripts/generate-css-vars.test.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -29,15 +31,13 @@
     "@iconify/react": "^5.2.1",
     "@types/lodash-es": "^4.17.12",
     "@types/nodemailer": "^6.4.17",
-    "astro": "^5.6.1",
     "crypto": "^1.0.1",
     "dotenv": "^16.5.0",
     "lodash-es": "^4.17.21",
     "node-fetch": "^3.3.2",
     "nodemailer": "^6.10.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "typescript": "^5.8.3"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
@@ -46,10 +46,14 @@
     "@types/jsdom": "^21.1.7",
     "@types/testing-library__jest-dom": "^5.14.9",
     "@vercel/node": "^5.1.14",
+    "astro": "^5.7.13",
     "autoprefixer": "^10.4.14",
     "jsdom": "^26.1.0",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
     "vitest": "^1.3.1"
   }
 }

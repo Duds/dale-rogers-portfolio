@@ -49,3 +49,10 @@ export const colors = {
 } as const;
 
 export type ColorToken = keyof typeof colors;
+
+// Additional tokens migrated from global.css :root
+export const uiColours = {
+  background: "#ffffff", // --color-bg
+  text: "#111111", // --color-text (default to black)
+  accent: "#8B5CF6", // --color-accent (default to purple)
+} as const;

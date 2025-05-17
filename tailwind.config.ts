@@ -1,5 +1,11 @@
 import type { Config } from "tailwindcss";
 import { colors } from "./src/styles/theme/colors";
+import { spacing } from "./src/styles/theme/spacing";
+import { shadows } from "./src/styles/theme/shadows";
+import { fontSize } from "./src/styles/theme/typography";
+import { radius } from "./src/styles/theme/radius";
+import { transitionDurationTokens } from "./src/styles/theme/transitions";
+import { zIndex } from "./src/styles/theme/zIndex";
 import typography from "@tailwindcss/typography";
 
 const config: Config = {
@@ -35,7 +41,12 @@ const config: Config = {
         "card-black": colors.neutral.cardBlack,
         "section-alt": colors.neutral.background,
       },
-      spacing: {}, // (optional: later hook into your spacing.ts if you want)
+      spacing: {
+        ...spacing,
+      },
+      fontSize: {
+        ...fontSize,
+      },
       fontFamily: {
         sans: ["DM Sans", "system-ui", "-apple-system", "sans-serif"],
         heading: ["Fraunces", "serif"],
@@ -43,13 +54,20 @@ const config: Config = {
         display: ["Fraunces", "serif"],
         mono: ["monospace"],
       },
+      borderRadius: {
+        ...radius,
+        pill: "9999px",
+      },
       fontWeight: {}, // (ready for future hook-in from typography.ts)
       lineHeight: {},
       letterSpacing: {},
       transitionProperty: {},
       transitionTimingFunction: {},
-      transitionDuration: {},
+      transitionDuration: {
+        ...transitionDurationTokens,
+      },
       boxShadow: {
+        ...shadows,
         sm: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
         DEFAULT:
           "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
@@ -72,8 +90,8 @@ const config: Config = {
         "dark-2xl": "0 25px 50px -12px rgb(255 255 255 / 0.35)",
         "dark-inner": "inset 0 2px 4px 0 rgb(255 255 255 / 0.15)",
       },
-      borderRadius: {
-        pill: "9999px",
+      zIndex: {
+        ...zIndex,
       },
     },
   },

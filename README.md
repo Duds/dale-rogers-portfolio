@@ -30,6 +30,20 @@ npm run preview
 - ♿ WCAG 2.1 AA compliant
 - 🇦🇺 Australian English localisation
 
+## Design Token Workflow
+
+This project uses a modern, type-safe design token system:
+
+- **Source of Truth:** All design tokens (colours, spacing, shadows, etc.) are defined in TypeScript files in `src/styles/theme/`.
+- **CSS Variable Generation:** Run `npm run generate-css-vars` to generate `src/styles/generated-tokens.css` with all tokens as CSS variables. This is automated before dev/build via `predev` and `prebuild` scripts.
+- **Usage:**
+  - CSS: Tokens are available as CSS variables (e.g., `var(--color-accent)`, `var(--shadow-lg)`, `var(--space-2)`).
+  - Tailwind: Tokens are imported into `tailwind.config.js` for consistent utility classes.
+  - JS/TS: Tokens can be imported directly from TypeScript for use in components or scripts.
+- **Node Version:** Use `nvm use 20` before running scripts if using Node Version Manager (NVM).
+
+This ensures a single source of truth for all design decisions, with full type safety and easy synchronisation between code and styles.
+
 ## Project Structure
 
 ```
