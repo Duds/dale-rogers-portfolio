@@ -1,3 +1,7 @@
+# TODOs
+
+_All actionable TODOs are now tracked in BACKLOG.md. This file contains only best practices, rationale, and completed checklists._
+
 # Portfolio TODO List
 
 ## Completed Items ✓
