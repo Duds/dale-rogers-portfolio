@@ -1,0 +1,84 @@
+---
+// MermaidPreview.astro
+---
+
+<div class="mermaid-preview">
+  <div class="section-title">Preview</div>
+  <div class="mermaid-container">
+    <div class="mermaid-wrapper">
+      <div id="mermaid-output"></div>
+    </div>
+    <div class="zoom-controls">
+      <button onclick="window.zoomOut()" title="Zoom Out" class="zoom-button">
+        <svg viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z"></path></svg>
+      </button>
+      <input
+        type="range"
+        class="zoom-slider"
+        min="50"
+        max="200"
+        value="100"
+        step="10"
+      />
+      <span class="zoom-value">100%</span>
+      <button onclick="window.zoomIn()" title="Zoom In" class="zoom-button">
+        <svg viewBox="0 0 24 24"
+          ><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg
+        >
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .mermaid-preview {
+    @apply w-full;
+  }
+
+  .section-title {
+    @apply text-lg font-medium text-grey-900 dark:text-grey-100 mb-4;
+  }
+
+  .mermaid-container {
+    @apply relative bg-white dark:bg-grey-800 border-2 border-grey-200 dark:border-grey-700 rounded-lg overflow-hidden min-h-[300px];
+  }
+
+  .mermaid-wrapper {
+    @apply p-4 overflow-auto max-h-[600px];
+  }
+
+  #mermaid-output {
+    @apply flex justify-center items-center min-h-[200px];
+  }
+
+  .zoom-controls {
+    @apply flex items-center gap-2 p-2 bg-grey-50 dark:bg-grey-900 border-t border-grey-200 dark:border-grey-700;
+  }
+
+  .zoom-button {
+    @apply p-1 bg-transparent text-grey-600 dark:text-grey-400 hover:bg-grey-200 dark:hover:bg-grey-700 rounded transition-colors;
+  }
+
+  .zoom-button svg {
+    @apply w-5 h-5;
+  }
+
+  .zoom-slider {
+    @apply flex-1 h-1 bg-grey-200 dark:bg-grey-700 rounded-full appearance-none;
+    @apply [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer;
+    @apply [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-primary [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-0;
+  }
+
+  .zoom-value {
+    @apply text-sm text-grey-600 dark:text-grey-400 min-w-[48px] text-center;
+  }
+</style>
+
+<script>
+  import { setupPreview } from "../shared/core/preview.js";
+
+  // Initialize preview when component is mounted
+  document.addEventListener("DOMContentLoaded", () => {
+    setupPreview();
+  });
+</script>

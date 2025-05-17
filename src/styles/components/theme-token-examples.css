@@ -1,0 +1,68 @@
+/* Theme Token Examples Demo Styles
+   @file theme-token-examples.css
+   @description Styles for visualising theme token usage in the demo component.
+   @author Dale Rogers
+*/
+
+.token-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.token-demo__swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 8rem;
+  height: 8rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  margin-bottom: var(--spacing-md);
+  transition: box-shadow var(--transition-fast);
+}
+
+.token-demo__label {
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  word-break: break-all;
+}
+
+.token-demo__typography {
+  font-family: inherit;
+  margin-bottom: var(--spacing-xs);
+}
+
+.token-demo__radius {
+  width: 4rem;
+  height: 4rem;
+  background: var(--colour-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.token-demo__shadow {
+  width: 4rem;
+  height: 4rem;
+  background: var(--colour-surface);
+  margin-bottom: var(--spacing-xs);
+}
+
+.token-demo__transition {
+  width: 4rem;
+  height: 1rem;
+  background: var(--colour-primary);
+  margin-bottom: var(--spacing-xs);
+  transition: width var(--transition-fast);
+}
+
+.token-demo__zindex {
+  position: relative;
+  width: 4rem;
+  height: 2rem;
+  background: var(--colour-secondary);
+  margin-bottom: var(--spacing-xs);
+  z-index: var(--z-index-modal);
+}

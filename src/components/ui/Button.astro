@@ -15,23 +15,22 @@ const baseStyles = [
   "px-8 py-4",
   "text-xl font-medium",
   "rounded-pill",
-  "transition-all duration-[var(--transition-normal)] ease-[var(--transition-timing)]",
+  "transition-all duration-normal ease-in-out",
 ].join(" ");
 
 const variantStyles: Record<NonNullable<Props["variant"]>, string> = {
   primary: [
-    "bg-black text-white",
-    "hover:bg-purple-500 hover:text-orange-500",
+    "bg-primary text-on-primary",
+    "hover:bg-primary-hover hover:text-on-primary-hover",
     "hover:-translate-y-0.5",
     "shadow-md",
     "hover:shadow-lg",
-    "dark:bg-white dark:text-black",
-    "dark:hover:bg-purple-500 dark:hover:text-orange-500",
+    "dark:bg-primary-dark dark:text-on-primary-dark",
+    "dark:hover:bg-primary-hover-dark dark:hover:text-on-primary-hover-dark",
   ].join(" "),
-  secondary:
-    "bg-[var(--colour-button-secondary)] text-[var(--colour-text)] hover:bg-[var(--colour-button-secondary-hover)]",
+  secondary: "bg-button-secondary text-text hover:bg-button-secondary-hover",
   outline:
-    "border-2 border-[var(--colour-button-outline)] text-[var(--colour-text)] hover:bg-[var(--colour-button-outline-hover)]",
+    "border-2 border-button-outline text-text hover:bg-button-outline-hover",
 };
 
 const combinedClasses = [baseStyles, variantStyles[variant], className]

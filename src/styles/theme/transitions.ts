@@ -30,10 +30,22 @@ export const transitionDuration = {
   1000: "1000ms",
 } as const;
 
+/**
+ * Transition duration tokens migrated from global.css
+ * @description Transition duration tokens for design system (Australian English spelling)
+ */
+export const transitionDurationTokens = {
+  fast: "150ms", // --transition-fast
+  normal: "300ms", // --transition-normal
+  slow: "500ms", // --transition-slow
+} as const;
+
 export type TransitionPropertyToken = keyof typeof transitionProperty;
 export type TransitionTimingFunctionToken =
   keyof typeof transitionTimingFunction;
 export type TransitionDurationToken = keyof typeof transitionDuration;
+export type TransitionDurationTokenCustom =
+  keyof typeof transitionDurationTokens;
 
 // Helper type for transition shorthand
 export type TransitionShorthand =

@@ -143,18 +143,18 @@ For better AI context and collaboration, maintain these documentation files:
     - [ ] Include customisation guide
 
 - [ ] Component Theme Improvements
-  - [ ] Create theme documentation with colour palette and usage guidelines
-  - [ ] Add theme toggle functionality
+  - [x] Create theme documentation with colour palette and usage guidelines
+  - [x] Add theme toggle functionality
   - [ ] Implement theme preview in Colophon page
-  - [ ] Create theme migration guide for future updates
+  - [x] Create theme migration guide for future updates
 - [ ] Accessibility Enhancements
   - [ ] Add ARIA labels to all interactive elements
   - [ ] Implement keyboard navigation for mobile menu
   - [ ] Add skip-to-content link
   - [ ] Test with screen readers
 - [ ] Performance Optimization
-  - [ ] Audit CSS custom property usage
-  - [ ] Consider extracting common styles to utility classes
+  - [x] Audit CSS custom property usage
+  - [x] Consider extracting common styles to utility classes
   - [ ] Implement critical CSS loading
 
 ## TypeScript Improvements

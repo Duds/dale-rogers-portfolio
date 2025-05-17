@@ -13,8 +13,9 @@ const { isTransparent = true } = Astro.props;
   class:list={[
     "w-full z-40",
     {
-      "bg-transparent": isTransparent,
-      "bg-white/80 dark:bg-neutral-950/80 backdrop-blur-sm": !isTransparent,
+      "bg-surface-header-transparent": isTransparent,
+      "bg-surface-header dark:bg-surface-header-dark backdrop-blur-sm":
+        !isTransparent,
     },
   ]}
 >

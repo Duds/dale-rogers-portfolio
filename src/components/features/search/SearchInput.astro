@@ -59,6 +59,7 @@
 
 <script>
   import { useSearch } from "./hooks/useSearch.js";
+  // import { uiColours } from '../../../styles/theme/colors.ts'; // Uncomment when migrating to theme tokens in JS/TS
 
   const searchInput = document.getElementById(
     "search-input"
@@ -160,6 +161,7 @@
 </script>
 
 <style>
+  /* TODO: Migrate all CSS to use theme tokens from TypeScript in JS/TS logic or CSS-in-JS */
   .search-bar-container {
     position: relative;
     height: 3rem;
@@ -260,17 +262,18 @@
     overflow-y: auto;
   }
 
-  /* Dark mode is now handled by CSS variables */
-
+  /* Remove local CSS variable definitions, use theme tokens in JS/TS */
+  /*
   :root {
     --color-text: #000;
     --color-background: #fff;
   }
-
   .dark {
     --color-text: #fff;
     --color-background: #171717;
   }
+  */
+  /* TODO: Migrate all CSS to use CSS-in-JS or style props with uiColours tokens */
 
   @media (max-width: 768px) {
     .search-input-container.expanded {

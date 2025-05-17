@@ -1,6 +1,104 @@
 import type { Config } from "tailwindcss";
 import { colors } from "./src/styles/theme/colors";
+import { spacing } from "./src/styles/theme/spacing";
+import { shadows } from "./src/styles/theme/shadows";
+import { fontSize } from "./src/styles/theme/typography";
+import { radius } from "./src/styles/theme/radius";
+import { transitionDurationTokens } from "./src/styles/theme/transitions";
+import { zIndex } from "./src/styles/theme/zIndex";
 import typography from "@tailwindcss/typography";
+
+// Map design token CSS variables into Tailwind theme
+const cssVars = {
+  colors: {
+    text: "var(--color-text)",
+    background: "var(--color-background)",
+    accent: "var(--color-accent)",
+  },
+  spacing: {
+    0: "var(--space-0)",
+    1: "var(--space-1)",
+    2: "var(--space-2)",
+    3: "var(--space-3)",
+    4: "var(--space-4)",
+    5: "var(--space-5)",
+    6: "var(--space-6)",
+    7: "var(--space-7)",
+    8: "var(--space-8)",
+    9: "var(--space-9)",
+    10: "var(--space-10)",
+    11: "var(--space-11)",
+    12: "var(--space-12)",
+    14: "var(--space-14)",
+    16: "var(--space-16)",
+    20: "var(--space-20)",
+    24: "var(--space-24)",
+    28: "var(--space-28)",
+    32: "var(--space-32)",
+    36: "var(--space-36)",
+    40: "var(--space-40)",
+    44: "var(--space-44)",
+    48: "var(--space-48)",
+    52: "var(--space-52)",
+    56: "var(--space-56)",
+    60: "var(--space-60)",
+    64: "var(--space-64)",
+    72: "var(--space-72)",
+    80: "var(--space-80)",
+    96: "var(--space-96)",
+    px: "var(--space-px)",
+    "0.5": "var(--space-0.5)",
+    "1.5": "var(--space-1.5)",
+    "2.5": "var(--space-2.5)",
+    "3.5": "var(--space-3.5)",
+  },
+  fontSize: {
+    xs: "var(--text-xs)",
+    sm: "var(--text-sm)",
+    base: "var(--text-base)",
+    lg: "var(--text-lg)",
+    xl: "var(--text-xl)",
+    "2xl": "var(--text-2xl)",
+    "3xl": "var(--text-3xl)",
+    "4xl": "var(--text-4xl)",
+    "5xl": "var(--text-5xl)",
+    "6xl": "var(--text-6xl)",
+    "7xl": "var(--text-7xl)",
+    "8xl": "var(--text-8xl)",
+    "9xl": "var(--text-9xl)",
+    "10xl": "var(--text-10xl)",
+  },
+  borderRadius: {
+    sm: "var(--radius-sm)",
+    md: "var(--radius-md)",
+    lg: "var(--radius-lg)",
+    xl: "var(--radius-xl)",
+    "2xl": "var(--radius-2xl)",
+    "3xl": "var(--radius-3xl)",
+    pill: "var(--radius-pill)",
+    full: "var(--radius-full)",
+  },
+  transitionDuration: {
+    fast: "var(--transition-fast)",
+    normal: "var(--transition-normal)",
+    slow: "var(--transition-slow)",
+  },
+  boxShadow: {
+    sm: "var(--shadow-sm)",
+    md: "var(--shadow-md)",
+    lg: "var(--shadow-lg)",
+    xl: "var(--shadow-xl)",
+  },
+  zIndex: {
+    0: "var(--z-0)",
+    10: "var(--z-10)",
+    20: "var(--z-20)",
+    30: "var(--z-30)",
+    40: "var(--z-40)",
+    50: "var(--z-50)",
+    auto: "var(--z-auto)",
+  },
+};
 
 const config: Config = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -8,7 +106,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: colors.neutral.background,
+        // Static design system colours
         white: colors.neutral.white,
         black: colors.neutral.black,
         grey: { ...colors.grey },
@@ -25,17 +123,23 @@ const config: Config = {
           orange: colors.secondary.orange,
           black: colors.secondary.black,
         },
-        "primary-purple": colors.primary.DEFAULT, // legacy utility
-        "primary-black": colors.secondary.black,
-        "primary-green": colors.secondary.green,
-        "primary-orange": colors.secondary.orange,
-        "card-purple": colors.neutral.cardPurple,
-        "card-green": colors.neutral.cardGreen,
-        "card-orange": colors.neutral.cardOrange,
-        "card-black": colors.neutral.cardBlack,
-        "section-alt": colors.neutral.background,
+        card: {
+          purple: colors.neutral.cardPurple,
+          green: colors.neutral.cardGreen,
+          orange: colors.neutral.cardOrange,
+          black: colors.neutral.cardBlack,
+        },
+        // CSS var backed colours (semantic)
+        ...cssVars.colors,
       },
-      spacing: {}, // (optional: later hook into your spacing.ts if you want)
+      spacing: {
+        ...spacing,
+        ...cssVars.spacing,
+      },
+      fontSize: {
+        ...fontSize,
+        ...cssVars.fontSize,
+      },
       fontFamily: {
         sans: ["DM Sans", "system-ui", "-apple-system", "sans-serif"],
         heading: ["Fraunces", "serif"],
@@ -43,13 +147,23 @@ const config: Config = {
         display: ["Fraunces", "serif"],
         mono: ["monospace"],
       },
+      borderRadius: {
+        ...radius,
+        ...cssVars.borderRadius,
+      },
       fontWeight: {}, // (ready for future hook-in from typography.ts)
       lineHeight: {},
       letterSpacing: {},
       transitionProperty: {},
       transitionTimingFunction: {},
-      transitionDuration: {},
+      transitionDuration: {
+        ...transitionDurationTokens,
+        ...cssVars.transitionDuration,
+      },
       boxShadow: {
+        ...shadows,
+        ...cssVars.boxShadow,
+        // fallback defaults
         sm: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
         DEFAULT:
           "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
@@ -58,7 +172,6 @@ const config: Config = {
         xl: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
         "2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
         inner: "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)",
-        none: "none",
         soft: "0 4px 20px rgba(0, 0, 0, 0.08)",
         "dark-sm": "0 1px 2px 0 rgb(255 255 255 / 0.15)",
         "dark-DEFAULT":
@@ -72,68 +185,76 @@ const config: Config = {
         "dark-2xl": "0 25px 50px -12px rgb(255 255 255 / 0.35)",
         "dark-inner": "inset 0 2px 4px 0 rgb(255 255 255 / 0.15)",
       },
-      borderRadius: {
-        pill: "9999px",
+      zIndex: {
+        ...zIndex,
+        ...cssVars.zIndex,
+      },
+      scale: {
+        "102": "1.02",
       },
     },
   },
   plugins: [
     function ({ addUtilities, theme }) {
-      const customUtilities = {
-        ".font-heading": {
-          fontFamily: theme("fontFamily.heading"),
-        },
-        ".font-body": {
-          fontFamily: theme("fontFamily.body"),
-        },
-        ".font-display": {
-          fontFamily: theme("fontFamily.display"),
-        },
-        ".bg-background": {
-          backgroundColor: theme("colors.background"),
-        },
-        ".bg-section-alt": {
-          backgroundColor: theme("colors.section-alt"),
-        },
-        ".bg-card-purple": {
-          backgroundColor: theme("colors.card-purple"),
-        },
-        ".bg-card-black": {
-          backgroundColor: theme("colors.card-black"),
-        },
-        ".bg-card-green": {
-          backgroundColor: theme("colors.card-green"),
-        },
-        ".bg-card-orange": {
-          backgroundColor: theme("colors.card-orange"),
-        },
-        ".bg-primary-purple": {
-          backgroundColor: theme("colors.primary-purple"),
-        },
-        ".bg-primary-black": {
-          backgroundColor: theme("colors.primary-black"),
-        },
-        ".bg-primary-green": {
-          backgroundColor: theme("colors.primary-green"),
-        },
-        ".bg-primary-orange": {
-          backgroundColor: theme("colors.primary-orange"),
-        },
-        ".rounded-pill": {
-          borderRadius: theme("borderRadius.pill"),
-        },
-        ".shadow-soft": {
-          boxShadow: theme("boxShadow.soft"),
-        },
+      const customUtilities: Record<string, any> = {
+        // Typography utilities
+        ".font-heading": { fontFamily: theme("fontFamily.heading") },
+        ".font-body": { fontFamily: theme("fontFamily.body") },
+        ".font-display": { fontFamily: theme("fontFamily.display") },
+        // Additional custom utilities
         ".hover-lift-shadow": {
           "@apply shadow-md transition-all duration-300 ease-in-out": {},
-          "&:hover": {
-            "@apply shadow-lg -translate-y-0.5": {},
-          },
+          "&:hover": { "@apply shadow-lg -translate-y-0.5": {} },
         },
       };
-
-      addUtilities(customUtilities);
+      // Auto-generate semantic color utilities from CSS-var tokens
+      const cssColorVars = cssVars.colors;
+      Object.entries(cssColorVars).forEach(([name, value]) => {
+        // Background and text
+        customUtilities[`.bg-${name}`] = { backgroundColor: value };
+        customUtilities[`.text-${name}`] = { color: value };
+        // Border
+        customUtilities[`.border-${name}`] = { borderColor: value };
+        // Ring (if using ring utilities)
+        customUtilities[`.ring-${name}`] = { ringColor: value };
+      });
+      // Auto-generate spacing utilities from CSS-var spacing tokens
+      const cssSpacingVars = cssVars.spacing;
+      Object.entries(cssSpacingVars).forEach(([key, value]) => {
+        const escKey = key.replace(".", "\\.");
+        customUtilities[`.p-${escKey}`] = { padding: value };
+        customUtilities[`.px-${escKey}`] = {
+          paddingLeft: value,
+          paddingRight: value,
+        };
+        customUtilities[`.py-${escKey}`] = {
+          paddingTop: value,
+          paddingBottom: value,
+        };
+        customUtilities[`.pt-${escKey}`] = { paddingTop: value };
+        customUtilities[`.pr-${escKey}`] = { paddingRight: value };
+        customUtilities[`.pb-${escKey}`] = { paddingBottom: value };
+        customUtilities[`.pl-${escKey}`] = { paddingLeft: value };
+        customUtilities[`.m-${escKey}`] = { margin: value };
+        customUtilities[`.mx-${escKey}`] = {
+          marginLeft: value,
+          marginRight: value,
+        };
+        customUtilities[`.my-${escKey}`] = {
+          marginTop: value,
+          marginBottom: value,
+        };
+        customUtilities[`.mt-${escKey}`] = { marginTop: value };
+        customUtilities[`.mr-${escKey}`] = { marginRight: value };
+        customUtilities[`.mb-${escKey}`] = { marginBottom: value };
+        customUtilities[`.ml-${escKey}`] = { marginLeft: value };
+        // Width and height utilities
+        customUtilities[`.w-${escKey}`] = { width: value };
+        customUtilities[`.h-${escKey}`] = { height: value };
+      });
+      addUtilities(customUtilities, {
+        variants: ["responsive", "hover", "dark"],
+      });
     },
     typography(),
   ],

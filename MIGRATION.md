@@ -4,7 +4,7 @@
 
 ### 1. Theme System Migration
 
-- [ ] Create theme token directory structure
+- [x] Create theme token directory structure
   ```
   src/styles/theme/
   ├── colors.ts
@@ -14,9 +14,9 @@
   ├── transitions.ts
   └── index.ts
   ```
-- [ ] Move all design tokens from global.css and tokens.css
-- [ ] Update Tailwind configuration to use theme tokens
-- [ ] Remove duplicate token definitions
+- [x] Move all design tokens from global.css and tokens.css
+- [x] Update Tailwind configuration to use theme tokens
+- [x] Remove duplicate token definitions
 
 ### 2. Component Style Migration
 
@@ -31,10 +31,11 @@
 - [ ] Move component styles from global.css
 - [ ] Update components to use new style structure
 - [ ] Add TypeScript types for component props
+- [ ] Add usage examples for new theme tokens in components and documentation
 
 ### 3. Landing Page Priority Updates
 
-- [ ] Refactor Hero component
+- [x] Refactor Hero component
 - [ ] Refactor Values section
 - [ ] Refactor CaseStudies section
 - [ ] Refactor Contact section
@@ -48,6 +49,7 @@
 - [ ] Update component documentation
 - [ ] Add usage examples
 - [ ] Document dark mode implementation
+- [x] Expand THEME.md or create a dedicated "Design Tokens" section, including migration rationale, usage patterns, and troubleshooting
 
 ### Testing
 
@@ -55,13 +57,15 @@
 - [ ] Add component visual regression tests
 - [ ] Add accessibility tests
 - [ ] Add dark mode tests
+- [ ] Add tests to ensure consistency between TypeScript token values and generated CSS variables
 
 ### Performance
 
 - [ ] Audit CSS bundle size
-- [ ] Optimize theme token usage
+- [x] Optimise theme token usage
 - [ ] Implement CSS variable fallbacks
 - [ ] Add performance monitoring
+- [ ] Profile build process for token generation and Tailwind integration
 
 ### Accessibility
 
@@ -69,6 +73,11 @@
 - [ ] Verify dark mode accessibility
 - [ ] Add ARIA attributes
 - [ ] Test with screen readers
+
+### Security
+
+- [ ] Audit token generation script for injection and path traversal risks
+- [ ] Validate and sanitise all script inputs and outputs
 
 ## Technical Debt Items
 

@@ -42,15 +42,19 @@ const infoLinks: Link[] = [
 ];
 ---
 
-<footer class="relative bg-white w-full py-20">
+<footer class="relative bg-surface-footer w-full py-20">
   <Container fullWidth={true}>
-    <div class="bg-black rounded-3xl py-20 overflow-hidden w-full">
+    <div
+      class="bg-footer-inner rounded-3xl py-20 overflow-hidden w-full"
+    >
       <!-- Acknowledgement of Country -->
       <div class="mb-16 px-8 md:px-12">
         <div
           class="flex flex-col items-center md:items-start space-y-4 max-w-3xl"
         >
-          <p class="text-neutral-400 text-center md:text-left">
+          <p
+            class="text-footer-text-secondary text-center md:text-left"
+          >
             I acknowledge the Ngunnawal people as the traditional custodians of
             the land. I pay my respects to Elders past, present and emerging.
           </p>
@@ -92,14 +96,18 @@ const infoLinks: Link[] = [
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Sitemap Column -->
             <div class="space-y-6">
-              <h3 class="text-3xl font-medium text-white">Sitemap</h3>
+              <h3
+                class="text-3xl font-medium text-footer-heading"
+              >
+                Sitemap
+              </h3>
               <ul class="space-y-4 list-none p-0 m-0">
                 {
                   sitemapLinks.map((link) => (
                     <li>
                       <a
                         href={link.href}
-                        class="text-neutral-400 text-xl hover:text-white transition-colors"
+                        class="text-footer-link text-xl hover:text-footer-link-hover transition-colors"
                       >
                         {link.name}
                       </a>
@@ -111,7 +119,11 @@ const infoLinks: Link[] = [
 
             <!-- Social Links Column -->
             <div class="space-y-6">
-              <h3 class="text-3xl font-medium text-white">Connect</h3>
+              <h3
+                class="text-3xl font-medium text-footer-heading"
+              >
+                Connect
+              </h3>
               <ul class="space-y-4 list-none p-0 m-0">
                 {
                   socialLinks.map((link) => (
@@ -120,7 +132,7 @@ const infoLinks: Link[] = [
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex items-center text-xl text-neutral-400 hover:text-white transition-colors"
+                        class="flex items-center text-xl text-footer-link hover:text-footer-link-hover transition-colors"
                       >
                         <img
                           src={`/icons/${link.icon}.svg`}
@@ -140,14 +152,18 @@ const infoLinks: Link[] = [
 
             <!-- Legal Column -->
             <div class="space-y-6">
-              <h3 class="text-3xl font-medium text-white">Legal</h3>
+              <h3
+                class="text-3xl font-medium text-footer-heading"
+              >
+                Legal
+              </h3>
               <ul class="space-y-4 list-none p-0 m-0">
                 {
                   infoLinks.map((link) => (
                     <li>
                       <a
                         href={link.href}
-                        class="text-neutral-400 text-xl hover:text-white transition-colors"
+                        class="text-footer-link text-xl hover:text-footer-link-hover transition-colors"
                       >
                         {link.name}
                       </a>
@@ -169,12 +185,15 @@ const infoLinks: Link[] = [
         <div
           class="flex flex-col md:flex-row md:justify-between md:items-center gap-4"
         >
-          <p class="text-sm !text-black">
+          <p class="text-sm !text-footer-copyright">
             &copy; {currentYear} Dale Rogers. All rights reserved.
           </p>
-          <p class="text-sm !text-black flex items-center">
-            Made with <span class="text-red-500 mx-1">❤️</span> in Canberra (Ngunnawal
-            Country)
+          <p
+            class="text-sm !text-footer-copyright flex items-center"
+          >
+            Made with <span class="text-footer-heart mx-1"
+              >❤️</span
+            > in Canberra (Ngunnawal Country)
           </p>
         </div>
       </div>
@@ -186,10 +205,10 @@ const infoLinks: Link[] = [
   .gradient-heading {
     background: linear-gradient(
       45deg,
-      #af8abf 0%,
-      #fa8a58 35%,
-      #36a96a 70%,
-      #af8abf 100%
+      var(--colour-footer-gradient-1, #af8abf) 0%,
+      var(--colour-footer-gradient-2, #fa8a58) 35%,
+      var(--colour-footer-gradient-3, #36a96a) 70%,
+      var(--colour-footer-gradient-1, #af8abf) 100%
     );
     background-size: 200% 100%;
     color: transparent;
@@ -218,7 +237,7 @@ const infoLinks: Link[] = [
   }
 
   .acknowledgement-slogan {
-    color: #9ca3af; /* Neutral-400 to match the paragraph above */
-    font-size: 1.25rem; /* text-xl */
+    color: var(--colour-footer-acknowledgement, #9ca3af);
+    font-size: 1.25rem;
   }
 </style>

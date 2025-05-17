@@ -32,12 +32,14 @@ const isActive = (href: string): boolean => {
   aria-label="Main navigation"
 >
   <Container fullWidth>
-    <div class="bg-neutral-100 dark:bg-neutral-900 rounded-3xl py-4">
+    <div
+      class="bg-nav-bg dark:bg-nav-bg-dark rounded-3xl py-4"
+    >
       <div class="flex items-center justify-between px-8 md:px-12">
         <!-- Left Section -->
         <a
           href="/"
-          class="font-heading text-3xl md:text-4xl font-bold text-black dark:text-white hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
+          class="font-heading text-3xl md:text-4xl font-bold text-nav-text dark:text-nav-text-dark hover:text-nav-text-hover dark:hover:text-nav-text-hover-dark transition-colors"
           aria-label="Dale Rogers - Home"
         >
           Dale Rogers
@@ -52,11 +54,11 @@ const isActive = (href: string): boolean => {
                 href={item.href}
                 class:list={[
                   "font-heading text-xl md:text-2xl font-bold px-4 py-2 rounded-full",
-                  "text-black dark:text-white border-2 border-black dark:border-white",
-                  "hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black",
+                  "text-nav-link dark:text-nav-link-dark border-2 border-nav-border dark:border-nav-border-dark",
+                  "hover:bg-nav-link-hover hover:text-nav-link-hover-text dark:hover:bg-nav-link-hover-dark dark:hover:text-nav-link-hover-text-dark",
                   "transition-all duration-300",
                   {
-                    "bg-black text-white dark:bg-white dark:text-black":
+                    "bg-nav-link-active text-nav-link-active-text dark:bg-nav-link-active-dark dark:text-nav-link-active-text-dark":
                       isActive(item.href),
                   },
                 ]}
@@ -70,7 +72,7 @@ const isActive = (href: string): boolean => {
 
         <!-- Mobile Menu Button -->
         <button
-          class="md:hidden p-2 text-black dark:text-white hover:text-purple-500 dark:hover:text-purple-400 transition-colors"
+          class="md:hidden p-2 text-nav-text dark:text-nav-text-dark hover:text-nav-text-hover dark:hover:text-nav-text-hover-dark transition-colors"
           aria-label="Toggle menu"
           aria-expanded="false"
           aria-controls="navbar-menu"
@@ -96,7 +98,7 @@ const isActive = (href: string): boolean => {
   <!-- Mobile Navigation -->
   <div
     id="navbar-menu"
-    class="hidden md:hidden border-t border-black/10 dark:border-white/10 bg-neutral-100/95 dark:bg-neutral-900/95 backdrop-blur-sm"
+    class="hidden md:hidden border-t border-nav-border-faint dark:border-nav-border-faint-dark bg-nav-bg-mobile dark:bg-nav-bg-mobile-dark backdrop-blur-sm"
     role="menu"
   >
     <Container fullWidth>
@@ -110,13 +112,12 @@ const isActive = (href: string): boolean => {
               href={item.href}
               class:list={[
                 "block font-heading text-2xl font-bold px-4 py-2 rounded-full",
-                "text-black dark:text-white border-2 border-black dark:border-white",
-                "hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black",
+                "text-nav-link dark:text-nav-link-dark border-2 border-nav-border dark:border-nav-border-dark",
+                "hover:bg-nav-link-hover hover:text-nav-link-hover-text dark:hover:bg-nav-link-hover-dark dark:hover:text-nav-link-hover-text-dark",
                 "transition-all duration-300",
                 {
-                  "bg-black text-white dark:bg-white dark:text-black": isActive(
-                    item.href
-                  ),
+                  "bg-nav-link-active text-nav-link-active-text dark:bg-nav-link-active-dark dark:text-nav-link-active-text-dark":
+                    isActive(item.href),
                 },
               ]}
               role="menuitem"

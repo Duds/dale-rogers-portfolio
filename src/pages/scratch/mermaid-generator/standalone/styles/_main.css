@@ -1,0 +1,346 @@
+/* Reset and base styles */
+:root {
+  --primary: #00796B;
+  --primary-light: #E0F2F1;
+  --primary-dark: #004c45;
+  --secondary: #F5F5F5;
+  --text: #333333;
+  --text-light: #666666;
+  --danger: #D32F2F;
+  --success: #388E3C;
+  --border: #E0E0E0;
+  --shadow: rgba(0, 0, 0, 0.1);
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  --border-radius: 8px;
+  --transition: all 0.2s ease-in-out;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--secondary);
+  min-height: 100vh;
+  padding: var(--spacing-lg);
+}
+
+/* Typography */
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--primary-dark);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Layout */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+  max-width: 1600px;
+  margin: 0 auto;
+  background-color: white;
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px var(--shadow);
+}
+
+.input-section,
+.output-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Input area */
+#mermaid-input {
+  width: 100%;
+  height: 300px;
+  padding: var(--spacing-md);
+  border: 2px solid var(--border);
+  border-radius: var(--border-radius);
+  font-family: 'Poppins', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  resize: vertical;
+  transition: var(--transition);
+}
+
+#mermaid-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.button-group-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-light);
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Buttons */
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--primary);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+}
+
+button.secondary {
+  background-color: var(--secondary);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+button.secondary:hover {
+  background-color: var(--border);
+}
+
+button.danger {
+  background-color: var(--danger);
+}
+
+button.danger:hover {
+  background-color: #B71C1C;
+}
+
+button svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Toggle switch */
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+}
+
+.toggle-switch input {
+  display: none;
+}
+
+.switch {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  background-color: var(--border);
+  border-radius: 20px;
+  transition: var(--transition);
+}
+
+.switch::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: white;
+  top: 2px;
+  left: 2px;
+  transition: var(--transition);
+}
+
+.toggle-switch input:checked + .switch {
+  background-color: var(--primary);
+}
+
+.toggle-switch input:checked + .switch::after {
+  transform: translateX(20px);
+}
+
+/* Mermaid output */
+.mermaid-container {
+  position: relative;
+  background-color: white;
+  border: 2px solid var(--border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.mermaid-wrapper {
+  padding: var(--spacing-md);
+  overflow: auto;
+  max-height: 600px;
+}
+
+#mermaid-output {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+/* Zoom controls */
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background-color: var(--secondary);
+  border-top: 1px solid var(--border);
+}
+
+.zoom-controls button {
+  padding: var(--spacing-xs);
+  background-color: transparent;
+  color: var(--text);
+}
+
+.zoom-controls button:hover {
+  background-color: var(--border);
+  color: var(--primary-dark);
+}
+
+.zoom-slider {
+  flex: 1;
+  height: 4px;
+  -webkit-appearance: none;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+}
+
+.zoom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--primary);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.zoom-slider::-webkit-slider-thumb:hover {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+}
+
+.zoom-value {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  min-width: 48px;
+  text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .mermaid-wrapper {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: var(--spacing-md);
+  }
+
+  .container {
+    padding: var(--spacing-lg);
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .controls {
+    gap: var(--spacing-md);
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background-color: white;
+    padding: 0;
+  }
+
+  .container {
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .input-section,
+  .controls,
+  .zoom-controls {
+    display: none;
+  }
+
+  .output-section {
+    width: 100%;
+  }
+
+  .mermaid-container {
+    border: none;
+  }
+
+  .mermaid-wrapper {
+    max-height: none;
+  }
+}
+
+/* Error message */
+.error {
+  color: var(--danger);
+  padding: var(--spacing-md);
+  border: 1px solid var(--danger);
+  border-radius: var(--border-radius);
+  background-color: #ffebee;
+  margin: var(--spacing-md) 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}

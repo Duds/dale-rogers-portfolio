@@ -1,0 +1,125 @@
+---
+import ScratchStandaloneLayout from "../../../layouts/ScratchStandaloneLayout.astro";
+import { getCollection } from "astro:content";
+import MermaidEditor from "./components/MermaidEditor.astro";
+import MermaidPreview from "./components/MermaidPreview.astro";
+
+// Check if we're in standalone mode (no navigation)
+const isStandalone = Astro.url.searchParams.has("standalone");
+
+// Get the project content
+const scratchEntries = await getCollection(
+  "scratch",
+  ({ data }) => data.status !== "draft"
+);
+const project = scratchEntries.find(
+  (entry) => entry.slug === "mermaid-generator"
+);
+
+// Build the standalone URL
+const standalonePath = "/scratch/mermaid-generator/standalone/index.html";
+const standaloneUrl = new URL(standalonePath, Astro.site).toString();
+---
+
+<ScratchStandaloneLayout
+  title={project
+    ? `${project.data.title} | Scratch | Dale Rogers`
+    : "Content Not Found | Scratch | Dale Rogers"}
+  description={project
+    ? project.data.description
+    : "The requested content could not be found."}
+>
+  <main class="container mx-auto px-4 py-8">
+    <div class="mx-auto max-w-4xl">
+      {
+        project ? (
+          <>
+            {!isStandalone && (
+              <div class="mb-8">
+                <h1 class="text-3xl font-bold tracking-tight text-grey-900 dark:text-grey-100 sm:text-4xl">
+                  {project.data.title}
+                </h1>
+                <p class="mt-4 text-lg text-grey-600 dark:text-grey-400">
+                  {project.data.description}
+                </p>
+                <div class="mt-4 flex gap-2">
+                  <a
+                    href={standalonePath}
+                    target="_blank"
+                    class="inline-flex items-center gap-1 px-4 py-2 text-sm font-medium bg-primary text-white rounded-md hover:bg-primary-dark"
+                  >
+                    Open Standalone Version
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="7" y1="17" x2="17" y2="7" />
+                      <polyline points="7 7 17 7 17 17" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            )}
+
+            <div class="border-2 border-grey-200 dark:border-grey-700 rounded-lg overflow-hidden">
+              <iframe
+                src={standalonePath}
+                id="mermaid-generator-frame"
+                title="Mermaid Generator"
+                class="w-full h-[600px] border-0"
+              />
+            </div>
+          </>
+        ) : (
+          <div class="mb-8">
+            <h1 class="text-3xl font-bold tracking-tight text-grey-900 dark:text-grey-100 sm:text-4xl">
+              Content Not Found
+            </h1>
+            <p class="mt-4 text-lg text-grey-600 dark:text-grey-400">
+              The Mermaid Generator content could not be found. Please check the
+              content collection.
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </main>
+</ScratchStandaloneLayout>
+
+<style>
+  /* Add any component-specific styles here */
+</style>
+
+<script>
+  // Handle iframe resizing and communication if needed
+  const iframe = document.getElementById(
+    "mermaid-generator-frame"
+  ) as HTMLIFrameElement;
+
+  // Adjust iframe height based on content if necessary
+  function adjustIframeHeight() {
+    if (!iframe) return;
+
+    try {
+      // Listen for messages from the iframe if needed
+      window.addEventListener("message", (event) => {
+        // Handle any messages from the iframe
+        // For example, you could adjust height based on content size
+        if (event.data && event.data.type === "resize") {
+          iframe.style.height = `${event.data.height}px`;
+        }
+      });
+    } catch (error) {
+      console.error("Error setting up iframe communication:", error);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", adjustIframeHeight);
+</script>

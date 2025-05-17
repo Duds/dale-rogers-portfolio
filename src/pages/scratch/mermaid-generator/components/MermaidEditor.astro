@@ -1,0 +1,44 @@
+---
+// MermaidEditor.astro
+import MermaidControls from "./MermaidControls.astro";
+---
+
+<div class="mermaid-editor">
+  <div class="input-section">
+    <div class="section-title">Mermaid Syntax</div>
+    <textarea
+      id="mermaid-input"
+      class="mermaid-input"
+      placeholder="Enter your Mermaid syntax here..."></textarea>
+    <MermaidControls />
+  </div>
+</div>
+
+<style>
+  .mermaid-editor {
+    @apply w-full;
+  }
+
+  .input-section {
+    @apply flex flex-col gap-4;
+  }
+
+  .section-title {
+    @apply text-lg font-medium text-grey-900 dark:text-grey-100;
+  }
+
+  .mermaid-input {
+    @apply w-full h-64 p-4 border-2 border-grey-200 dark:border-grey-700 rounded-lg font-mono text-sm leading-relaxed resize-y transition-colors;
+    @apply focus:outline-none focus:border-primary dark:focus:border-primary-light;
+    @apply bg-white dark:bg-grey-800 text-grey-900 dark:text-grey-100;
+  }
+</style>
+
+<script>
+  import { setupEditor } from "../shared/core/editor.js";
+
+  // Initialize editor when component is mounted
+  document.addEventListener("DOMContentLoaded", () => {
+    setupEditor();
+  });
+</script>
