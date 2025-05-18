@@ -229,12 +229,12 @@
 
   /* Focus outline for keyboard navigation */
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-purple-500;
+    @apply outline-2 outline-offset-2 outline-purple;
   }
 
   /* Selection styles */
   ::selection {
-    @apply bg-purple-100 text-purple-900 dark:bg-purple-900 dark:text-purple-100;
+    @apply bg-ghost text-black dark:bg-ghost-dark dark:text-white;
   }
 
   /* Scrollbar styles */
@@ -252,7 +252,7 @@
 
   /* Default link styles */
   a {
-    @apply text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300;
+    @apply text-purple hover:text-purple-hover dark:text-purple-dark dark:hover:text-purple-hover-dark;
   }
 
   /* Default heading styles */
@@ -309,11 +309,11 @@
   input[type="url"],
   input[type="search"],
   textarea {
-    @apply block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 placeholder-gray-500 transition-colors focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-400;
+    @apply block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 placeholder-gray-500 transition-colors focus:border-purple focus:outline-none focus:ring-1 focus:ring-purple dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-400;
   }
 
   select {
-    @apply block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 transition-colors focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100;
+    @apply block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 transition-colors focus:border-purple focus:outline-none focus:ring-1 focus:ring-purple dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100;
   }
 
   label {
@@ -336,7 +336,7 @@
 
   /* Blockquote styles */
   blockquote {
-    @apply border-l-4 border-purple-500 bg-purple-50 px-4 py-2 text-gray-900 dark:border-purple-400 dark:bg-purple-900/10 dark:text-gray-100;
+    @apply border-l-4 border-purple bg-ghost-hover px-4 py-2 text-gray-900 dark:border-purple-dark dark:bg-ghost-hover-dark dark:text-gray-100;
   }
 
   /* HR styles */

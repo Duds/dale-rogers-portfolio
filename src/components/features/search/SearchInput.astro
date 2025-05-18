@@ -1,5 +1,5 @@
 ---
-
+import Button from "@/components/ui/Button.astro";
 ---
 
 <div class="search-bar-container">
@@ -13,12 +13,14 @@
     method="get"
   >
     <!-- Main search button with magnifying glass icon -->
-    <button
+    <Button
       type="button"
       id="search-toggle"
-      class="search-toggle"
+      variant="ghost"
+      ghostColour="black"
       aria-label="Toggle search"
       tabindex="0"
+      class="search-toggle"
     >
       <svg
         class="search-icon"
@@ -34,7 +36,7 @@
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-    </button>
+    </Button>
 
     <!-- Search input that appears when the button is clicked -->
     <div class="search-input-container">

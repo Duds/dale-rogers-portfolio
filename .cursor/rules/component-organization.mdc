@@ -5,24 +5,27 @@ alwaysApply: true
 ---
 # Component Organization Rules
 
-## Directory Structure
+**Summary:**
+- All components must follow a strict directory structure, use modular CSS, TypeScript types, and Australian English documentation. Testing is E2E-first (Playwright). Accessibility, dark mode, and mobile responsiveness are mandatory.
 
-1. **Base Components**
-   ```
-   src/components/
-   ├── ui/           # Reusable UI components
-   ├── layout/       # Layout components
-   └── features/     # Feature-specific components
-       └── home/
-           ├── components/
-           └── types/
-   ```
+## Directory Structure (Current)
 
-2. **Component Files**
-   - One component per file
-   - Named exports for types
-   - Default export for component
-   - Styles in separate CSS file
+```
+src/components/
+├── ui/           # Reusable UI components
+├── layout/       # Layout components
+├── features/     # Feature-specific components
+├── sections/     # Page/section components
+└── README.md
+src/styles/components/  # Modular CSS for each component
+```
+
+## Component Files
+- One component per file (e.g., Button.astro)
+- Named exports for types (in types.ts if complex)
+- Default export for component
+- Styles in separate CSS file in src/styles/components/
+- Test file in tests/ui/ (E2E, Playwright)
 
 ## Component Requirements
 
@@ -61,35 +64,19 @@ alwaysApply: true
    ```
 
 ## Best Practices
+- Single responsibility, composable, accessible by default
+- Dark mode support, mobile-first responsive
+- Clear prop names, required vs optional, default values, type safety
+- Lazy loading, optimised assets, minimal re-renders, bundle size awareness
+- Use Australian English, date/currency formats, and accessibility standards
 
-1. **Component Design**
-   - Single responsibility
-   - Composable
-   - Accessible by default
-   - Dark mode support
-   - Mobile-first responsive
-
-2. **Props Interface**
-   - Clear prop names
-   - Required vs optional
-   - Default values
-   - Type safety
-
-3. **Performance**
-   - Lazy loading when needed
-   - Optimised assets
-   - Minimal re-renders
-   - Bundle size awareness
-
-## Checklist
-
-Before committing:
-- [ ] Component in correct directory
-- [ ] TypeScript types defined
-- [ ] Documentation complete
-- [ ] Styles in CSS file
-- [ ] Tests written
-- [ ] Accessibility checked
+## Checklist (Before Commit)
+- [ ] Component in correct directory (see above)
+- [ ] TypeScript types defined and used
+- [ ] Documentation in Australian English
+- [ ] Styles in src/styles/components/*.css
+- [ ] Playwright E2E test in tests/ui/
+- [ ] Accessibility checked (WCAG AA)
 - [ ] Dark mode supported
 - [ ] Mobile responsive
 
@@ -99,11 +86,9 @@ Before committing:
 ```
 src/components/ui/Button/
 ├── Button.astro
-├── Button.test.ts
-└── types.ts
-
-src/styles/components/
-└── button.css
+├── types.ts
+src/styles/components/button.css
+tests/ui/button.spec.ts
 ```
 
 ### ❌ Incorrect Structure
@@ -113,15 +98,5 @@ src/components/
 ```
 
 ## Migration Notes
-
-1. When moving components:
-   - Update import paths
-   - Move related files
-   - Update documentation
-   - Test all instances
-
-2. When creating components:
-   - Follow directory structure
-   - Include all required files
-   - Add to component index
-   - Update documentation
+- When moving components: update import paths, move related files (types, styles, tests), update docs, test all instances.
+- When creating components: follow directory structure, include all required files, add to component index, update docs, add Playwright test.

@@ -1,5 +1,5 @@
 ---
-import Container from "@/components/layout/Container.astro";
+import SectionContainer from "@/components/layout/SectionContainer.astro";
 import "@/styles/components/partner-logos.css";
 
 /**
@@ -66,37 +66,35 @@ const defaultLogos: PartnerLogo[] = [
 const { title = "Trusted by", logos = defaultLogos } = Astro.props;
 ---
 
-<section class="partner-logos-section">
-  <Container fullWidth={true}>
-    <div class="flex flex-col items-center">
-      <h2 class="partner-logos-heading">{title}</h2>
-      <div class="partner-logos-list">
-        {
-          logos.map((logo) => (
-            <a
-              href={logo.website || "#"}
-              target={logo.website ? "_blank" : "_self"}
-              rel={logo.website ? "noopener noreferrer" : ""}
-              class:list={[
-                "partner-logo-link",
-                !logo.website ? "pointer-events-none" : "",
-              ]}
-              aria-label={
-                logo.website ? `Visit ${logo.name}'s website` : logo.name
-              }
-            >
-              <img
-                src={logo.url}
-                alt={logo.alt}
-                class="partner-logo-img"
-                loading="lazy"
-                width="auto"
-                height="48"
-              />
-            </a>
-          ))
-        }
-      </div>
+<SectionContainer class="partner-logos-section">
+  <div class="flex flex-col items-center">
+    <h2 class="partner-logos-heading">{title}</h2>
+    <div class="partner-logos-list">
+      {
+        logos.map((logo) => (
+          <a
+            href={logo.website || "#"}
+            target={logo.website ? "_blank" : "_self"}
+            rel={logo.website ? "noopener noreferrer" : ""}
+            class:list={[
+              "partner-logo-link",
+              !logo.website ? "pointer-events-none" : "",
+            ]}
+            aria-label={
+              logo.website ? `Visit ${logo.name}'s website` : logo.name
+            }
+          >
+            <img
+              src={logo.url}
+              alt={logo.alt}
+              class="partner-logo-img"
+              loading="lazy"
+              width="auto"
+              height="48"
+            />
+          </a>
+        ))
+      }
     </div>
-  </Container>
-</section>
+  </div>
+</SectionContainer>

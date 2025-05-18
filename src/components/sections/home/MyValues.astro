@@ -1,5 +1,5 @@
 ---
-import Container from "@/components/layout/Container.astro";
+import SectionContainer from "@/components/layout/SectionContainer.astro";
 import Button from "@/components/ui/Button.astro";
 import "@/styles/components/my-values.css";
 
@@ -26,8 +26,8 @@ const {
 } = Astro.props;
 ---
 
-<section class="my-values-section">
-  <Container fullWidth={true} class="flex flex-col h-full">
+<SectionContainer class="my-values-section">
+  <div class="flex flex-col h-full">
     <!-- Headings above the card -->
     <div class="mb-4 md:mb-6 text-left">
       <h2 class="my-values-heading">{title}</h2>
@@ -45,7 +45,7 @@ const {
     </div>
     <!-- Button beneath the card -->
     <div class="my-values-button">
-      <Button variant="primary" href={buttonLink}>
+      <Button variant="black" href={buttonLink}>
         {buttonText}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -60,5 +60,5 @@ const {
         </svg>
       </Button>
     </div>
-  </Container>
-</section>
+  </div>
+</SectionContainer>

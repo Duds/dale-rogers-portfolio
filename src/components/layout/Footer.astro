@@ -1,6 +1,7 @@
 ---
 import Container from "@/components/layout/Container.astro";
 import "@/styles/components/footer.css";
+import Button from "@/components/ui/Button.astro";
 
 interface Link {
   name: string;
@@ -70,7 +71,11 @@ const infoLinks: Link[] = [
             Transforming services,<br />enriching lives,<br />together
           </h2>
           <div>
-            <a href="/contact" class="btn-footer">
+            <Button
+              variant="purple"
+              href="/contact"
+              class="button button--purple text-2xl px-12 py-6"
+            >
               Get in touch
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +88,7 @@ const infoLinks: Link[] = [
                   d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                   clip-rule="evenodd"></path>
               </svg>
-            </a>
+            </Button>
           </div>
         </div>
         <!-- Right side with columns -->
@@ -96,7 +101,10 @@ const infoLinks: Link[] = [
                 {
                   sitemapLinks.map((link) => (
                     <li>
-                      <a href={link.href} class="footer-link">
+                      <a
+                        href={link.href}
+                        class="footer-link hover:text-primary"
+                      >
                         {link.name}
                       </a>
                     </li>
@@ -115,7 +123,7 @@ const infoLinks: Link[] = [
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex items-center footer-link"
+                        class="flex items-center footer-link hover:text-primary"
                       >
                         <img
                           src={`/icons/${link.icon}.svg`}
@@ -139,7 +147,10 @@ const infoLinks: Link[] = [
                 {
                   infoLinks.map((link) => (
                     <li>
-                      <a href={link.href} class="footer-link">
+                      <a
+                        href={link.href}
+                        class="footer-link hover:text-primary"
+                      >
                         {link.name}
                       </a>
                     </li>

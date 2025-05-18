@@ -18,28 +18,3 @@ const { isTransparent = true } = Astro.props;
 >
   <Navigation />
 </header>
-
-<script>
-  // Theme initialization
-  const initTheme = () => {
-    const theme =
-      localStorage.getItem("theme") ??
-      (window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light");
-
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  };
-
-  // Initialize theme on page load and navigation
-  document.addEventListener("astro:page-load", initTheme);
-
-  // Watch for system theme changes
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", (e) => {
-      if (!localStorage.getItem("theme")) {
-        document.documentElement.classList.toggle("dark", e.matches);
-      }
-    });
-</script>

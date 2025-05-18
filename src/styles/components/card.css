@@ -1,7 +1,7 @@
 /* Card component styles migrated from global.css */
 .card {
-  @apply bg-bg rounded-lg p-6 shadow-soft dark:shadow-soft-dark transition-all duration-normal ease-in-out;
+  @apply bg-bg rounded-lg p-6 shadow-soft transition-all duration-300 ease-in-out;
 }
 .card--clickable {
-  @apply hover:shadow-elevated dark:hover:shadow-elevated-dark cursor-pointer hover:-translate-y-1;
+  @apply cursor-pointer hover:-translate-y-1;
 }

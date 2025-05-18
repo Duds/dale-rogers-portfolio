@@ -1,20 +1,25 @@
 ---
+import Button from "@/components/ui/Button.astro";
 
+interface Props {
+  /** Whether to include the theme toggle script (set to false for additional instances) */
+  includeScript?: boolean;
+}
+
+const { includeScript = true } = Astro.props;
 ---
 
 <style>
-  /* Base styles */
   .theme-toggle {
     @apply font-sans text-xl md:text-2xl font-bold border-2 rounded-full transition-all duration-300;
-    background-color: transparent;
     width: 48px;
     height: 48px;
     padding: 0;
     position: relative;
     overflow: hidden;
+    /* Use token for border radius if available */
+    border-radius: var(--radius-full, 9999px);
   }
-
-  /* Icons container */
   .theme-icons {
     position: absolute;
     top: 0;
@@ -25,12 +30,9 @@
     align-items: center;
     justify-content: center;
   }
-
-  /* SVG styling */
   .theme-toggle svg {
     width: 24px;
     height: 24px;
-    stroke: var(--colour-on-primary) !important;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -40,58 +42,26 @@
       visibility 0.2s ease,
       transform 0.3s ease;
   }
-
-  /* Dark mode SVG */
-  html.dark .theme-toggle svg {
-    stroke: var(--colour-on-primary-dark) !important;
-  }
-
-  /* Hover styles - light mode */
-  .theme-toggle:hover {
-    background-color: var(--colour-primary) !important;
-  }
-
-  /* Hover SVG color - light mode */
-  .theme-toggle:hover svg {
-    stroke: var(--colour-on-primary) !important;
-  }
-
-  /* Hover styles - dark mode */
-  html.dark .theme-toggle:hover {
-    background-color: var(--colour-primary-dark) !important;
-  }
-
-  /* Hover SVG color - dark mode */
-  html.dark .theme-toggle:hover svg {
-    stroke: var(--colour-on-primary-dark) !important;
-  }
-
-  /* Theme icon visibility */
-  .sun-icon {
+  .moon-icon {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, -50%) rotate(0deg) !important;
   }
-
-  .moon-icon {
+  .sun-icon {
     opacity: 0;
     visibility: hidden;
     transform: translate(-50%, -50%) rotate(90deg) !important;
   }
-
-  html.dark .sun-icon {
+  html.dark .moon-icon {
     opacity: 0;
     visibility: hidden;
     transform: translate(-50%, -50%) rotate(-90deg) !important;
   }
-
-  html.dark .moon-icon {
+  html.dark .sun-icon {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, -50%) rotate(0deg) !important;
   }
-
-  /* Spin animation */
   .theme-toggle.spin .sun-icon,
   .theme-toggle.spin .moon-icon {
     transition:
@@ -99,8 +69,6 @@
       visibility 0.2s ease,
       transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-
-  /* Theme transition overlay */
   .theme-transition {
     position: fixed;
     top: 0;
@@ -113,17 +81,18 @@
     z-index: 9999;
     transition: opacity 0.5s ease;
   }
-
   .theme-transition.fade-in {
     opacity: 0.15;
   }
 </style>
 
-<button
+<Button
   id="theme-toggle"
-  class="theme-toggle border-primary dark:border-primary-dark"
+  variant="ghost"
+  ghostColour="black"
   aria-label="Toggle theme"
   title="Toggle dark mode"
+  class="theme-toggle border-black dark:border-white hover:bg-black hover:text-white hover:border-black dark:hover:bg-black dark:hover:text-white dark:hover:border-white"
 >
   <div class="theme-icons">
     <svg
@@ -133,6 +102,7 @@
       stroke-width="1.5"
       viewBox="0 0 24 24"
       fill="none"
+      stroke="currentColor"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -153,7 +123,6 @@
       <path d="M1 12L2 12" stroke-linecap="round" stroke-linejoin="round"
       ></path>
     </svg>
-
     <svg
       class="moon-icon"
       width="24"
@@ -161,6 +130,7 @@
       stroke-width="1.5"
       viewBox="0 0 24 24"
       fill="none"
+      stroke="currentColor"
       xmlns="http://www.w3.org/2000/svg"
     >
       <circle cx="12" cy="12" r="10" stroke-width="1.5"></circle>
@@ -180,92 +150,83 @@
         stroke-linejoin="round"></path>
     </svg>
   </div>
-</button>
+</Button>
 
 <!-- Theme transition overlay -->
 <div id="theme-transition" class="theme-transition"></div>
 
+{includeScript && (
 <script is:inline>
-  // Add CSS transitions to the root element
-  document.addEventListener("DOMContentLoaded", () => {
-    document.documentElement.style.transition =
-      "background-color 0.5s ease, color 0.5s ease";
+  // Theme toggle utility functions
+  const THEME_KEY = "theme";
 
-    // Apply transitions to common elements
-    const style = document.createElement("style");
-    style.textContent = `
-      * {
-        transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease, fill 0.5s ease, stroke 0.5s ease;
-      }
-    `;
-    document.head.appendChild(style);
-  });
+  // Get the current theme from localStorage or system preference
+  function getTheme() {
+    const stored = localStorage.getItem(THEME_KEY);
+    if (stored === "dark" || stored === "light") return stored;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
 
-  // Theme toggle functionality
+  // Set the theme and update <html> class
+  function setTheme(theme) {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem(THEME_KEY, theme);
+  }
+
+  // Toggle between light and dark
+  function toggleTheme() {
+    const current = getTheme();
+    const next = current === "dark" ? "light" : "dark";
+    setTheme(next);
+  }
+
+  // Initialize theme on page load
   function initTheme() {
-    const root = document.documentElement;
+    setTheme(getTheme());
+  }
+
+  // Add event listeners
+  document.addEventListener("DOMContentLoaded", () => {
+    initTheme();
     const themeToggle = document.getElementById("theme-toggle");
     const themeTransition = document.getElementById("theme-transition");
 
-    // Check for existing theme preference in localStorage
-    let darkMode = localStorage.getItem("theme") === "dark";
-
-    // If no theme is set, check system preference
-    if (!localStorage.getItem("theme")) {
-      darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      localStorage.setItem("theme", darkMode ? "dark" : "light");
-    }
-
-    // Apply theme on page load
-    if (darkMode) {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-
-    // Toggle theme on click
     themeToggle?.addEventListener("click", () => {
-      // Add spin animation class
+      // Add animation classes
       themeToggle.classList.add("spin");
+      if (themeTransition) {
+        themeTransition.classList.add("fade-in");
+      }
 
-      // Start fade transition
-      themeTransition.classList.add("fade-in");
+      // Toggle theme
+      toggleTheme();
 
-      // Toggle dark mode with a slight delay
-      setTimeout(() => {
-        // Toggle dark mode
-        darkMode = !darkMode;
-
-        // Update DOM
-        if (darkMode) {
-          root.classList.add("dark");
-        } else {
-          root.classList.remove("dark");
-        }
-
-        // Store preference
-        localStorage.setItem("theme", darkMode ? "dark" : "light");
-
-        // End fade transition
-        setTimeout(() => {
-          themeTransition.classList.remove("fade-in");
-        }, 300);
-      }, 100);
-
-      // Remove spin class after animation completes
+      // Remove animation classes after animation completes
       setTimeout(() => {
         themeToggle.classList.remove("spin");
       }, 500);
+
+      if (themeTransition) {
+        setTimeout(() => {
+          themeTransition.classList.remove("fade-in");
+        }, 500);
+      }
     });
-  }
+  });
 
-  // Run on load
-  document.addEventListener("DOMContentLoaded", initTheme);
-
-  // Also run immediately in case the script loads after DOMContentLoaded
-  initTheme();
-
-  // Handle Astro page transitions
+  // Support Astro view transitions
   document.addEventListener("astro:page-load", initTheme);
   document.addEventListener("astro:after-swap", initTheme);
+
+  // Listen for system preference changes if no manual override
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      if (!localStorage.getItem(THEME_KEY)) {
+        setTheme(e.matches ? "dark" : "light");
+      }
+    });
 </script>
+)}

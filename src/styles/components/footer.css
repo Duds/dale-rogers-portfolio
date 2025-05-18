@@ -3,13 +3,19 @@
   @apply relative w-full py-20;
 }
 .footer-inner {
-  @apply rounded-3xl py-20 overflow-hidden w-full;
+  @apply rounded-3xl py-20 overflow-hidden w-full bg-black;
 }
 .footer-heading {
-  @apply text-3xl font-medium;
+  @apply text-3xl font-medium text-white;
 }
 .footer-link {
-  @apply text-xl transition-colors;
+  @apply text-xl transition-colors text-white;
+}
+.text-footer-text-secondary {
+  @apply text-white/80;
+}
+.acknowledgement-slogan {
+  @apply text-white;
 }
 .footer-copyright {
   @apply text-sm;

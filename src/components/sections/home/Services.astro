@@ -16,10 +16,10 @@ interface ServiceData extends Service {
 
 const getVariantClasses = (variant: ServiceData["variant"]) => {
   const variants = {
-    purple: "bg-service-purple hover:bg-service-purple-hover",
-    black: "bg-service-black hover:bg-service-black-hover",
-    green: "bg-service-green hover:bg-service-green-hover",
-    orange: "bg-service-orange hover:bg-service-orange-hover",
+    purple: "bg-purple hover:bg-purple-hover",
+    black: "bg-black hover:bg-black-hover",
+    green: "bg-green hover:bg-green-hover",
+    orange: "bg-orange hover:bg-orange-hover",
   };
   return variants[variant];
 };
@@ -72,7 +72,7 @@ const services: ServiceData[] = [
         </p>
       </div>
       <div class="col-span-12 lg:col-span-8 flex items-end justify-end">
-        <Button variant="primary" href="/services">
+        <Button variant="black" href="/services">
           See how it works
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -1,6 +1,25 @@
 # Dale Rogers Portfolio
 
-A modern, performant portfolio website built with Astro, showcasing case studies, articles, and technical experiments.
+## Overview
+
+This is the personal portfolio for Dale Rogers, built with Astro, TypeScript, and a modular, token-based CSS system. The project is designed for accessibility, responsiveness, and compliance with Australian standards.
+
+## Key Features
+
+- Modular UI components
+- Token-based theming (all colours, spacing, radii, etc. use design tokens)
+- Dark/light mode support
+- Accessible (WCAG AA contrast)
+- E2E tested (Playwright)
+- Content-driven (case studies, articles, services)
+- Australian English, date, and currency conventions
+
+## Design System & CSS Refactor
+
+- **Token-based styling is mandatory**: All colours, spacing, radii, and other design values use CSS variables (tokens). Do not use Tailwind's default colour-numbered classes (e.g. `-500`).
+- **No custom classes in @apply**: Custom token-based utility classes (e.g. `bg-primary`, `text-primary`) must not be used in `@apply` rules. Use them directly in markup.
+- **Component-level styles**: Each component imports its own CSS, using theme tokens.
+- **Direct documentation updates**: When making changes, you must directly update all relevant documentation files (README, changelog, code comments, architecture docs, etc.) as part of your change. Do not just describe or suggest documentation updates—make the actual edits.
 
 ## Quick Start
 
@@ -116,3 +135,18 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 Dale Rogers - [contact@dalerogers.com.au](mailto:contact@dalerogers.com.au)
 
 Project Link: [https://github.com/Duds/dale-rogers-portfolio](https://github.com/Duds/dale-rogers-portfolio)
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for details on recent changes.
+
+## Recent Updates (DD/MM/YYYY)
+
+- Fixed all Tailwind @apply errors (tokens, variants, and custom utilities)
+- Updated button, card, and section-heading styles for consistency and accessibility
+- Improved footer CTA (purple, large, animated, accessible)
+- Integrated custom shadows plugin for cards and buttons
+- Added and documented custom tokens (e.g., bg-bg)
+- Ensured all changes follow Australian English and accessibility standards
+
+See the changelog and code comments for more details.

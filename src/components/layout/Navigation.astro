@@ -1,7 +1,7 @@
 ---
 import ThemeToggle from "@/components/ui/ThemeToggle.astro";
 import SearchInput from "@/components/features/search/SearchInput.astro";
-import Container from "./Container.astro";
+import Button from "@/components/ui/Button.astro";
 import "@/styles/components/navigation.css";
 
 interface NavItem {
@@ -28,88 +28,86 @@ const isActive = (href: string): boolean => {
 
 <nav
   id="main-nav"
-  class="navigation"
+  class="navigation px-6 md:px-12"
   role="navigation"
   aria-label="Main navigation"
 >
-  <Container fullWidth>
-    <div class="navigation__container">
-      <div class="flex items-center justify-between px-8 md:px-12">
-        <!-- Left Section -->
-        <a href="/" class="navigation__brand" aria-label="Dale Rogers - Home">
-          Dale Rogers
-        </a>
-        <!-- Right Section -->
-        <div class="hidden md:flex items-center gap-4">
-          <SearchInput />
-          {
-            navItems.map((item) => (
-              <a
-                href={item.href}
-                class:list={[
-                  "navigation__link",
-                  isActive(item.href) && "navigation__link--active",
-                ]}
-              >
-                {item.label}
-              </a>
-            ))
-          }
-          <ThemeToggle />
-        </div>
-        <!-- Mobile Menu Button -->
-        <button
-          class="md:hidden p-2 text-nav-text dark:text-nav-text-dark hover:text-nav-text-hover dark:hover:text-nav-text-hover-dark transition-colors"
-          aria-label="Toggle menu"
-          aria-expanded="false"
-          aria-controls="navbar-menu"
-        >
-          <svg
-            class="w-8 h-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </Container>
-  <!-- Mobile Navigation -->
-  <div id="navbar-menu" class="navigation__mobile-menu" role="menu">
-    <Container fullWidth>
-      <div class="space-y-4 px-8 md:px-12 py-4">
-        <div class="w-full">
-          <SearchInput />
-        </div>
+  <div class="navigation__container">
+    <div class="flex items-center justify-between">
+      <!-- Left Section -->
+      <a href="/" class="navigation__brand" aria-label="Dale Rogers - Home">
+        Dale Rogers
+      </a>
+      <!-- Right Section -->
+      <div class="hidden md:flex items-center gap-4">
+        <SearchInput />
         {
           navItems.map((item) => (
-            <a
+            <Button
               href={item.href}
+              variant="ghost"
               class:list={[
-                "block font-heading text-2xl font-bold px-4 py-2 rounded-full",
-                "text-nav-link dark:text-nav-link-dark border-2 border-nav-border dark:border-nav-border-dark",
-                "hover:bg-nav-link-hover hover:text-nav-link-hover-text dark:hover:bg-nav-link-hover-dark dark:hover:text-nav-link-hover-text-dark",
-                "transition-all duration-300",
+                "navigation__link",
                 isActive(item.href) && "navigation__link--active",
               ]}
-              role="menuitem"
             >
               {item.label}
-            </a>
+            </Button>
           ))
         }
-        <div class="py-2">
-          <ThemeToggle />
-        </div>
+        <ThemeToggle />
       </div>
-    </Container>
+      <!-- Mobile Menu Button -->
+      <button
+        class="md:hidden p-2 text-nav-text dark:text-nav-text-dark hover:text-nav-text-hover dark:hover:text-nav-text-hover-dark transition-colors"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="navbar-menu"
+      >
+        <svg
+          class="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Navigation -->
+  <div id="navbar-menu" class="navigation__mobile-menu" role="menu">
+    <div class="space-y-4 py-4">
+      <div class="w-full">
+        <SearchInput />
+      </div>
+      {
+        navItems.map((item) => (
+          <Button
+            href={item.href}
+            variant="ghost"
+            class:list={[
+              "block font-heading text-2xl font-bold px-4 py-2 rounded-full",
+              "text-nav-link dark:text-nav-link-dark border-2 border-nav-border dark:border-nav-border-dark",
+              "hover:bg-nav-link-hover hover:text-nav-link-hover-text dark:hover:bg-nav-link-hover-dark dark:hover:text-nav-link-hover-text-dark",
+              "transition-all duration-300",
+              isActive(item.href) && "navigation__link--active",
+            ]}
+            role="menuitem"
+          >
+            {item.label}
+          </Button>
+        ))
+      }
+      <div class="py-2">
+        <ThemeToggle includeScript={false} />
+      </div>
+    </div>
   </div>
 </nav>
 

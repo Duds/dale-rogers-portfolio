@@ -97,7 +97,7 @@ if (
     ctaText={heroContent.ctaText || ""}
   />
   <FeaturedServicesSlider />
-  <AboutSection bio={aboutContent["paragraphs"]?.join("\n\n") || ""} />
+  <AboutSection paragraphs={aboutContent["paragraphs"] || []} />
   <CaseStudiesBento />
   <Services />
   <ServicesText content={servicesTextContent["paragraphs"] || []} />

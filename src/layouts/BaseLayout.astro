@@ -17,18 +17,6 @@ const {
   image = "/images/og-image.jpg",
   canonicalURL = Astro.url,
 } = Astro.props;
-
-// Theme initialization script that runs before page loads to prevent flashing
-const themeScript = `
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const storedTheme = localStorage.getItem('theme');
-
-  if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
-    document.documentElement.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
-  }
-`;
 ---
 
 <!doctype html>
@@ -59,8 +47,25 @@ const themeScript = `
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Inject the theme script early to avoid flashing -->
-    <script set:html={themeScript} />
+    <!-- Use the new dark mode utility as early as possible -->
+    <script is:inline>
+      // Initialize theme from localStorage or system preference
+      (function () {
+        const THEME_KEY = "theme";
+        const stored = localStorage.getItem(THEME_KEY);
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const theme =
+          stored === "dark" || stored === "light"
+            ? stored
+            : prefersDark
+              ? "dark"
+              : "light";
+
+        document.documentElement.classList.toggle("dark", theme === "dark");
+      })();
+    </script>
 
     <ViewTransitions />
   </head>
