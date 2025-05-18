@@ -12,11 +12,17 @@ const alignmentClasses = {
   center: "text-center mx-auto",
   right: "text-right ml-auto",
 };
+
+import "@/styles/components/section-heading.css";
 ---
 
-<div class={`max-w-4xl ${alignmentClasses[alignment]}`}>
-  <h2 class="text-4xl md:text-5xl font-heading mb-4 text-heading">
+<div class={`section-heading ${alignmentClasses[alignment]}`}>
+  <h2 class="section-heading__title text-heading">
     {heading}
   </h2>
-  {subheading && <p class="text-lg text-subheading">{subheading}</p>}
+  {
+    subheading && (
+      <p class="section-heading__subtitle text-subheading">{subheading}</p>
+    )
+  }
 </div>

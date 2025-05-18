@@ -1,31 +1,14 @@
 ---
 import type { TagListProps } from "./types";
+import "@/styles/components/tag-list.css";
 
 interface Props extends TagListProps {}
 
 const { tags, class: className = "", currentTag } = Astro.props;
 
-const baseClasses = [
-  "inline-flex items-center",
-  "px-3 py-1",
-  "rounded-full",
-  "text-sm",
-  "transition-colors duration-fast",
-].join(" ");
-
-const activeClasses = [
-  "bg-tag-active",
-  "text-tag-active-text",
-  "dark:bg-tag-active-dark",
-  "dark:text-tag-active-text-dark",
-].join(" ");
-
-const defaultClasses = [
-  "bg-tag-default",
-  "hover:bg-tag-default-hover",
-  "dark:bg-tag-default-dark",
-  "dark:hover:bg-tag-default-hover-dark",
-].join(" ");
+const baseClasses = "tag-list";
+const activeClasses = "tag-list--active";
+const defaultClasses = "tag-list--default";
 ---
 
 <div class:list={["flex flex-wrap gap-2", className]}>

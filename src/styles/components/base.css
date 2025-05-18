@@ -5,42 +5,51 @@
   }
 
   .btn-primary {
-    @apply bg-primary text-white hover:bg-primary-dark focus:ring-primary dark:bg-primary dark:hover:bg-primary-light dark:focus:ring-primary;
+    /* Token-based classes to add in markup: bg-primary text-on-primary hover:bg-primary-hover hover:text-on-primary-hover dark:bg-primary-dark dark:text-on-primary-dark dark:hover:bg-primary-hover-dark dark:hover:text-on-primary-hover-dark */
+    @apply;
   }
 
   .btn-secondary {
-    @apply bg-grey-100 text-grey-900 hover:bg-grey-200 focus:ring-grey-500 dark:bg-grey-800 dark:text-grey-100 dark:hover:bg-grey-700 dark:focus:ring-grey-400;
+    /* Token-based classes to add in markup: bg-button-secondary text-text hover:bg-button-secondary-hover */
+    @apply;
   }
 
   .btn-outline {
-    @apply border border-grey-200 bg-transparent text-grey-900 hover:bg-grey-100 focus:ring-grey-500 dark:border-grey-700 dark:text-grey-100 dark:hover:bg-grey-800 dark:focus:ring-grey-400;
+    /* Token-based classes to add in markup: border-2 border-button-outline text-text hover:bg-button-outline-hover */
+    @apply;
   }
 
   /* Card variants */
   .card {
-    @apply rounded-lg bg-white p-6 shadow-md transition-shadow dark:bg-grey-800;
+    /* Token-based classes to add in markup: bg-bg shadow-soft dark:shadow-soft-dark */
+    @apply rounded-lg p-6 transition-all;
   }
 
   .card-hover {
-    @apply hover:shadow-lg dark:shadow-dark-md dark:hover:shadow-dark-lg;
+    /* Token-based classes to add in markup: hover:shadow-elevated dark:hover:shadow-elevated-dark */
+    @apply cursor-pointer hover:-translate-y-1;
   }
 
   .card-bordered {
-    @apply border border-grey-200 dark:border-grey-700;
+    /* Token-based classes to add in markup: border border-card-border dark:border-card-border-dark */
+    @apply;
   }
 
   /* Input variants */
   .input {
-    @apply block w-full rounded-md border border-grey-300 bg-white px-4 py-2 text-grey-900 placeholder-grey-500 transition-colors focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-grey-700 dark:bg-grey-900 dark:text-grey-100 dark:placeholder-grey-400;
+    /* Token-based classes to add in markup: border-input-border bg-input-bg text-input-text placeholder-input-placeholder dark:border-input-border-dark dark:bg-input-bg-dark dark:text-input-text-dark dark:placeholder-input-placeholder-dark */
+    @apply block w-full rounded-md px-4 py-2 transition-colors focus:outline-none focus:ring-1;
   }
 
   .input-error {
-    @apply border-error-500 focus:border-error-500 focus:ring-error-500;
+    /* Token-based classes to add in markup: border-error focus:border-error focus:ring-error */
+    @apply;
   }
 
   /* Label styles */
   .label {
-    @apply mb-2 block text-sm font-medium text-grey-700 dark:text-grey-300;
+    /* Token-based classes to add in markup: text-label dark:text-label-dark */
+    @apply mb-2 block text-sm font-medium;
   }
 
   /* Badge variants */
@@ -49,32 +58,39 @@
   }
 
   .badge-primary {
-    @apply bg-primary-100 text-primary dark:bg-primary-900 dark:text-primary;
+    /* Token-based classes to add in markup: bg-badge-primary text-badge-primary-text dark:bg-badge-primary-dark dark:text-badge-primary-text-dark */
+    @apply;
   }
 
   .badge-secondary {
-    @apply bg-grey-100 text-grey-800 dark:bg-grey-700 dark:text-grey-300;
+    /* Token-based classes to add in markup: bg-badge-secondary text-badge-secondary-text dark:bg-badge-secondary-dark dark:text-badge-secondary-text-dark */
+    @apply;
   }
 
   .badge-success {
-    @apply bg-success-100 text-success-800 dark:bg-success-900 dark:text-success-300;
+    /* Token-based classes to add in markup: bg-badge-success text-badge-success-text dark:bg-badge-success-dark dark:text-badge-success-text-dark */
+    @apply;
   }
 
   .badge-error {
-    @apply bg-error-100 text-error-800 dark:bg-error-900 dark:text-error-300;
+    /* Token-based classes to add in markup: bg-badge-error text-badge-error-text dark:bg-badge-error-dark dark:text-badge-error-text-dark */
+    @apply;
   }
 
   .badge-warning {
-    @apply bg-warning-100 text-warning-800 dark:bg-warning-900 dark:text-warning-300;
+    /* Token-based classes to add in markup: bg-badge-warning text-badge-warning-text dark:bg-badge-warning-dark dark:text-badge-warning-text-dark */
+    @apply;
   }
 
   /* Link variants */
   .link {
-    @apply text-primary underline-offset-4 hover:underline dark:text-primary;
+    /* Token-based classes to add in markup: text-link hover:text-link-hover dark:text-link-dark dark:hover:text-link-hover-dark */
+    @apply underline-offset-4 hover:underline;
   }
 
   .link-subtle {
-    @apply text-grey-600 hover:text-grey-900 dark:text-grey-400 dark:hover:text-grey-100;
+    /* Token-based classes to add in markup: text-link-subtle hover:text-link-subtle-hover dark:text-link-subtle-dark dark:hover:text-link-subtle-hover-dark */
+    @apply;
   }
 
   /* Container sizes */
@@ -101,31 +117,38 @@
 
   /* Typography styles */
   .heading-1 {
-    @apply text-4xl font-bold tracking-tight text-grey-900 dark:text-white sm:text-5xl;
+    /* Token-based classes to add in markup: text-heading dark:text-heading-dark */
+    @apply text-4xl font-bold tracking-tight sm:text-5xl;
   }
 
   .heading-2 {
-    @apply text-3xl font-bold tracking-tight text-grey-900 dark:text-white sm:text-4xl;
+    /* Token-based classes to add in markup: text-heading dark:text-heading-dark */
+    @apply text-3xl font-bold tracking-tight sm:text-4xl;
   }
 
   .heading-3 {
-    @apply text-2xl font-bold tracking-tight text-grey-900 dark:text-white sm:text-3xl;
+    /* Token-based classes to add in markup: text-heading dark:text-heading-dark */
+    @apply text-2xl font-bold tracking-tight sm:text-3xl;
   }
 
   .heading-4 {
-    @apply text-xl font-bold tracking-tight text-grey-900 dark:text-white sm:text-2xl;
+    /* Token-based classes to add in markup: text-heading dark:text-heading-dark */
+    @apply text-xl font-bold tracking-tight sm:text-2xl;
   }
 
   .body-large {
-    @apply text-lg text-grey-600 dark:text-grey-400;
+    /* Token-based classes to add in markup: text-body-large dark:text-body-large-dark */
+    @apply text-lg;
   }
 
   .body {
-    @apply text-base text-grey-600 dark:text-grey-400;
+    /* Token-based classes to add in markup: text-body dark:text-body-dark */
+    @apply text-base;
   }
 
   .body-small {
-    @apply text-sm text-grey-600 dark:text-grey-400;
+    /* Token-based classes to add in markup: text-body-small dark:text-body-small-dark */
+    @apply text-sm;
   }
 
   /* Grid layouts */
@@ -143,6 +166,7 @@
 
   /* Focus styles */
   .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-grey-900;
+    /* Token-based classes to add in markup: focus:ring-token dark:focus:ring-token-dark */
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
 }

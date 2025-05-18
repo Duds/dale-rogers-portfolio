@@ -1,0 +1,19 @@
+/* Footer component styles migrated from global.css */
+.footer {
+  @apply relative w-full py-20;
+}
+.footer-inner {
+  @apply rounded-3xl py-20 overflow-hidden w-full;
+}
+.footer-heading {
+  @apply text-3xl font-medium;
+}
+.footer-link {
+  @apply text-xl transition-colors;
+}
+.footer-copyright {
+  @apply text-sm;
+}
+.footer-heart {
+  @apply mx-1;
+}

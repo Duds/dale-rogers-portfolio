@@ -1,0 +1,43 @@
+/* Services section component styles */
+.services-section {
+  @apply w-full bg-white dark:bg-neutral-950;
+}
+.services-container {
+  @apply grid grid-cols-12 gap-8 mb-16;
+}
+.services-heading {
+  /* Token-based class to add in markup: font-body */
+  @apply text-2xl font-semibold text-neutral-600 dark:text-neutral-400 mb-4;
+}
+.services-title {
+  @apply text-4xl text-neutral-900 dark:text-white leading-tight;
+}
+.services-list {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8;
+}
+.services-card {
+  /* 'group' utility removed; add 'group' to markup if needed */
+  @apply relative overflow-hidden rounded-2xl transition-all duration-300 h-[600px] flex flex-col;
+}
+.services-card-image {
+  @apply relative h-[400px] w-full overflow-hidden;
+}
+.services-card-img {
+  @apply absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105;
+}
+.services-card-gradient {
+  @apply absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50 group-hover:to-black/60 transition-opacity duration-300;
+}
+.services-card-content {
+  @apply p-8 flex flex-col flex-grow;
+}
+.services-card-title {
+  /* Token-based class to add in markup: font-display */
+  @apply text-2xl text-white mb-3;
+}
+.services-card-description {
+  @apply text-white/90;
+}
+.services-empty {
+  @apply col-span-full p-8 text-center text-neutral-600 dark:text-neutral-400;
+}

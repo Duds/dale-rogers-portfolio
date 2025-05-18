@@ -1,0 +1,17 @@
+/* PartnerLogos component styles */
+.partner-logos-section {
+  @apply py-12 md:py-16 bg-white;
+}
+.partner-logos-heading {
+  /* Token-based class to add in markup: font-display */
+  @apply text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 mb-6 md:mb-8 text-center;
+}
+.partner-logos-list {
+  @apply flex flex-wrap justify-center items-center gap-8 md:gap-12;
+}
+.partner-logo-link {
+  @apply opacity-60 hover:opacity-100 transition-opacity duration-300;
+}
+.partner-logo-img {
+  @apply h-10 md:h-12 w-auto dark:invert;
+}

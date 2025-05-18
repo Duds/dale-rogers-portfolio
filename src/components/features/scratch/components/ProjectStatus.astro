@@ -6,11 +6,9 @@ interface Props {
 const { status } = Astro.props;
 
 const statusColors = {
-  "in-progress":
-    "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
-  completed:
-    "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-  abandoned: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+  "in-progress": "bg-status-in-progress text-status-in-progress",
+  completed: "bg-status-completed text-status-completed",
+  abandoned: "bg-status-abandoned text-status-abandoned",
 };
 
 const statusMessages = {

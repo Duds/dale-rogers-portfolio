@@ -1,0 +1,28 @@
+/* CaseStudiesBento section component styles */
+.case-studies-bento {
+  @apply w-full py-20;
+}
+.case-studies-bento__container {
+  @apply max-w-7xl mx-auto px-4 sm:px-12 lg:px-16;
+}
+.case-studies-bento__heading {
+  @apply font-body text-2xl font-semibold text-neutral-600 dark:text-neutral-400 mb-4;
+}
+.case-studies-bento__subheading {
+  @apply font-display text-4xl md:text-6xl lg:text-7xl font-black text-neutral-900 dark:text-white;
+}
+.case-studies-bento__card {
+  @apply group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-3xl;
+}
+.case-studies-bento__image {
+  @apply relative aspect-video rounded-3xl overflow-hidden mb-4 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105;
+}
+.case-studies-bento__client {
+  @apply text-sm font-medium text-neutral-600 dark:text-neutral-400;
+}
+.case-studies-bento__title {
+  @apply text-2xl font-bold text-neutral-900 dark:text-white group-hover:text-primary transition-colors;
+}
+.case-studies-bento__tag {
+  @apply text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 px-2 py-1 rounded-full;
+}

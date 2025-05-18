@@ -1,6 +1,7 @@
 ---
 import Container from "@/components/layout/Container.astro";
 import Button from "@/components/ui/Button.astro";
+import "@/styles/components/my-values.css";
 
 interface Props {
   /** Title for the values card (h2) */
@@ -25,26 +26,15 @@ const {
 } = Astro.props;
 ---
 
-<section class="w-full h-screen flex flex-col justify-between py-12 md:py-16">
+<section class="my-values-section">
   <Container fullWidth={true} class="flex flex-col h-full">
     <!-- Headings above the card -->
     <div class="mb-4 md:mb-6 text-left">
-      <h2
-        class="font-body text-xl md:text-2xl font-semibold text-neutral-600 dark:text-neutral-400 mb-2 md:mb-4"
-      >
-        {title}
-      </h2>
-      <h3
-        class="text-3xl md:text-4xl text-neutral-900 dark:text-white leading-tight"
-      >
-        {subtitle}
-      </h3>
+      <h2 class="my-values-heading">{title}</h2>
+      <h3 class="my-values-subheading">{subtitle}</h3>
     </div>
-
     <!-- Photo card - full width, fills available space -->
-    <div
-      class="w-full flex-grow overflow-hidden rounded-2xl shadow-lg mb-4 md:mb-6"
-    >
+    <div class="my-values-card">
       <img
         src={imageUrl}
         alt="A group of people collaborating and brainstorming together, symbolizing inclusive design and shared values"
@@ -53,9 +43,8 @@ const {
         height="1080"
       />
     </div>
-
     <!-- Button beneath the card -->
-    <div class="text-left mt-4">
+    <div class="my-values-button">
       <Button variant="primary" href={buttonLink}>
         {buttonText}
         <svg
@@ -73,7 +62,3 @@ const {
     </div>
   </Container>
 </section>
-
-<style>
-  /* Component-specific styles can go here */
-</style>

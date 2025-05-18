@@ -1,5 +1,6 @@
 ---
 import Container from "@/components/layout/Container.astro";
+import "@/styles/components/footer.css";
 
 interface Link {
   name: string;
@@ -42,19 +43,15 @@ const infoLinks: Link[] = [
 ];
 ---
 
-<footer class="relative bg-surface-footer w-full py-20">
+<footer class="footer">
   <Container fullWidth={true}>
-    <div
-      class="bg-footer-inner rounded-3xl py-20 overflow-hidden w-full"
-    >
+    <div class="footer-inner">
       <!-- Acknowledgement of Country -->
       <div class="mb-16 px-8 md:px-12">
         <div
           class="flex flex-col items-center md:items-start space-y-4 max-w-3xl"
         >
-          <p
-            class="text-footer-text-secondary text-center md:text-left"
-          >
+          <p class="text-footer-text-secondary text-center md:text-left">
             I acknowledge the Ngunnawal people as the traditional custodians of
             the land. I pay my respects to Elders past, present and emerging.
           </p>
@@ -63,7 +60,6 @@ const infoLinks: Link[] = [
           </p>
         </div>
       </div>
-
       <div class="grid lg:grid-cols-3 gap-12 lg:gap-20 px-8 md:px-12">
         <!-- Left side with CTA -->
         <div class="lg:col-span-2 space-y-8">
@@ -90,25 +86,17 @@ const infoLinks: Link[] = [
             </a>
           </div>
         </div>
-
         <!-- Right side with columns -->
         <div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Sitemap Column -->
             <div class="space-y-6">
-              <h3
-                class="text-3xl font-medium text-footer-heading"
-              >
-                Sitemap
-              </h3>
+              <h3 class="footer-heading">Sitemap</h3>
               <ul class="space-y-4 list-none p-0 m-0">
                 {
                   sitemapLinks.map((link) => (
                     <li>
-                      <a
-                        href={link.href}
-                        class="text-footer-link text-xl hover:text-footer-link-hover transition-colors"
-                      >
+                      <a href={link.href} class="footer-link">
                         {link.name}
                       </a>
                     </li>
@@ -116,14 +104,9 @@ const infoLinks: Link[] = [
                 }
               </ul>
             </div>
-
             <!-- Social Links Column -->
             <div class="space-y-6">
-              <h3
-                class="text-3xl font-medium text-footer-heading"
-              >
-                Connect
-              </h3>
+              <h3 class="footer-heading">Connect</h3>
               <ul class="space-y-4 list-none p-0 m-0">
                 {
                   socialLinks.map((link) => (
@@ -132,7 +115,7 @@ const infoLinks: Link[] = [
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex items-center text-xl text-footer-link hover:text-footer-link-hover transition-colors"
+                        class="flex items-center footer-link"
                       >
                         <img
                           src={`/icons/${link.icon}.svg`}
@@ -149,22 +132,14 @@ const infoLinks: Link[] = [
                 }
               </ul>
             </div>
-
             <!-- Legal Column -->
             <div class="space-y-6">
-              <h3
-                class="text-3xl font-medium text-footer-heading"
-              >
-                Legal
-              </h3>
+              <h3 class="footer-heading">Legal</h3>
               <ul class="space-y-4 list-none p-0 m-0">
                 {
                   infoLinks.map((link) => (
                     <li>
-                      <a
-                        href={link.href}
-                        class="text-footer-link text-xl hover:text-footer-link-hover transition-colors"
-                      >
+                      <a href={link.href} class="footer-link">
                         {link.name}
                       </a>
                     </li>
@@ -177,7 +152,6 @@ const infoLinks: Link[] = [
       </div>
     </div>
   </Container>
-
   <!-- Copyright section -->
   <div class="py-8">
     <Container fullWidth={true}>
@@ -185,15 +159,12 @@ const infoLinks: Link[] = [
         <div
           class="flex flex-col md:flex-row md:justify-between md:items-center gap-4"
         >
-          <p class="text-sm !text-footer-copyright">
+          <p class="footer-copyright">
             &copy; {currentYear} Dale Rogers. All rights reserved.
           </p>
-          <p
-            class="text-sm !text-footer-copyright flex items-center"
-          >
-            Made with <span class="text-footer-heart mx-1"
-              >❤️</span
-            > in Canberra (Ngunnawal Country)
+          <p class="footer-copyright flex items-center">
+            Made with <span class="footer-heart">❤️</span> in Canberra (Ngunnawal
+            Country)
           </p>
         </div>
       </div>

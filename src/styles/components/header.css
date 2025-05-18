@@ -1,0 +1,11 @@
+/* Header component styles migrated from global.css */
+.header {
+  @apply w-full z-40;
+}
+.header--transparent {
+  /* Custom classes removed: bg-surface-header-transparent */
+}
+.header--solid {
+  /* Custom classes removed: bg-surface-header dark:bg-surface-header-dark */
+  @apply backdrop-blur-sm;
+}

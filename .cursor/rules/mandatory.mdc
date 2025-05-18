@@ -1,0 +1,104 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Mandatory Project Rules
+
+## Project Directory Tree (Summary)
+
+```
+/ (root)
+├── src/
+│   ├── components/
+│   │   ├── ui/
+│   │   ├── layout/
+│   │   ├── features/
+│   │   └── sections/
+│   ├── styles/
+│   │   ├── components/
+│   │   └── theme/
+│   ├── content/
+│   ├── layouts/
+│   ├── pages/
+│   ├── types/
+│   ├── plugins/
+│   └── scripts/
+├── tests/
+│   ├── ui/
+│   ├── layout/
+│   └── sections/
+├── docs/
+├── public/
+├── .cursor/rules/
+├── .github/
+├── dist/
+├── node_modules/
+├── package.json
+├── tailwind.config.ts
+├── postcss.config.mjs
+├── astro.config.mjs
+└── ...
+```
+
+---
+
+## Project Summary
+
+- **Personal portfolio** for Dale Rogers, built with Astro, TypeScript, and modular CSS.
+- Features: modular UI, dark/light theme, accessible, responsive, E2E tested, Australian standards.
+- Content-driven, with case studies, articles, and service listings.
+
+---
+
+## Theme Principles (Summary)
+- **Token-based theming**: All colours, spacing, radii, etc. use design tokens.
+- **Dark/light mode**: Fully supported, with smooth transitions.
+- **Component-level styles**: Each component imports its own CSS, using theme tokens.
+- **Accessible contrast**: All theme choices meet WCAG AA contrast.
+- **Australian standards**: Date, currency, and spelling follow en-AU conventions.
+
+---
+
+## Test Principles (Summary)
+- **E2E-first**: Playwright is used for all UI/component/visual tests.
+- **No direct unit tests for .astro**: Only integration/E2E/visual tests for Astro components.
+- **Accessibility checks**: Automated a11y checks are included in E2E tests.
+- **Visual regression**: Key components/pages have screenshot tests.
+- **Test coverage**: All major UI and layout components are covered.
+
+---
+
+## Rules & When to Use (Summary)
+- **component-organization**: For creating, moving, or refactoring components. Ensures correct directory, types, docs, and styles.
+- **development-standards**: For all code changes. Enforces TypeScript, documentation, accessibility, and Australian standards.
+- **theme-system**: For any theme or style changes. Use tokens, support both themes, and document changes.
+- **performance**: For optimising code, assets, or build. Use lazy loading, memoisation, and efficient CSS.
+- **accessibility**: For any UI/UX changes. Follow WCAG, use semantic HTML, and test with screen readers.
+- **github-workflow**: For all git operations. Use feature branches, semantic commits, PRs, and code reviews.
+- **update-docs**: For any documentation changes. Use Australian English, update READMEs, and keep changelogs current.
+- **content-changes**: For updating content. Separate content from code/styling, and use content collections.
+- **content-collections**: For managing structured content (case studies, articles, services). Use Astro content collections and types.
+- **layout-patterns**: For layout changes. Use standard layout components and patterns.
+- **mdc**: For creating or editing .mdc rules files.
+
+---
+
+## Usage Guidance
+- **When adding or editing code**: Apply development-standards, component-organization, and theme-system.
+- **When updating UI/UX**: Apply accessibility, performance, and layout-patterns.
+- **When changing content**: Apply content-changes and content-collections.
+- **When working with git**: Apply github-workflow.
+- **When updating docs**: Apply update-docs.
+- **When editing rules**: Apply mdc.
+
+---
+
+## Additional Guidance
+
+- Always offer suggestions as a lettered list (a), b), c), etc.).
+- Always perform changes directly to the file, do not replay in chat and suggest user does it.
+
+---
+
+*This file is mandatory. All contributors must read and follow these rules for every change.*

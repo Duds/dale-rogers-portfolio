@@ -1,0 +1,10 @@
+/* TagList component styles migrated from global.css */
+.tag-list {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm transition-colors;
+}
+.tag-list--active {
+  /* Token-based classes to add in markup: bg-tag-active text-tag-active-text dark:bg-tag-active-dark dark:text-tag-active-text-dark */
+}
+.tag-list--default {
+  /* Token-based classes to add in markup: bg-tag-default hover:bg-tag-default-hover dark:bg-tag-default-dark dark:hover:bg-tag-default-hover-dark */
+}

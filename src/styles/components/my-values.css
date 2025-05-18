@@ -1,0 +1,17 @@
+/* MyValues section component styles */
+.my-values-section {
+  @apply w-full h-screen flex flex-col justify-between py-12 md:py-16;
+}
+.my-values-heading {
+  /* Token-based class to add in markup: font-body */
+  @apply text-xl md:text-2xl font-semibold text-neutral-600 dark:text-neutral-400 mb-2 md:mb-4;
+}
+.my-values-subheading {
+  @apply text-3xl md:text-4xl text-neutral-900 dark:text-white leading-tight;
+}
+.my-values-card {
+  @apply w-full flex-grow overflow-hidden rounded-2xl shadow-lg mb-4 md:mb-6;
+}
+.my-values-button {
+  @apply text-left mt-4;
+}

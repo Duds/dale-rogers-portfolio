@@ -37,222 +37,52 @@
       transform: rotate(360deg);
     }
   }
+
+  /* Custom border utilities for token-based theme */
+  .border-primary {
+    border-color: var(--colour-primary) !important;
+  }
+  .dark .border-primary-dark {
+    border-color: var(--colour-primary-dark) !important;
+  }
+
+  /* Custom background utilities for navigation using tokens */
+  .bg-nav-bg {
+    background-color: var(--color-nav-bg) !important;
+  }
+  .dark .bg-nav-bg-dark {
+    background-color: var(--color-nav-bg-dark) !important;
+  }
+  .bg-nav-bg-mobile {
+    background-color: var(--color-nav-bg-mobile) !important;
+  }
+  .dark .bg-nav-bg-mobile-dark {
+    background-color: var(--color-nav-bg-mobile-dark) !important;
+  }
+
+  /* Custom font utility for heading */
+  .font-heading {
+    font-family: var(--font-heading) !important;
+  }
+
+  /* Custom text colour utilities for navigation using tokens */
+  .text-nav-text {
+    color: var(--color-nav-link) !important;
+  }
+  .dark .text-nav-text-dark {
+    color: var(--color-nav-link-dark) !important;
+  }
+  .hover\:text-nav-text-hover:hover {
+    color: var(--color-nav-link-hover-text) !important;
+  }
+  .dark .hover\:text-nav-text-hover-dark:hover {
+    color: var(--color-nav-link-hover-text-dark) !important;
+  }
 }
 
 @layer components {
-  /* Button Components */
-  .btn-base {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-md font-medium transition-all duration-300;
-  }
-
-  .btn-primary {
-    @apply inline-flex items-center gap-2 rounded-full text-xl px-8 py-4
-           bg-black text-white dark:bg-white dark:text-black
-           hover:bg-purple-500 hover:text-white dark:hover:bg-purple-500 dark:hover:text-white
-           hover:-translate-y-0.5 shadow-lg hover:shadow-xl transition-all duration-300;
-  }
-
-  .btn-secondary {
-    @apply btn-base border-2 border-black text-black hover:bg-black hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black;
-  }
-
-  .btn-footer {
-    @apply inline-flex items-center gap-2 px-8 py-4 text-xl font-medium rounded-pill transition-all duration-[var(--transition-normal)] ease-[var(--transition-timing)] bg-white text-black hover:bg-purple-500 hover:text-orange-500 hover:-translate-y-0.5 shadow-md hover:shadow-lg;
-  }
-
-  /* Layout Components */
-  .container-default {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  .section-default {
-    @apply py-16 bg-white dark:bg-black;
-  }
-
-  .section-alt {
-    @apply bg-gray-50 dark:bg-gray-900;
-  }
-
-  /* Card Components */
-  .card-base {
-    @apply bg-background rounded-lg shadow-soft p-6 transition-transform duration-300;
-  }
-
-  .card-hover {
-    @apply hover:scale-[1.02];
-  }
-
-  .card-service {
-    @apply card-base card-hover cursor-pointer;
-  }
-
-  .card-service-purple {
-    @apply bg-card-purple;
-  }
-
-  .card-service-black {
-    @apply bg-card-black text-white;
-  }
-
-  .card-service-green {
-    @apply bg-card-green;
-  }
-
-  .card-service-orange {
-    @apply bg-card-orange;
-  }
-
-  /* Typography Components */
-  .heading-1 {
-    @apply font-heading text-4xl md:text-5xl lg:text-6xl tracking-tight;
-  }
-
-  .heading-2 {
-    @apply font-heading text-3xl md:text-4xl tracking-tight;
-  }
-
-  .heading-3 {
-    @apply font-heading text-2xl md:text-3xl tracking-tight;
-  }
-
-  .heading-xxl {
-    @apply font-heading text-6xl md:text-8xl lg:text-10xl tracking-tight font-black;
-  }
-
-  .body-large {
-    @apply text-lg md:text-xl;
-  }
-
-  .body-default {
-    @apply text-base;
-  }
-
-  .body-small {
-    @apply text-sm;
-  }
-
-  /* Tag Components */
-  .tag {
-    @apply inline-flex px-3 py-1 rounded-pill text-sm section-alt;
-  }
-
-  /* Footer Components */
-  .footer-base {
-    @apply relative bg-black text-white py-20 overflow-hidden;
-  }
-
-  .footer-content {
-    @apply flex flex-col md:flex-row justify-between gap-12 md:gap-24;
-  }
-
-  .footer-cta {
-    @apply md:w-3/5;
-  }
-
-  .footer-heading {
-    @apply text-4xl md:text-6xl font-sans mb-8;
-  }
-
-  .footer-button {
-    @apply inline-flex items-center justify-center rounded-full px-8 py-4 text-xl md:text-2xl font-medium transition-colors duration-200
-           bg-white text-black hover:bg-purple-500 hover:text-white;
-  }
-
-  .footer-columns {
-    @apply md:w-2/5;
-  }
-
-  .footer-grid {
-    @apply grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12;
-  }
-
-  .footer-column-heading {
-    @apply text-xl font-sans mb-4;
-  }
-
-  .footer-link {
-    @apply text-white hover:text-purple-500 transition-colors;
-  }
-
-  .footer-social-link {
-    @apply inline-flex items-center text-white hover:text-purple-500 transition-colors;
-  }
-
-  .footer-copyright {
-    @apply pt-8 border-t border-white/10;
-  }
-
-  .footer-copyright-text {
-    @apply text-white/50 text-sm;
-  }
-
-  .footer-decorative-text {
-    @apply absolute bottom-0 left-0 w-screen text-left select-none pointer-events-none whitespace-nowrap
-           font-sans text-[18vw] leading-none text-white/5 translate-y-[45%] tracking-[-.02em];
-  }
-
-  /* Navigation Components */
-  .nav-base {
-    @apply fixed top-0 left-0 w-full z-50 transition-all duration-300;
-  }
-
-  .nav-container {
-    @apply flex items-center justify-between relative;
-  }
-
-  .nav-logo {
-    @apply font-heading text-4xl md:text-5xl hover:text-purple-500 transition-colors tracking-tight font-bold;
-  }
-
-  .nav-links {
-    @apply flex items-center gap-6;
-  }
-
-  .nav-link {
-    @apply font-heading text-xl md:text-2xl px-6 py-2
-           text-black dark:text-white
-           hover:text-purple-500 dark:hover:text-purple-400
-           rounded-full font-bold
-           transition-all duration-300;
-  }
-
-  .nav-link-active {
-    @apply text-purple-500 dark:text-purple-400;
-  }
-
-  .nav-scrolled {
-    @apply bg-white/95 dark:bg-black/95 backdrop-blur-sm shadow-md;
-  }
-
-  .nav-mobile-menu {
-    @apply p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5;
-  }
-
-  /* Theme Toggle Components */
-  .theme-toggle {
-    @apply relative flex items-center justify-center w-12 h-12;
-  }
-
-  .theme-icon-light {
-    @apply absolute inset-0 flex items-center justify-center
-           text-black dark:text-white text-2xl
-           opacity-100 dark:opacity-0 transform rotate-0 dark:rotate-90
-           transition-all duration-300 ease-in-out;
-  }
-
-  .theme-icon-dark {
-    @apply absolute inset-0 flex items-center justify-center
-           text-black dark:text-white text-2xl
-           opacity-0 dark:opacity-100 transform -rotate-90 dark:rotate-0
-           transition-all duration-300 ease-in-out;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .theme-icon-light,
-    .theme-icon-dark {
-      @apply transition-none transform-none;
-    }
-  }
+  /* Remove migrated Button, Card, Tag, Footer, Navigation, SectionHeading, MyValues, CaseStudiesBento, AboutSection, FeaturedServicesSlider, PartnerLogos, and Services styles */
+  /* Retain only global, utility, and non-component-specific styles here. */
 }
 
 :root {
@@ -326,6 +156,58 @@
   --z-40: 40;
   --z-50: 50;
   --z-auto: auto;
+
+  /* Navigation */
+  --color-nav-bg: #fff;
+  --color-nav-bg-dark: #18181b;
+  --color-nav-link: #22223b;
+  --color-nav-link-dark: #fff;
+  --color-nav-link-hover: #f3f4f6;
+  --color-nav-link-hover-dark: #27272a;
+  --color-nav-link-hover-text: #fa8a58;
+  --color-nav-link-hover-text-dark: #fa8a58;
+  --color-nav-link-active: #e0e7ff;
+  --color-nav-link-active-dark: #312e81;
+  --color-nav-link-active-text: #4338ca;
+  --color-nav-link-active-text-dark: #a5b4fc;
+  --color-nav-bg-mobile: #fff;
+  --color-nav-bg-mobile-dark: #18181b;
+  --color-nav-border: #e5e7eb;
+  --color-nav-border-dark: #374151;
+  --color-nav-border-faint: #f3f4f6;
+  --color-nav-border-faint-dark: #27272a;
+
+  /* Footer */
+  --color-surface-footer: #f8fafc;
+  --color-footer-inner: #fff;
+  --color-footer-heading: #22223b;
+  --color-footer-link: #6366f1;
+  --color-footer-link-hover: #4338ca;
+  --color-footer-copyright: #9ca3af;
+  --color-footer-heart: #fa8a58;
+  --color-footer-text-secondary: #9ca3af;
+
+  /* Header */
+  --color-surface-header-transparent: rgba(255,255,255,0.8);
+  --color-surface-header: #fff;
+  --color-surface-header-dark: #18181b;
+
+  /* Card, Button, Tag, SectionHeading, etc. */
+  --color-bg: #fff;
+  --color-button-secondary: #f3f4f6;
+  --color-button-secondary-hover: #e5e7eb;
+  --color-button-outline: #6366f1;
+  --color-button-outline-hover: #4338ca;
+  --color-tag-active: #6366f1;
+  --color-tag-active-dark: #4338ca;
+  --color-tag-active-text: #fff;
+  --color-tag-active-text-dark: #fff;
+  --color-tag-default: #e5e7eb;
+  --color-tag-default-hover: #d1d5db;
+  --color-tag-default-dark: #374151;
+  --color-tag-default-hover-dark: #27272a;
+  --color-heading: #22223b;
+  --color-subheading: #6b7280;
 }
 
 /* Dark mode overrides */
@@ -337,11 +219,12 @@
 @layer base {
   html {
     @apply scroll-smooth antialiased;
-    font-family: var(--font-body);
+    /* Custom classes removed: font-body */
+    /* font-family: var(--font-body); */
   }
 
   body {
-    @apply bg-white text-black dark:bg-black dark:text-white;
+    /* Custom classes removed: bg-white text-black dark:bg-black dark:text-white */
   }
 
   /* Focus outline for keyboard navigation */
@@ -374,12 +257,13 @@
 
   /* Default heading styles */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold text-black dark:text-white tracking-tight;
+    /* Custom classes removed: font-heading text-black dark:text-white */
+    @apply font-bold tracking-tight;
   }
 
   /* Default paragraph styles */
   p {
-    @apply font-body text-base text-black/80 dark:text-white/80;
+    /* Custom classes removed: font-body text-base text-black/80 dark:text-white/80 */
   }
 
   /* Default list styles */
@@ -463,7 +347,8 @@
 
 /* Section Layout Classes */
 .section-full {
-  @apply w-full bg-white dark:bg-neutral-950;
+  /* Custom classes removed: bg-white dark:bg-neutral-950 */
+  @apply w-full;
 }
 
 .section-content {
@@ -480,9 +365,11 @@
 
 /* Text Styles */
 .emphasis {
-  @apply text-primary dark:text-primary font-medium italic;
+  /* Custom classes removed: text-primary dark:text-primary */
+  @apply font-medium italic;
 }
 
 .strong {
-  @apply text-neutral-900 dark:text-white font-bold;
+  /* Custom classes removed: text-neutral-900 dark:text-white */
+  @apply font-bold;
 }

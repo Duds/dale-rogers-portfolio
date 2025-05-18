@@ -1,6 +1,7 @@
 ---
 import Container from "@/components/layout/Container.astro";
 import Button from "@/components/ui/Button.astro";
+import "@/styles/components/services.css";
 
 interface Service {
   title: string;
@@ -15,10 +16,10 @@ interface ServiceData extends Service {
 
 const getVariantClasses = (variant: ServiceData["variant"]) => {
   const variants = {
-    purple: "bg-primary-purple/95 hover:bg-primary-purple",
-    black: "bg-primary-black/95 hover:bg-primary-black",
-    green: "bg-primary-green/95 hover:bg-primary-green",
-    orange: "bg-primary-orange/95 hover:bg-primary-orange",
+    purple: "bg-service-purple hover:bg-service-purple-hover",
+    black: "bg-service-black hover:bg-service-black-hover",
+    green: "bg-service-green hover:bg-service-green-hover",
+    orange: "bg-service-orange hover:bg-service-orange-hover",
   };
   return variants[variant];
 };
@@ -61,16 +62,12 @@ const services: ServiceData[] = [
 ];
 ---
 
-<section class="w-full bg-white dark:bg-neutral-950">
+<section class="services-section">
   <Container fullWidth={true}>
-    <div class="grid grid-cols-12 gap-8 mb-16">
+    <div class="services-container">
       <div class="col-span-12 lg:col-span-4">
-        <h2
-          class="font-body text-2xl font-semibold text-neutral-600 dark:text-neutral-400 mb-4"
-        >
-          Services
-        </h2>
-        <p class="text-4xl text-neutral-900 dark:text-white leading-tight">
+        <h2 class="services-heading">Services</h2>
+        <p class="services-title">
           Designing services that people trust and teams can deliver.
         </p>
       </div>
@@ -91,38 +88,35 @@ const services: ServiceData[] = [
         </Button>
       </div>
     </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div class="services-list">
       {
         services?.map((service: ServiceData) => (
           <a
             href={service.link}
-            class={`group relative overflow-hidden rounded-2xl transition-all duration-300 h-[600px] flex flex-col ${getVariantClasses(service.variant)}`}
+            class={`services-card ${getVariantClasses(service.variant)}`}
           >
-            <div class="relative h-[400px] w-full overflow-hidden">
+            <div class="services-card-image">
               <img
                 src={service.imageUrl}
                 alt=""
                 aria-hidden="true"
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                class="services-card-img"
                 width="400"
                 height="400"
                 loading="lazy"
               />
-              <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50 group-hover:to-black/60 transition-opacity duration-300" />
+              <div class="services-card-gradient" />
             </div>
-            <div class="p-8 flex flex-col flex-grow">
-              <h3 class="text-2xl font-display text-white mb-3">
-                {service.title}
-              </h3>
-              <p class="text-white/90">{service.description}</p>
+            <div class="services-card-content">
+              <h3 class="services-card-title">{service.title}</h3>
+              <p class="services-card-description">{service.description}</p>
             </div>
           </a>
         ))
       }
       {
         !services?.length && (
-          <div class="col-span-full p-8 text-center text-neutral-600 dark:text-neutral-400">
+          <div class="services-empty">
             <p>No services found.</p>
           </div>
         )

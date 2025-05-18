@@ -1,0 +1,68 @@
+{
+  "summary": {
+    "totalFiles": 15,
+    "filesWithChanges": [
+      "/home/dale-rogers/dev/personal/dale-rogers-portfolio/src/styles/components/navigation.css",
+      "/home/dale-rogers/dev/personal/dale-rogers-portfolio/src/styles/components/section-heading.css"
+    ],
+    "totalApplyRules": 2,
+    "customClasses": [
+      "shadow-hover",
+      "text-balance",
+      "spinning-logo",
+      "animate-spin-slow",
+      "border-primary",
+      "border-primary-dark",
+      "bg-nav-bg",
+      "bg-nav-bg-dark",
+      "bg-nav-bg-mobile",
+      "bg-nav-bg-mobile-dark",
+      "font-heading",
+      "text-nav-text",
+      "text-nav-text-dark",
+      "hover:text-nav-text-hover",
+      "hover:text-nav-text-hover-dark"
+    ],
+    "allRemovedClasses": [
+      "bg-nav-bg-mobile",
+      "font-heading"
+    ]
+  },
+  "details": [
+    {
+      "file": "/home/dale-rogers/dev/personal/dale-rogers-portfolio/src/styles/components/navigation.css",
+      "selector": ".navigation__mobile-menu",
+      "selectorLine": 17,
+      "line": 18,
+      "original": "@apply hidden md:hidden border-t border-nav-border-faint dark:border-nav-border-faint-dark bg-nav-bg-mobile dark:bg-nav-bg-mobile-dark backdrop-blur-sm;",
+      "removed": [
+        "bg-nav-bg-mobile"
+      ],
+      "kept": [
+        "hidden",
+        "md:hidden",
+        "border-t",
+        "border-nav-border-faint",
+        "dark:border-nav-border-faint-dark",
+        "dark:bg-nav-bg-mobile-dark",
+        "backdrop-blur-sm"
+      ]
+    },
+    {
+      "file": "/home/dale-rogers/dev/personal/dale-rogers-portfolio/src/styles/components/section-heading.css",
+      "selector": ".section-heading__title",
+      "selectorLine": 5,
+      "line": 6,
+      "original": "@apply text-4xl md:text-5xl font-heading mb-4 text-heading;",
+      "removed": [
+        "font-heading"
+      ],
+      "kept": [
+        "text-4xl",
+        "md:text-5xl",
+        "mb-4",
+        "text-heading"
+      ]
+    }
+  ]
+}

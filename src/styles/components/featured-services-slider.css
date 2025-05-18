@@ -1,0 +1,24 @@
+/* FeaturedServicesSlider component styles */
+.featured-services-section {
+  @apply min-h-[60vh] md:min-h-[70vh] relative overflow-hidden py-16 w-full bg-white dark:bg-neutral-900;
+}
+.slider-viewport {
+  @apply w-full overflow-hidden;
+}
+.slider-container {
+  @apply flex gap-4 md:gap-6 w-max transition-all duration-700 ease-out will-change-transform pl-4 md:pl-8;
+}
+.featured-service-card {
+  /* 'group' utility removed; add 'group' to markup if needed */
+  @apply w-[70vw] md:w-[35vw] lg:w-[25vw] h-[60vh] relative rounded-2xl overflow-hidden flex-shrink-0 bg-neutral-200 dark:bg-neutral-800;
+}
+.featured-service-image {
+  @apply w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105;
+}
+.featured-service-title {
+  /* Token-based class to add in markup: font-display */
+  @apply text-xl md:text-2xl text-white mb-2;
+}
+.featured-service-description {
+  @apply text-neutral-200/90 text-base md:text-lg;
+}

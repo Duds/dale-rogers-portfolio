@@ -2,6 +2,7 @@
 import ThemeToggle from "@/components/ui/ThemeToggle.astro";
 import SearchInput from "@/components/features/search/SearchInput.astro";
 import Container from "./Container.astro";
+import "@/styles/components/navigation.css";
 
 interface NavItem {
   label: string;
@@ -27,24 +28,17 @@ const isActive = (href: string): boolean => {
 
 <nav
   id="main-nav"
-  class="fixed w-full top-0 z-50 transition-all duration-300 pt-4"
+  class="navigation"
   role="navigation"
   aria-label="Main navigation"
 >
   <Container fullWidth>
-    <div
-      class="bg-nav-bg dark:bg-nav-bg-dark rounded-3xl py-4"
-    >
+    <div class="navigation__container">
       <div class="flex items-center justify-between px-8 md:px-12">
         <!-- Left Section -->
-        <a
-          href="/"
-          class="font-heading text-3xl md:text-4xl font-bold text-nav-text dark:text-nav-text-dark hover:text-nav-text-hover dark:hover:text-nav-text-hover-dark transition-colors"
-          aria-label="Dale Rogers - Home"
-        >
+        <a href="/" class="navigation__brand" aria-label="Dale Rogers - Home">
           Dale Rogers
         </a>
-
         <!-- Right Section -->
         <div class="hidden md:flex items-center gap-4">
           <SearchInput />
@@ -53,14 +47,8 @@ const isActive = (href: string): boolean => {
               <a
                 href={item.href}
                 class:list={[
-                  "font-heading text-xl md:text-2xl font-bold px-4 py-2 rounded-full",
-                  "text-nav-link dark:text-nav-link-dark border-2 border-nav-border dark:border-nav-border-dark",
-                  "hover:bg-nav-link-hover hover:text-nav-link-hover-text dark:hover:bg-nav-link-hover-dark dark:hover:text-nav-link-hover-text-dark",
-                  "transition-all duration-300",
-                  {
-                    "bg-nav-link-active text-nav-link-active-text dark:bg-nav-link-active-dark dark:text-nav-link-active-text-dark":
-                      isActive(item.href),
-                  },
+                  "navigation__link",
+                  isActive(item.href) && "navigation__link--active",
                 ]}
               >
                 {item.label}
@@ -69,7 +57,6 @@ const isActive = (href: string): boolean => {
           }
           <ThemeToggle />
         </div>
-
         <!-- Mobile Menu Button -->
         <button
           class="md:hidden p-2 text-nav-text dark:text-nav-text-dark hover:text-nav-text-hover dark:hover:text-nav-text-hover-dark transition-colors"
@@ -94,13 +81,8 @@ const isActive = (href: string): boolean => {
       </div>
     </div>
   </Container>
-
   <!-- Mobile Navigation -->
-  <div
-    id="navbar-menu"
-    class="hidden md:hidden border-t border-nav-border-faint dark:border-nav-border-faint-dark bg-nav-bg-mobile dark:bg-nav-bg-mobile-dark backdrop-blur-sm"
-    role="menu"
-  >
+  <div id="navbar-menu" class="navigation__mobile-menu" role="menu">
     <Container fullWidth>
       <div class="space-y-4 px-8 md:px-12 py-4">
         <div class="w-full">
@@ -115,10 +97,7 @@ const isActive = (href: string): boolean => {
                 "text-nav-link dark:text-nav-link-dark border-2 border-nav-border dark:border-nav-border-dark",
                 "hover:bg-nav-link-hover hover:text-nav-link-hover-text dark:hover:bg-nav-link-hover-dark dark:hover:text-nav-link-hover-text-dark",
                 "transition-all duration-300",
-                {
-                  "bg-nav-link-active text-nav-link-active-text dark:bg-nav-link-active-dark dark:text-nav-link-active-text-dark":
-                    isActive(item.href),
-                },
+                isActive(item.href) && "navigation__link--active",
               ]}
               role="menuitem"
             >

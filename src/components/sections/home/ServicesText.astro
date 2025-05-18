@@ -19,10 +19,7 @@ const { class: className, content, ...props } = Astro.props;
     <div class="col-span-6 lg:col-span-4">
       {
         content.map((paragraph) => (
-          <p
-            class="mb-6 text-2xl text-neutral-600 dark:text-neutral-300"
-            set:html={paragraph}
-          />
+          <p class="mb-6 text-2xl text-text-secondary" set:html={paragraph} />
         ))
       }
       <div class="mt-12">
@@ -47,7 +44,8 @@ const { class: className, content, ...props } = Astro.props;
 
 <style>
   :global(.emphasis) {
-    @apply text-primary dark:text-primary font-medium italic;
+    /* Token-based classes to add in markup: text-primary dark:text-primary */
+    @apply font-medium italic;
   }
 
   :global(.strong) {

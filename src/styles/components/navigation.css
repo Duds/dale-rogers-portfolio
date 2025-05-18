@@ -1,0 +1,21 @@
+/* Navigation component styles migrated from global.css */
+.navigation {
+  @apply fixed w-full top-0 z-50 transition-all duration-300 pt-4;
+}
+.navigation__container {
+  @apply rounded-3xl py-4;
+}
+.navigation__brand {
+  @apply text-3xl md:text-4xl font-bold transition-colors;
+}
+.navigation__link {
+  /* Custom classes removed: text-nav-link dark:text-nav-link-dark border-nav-border dark:border-nav-border-dark hover:bg-nav-link-hover hover:text-nav-link-hover-text dark:hover:bg-nav-link-hover-dark dark:hover:text-nav-link-hover-text-dark */
+  @apply text-xl md:text-2xl font-bold px-4 py-2 rounded-full transition-all duration-300;
+}
+.navigation__link--active {
+  /* Custom classes removed: bg-nav-link-active text-nav-link-active-text dark:bg-nav-link-active-dark dark:text-nav-link-active-text-dark */
+}
+.navigation__mobile-menu {
+  /* Custom classes removed: border-nav-border-faint dark:border-nav-border-faint-dark dark:bg-nav-bg-mobile-dark */
+  @apply hidden md:hidden border-t backdrop-blur-sm;
+}

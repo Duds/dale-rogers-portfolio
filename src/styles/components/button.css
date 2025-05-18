@@ -1,0 +1,14 @@
+/* Button component styles migrated from global.css */
+.button {
+  /* Token-based class to add in markup: rounded-pill */
+  @apply inline-flex items-center gap-2 px-8 py-4 text-xl font-medium transition-all;
+}
+.button--primary {
+  /* Token-based classes to add in markup: bg-primary text-on-primary hover:bg-primary-hover hover:text-on-primary-hover hover:-translate-y-0.5 shadow-md hover:shadow-lg dark:bg-primary-dark dark:text-on-primary-dark dark:hover:bg-primary-hover-dark dark:hover:text-on-primary-hover-dark */
+}
+.button--secondary {
+  /* Token-based classes to add in markup: bg-button-secondary text-text hover:bg-button-secondary-hover */
+}
+.button--outline {
+  /* Token-based classes to add in markup: border-2 border-button-outline text-text hover:bg-button-outline-hover */
+}

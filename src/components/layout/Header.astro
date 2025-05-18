@@ -1,5 +1,6 @@
 ---
 import Navigation from "./Navigation.astro";
+import "@/styles/components/header.css";
 
 interface Props {
   /** Whether the header should be transparent */
@@ -11,12 +12,8 @@ const { isTransparent = true } = Astro.props;
 
 <header
   class:list={[
-    "w-full z-40",
-    {
-      "bg-surface-header-transparent": isTransparent,
-      "bg-surface-header dark:bg-surface-header-dark backdrop-blur-sm":
-        !isTransparent,
-    },
+    "header",
+    isTransparent ? "header--transparent" : "header--solid",
   ]}
 >
   <Navigation />

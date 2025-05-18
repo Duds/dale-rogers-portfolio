@@ -1,6 +1,5 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
-import tailwind from "@astrojs/tailwind";
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 
@@ -16,7 +15,6 @@ export default defineConfig({
       remarkPlugins: [],
       rehypePlugins: [],
     }),
-    tailwind(),
     react(),
   ],
   output: "server",
