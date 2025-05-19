@@ -64,6 +64,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated `global.css` import ordering to satisfy PostCSS `@import` rules and suppress Vite warnings
 - Refactored `ThemeToggle.astro` and other components to replace arbitrary `[var(...)]` classes with semantic utilities like `border-text`
 - Updated migration and documentation: `MIGRATION.md`, `THEME.md`, and `TODO.md` to reflect design token migration progress
+- Refactored all CSS to remove custom classes from @apply and enforce token-based utility usage throughout the codebase
+- Updated all documentation to clarify that contributors must directly update docs (README, changelog, code comments, etc.) as part of any change
+- Enforced token-based styling for all colours, spacing, radii, and other design values; Tailwind colour-numbered classes (e.g. -500) are no longer used
 
 ### Fixed
 
