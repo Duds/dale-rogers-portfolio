@@ -13,6 +13,13 @@ alwaysApply: true
   "project": "Dale Rogers Portfolio"
 }
 
+## Documentation and Commit Enforcement
+
+- All contributors must directly update all relevant documentation files (README, changelog, code comments, architecture docs, etc.) as part of every change.
+- Do not just describe or suggest documentation updates—make the actual edits.
+- All changes must be committed and pushed before ending a session.
+- This rule is mandatory and applies to all code, content, and design changes.
+
 ## Project Directory Tree
 
 ```text
