@@ -2,6 +2,7 @@
 import Container from "@/components/layout/Container.astro";
 import type { HTMLAttributes } from "astro/types";
 import { getCollection } from "astro:content";
+import Heading from "@/components/ui/Heading.astro";
 
 /**
  * Interface for case study data
@@ -62,14 +63,17 @@ const { class: className, ...props } = Astro.props;
   <Container fullWidth={true}>
     <div class="max-w-7xl mx-auto px-4 sm:px-12 lg:px-16">
       <div class="text-center mb-16">
-        <h2 class="font-body text-2xl font-semibold text-text-secondary mb-4">
-          Case Studies
-        </h2>
-        <h3
-          class="font-display text-4xl md:text-6xl lg:text-7xl font-black text-heading"
+        <Heading
+          level={2}
+          font="dm-sans"
+          size="4xl"
+          class="text-text-secondary mb-4 font-normal"
         >
+          Case Studies
+        </Heading>
+        <Heading level={3} font="fraunces" size="hero" class="text-heading">
           Transforming Ideas into Digital Reality
-        </h3>
+        </Heading>
       </div>
     </div>
     <div class="grid grid-cols-1 gap-8">

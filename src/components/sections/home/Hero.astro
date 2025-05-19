@@ -1,6 +1,7 @@
 ---
 // Hero section component
 import Button from "@/components/ui/Button.astro";
+import Heading from "@/components/ui/Heading.astro";
 import SectionContainer from "@/components/layout/SectionContainer.astro";
 
 /**
@@ -9,6 +10,13 @@ import SectionContainer from "@/components/layout/SectionContainer.astro";
  * @description Displays a dramatic slogan, description, and call-to-action button.
  * @australian-english
  */
+
+interface Props {
+  /** Font family for the heading - 'fraunces' or 'dm-sans' */
+  headingFont?: "fraunces" | "dm-sans";
+}
+
+const { headingFont = "fraunces" } = Astro.props;
 
 // Dramatic slogan with line breaks for visual impact
 const slogan = "Service\nDesign\nStrategy";
@@ -36,6 +44,14 @@ const description =
     line-height: 1.2;
   }
 
+  .heading-fraunces {
+    font-family: var(--font-heading);
+  }
+
+  .heading-dm-sans {
+    font-family: var(--font-body);
+  }
+
   @keyframes gradientRotate {
     0% {
       background-position: 0% 50%;
@@ -50,7 +66,7 @@ const description =
   <div class="grid grid-cols-6 gap-8 lg:gap-12 w-full">
     <!-- Left Column -->
     <div class="col-span-6 lg:col-span-4">
-      <h1 class="gradient-heading text-6xl md:text-8xl font-bold">
+      <Heading level={1} font={headingFont} size="hero" gradient={true}>
         {
           slogan.split("\n").map((line, i) => (
             <>
@@ -59,12 +75,12 @@ const description =
             </>
           ))
         }
-      </h1>
+      </Heading>
     </div>
 
     <!-- Right Column -->
     <div class="col-span-6 lg:col-span-2 flex flex-col justify-end">
-      <p class={`text-2xl text-text mb-8 max-w-2xl`}>
+      <p class="text-2xl text-text mb-8 max-w-2xl">
         {description}
       </p>
       <div>

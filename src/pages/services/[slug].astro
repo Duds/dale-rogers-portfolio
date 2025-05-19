@@ -7,6 +7,7 @@ import TagList from "@/components/ui/TagList.astro";
 import FormattedDate from "@/components/ui/FormattedDate.astro";
 import Icon from "@/components/ui/Icon.astro";
 import CaseStudyCard from "@/components/features/case-studies/components/CaseStudyCard.astro";
+import Heading from "@/components/ui/Heading.astro";
 
 export const prerender = true;
 
@@ -49,7 +50,12 @@ if (
 }
 
 const quickFacts = [
-  { icon: "calendar", label: "Published", value: entry.data.pubDate, isDate: true },
+  {
+    icon: "calendar",
+    label: "Published",
+    value: entry.data.pubDate,
+    isDate: true,
+  },
   { icon: "user", label: "Author", value: entry.data.author },
   { icon: "tag", label: "Type", value: entry.data.serviceType },
 ];
@@ -70,59 +76,100 @@ const description = entry.data.description;
           class="w-full h-full object-cover object-center rounded-b-3xl"
           loading="eager"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-b-3xl" />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-b-3xl"
+        >
+        </div>
         <div class="absolute bottom-0 left-0 p-6 md:p-12">
           <div class="flex items-center gap-4 mb-2">
-            {entry.data.icon && <Icon name={entry.data.icon} class="w-10 h-10 text-white" />}
-            <h1 class="text-3xl md:text-5xl font-black text-white font-heading drop-shadow-lg">{entry.data.title}</h1>
+            {
+              entry.data.icon && (
+                <Icon name={entry.data.icon} class="w-10 h-10 text-white" />
+              )
+            }
+            <Heading
+              level={1}
+              font="fraunces"
+              size="hero"
+              class="text-white drop-shadow-lg"
+            >
+              {entry.data.title}
+            </Heading>
           </div>
-          <p class="text-lg md:text-2xl text-white/90 font-body max-w-2xl drop-shadow">{entry.data.description}</p>
+          <p
+            class="text-lg md:text-2xl text-white/90 font-body max-w-2xl drop-shadow"
+          >
+            {entry.data.description}
+          </p>
         </div>
       </div>
     </div>
     <Container>
       <!-- Quick Facts -->
-      <div class="flex flex-wrap gap-6 mb-10 justify-center md:justify-start text-lg">
-        {quickFacts.map((fact) => (
-          <div class="flex items-center gap-2 bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-lg shadow-sm text-xl">
-            <Icon name={fact.icon} class="w-6 h-6 text-primary" />
-            <span class="font-semibold text-neutral-800 dark:text-neutral-200">{fact.label}:</span>
-            <span class="text-neutral-700 dark:text-neutral-300">
-              {fact.isDate ? <FormattedDate date={fact.value} /> : fact.value}
-            </span>
-          </div>
-        ))}
+      <div
+        class="flex flex-wrap gap-6 mb-10 justify-center md:justify-start text-lg"
+      >
+        {
+          quickFacts.map((fact) => (
+            <div class="flex items-center gap-2 bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-lg shadow-sm text-xl">
+              <Icon name={fact.icon} class="w-6 h-6 text-primary" />
+              <span class="font-semibold text-neutral-800 dark:text-neutral-200">
+                {fact.label}:
+              </span>
+              <span class="text-neutral-700 dark:text-neutral-300">
+                {fact.isDate ? <FormattedDate date={fact.value} /> : fact.value}
+              </span>
+            </div>
+          ))
+        }
         {entry.data.tags && <TagList tags={entry.data.tags} />}
       </div>
       <!-- Benefits -->
-      {entry.data.benefits && (
-        <div class="mb-12">
-          <h2 class="text-3xl font-black font-heading mb-6">Key Benefits</h2>
-          <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {entry.data.benefits.map((benefit: { text: string; icon: string }) => (
-              <li class="flex items-start gap-3 bg-white dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-700 rounded-xl p-4 shadow-sm text-xl">
-                <Icon name={benefit.icon} class="w-7 h-7 text-secondary-green dark:text-secondary-green mt-1 shrink-0" />
-                <span class="text-neutral-800 dark:text-neutral-200">{benefit.text}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {
+        entry.data.benefits && (
+          <div class="mb-12">
+            <h2 class="text-3xl font-black font-heading mb-6">Key Benefits</h2>
+            <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {entry.data.benefits.map(
+                (benefit: { text: string; icon: string }) => (
+                  <li class="flex items-start gap-3 bg-white dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-700 rounded-xl p-4 shadow-sm text-xl">
+                    <Icon
+                      name={benefit.icon}
+                      class="w-7 h-7 text-secondary-green dark:text-secondary-green mt-1 shrink-0"
+                    />
+                    <span class="text-neutral-800 dark:text-neutral-200">
+                      {benefit.text}
+                    </span>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+        )
+      }
       <!-- Process Timeline -->
-      {entry.data.process && (
-        <div class="mb-12">
-          <h2 class="text-3xl font-black font-heading mb-6">Our Process</h2>
-          <ol class="relative border-l-2 border-primary/30 ml-4 list-none p-0">
-            {entry.data.process.map((step: { title: string; description: string }, idx: number) => (
-              <li class="mb-10 ml-8">
-                <span class="absolute -left-5 flex items-center justify-center w-10 h-10 bg-secondary-orange text-white rounded-full ring-4 ring-white dark:ring-neutral-900 font-black text-xl">{idx + 1}</span>
-                <h3 class="text-2xl font-bold mb-1">{step.title}</h3>
-                <p class="text-neutral-700 dark:text-neutral-300 text-xl">{step.description}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      )}
+      {
+        entry.data.process && (
+          <div class="mb-12">
+            <h2 class="text-3xl font-black font-heading mb-6">Our Process</h2>
+            <ol class="relative border-l-2 border-primary/30 ml-4 list-none p-0">
+              {entry.data.process.map(
+                (step: { title: string; description: string }, idx: number) => (
+                  <li class="mb-10 ml-8">
+                    <span class="absolute -left-5 flex items-center justify-center w-10 h-10 bg-secondary-orange text-white rounded-full ring-4 ring-white dark:ring-neutral-900 font-black text-xl">
+                      {idx + 1}
+                    </span>
+                    <h3 class="text-2xl font-bold mb-1">{step.title}</h3>
+                    <p class="text-neutral-700 dark:text-neutral-300 text-xl">
+                      {step.description}
+                    </p>
+                  </li>
+                )
+              )}
+            </ol>
+          </div>
+        )
+      }
       <!-- Rich MDX Content -->
       <div
         class="prose prose-2xl dark:prose-invert max-w-none mb-16
@@ -137,29 +184,39 @@ const description = entry.data.description;
         <Content />
       </div>
       <!-- Related Case Studies -->
-      {relatedCaseStudies.length > 0 && (
-        <div class="mt-16">
-          <h2 class="text-2xl font-bold font-heading mb-6">Related Case Studies</h2>
-          <div class="grid gap-8 md:grid-cols-2">
-            {relatedCaseStudies.map((study) => (
-              <CaseStudyCard
-                title={study.data.title}
-                description={study.data.description}
-                client={study.data.client}
-                industry={study.data.industry}
-                duration={study.data.duration}
-                tags={study.data.tags}
-                href={`/work/${study.slug}`}
-                coverImage={study.data.coverImage}
-              />
-            ))}
+      {
+        relatedCaseStudies.length > 0 && (
+          <div class="mt-16">
+            <h2 class="text-2xl font-bold font-heading mb-6">
+              Related Case Studies
+            </h2>
+            <div class="grid gap-8 md:grid-cols-2">
+              {relatedCaseStudies.map((study) => (
+                <CaseStudyCard
+                  title={study.data.title}
+                  description={study.data.description}
+                  client={study.data.client}
+                  industry={study.data.industry}
+                  duration={study.data.duration}
+                  tags={study.data.tags}
+                  href={`/work/${study.slug}`}
+                  coverImage={study.data.coverImage}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
       <!-- CTA -->
-      <div class="mt-20 bg-primary/10 dark:bg-primary/20 p-8 md:p-12 rounded-2xl text-center shadow-lg">
-        <h2 class="text-3xl md:text-4xl font-bold font-heading mb-5">Interested in this service?</h2>
-        <p class="text-xl md:text-2xl mb-8">Let's discuss how I can help with your specific needs.</p>
+      <div
+        class="mt-20 bg-primary/10 dark:bg-primary/20 p-8 md:p-12 rounded-2xl text-center shadow-lg"
+      >
+        <h2 class="text-3xl md:text-4xl font-bold font-heading mb-5">
+          Interested in this service?
+        </h2>
+        <p class="text-xl md:text-2xl mb-8">
+          Let's discuss how I can help with your specific needs.
+        </p>
         <a
           href="/contact"
           class="inline-block px-10 py-4 bg-secondary-orange text-white font-bold rounded-full

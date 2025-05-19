@@ -1,6 +1,7 @@
 ---
-import SectionContainer from "@/components/layout/SectionContainer.astro";
 import Button from "@/components/ui/Button.astro";
+import Heading from "@/components/ui/Heading.astro";
+import SectionContainer from "@/components/layout/SectionContainer.astro";
 import "@/styles/components/my-values.css";
 
 interface Props {
@@ -14,6 +15,8 @@ interface Props {
   buttonText?: string;
   /** Button link destination */
   buttonLink?: string;
+  /** Font family for the heading - 'fraunces' or 'dm-sans' */
+  font?: "fraunces" | "dm-sans";
 }
 
 // Default values
@@ -23,6 +26,7 @@ const {
   imageUrl = "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   buttonText = "Explore My Values",
   buttonLink = "/values",
+  font = "fraunces",
 } = Astro.props;
 ---
 
@@ -30,8 +34,22 @@ const {
   <div class="flex flex-col h-full">
     <!-- Headings above the card -->
     <div class="mb-4 md:mb-6 text-left">
-      <h2 class="my-values-heading">{title}</h2>
-      <h3 class="my-values-subheading">{subtitle}</h3>
+      <Heading
+        level={2}
+        font="dm-sans"
+        size="2xl"
+        class="text-text-secondary mb-2 md:mb-4 font-normal"
+      >
+        {title}
+      </Heading>
+      <Heading
+        level={3}
+        font={font}
+        size="2xl"
+        class="text-heading leading-tight"
+      >
+        {subtitle}
+      </Heading>
     </div>
     <!-- Photo card - full width, fills available space -->
     <div class="my-values-card">

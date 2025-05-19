@@ -1,0 +1,170 @@
+---
+/**
+ * Reusable Heading Component
+ * @component Heading
+ * @description A flexible heading component that supports different font families, sizes, and styles
+ *
+ * @size-mapping
+ * The size prop uses a counterintuitive naming convention where higher numbers (2xl, 3xl, 4xl)
+ * actually result in smaller text sizes. Here's the mapping:
+ *
+ * | Size  | Mobile        | Desktop       | Typical Use           |
+ * |-------|---------------|---------------|----------------------|
+ * | hero  | text-9xl      | text-8xl      | Hero sections        |
+ * | xl    | text-4xl      | text-5xl      | Main headings (h1)   |
+ * | 2xl   | text-3xl      | text-4xl      | Section headings (h2)|
+ * | 3xl   | text-2xl      | text-3xl      | Subheadings (h3)     |
+ * | 4xl   | text-xl       | text-2xl      | Minor headings (h4)  |
+ * | custom| (use class)   | (use class)   | Custom sizes         |
+ *
+ * @example
+ * ```astro
+ * <Heading level={1} size="xl">Main Title</Heading>
+ * <Heading level={2} size="2xl">Section Title</Heading>
+ * <Heading level={3} size="3xl">Subsection Title</Heading>
+ * ```
+ *
+ * @australian-english
+ */
+
+interface Props {
+  /** The heading level (h1-h6) */
+  level: 1 | 2 | 3 | 4 | 5 | 6;
+  /** Font family for the heading - 'fraunces' or 'dm-sans' */
+  font?: "fraunces" | "dm-sans";
+  /**
+   * Size variant for the heading.
+   * Note: Higher numbers (2xl, 3xl, 4xl) result in smaller text sizes.
+   * See the size mapping table in the component documentation.
+   */
+  size?: "hero" | "xl" | "2xl" | "3xl" | "4xl" | "custom";
+  /** Whether to apply the gradient effect */
+  gradient?: boolean;
+  /** Additional classes to apply */
+  class?: string;
+}
+
+const {
+  level,
+  font = "fraunces",
+  size = "xl",
+  gradient = false,
+  class: className = "",
+} = Astro.props;
+
+// Map size variants to Tailwind classes
+const sizeClasses = {
+  hero: "text-9xl md:text-8xl", // Hero size for dramatic headlines
+  xl: "text-4xl md:text-5xl", // Extra large (h1)
+  "2xl": "text-3xl md:text-4xl", // Double extra large (h2)
+  "3xl": "text-2xl md:text-3xl", // Triple extra large (h3)
+  "4xl": "text-xl md:text-2xl", // Quadruple extra large (h4)
+  custom: "", // Custom size (use class prop)
+};
+
+// Map heading levels to default sizes if not specified
+const headingSizes = {
+  1: "xl",
+  2: "2xl",
+  3: "3xl",
+  4: "4xl",
+  5: "4xl",
+  6: "4xl",
+};
+
+// Get the appropriate size class
+const sizeClass = size === "custom" ? "" : sizeClasses[size];
+
+// Base classes for all headings
+const baseClasses = "font-bold tracking-tight";
+
+// Font family classes
+const fontClasses = {
+  fraunces: "font-heading",
+  "dm-sans": "font-body",
+};
+
+// Combine all classes
+const classes = [
+  baseClasses,
+  fontClasses[font],
+  sizeClass,
+  gradient ? "gradient-heading" : "",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<style>
+  .gradient-heading {
+    background: linear-gradient(
+      45deg,
+      var(--colour-hero-gradient-1, #af8abf) 0%,
+      var(--colour-hero-gradient-2, #fa8a58) 35%,
+      var(--colour-hero-gradient-3, #36a96a) 70%,
+      var(--colour-hero-gradient-1, #af8abf) 100%
+    );
+    background-size: 200% 100%;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradientRotate 8s linear infinite;
+    will-change: background-position;
+    padding: 0.1em 0;
+    margin: -0.1em 0;
+    line-height: 1.2;
+  }
+
+  @keyframes gradientRotate {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
+  }
+</style>
+
+{
+  level === 1 && (
+    <h1 class={classes}>
+      <slot />
+    </h1>
+  )
+}
+{
+  level === 2 && (
+    <h2 class={classes}>
+      <slot />
+    </h2>
+  )
+}
+{
+  level === 3 && (
+    <h3 class={classes}>
+      <slot />
+    </h3>
+  )
+}
+{
+  level === 4 && (
+    <h4 class={classes}>
+      <slot />
+    </h4>
+  )
+}
+{
+  level === 5 && (
+    <h5 class={classes}>
+      <slot />
+    </h5>
+  )
+}
+{
+  level === 6 && (
+    <h6 class={classes}>
+      <slot />
+    </h6>
+  )
+}

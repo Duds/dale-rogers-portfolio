@@ -4,6 +4,7 @@ import Container from "@/components/layout/Container.astro";
 import { type CollectionEntry } from "astro:content";
 import TagList from "@/components/ui/TagList.astro";
 import FormattedDate from "@/components/ui/FormattedDate.astro";
+import Heading from "@/components/ui/Heading.astro";
 
 interface Props {
   caseStudy: CollectionEntry<"case-studies">;
@@ -28,22 +29,29 @@ const {
 
 <BaseLayout title={title} description={description} image={coverImage}>
   <Container>
-    <article class="prose prose-lg dark:prose-invert mx-auto">
+    <article class="prose prose-lg dark:prose-invert mx-auto pt-32 md:pt-40">
       <header class="mb-8">
-        <h1 class="text-4xl font-bold mb-4">{title}</h1>
-        <div
-          class="flex items-center gap-4 text-gray-600 dark:text-gray-400 mb-4"
-        >
+        <Heading level={1} font="fraunces" size="xl" class="mb-4">
+          {title}
+        </Heading>
+        <div class="flex items-center gap-4 text-text-secondary mb-4">
           <FormattedDate date={pubDate} />
           <span>by {author}</span>
         </div>
         {tags && <TagList tags={tags} class="mb-6" />}
 
         <div
-          class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg"
+          class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-surface dark:bg-surface-dark p-6 rounded-lg"
         >
           <div>
-            <h2 class="text-xl font-semibold mb-2">Project Details</h2>
+            <Heading
+              level={2}
+              font="dm-sans"
+              size="4xl"
+              class="mb-4 font-normal"
+            >
+              Project Details
+            </Heading>
             <dl class="space-y-2">
               <div>
                 <dt class="font-medium">Client</dt>
@@ -60,7 +68,14 @@ const {
             </dl>
           </div>
           <div>
-            <h2 class="text-xl font-semibold mb-2">Overview</h2>
+            <Heading
+              level={2}
+              font="dm-sans"
+              size="4xl"
+              class="mb-4 font-normal"
+            >
+              Overview
+            </Heading>
             <dl class="space-y-2">
               <div>
                 <dt class="font-medium">Challenge</dt>
@@ -114,7 +129,7 @@ const {
   }
 
   .case-study-content :global(blockquote) {
-    @apply border-l-4 border-blue-500 pl-4 italic my-8;
+    @apply border-l-4 border-purple dark:border-purple-dark pl-4 italic my-8;
   }
 
   .case-study-content :global(pre) {
@@ -122,11 +137,11 @@ const {
   }
 
   .case-study-content :global(h2) {
-    @apply text-3xl font-bold mt-12 mb-6;
+    @apply mt-12 mb-6;
   }
 
   .case-study-content :global(h3) {
-    @apply text-2xl font-bold mt-8 mb-4;
+    @apply mt-8 mb-4;
   }
 
   .case-study-content :global(p) {
@@ -142,6 +157,36 @@ const {
   }
 
   .case-study-content :global(a) {
-    @apply text-blue-500 hover:underline;
+    @apply text-purple dark:text-purple-dark hover:underline;
   }
 </style>
+
+<script>
+  // Add Heading components to content headings
+  document.addEventListener("DOMContentLoaded", () => {
+    const content = document.querySelector(".case-study-content");
+    if (!content) return;
+
+    // Replace h2 elements with Heading components
+    content.querySelectorAll("h2").forEach((h2) => {
+      const heading = document.createElement("astro-heading");
+      heading.setAttribute("level", "2");
+      heading.setAttribute("font", "dm-sans");
+      heading.setAttribute("size", "3xl");
+      heading.setAttribute("class", "font-normal");
+      heading.innerHTML = h2.innerHTML;
+      h2.replaceWith(heading);
+    });
+
+    // Replace h3 elements with Heading components
+    content.querySelectorAll("h3").forEach((h3) => {
+      const heading = document.createElement("astro-heading");
+      heading.setAttribute("level", "3");
+      heading.setAttribute("font", "dm-sans");
+      heading.setAttribute("size", "4xl");
+      heading.setAttribute("class", "font-normal");
+      heading.innerHTML = h3.innerHTML;
+      h3.replaceWith(heading);
+    });
+  });
+</script>

@@ -4,7 +4,6 @@ import Container from "@/components/layout/Container.astro";
 import { type CollectionEntry } from "astro:content";
 import TagList from "@/components/ui/TagList.astro";
 import FormattedDate from "@/components/ui/FormattedDate.astro";
-import { getCollection } from "astro:content";
 
 interface Props {
   scratch: CollectionEntry<"scratch">;
@@ -16,7 +15,6 @@ interface Props {
 const { scratch } = Astro.props;
 const {
   title: scratchTitle,
-  description: scratchDescription,
   pubDate,
   tags,
   coverImage,
@@ -24,19 +22,7 @@ const {
   author,
 } = scratch.data;
 
-const {
-  title: propsTitle,
-  description: propsDescription,
-  showNavigation = true,
-} = Astro.props;
-
-// Only fetch scratch projects if navigation is enabled
-let scratchProjects: CollectionEntry<"scratch">[] = [];
-if (showNavigation) {
-  scratchProjects = await getCollection("scratch", ({ data }) => {
-    return data.status !== "draft";
-  });
-}
+const { title: propsTitle, description: propsDescription } = Astro.props;
 ---
 
 <BaseLayout
@@ -105,11 +91,11 @@ if (showNavigation) {
   }
 
   .scratch-content :global(h2) {
-    @apply text-3xl font-bold mt-12 mb-6;
+    @apply mt-12 mb-6;
   }
 
   .scratch-content :global(h3) {
-    @apply text-2xl font-bold mt-8 mb-4;
+    @apply mt-8 mb-4;
   }
 
   .scratch-content :global(p) {
@@ -128,3 +114,31 @@ if (showNavigation) {
     @apply text-blue-500 hover:underline;
   }
 </style>
+
+<script>
+  // Add Heading components to content headings
+  document.addEventListener("DOMContentLoaded", () => {
+    const content = document.querySelector(".scratch-content");
+    if (!content) return;
+
+    // Replace h2 elements with Heading components
+    content.querySelectorAll("h2").forEach((h2) => {
+      const heading = document.createElement("astro-heading");
+      heading.setAttribute("level", "2");
+      heading.setAttribute("font", "fraunces");
+      heading.setAttribute("size", "2xl");
+      heading.innerHTML = h2.innerHTML;
+      h2.replaceWith(heading);
+    });
+
+    // Replace h3 elements with Heading components
+    content.querySelectorAll("h3").forEach((h3) => {
+      const heading = document.createElement("astro-heading");
+      heading.setAttribute("level", "3");
+      heading.setAttribute("font", "fraunces");
+      heading.setAttribute("size", "3xl");
+      heading.innerHTML = h3.innerHTML;
+      h3.replaceWith(heading);
+    });
+  });
+</script>

@@ -7,6 +7,7 @@
 }
 .navigation__brand {
   @apply text-3xl md:text-4xl font-bold transition-colors text-black dark:text-white;
+  font-family: var(--font-heading);
 }
 .navigation__link {
   /* Custom classes removed: text-nav-link dark:text-nav-link-dark border-nav-border dark:border-nav-border-dark hover:bg-nav-link-hover hover:text-nav-link-hover-text dark:hover:bg-nav-link-hover-dark dark:hover:text-nav-link-hover-text-dark */

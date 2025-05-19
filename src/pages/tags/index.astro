@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Container from "@/components/layout/Container.astro";
-import TagList from "@/components/ui/TagList.astro";
+import TagList from "@/components/features/tags/TagList.astro";
+import Heading from "@/components/ui/Heading.astro";
 import { getCollection } from "astro:content";
 
 // Get all content
@@ -45,7 +46,9 @@ const allTags = sortedTags.map(([tag]) => tag);
 <BaseLayout title="Tags | Dale Rogers" description="Browse content by tags">
   <Container class="py-16">
     <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl font-bold mb-8">Browse by Tag</h1>
+      <Heading level={1} font="fraunces" size="xl" class="mb-8">
+        Browse by Tag
+      </Heading>
       <p class="text-gray-600 dark:text-gray-400 mb-12">
         Browse all content by tags. Click on a tag to see related articles, case
         studies, and scratch posts.
@@ -62,9 +65,14 @@ const allTags = sortedTags.map(([tag]) => tag);
               href={`/tags/${tag}`}
               class="group p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             >
-              <h2 class="text-lg font-semibold group-hover:text-primary transition-colors">
+              <Heading
+                level={2}
+                font="fraunces"
+                size="2xl"
+                class="group-hover:text-primary transition-colors"
+              >
                 {tag.charAt(0).toUpperCase() + tag.slice(1)}
-              </h2>
+              </Heading>
               <p class="text-gray-600 dark:text-gray-400">
                 {count} item{count === 1 ? "" : "s"}
               </p>
