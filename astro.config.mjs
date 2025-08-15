@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import react from "@astrojs/react";
+import tailwind from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,6 +17,7 @@ export default defineConfig({
       rehypePlugins: [],
     }),
     react(),
+    // Tailwind CSS v4 via Vite plugin - no PostCSS needed
   ],
   output: "server",
   adapter: node({
@@ -30,6 +32,8 @@ export default defineConfig({
     },
   },
   vite: {
+    plugins: [tailwind()],
     envPrefix: ["SMTP_", "EMAIL_"],
+    // Tailwind CSS v4 processed through Vite plugin for best DX and HMR
   },
 });

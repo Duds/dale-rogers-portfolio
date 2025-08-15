@@ -6,10 +6,10 @@
 /* Import base component styles */
 @import './components/base.css';
 
-/* Tailwind layers */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@reference "tailwindcss";
+
+/* Make all Tailwind utilities available globally */
 
 @layer utilities {
   .shadow-hover {
