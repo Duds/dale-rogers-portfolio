@@ -5,25 +5,41 @@
   "private": true,
   "packageManager": "pnpm@10.14.0",
   "scripts": {
-    "check-tokens": "tsx src/scripts/check-token-usage.ts",
-    "check-pm": "node scripts/check-package-manager.js",
-    "predev": "pnpm run generate-css-vars",
-    "prebuild": "pnpm run generate-css-vars",
     "dev": "astro dev",
-    "start": "astro dev",
+    "dev:turbo": "astro dev --turbo",
+    "dev:health": "pnpm run check-pm && pnpm run check-tokens && pnpm run typecheck && pnpm run lint",
     "build": "astro build",
-    "build:standalone-mermaid": "astro build && node build-standalone.js",
     "preview": "astro preview",
     "astro": "astro",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
+    "lint:fix": "eslint . --ext .js,.ts,.jsx,.tsx --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "test": "vitest",
-    "test:watch": "vitest watch",
-    "test:coverage": "vitest run --coverage",
-    "generate-css-vars": "npx tsx src/scripts/generate-css-vars.ts",
-    "test:tokens": "vitest run src/scripts/generate-css-vars.test.ts",
-    "lint:css": "tsx src/scripts/lint-css.ts",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:run": "vitest --run",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "e2e:debug": "playwright test --debug",
+    "gen:tree": "node scripts/gen-tree.cjs",
+    "rules:seal": "node scripts/ensure-rules-frontmatter.cjs",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "storybook:export": "storybook build --output-dir storybook-static"
+    "storybook:export": "storybook build --docs",
+    "check-pm": "node scripts/check-package-manager.js",
+    "check-tokens": "node scripts/check-tokens.js",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml,astro,css}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -71,7 +87,9 @@
     "esbuild": "^0.25.4",
     "glob": "^8.1.0",
     "jsdom": "^26.1.0",
+    "lint-staged": "^16.1.5",
     "playwright": "^1.52.0",
+    "prettier": "^3.6.2",
     "storybook": "^8.6.14",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "4.1.12",
