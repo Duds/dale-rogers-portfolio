@@ -25,17 +25,57 @@ This is the personal portfolio for Dale Rogers, built with Astro, TypeScript, an
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm run dev
 
 # Build for production
-npm run build
+pnpm run build
 
 # Preview production build
-npm run preview
+pnpm run preview
 ```
+
+## Package Manager
+
+**This project uses pnpm exclusively.** Do not use npm or yarn.
+
+### Why pnpm?
+
+- Faster installation and updates
+- Better disk space efficiency
+- Strict dependency resolution
+- Consistent package management
+
+### Commands
+
+```bash
+# Install dependencies
+pnpm install
+
+# Add new dependency
+pnpm add <package-name>
+
+# Add dev dependency
+pnpm add -D <package-name>
+
+# Run scripts
+pnpm run <script-name>
+
+# Remove dependency
+pnpm remove <package-name>
+
+# Update dependencies
+pnpm update
+```
+
+### Enforcement
+
+- The project includes automatic checks to prevent npm/yarn usage
+- Run `pnpm run check-pm` to verify package manager compliance
+- Pre-commit hooks automatically check for violations
+- Unwanted lockfiles (package-lock.json, yarn.lock) are automatically detected
 
 ## Features
 
@@ -54,12 +94,12 @@ npm run preview
 This project uses a modern, type-safe design token system:
 
 - **Source of Truth:** All design tokens (colours, spacing, shadows, etc.) are defined in TypeScript files in `src/styles/theme/`.
-- **CSS Variable Generation:** Run `npm run generate-css-vars` to generate `src/styles/generated-tokens.css` with all tokens as CSS variables. This is automated before dev/build via `predev` and `prebuild` scripts.
+- **CSS Variable Generation:** Run `pnpm run generate-css-vars` to generate `src/styles/generated-tokens.css` with all tokens as CSS variables. This is automated before dev/build via `predev` and `prebuild` scripts.
 - **Usage:**
   - CSS: Tokens are available as CSS variables (e.g., `var(--color-accent)`, `var(--shadow-lg)`, `var(--space-2)`).
   - Tailwind: Tokens are imported into `tailwind.config.js` for consistent utility classes.
   - JS/TS: Tokens can be imported directly from TypeScript for use in components or scripts.
-- **Node Version:** Use `nvm use 20` before running scripts if using Node Version Manager (NVM).
+- **Node Version:** Use `nvm use 20.19.2` before running scripts if using Node Version Manager (NVM). Node.js 20+ is required for Azure dependencies.
 
 This ensures a single source of truth for all design decisions, with full type safety and easy synchronisation between code and styles.
 

@@ -65,8 +65,10 @@
 </div>
 
 <style>
+  @reference "tailwindcss";
+
   .mermaid-controls {
-    @apply flex flex-wrap gap-4 p-4 bg-grey-50 dark:bg-grey-900 border-t border-grey-200 dark:border-grey-700;
+    @apply flex flex-wrap gap-4 p-4 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700;
   }
 
   .control-group {
@@ -74,8 +76,8 @@
   }
 
   .control-button {
-    @apply flex items-center gap-2 px-3 py-2 bg-white dark:bg-grey-800 text-grey-700 dark:text-grey-300
-           border border-grey-300 dark:border-grey-600 rounded-lg hover:bg-grey-50 dark:hover:bg-grey-700
+    @apply flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300
+           border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700
            transition-colors text-sm font-medium;
   }
 
@@ -84,11 +86,11 @@
   }
 
   .control-label {
-    @apply flex items-center gap-2 text-sm text-grey-600 dark:text-grey-400 cursor-pointer;
+    @apply flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 cursor-pointer;
   }
 
   .control-label input[type="checkbox"] {
-    @apply w-4 h-4 text-primary border-grey-300 dark:border-grey-600 rounded focus:ring-primary;
+    @apply w-4 h-4 text-blue-600 border-gray-300 dark:border-gray-600 rounded focus:ring-blue-600;
   }
 </style>
 

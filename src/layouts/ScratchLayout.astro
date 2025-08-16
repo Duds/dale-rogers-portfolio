@@ -78,6 +78,8 @@ const { title: propsTitle, description: propsDescription } = Astro.props;
 </BaseLayout>
 
 <style>
+  @reference "tailwindcss";
+
   .scratch-content :global(img) {
     @apply rounded-lg my-8;
   }

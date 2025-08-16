@@ -50,6 +50,8 @@ const { class: className, content, ...props } = Astro.props;
 </script>
 
 <style>
+  @reference "tailwindcss";
+
   :global(.emphasis) {
     /* Token-based classes to add in markup: text-primary dark:text-primary */
     @apply font-medium italic;

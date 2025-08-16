@@ -124,6 +124,8 @@ const {
 </BaseLayout>
 
 <style>
+  @reference "tailwindcss";
+
   .case-study-content :global(img) {
     @apply rounded-lg my-8;
   }
@@ -157,7 +159,7 @@ const {
   }
 
   .case-study-content :global(a) {
-    @apply text-purple dark:text-purple-dark hover:underline;
+    @apply text-purple-600 dark:text-purple-400 hover:underline;
   }
 </style>
 
