@@ -49,6 +49,10 @@ function logMenu() {
   console.log('7. 🔧 Type Check - TypeScript validation');
   console.log('8. 📚 Storybook - Component development');
   console.log('9. 🎯 Quick Start - Full development workflow');
+  console.log('10. 📊 Performance Analysis - Analyze build performance');
+  console.log('11. 🖼️  Image Optimization - Optimize images');
+  console.log('12. 🚀 Advanced Image Optimization - Generate responsive variants');
+  console.log('13. 📈 Performance Monitor - Track performance budgets');
   console.log('0. 🚪 Exit');
   console.log('');
 }
@@ -124,6 +128,22 @@ function typeCheck() {
 function storybook() {
   const child = runInteractiveCommand('pnpm run storybook', 'Storybook Development');
   return child;
+}
+
+function performanceAnalysis() {
+  runCommand('node scripts/performance-analysis.js', 'Performance Analysis');
+}
+
+function imageOptimization() {
+  runCommand('node scripts/optimize-images.js --auto', 'Image Optimization');
+}
+
+function advancedImageOptimization() {
+  runCommand('node scripts/advanced-image-optimization.js', 'Advanced Image Optimization');
+}
+
+function performanceMonitor() {
+  runCommand('node scripts/performance-monitor.js', 'Performance Monitoring');
 }
 
 function quickStart() {
@@ -208,40 +228,52 @@ async function main() {
         activeProcess = null;
       }
 
-      switch (answer.trim()) {
-        case '1':
-          healthCheck();
-          break;
-        case '2':
-          cleanInstall();
-          break;
-        case '3':
-          buildProject();
-          break;
-        case '4':
-          activeProcess = devServer();
-          break;
-        case '5':
-          runTests();
-          break;
-        case '6':
-          lintAndFix();
-          break;
-        case '7':
-          typeCheck();
-          break;
-        case '8':
-          activeProcess = storybook();
-          break;
-        case '9':
-          quickStart();
-          break;
-        case '0':
-          running = false;
-          break;
-        default:
-          log(`${colors.red}Invalid option: ${answer}${colors.reset}`);
-      }
+                        switch (answer.trim()) {
+                    case '1':
+                      healthCheck();
+                      break;
+                    case '2':
+                      cleanInstall();
+                      break;
+                    case '3':
+                      buildProject();
+                      break;
+                    case '4':
+                      activeProcess = devServer();
+                      break;
+                    case '5':
+                      runTests();
+                      break;
+                    case '6':
+                      lintAndFix();
+                      break;
+                    case '7':
+                      typeCheck();
+                      break;
+                    case '8':
+                      activeProcess = storybook();
+                      break;
+                    case '9':
+                      quickStart();
+                      break;
+                    case '10':
+                      performanceAnalysis();
+                      break;
+                    case '11':
+                      imageOptimization();
+                      break;
+                    case '12':
+                      advancedImageOptimization();
+                      break;
+                    case '13':
+                      performanceMonitor();
+                      break;
+                    case '0':
+                      running = false;
+                      break;
+                    default:
+                      log(`${colors.red}Invalid option: ${answer}${colors.reset}`);
+                  }
 
       if (running && answer !== '4' && answer !== '8') {
         await askQuestion(`${colors.yellow}Press Enter to continue...${colors.reset}`);
