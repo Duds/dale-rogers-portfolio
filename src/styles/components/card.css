@@ -1,6 +1,8 @@
+@reference "tailwindcss";
+
 /* Card component styles migrated from global.css */
 .card {
-  @apply bg-bg rounded-lg p-6 shadow-soft transition-all duration-300 ease-in-out;
+  @apply bg-white dark:bg-gray-900 rounded-lg p-6 shadow-lg transition-all duration-300 ease-in-out;
 }
 .card--clickable {
   @apply cursor-pointer hover:-translate-y-1;

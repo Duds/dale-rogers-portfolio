@@ -273,10 +273,11 @@ export const cleanupHelpers = {
   },
 };
 
-// Export all helpers
-export {
-  userEvent,
-  accessibilityHelpers,
-  performanceHelpers,
-  cleanupHelpers,
-};
+// Global test utilities
+declare global {
+  namespace Vi {
+    interface JestAssertion<T = any> extends jest.Matchers<void, T> {}
+  }
+}
+
+export {};

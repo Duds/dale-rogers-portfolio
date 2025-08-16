@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 /* SectionHeading component styles migrated from global.css */
 .section-heading {
   @apply max-w-4xl;
