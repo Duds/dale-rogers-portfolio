@@ -1,10 +1,10 @@
-import '@testing-library/jest-dom';
-import { vi } from 'vitest';
+import "@testing-library/jest-dom";
+import { vi, afterEach, beforeEach } from "vitest";
 
 // Mock matchMedia for responsive design testing
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
-  value: vi.fn().mockImplementation(query => ({
+  value: vi.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
@@ -53,11 +53,10 @@ const sessionStorageMock = {
 global.sessionStorage = sessionStorageMock;
 
 // Mock console methods to reduce noise in tests
-const originalConsole = { ...console };
 beforeAll(() => {
-  vi.spyOn(console, 'log').mockImplementation(() => {});
-  vi.spyOn(console, 'warn').mockImplementation(() => {});
-  vi.spyOn(console, 'error').mockImplementation(() => {});
+  vi.spyOn(console, "log").mockImplementation(() => {});
+  vi.spyOn(console, "warn").mockImplementation(() => {});
+  vi.spyOn(console, "error").mockImplementation(() => {});
 });
 
 afterAll(() => {
@@ -68,13 +67,13 @@ afterAll(() => {
 global.fetch = vi.fn();
 
 // Mock window.scrollTo
-Object.defineProperty(window, 'scrollTo', {
+Object.defineProperty(window, "scrollTo", {
   writable: true,
   value: vi.fn(),
 });
 
 // Mock window.getComputedStyle
-Object.defineProperty(window, 'getComputedStyle', {
+Object.defineProperty(window, "getComputedStyle", {
   writable: true,
   value: vi.fn(() => ({
     getPropertyValue: vi.fn(),
@@ -82,7 +81,7 @@ Object.defineProperty(window, 'getComputedStyle', {
 });
 
 // Mock CSS.supports
-Object.defineProperty(window, 'CSS', {
+Object.defineProperty(window, "CSS", {
   writable: true,
   value: {
     supports: vi.fn(),
@@ -90,7 +89,7 @@ Object.defineProperty(window, 'CSS', {
 });
 
 // Mock performance API
-Object.defineProperty(window, 'performance', {
+Object.defineProperty(window, "performance", {
   writable: true,
   value: {
     now: vi.fn(() => Date.now()),
@@ -101,43 +100,43 @@ Object.defineProperty(window, 'performance', {
 });
 
 // Mock URL.createObjectURL
-Object.defineProperty(URL, 'createObjectURL', {
+Object.defineProperty(URL, "createObjectURL", {
   writable: true,
-  value: vi.fn(() => 'mocked-url'),
+  value: vi.fn(() => "mocked-url"),
 });
 
 // Mock URL.revokeObjectURL
-Object.defineProperty(URL, 'revokeObjectURL', {
+Object.defineProperty(URL, "revokeObjectURL", {
   writable: true,
   value: vi.fn(),
 });
 
 // Mock navigator
-Object.defineProperty(navigator, 'userAgent', {
+Object.defineProperty(navigator, "userAgent", {
   writable: true,
-  value: 'Mozilla/5.0 (Test Browser)',
+  value: "Mozilla/5.0 (Test Browser)",
 });
 
-Object.defineProperty(navigator, 'language', {
+Object.defineProperty(navigator, "language", {
   writable: true,
-  value: 'en-AU',
+  value: "en-AU",
 });
 
 // Mock document.createRange
-Object.defineProperty(document, 'createRange', {
+Object.defineProperty(document, "createRange", {
   writable: true,
   value: vi.fn(() => ({
     setStart: vi.fn(),
     setEnd: vi.fn(),
     commonAncestorContainer: {
-      nodeName: 'BODY',
+      nodeName: "BODY",
       ownerDocument: document,
     },
   })),
 });
 
 // Mock document.getSelection
-Object.defineProperty(document, 'getSelection', {
+Object.defineProperty(document, "getSelection", {
   writable: true,
   value: vi.fn(() => ({
     removeAllRanges: vi.fn(),
@@ -145,25 +144,56 @@ Object.defineProperty(document, 'getSelection', {
   })),
 });
 
-// Setup test environment
+// Setup test environment with proper cleanup
 beforeEach(() => {
   // Clear all mocks before each test
   vi.clearAllMocks();
-  
+
   // Reset localStorage and sessionStorage
   localStorageMock.getItem.mockClear();
   localStorageMock.setItem.mockClear();
   localStorageMock.removeItem.mockClear();
   localStorageMock.clear.mockClear();
-  
+
   sessionStorageMock.getItem.mockClear();
   sessionStorageMock.setItem.mockClear();
   sessionStorageMock.removeItem.mockClear();
   sessionStorageMock.clear.mockClear();
-  
+
   // Reset fetch mock
   if (global.fetch) {
     (global.fetch as any).mockClear();
+  }
+});
+
+afterEach(() => {
+  // Clean up DOM after each test
+  document.body.innerHTML = "";
+  document.head.innerHTML = "";
+
+  // Clear all mocks
+  vi.clearAllMocks();
+
+  // Reset IntersectionObserver and ResizeObserver
+  if (global.IntersectionObserver) {
+    (global.IntersectionObserver as any).mockClear();
+  }
+  if (global.ResizeObserver) {
+    (global.ResizeObserver as any).mockClear();
+  }
+
+  // Reset requestAnimationFrame
+  if (
+    global.requestAnimationFrame &&
+    typeof (global.requestAnimationFrame as any).mockClear === "function"
+  ) {
+    (global.requestAnimationFrame as any).mockClear();
+  }
+  if (
+    global.cancelAnimationFrame &&
+    typeof (global.cancelAnimationFrame as any).mockClear === "function"
+  ) {
+    (global.cancelAnimationFrame as any).mockClear();
   }
 });
 

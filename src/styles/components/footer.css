@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 /* Footer component styles migrated from global.css */
 .footer {
   @apply relative w-full py-20;

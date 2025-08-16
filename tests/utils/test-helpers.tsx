@@ -19,13 +19,13 @@ export const renderWithProviders = (
 // Mock utilities
 export const mockConsole = () => {
   const originalConsole = { ...console };
-  
+
   beforeAll(() => {
     vi.spyOn(console, 'log').mockImplementation(() => {});
     vi.spyOn(console, 'warn').mockImplementation(() => {});
     vi.spyOn(console, 'error').mockImplementation(() => {});
   });
-  
+
   afterAll(() => {
     vi.restoreAllMocks();
   });
@@ -42,7 +42,7 @@ export const mockFetch = (response: any, status = 200) => {
 
 export const mockLocalStorage = () => {
   const store: Record<string, string> = {};
-  
+
   Object.defineProperty(window, 'localStorage', {
     value: {
       getItem: vi.fn((key: string) => store[key] || null),
@@ -62,7 +62,7 @@ export const mockLocalStorage = () => {
 
 export const mockSessionStorage = () => {
   const store: Record<string, string> = {};
-  
+
   Object.defineProperty(window, 'sessionStorage', {
     value: {
       getItem: vi.fn((key: string) => store[key] || null),
@@ -115,10 +115,10 @@ export const mockResizeObserver = () => {
 export const mockRequestAnimationFrame = () => {
   const mockRAF = vi.fn((cb) => setTimeout(cb, 0));
   const mockCAF = vi.fn();
-  
+
   global.requestAnimationFrame = mockRAF;
   global.cancelAnimationFrame = mockCAF;
-  
+
   return { mockRAF, mockCAF };
 };
 
@@ -132,13 +132,13 @@ export const testData = {
       avatar: 'https://example.com/avatar.jpg',
       ...overrides,
     }),
-    
+
     createMany: (count: number, overrides = {}) =>
       Array.from({ length: count }, (_, i) =>
         testData.users.create({ id: `user-${i + 1}`, ...overrides })
       ),
   },
-  
+
   posts: {
     create: (overrides = {}) => ({
       id: 'post-1',
@@ -148,13 +148,13 @@ export const testData = {
       publishedAt: new Date().toISOString(),
       ...overrides,
     }),
-    
+
     createMany: (count: number, overrides = {}) =>
       Array.from({ length: count }, (_, i) =>
         testData.posts.create({ id: `post-${i + 1}`, ...overrides })
       ),
   },
-  
+
   comments: {
     create: (overrides = {}) => ({
       id: 'comment-1',
@@ -164,7 +164,7 @@ export const testData = {
       createdAt: new Date().toISOString(),
       ...overrides,
     }),
-    
+
     createMany: (count: number, overrides = {}) =>
       Array.from({ length: count }, (_, i) =>
         testData.comments.create({ id: `comment-${i + 1}`, ...overrides })
@@ -194,7 +194,7 @@ export const createEvent = {
 export const waitFor = (condition: () => boolean, timeout = 1000) => {
   return new Promise<void>((resolve, reject) => {
     const startTime = Date.now();
-    
+
     const check = () => {
       if (condition()) {
         resolve();
@@ -204,7 +204,7 @@ export const waitFor = (condition: () => boolean, timeout = 1000) => {
         setTimeout(check, 10);
       }
     };
-    
+
     check();
   });
 };
@@ -212,29 +212,29 @@ export const waitFor = (condition: () => boolean, timeout = 1000) => {
 // Accessibility helpers
 export const accessibilityHelpers = {
   hasRole: (element: Element, role: string) => element.getAttribute('role') === role,
-  
+
   hasLabel: (element: Element, label: string) => {
     const ariaLabel = element.getAttribute('aria-label');
     const ariaLabelledBy = element.getAttribute('aria-labelledby');
     const title = element.getAttribute('title');
-    
+
     return ariaLabel === label || title === label || ariaLabelledBy === label;
   },
-  
+
   hasRequiredAttributes: (element: Element, attributes: string[]) => {
     return attributes.every(attr => element.hasAttribute(attr));
   },
-  
+
   isKeyboardAccessible: (element: Element) => {
-    return element.tabIndex >= 0 || 
-           element.tagName === 'BUTTON' || 
+    return element.tabIndex >= 0 ||
+           element.tagName === 'BUTTON' ||
            element.tagName === 'A';
   },
-  
+
   hasFocusManagement: (element: Element) => {
-    return element.hasAttribute('tabindex') || 
-           element.tagName === 'BUTTON' || 
-           element.tagName === 'A' || 
+    return element.hasAttribute('tabindex') ||
+           element.tagName === 'BUTTON' ||
+           element.tagName === 'A' ||
            element.tagName === 'INPUT';
   },
 };
@@ -245,10 +245,10 @@ export const performanceHelpers = {
     const start = performance.now();
     const result = await fn();
     const end = performance.now();
-    
+
     return { result, time: end - start };
   },
-  
+
   isPerformanceAcceptable: (time: number, threshold = 100) => {
     return time <= threshold;
   },
@@ -259,15 +259,15 @@ export const cleanupHelpers = {
   clearMocks: () => {
     vi.clearAllMocks();
   },
-  
+
   resetMocks: () => {
     vi.resetAllMocks();
   },
-  
+
   restoreMocks: () => {
     vi.restoreAllMocks();
   },
-  
+
   clearDOM: () => {
     document.body.innerHTML = '';
   },

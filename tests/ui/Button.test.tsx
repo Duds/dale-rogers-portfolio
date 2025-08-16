@@ -247,8 +247,7 @@ describe('Button Component', () => {
 
     it('does not re-render unnecessarily', () => {
       const { rerender } = renderWithProviders(<Button {...defaultProps} />);
-      const button = screen.getByRole('button');
-      const initialRenderCount = button.getAttribute('data-render-count') || '0';
+      const button = screen.getByRole('button', { name: 'Click me' });
       
       rerender(<Button {...defaultProps} />);
       
@@ -263,7 +262,7 @@ describe('Button Component', () => {
           <Button type="submit" {...defaultProps} />
         </form>
       );
-      const button = screen.getByRole('button');
+      const button = screen.getByRole('button', { name: 'Click me' });
       expect(button).toHaveAttribute('type', 'submit');
     });
 
@@ -275,7 +274,7 @@ describe('Button Component', () => {
         </div>
       );
       
-      const buttons = screen.getAllByRole('button');
+      const buttons = screen.getAllByRole('button', { name: 'Click me' });
       expect(buttons).toHaveLength(2);
       expect(buttons[0]).toHaveClass('bg-primary');
       expect(buttons[1]).toHaveClass('bg-secondary');

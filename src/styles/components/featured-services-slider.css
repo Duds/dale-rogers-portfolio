@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 /* FeaturedServicesSlider component styles */
 .featured-services-section {
   @apply min-h-[60vh] md:min-h-[70vh] relative overflow-hidden py-16 w-full bg-white dark:bg-neutral-900;

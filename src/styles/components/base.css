@@ -8,17 +8,14 @@
 
   .btn-primary {
     /* Token-based classes to add in markup: bg-primary text-on-primary hover:bg-primary-hover hover:text-on-primary-hover dark:bg-primary-dark dark:text-on-primary-dark dark:hover:bg-primary-hover-dark dark:hover:text-on-primary-hover-dark */
-    @apply;
   }
 
   .btn-secondary {
     /* Token-based classes to add in markup: bg-button-secondary text-text hover:bg-button-secondary-hover */
-    @apply;
   }
 
   .btn-outline {
     /* Token-based classes to add in markup: border-2 border-button-outline text-text hover:bg-button-outline-hover */
-    @apply;
   }
 
   /* Card variants */
@@ -34,7 +31,6 @@
 
   .card-bordered {
     /* Token-based classes to add in markup: border border-card-border dark:border-card-border-dark */
-    @apply;
   }
 
   /* Input variants */
@@ -45,7 +41,6 @@
 
   .input-error {
     /* Token-based classes to add in markup: border-error focus:border-error focus:ring-error */
-    @apply;
   }
 
   /* Label styles */
@@ -61,27 +56,22 @@
 
   .badge-primary {
     /* Token-based classes to add in markup: bg-badge-primary text-badge-primary-text dark:bg-badge-primary-dark dark:text-badge-primary-text-dark */
-    @apply;
   }
 
   .badge-secondary {
     /* Token-based classes to add in markup: bg-badge-secondary text-badge-secondary-text dark:bg-badge-secondary-dark dark:text-badge-secondary-text-dark */
-    @apply;
   }
 
   .badge-success {
     /* Token-based classes to add in markup: bg-badge-success text-badge-success-text dark:bg-badge-success-dark dark:text-badge-success-text-dark */
-    @apply;
   }
 
   .badge-error {
     /* Token-based classes to add in markup: bg-badge-error text-badge-error-text dark:bg-badge-error-dark dark:text-badge-error-text-dark */
-    @apply;
   }
 
   .badge-warning {
     /* Token-based classes to add in markup: bg-badge-warning text-badge-warning-text dark:bg-badge-warning-dark dark:text-badge-warning-text-dark */
-    @apply;
   }
 
   /* Link variants */
@@ -92,7 +82,6 @@
 
   .link-subtle {
     /* Token-based classes to add in markup: text-link-subtle hover:text-link-subtle-hover dark:text-link-subtle-dark dark:hover:text-link-subtle-hover-dark */
-    @apply;
   }
 
   /* Container sizes */

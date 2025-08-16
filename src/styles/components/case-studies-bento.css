@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 /* CaseStudiesBento section component styles */
 .case-studies-bento {
   @apply w-full py-20;

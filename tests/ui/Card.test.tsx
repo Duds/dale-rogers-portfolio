@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import { 
-  Card, 
-  CardHeader, 
-  CardTitle, 
-  CardDescription, 
-  CardContent, 
-  CardFooter 
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter
 } from '../../src/components/ui/Card';
 import { Button } from '../../src/components/ui/Button';
 import { renderWithProviders, mockConsole } from '../utils/test-helpers';
@@ -46,24 +46,24 @@ describe('Card Component', () => {
     it('renders with correct classes', () => {
       renderWithProviders(
         <Card>
-          <CardHeader>
+          <CardHeader data-testid="header">
             <div>Header content</div>
           </CardHeader>
         </Card>
       );
-      const header = screen.getByText('Header content').closest('div');
+      const header = screen.getByTestId('header');
       expect(header).toHaveClass('flex', 'flex-col', 'space-y-1.5', 'p-6');
     });
 
     it('applies custom className', () => {
       renderWithProviders(
         <Card>
-          <CardHeader className="custom-header">
+          <CardHeader className="custom-header" data-testid="header">
             <div>Header content</div>
           </CardHeader>
         </Card>
       );
-      const header = screen.getByText('Header content').closest('div');
+      const header = screen.getByTestId('header');
       expect(header).toHaveClass('custom-header');
     });
 
@@ -170,24 +170,24 @@ describe('Card Component', () => {
     it('renders with correct classes', () => {
       renderWithProviders(
         <Card>
-          <CardContent>
+          <CardContent data-testid="content">
             <div>Content</div>
           </CardContent>
         </Card>
       );
-      const content = screen.getByText('Content').closest('div');
+      const content = screen.getByTestId('content');
       expect(content).toHaveClass('p-6', 'pt-0');
     });
 
     it('applies custom className', () => {
       renderWithProviders(
         <Card>
-          <CardContent className="custom-content">
+          <CardContent className="custom-content" data-testid="content">
             <div>Content</div>
           </CardContent>
         </Card>
       );
-      const content = screen.getByText('Content').closest('div');
+      const content = screen.getByTestId('content');
       expect(content).toHaveClass('custom-content');
     });
 
@@ -207,24 +207,24 @@ describe('Card Component', () => {
     it('renders with correct classes', () => {
       renderWithProviders(
         <Card>
-          <CardFooter>
+          <CardFooter data-testid="footer">
             <div>Footer content</div>
           </CardFooter>
         </Card>
       );
-      const footer = screen.getByText('Footer content').closest('div');
+      const footer = screen.getByTestId('footer');
       expect(footer).toHaveClass('flex', 'items-center', 'p-6', 'pt-0');
     });
 
     it('applies custom className', () => {
       renderWithProviders(
         <Card>
-          <CardFooter className="custom-footer">
+          <CardFooter className="custom-footer" data-testid="footer">
             <div>Footer content</div>
           </CardFooter>
         </Card>
       );
-      const footer = screen.getByText('Footer content').closest('div');
+      const footer = screen.getByTestId('footer');
       expect(footer).toHaveClass('custom-footer');
     });
 
@@ -353,17 +353,17 @@ describe('Card Component', () => {
     it('applies consistent spacing', () => {
       renderWithProviders(
         <Card>
-          <CardHeader>
+          <CardHeader data-testid="header">
             <CardTitle>Title</CardTitle>
           </CardHeader>
-          <CardContent>Content</CardContent>
-          <CardFooter>Footer</CardFooter>
+          <CardContent data-testid="content">Content</CardContent>
+          <CardFooter data-testid="footer">Footer</CardFooter>
         </Card>
       );
 
-      const header = screen.getByText('Title').closest('div');
-      const content = screen.getByText('Content').closest('div');
-      const footer = screen.getByText('Footer').closest('div');
+      const header = screen.getByTestId('header');
+      const content = screen.getByTestId('content');
+      const footer = screen.getByTestId('footer');
 
       expect(header).toHaveClass('p-6');
       expect(content).toHaveClass('p-6', 'pt-0');
@@ -372,12 +372,12 @@ describe('Card Component', () => {
 
     it('supports custom width classes', () => {
       renderWithProviders(
-        <Card className="w-[350px]">
+        <Card className="w-[350px]" data-testid="custom-width-card">
           <CardContent>Content</CardContent>
         </Card>
       );
 
-      const card = screen.getByText('Content').closest('div');
+      const card = screen.getByTestId('custom-width-card');
       expect(card).toHaveClass('w-[350px]');
     });
 
@@ -399,12 +399,12 @@ describe('Card Component', () => {
     it('renders with empty content', () => {
       renderWithProviders(
         <Card>
-          <CardContent></CardContent>
+          <CardContent data-testid="empty-content"></CardContent>
         </Card>
       );
 
-      const card = screen.getByText('').closest('div');
-      expect(card).toBeInTheDocument();
+      const content = screen.getByTestId('empty-content');
+      expect(content).toBeInTheDocument();
     });
 
     it('handles undefined children gracefully', () => {
@@ -419,12 +419,12 @@ describe('Card Component', () => {
 
     it('combines multiple className props correctly', () => {
       renderWithProviders(
-        <Card className="border-2 bg-blue-50">
+        <Card className="border-2 bg-blue-50" data-testid="multi-class-card">
           <CardContent>Content</CardContent>
         </Card>
       );
 
-      const card = screen.getByText('Content').closest('div');
+      const card = screen.getByTestId('multi-class-card');
       expect(card).toHaveClass('border-2', 'bg-blue-50');
     });
   });
@@ -432,21 +432,21 @@ describe('Card Component', () => {
   describe('Performance', () => {
     it('renders quickly', async () => {
       const start = performance.now();
-      
+
       renderWithProviders(
         <Card>
           <CardContent>Content</CardContent>
         </Card>
       );
-      
+
       const end = performance.now();
       const renderTime = end - start;
-      
+
       expect(renderTime).toBeLessThan(100);
     });
 
     it('handles large content efficiently', () => {
-      const largeContent = Array.from({ length: 1000 }, (_, i) => 
+      const largeContent = Array.from({ length: 1000 }, (_, i) =>
         `<div key="${i}">Content item ${i}</div>`
       ).join('');
 

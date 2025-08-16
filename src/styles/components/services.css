@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 /* Services section component styles */
 .services-section {
   @apply w-full bg-white dark:bg-neutral-950;

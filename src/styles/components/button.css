@@ -13,22 +13,22 @@
 
 /* Black Button */
 .button--black {
-  @apply bg-black text-white hover:bg-black-hover hover:text-white shadow-md hover:shadow-lg dark:bg-black-dark dark:text-white dark:hover:bg-black-hover-dark dark:hover:text-white;
+  @apply bg-black text-white hover:bg-gray-800 hover:text-white shadow-md hover:shadow-lg dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800 dark:hover:text-white;
 }
 
 /* Purple Button */
 .button--purple {
-  @apply bg-purple text-white hover:bg-purple-hover hover:text-white shadow-md hover:shadow-lg dark:bg-purple-dark dark:text-white dark:hover:bg-purple-hover-dark dark:hover:text-white;
+  @apply bg-purple-600 text-white hover:bg-purple-700 hover:text-white shadow-md hover:shadow-lg dark:bg-purple-700 dark:text-white dark:hover:bg-purple-800 dark:hover:text-white;
 }
 
 /* Orange Button */
 .button--orange {
-  @apply bg-orange text-white hover:bg-orange-hover hover:text-white shadow-md hover:shadow-lg dark:bg-orange-dark dark:text-white dark:hover:bg-orange-hover-dark dark:hover:text-white;
+  @apply bg-orange-500 text-white hover:bg-orange-600 hover:text-white shadow-md hover:shadow-lg dark:bg-orange-600 dark:text-white dark:hover:bg-orange-700 dark:hover:text-white;
 }
 
 /* Green Button */
 .button--green {
-  @apply bg-green text-white hover:bg-green-hover hover:text-white shadow-md hover:shadow-lg dark:bg-green-dark dark:text-white dark:hover:bg-green-hover-dark dark:hover:text-white;
+  @apply bg-green-500 text-white hover:bg-green-600 hover:text-white shadow-md hover:shadow-lg dark:bg-green-600 dark:text-white dark:hover:bg-green-700 dark:hover:text-white;
 }
 
 /* Ghost Button */
