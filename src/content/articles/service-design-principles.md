@@ -13,6 +13,7 @@ Service design is a holistic approach to creating and improving services. It foc
 ## 1. User-Centered
 
 Service design puts users at the center of the process. This means:
+
 - Understanding user needs through research
 - Involving users in the design process
 - Testing solutions with real users
@@ -21,6 +22,7 @@ Service design puts users at the center of the process. This means:
 ## 2. Co-Creative
 
 Service design is a collaborative process that involves:
+
 - Working with stakeholders across the organization
 - Engaging users in the design process
 - Facilitating workshops and co-design sessions
@@ -29,6 +31,7 @@ Service design is a collaborative process that involves:
 ## 3. Holistic
 
 Service design considers the entire service experience:
+
 - All touchpoints and channels
 - Front-stage and back-stage processes
 - Physical and digital elements
@@ -37,6 +40,7 @@ Service design considers the entire service experience:
 ## 4. Evidence-Based
 
 Service design relies on data and research:
+
 - User research and testing
 - Analytics and metrics
 - Service performance data
@@ -45,6 +49,7 @@ Service design relies on data and research:
 ## 5. Iterative
 
 Service design is an ongoing process:
+
 - Prototyping and testing
 - Learning from failures
 - Continuous improvement
@@ -53,10 +58,11 @@ Service design is an ongoing process:
 ## Conclusion
 
 These principles provide a foundation for creating services that are:
+
 - User-friendly
 - Efficient
 - Effective
 - Sustainable
 - Adaptable
 
-By applying these principles, organizations can create services that truly meet user needs and deliver value. 
+By applying these principles, organizations can create services that truly meet user needs and deliver value.

@@ -71,7 +71,7 @@ function generateStandaloneVersion() {
     // Convert .ts to .js for standalone version
     const target = path.join(
       config.directories.standalone.scripts,
-      file.replace(".ts", ".js")
+      file.replace(".ts", ".js"),
     );
     fs.copyFileSync(source, target);
     console.log(`Copied core file: ${file} -> ${path.basename(target)}`);
@@ -81,7 +81,7 @@ function generateStandaloneVersion() {
   try {
     execSync(
       "npx tailwindcss -i ./src/pages/scratch/mermaid-generator/styles/input.css -o ./src/pages/scratch/mermaid-generator/standalone/styles/_main.css --minify",
-      { stdio: "inherit" }
+      { stdio: "inherit" },
     );
     console.log("Generated minified Tailwind CSS");
   } catch (error) {
@@ -116,7 +116,7 @@ function generateStandaloneVersion() {
 
   fs.writeFileSync(
     path.join(config.directories.standalone.root, "index.html"),
-    standaloneHtml
+    standaloneHtml,
   );
   console.log("Created standalone index.html");
 
@@ -130,7 +130,7 @@ function createStandaloneZip() {
     const zipName = "mermaid-generator-standalone.zip";
     execSync(
       `cd ${config.directories.standalone.root} && zip -r ../${zipName} .`,
-      { stdio: "inherit" }
+      { stdio: "inherit" },
     );
     console.log(`Created ${zipName}`);
   } catch (error) {

@@ -66,7 +66,7 @@ export class KeyboardHandler {
     key: string,
     ctrlKey = false,
     shiftKey = false,
-    altKey = false
+    altKey = false,
   ): void {
     const keyString = [
       ctrlKey ? "ctrl" : "",
@@ -167,5 +167,5 @@ export const defaultShortcuts: KeyBinding[] = [
 
 // Register default shortcuts
 defaultShortcuts.forEach((shortcut) =>
-  keyboardHandler.registerBinding(shortcut)
+  keyboardHandler.registerBinding(shortcut),
 );

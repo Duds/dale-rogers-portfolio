@@ -109,12 +109,12 @@ function analyzeBuildPerformance() {
       if (clientSize > 1024 * 1024 * 2) {
         // 2MB
         logWarning(
-          "Client bundle is large. Consider code splitting and tree shaking."
+          "Client bundle is large. Consider code splitting and tree shaking.",
         );
       } else if (clientSize > 1024 * 1024) {
         // 1MB
         logWarning(
-          "Client bundle is moderate. Monitor for optimization opportunities."
+          "Client bundle is moderate. Monitor for optimization opportunities.",
         );
       } else {
         logSuccess("Client bundle size is good.");
@@ -128,12 +128,12 @@ function analyzeBuildPerformance() {
       if (serverSize > 1024 * 1024 * 5) {
         // 5MB
         logWarning(
-          "Server bundle is large. Consider lazy loading and dynamic imports."
+          "Server bundle is large. Consider lazy loading and dynamic imports.",
         );
       } else if (serverSize > 1024 * 1024 * 2) {
         // 2MB
         logWarning(
-          "Server bundle is moderate. Monitor for optimization opportunities."
+          "Server bundle is moderate. Monitor for optimization opportunities.",
         );
       } else {
         logSuccess("Server bundle size is good.");
@@ -191,7 +191,7 @@ function analyzeDependencies() {
       // Check for duplicate or conflicting dependencies
       const allDeps = [...prodDeps, ...devDeps];
       const duplicates = allDeps.filter(
-        (item, index) => allDeps.indexOf(item) !== index
+        (item, index) => allDeps.indexOf(item) !== index,
       );
 
       if (duplicates.length > 0) {
@@ -261,7 +261,7 @@ function analyzeTailwindPerformance() {
 
       if (totalPatterns > 100) {
         logWarning(
-          "Large number of CSS patterns. Consider CSS-in-JS or CSS modules."
+          "Large number of CSS patterns. Consider CSS-in-JS or CSS modules.",
         );
       } else {
         logSuccess("CSS patterns are manageable.");
@@ -347,7 +347,7 @@ function runBundleAnalysis() {
 
     // Check if we have the bundle analyzer
     const hasAnalyzer = existsSync(
-      join(projectRoot, "node_modules/vite-bundle-analyzer")
+      join(projectRoot, "node_modules/vite-bundle-analyzer"),
     );
 
     if (hasAnalyzer) {

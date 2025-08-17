@@ -1,12 +1,52 @@
 ---
-// src/pages/work/index.astro
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/BaseLayout.astro";
+import CaseStudyCard from "@/components/features/case-studies/components/CaseStudyCard.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+
 export const prerender = true;
 
-// Add layout and define a redirect
-import Layout from "@/layouts/Layout.astro";
+// Get all case studies and sort by publication date
+const caseStudies = await getCollection("case-studies");
+const sortedCaseStudies = caseStudies.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
-<Layout title="Redirecting to Work">
-  <meta http-equiv="refresh" content="0;url=/work/1" />
-  <p>Redirecting to <a href="/work/1">Work</a>...</p>
+<Layout title="Work | Dale Rogers - Full Stack Developer">
+  <PageHeader
+    title="Work & Case Studies"
+    description="Explore my portfolio of successful projects and learn how I've helped clients achieve their goals through innovative solutions."
+  />
+
+  <div class="container mx-auto px-4 py-12">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      id="case-studies-grid"
+    >
+      {
+        sortedCaseStudies.map((study) => (
+          <CaseStudyCard
+            title={study.data.title}
+            description={study.data.description}
+            client={study.data.client}
+            industry={study.data.industry}
+            duration={study.data.duration}
+            tags={study.data.tags}
+            href={`/work/${study.slug}`}
+            coverImage={study.data.coverImage}
+          />
+        ))
+      }
+    </div>
+  </div>
 </Layout>
+
+<style>
+  @reference "tailwindcss";
+
+  /* Hover effect for case study cards using Tailwind directly */
+  .group:hover h2 {
+    @apply text-purple-600 dark:text-purple-400;
+  }
+</style>

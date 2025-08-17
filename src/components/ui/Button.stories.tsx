@@ -1,42 +1,50 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from './Button';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "./Button";
 
 const meta: Meta<typeof Button> = {
-  title: 'UI/Button',
+  title: "UI/Button",
   component: Button,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A versatile button component with multiple variants and sizes.',
+        component:
+          "A versatile button component with multiple variants and sizes.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      control: { type: 'select' },
-      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
-      description: 'The visual style variant of the button',
+      control: { type: "select" },
+      options: [
+        "default",
+        "destructive",
+        "outline",
+        "secondary",
+        "ghost",
+        "link",
+      ],
+      description: "The visual style variant of the button",
     },
     size: {
-      control: { type: 'select' },
-      options: ['default', 'sm', 'lg', 'icon'],
-      description: 'The size of the button',
+      control: { type: "select" },
+      options: ["default", "sm", "lg", "icon"],
+      description: "The size of the button",
     },
     disabled: {
-      control: { type: 'boolean' },
-      description: 'Whether the button is disabled',
+      control: { type: "boolean" },
+      description: "Whether the button is disabled",
     },
     children: {
-      control: { type: 'text' },
-      description: 'The content to display inside the button',
+      control: { type: "text" },
+      description: "The content to display inside the button",
     },
   },
   args: {
-    children: 'Button',
-    variant: 'default',
-    size: 'default',
+    children: "Button",
+    variant: "default",
+    size: "default",
     disabled: false,
   },
 };
@@ -46,56 +54,56 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    variant: 'default',
+    variant: "default",
   },
 };
 
 export const Secondary: Story = {
   args: {
-    variant: 'secondary',
+    variant: "secondary",
   },
 };
 
 export const Destructive: Story = {
   args: {
-    variant: 'destructive',
+    variant: "destructive",
   },
 };
 
 export const Outline: Story = {
   args: {
-    variant: 'outline',
+    variant: "outline",
   },
 };
 
 export const Ghost: Story = {
   args: {
-    variant: 'ghost',
+    variant: "ghost",
   },
 };
 
 export const Link: Story = {
   args: {
-    variant: 'link',
+    variant: "link",
   },
 };
 
 export const Small: Story = {
   args: {
-    size: 'sm',
+    size: "sm",
   },
 };
 
 export const Large: Story = {
   args: {
-    size: 'lg',
+    size: "lg",
   },
 };
 
 export const Icon: Story = {
   args: {
-    size: 'icon',
-    children: '🔍',
+    size: "icon",
+    children: "🔍",
   },
 };
 
@@ -119,7 +127,7 @@ export const AllVariants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All button variants displayed together for comparison.',
+        story: "All button variants displayed together for comparison.",
       },
     },
   },
@@ -137,7 +145,7 @@ export const AllSizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All button sizes displayed together for comparison.',
+        story: "All button sizes displayed together for comparison.",
       },
     },
   },

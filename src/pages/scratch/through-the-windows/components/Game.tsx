@@ -1,10 +1,16 @@
-import { useCallback, useEffect, useState, useRef } from 'react';
-import type { GameConfig, GameState, WindowPosition, TramZone, TramPosition } from '../types/index.js';
+import { useCallback, useEffect, useState, useRef } from "react";
+import type {
+  GameConfig,
+  GameState,
+  WindowPosition,
+  TramZone,
+  TramPosition,
+} from "../types/index.js";
 
 // Import components with correct .tsx extensions
-import { GameControls } from './GameControls.tsx';
-import { GameStats } from './GameStats.tsx';
-import { GameWindow } from './GameWindow.tsx';
+import { GameControls } from "./GameControls.tsx";
+import { GameStats } from "./GameStats.tsx";
+import { GameWindow } from "./GameWindow.tsx";
 
 interface Props {
   config: GameConfig;
@@ -15,34 +21,34 @@ interface Props {
 const INITIAL_STATE: GameState = {
   score: 0,
   isActive: false,
-  status: 'idle',
+  status: "idle",
   timeRemaining: 0,
   currentZone: {
     number: 1,
-    name: 'Tram Depot',
+    name: "Tram Depot",
     length: 600,
     timeLimit: 60,
-    initialWindows: []
-  }
+    initialWindows: [],
+  },
 };
 
 const INITIAL_TRAM_POSITION: TramPosition = {
   x: 0,
   velocity: 0,
   targetX: 0,
-  cameraOffset: 0
+  cameraOffset: 0,
 };
 
 // Key codes for arrow keys
-const KEY_LEFT = 'ArrowLeft';
-const KEY_RIGHT = 'ArrowRight';
+const KEY_LEFT = "ArrowLeft";
+const KEY_RIGHT = "ArrowRight";
 
 /** Default physics settings if not provided in config */
 const DEFAULT_PHYSICS = {
   maxVelocity: 5,
   acceleration: 0.5,
   deceleration: 0.3,
-  cameraLag: 0.95
+  cameraLag: 0.95,
 };
 
 /**
@@ -59,9 +65,11 @@ export function Game({ config, onGameOver }: Props) {
     x: 0,
     y: 0,
     width: 100,
-    height: 100
+    height: 100,
   });
-  const [tramPosition, setTramPosition] = useState<TramPosition>(INITIAL_TRAM_POSITION);
+  const [tramPosition, setTramPosition] = useState<TramPosition>(
+    INITIAL_TRAM_POSITION,
+  );
 
   // Track key presses with refs to avoid re-renders
   const keysPressed = useRef<Set<string>>(new Set());
@@ -76,14 +84,14 @@ export function Game({ config, onGameOver }: Props) {
     setGameState({
       ...INITIAL_STATE,
       isActive: true,
-      status: 'playing',
+      status: "playing",
       timeRemaining: firstZone.timeLimit,
-      currentZone: firstZone
+      currentZone: firstZone,
     });
 
     setTramPosition({
       ...INITIAL_TRAM_POSITION,
-      x: 0
+      x: 0,
     });
 
     setWindows(Array(10).fill(false));
@@ -94,7 +102,7 @@ export function Game({ config, onGameOver }: Props) {
     setGameState((prev: GameState) => ({
       ...prev,
       isActive: false,
-      status: 'paused'
+      status: "paused",
     }));
 
     // Cancel animation frame if paused
@@ -109,7 +117,7 @@ export function Game({ config, onGameOver }: Props) {
     setGameState((prev: GameState) => ({
       ...prev,
       isActive: true,
-      status: 'playing'
+      status: "playing",
     }));
 
     // Resume animation will be handled by the useEffect below
@@ -118,7 +126,7 @@ export function Game({ config, onGameOver }: Props) {
   /** Handles key events for tram movement */
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (gameState.status !== 'playing') return;
+      if (gameState.status !== "playing") return;
 
       if (e.key === KEY_LEFT || e.key === KEY_RIGHT) {
         keysPressed.current.add(e.key);
@@ -131,127 +139,141 @@ export function Game({ config, onGameOver }: Props) {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
     };
   }, [gameState.status]);
 
   /** Check if tram has moved to a new zone */
-  const checkZoneTransition = useCallback((position: number) => {
-    // Ensure we have valid zones
-    if (!config.zones || !Array.isArray(config.zones)) return;
+  const checkZoneTransition = useCallback(
+    (position: number) => {
+      // Ensure we have valid zones
+      if (!config.zones || !Array.isArray(config.zones)) return;
 
-    const currentZoneIndex = config.zones.findIndex(
-      zone => zone && zone.number === gameState.currentZone.number
-    );
+      const currentZoneIndex = config.zones.findIndex(
+        (zone) => zone && zone.number === gameState.currentZone.number,
+      );
 
-    if (currentZoneIndex === -1) return;
+      if (currentZoneIndex === -1) return;
 
-    // Calculate the total length of all previous zones
-    let totalPreviousLength = 0;
-    for (let i = 0; i < currentZoneIndex; i++) {
-      const zone = config.zones[i];
-      if (zone && typeof zone.length === 'number') {
-        totalPreviousLength += zone.length;
+      // Calculate the total length of all previous zones
+      let totalPreviousLength = 0;
+      for (let i = 0; i < currentZoneIndex; i++) {
+        const zone = config.zones[i];
+        if (zone && typeof zone.length === "number") {
+          totalPreviousLength += zone.length;
+        }
       }
-    }
 
-    // Calculate the end position of the current zone
-    const currentZoneEnd = totalPreviousLength + gameState.currentZone.length;
+      // Calculate the end position of the current zone
+      const currentZoneEnd = totalPreviousLength + gameState.currentZone.length;
 
-    // Check if we've moved beyond the current zone
-    if (position > currentZoneEnd && currentZoneIndex < config.zones.length - 1) {
-      // Move to next zone
-      const nextZone = config.zones[currentZoneIndex + 1];
-      if (nextZone && typeof nextZone.timeLimit === 'number') {
-        setGameState(prev => ({
-          ...prev,
-          currentZone: nextZone,
-          timeRemaining: nextZone.timeLimit
-        }));
+      // Check if we've moved beyond the current zone
+      if (
+        position > currentZoneEnd &&
+        currentZoneIndex < config.zones.length - 1
+      ) {
+        // Move to next zone
+        const nextZone = config.zones[currentZoneIndex + 1];
+        if (nextZone && typeof nextZone.timeLimit === "number") {
+          setGameState((prev) => ({
+            ...prev,
+            currentZone: nextZone,
+            timeRemaining: nextZone.timeLimit,
+          }));
+        }
+      } else if (position < totalPreviousLength && currentZoneIndex > 0) {
+        // Move to previous zone
+        const prevZone = config.zones[currentZoneIndex - 1];
+        if (prevZone && typeof prevZone.timeLimit === "number") {
+          setGameState((prev) => ({
+            ...prev,
+            currentZone: prevZone,
+            timeRemaining: prevZone.timeLimit,
+          }));
+        }
       }
-    } else if (position < totalPreviousLength && currentZoneIndex > 0) {
-      // Move to previous zone
-      const prevZone = config.zones[currentZoneIndex - 1];
-      if (prevZone && typeof prevZone.timeLimit === 'number') {
-        setGameState(prev => ({
-          ...prev,
-          currentZone: prevZone,
-          timeRemaining: prevZone.timeLimit
-        }));
-      }
-    }
-  }, [gameState.currentZone, config.zones]);
+    },
+    [gameState.currentZone, config.zones],
+  );
 
   /** Update tram position based on physics */
-  const updateTramPosition = useCallback((timestamp: number) => {
-    if (gameState.status !== 'playing') return;
+  const updateTramPosition = useCallback(
+    (timestamp: number) => {
+      if (gameState.status !== "playing") return;
 
-    const deltaTime = timestamp - lastTimestamp.current;
-    lastTimestamp.current = timestamp;
+      const deltaTime = timestamp - lastTimestamp.current;
+      lastTimestamp.current = timestamp;
 
-    // Calculate acceleration based on key presses
-    let acceleration = 0;
+      // Calculate acceleration based on key presses
+      let acceleration = 0;
 
-    if (keysPressed.current.has(KEY_RIGHT)) {
-      acceleration = tramPhysics.acceleration;
-    } else if (keysPressed.current.has(KEY_LEFT)) {
-      acceleration = -tramPhysics.acceleration;
-    } else {
-      // Apply deceleration if no keys are pressed
-      if (tramPosition.velocity > 0) {
-        acceleration = -tramPhysics.deceleration;
-      } else if (tramPosition.velocity < 0) {
-        acceleration = tramPhysics.deceleration;
+      if (keysPressed.current.has(KEY_RIGHT)) {
+        acceleration = tramPhysics.acceleration;
+      } else if (keysPressed.current.has(KEY_LEFT)) {
+        acceleration = -tramPhysics.acceleration;
+      } else {
+        // Apply deceleration if no keys are pressed
+        if (tramPosition.velocity > 0) {
+          acceleration = -tramPhysics.deceleration;
+        } else if (tramPosition.velocity < 0) {
+          acceleration = tramPhysics.deceleration;
+        }
       }
-    }
 
-    // Update velocity based on acceleration
-    let newVelocity = tramPosition.velocity + acceleration * (deltaTime / 1000);
+      // Update velocity based on acceleration
+      let newVelocity =
+        tramPosition.velocity + acceleration * (deltaTime / 1000);
 
-    // Apply maximum velocity limit
-    if (Math.abs(newVelocity) > tramPhysics.maxVelocity) {
-      newVelocity = Math.sign(newVelocity) * tramPhysics.maxVelocity;
-    }
+      // Apply maximum velocity limit
+      if (Math.abs(newVelocity) > tramPhysics.maxVelocity) {
+        newVelocity = Math.sign(newVelocity) * tramPhysics.maxVelocity;
+      }
 
-    // Stop tram if velocity is very small
-    if (Math.abs(newVelocity) < 0.01 && acceleration === 0) {
-      newVelocity = 0;
-    }
+      // Stop tram if velocity is very small
+      if (Math.abs(newVelocity) < 0.01 && acceleration === 0) {
+        newVelocity = 0;
+      }
 
-    // Update position based on velocity
-    const newX = tramPosition.x + newVelocity * (deltaTime / 1000);
+      // Update position based on velocity
+      const newX = tramPosition.x + newVelocity * (deltaTime / 1000);
 
-    // Calculate camera offset with lag effect
-    const targetCameraOffset = -newX; // Center tram in view
-    const newCameraOffset = tramPosition.cameraOffset +
-      (targetCameraOffset - tramPosition.cameraOffset) * (1 - tramPhysics.cameraLag) * (deltaTime / 1000);
+      // Calculate camera offset with lag effect
+      const targetCameraOffset = -newX; // Center tram in view
+      const newCameraOffset =
+        tramPosition.cameraOffset +
+        (targetCameraOffset - tramPosition.cameraOffset) *
+          (1 - tramPhysics.cameraLag) *
+          (deltaTime / 1000);
 
-    // Update tram position state
-    setTramPosition({
-      x: newX,
-      velocity: newVelocity,
-      targetX: newX,
-      cameraOffset: newCameraOffset
-    });
+      // Update tram position state
+      setTramPosition({
+        x: newX,
+        velocity: newVelocity,
+        targetX: newX,
+        cameraOffset: newCameraOffset,
+      });
 
-    // Check if we've moved to a new zone
-    checkZoneTransition(newX);
+      // Check if we've moved to a new zone
+      checkZoneTransition(newX);
 
-    // Continue animation loop
-    animationFrameId.current = requestAnimationFrame(updateTramPosition);
-  }, [gameState.status, tramPosition, tramPhysics, checkZoneTransition]);
+      // Continue animation loop
+      animationFrameId.current = requestAnimationFrame(updateTramPosition);
+    },
+    [gameState.status, tramPosition, tramPhysics, checkZoneTransition],
+  );
 
   /** Start animation loop when game becomes active */
   useEffect(() => {
-    if (gameState.isActive && gameState.status === 'playing') {
+    if (gameState.isActive && gameState.status === "playing") {
       lastTimestamp.current = performance.now();
       // Need to explicitly assign updateTramPosition to handle possible undefined
-      const animationCallback = (timestamp: number) => updateTramPosition(timestamp);
+      const animationCallback = (timestamp: number) =>
+        updateTramPosition(timestamp);
       animationFrameId.current = requestAnimationFrame(animationCallback);
     }
 
@@ -272,9 +294,10 @@ export function Game({ config, onGameOver }: Props) {
 
         if (timeRemaining <= 0) {
           // Move to next zone if available
-          const nextZoneIndex = config.zones.findIndex(
-            (zone: TramZone) => zone.number === prev.currentZone.number
-          ) + 1;
+          const nextZoneIndex =
+            config.zones.findIndex(
+              (zone: TramZone) => zone.number === prev.currentZone.number,
+            ) + 1;
 
           if (nextZoneIndex < config.zones.length) {
             const nextZone = config.zones[nextZoneIndex];
@@ -282,7 +305,7 @@ export function Game({ config, onGameOver }: Props) {
               return {
                 ...prev,
                 timeRemaining: nextZone.timeLimit,
-                currentZone: nextZone
+                currentZone: nextZone,
               };
             }
           }
@@ -292,13 +315,13 @@ export function Game({ config, onGameOver }: Props) {
           return {
             ...prev,
             isActive: false,
-            status: 'gameover'
+            status: "gameover",
           };
         }
 
         return {
           ...prev,
-          timeRemaining
+          timeRemaining,
         };
       });
     }, 1000);
@@ -322,7 +345,7 @@ export function Game({ config, onGameOver }: Props) {
         x: Math.random() * (window.innerWidth - 100),
         y: Math.random() * (window.innerHeight - 100),
         width: 100,
-        height: 100
+        height: 100,
       });
     }, 1000);
 
@@ -330,25 +353,28 @@ export function Game({ config, onGameOver }: Props) {
   }, [gameState.isActive]);
 
   /** Handles window click for scoring */
-  const handleWindowClick = useCallback((index: number) => {
-    if (!gameState.isActive || !windows[index]) return;
+  const handleWindowClick = useCallback(
+    (index: number) => {
+      if (!gameState.isActive || !windows[index]) return;
 
-    setGameState((prev: GameState) => ({
-      ...prev,
-      score: prev.score + 10 // Simple scoring for now
-    }));
+      setGameState((prev: GameState) => ({
+        ...prev,
+        score: prev.score + 10, // Simple scoring for now
+      }));
 
-    setWindows((prev: boolean[]) => {
-      const newWindows = [...prev];
-      newWindows[index] = false;
-      return newWindows;
-    });
-  }, [gameState.isActive, windows]);
+      setWindows((prev: boolean[]) => {
+        const newWindows = [...prev];
+        newWindows[index] = false;
+        return newWindows;
+      });
+    },
+    [gameState.isActive, windows],
+  );
 
   // Calculate visual style based on tram position
   const tramStyle = {
     transform: `translateX(${tramPosition.cameraOffset}px)`,
-    transition: 'transform 0.05s ease-out'
+    transition: "transform 0.05s ease-out",
   };
 
   return (

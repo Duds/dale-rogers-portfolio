@@ -17,13 +17,13 @@ function toKebabCase(str: string) {
 function cssVarsFromObject(
   obj: Record<string, string | number>,
   prefix: string,
-  dashCaseKeys = false
+  dashCaseKeys = false,
 ) {
   return Object.entries(obj)
     .map(([key, value]) =>
       dashCaseKeys
         ? `  --${prefix}-${key}: ${value};`
-        : `  --${prefix}-${toKebabCase(key)}: ${value};`
+        : `  --${prefix}-${toKebabCase(key)}: ${value};`,
     )
     .join("\n");
 }
@@ -42,7 +42,7 @@ ${cssVarsFromObject(zIndex, "z", true)}
 
 fs.writeFileSync(
   path.join(__dirname, "../styles/generated-tokens.css"),
-  css.trim() + "\n"
+  css.trim() + "\n",
 );
 
 console.log("Generated CSS variables for theme tokens!");

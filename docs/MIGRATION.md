@@ -41,19 +41,16 @@ _All actionable TODOs are now tracked in BACKLOG.md. This file contains only gui
 ## Guidelines for Future Development
 
 1. **Theme Token Usage**
-
    - Always use theme tokens from `src/styles/theme`
    - No direct color/spacing values in components
    - Document any new tokens
 
 2. **Component Styles**
-
    - Component-specific styles in dedicated files
    - Use Tailwind classes with theme tokens
    - Document style variations
 
 3. **Testing Requirements**
-
    - Visual regression tests for components
    - Accessibility tests
    - Dark mode tests

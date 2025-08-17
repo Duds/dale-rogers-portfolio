@@ -139,21 +139,18 @@ Planned improvements or future explorations.
 ## Content Creation Workflow
 
 1. **Planning**
-
    - Identify content type
    - Define target audience
    - Outline key messages
    - Gather supporting materials
 
 2. **Creation**
-
    - Write content in Markdown
    - Add required metadata
    - Include optimised images
    - Review for accuracy
 
 3. **Review**
-
    - Check spelling and grammar
    - Verify metadata completeness
    - Test image loading
@@ -168,21 +165,18 @@ Planned improvements or future explorations.
 ## Best Practices
 
 1. **Content Organisation**
-
    - Use consistent file naming
    - Maintain proper directory structure
    - Group related content
    - Update content collections
 
 2. **SEO Optimisation**
-
    - Write descriptive titles
    - Include meta descriptions
    - Use appropriate tags
    - Implement proper heading structure
 
 3. **Accessibility**
-
    - Provide alt text for images
    - Use semantic markup
    - Maintain proper contrast

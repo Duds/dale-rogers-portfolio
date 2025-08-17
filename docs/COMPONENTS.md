@@ -91,14 +91,12 @@ Components require comprehensive JSDoc documentation:
 ## Component Creation Checklist
 
 1. **Planning**
-
    - [ ] Identify component purpose
    - [ ] Define required props
    - [ ] Plan component structure
    - [ ] Consider accessibility needs
 
 2. **Implementation**
-
    - [ ] Create component file
    - [ ] Add TypeScript types
    - [ ] Write JSDoc documentation
@@ -107,7 +105,6 @@ Components require comprehensive JSDoc documentation:
    - [ ] Implement accessibility features
 
 3. **Testing**
-
    - [ ] Test functionality
    - [ ] Verify accessibility
    - [ ] Check responsive design
@@ -123,21 +120,18 @@ Components require comprehensive JSDoc documentation:
 ## Best Practices
 
 1. **Component Design**
-
    - Keep components focused and single-purpose
    - Use composition over inheritance
    - Implement proper prop validation
    - Handle loading and error states
 
 2. **Performance**
-
    - Minimise unnecessary renders
    - Optimise images and assets
    - Use proper caching strategies
    - Implement code splitting
 
 3. **Maintenance**
-
    - Keep documentation updated
    - Follow version control practices
    - Write clear commit messages

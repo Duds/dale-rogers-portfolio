@@ -5,6 +5,7 @@ A linear narrative scene map for the ambient tram journey. Each scene block incl
 ---
 
 ## 🚉 Z0: Depot
+
 - **Length**: 600px
 - **Palette**: #F0EAD6 (Morning beige)
 - **Visuals**: Platform, bird, paper drifting
@@ -17,6 +18,7 @@ A linear narrative scene map for the ambient tram journey. Each scene block incl
 ---
 
 ## 🌾 Z1: Fields
+
 - **Length**: 1200px
 - **Palette**: #D6C7AE (Dusty green)
 - **Visuals**: Trees, fields, windmill
@@ -29,6 +31,7 @@ A linear narrative scene map for the ambient tram journey. Each scene block incl
 ---
 
 ## 🚏 Z2: Station A
+
 - **Length**: 200px
 - **Palette**: #CCC1AA
 - **Visuals**: Platform, goat, farmhouse
@@ -40,6 +43,7 @@ A linear narrative scene map for the ambient tram journey. Each scene block incl
 ---
 
 ## 🏘️ Z3: Village
+
 - **Length**: 1200px
 - **Palette**: #A89F91 (Faded paper brown)
 - **Visuals**: Houses, street, dog, upstairs window
@@ -51,6 +55,7 @@ A linear narrative scene map for the ambient tram journey. Each scene block incl
 ---
 
 ## ⛰️ Z4: Hill Climb
+
 - **Length**: 700px
 - **Palette**: #D6D6D6 (Grey slope)
 - **Motion**: Tram leans back, groans
@@ -61,6 +66,7 @@ A linear narrative scene map for the ambient tram journey. Each scene block incl
 ---
 
 ## 🚉 Z5: Station B
+
 - **Length**: 300px
 - **Palette**: #C6BFAF
 - **Visuals**: Clifftop view, bench
@@ -72,6 +78,7 @@ A linear narrative scene map for the ambient tram journey. Each scene block incl
 ---
 
 ## 🌀 Z6: Descent
+
 - **Length**: 700px
 - **Palette**: #B6A99C
 - **Motion**: Gravity pulls, speed increases
@@ -82,6 +89,7 @@ A linear narrative scene map for the ambient tram journey. Each scene block incl
 ---
 
 ## 🏭 Z7: Industrial
+
 - **Length**: 1000px
 - **Palette**: #AAA8A3 (Muted steel)
 - **Visuals**: Fences, graffiti wall, smokestacks
@@ -92,6 +100,7 @@ A linear narrative scene map for the ambient tram journey. Each scene block incl
 ---
 
 ## 🚉 Z8: Station C
+
 - **Length**: 300px
 - **Palette**: #8F8F8F
 - **Passengers**: Courier offboards, couple boards
@@ -102,6 +111,7 @@ A linear narrative scene map for the ambient tram journey. Each scene block incl
 ---
 
 ## 🌇 Z9: Urban End
+
 - **Length**: 1000px
 - **Palette**: #666666 (Dusk grey)
 - **Visuals**: Fading tram silhouettes, sunset gradient
@@ -112,7 +122,7 @@ A linear narrative scene map for the ambient tram journey. Each scene block incl
 ---
 
 **Legend**:
+
 - 📍 Zones are arranged linearly.
 - 🎭 Micro-events create environmental storytelling.
 - 🎨 Colours suggest tone and time-of-day evolution.
-

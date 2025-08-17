@@ -1,23 +1,31 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './Card';
-import { Button } from './Button';
+import type { Meta, StoryObj } from "@storybook/react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./Card";
+import { Button } from "./Button";
 
 const meta: Meta<typeof Card> = {
-  title: 'UI/Card',
+  title: "UI/Card",
   component: Card,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A flexible card component with header, content, and footer sections.',
+        component:
+          "A flexible card component with header, content, and footer sections.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     className: {
-      control: { type: 'text' },
-      description: 'Additional CSS classes to apply to the card',
+      control: { type: "text" },
+      description: "Additional CSS classes to apply to the card",
     },
   },
 };
@@ -33,7 +41,9 @@ export const Default: Story = {
         <CardDescription>Card Description</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>This is the main content of the card. You can put any content here.</p>
+        <p>
+          This is the main content of the card. You can put any content here.
+        </p>
       </CardContent>
       <CardFooter>
         <Button>Action</Button>
@@ -51,7 +61,10 @@ export const WithImage: Story = {
       </CardHeader>
       <CardContent>
         <div className="aspect-video bg-muted rounded-md mb-4"></div>
-        <p>This card demonstrates how to include images or other media content within the card structure.</p>
+        <p>
+          This card demonstrates how to include images or other media content
+          within the card structure.
+        </p>
       </CardContent>
       <CardFooter className="justify-between">
         <Button variant="outline">View Details</Button>
@@ -69,7 +82,9 @@ export const StatsCard: Story = {
         <CardDescription>Success Rate</CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-muted-foreground">Projects completed successfully</p>
+        <p className="text-sm text-muted-foreground">
+          Projects completed successfully
+        </p>
       </CardContent>
     </Card>
   ),
@@ -96,7 +111,9 @@ export const ProfileCard: Story = {
         </div>
       </CardContent>
       <CardFooter className="justify-center">
-        <Button variant="outline" className="w-full">View Portfolio</Button>
+        <Button variant="outline" className="w-full">
+          View Portfolio
+        </Button>
       </CardFooter>
     </Card>
   ),
@@ -107,8 +124,9 @@ export const ContentOnly: Story = {
     <Card className="w-[400px]">
       <CardContent className="pt-6">
         <p className="text-lg leading-relaxed">
-          This is a card with only content, no header or footer. Useful for simple content display
-          or when you want to customize the layout completely.
+          This is a card with only content, no header or footer. Useful for
+          simple content display or when you want to customize the layout
+          completely.
         </p>
       </CardContent>
     </Card>
@@ -144,7 +162,9 @@ export const AllCardComponents: Story = {
           <p>Content section for main information</p>
         </CardContent>
         <CardFooter>
-          <p className="text-sm text-muted-foreground">Footer for actions or metadata</p>
+          <p className="text-sm text-muted-foreground">
+            Footer for actions or metadata
+          </p>
         </CardFooter>
       </Card>
 
@@ -154,7 +174,9 @@ export const AllCardComponents: Story = {
           <CardDescription>Showing different content</CardDescription>
         </CardHeader>
         <CardContent>
-          <p>You can compose cards in many different ways to create rich layouts.</p>
+          <p>
+            You can compose cards in many different ways to create rich layouts.
+          </p>
         </CardContent>
         <CardFooter>
           <Button>Primary Action</Button>
@@ -165,7 +187,7 @@ export const AllCardComponents: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Multiple cards showing different compositions and layouts.',
+        story: "Multiple cards showing different compositions and layouts.",
       },
     },
   },

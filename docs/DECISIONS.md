@@ -383,13 +383,11 @@ Global CSS classes with standardized patterns
 #### Layout Pattern Rules
 
 1. **Full-Width Sections**
-
    - Use `.section-full` for edge-to-edge sections
    - Maintain consistent padding with `.px-4 sm:px-6 lg:px-8`
    - Centre headings with `.max-w-7xl mx-auto text-centre`
 
 2. **Content Width**
-
    - Use `.section-content` for standard width
    - Apply `.section-content-narrow` for 2/3 width
    - Implement `.section-content-wide` for wider content

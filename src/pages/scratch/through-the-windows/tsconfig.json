@@ -14,14 +14,6 @@
     "moduleResolution": "node16",
     "typeRoots": ["./types", "../../../node_modules/@types"]
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.astro",
-    "types/**/*.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.astro", "types/**/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }

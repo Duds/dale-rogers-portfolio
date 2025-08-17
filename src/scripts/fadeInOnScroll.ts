@@ -20,7 +20,7 @@ export function fadeInOnScroll(selector = "[data-fade]") {
         }
       });
     },
-    { threshold: 0.15 }
+    { threshold: 0.15 },
   );
   elements.forEach((el, i) => {
     // Add staggered delay

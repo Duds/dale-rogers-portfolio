@@ -1,7 +1,7 @@
-import { vi } from 'vitest';
-import type { ReactElement } from 'react';
-import { render, type RenderOptions } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { vi } from "vitest";
+import type { ReactElement } from "react";
+import { render, type RenderOptions } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 // Test wrapper component for providers
 export const TestWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -11,7 +11,7 @@ export const TestWrapper = ({ children }: { children: React.ReactNode }) => {
 // Render with providers
 export const renderWithProviders = (
   ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>
+  options?: Omit<RenderOptions, "wrapper">,
 ) => {
   return render(ui, { wrapper: TestWrapper, ...options });
 };
@@ -21,9 +21,9 @@ export const mockConsole = () => {
   const originalConsole = { ...console };
 
   beforeAll(() => {
-    vi.spyOn(console, 'log').mockImplementation(() => {});
-    vi.spyOn(console, 'warn').mockImplementation(() => {});
-    vi.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    vi.spyOn(console, "error").mockImplementation(() => {});
   });
 
   afterAll(() => {
@@ -43,7 +43,7 @@ export const mockFetch = (response: any, status = 200) => {
 export const mockLocalStorage = () => {
   const store: Record<string, string> = {};
 
-  Object.defineProperty(window, 'localStorage', {
+  Object.defineProperty(window, "localStorage", {
     value: {
       getItem: vi.fn((key: string) => store[key] || null),
       setItem: vi.fn((key: string, value: string) => {
@@ -53,7 +53,7 @@ export const mockLocalStorage = () => {
         delete store[key];
       }),
       clear: vi.fn(() => {
-        Object.keys(store).forEach(key => delete store[key]);
+        Object.keys(store).forEach((key) => delete store[key]);
       }),
     },
     writable: true,
@@ -63,7 +63,7 @@ export const mockLocalStorage = () => {
 export const mockSessionStorage = () => {
   const store: Record<string, string> = {};
 
-  Object.defineProperty(window, 'sessionStorage', {
+  Object.defineProperty(window, "sessionStorage", {
     value: {
       getItem: vi.fn((key: string) => store[key] || null),
       setItem: vi.fn((key: string, value: string) => {
@@ -73,7 +73,7 @@ export const mockSessionStorage = () => {
         delete store[key];
       }),
       clear: vi.fn(() => {
-        Object.keys(store).forEach(key => delete store[key]);
+        Object.keys(store).forEach((key) => delete store[key]);
       }),
     },
     writable: true,
@@ -81,9 +81,9 @@ export const mockSessionStorage = () => {
 };
 
 export const mockMatchMedia = (matches = false) => {
-  Object.defineProperty(window, 'matchMedia', {
+  Object.defineProperty(window, "matchMedia", {
     writable: true,
-    value: vi.fn().mockImplementation(query => ({
+    value: vi.fn().mockImplementation((query) => ({
       matches,
       media: query,
       onchange: null,
@@ -126,68 +126,72 @@ export const mockRequestAnimationFrame = () => {
 export const testData = {
   users: {
     create: (overrides = {}) => ({
-      id: 'user-1',
-      name: 'Test User',
-      email: 'test@example.com',
-      avatar: 'https://example.com/avatar.jpg',
+      id: "user-1",
+      name: "Test User",
+      email: "test@example.com",
+      avatar: "https://example.com/avatar.jpg",
       ...overrides,
     }),
 
     createMany: (count: number, overrides = {}) =>
       Array.from({ length: count }, (_, i) =>
-        testData.users.create({ id: `user-${i + 1}`, ...overrides })
+        testData.users.create({ id: `user-${i + 1}`, ...overrides }),
       ),
   },
 
   posts: {
     create: (overrides = {}) => ({
-      id: 'post-1',
-      title: 'Test Post',
-      content: 'This is a test post content.',
-      authorId: 'user-1',
+      id: "post-1",
+      title: "Test Post",
+      content: "This is a test post content.",
+      authorId: "user-1",
       publishedAt: new Date().toISOString(),
       ...overrides,
     }),
 
     createMany: (count: number, overrides = {}) =>
       Array.from({ length: count }, (_, i) =>
-        testData.posts.create({ id: `post-${i + 1}`, ...overrides })
+        testData.posts.create({ id: `post-${i + 1}`, ...overrides }),
       ),
   },
 
   comments: {
     create: (overrides = {}) => ({
-      id: 'comment-1',
-      content: 'This is a test comment.',
-      authorId: 'user-1',
-      postId: 'post-1',
+      id: "comment-1",
+      content: "This is a test comment.",
+      authorId: "user-1",
+      postId: "post-1",
       createdAt: new Date().toISOString(),
       ...overrides,
     }),
 
     createMany: (count: number, overrides = {}) =>
       Array.from({ length: count }, (_, i) =>
-        testData.comments.create({ id: `comment-${i + 1}`, ...overrides })
+        testData.comments.create({ id: `comment-${i + 1}`, ...overrides }),
       ),
   },
 };
 
 // Event creators
 export const createEvent = {
-  click: (element: Element) => new MouseEvent('click', { bubbles: true }),
-  change: (element: Element, value: string) => new Event('change', { bubbles: true }),
-  input: (element: Element, value: string) => new Event('input', { bubbles: true }),
-  submit: (element: Element) => new Event('submit', { bubbles: true }),
-  keydown: (key: string, options = {}) => new KeyboardEvent('keydown', {
-    key,
-    bubbles: true,
-    ...options,
-  }),
-  keyup: (key: string, options = {}) => new KeyboardEvent('keyup', {
-    key,
-    bubbles: true,
-    ...options,
-  }),
+  click: (element: Element) => new MouseEvent("click", { bubbles: true }),
+  change: (element: Element, value: string) =>
+    new Event("change", { bubbles: true }),
+  input: (element: Element, value: string) =>
+    new Event("input", { bubbles: true }),
+  submit: (element: Element) => new Event("submit", { bubbles: true }),
+  keydown: (key: string, options = {}) =>
+    new KeyboardEvent("keydown", {
+      key,
+      bubbles: true,
+      ...options,
+    }),
+  keyup: (key: string, options = {}) =>
+    new KeyboardEvent("keyup", {
+      key,
+      bubbles: true,
+      ...options,
+    }),
 };
 
 // Wait utilities
@@ -199,7 +203,7 @@ export const waitFor = (condition: () => boolean, timeout = 1000) => {
       if (condition()) {
         resolve();
       } else if (Date.now() - startTime > timeout) {
-        reject(new Error('Timeout waiting for condition'));
+        reject(new Error("Timeout waiting for condition"));
       } else {
         setTimeout(check, 10);
       }
@@ -211,31 +215,36 @@ export const waitFor = (condition: () => boolean, timeout = 1000) => {
 
 // Accessibility helpers
 export const accessibilityHelpers = {
-  hasRole: (element: Element, role: string) => element.getAttribute('role') === role,
+  hasRole: (element: Element, role: string) =>
+    element.getAttribute("role") === role,
 
   hasLabel: (element: Element, label: string) => {
-    const ariaLabel = element.getAttribute('aria-label');
-    const ariaLabelledBy = element.getAttribute('aria-labelledby');
-    const title = element.getAttribute('title');
+    const ariaLabel = element.getAttribute("aria-label");
+    const ariaLabelledBy = element.getAttribute("aria-labelledby");
+    const title = element.getAttribute("title");
 
     return ariaLabel === label || title === label || ariaLabelledBy === label;
   },
 
   hasRequiredAttributes: (element: Element, attributes: string[]) => {
-    return attributes.every(attr => element.hasAttribute(attr));
+    return attributes.every((attr) => element.hasAttribute(attr));
   },
 
   isKeyboardAccessible: (element: Element) => {
-    return element.tabIndex >= 0 ||
-           element.tagName === 'BUTTON' ||
-           element.tagName === 'A';
+    return (
+      element.tabIndex >= 0 ||
+      element.tagName === "BUTTON" ||
+      element.tagName === "A"
+    );
   },
 
   hasFocusManagement: (element: Element) => {
-    return element.hasAttribute('tabindex') ||
-           element.tagName === 'BUTTON' ||
-           element.tagName === 'A' ||
-           element.tagName === 'INPUT';
+    return (
+      element.hasAttribute("tabindex") ||
+      element.tagName === "BUTTON" ||
+      element.tagName === "A" ||
+      element.tagName === "INPUT"
+    );
   },
 };
 
@@ -269,7 +278,7 @@ export const cleanupHelpers = {
   },
 
   clearDOM: () => {
-    document.body.innerHTML = '';
+    document.body.innerHTML = "";
   },
 };
 

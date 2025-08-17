@@ -1,10 +1,10 @@
-@import './generated-tokens.css';
+@import "./generated-tokens.css";
 
 /* Import fonts first */
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap");
 
 /* Import base component styles */
-@import './components/base.css';
+@import "./components/base.css";
 
 @import "tailwindcss";
 @reference "tailwindcss";
@@ -91,10 +91,10 @@
   --font-body: "DM Sans", system-ui, -apple-system, sans-serif;
 
   /* Primary Colors */
-  --color-purple: #8B5CF6;
+  --color-purple: #8b5cf6;
   --color-black: #111111;
-  --color-green: #10B981;
-  --color-orange: #F97316;
+  --color-green: #10b981;
+  --color-orange: #f97316;
 
   /* UI Colors */
   --color-bg: #ffffff;
@@ -188,7 +188,7 @@
   --color-footer-text-secondary: #9ca3af;
 
   /* Header */
-  --color-surface-header-transparent: rgba(255,255,255,0.8);
+  --color-surface-header-transparent: rgba(255, 255, 255, 0.8);
   --color-surface-header: #fff;
   --color-surface-header-dark: #18181b;
 
@@ -256,7 +256,12 @@
   }
 
   /* Default heading styles */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     /* Custom classes removed: font-heading text-black dark:text-white */
     @apply font-bold tracking-tight;
   }
@@ -267,7 +272,8 @@
   }
 
   /* Default list styles */
-  ul, ol {
+  ul,
+  ol {
     @apply list-inside text-gray-600 dark:text-gray-400;
   }
 

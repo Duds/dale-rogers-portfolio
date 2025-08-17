@@ -18,18 +18,18 @@ A generative ambient scene built in Astro.js with Canvas. This experience invite
 
 ## 2. Scene List (World Zones)
 
-| ID       | Name             | Length (px) | Description                                        |
-|----------|------------------|-------------|----------------------------------------------------|
-| Z0       | Depot            | 600         | Quiet platform. Birds. A passenger waits.          |
-| Z1       | Fields           | 1200        | Open countryside. Trees, windmills, falling leaves |
-| Z2       | Station A        | 200         | Farmer and goat at rural stop                      |
-| Z3       | Village          | 1200        | Houses, street life. Cat, dog, upstairs window     |
-| Z4       | Hill Climb       | 700         | Tram leans up. Sparks and sound                    |
-| Z5       | Station B        | 300         | Mountain-top platform. Teen and elderly woman      |
-| Z6       | Descent          | 700         | Fast ride downhill. Camera drifts forward          |
-| Z7       | Industrial       | 1000        | Fences, graffiti, trucks, wires                    |
-| Z8       | Station C        | 300         | Courier, couple board. Sign flickers               |
-| Z9       | Urban End        | 1000        | Dusk. Final stop. Tram fades out in distance       |
+| ID  | Name       | Length (px) | Description                                        |
+| --- | ---------- | ----------- | -------------------------------------------------- |
+| Z0  | Depot      | 600         | Quiet platform. Birds. A passenger waits.          |
+| Z1  | Fields     | 1200        | Open countryside. Trees, windmills, falling leaves |
+| Z2  | Station A  | 200         | Farmer and goat at rural stop                      |
+| Z3  | Village    | 1200        | Houses, street life. Cat, dog, upstairs window     |
+| Z4  | Hill Climb | 700         | Tram leans up. Sparks and sound                    |
+| Z5  | Station B  | 300         | Mountain-top platform. Teen and elderly woman      |
+| Z6  | Descent    | 700         | Fast ride downhill. Camera drifts forward          |
+| Z7  | Industrial | 1000        | Fences, graffiti, trucks, wires                    |
+| Z8  | Station C  | 300         | Courier, couple board. Sign flickers               |
+| Z9  | Urban End  | 1000        | Dusk. Final stop. Tram fades out in distance       |
 
 ---
 
@@ -44,24 +44,24 @@ A generative ambient scene built in Astro.js with Canvas. This experience invite
 
 ## 4. Interaction System
 
-| Type         | Trigger                     | Effect                                          |
-|--------------|-----------------------------|-------------------------------------------------|
-| Proximity    | Near object                 | Tree shakes, people wave                        |
-| Velocity     | Passing fast                | Leaves blow, branches bend                      |
-| Idle Time    | Wait 3s+ in zone            | Animals appear, doors open                      |
-| Input Event  | Spacebar (bell)             | Sound + object-specific reactions (goat, light) |
+| Type        | Trigger          | Effect                                          |
+| ----------- | ---------------- | ----------------------------------------------- |
+| Proximity   | Near object      | Tree shakes, people wave                        |
+| Velocity    | Passing fast     | Leaves blow, branches bend                      |
+| Idle Time   | Wait 3s+ in zone | Animals appear, doors open                      |
+| Input Event | Spacebar (bell)  | Sound + object-specific reactions (goat, light) |
 
 ---
 
 ## 5. Micro-Events Index
 
-| ID  | Location    | Condition              | Event                                 |
-|-----|-------------|------------------------|----------------------------------------|
-| ME1 | Fields      | Pass tree fast         | Tree shakes, leaf falls                |
-| ME2 | Village     | Idle near alley        | Cat darts across                       |
-| ME3 | Hill Climb  | Climb slope            | Sparks and sound emitted               |
-| ME4 | Station C   | Spacebar x2            | Bell chime melody                      |
-| ME5 | Urban End   | Never stop entire trip | Ghost tram in background               |
+| ID  | Location   | Condition              | Event                    |
+| --- | ---------- | ---------------------- | ------------------------ |
+| ME1 | Fields     | Pass tree fast         | Tree shakes, leaf falls  |
+| ME2 | Village    | Idle near alley        | Cat darts across         |
+| ME3 | Hill Climb | Climb slope            | Sparks and sound emitted |
+| ME4 | Station C  | Spacebar x2            | Bell chime melody        |
+| ME5 | Urban End  | Never stop entire trip | Ghost tram in background |
 
 ---
 
@@ -94,8 +94,8 @@ A generative ambient scene built in Astro.js with Canvas. This experience invite
 
 ## 8. Audio Triggers
 
-| Event             | Sound                   |
-|------------------|--------------------------|
+| Event            | Sound                    |
+| ---------------- | ------------------------ |
 | Spacebar         | Tram bell                |
 | Fast pass trees  | Wind swoosh              |
 | Brake near edge  | Soft metallic screech    |

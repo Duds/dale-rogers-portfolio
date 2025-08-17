@@ -1,4 +1,4 @@
-import type { WindowPosition } from '../types/index.js';
+import type { WindowPosition } from "../types/index.js";
 
 /**
  * Component representing a game window that can be clicked
@@ -21,12 +21,12 @@ export function GameWindow({ isOpen, position, onClick }: Props) {
     top: `${position.y}px`,
     width: `${position.width}px`,
     height: `${position.height}px`,
-    position: 'absolute' as const
+    position: "absolute" as const,
   };
 
   return (
     <div
-      className={`game-window ${isOpen ? 'open' : 'closed'}`}
+      className={`game-window ${isOpen ? "open" : "closed"}`}
       style={style}
       onClick={onClick}
     >

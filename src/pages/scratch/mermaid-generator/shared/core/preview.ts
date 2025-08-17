@@ -25,14 +25,14 @@ export function setupPreview(): void {
   };
 
   const zoomSlider = document.querySelector(
-    ".zoom-slider"
+    ".zoom-slider",
   ) as HTMLInputElement | null;
   const zoomValue = document.querySelector(".zoom-value") as HTMLElement | null;
   const output = document.getElementById(
-    "mermaid-output"
+    "mermaid-output",
   ) as HTMLElement | null;
   const input = document.getElementById(
-    "mermaid-input"
+    "mermaid-input",
   ) as HTMLTextAreaElement | null;
 
   if (!zoomSlider || !zoomValue || !output || !input) {
@@ -96,7 +96,7 @@ export function setupPreview(): void {
 
   // Set up auto-update if enabled
   const autoUpdateCheckbox = document.getElementById(
-    "auto-update"
+    "auto-update",
   ) as HTMLInputElement | null;
   if (autoUpdateCheckbox) {
     autoUpdateCheckbox.addEventListener("change", () => {

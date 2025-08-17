@@ -2,8 +2,8 @@
 
 ## 🎯 **Overall Status: FUNCTIONAL WITH MINOR ISSUES**
 
-**Date**: $(date +%d/%m/%Y)  
-**Time**: $(date +%H:%M)  
+**Date**: $(date +%d/%m/%Y)
+**Time**: $(date +%H:%M)
 **Status**: ✅ **READY FOR DEVELOPMENT**
 
 ---

@@ -18,7 +18,7 @@ const SOURCE_DIR = path.join(__dirname, "src/pages/scratch/mermaid-generator");
 const STANDALONE_DIR = path.join(SOURCE_DIR, "standalone");
 const BUILD_DIR = path.join(
   __dirname,
-  "dist/scratch/mermaid-generator/standalone"
+  "dist/scratch/mermaid-generator/standalone",
 );
 
 // Ensure build directory exists
@@ -37,27 +37,27 @@ function transformJsForPortability(filePath) {
   // Remove multi-line commented out code blocks (typically removed Astro code)
   content = content.replace(
     /\/\/\s*let message.*?document\.body\.appendChild\(contentTest\);/s,
-    ""
+    "",
   );
 
   // Remove import/export statements
   content = content.replace(
     /import\s+.*?from\s+['"].*?['"]/g,
-    "// Import removed for portability"
+    "// Import removed for portability",
   );
   content = content.replace(/export\s+/g, "// export removed: ");
 
   // Replace arrow functions with regular functions for older browser compatibility
   content = content.replace(
     /const\s+(\w+)\s*=\s*\(\s*([^)]*)\s*\)\s*=>\s*{/g,
-    "function $1($2) {"
+    "function $1($2) {",
   );
   content = content.replace(/\(\s*([^)]*)\s*\)\s*=>\s*{/g, "function($1) {");
 
   // Replace inline arrow functions that return expressions
   content = content.replace(
     /\(\s*([^)]*)\s*\)\s*=>\s*([^{].*?)(?=[\n,;)])/g,
-    "function($1) { return $2; }"
+    "function($1) { return $2; }",
   );
 
   // Replace async/await with promises if needed (simplified)
@@ -73,7 +73,7 @@ function transformJsForPortability(filePath) {
     function (match, before, expr, after) {
       // Simple cases only - for complex template literals, this would need to be enhanced
       return '"' + before + '" + (' + expr + ') + "' + after + '"';
-    }
+    },
   );
 
   // Add portability comment and version info
@@ -125,7 +125,7 @@ function copyDir(src, dest) {
           const buildTime = new Date().toISOString();
           content = content.replace(
             "</head>",
-            `  <!-- Built for file:// compatibility on ${buildTime} -->\n</head>`
+            `  <!-- Built for file:// compatibility on ${buildTime} -->\n</head>`,
           );
           fs.writeFileSync(filePath, content);
         });
@@ -171,7 +171,7 @@ Built with Mermaid.js - https://mermaid.js.org/
     console.log("Standalone build complete!");
     console.log(`Files are available in ${BUILD_DIR}`);
     console.log(
-      "You can open index.html directly with any browser (file:// protocol compatible)"
+      "You can open index.html directly with any browser (file:// protocol compatible)",
     );
   } catch (error) {
     console.error("Build failed:", error);

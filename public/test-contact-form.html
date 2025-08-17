@@ -1,107 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Form Test</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .form-group {
-      margin-bottom: 15px;
-    }
-    label {
-      display: block;
-      margin-bottom: 5px;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      cursor: pointer;
-    }
-    #result {
-      margin-top: 20px;
-      padding: 10px;
-      border-radius: 5px;
-    }
-    .success {
-      background-color: #d4edda;
-      color: #155724;
-    }
-    .error {
-      background-color: #f8d7da;
-      color: #721c24;
-    }
-  </style>
-</head>
-<body>
-  <h1>Contact Form Test</h1>
-  <form id="contact-form">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required>
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
-    </div>
-    <button type="submit">Send Message</button>
-  </form>
-  <div id="result" style="display: none;"></div>
-
-  <script>
-    document.getElementById('contact-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-
-      const resultDiv = document.getElementById('result');
-      resultDiv.className = '';
-      resultDiv.style.display = 'none';
-
-      try {
-        const formData = new FormData(this);
-
-        const response = await fetch('/api/azure-contact', {
-          method: 'POST',
-          body: formData
-        });
-
-        const data = await response.json();
-
-        resultDiv.style.display = 'block';
-
-        if (response.ok) {
-          resultDiv.className = 'success';
-          resultDiv.textContent = 'Message sent successfully!';
-          this.reset();
-        } else {
-          resultDiv.className = 'error';
-          resultDiv.textContent = data.error || 'Failed to send message. Please try again.';
-          if (data.details) {
-            resultDiv.textContent += ' Details: ' + data.details;
-          }
-        }
-      } catch (error) {
-        resultDiv.style.display = 'block';
-        resultDiv.className = 'error';
-        resultDiv.textContent = 'An error occurred. Please try again.';
-        console.error(error);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
       }
-    });
-  </script>
-</body>
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+      }
+      #result {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .success {
+        background-color: #d4edda;
+        color: #155724;
+      }
+      .error {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Contact Form Test</h1>
+    <form id="contact-form">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit">Send Message</button>
+    </form>
+    <div id="result" style="display: none"></div>
+
+    <script>
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const resultDiv = document.getElementById("result");
+          resultDiv.className = "";
+          resultDiv.style.display = "none";
+
+          try {
+            const formData = new FormData(this);
+
+            const response = await fetch("/api/azure-contact", {
+              method: "POST",
+              body: formData,
+            });
+
+            const data = await response.json();
+
+            resultDiv.style.display = "block";
+
+            if (response.ok) {
+              resultDiv.className = "success";
+              resultDiv.textContent = "Message sent successfully!";
+              this.reset();
+            } else {
+              resultDiv.className = "error";
+              resultDiv.textContent =
+                data.error || "Failed to send message. Please try again.";
+              if (data.details) {
+                resultDiv.textContent += " Details: " + data.details;
+              }
+            }
+          } catch (error) {
+            resultDiv.style.display = "block";
+            resultDiv.className = "error";
+            resultDiv.textContent = "An error occurred. Please try again.";
+            console.error(error);
+          }
+        });
+    </script>
+  </body>
 </html>

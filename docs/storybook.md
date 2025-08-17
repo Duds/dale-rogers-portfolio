@@ -154,7 +154,6 @@ Located at `src/components/ui/Card.stories.tsx`
 ### Story Best Practices
 
 1. **Use Descriptive Titles**
-
    - Group related components: `UI/Button`, `UI/Card`
    - Use clear, descriptive names
 
@@ -331,13 +330,11 @@ parameters: {
 ### Common Issues
 
 1. **Stories Not Loading**
-
    - Check file naming: `*.stories.tsx`
    - Verify import paths
    - Check TypeScript errors
 
 2. **Styles Not Applied**
-
    - Ensure global CSS import in preview.ts
    - Check Tailwind CSS configuration
    - Verify CSS variable definitions

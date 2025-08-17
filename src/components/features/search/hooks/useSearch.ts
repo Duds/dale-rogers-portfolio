@@ -9,7 +9,7 @@ interface SearchResult {
 
 export const useSearch = (
   input: HTMLInputElement,
-  resultsContainer: HTMLDivElement
+  resultsContainer: HTMLDivElement,
 ) => {
   const handleSearch = debounce(async (event: Event) => {
     const target = event.target as HTMLInputElement;
@@ -31,7 +31,7 @@ export const useSearch = (
       input.setAttribute("aria-expanded", "true");
 
       const response = await fetch(
-        `/api/search?q=${encodeURIComponent(query)}`
+        `/api/search?q=${encodeURIComponent(query)}`,
       );
       const data = await response.json();
 
@@ -72,7 +72,7 @@ export const useSearch = (
                           ${result.description}
                         </div>
                       </a>
-                    `
+                    `,
                   )
                   .join("")}
               </div>
@@ -94,7 +94,7 @@ export const useSearch = (
           acc[category].push(result);
           return acc;
         },
-        {} as Record<string, SearchResult[]>
+        {} as Record<string, SearchResult[]>,
       );
 
       // Render results
@@ -122,11 +122,11 @@ export const useSearch = (
                             ${result.description}
                           </div>
                         </a>
-                      `
+                      `,
                     )
                     .join("")}
                 </div>
-              `
+              `,
             )
             .join("")}
         </div>
@@ -144,7 +144,7 @@ export const useSearch = (
   const handleKeyDown = (event: KeyboardEvent) => {
     const results = resultsContainer.querySelectorAll("a");
     const currentIndex = Array.from(results).findIndex((result) =>
-      result.matches(":focus")
+      result.matches(":focus"),
     );
 
     switch (event.key) {

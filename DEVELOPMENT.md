@@ -112,13 +112,11 @@ EMAIL_TO=your-email@domain.com
 ### Common Issues
 
 1. Email sending fails:
-
    - Check SMTP credentials
    - Verify app password
    - Check email aliases
 
 2. Build failures:
-
    - Clear cache: `npm run clean`
    - Update dependencies: `npm update`
    - Check TypeScript errors: `npm run typecheck`
@@ -325,14 +323,12 @@ The following classes are available for consistent layout implementation:
 ### Usage Guidelines
 
 1. **Section Structure**
-
    - Always use `.section-full` for the outer container
    - Apply appropriate content width class for text content
    - Use full width for images and other visual elements
    - Maintain consistent padding with `.px-4 sm:px-6 lg:px-8`
 
 2. **Responsive Considerations**
-
    - Test layouts at all breakpoints
    - Ensure proper spacing on mobile
    - Consider content readability
@@ -374,20 +370,17 @@ import Feature from "@/components/features/feature-name/components/Component.ast
 All code and documentation must follow Australian English standards:
 
 1. **Spelling Configuration**
-
    - Use VS Code Code Spell Checker extension
    - Enable Australian English: `"cSpell.language": "en,en-AU"`
    - Add project-specific terms to `cSpell.words`
 
 2. **Common Australian Spellings**
-
    - Use '-our' endings: colour, behaviour, favour
    - Use '-ise' endings: customise, realise
    - Use '-re' endings: centre, metre
    - Use Australian terms: organisation, catalogue
 
 3. **Date and Time Formats**
-
    - Dates: DD/MM/YYYY
    - Time: 24-hour format
    - Time zones: Australian time zones

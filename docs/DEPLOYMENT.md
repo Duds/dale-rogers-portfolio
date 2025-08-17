@@ -107,7 +107,6 @@ jobs:
 ## Rollback Procedure
 
 1. **Identify Issue**
-
    - Monitor error rates
    - Check user reports
    - Review logs

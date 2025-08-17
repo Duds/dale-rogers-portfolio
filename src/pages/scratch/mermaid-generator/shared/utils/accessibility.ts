@@ -82,7 +82,7 @@ export class AccessibilityManager {
   // Create a focus trap for modal dialogs
   createFocusTrap(element: HTMLElement): () => void {
     const focusableElements = element.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
     const firstFocusable = focusableElements[0] as HTMLElement;
     const lastFocusable = focusableElements[
@@ -134,7 +134,7 @@ export class AccessibilityManager {
       onArrowDown?: () => void;
       onArrowLeft?: () => void;
       onArrowRight?: () => void;
-    }
+    },
   ): () => void {
     const handleKeyDown = (e: KeyboardEvent): void => {
       switch (e.key) {

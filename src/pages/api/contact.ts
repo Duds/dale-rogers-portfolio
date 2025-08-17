@@ -40,7 +40,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
     }
 
@@ -105,7 +105,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
       html: `
                 <h2>New Portfolio Contact Form Submission</h2>
                 <p><strong>Date:</strong> ${new Date().toLocaleString(
-                  "en-AU"
+                  "en-AU",
                 )}</p>
                 <p><strong>Name:</strong> ${name}</p>
                 <p><strong>Email:</strong> ${email}</p>
@@ -144,7 +144,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
   }
 };

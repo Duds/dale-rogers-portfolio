@@ -42,7 +42,7 @@ export const GET: APIRoute = async ({ url }) => {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
     }
 
@@ -55,7 +55,7 @@ export const GET: APIRoute = async ({ url }) => {
   } catch (error) {
     console.error(
       "Search error:",
-      error instanceof Error ? error.message : String(error)
+      error instanceof Error ? error.message : String(error),
     );
 
     return new Response(
@@ -69,7 +69,7 @@ export const GET: APIRoute = async ({ url }) => {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
   }
 };

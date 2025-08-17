@@ -48,14 +48,12 @@ This document outlines the theme system used throughout the portfolio site, incl
 The site uses a flexible button system with multiple variants:
 
 1. **Primary Button** (`.btn-primary`)
-
    - Background: `--colour-button-bg`
    - Text: `--colour-button-text`
    - Hover: `--colour-button-hover`
    - Used for: Main CTAs, form submissions
 
 2. **Secondary Button** (`.btn-secondary`)
-
    - Border: `--colour-text`
    - Text: `--colour-text`
    - Hover: Light background
@@ -71,7 +69,6 @@ The site uses a flexible button system with multiple variants:
 Cards use a consistent styling system with contextual variants:
 
 1. **Base Card** (`.card-base`)
-
    - Background: `--colour-bg`
    - Shadow: `--colour-shadow`
    - Border radius: `--radius-lg`
@@ -131,13 +128,11 @@ To customize the theme:
 ## Accessibility Considerations
 
 1. Maintain minimum contrast ratios:
-
    - Text: 4.5:1
    - Large text: 3:1
    - UI components: 3:1
 
 2. Use semantic colors appropriately:
-
    - Success: Green
    - Warning: Orange
    - Error: Red
@@ -155,19 +150,16 @@ To customize the theme:
 The site uses a consistent shadow system with support for both light and dark modes:
 
 1. **Soft Shadow** (`shadow-soft`)
-
    - Light mode: `0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)`
    - Dark mode: `0 4px 6px -1px rgba(255, 255, 255, 0.05), 0 2px 4px -1px rgba(255, 255, 255, 0.03)`
    - Usage: Static elements, cards, containers
 
 2. **Hover Shadow** (`shadow-soft-hover`)
-
    - Light mode: `0 6px 8px -2px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03)`
    - Dark mode: `0 6px 8px -2px rgba(255, 255, 255, 0.05), 0 4px 6px -2px rgba(255, 255, 255, 0.03)`
    - Usage: Interactive elements, buttons, links
 
 3. **Button Hover** (`shadow-button-hover`)
-
    - Value: `0 4px 14px -2px rgba(139, 92, 246, 0.4)`
    - Usage: Primary button hover states
 
@@ -187,7 +179,6 @@ The site uses a consistent shadow system with support for both light and dark mo
 ### Performance Considerations
 
 1. **Hardware Acceleration**
-
    - Use transform properties for hover effects
    - Combine with `will-change` for heavy animations
    - Implement `@media (prefers-reduced-motion)` support
@@ -200,7 +191,6 @@ The site uses a consistent shadow system with support for both light and dark mo
 ### Accessibility Guidelines
 
 1. **Contrast**
-
    - Maintain 3:1 minimum contrast ratio
    - Ensure visibility in both modes
    - Test with vision impairment tools
@@ -215,14 +205,12 @@ The site uses a consistent shadow system with support for both light and dark mo
 ### Shadow System Improvements
 
 1. **Component Integration** (Priority: High)
-
    - Implement new shadow variants in existing components
    - Test shadow behaviour across all breakpoints
    - Verify dark mode transitions
    - Estimated effort: 30 minutes
 
 2. **Animation Enhancements** (Priority: Medium)
-
    - Add configurable animation durations
    - Implement staggered shadow animations
    - Create hover animation presets
@@ -230,7 +218,6 @@ The site uses a consistent shadow system with support for both light and dark mo
    - Estimated effort: 45 minutes
 
 3. **Shadow Showcase** (Priority: Medium)
-
    - Create a dedicated shadow documentation page
    - Add interactive examples
    - Include performance metrics
@@ -238,7 +225,6 @@ The site uses a consistent shadow system with support for both light and dark mo
    - Estimated effort: 1 hour
 
 4. **Responsive Shadows** (Priority: Low)
-
    - Implement breakpoint-specific shadows
    - Add mobile-optimised variants
    - Create responsive animation timings
@@ -246,7 +232,6 @@ The site uses a consistent shadow system with support for both light and dark mo
    - Estimated effort: 45 minutes
 
 5. **Performance Optimisation** (Priority: High)
-
    - Profile shadow rendering performance
    - Optimise shadow layers for mobile
    - Implement selective hardware acceleration
@@ -254,7 +239,6 @@ The site uses a consistent shadow system with support for both light and dark mo
    - Estimated effort: 1 hour
 
 6. **Accessibility Enhancements** (Priority: High)
-
    - Add high contrast shadow modes
    - Implement focus visible indicators
    - Create reduced motion variants
@@ -262,7 +246,6 @@ The site uses a consistent shadow system with support for both light and dark mo
    - Estimated effort: 45 minutes
 
 7. **Documentation Updates** (Priority: Medium)
-
    - Add usage examples for new variants
    - Create troubleshooting guide
    - Document performance considerations

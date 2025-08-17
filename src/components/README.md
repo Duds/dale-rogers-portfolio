@@ -64,13 +64,11 @@ This directory contains reusable UI components used throughout the portfolio sit
    ```
 
 2. **Props**
-
    - All components use TypeScript interfaces for props
    - Required props are marked as such
    - Optional props have default values
 
 3. **Styling**
-
    - Components use Tailwind CSS classes
    - Custom styles are defined in `global.css`
    - Theme variables are used for consistent colors
@@ -83,13 +81,11 @@ This directory contains reusable UI components used throughout the portfolio sit
 ## Best Practices
 
 1. **Component Structure**
-
    - One component per file
    - Clear prop interfaces
    - Consistent naming conventions
 
 2. **Documentation**
-
    - JSDoc comments for props and functions
    - Clear examples in component files
    - TypeScript types for better IDE support

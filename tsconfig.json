@@ -1,69 +1,63 @@
 {
-    "extends": "astro/tsconfigs/strict",
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "@/*": [
-                "./src/*"
-            ]
-        },
-        "types": ["astro/client", "astro/env"],
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-
-        // Strict Type Checking
-        "strict": true,
-        "noImplicitAny": true,
-        "strictNullChecks": true,
-        "strictFunctionTypes": true,
-        "strictBindCallApply": true,
-        "strictPropertyInitialization": true,
-        "noImplicitThis": true,
-        "useUnknownInCatchVariables": true,
-        "alwaysStrict": true,
-
-        // Additional Checks
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": true,
-        "noUncheckedIndexedAccess": true,
-        "noImplicitOverride": true,
-        "noPropertyAccessFromIndexSignature": true,
-
-        // Module Resolution
-        "module": "Node16",
-        "moduleResolution": "node16",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-
-        // Enhanced Error Reporting
-        "forceConsistentCasingInFileNames": true,
-
-        // Source Maps and Debugging
-        "sourceMap": true,
-        "declaration": true,
-        "declarationMap": true,
-
-        // Latest Language Features
-        "target": "ESNext",
-        "lib": ["ESNext", "DOM", "DOM.Iterable"],
-        "jsx": "preserve",
-        "verbatimModuleSyntax": true,
-
-        // Skip checking missing files
-        "skipLibCheck": true
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
     },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "src/**/*.astro"
-    ],
-    "exclude": [
-        "node_modules",
-        "dist",
-        "**/**.json",
-        "src/pages/services/index.astro",
-        "src/pages/services/ux-research.astro"
-    ]
+    "types": ["astro/client", "astro/env"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    // Strict Type Checking
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+
+    // Additional Checks
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+
+    // Module Resolution
+    "module": "Node16",
+    "moduleResolution": "node16",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    // Enhanced Error Reporting
+    "forceConsistentCasingInFileNames": true,
+
+    // Source Maps and Debugging
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Latest Language Features
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "jsx": "preserve",
+    "verbatimModuleSyntax": true,
+
+    // Skip checking missing files
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.astro"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/**.json",
+    "src/pages/services/index.astro",
+    "src/pages/services/ux-research.astro"
+  ]
 }
