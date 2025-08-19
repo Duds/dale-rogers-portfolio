@@ -1,0 +1,17 @@
+function r(s = "[data-fade]") {
+  if (typeof window > "u") return;
+  let o = document.querySelectorAll(s),
+    n = new window.IntersectionObserver(
+      (t) => {
+        t.forEach((e) => {
+          e.isIntersecting &&
+            (e.target.classList.add("visible"), n.unobserve(e.target));
+        });
+      },
+      { threshold: 0.15 },
+    );
+  o.forEach((t, e) => {
+    ((t.style.transitionDelay = `${e * 80}ms`), n.observe(t));
+  });
+}
+export { r as fadeInOnScroll };

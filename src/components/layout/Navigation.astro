@@ -1,193 +1,176 @@
 ---
+/**
+ * @fileoverview Navigation component for site navigation.
+ * Features professional styling with mobile responsiveness, theme toggle, search functionality,
+ * and proper semantic navigation with accessibility features.
+ */
+
 import ThemeToggle from "@/components/ui/ThemeToggle.astro";
 import SearchInput from "@/components/features/search/SearchInput.astro";
-import Button from "@/components/ui/Button.astro";
+import Container from "./Container.astro";
 import "@/styles/components/navigation.css";
 
-interface NavItem {
-  label: string;
-  href: string;
+interface Props {
+  /** Additional CSS classes */
+  class?: string;
 }
 
-// Get current path and determine active page
-const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1); // Remove the leading "/"
+const { class: className } = Astro.props;
+
+const baseClasses = "navigation";
+const combinedClasses = [baseClasses, className].filter(Boolean).join(" ");
+
+// Get current path for active state detection
+const currentPath = Astro.url.pathname;
 
 // Navigation items
-const navItems: NavItem[] = [
-  { label: "Work", href: "/work" },
-  { label: "Articles", href: "/articles" },
+const navItems = [
+  { href: "/", text: "Home", ariaLabel: "Go to homepage" },
+  { href: "/about", text: "About", ariaLabel: "Learn about Dale Rogers" },
+  { href: "/work", text: "Work", ariaLabel: "View portfolio work" },
+  { href: "/services", text: "Services", ariaLabel: "View available services" },
+  { href: "/values", text: "Values", ariaLabel: "Learn about our values" },
+  { href: "/contact", text: "Contact", ariaLabel: "Get in touch" },
 ];
 
-// Function to determine if a link is active
+// Helper function to determine if a nav item is active
 const isActive = (href: string): boolean => {
-  if (href === "/") return pathname === "/";
-  return currentPath.startsWith(href.slice(1));
+  if (href === "/") return currentPath === "/";
+  return currentPath.startsWith(href);
 };
 ---
 
-<nav
-  id="main-nav"
-  class="navigation px-6 md:px-12"
-  role="navigation"
-  aria-label="Main navigation"
->
-  <div class="navigation__container">
-    <div class="flex items-center justify-between">
-      <!-- Left Section -->
-      <a href="/" class="navigation__brand" aria-label="Dale Rogers - Home">
-        Dale Rogers
-      </a>
-      <!-- Right Section -->
-      <div class="hidden md:flex items-center gap-4">
-        <SearchInput />
-        {
-          navItems.map((item) => (
-            <Button
-              href={item.href}
-              variant="ghost"
-              class:list={[
-                "navigation__link",
-                isActive(item.href) && "navigation__link--active",
-              ]}
-            >
-              {item.label}
-            </Button>
-          ))
-        }
-        <ThemeToggle />
+<nav class={combinedClasses} role="navigation" aria-label="Main navigation">
+  <Container>
+    <div class="navigation__content">
+      <!-- Brand/Logo -->
+      <div class="navigation__brand">
+        <a
+          href="/"
+          class="navigation__logo"
+          aria-label="Dale Rogers - Homepage"
+        >
+          Dale Rogers
+        </a>
       </div>
+
       <!-- Mobile Menu Button -->
       <button
-        class="md:hidden p-2 text-nav-text dark:text-nav-text-dark hover:text-nav-text-hover dark:hover:text-nav-text-hover-dark transition-colors"
-        aria-label="Toggle menu"
+        class="navigation__mobile-toggle"
+        type="button"
+        aria-controls="main-navigation"
         aria-expanded="false"
-        aria-controls="navbar-menu"
+        aria-label="Toggle navigation menu"
+        id="mobile-menu-button"
       >
-        <svg
-          class="w-8 h-8"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
+        <span class="navigation__hamburger">
+          <span class="navigation__hamburger-line"></span>
+          <span class="navigation__hamburger-line"></span>
+          <span class="navigation__hamburger-line"></span>
+        </span>
       </button>
-    </div>
-  </div>
-  <!-- Mobile Navigation -->
-  <div id="navbar-menu" class="navigation__mobile-menu" role="menu">
-    <div class="space-y-4 py-4">
-      <div class="w-full">
+
+      <!-- Navigation Menu -->
+      <div
+        class="navigation__menu"
+        id="main-navigation"
+        aria-labelledby="mobile-menu-button"
+      >
+        <ul class="navigation__list" role="menubar">
+          {
+            navItems.map((item) => {
+              const activeClass = isActive(item.href)
+                ? "navigation__link--active"
+                : "";
+              return (
+                <li class="navigation__item" role="none">
+                  <a
+                    href={item.href}
+                    class={`navigation__link ${activeClass}`}
+                    role="menuitem"
+                    aria-label={item.ariaLabel}
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                  >
+                    {item.text}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+
+      <!-- Actions: Search and Theme Toggle -->
+      <div class="navigation__actions">
         <SearchInput />
-      </div>
-      {
-        navItems.map((item) => (
-          <Button
-            href={item.href}
-            variant="ghost"
-            class:list={[
-              "block font-heading text-2xl font-bold px-4 py-2 rounded-full",
-              "text-nav-link dark:text-nav-link-dark border-2 border-nav-border dark:border-nav-border-dark",
-              "hover:bg-nav-link-hover hover:text-nav-link-hover-text dark:hover:bg-nav-link-hover-dark dark:hover:text-nav-link-hover-text-dark",
-              "transition-all duration-300",
-              isActive(item.href) && "navigation__link--active",
-            ]}
-            role="menuitem"
-          >
-            {item.label}
-          </Button>
-        ))
-      }
-      <div class="py-2">
-        <ThemeToggle includeScript={false} />
+        <ThemeToggle />
       </div>
     </div>
-  </div>
+  </Container>
 </nav>
 
 <script>
-  // Mobile menu toggle functionality
-  const initMobileMenu = () => {
-    const menuButton = document.querySelector(
-      'button[aria-controls="navbar-menu"]'
-    );
-    const menu = document.getElementById("navbar-menu");
-    const navbar = document.getElementById("main-nav");
+  /**
+   * Mobile navigation toggle functionality
+   */
+  function initMobileNavigation() {
+    const mobileButton = document.getElementById("mobile-menu-button");
+    const navigation = document.getElementById("main-navigation");
 
-    menuButton?.addEventListener("click", () => {
-      const isExpanded = menuButton.getAttribute("aria-expanded") === "true";
-      menuButton.setAttribute("aria-expanded", String(!isExpanded));
-      menu?.classList.toggle("hidden");
-    });
+    if (!mobileButton || !navigation) return;
 
-    // Close menu when clicking outside
-    document.addEventListener("click", (e) => {
-      if (!navbar?.contains(e.target as Node)) {
-        menu?.classList.add("hidden");
-        menuButton?.setAttribute("aria-expanded", "false");
-      }
-    });
-  };
+    const toggleMobileMenu = () => {
+      const isExpanded = mobileButton.getAttribute("aria-expanded") === "true";
+      const newState = !isExpanded;
 
-  // Scroll functionality
-  const initScrollBehavior = () => {
-    const navbar = document.getElementById("main-nav");
-    if (!navbar) return;
+      mobileButton.setAttribute("aria-expanded", newState.toString());
+      mobileButton.classList.toggle(
+        "navigation__mobile-toggle--active",
+        newState
+      );
+      navigation.classList.toggle("navigation__menu--open", newState);
 
-    let lastScrollY = window.scrollY;
-    const scrollThreshold = 50;
-
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // Add backdrop when scrolled
-      if (currentScrollY > 0) {
-        navbar.classList.add("backdrop-blur-sm");
-      } else {
-        navbar.classList.remove("backdrop-blur-sm");
-      }
-
-      // Show nav at the top of the page
-      if (currentScrollY < scrollThreshold) {
-        navbar.style.transform = "translateY(0)";
-        return;
-      }
-
-      // Hide nav when scrolling down, show when scrolling up
-      if (currentScrollY > lastScrollY) {
-        navbar.style.transform = "translateY(-100%)";
-      } else {
-        navbar.style.transform = "translateY(0)";
-      }
-
-      lastScrollY = currentScrollY;
+      // Prevent body scroll when menu is open
+      document.body.classList.toggle("navigation-open", newState);
     };
 
-    // Throttle scroll events for better performance
-    let ticking = false;
-    window.addEventListener("scroll", () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
+    // Toggle on button click
+    mobileButton.addEventListener("click", toggleMobileMenu);
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (event) => {
+      const target = event.target as Node;
+      if (!mobileButton.contains(target) && !navigation.contains(target)) {
+        if (mobileButton.getAttribute("aria-expanded") === "true") {
+          toggleMobileMenu();
+        }
       }
     });
 
-    // Initial call to set initial state
-    handleScroll();
-  };
+    // Close menu on escape key
+    document.addEventListener("keydown", (event) => {
+      if (
+        event.key === "Escape" &&
+        mobileButton.getAttribute("aria-expanded") === "true"
+      ) {
+        toggleMobileMenu();
+      }
+    });
 
-  // Initialize functionality
-  document.addEventListener("astro:page-load", () => {
-    initMobileMenu();
-    initScrollBehavior();
-  });
+    // Close menu when navigating to a new page
+    const navLinks = navigation.querySelectorAll('a[role="menuitem"]');
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (mobileButton.getAttribute("aria-expanded") === "true") {
+          toggleMobileMenu();
+        }
+      });
+    });
+  }
+
+  // Initialize on DOM content loaded
+  document.addEventListener("DOMContentLoaded", initMobileNavigation);
+
+  // Re-initialize on Astro page navigation
+  document.addEventListener("astro:page-load", initMobileNavigation);
 </script>

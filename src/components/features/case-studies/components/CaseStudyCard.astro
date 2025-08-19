@@ -25,65 +25,104 @@ import Tag from "@/components/ui/Tag.astro";
 ---
 
 <article
-  class="group bg-card dark:bg-card-dark rounded-2xl shadow-soft dark:shadow-soft-dark overflow-hidden transition-all duration-300 hover:shadow-lg dark:hover:shadow-lg-dark hover:-translate-y-1"
+  class="group bg-white dark: rounded-3xl shadow-lg dark:shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl dark:hover:shadow-2xl hover:-translate-y-3 border  dark:border-text-secondary" style="border-color: var(--color-border-primary);" style="background-color: var(--color-text-primary);"
+  data-industry={industry}
+  data-tags={tags.join(",")}
 >
   {
     coverImage && (
-      <div class="relative aspect-video w-full overflow-hidden">
+      <div class="relative aspect-[4/3] w-full overflow-hidden">
         <img
           src={coverImage}
           alt={`Cover image for ${title}`}
-          class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           width="800"
-          height="450"
+          height="600"
           loading="lazy"
+          decoding="async"
+          sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500" />
+
+        <!-- Client badge overlay -->
+        <div class="absolute top-4 left-4">
+          <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-white/95 dark:bg-black/95  dark:text-white backdrop-blur-sm shadow-lg border border-white/20 dark:border-black/20" style="color: var(--color-text-primary);">
+            {client}
+          </span>
+        </div>
+
+        <!-- Industry badge overlay -->
+        <div class="absolute top-4 right-4">
+          <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium /90 text-white backdrop-blur-sm shadow-lg" style="background-color: var(--color-brand-highlight);">
+            {industry}
+          </span>
+        </div>
       </div>
     )
   }
 
-  <div class="p-6">
-    <h3
-      class="text-2xl font-heading font-bold text-heading dark:text-heading-dark mb-2"
-    >
+  <div class="p-8">
+    <!-- Title with enhanced typography -->
+    <h3 class="mb-6">
       <a
         href={href}
-        class="hover:text-accent dark:hover:text-accent-dark transition-colors"
+        aria-label={`View case study: ${title}`}
+        class="text-2xl font-heading font-bold  dark:text-white leading-tight hover: dark:hover: transition-colors duration-300 group-hover: dark:group-hover: focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-highlight focus-visible:ring-offset-2 rounded" style="color: var(--color-brand-subtle);" style="color: var(--color-brand-highlight);" style="color: var(--color-text-primary);"
       >
         {title}
       </a>
     </h3>
 
-    <p class="text-text-secondary dark:text-text-secondary-dark mb-4">
+    <!-- Description with improved readability -->
+    <p class="dark: mb-8 leading-relaxed text-base" style="color: var(--color-text-muted);" style="color: var(--color-text-secondary);">
       {description}
     </p>
 
-    <div
-      class="flex flex-wrap gap-4 mb-6 text-sm text-text-secondary dark:text-text-secondary-dark"
-    >
-      <div>
-        <span class="font-semibold">Client:</span>
-        {client}
-      </div>
-      <div>
-        <span class="font-semibold">Industry:</span>
-        {industry}
-      </div>
-      <div>
-        <span class="font-semibold">Duration:</span>
-        {duration}
+    <!-- Project metadata with better organization -->
+    <div class="space-y-4 mb-8">
+      <div class="grid grid-cols-1 gap-3 text-sm">
+        <div class="flex items-center justify-between py-3 px-4 bg-gradient-to-r from-background-tertiary to-white dark:from-text-primary dark:to-text-primary rounded-xl border  dark:border-text-secondary" style="border-color: var(--color-border-primary);">
+          <span class="font-semibold  dark: uppercase tracking-wide text-xs" style="color: var(--color-text-muted);" style="color: var(--color-text-secondary);">
+            Duration
+          </span>
+          <span class="dark:text-white font-semibold" style="color: var(--color-text-primary);">
+            {duration}
+          </span>
+        </div>
       </div>
     </div>
 
-    <div class="flex flex-wrap gap-2">
+    <!-- Tags with enhanced styling -->
+    <div class="flex flex-wrap gap-2 mb-6">
       {
-        tags.map((tag) => (
-          <a href={`/tags/${tag.toLowerCase()}`}>
-            <Tag text={tag} clickable={true} />
+        tags.slice(0, 3).map((tag) => (
+          <a href={`/tags/${tag.toLowerCase()}`} class="group/tag" aria-label={`View tag: ${tag}`}>
+            <Tag text={tag} clickable={true} class="group-hover/tag: group-hover/tag:text-white transition-all duration-300 text-sm" style="background-color: var(--color-brand-highlight);" />
           </a>
         ))
       }
+      {tags.length > 3 && (
+        <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium  dark:  dark:" style="background-color: var(--color-background-tertiary);" style="background-color: var(--color-text-primary);" style="color: var(--color-text-muted);" style="color: var(--color-text-secondary);">
+          +{tags.length - 3} more
+        </span>
+      )}
+    </div>
+
+    <!-- View case study link -->
+    <div class="pt-4 border-t  dark:border-text-secondary" style="border-color: var(--color-border-primary);">
+      <a
+        href={href}
+        aria-label={`View case study: ${title}`}
+        class="inline-flex items-center text-sm font-semibold  dark: hover: dark:hover:text-purple-300 transition-all duration-300 group-hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-highlight focus-visible:ring-offset-2 rounded" style="color: var(--color-brand-subtle);" style="color: var(--color-brand-emphasis);" style="color: var(--color-brand-highlight);"
+      >
+        View Case Study
+        <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
     </div>
   </div>
+
+  <!-- Subtle background pattern -->
+  <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-purple-50/30 dark:to-purple-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl"></div>
 </article>

@@ -1,7 +1,7 @@
 ---
 import Button from "@/components/ui/Button.astro";
 import Heading from "@/components/ui/Heading.astro";
-import SectionContainer from "@/components/layout/SectionContainer.astro";
+import Container from "@/components/layout/Container.astro";
 import "@/styles/components/my-values.css";
 
 interface Props {
@@ -15,38 +15,31 @@ interface Props {
   buttonText?: string;
   /** Button link destination */
   buttonLink?: string;
-  /** Font family for the heading - 'fraunces' or 'dm-sans' */
-  font?: "fraunces" | "dm-sans";
 }
 
 // Default values
 const {
   title = "My Values",
   subtitle = "Designing with empathy, accessibility and inclusivity at the forefront of everything I do.",
-  imageUrl = "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  imageUrl = "https://images.unsplash.com/photo-1600202751116-3e0226e1e7a0?q=80&w=2670&auto=format&fit=crop",
   buttonText = "Explore My Values",
   buttonLink = "/values",
-  font = "fraunces",
 } = Astro.props;
 ---
 
-<SectionContainer class="my-values-section">
+<Container contentMargin={true} class="my-values-section">
   <div class="flex flex-col h-full">
     <!-- Headings above the card -->
     <div class="mb-4 md:mb-6 text-left">
       <Heading
         level={2}
-        font="dm-sans"
-        size="2xl"
-        class="text-text-secondary mb-2 md:mb-4 font-normal"
+        class="my-values-title mb-2 md:mb-4 font-normal text-xl"
       >
         {title}
       </Heading>
       <Heading
         level={3}
-        font={font}
-        size="2xl"
-        class="text-heading leading-tight"
+        class="my-values-subtitle leading-tight text-2xl md:text-3xl font-bold"
       >
         {subtitle}
       </Heading>
@@ -63,7 +56,7 @@ const {
     </div>
     <!-- Button beneath the card -->
     <div class="my-values-button">
-      <Button variant="black" href={buttonLink}>
+      <Button variant="primary" href={buttonLink}>
         {buttonText}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -79,4 +72,4 @@ const {
       </Button>
     </div>
   </div>
-</SectionContainer>
+</Container>

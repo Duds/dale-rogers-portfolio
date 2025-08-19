@@ -127,7 +127,7 @@ const { title: propsTitle, description: propsDescription } = Astro.props;
     content.querySelectorAll("h2").forEach((h2) => {
       const heading = document.createElement("astro-heading");
       heading.setAttribute("level", "2");
-      heading.setAttribute("font", "fraunces");
+      heading.setAttribute("font", "inter");
       heading.setAttribute("size", "2xl");
       heading.innerHTML = h2.innerHTML;
       h2.replaceWith(heading);
@@ -137,7 +137,7 @@ const { title: propsTitle, description: propsDescription } = Astro.props;
     content.querySelectorAll("h3").forEach((h3) => {
       const heading = document.createElement("astro-heading");
       heading.setAttribute("level", "3");
-      heading.setAttribute("font", "fraunces");
+      heading.setAttribute("font", "inter");
       heading.setAttribute("size", "3xl");
       heading.innerHTML = h3.innerHTML;
       h3.replaceWith(heading);

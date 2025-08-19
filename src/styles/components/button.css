@@ -1,9 +1,8 @@
 @reference "tailwindcss";
 
-/* Button component styles migrated from global.css */
+/* Professional Button Component Styles with proper theme tokens */
 .button {
-  /* Token-based class to add in markup: rounded-full */
-  @apply inline-flex items-center gap-2 px-8 py-4 text-xl font-medium transition-all rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-black;
+  @apply inline-flex items-center gap-2 px-6 py-3 text-base font-medium transition-all duration-300 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.2s;
@@ -11,52 +10,80 @@
 
 .button:hover,
 .button:focus-visible {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
-/* Black Button */
-.button--black {
-  @apply bg-black text-white hover:bg-gray-800 hover:text-white shadow-md hover:shadow-lg dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800 dark:hover:text-white;
+/* Primary Button - Deep charcoal */
+.button--primary {
+  @apply text-white shadow-md hover:shadow-lg;
+  background-color: var(--color-primary-main);
 }
 
-/* Purple Button */
-.button--purple {
-  @apply bg-purple-600 text-white hover:bg-purple-700 hover:text-white shadow-md hover:shadow-lg dark:bg-purple-700 dark:text-white dark:hover:bg-purple-800 dark:hover:text-white;
+.button--primary:hover {
+  background-color: var(--color-primary-dark);
 }
 
-/* Orange Button */
-.button--orange {
-  @apply bg-orange-500 text-white hover:bg-orange-600 hover:text-white shadow-md hover:shadow-lg dark:bg-orange-600 dark:text-white dark:hover:bg-orange-700 dark:hover:text-white;
+/* Secondary Button - Professional blue */
+.button--secondary {
+  @apply bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg;
 }
 
-/* Green Button */
-.button--green {
-  @apply bg-green-500 text-white hover:bg-green-600 hover:text-white shadow-md hover:shadow-lg dark:bg-green-600 dark:text-white dark:hover:bg-green-700 dark:hover:text-white;
+/* Accent Button - Emerald green */
+.button--accent {
+  @apply text-white shadow-md hover:shadow-lg;
+  background-color: var(--color-accent-main);
 }
 
-/* Ghost Button */
+.button--accent:hover {
+  background-color: var(--color-accent-dark);
+}
+
+/* Grey Button - Neutral option */
+.button--grey {
+  @apply text-white shadow-md hover:shadow-lg;
+  background-color: var(--color-text-secondary);
+}
+
+.button--grey:hover {
+  background-color: var(--color-text-tertiary);
+}
+
+/* Ghost Button - Transparent with border */
 .button--ghost {
-  @apply bg-transparent border-2 border-solid border-black text-black hover:bg-black hover:text-white hover:border-black shadow-none dark:bg-transparent dark:text-white dark:border-white dark:hover:bg-black dark:hover:text-white dark:hover:border-white;
+  @apply bg-transparent border-2 border-solid shadow-none;
+  color: var(--color-text-secondary);
+  border-color: var(--color-text-secondary);
 }
 
-/*
-Token usage:
-- bg-*, text-*, hover:bg-*-hover, hover:text-*, shadow-md, hover:shadow-lg
-- dark:bg-*-dark, dark:text-*, dark:hover:bg-*-hover-dark, dark:hover:text-*
-- border-ghost, border-ghost-hover, dark:border-ghost-dark, dark:hover:border-ghost-hover-dark
-- focus-visible:ring-black (for accessibility)
-*/
+.button--ghost:hover {
+  background-color: var(--color-background-tertiary);
+  color: var(--color-text-primary);
+}
+
+/* Dark mode adjustments */
+.dark .button--ghost {
+  border-color: var(--color-text-disabled);
+  color: var(--color-text-disabled);
+}
 
 .dark .button--ghost:hover {
-  background-color: #fff !important;
-  color: #000 !important;
-  border-color: #000 !important;
+  background-color: var(--color-text-primary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-text-primary);
 }
 
-.footer-inner .button--purple {
+.dark .button--ghost:hover {
+  background-color: var(--color-text-inverse);
+  color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+}
+
+/* Footer button special styling */
+.footer-inner .button--secondary {
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.footer-inner .button--purple:hover,
-.footer-inner .button--purple:focus-visible {
-  color: #f97316; /* orange-500 */
+
+.footer-inner .button--secondary:hover,
+.footer-inner .button--secondary:focus-visible {
+  color: var(--color-accent-main);
 }

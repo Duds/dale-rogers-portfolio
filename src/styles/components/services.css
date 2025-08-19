@@ -1,57 +1,115 @@
+/**
+ * Services Component Styles - Semantic Color System
+ *
+ * Uses semantic color tokens that can be easily refactored
+ * without changing component code.
+ */
+
 @reference "tailwindcss";
 
-/* Services section component styles */
-.services-section {
-  @apply w-full bg-white dark:bg-neutral-950;
-}
-.services-container {
-  @apply grid grid-cols-12 gap-8 mb-16;
-}
-.services-heading {
-  /* Token-based class to add in markup: font-body */
-  @apply text-2xl font-semibold text-neutral-600 dark:text-neutral-400 mb-4;
-}
-.services-title {
-  @apply text-4xl text-neutral-900 dark:text-white leading-tight;
-}
-.services-list {
-  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8;
-}
-.services-card {
-  /* 'group' utility removed; add 'group' to markup if needed */
-  @apply relative overflow-hidden rounded-2xl transition-all duration-300 h-[600px] flex flex-col;
-  /* Micro animation: lift and shadow on hover */
-  transition:
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.services-card:hover,
-.services-card:focus-visible {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow:
-    0 8px 32px 0 rgba(0, 0, 0, 0.18),
-    0 1.5px 6px 0 rgba(0, 0, 0, 0.1);
-  z-index: 2;
-}
-.services-card-image {
-  @apply relative h-[400px] w-full overflow-hidden;
-}
-.services-card-img {
-  @apply absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105;
-}
-.services-card-gradient {
-  @apply absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50 group-hover:to-black/60 transition-opacity duration-300;
-}
-.services-card-content {
-  @apply p-8 flex flex-col flex-grow;
-}
-.services-card-title {
-  /* Token-based class to add in markup: font-display */
-  @apply text-2xl text-white mb-3;
-}
-.services-card-description {
-  @apply text-white/90;
-}
-.services-empty {
-  @apply col-span-full p-8 text-center text-neutral-600 dark:text-neutral-400;
+@layer components {
+  .services-section {
+    @apply py-16 md:py-24;
+    background-color: var(--color-background-primary);
+  }
+
+  .services-container {
+    @apply grid grid-cols-12 gap-8 items-end mb-16;
+  }
+
+  .services-heading {
+    @apply text-4xl md:text-5xl font-bold mb-6;
+    color: var(--color-text-primary);
+  }
+
+  .services-title {
+    @apply text-xl max-w-2xl;
+    color: var(--color-text-secondary);
+  }
+
+  .services-list {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8;
+  }
+
+  .services-card {
+    @apply relative overflow-hidden rounded-3xl transition-all duration-500 hover:scale-105;
+    background-color: var(--color-background-elevated);
+    border: 1px solid var(--color-border-primary);
+  }
+
+  .services-card:hover {
+    border-color: var(--color-border-focus);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .services-card-image {
+    @apply relative h-48 overflow-hidden;
+  }
+
+  .services-card-img {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+
+  .services-card:hover .services-card-img {
+    @apply scale-110;
+  }
+
+  .services-card-gradient {
+    @apply absolute inset-0 bg-gradient-to-t from-black/20 to-transparent;
+  }
+
+  .services-card-content {
+    @apply p-6;
+  }
+
+  .services-card-title {
+    @apply text-xl font-bold mb-3;
+    color: var(--color-text-primary);
+  }
+
+  .services-card-description {
+    @apply text-base leading-relaxed;
+    color: var(--color-text-secondary);
+  }
+
+  .services-empty {
+    @apply col-span-full text-center py-12;
+    color: var(--color-text-muted);
+  }
+
+  /* Service variant styles using semantic colors */
+  .services-card--primary {
+    background: linear-gradient(135deg, var(--color-primary-main), var(--color-primary-dark));
+    color: var(--color-primary-contrast);
+  }
+
+  .services-card--secondary {
+    background: linear-gradient(135deg, var(--color-secondary-main), var(--color-secondary-dark));
+    color: var(--color-secondary-contrast);
+  }
+
+  .services-card--accent {
+    background: linear-gradient(135deg, var(--color-accent-main), var(--color-accent-dark));
+    color: var(--color-accent-contrast);
+  }
+
+  .services-card--brand {
+    background: linear-gradient(135deg, var(--color-brand-highlight), var(--color-brand-emphasis));
+    color: white;
+  }
+
+  /* Dark theme adjustments */
+  .dark .services-card {
+    background-color: var(--color-background-elevated);
+    border-color: var(--color-border-primary);
+  }
+
+  .dark .services-card:hover {
+    border-color: var(--color-border-focus);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .dark .services-card-gradient {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+  }
 }

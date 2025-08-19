@@ -15,7 +15,7 @@ export interface LogoSaladProps {
 export interface Service {
   title: string;
   description: string;
-  variant: "purple" | "black" | "green" | "orange";
+  variant: "primary" | "black" | "green" | "orange";
   imageUrl: string;
 }
 

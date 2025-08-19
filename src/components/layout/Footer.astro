@@ -45,10 +45,10 @@ const infoLinks: Link[] = [
 ---
 
 <footer class="footer">
-  <Container fullWidth={true}>
+  <Container contentMargin={true}>
     <div class="footer-inner">
       <!-- Acknowledgement of Country -->
-      <div class="mb-16 px-8 md:px-12">
+      <div class="mb-16">
         <div
           class="flex flex-col items-center md:items-start space-y-4 max-w-3xl"
         >
@@ -61,20 +61,20 @@ const infoLinks: Link[] = [
           </p>
         </div>
       </div>
-      <div class="grid lg:grid-cols-3 gap-12 lg:gap-20 px-8 md:px-12">
+      <div class="grid lg:grid-cols-3 gap-12 lg:gap-20">
         <!-- Left side with CTA -->
         <div class="lg:col-span-2 space-y-8">
           <h2
-            class="gradient-heading text-4xl md:text-6xl font-display leading-tight md:leading-tight"
+            class="text-4xl md:text-6xl font-display leading-tight md:leading-tight text-white"
             id="gradient-text"
           >
             Transforming services,<br />enriching lives,<br />together
           </h2>
           <div>
             <Button
-              variant="purple"
+              variant="primary"
               href="/contact"
-              class="button button--purple text-2xl px-12 py-6"
+              class="button button--primary text-2xl px-12 py-6"
             >
               Get in touch
               <svg
@@ -101,10 +101,7 @@ const infoLinks: Link[] = [
                 {
                   sitemapLinks.map((link) => (
                     <li>
-                      <a
-                        href={link.href}
-                        class="footer-link hover:text-primary"
-                      >
+                      <a href={link.href} class="footer-link hover:text-white">
                         {link.name}
                       </a>
                     </li>
@@ -123,7 +120,7 @@ const infoLinks: Link[] = [
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex items-center footer-link hover:text-primary"
+                        class="flex items-center footer-link hover:text-white"
                       >
                         <img
                           src={`/icons/${link.icon}.svg`}
@@ -147,10 +144,7 @@ const infoLinks: Link[] = [
                 {
                   infoLinks.map((link) => (
                     <li>
-                      <a
-                        href={link.href}
-                        class="footer-link hover:text-primary"
-                      >
+                      <a href={link.href} class="footer-link hover:text-white">
                         {link.name}
                       </a>
                     </li>
@@ -163,63 +157,21 @@ const infoLinks: Link[] = [
       </div>
     </div>
   </Container>
-  <!-- Copyright section -->
-  <div class="py-8">
-    <Container fullWidth={true}>
-      <div class="px-8 md:px-12">
-        <div
-          class="flex flex-col md:flex-row md:justify-between md:items-center gap-4"
-        >
-          <p class="footer-copyright">
-            &copy; {currentYear} Dale Rogers. All rights reserved.
-          </p>
-          <p class="footer-copyright flex items-center">
-            Made with <span class="footer-heart">❤️</span> in Canberra (Ngunnawal
-            Country)
-          </p>
-        </div>
-      </div>
-    </Container>
-  </div>
 </footer>
 
-<style>
-  .gradient-heading {
-    background: linear-gradient(
-      45deg,
-      var(--colour-footer-gradient-1, #af8abf) 0%,
-      var(--colour-footer-gradient-2, #fa8a58) 35%,
-      var(--colour-footer-gradient-3, #36a96a) 70%,
-      var(--colour-footer-gradient-1, #af8abf) 100%
-    );
-    background-size: 200% 100%;
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    animation: gradientRotate 8s linear infinite;
-    will-change: background-position;
-    padding: 0.1em 0;
-    margin: -0.1em 0;
-    line-height: 1.2;
-  }
-
-  @keyframes gradientRotate {
-    0% {
-      background-position: 0% 50%;
-    }
-    100% {
-      background-position: 200% 50%;
-    }
-  }
-
-  /* Ensure gradient is visible in dark mode */
-  :global(.dark) .gradient-heading {
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .acknowledgement-slogan {
-    color: var(--colour-footer-acknowledgement, #9ca3af);
-    font-size: 1.25rem;
-  }
-</style>
+<!-- Copyright section with proper padding and contrast -->
+<div class="copyright-section">
+  <Container contentMargin={true}>
+    <div
+      class="flex flex-col md:flex-row md:justify-between md:items-center gap-4"
+    >
+      <p class="copyright-text">
+        &copy; {currentYear} Dale Rogers. All rights reserved.
+      </p>
+      <p class="copyright-text flex items-center">
+        Made with <span class="copyright-heart">❤️</span> in Canberra (Ngunnawal
+        Country)
+      </p>
+    </div>
+  </Container>
+</div>

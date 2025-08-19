@@ -1,0 +1,147 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  priority?: boolean;
+  placeholder?: string;
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  class: className = "",
+  priority = false,
+  placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23f3f4f6'/%3E%3C/svg%3E"
+} = Astro.props;
+
+const imageId = `lazy-image-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={`lazy-image-container ${className}`}>
+  {priority ? (
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      class="lazy-image loaded"
+      loading="eager"
+    />
+  ) : (
+    <>
+      <img
+        src={placeholder}
+        alt=""
+        width={width}
+        height={height}
+        class="lazy-image placeholder"
+        aria-hidden="true"
+      />
+      <img
+        data-src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        class="lazy-image"
+        loading="lazy"
+        id={imageId}
+      />
+    </>
+  )}
+</div>
+
+<style>
+  .lazy-image-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .lazy-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .lazy-image.placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: blur(10px);
+    transform: scale(1.1);
+  }
+
+  .lazy-image:not(.loaded) {
+    opacity: 0;
+  }
+
+  .lazy-image.loaded {
+    opacity: 1;
+  }
+
+  /* Loading animation */
+  .lazy-image:not(.loaded)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #e5e7eb;
+    border-top: 2px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+
+<script>
+  // Lazy loading implementation
+  function initLazyLoading() {
+    const lazyImages = document.querySelectorAll('.lazy-image:not(.loaded)');
+    
+    if (lazyImages.length === 0) return;
+
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target as HTMLImageElement;
+          const dataSrc = img.getAttribute('data-src');
+          
+          if (dataSrc) {
+            img.src = dataSrc;
+            img.classList.add('loaded');
+            observer.unobserve(img);
+          }
+        }
+      });
+    }, {
+      rootMargin: '50px 0px',
+      threshold: 0.01
+    });
+
+    lazyImages.forEach(img => {
+      imageObserver.observe(img);
+    });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLazyLoading);
+  } else {
+    initLazyLoading();
+  }
+
+  // Re-initialize for dynamic content
+  document.addEventListener('astro:page-load', initLazyLoading);
+</script>

@@ -1,27 +1,138 @@
 @reference "tailwindcss";
 
-/* Footer component styles migrated from global.css */
+/* Professional Footer Component Styles with proper theme tokens */
 .footer {
-  @apply relative w-full py-20;
+  @apply bg-white dark:bg-gray-900;
 }
+
+/* Footer inner container - black card with rounded corners and internal padding */
 .footer-inner {
-  @apply rounded-3xl py-20 overflow-hidden w-full bg-black;
+  @apply bg-neutral-900 rounded-3xl p-8 md:p-12;
 }
+
+.footer__content {
+  @apply space-y-12;
+}
+
+/* Acknowledgement of Country */
+.footer__acknowledgement {
+  @apply text-center pb-8 border-b border-neutral-700;
+}
+
+.footer__acknowledgement-text {
+  @apply text-neutral-300 text-sm md:text-base leading-relaxed max-w-4xl mx-auto;
+}
+
+/* Slogan Section */
+.footer__slogan {
+  @apply text-center pb-8 border-b border-neutral-700;
+}
+
+.footer__slogan-text {
+  @apply text-2xl md:text-3xl font-bold text-white mb-3;
+}
+
+.footer__slogan-subtitle {
+  @apply text-neutral-300 text-base md:text-lg;
+}
+
+.footer__main {
+  @apply flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8;
+}
+
+.footer__brand {
+  @apply space-y-2;
+}
+
+.footer__title {
+  @apply text-3xl md:text-4xl font-bold;
+}
+
+.footer__description {
+  @apply text-neutral-400 text-lg;
+}
+
+.footer__actions {
+  @apply flex-shrink-0;
+}
+
+.footer__links {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12;
+}
+
+.footer__section {
+  @apply space-y-4;
+}
+
+.footer__section-title {
+  @apply text-lg font-semibold text-white mb-4;
+}
+
+.footer__link-list {
+  @apply space-y-2;
+}
+
+.footer__link {
+  @apply text-neutral-400 hover:text-white transition-colors duration-300;
+}
+
+.footer__bottom {
+  @apply pt-8 border-t border-neutral-600 flex flex-col md:flex-row justify-between items-start md:items-center gap-4;
+}
+
+.footer__copyright {
+  @apply text-neutral-400;
+}
+
+.footer__legal {
+  @apply flex gap-6;
+}
+
+.footer__legal-link {
+  @apply text-neutral-400 hover:text-white transition-colors duration-300;
+}
+
+/* Footer heading styles - WHITE for maximum contrast on black */
 .footer-heading {
-  @apply text-3xl font-medium text-white;
+  @apply text-lg font-semibold text-white mb-4;
 }
+
+/* Footer link styles - LIGHT GRAY for good contrast, WHITE on hover */
 .footer-link {
-  @apply text-xl transition-colors text-white;
+  @apply text-neutral-200 hover:text-white transition-colors duration-300;
 }
-.text-footer-text-secondary {
-  @apply text-white/80;
-}
-.acknowledgement-slogan {
-  @apply text-white;
-}
+
+/* Footer copyright styles - LIGHT GRAY for good contrast */
 .footer-copyright {
-  @apply text-sm;
+  @apply text-neutral-200;
 }
+
+/* Footer heart styles - BRIGHT RED for good contrast */
 .footer-heart {
-  @apply mx-1;
+  @apply text-red-400;
+}
+
+/* Acknowledgement text - LIGHT GRAY for good contrast on black */
+.text-footer-text-secondary {
+  @apply text-neutral-200;
+}
+
+/* Acknowledgement slogan - WHITE for maximum contrast */
+.acknowledgement-slogan {
+  @apply text-white font-medium text-xl;
+}
+
+/* Copyright section styles - inherits body background */
+.copyright-section {
+  @apply py-8;
+}
+
+/* Copyright text - DARK for good contrast on light body background */
+.copyright-text {
+  @apply text-neutral-700 dark:text-neutral-300 text-base;
+}
+
+/* Copyright heart - BRIGHT RED for good contrast */
+.copyright-heart {
+  @apply text-red-500 dark:text-red-400;
 }

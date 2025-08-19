@@ -50,11 +50,11 @@ const capabilities: Capability[] = [
 
     <div class="grid md:grid-cols-2 gap-8 mb-12">
       <div>
-        <p class="text-text-secondary mb-4">
+        <p class="mb-4" style="color: var(--color-text-secondary);">
           I offer a comprehensive range of service design capabilities to help
           organizations create better experiences for their users.
         </p>
-        <p class="text-text-secondary mb-4">
+        <p class="mb-4" style="color: var(--color-text-secondary);">
           From research to implementation, I work closely with clients to
           understand their needs and deliver solutions that drive meaningful
           change.
@@ -69,7 +69,7 @@ const capabilities: Capability[] = [
           <Card title={capability.title}>
             <div class="flex items-start space-x-4">
               <Icon name={capability.icon} class="w-8 h-8 text-primary" />
-              <p class="text-text-secondary">{capability.description}</p>
+              <p class="" style="color: var(--color-text-secondary);">{capability.description}</p>
             </div>
           </Card>
         ))

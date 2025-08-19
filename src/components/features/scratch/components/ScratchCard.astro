@@ -47,7 +47,7 @@ const formattedDate = new Date(pubDate).toLocaleDateString("en-AU", {
       </span>
     </div>
 
-    <p class="text-text-secondary mb-4">{description}</p>
+    <p class="mb-4" style="color: var(--color-text-secondary);">{description}</p>
 
     <div class="flex flex-wrap gap-md mb-4">
       {
@@ -62,7 +62,7 @@ const formattedDate = new Date(pubDate).toLocaleDateString("en-AU", {
     <div class="flex items-center justify-between">
       <time
         datetime={pubDate.toISOString()}
-        class="text-sm text-text-secondary"
+        class="text-sm" style="color: var(--color-text-secondary);"
       >
         {formattedDate}
       </time>

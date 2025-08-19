@@ -1,0 +1,14 @@
+@reference "tailwindcss";
+
+/* Professional Page Header Component Styles with proper theme tokens */
+.page-header {
+  @apply text-center py-16 md:py-20;
+}
+
+.page-header__title {
+  @apply text-5xl md:text-6xl lg:text-7xl font-black text-neutral-900 dark:text-white leading-tight mb-6;
+}
+
+.page-header__description {
+  @apply text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed;
+}

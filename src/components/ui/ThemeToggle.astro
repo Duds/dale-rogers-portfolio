@@ -1,234 +1,109 @@
 ---
-import Button from "@/components/ui/Button.astro";
+/**
+ * @fileoverview Theme toggle component for switching between light and dark modes.
+ * Features professional styling with smooth transitions and accessibility.
+ */
 
 interface Props {
-  /** Whether to include the theme toggle script (set to false for additional instances) */
-  includeScript?: boolean;
+  /** Additional CSS classes */
+  class?: string;
 }
 
-const { includeScript = true } = Astro.props;
+const { class: className } = Astro.props;
+
+const baseClasses = "theme-toggle";
+const combinedClasses = [baseClasses, className]
+  .filter(Boolean)
+  .join(" ");
 ---
 
-<style>
-  @reference "tailwindcss";
-
-  .theme-toggle {
-    @apply font-sans text-xl md:text-2xl font-bold border-2 rounded-full transition-all duration-300;
-    width: 48px;
-    height: 48px;
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-    /* Use token for border radius if available */
-    border-radius: var(--radius-full, 9999px);
-  }
-  .theme-icons {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .theme-toggle svg {
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition:
-      opacity 0.2s ease,
-      visibility 0.2s ease,
-      transform 0.3s ease;
-  }
-  .moon-icon {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) rotate(0deg) !important;
-  }
-  .sun-icon {
-    opacity: 0;
-    visibility: hidden;
-    transform: translate(-50%, -50%) rotate(90deg) !important;
-  }
-  html.dark .moon-icon {
-    opacity: 0;
-    visibility: hidden;
-    transform: translate(-50%, -50%) rotate(-90deg) !important;
-  }
-  html.dark .sun-icon {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) rotate(0deg) !important;
-  }
-  .theme-toggle.spin .sun-icon,
-  .theme-toggle.spin .moon-icon {
-    transition:
-      opacity 0.2s ease,
-      visibility 0.2s ease,
-      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .theme-transition {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--colour-primary);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transition: opacity 0.5s ease;
-  }
-  .theme-transition.fade-in {
-    opacity: 0.15;
-  }
-</style>
-
-<Button
+<button
   id="theme-toggle"
-  variant="ghost"
-  ghostColour="black"
+  class={combinedClasses}
+  type="button"
   aria-label="Toggle theme"
-  title="Toggle dark mode"
-  class="theme-toggle border-black dark:border-white hover:bg-black hover:text-white hover:border-black dark:hover:bg-black dark:hover:text-white dark:hover:border-white"
+  aria-pressed="false"
 >
-  <div class="theme-icons">
+  <span class="theme-toggle__icon theme-toggle__icon--light">
     <svg
-      class="sun-icon"
-      width="24"
-      height="24"
-      stroke-width="1.5"
-      viewBox="0 0 24 24"
+      class="w-6 h-6"
       fill="none"
       stroke="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
     >
       <path
-        d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z"
         stroke-linecap="round"
-        stroke-linejoin="round"></path>
-      <path d="M22 12L23 12" stroke-linecap="round" stroke-linejoin="round"
-      ></path>
-      <path d="M12 2V1" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M12 23V22" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M20 20L19 19" stroke-linecap="round" stroke-linejoin="round"
-      ></path>
-      <path d="M20 4L19 5" stroke-linecap="round" stroke-linejoin="round"
-      ></path>
-      <path d="M4 20L5 19" stroke-linecap="round" stroke-linejoin="round"
-      ></path>
-      <path d="M4 4L5 5" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M1 12L2 12" stroke-linecap="round" stroke-linejoin="round"
-      ></path>
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+      />
     </svg>
+  </span>
+  <span class="theme-toggle__icon theme-toggle__icon--dark">
     <svg
-      class="moon-icon"
-      width="24"
-      height="24"
-      stroke-width="1.5"
-      viewBox="0 0 24 24"
+      class="w-6 h-6"
       fill="none"
       stroke="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
     >
-      <circle cx="12" cy="12" r="10" stroke-width="1.5"></circle>
       <path
-        d="M7.63262 3.06689C8.98567 3.35733 9.99999 4.56025 9.99999 6.00007C9.99999 7.65693 8.65685 9.00007 6.99999 9.00007C5.4512 9.00007 4.17653 7.82641 4.01685 6.31997"
-      ></path>
-      <path
-        d="M22 13.0505C21.3647 12.4022 20.4793 12 19.5 12C17.567 12 16 13.567 16 15.5C16 17.2632 17.3039 18.7219 19 18.9646"
-      ></path>
-      <path
-        d="M14.5 8.51L14.51 8.49889"
         stroke-linecap="round"
-        stroke-linejoin="round"></path>
-      <path
-        d="M10 17C11.1046 17 12 16.1046 12 15C12 13.8954 11.1046 13 10 13C8.89543 13 8 13.8954 8 15C8 16.1046 8.89543 17 10 17Z"
-        stroke-linecap="round"
-        stroke-linejoin="round"></path>
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+      />
     </svg>
-  </div>
-</Button>
+  </span>
+</button>
 
-<!-- Theme transition overlay -->
-<div id="theme-transition" class="theme-transition"></div>
+<script>
+  const initThemeToggle = () => {
+    const toggle = document.getElementById("theme-toggle");
+    const root = document.documentElement;
+    const iconLight = document.querySelector(".theme-toggle__icon--light");
+    const iconDark = document.querySelector(".theme-toggle__icon--dark");
 
-{includeScript && (
-<script is:inline>
-  // Theme toggle utility functions
-  const THEME_KEY = "theme";
+    if (!toggle || !iconLight || !iconDark) return;
 
-  // Get the current theme from localStorage or system preference
-  function getTheme() {
-    const stored = localStorage.getItem(THEME_KEY);
-    if (stored === "dark" || stored === "light") return stored;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  }
+    // Update toggle state based on current theme
+    const updateToggleState = () => {
+      const isDark = root.classList.contains("dark");
+      toggle.setAttribute("aria-pressed", isDark.toString());
+    };
 
-  // Set the theme and update <html> class
-  function setTheme(theme) {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    localStorage.setItem(THEME_KEY, theme);
-  }
-
-  // Toggle between light and dark
-  function toggleTheme() {
-    const current = getTheme();
-    const next = current === "dark" ? "light" : "dark";
-    setTheme(next);
-  }
-
-  // Initialize theme on page load
-  function initTheme() {
-    setTheme(getTheme());
-  }
-
-  // Add event listeners
-  document.addEventListener("DOMContentLoaded", () => {
-    initTheme();
-    const themeToggle = document.getElementById("theme-toggle");
-    const themeTransition = document.getElementById("theme-transition");
-
-    themeToggle?.addEventListener("click", () => {
-      // Add animation classes
-      themeToggle.classList.add("spin");
-      if (themeTransition) {
-        themeTransition.classList.add("fade-in");
+    // Toggle theme function
+    const toggleTheme = () => {
+      const isDark = root.classList.contains("dark");
+      
+      if (isDark) {
+        root.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      } else {
+        root.classList.add("dark");
+        localStorage.setItem("theme", "dark");
       }
+      
+      updateToggleState();
+    };
 
-      // Toggle theme
-      toggleTheme();
-
-      // Remove animation classes after animation completes
-      setTimeout(() => {
-        themeToggle.classList.remove("spin");
-      }, 500);
-
-      if (themeTransition) {
-        setTimeout(() => {
-          themeTransition.classList.remove("fade-in");
-        }, 500);
+    // Event listeners
+    toggle.addEventListener("click", toggleTheme);
+    
+    // Keyboard support
+    toggle.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleTheme();
       }
     });
-  });
 
-  // Support Astro view transitions
-  document.addEventListener("astro:page-load", initTheme);
-  document.addEventListener("astro:after-swap", initTheme);
+    // Initial state update
+    updateToggleState();
+  };
 
-  // Listen for system preference changes if no manual override
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", (e) => {
-      if (!localStorage.getItem(THEME_KEY)) {
-        setTheme(e.matches ? "dark" : "light");
-      }
-    });
+  // Initialize theme toggle on page load
+  document.addEventListener("astro:page-load", initThemeToggle);
+  document.addEventListener("DOMContentLoaded", initThemeToggle);
 </script>
-)}

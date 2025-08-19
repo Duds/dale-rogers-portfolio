@@ -21,10 +21,11 @@ const { paragraphs = [] } = Astro.props;
 ---
 
 <SectionContainer class="about-section py-32">
-  <div class="grid grid-cols-6 gap-8">
-    <div class="col-span-6 lg:col-span-4">
+      <div class="grid grid-cols-12 gap-8">
+      <div class="col-span-12 lg:col-span-8">
       <div
-        class="mb-6 text-2xl text-text-secondary about-section__bio prose prose-lg max-w-none"
+        class="mb-6 text-2xl about-section__bio prose prose-lg max-w-none"
+        style="color: var(--color-text-secondary);"
       >
         {
           paragraphs.map((p) => (
@@ -33,7 +34,7 @@ const { paragraphs = [] } = Astro.props;
         }
       </div>
       <div class="mt-12">
-        <Button variant="black" href="/about" class="fade-in-up" data-fade>
+        <Button variant="primary" href="/about" class="fade-in-up" data-fade>
           Get to know me
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -66,6 +67,11 @@ const { paragraphs = [] } = Astro.props;
     @apply font-medium italic;
   }
   :global(.about-section__bio .strong) {
-    @apply text-neutral-900 dark:text-white font-bold;
+    @apply font-bold;
+    color: var(--color-text-primary);
+  }
+
+  .dark :global(.about-section__bio .strong) {
+    color: var(--color-text-primary);
   }
 </style>

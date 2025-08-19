@@ -1,0 +1,19 @@
+@reference "tailwindcss";
+
+/* Professional Tag Component Styles with proper theme tokens */
+.tag {
+  @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-neutral-100 text-neutral-600 border border-neutral-200 transition-all duration-300;
+}
+
+.tag--clickable {
+  @apply cursor-pointer hover:bg-border-primary hover:text-neutral-900 hover:border-neutral-400;
+}
+
+/* Dark mode adjustments */
+.dark .tag {
+  @apply bg-neutral-900 text-neutral-400 border-neutral-600;
+}
+
+.dark .tag--clickable:hover {
+  @apply bg-neutral-600 text-white border-text-tertiary;
+}

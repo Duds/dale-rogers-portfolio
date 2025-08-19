@@ -1,11 +1,15 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: [
+    "../src/**/*.stories.@(js|jsx|ts|tsx)"
+  ],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
+    "@storybook/addon-a11y",
+    "@storybook/addon-themes",
   ],
   framework: {
     name: "@storybook/react-vite",
@@ -13,6 +17,7 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: "tag",
+    defaultName: "Documentation",
   },
   typescript: {
     check: false,
@@ -24,7 +29,27 @@ const config: StorybookConfig = {
     },
   },
   viteFinal: async (config) => {
-    // Add any custom Vite configuration here
+    // Add CSS imports for component styles
+    if (config.css) {
+      config.css.preprocessorOptions = {
+        ...config.css.preprocessorOptions,
+        postcss: {
+          plugins: [
+            require('tailwindcss'),
+            require('autoprefixer'),
+          ],
+        },
+      };
+    }
+
+    // Add alias for @ imports
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@': '/src',
+      };
+    }
+
     return config;
   },
 };

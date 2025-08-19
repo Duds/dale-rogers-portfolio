@@ -1,58 +1,181 @@
+/**
+ * Professional Color Palette - Semantic Design System
+ *
+ * A sophisticated, modern color system designed for professional portfolios
+ * and business applications. Uses semantic naming conventions that allow
+ * easy refactoring by updating core values without changing component code.
+ */
+
 export const colors = {
+  // Core semantic colors - These can be refactored without changing component code
   primary: {
-    light: "#A78BFA", // light purple
-    DEFAULT: "#8B5CF6", // main purple
-    dark: "#7C3AED", // dark purple
+    main: "#1F2937", // Deep charcoal - professional, trustworthy
+    light: "#374151", // Lighter variant
+    dark: "#111827", // Darker variant
+    contrast: "#FFFFFF", // Text/icon color on primary backgrounds
   },
+  
   secondary: {
-    green: "#10B981", // primary green
-    orange: "#F97316", // primary orange
-    black: "#111111", // strong black
+    main: "#3B82F6", // Professional blue - reliable, corporate
+    light: "#60A5FA", // Lighter variant
+    dark: "#1D4ED8", // Darker variant
+    contrast: "#FFFFFF", // Text/icon color on secondary backgrounds
   },
-  neutral: {
-    white: "#FFFFFF",
-    black: "#000000",
-    background: "#F9FAFB",
-    cardPurple: "#F3F0FF",
-    cardGreen: "#ECFDF5",
-    cardOrange: "#FFF7ED",
-    cardBlack: "#111111",
+  
+  accent: {
+    main: "#10B981", // Growth/success color
+    light: "#34D399", // Lighter variant
+    dark: "#047857", // Darker variant
+    contrast: "#FFFFFF", // Text/icon color on accent backgrounds
   },
-  grey: {
-    50: "hsl(210, 20%, 98%)",
-    100: "hsl(220, 14%, 96%)",
-    200: "hsl(220, 13%, 91%)",
-    300: "hsl(216, 12%, 84%)",
-    400: "hsl(218, 11%, 65%)",
-    500: "hsl(220, 9%, 46%)",
-    600: "hsl(215, 14%, 34%)",
-    700: "hsl(217, 19%, 27%)",
-    800: "hsl(215, 28%, 17%)",
-    900: "hsl(221, 39%, 11%)",
-    950: "hsl(224, 71%, 4%)",
+
+  // Background and surface colors
+  background: {
+    primary: "#FAFAFA", // Main background
+    secondary: "#FFFFFF", // Secondary background
+    tertiary: "#F3F4F6", // Tertiary background
+    elevated: "#FFFFFF", // Elevated surfaces (cards, modals)
+    overlay: "rgba(0, 0, 0, 0.5)", // Overlay backgrounds
   },
-  success: {
-    light: "#BBF7D0", // soft green
-    DEFAULT: "#22C55E", // main green
-    dark: "#16A34A", // dark green
+
+  // Text colors with semantic meaning
+  text: {
+    primary: "#111827", // Main text color
+    secondary: "#4B5563", // Secondary text
+    tertiary: "#6B7280", // Tertiary text
+    disabled: "#9CA3AF", // Disabled text
+    inverse: "#FFFFFF", // Text on dark backgrounds
+    muted: "#9CA3AF", // Muted text
   },
-  warning: {
-    light: "#FEF9C3", // soft yellow
-    DEFAULT: "#EAB308", // main yellow
-    dark: "#CA8A04", // dark yellow
+
+  // Border and divider colors
+  border: {
+    primary: "#E5E7EB", // Main borders
+    secondary: "#D1D5DB", // Secondary borders
+    tertiary: "#F3F4F6", // Tertiary borders
+    focus: "#3B82F6", // Focus state borders
+    error: "#DC2626", // Error state borders
   },
-  error: {
-    light: "#FECACA", // soft red
-    DEFAULT: "#EF4444", // main red
-    dark: "#DC2626", // dark red
+
+  // Semantic state colors
+  state: {
+    success: "#059669", // Success states
+    warning: "#D97706", // Warning states
+    error: "#DC2626", // Error states
+    info: "#3B82F6", // Information states
+  },
+
+  // Interactive element colors
+  interactive: {
+    hover: "#F3F4F6", // Hover state backgrounds
+    active: "#E5E7EB", // Active state backgrounds
+    selected: "#DBEAFE", // Selected state backgrounds
+    focus: "#FEF3C7", // Focus state backgrounds
+  },
+
+  // Shadow and depth colors
+  shadow: {
+    light: "rgba(0, 0, 0, 0.05)",
+    medium: "rgba(0, 0, 0, 0.1)",
+    heavy: "rgba(0, 0, 0, 0.2)",
+    colored: "rgba(59, 130, 246, 0.1)", // Blue-tinted shadow
+  },
+
+  // Brand accent colors (can be easily refactored)
+  brand: {
+    highlight: "#8B5CF6", // Can be changed from purple to any color
+    subtle: "#F3F4F6", // Subtle brand accent
+    emphasis: "#1F2937", // Brand emphasis color
+  },
+
+  // Utility colors
+  utility: {
+    transparent: "transparent",
+    current: "currentColor",
+    inherit: "inherit",
   },
 } as const;
 
+// Dark theme color overrides
+export const darkColors = {
+  background: {
+    primary: "#111827", // Dark main background
+    secondary: "#1F2937", // Dark secondary background
+    tertiary: "#374151", // Dark tertiary background
+    elevated: "#1F2937", // Dark elevated surfaces
+    overlay: "rgba(0, 0, 0, 0.7)", // Dark overlay backgrounds
+  },
+
+  text: {
+    primary: "#FFFFFF", // Dark theme main text
+    secondary: "#D1D5DB", // Dark theme secondary text
+    tertiary: "#9CA3AF", // Dark theme tertiary text
+    disabled: "#6B7280", // Dark theme disabled text
+    inverse: "#111827", // Dark theme text on light backgrounds
+    muted: "#6B7280", // Dark theme muted text
+  },
+
+  border: {
+    primary: "#374151", // Dark theme main borders
+    secondary: "#4B5563", // Dark theme secondary borders
+    tertiary: "#1F2937", // Dark theme tertiary borders
+    focus: "#60A5FA", // Dark theme focus borders
+    error: "#F87171", // Dark theme error borders
+  },
+
+  interactive: {
+    hover: "#374151", // Dark theme hover states
+    active: "#4B5563", // Dark theme active states
+    selected: "#1E40AF", // Dark theme selected states
+    focus: "#92400E", // Dark theme focus states
+  },
+
+  shadow: {
+    light: "rgba(0, 0, 0, 0.3)",
+    medium: "rgba(0, 0, 0, 0.5)",
+    heavy: "rgba(0, 0, 0, 0.7)",
+    colored: "rgba(139, 92, 246, 0.2)", // Purple-tinted shadow for dark theme
+  },
+} as const;
+
+// Type exports for TypeScript
 export type ColorToken = keyof typeof colors;
+export type DarkColorToken = keyof typeof darkColors;
+export type ColorScale = keyof typeof colors.primary;
 
-// Additional tokens migrated from global.css :root
-export const uiColours = {
-  background: "#ffffff", // --color-bg
-  text: "#111111", // --color-text (default to black)
-  accent: "#8B5CF6", // --color-accent (default to purple)
-} as const;
+// Helper function to get color with dark theme support
+export const getColor = (colorPath: string, isDark: boolean = false): string => {
+  const path = colorPath.split('.');
+  const colorObj = isDark ? darkColors : colors;
+  
+  let current: any = colorObj;
+  for (const key of path) {
+    if (current[key] === undefined) {
+      console.warn(`Color path "${colorPath}" not found in ${isDark ? 'dark' : 'light'} theme`);
+      return '#000000'; // Fallback
+    }
+    current = current[key];
+  }
+  
+  return current;
+};
+
+// CSS custom property generator
+export const generateCSSVariables = (isDark: boolean = false): Record<string, string> => {
+  const colorObj = isDark ? darkColors : colors;
+  const variables: Record<string, string> = {};
+  
+  const flattenColors = (obj: any, prefix: string = '') => {
+    for (const [key, value] of Object.entries(obj)) {
+      const fullKey = prefix ? `${prefix}-${key}` : key;
+      if (typeof value === 'string') {
+        variables[`--color-${fullKey}`] = value;
+      } else if (typeof value === 'object' && value !== null) {
+        flattenColors(value, fullKey);
+      }
+    }
+  };
+  
+  flattenColors(colorObj);
+  return variables;
+};

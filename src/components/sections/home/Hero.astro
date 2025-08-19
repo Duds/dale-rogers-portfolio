@@ -2,7 +2,7 @@
 // Hero section component
 import Button from "@/components/ui/Button.astro";
 import Heading from "@/components/ui/Heading.astro";
-import SectionContainer from "@/components/layout/SectionContainer.astro";
+import Container from "@/components/layout/Container.astro";
 
 /**
  * Hero section for the home page
@@ -11,94 +11,56 @@ import SectionContainer from "@/components/layout/SectionContainer.astro";
  * @australian-english
  */
 
-interface Props {
-  /** Font family for the heading - 'fraunces' or 'dm-sans' */
-  headingFont?: "fraunces" | "dm-sans";
-}
-
-const { headingFont = "fraunces" } = Astro.props;
-
 // Dramatic slogan with line breaks for visual impact
 const slogan = "Service\nDesign\nStrategy";
 const description =
-  "I'm Dale Rogers, a service designer and strategist helping organisations transform how they deliver value. With over a decade of experience, I bridge the gap between human needs and organisational goals.";
+  "I'm Dale Rogers, a service designer and strategy consultant, helping organisations transform how they deliver value. With decades of experience, I bridge the gap between human needs and organisational goals.";
 ---
 
-<style>
-  .gradient-heading {
-    background: linear-gradient(
-      45deg,
-      var(--colour-hero-gradient-1, #af8abf) 0%,
-      var(--colour-hero-gradient-2, #fa8a58) 35%,
-      var(--colour-hero-gradient-3, #36a96a) 70%,
-      var(--colour-hero-gradient-1, #af8abf) 100%
-    );
-    background-size: 200% 100%;
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    animation: gradientRotate 8s linear infinite;
-    will-change: background-position;
-    padding: 0.1em 0;
-    margin: -0.1em 0;
-    line-height: 1.2;
-  }
+<div class="pt-32 md:pt-40 flex items-center py-20">
+  <Container>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 w-full">
+      <!-- Left Column -->
+      <div class="flex flex-col justify-center">
+        <Heading
+          level={1}
+          class="text-6xl md:text-7xl lg:text-8xl font-bold text-neutral-900 dark:text-white leading-tight"
+        >
+          {
+            slogan.split("\n").map((line, i) => (
+              <>
+                {i > 0 && <br />}
+                {line}
+              </>
+            ))
+          }
+        </Heading>
+      </div>
 
-  .heading-fraunces {
-    font-family: var(--font-heading);
-  }
-
-  .heading-dm-sans {
-    font-family: var(--font-body);
-  }
-
-  @keyframes gradientRotate {
-    0% {
-      background-position: 0% 50%;
-    }
-    100% {
-      background-position: 200% 50%;
-    }
-  }
-</style>
-
-<SectionContainer class="pt-32 md:pt-40 flex items-center py-20">
-  <div class="grid grid-cols-6 gap-8 lg:gap-12 w-full">
-    <!-- Left Column -->
-    <div class="col-span-6 lg:col-span-4">
-      <Heading level={1} font={headingFont} size="hero" gradient={true}>
-        {
-          slogan.split("\n").map((line, i) => (
-            <>
-              {i > 0 && <br />}
-              {line}
-            </>
-          ))
-        }
-      </Heading>
-    </div>
-
-    <!-- Right Column -->
-    <div class="col-span-6 lg:col-span-2 flex flex-col justify-end">
-      <p class="text-2xl text-text mb-8 max-w-2xl">
-        {description}
-      </p>
-      <div>
-        <Button variant="black" href="/work">
-          View Work
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"></path>
-          </svg>
-        </Button>
+      <!-- Right Column -->
+      <div class="flex flex-col justify-end">
+        <p
+          class="text-2xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl"
+        >
+          {description}
+        </p>
+        <div>
+          <Button variant="primary" href="/work">
+            View Work
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </Button>
+        </div>
       </div>
     </div>
-  </div>
-</SectionContainer>
+  </Container>
+</div>

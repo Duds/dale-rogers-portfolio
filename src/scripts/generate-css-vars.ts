@@ -1,9 +1,9 @@
-import { uiColours } from "../styles/theme/colors.ts";
+import { colors } from "../styles/theme/colors.ts";
 import { shadows } from "../styles/theme/shadows.ts";
 import { spacing } from "../styles/theme/spacing.ts";
 import { fontSize } from "../styles/theme/typography.ts";
 import { radius } from "../styles/theme/radius.ts";
-import { transitionDurationTokens } from "../styles/theme/transitions.ts";
+import { transitions } from "../styles/theme/transitions.ts";
 import { zIndex } from "../styles/theme/zIndex.ts";
 import * as fs from "fs";
 import * as path from "path";
@@ -15,27 +15,36 @@ function toKebabCase(str: string) {
 }
 
 function cssVarsFromObject(
-  obj: Record<string, string | number>,
+  obj: Record<string, string | number | Record<string, string>>,
   prefix: string,
   dashCaseKeys = false,
 ) {
-  return Object.entries(obj)
-    .map(([key, value]) =>
-      dashCaseKeys
-        ? `  --${prefix}-${key}: ${value};`
-        : `  --${prefix}-${toKebabCase(key)}: ${value};`,
-    )
-    .join("\n");
+  const vars: string[] = [];
+  
+  Object.entries(obj).forEach(([key, value]) => {
+    if (typeof value === 'string' || typeof value === 'number') {
+      const varName = dashCaseKeys ? key : toKebabCase(key);
+      vars.push(`  --${prefix}-${varName}: ${value};`);
+    } else if (typeof value === 'object') {
+      // Handle nested objects like grey scale
+      Object.entries(value).forEach(([subKey, subValue]) => {
+        const varName = `${key}-${subKey}`;
+        vars.push(`  --${prefix}-${varName}: ${subValue};`);
+      });
+    }
+  });
+  
+  return vars.join('\n');
 }
 
 const css = `
 :root {
-${cssVarsFromObject(uiColours, "color")}
+${cssVarsFromObject(colors, "color")}
 ${cssVarsFromObject(shadows, "shadow", true)}
 ${cssVarsFromObject(spacing, "space", true)}
 ${cssVarsFromObject(fontSize, "text", true)}
 ${cssVarsFromObject(radius, "radius", true)}
-${cssVarsFromObject(transitionDurationTokens, "transition", true)}
+${cssVarsFromObject(transitions, "transition", true)}
 ${cssVarsFromObject(zIndex, "z", true)}
 }
 `;
@@ -45,4 +54,4 @@ fs.writeFileSync(
   css.trim() + "\n",
 );
 
-console.log("Generated CSS variables for theme tokens!");
+console.log("Generated CSS variables for simplified theme tokens!");

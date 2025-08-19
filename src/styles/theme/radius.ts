@@ -1,18 +1,26 @@
 /**
- * Border radius tokens migrated from global.css
- * @file radius.ts
- * @description Border radius tokens for design system (Australian English spelling)
+ * Professional Border Radius System - Inspired by Index Ventures
+ * 
+ * A refined border radius system designed for professional interfaces
+ * with consistent visual harmony and modern aesthetics.
  */
 
 export const radius = {
-  pill: "9999px", // --radius-pill
-  lg: "1.5rem", // --radius-lg
-  md: "1rem", // --radius-md
-  sm: "0.5rem", // --radius-sm
-  xl: "0.75rem", // --radius-xl
-  "2xl": "1rem", // --radius-2xl
-  "3xl": "1.5rem", // --radius-3xl
-  full: "9999px", // --radius-full
+  // No radius
+  none: "0",
+  
+  // Subtle radius - For professional interfaces
+  sm: "0.125rem",    // 2px - Subtle corners
+  base: "0.25rem",   // 4px - Default radius
+  md: "0.375rem",    // 6px - Medium radius
+  lg: "0.5rem",      // 8px - Large radius
+  xl: "0.75rem",     // 12px - Extra large radius
+  "2xl": "1rem",     // 16px - Double extra large
+  
+  // Special radius values
+  "3xl": "1.5rem",   // 24px - Triple extra large
+  full: "9999px",    // Fully rounded (pills, circles)
 } as const;
 
+// Type exports for TypeScript
 export type RadiusToken = keyof typeof radius;

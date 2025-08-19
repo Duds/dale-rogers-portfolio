@@ -3,123 +3,108 @@ import Container from "@/components/layout/Container.astro";
 import Button from "@/components/ui/Button.astro";
 import "@/styles/components/services.css";
 
+interface Props {
+  title?: string;
+  description?: string;
+}
+
 interface Service {
   title: string;
   description: string;
-  imageUrl: string;
-  link: string;
+  icon: string;
+  variant: "primary" | "secondary" | "accent" | "brand";
 }
 
-interface ServiceData extends Service {
-  variant: "purple" | "black" | "green" | "orange";
-}
+const {
+  title = "Our Services",
+  description = "Comprehensive solutions tailored to your needs",
+} = Astro.props;
 
-const getVariantClasses = (variant: ServiceData["variant"]) => {
-  const variants = {
-    purple: "bg-purple hover:bg-purple-hover",
-    black: "bg-black hover:bg-black-hover",
-    green: "bg-green hover:bg-green-hover",
-    orange: "bg-orange hover:bg-orange-hover",
-  };
-  return variants[variant];
-};
-
-// Define services with their variants and Unsplash images
-const services: ServiceData[] = [
+const services: Service[] = [
   {
-    title: "Service Design",
-    description:
-      "Creating seamless experiences that work for users and organisations",
-    imageUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&fit=crop",
-    link: "/services/service-design",
-    variant: "purple",
+    title: "Strategic Design",
+    description: "End-to-end design solutions that drive business outcomes",
+    icon: "codesign",
+    variant: "primary",
   },
   {
-    title: "Digital Strategy",
-    description: "Aligning technology with your business objectives",
-    imageUrl:
-      "https://images.unsplash.com/photo-1553484771-047a44eee27a?q=80&w=2940&fit=crop",
-    link: "/services/digital-strategy",
-    variant: "black",
+    title: "User Experience",
+    description: "Human-centred design that creates meaningful connections",
+    icon: "evaluation",
+    variant: "secondary",
   },
   {
-    title: "Research & Testing",
-    description: "Understanding your users through evidence-based insights",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2940&fit=crop",
-    link: "/services/research-testing",
-    variant: "green",
+    title: "Design Systems",
+    description: "Scalable design infrastructure for consistent experiences",
+    icon: "blueprint",
+    variant: "accent",
   },
   {
-    title: "Training & Capability",
-    description: "Building design capability in your organisation",
-    imageUrl:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2940&fit=crop",
-    link: "/services/training-capability",
-    variant: "orange",
+    title: "Innovation Consulting",
+    description: "Strategic guidance to transform your business through design",
+    icon: "codesign",
+    variant: "brand",
   },
 ];
+
+const variantStyles = {
+  primary: "bg-primary-main hover:bg-primary-dark text-primary-contrast",
+  secondary:
+    "bg-secondary-main hover:bg-secondary-dark text-secondary-contrast",
+  accent: " hover: text-accent-contrast",
+  brand: " hover: text-white",
+};
+
+// Simple icon path function
+const getIconPath = (iconName: string): string => {
+  return `/icons/${iconName}.svg`;
+};
 ---
 
-<section class="services-section">
-  <Container fullWidth={true}>
-    <div class="services-container">
-      <div class="col-span-12 lg:col-span-4">
-        <h2 class="services-heading">Services</h2>
-        <p class="services-title">
-          Designing services that people trust and teams can deliver.
-        </p>
-      </div>
-      <div class="col-span-12 lg:col-span-8 flex items-end justify-end">
-        <Button variant="black" href="/services">
-          See how it works
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"></path>
-          </svg>
-        </Button>
-      </div>
+<section class="py-16 md:py-24" style="background-color: var(--color-background-primary);">
+  <Container>
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold  mb-6" style="color: var(--color-text-primary);">
+        {title}
+      </h2>
+      <p class="text-xl  max-w-3xl mx-auto" style="color: var(--color-text-secondary);">
+        {description}
+      </p>
     </div>
-    <div class="services-list">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {
-        services?.map((service: ServiceData) => (
-          <a
-            href={service.link}
-            class={`services-card ${getVariantClasses(service.variant)}`}
-          >
-            <div class="services-card-image">
+        services.map((service) => (
+          <div class="text-center group">
+            <div
+              class={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 transition-all duration-300 group-hover:scale-110 ${variantStyles[service.variant]}`}
+            >
               <img
-                src={service.imageUrl}
+                src={getIconPath(service.icon)}
                 alt=""
-                aria-hidden="true"
-                class="services-card-img"
-                width="400"
-                height="400"
-                loading="lazy"
+                class="w-8 h-8"
+                width="32"
+                height="32"
               />
-              <div class="services-card-gradient" />
             </div>
-            <div class="services-card-content">
-              <h3 class="services-card-title">{service.title}</h3>
-              <p class="services-card-description">{service.description}</p>
-            </div>
-          </a>
-        ))
-      }
-      {
-        !services?.length && (
-          <div class="services-empty">
-            <p>No services found.</p>
+
+            <h3 class="text-xl font-bold  mb-4" style="color: var(--color-text-primary);">
+              {service.title}
+            </h3>
+
+            <p class="mb-6 leading-relaxed" style="color: var(--color-text-secondary);">
+              {service.description}
+            </p>
+
+            <Button
+              variant="ghost"
+              ghostColour="primary"
+              class="group-hover:bg-primary-main group-hover:text-primary-contrast group-hover:border-primary-main transition-all duration-300"
+            >
+              Learn More
+            </Button>
           </div>
-        )
+        ))
       }
     </div>
   </Container>

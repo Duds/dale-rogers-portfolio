@@ -12,28 +12,28 @@ interface Props extends ButtonProps {}
 const {
   id,
   href,
-  variant = "black",
-  ghostColour = "black",
+  variant = "primary",
+  ghostColour = "primary",
   class: className,
   ...rest
 } = Astro.props;
 
 const baseStyles = "button";
 const ghostColourStyles: Record<NonNullable<Props["ghostColour"]>, string> = {
-  black:
-    "border-black text-black hover:border-black dark:border-white dark:text-white dark:hover:border-white",
-  purple:
-    "border-purple text-purple hover:border-purple dark:border-purple-dark dark:text-purple-dark dark:hover:border-purple-dark",
-  orange:
-    "border-orange text-orange hover:border-orange dark:border-orange-dark dark:text-orange-dark dark:hover:border-orange-dark",
-  green:
-    "border-green text-green hover:border-green dark:border-green-dark dark:text-green-dark dark:hover:border-green-dark",
+  primary:
+    "border-primary text-primary hover:border-primary dark:border-white dark:text-white dark:hover:border-white",
+  secondary:
+    "border-secondary text-secondary hover:border-secondary dark:border-secondary dark:text-secondary dark:hover:border-secondary",
+  accent:
+    "border-accent text-accent hover:border-accent dark:border-accent dark:text-accent dark:hover:border-accent",
+  grey:
+    "border-grey-600 text-grey-600 hover:border-grey-700 dark:border-grey-300 dark:text-grey-300 dark:hover:border-grey-200",
 };
 const variantStyles: Record<NonNullable<Props["variant"]>, string> = {
-  black: "button--black",
-  purple: "button--purple",
-  orange: "button--orange",
-  green: "button--green",
+  primary: "button--primary",
+  secondary: "button--secondary",
+  accent: "button--accent",
+  grey: "button--grey",
   ghost: `button--ghost ${ghostColourStyles[ghostColour]}`,
 };
 const combinedClasses = [baseStyles, variantStyles[variant], className]

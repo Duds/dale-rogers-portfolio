@@ -1,0 +1,162 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  priority?: boolean;
+  sizes?: string;
+  quality?: number;
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  class: className = "",
+  priority = false,
+  sizes = "100vw",
+  quality = 80
+} = Astro.props;
+
+// Generate responsive image URLs for Unsplash
+const generateResponsiveUrls = (baseUrl: string) => {
+  const sizes = [400, 800, 1200, 1600, 2070];
+  return sizes.map(size => ({
+    width: size,
+    url: baseUrl.replace(/w=\d+/, `w=${size}`).replace(/q=\d+/, `q=${quality}`)
+  }));
+};
+
+const responsiveUrls = src.includes('unsplash.com') ? generateResponsiveUrls(src) : [];
+---
+
+<picture class={`optimized-image ${className}`}>
+  {responsiveUrls.length > 0 && (
+    <>
+      {/* WebP format with responsive sizes */}
+      <source
+        type="image/webp"
+        media="(min-width: 1200px)"
+        srcset={responsiveUrls
+          .filter(url => url.width >= 1200)
+          .map(url => `${url.url}&fm=webp ${url.width}w`)
+          .join(', ')}
+        sizes={sizes}
+      />
+      <source
+        type="image/webp"
+        media="(min-width: 800px)"
+        srcset={responsiveUrls
+          .filter(url => url.width >= 800)
+          .map(url => `${url.url}&fm=webp ${url.width}w`)
+          .join(', ')}
+        sizes={sizes}
+      />
+      <source
+        type="image/webp"
+        media="(min-width: 400px)"
+        srcset={responsiveUrls
+          .filter(url => url.width >= 400)
+          .map(url => `${url.url}&fm=webp ${url.width}w`)
+          .join(', ')}
+        sizes={sizes}
+      />
+      
+      {/* JPEG format with responsive sizes */}
+      <source
+        media="(min-width: 1200px)"
+        srcset={responsiveUrls
+          .filter(url => url.width >= 1200)
+          .map(url => `${url.url} ${url.width}w`)
+          .join(', ')}
+        sizes={sizes}
+      />
+      <source
+        media="(min-width: 800px)"
+        srcset={responsiveUrls
+          .filter(url => url.width >= 800)
+          .map(url => `${url.url} ${url.width}w`)
+          .join(', ')}
+        sizes={sizes}
+      />
+      <source
+        media="(min-width: 400px)"
+        srcset={responsiveUrls
+          .filter(url => url.width >= 400)
+          .map(url => `${url.url} ${url.width}w`)
+          .join(', ')}
+        sizes={sizes}
+      />
+    </>
+  )}
+  
+  {/* Fallback image */}
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    class="optimized-image__img"
+    loading={priority ? "eager" : "lazy"}
+    decoding="async"
+    fetchpriority={priority ? "high" : "auto"}
+  />
+</picture>
+
+<style>
+  .optimized-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .optimized-image__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Progressive loading effect */
+  .optimized-image__img {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* High priority images load immediately */
+  .optimized-image__img[loading="eager"] {
+    opacity: 1;
+    animation: none;
+  }
+</style>
+
+<script>
+  // Preload critical images
+  function preloadCriticalImages() {
+    const criticalImages = document.querySelectorAll('.optimized-image__img[loading="eager"]');
+    
+    criticalImages.forEach(img => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = (img as HTMLImageElement).src;
+      document.head.appendChild(link);
+    });
+  }
+
+  // Initialize preloading
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', preloadCriticalImages);
+  } else {
+    preloadCriticalImages();
+  }
+</script>

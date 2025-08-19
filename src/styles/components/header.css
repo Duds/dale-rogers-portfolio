@@ -1,13 +1,14 @@
 @reference "tailwindcss";
 
-/* Header component styles migrated from global.css */
+/* Header component styles with proper theme tokens */
 .header {
   @apply w-full z-40;
 }
+
 .header--transparent {
-  /* Custom classes removed: bg-surface-header-transparent */
+  @apply bg-transparent;
 }
+
 .header--solid {
-  /* Custom classes removed: bg-surface-header dark:bg-surface-header-dark */
-  @apply backdrop-blur-sm;
+  @apply bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-600/50 shadow-sm;
 }

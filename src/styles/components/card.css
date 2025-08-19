@@ -1,9 +1,39 @@
 @reference "tailwindcss";
 
-/* Card component styles migrated from global.css */
+/* Professional Card Component Styles */
 .card {
-  @apply bg-white dark:bg-gray-900 rounded-lg p-6 shadow-lg transition-all duration-300 ease-in-out;
+  @apply bg-white border rounded-xl shadow-md transition-all duration-300 overflow-hidden;
+  border-color: var(--color-border-primary);
 }
+
 .card--clickable {
-  @apply cursor-pointer hover:-translate-y-1;
+  @apply cursor-pointer hover:shadow-lg hover:-translate-y-1;
+}
+
+.card__content {
+  @apply p-6;
+}
+
+.card__title {
+  @apply text-xl font-semibold mb-4;
+  color: var(--color-text-primary);
+}
+
+.card__body {
+  @apply leading-relaxed;
+  color: var(--color-text-secondary);
+}
+
+/* Dark mode adjustments */
+.dark .card {
+  background-color: var(--color-background-primary);
+  border-color: var(--color-border-primary);
+}
+
+.dark .card__title {
+  color: var(--color-text-primary);
+}
+
+.dark .card__body {
+  color: var(--color-text-muted);
 }

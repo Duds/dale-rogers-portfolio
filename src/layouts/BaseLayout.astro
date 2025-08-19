@@ -1,7 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions";
 import Header from "@/components/layout/Header.astro";
-import Footer from "@/components/layout/Footer.astro";
 import "@/styles/global.css";
 
 interface Props {
@@ -76,6 +75,5 @@ const {
     <main class="flex-grow">
       <slot />
     </main>
-    <Footer />
   </body>
 </html>

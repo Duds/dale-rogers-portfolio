@@ -4,6 +4,7 @@ description: "Learn how to create effective service blueprints to visualize and 
 pubDate: 2024-04-10
 tags: ["Service Design", "Blueprinting", "Methodology"]
 author: "Dale Rogers"
+coverImage: "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2070&auto=format&fit=crop"
 ---
 
 # Service Blueprinting: A Practical Guide

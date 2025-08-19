@@ -5,13 +5,12 @@
  */
 
 export const zIndex = {
-  0: "0", // --z-0
-  10: "10", // --z-10
-  20: "20", // --z-20
-  30: "30", // --z-30
-  40: "40", // --z-40
-  50: "50", // --z-50
-  auto: "auto", // --z-auto
+  base: "0",
+  dropdown: "10",
+  sticky: "20", 
+  overlay: "30",
+  modal: "40",
+  tooltip: "50",
 } as const;
 
 export type ZIndexToken = keyof typeof zIndex;

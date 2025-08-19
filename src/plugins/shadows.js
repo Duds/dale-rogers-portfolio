@@ -3,7 +3,7 @@ const plugin = require("tailwindcss/plugin");
 module.exports = plugin(function ({ addUtilities, theme }) {
   addUtilities({
     ".shadow-soft": {
-      "@apply transition-shadow duration-200 ease-in-out": {},
+      "@apply transition-shadow duration-normal ease-in-out": {},
       "box-shadow": "var(--tw-shadow)",
       "--tw-shadow": theme("boxShadow.soft"),
       transform: "translateZ(0)",
@@ -13,7 +13,7 @@ module.exports = plugin(function ({ addUtilities, theme }) {
       "--tw-shadow": theme("boxShadow.soft-dark"),
     },
     ".shadow-soft-hover": {
-      "@apply shadow-soft transition-all duration-200 ease-in-out": {},
+      "@apply shadow-soft transition-all duration-normal ease-in-out": {},
       "will-change": "transform, box-shadow",
     },
     ".shadow-soft-hover:hover": {
@@ -25,14 +25,14 @@ module.exports = plugin(function ({ addUtilities, theme }) {
       "--tw-shadow": theme("boxShadow.soft-hover-dark"),
     },
     ".shadow-button": {
-      "@apply transition-all duration-200 ease-in-out": {},
+      "@apply transition-all duration-normal ease-in-out": {},
       "box-shadow": "var(--tw-shadow)",
       "--tw-shadow": theme("boxShadow.button-hover"),
       transform: "translateZ(0)",
       "will-change": "transform, box-shadow",
     },
     ".shadow-card": {
-      "@apply transition-shadow duration-200 ease-in-out": {},
+      "@apply transition-shadow duration-normal ease-in-out": {},
       "box-shadow": "var(--tw-shadow)",
       "--tw-shadow": theme("boxShadow.card"),
       transform: "translateZ(0)",

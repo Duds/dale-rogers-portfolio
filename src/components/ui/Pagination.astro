@@ -62,11 +62,11 @@ const nextUrl = hasNext ? getPageUrl(currentPage + 1) : "#";
 >
   <a
     href={previousUrl}
-    class={`btn-base inline-flex items-center gap-2 px-6 py-3 rounded-full text-lg font-medium transition-all duration-300
+    class={`btn-base inline-flex items-center gap-2 px-6 py-3 rounded-full text-lg font-medium transition-all duration-normal
       ${
         hasPrevious
-          ? "bg-surface text-text hover:bg-primary hover:text-on-primary dark:bg-surface-dark dark:text-text-dark dark:hover:bg-primary-dark dark:hover:text-on-primary-dark shadow-soft hover:shadow-lg hover:-translate-y-0.5"
-          : "bg-surface-disabled text-text-disabled cursor-not-allowed dark:bg-surface-disabled-dark dark:text-text-disabled-dark"
+          ? "bg-white dark:  dark:text-white hover: hover:text-white dark:hover:bg-white dark:hover: shadow-md hover:shadow-lg hover:-translate-y-0.5"
+          : " dark:  dark: cursor-not-allowed"
       }`}
     aria-disabled={!hasPrevious}
     tabindex={hasPrevious ? 0 : -1}
@@ -87,7 +87,7 @@ const nextUrl = hasNext ? getPageUrl(currentPage + 1) : "#";
   </a>
 
   <span
-    class="text-lg font-medium text-text-secondary dark:text-text-secondary-dark"
+    class="text-lg font-medium  dark:" style="color: var(--color-text-muted);" style="color: var(--color-text-secondary);"
     aria-live="polite"
   >
     Page {currentPage} of {totalPages}
@@ -95,11 +95,11 @@ const nextUrl = hasNext ? getPageUrl(currentPage + 1) : "#";
 
   <a
     href={nextUrl}
-    class={`btn-base inline-flex items-center gap-2 px-6 py-3 rounded-full text-lg font-medium transition-all duration-300
+    class={`btn-base inline-flex items-center gap-2 px-6 py-3 rounded-full text-lg font-medium transition-all duration-normal
       ${
         hasNext
-          ? "bg-surface text-text hover:bg-primary hover:text-on-primary dark:bg-surface-dark dark:text-text-dark dark:hover:bg-primary-dark dark:hover:text-on-primary-dark shadow-soft hover:shadow-lg hover:-translate-y-0.5"
-          : "bg-surface-disabled text-text-disabled cursor-not-allowed dark:bg-surface-disabled-dark dark:text-text-disabled-dark"
+          ? "bg-white dark:  dark:text-white hover: hover:text-white dark:hover:bg-white dark:hover: shadow-md hover:shadow-lg hover:-translate-y-0.5"
+          : " dark:  dark: cursor-not-allowed"
       }`}
     aria-disabled={!hasNext}
     tabindex={hasNext ? 0 : -1}

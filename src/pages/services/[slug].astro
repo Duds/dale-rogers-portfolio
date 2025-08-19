@@ -89,7 +89,7 @@ const description = entry.data.description;
             }
             <Heading
               level={1}
-              font="fraunces"
+              font="inter"
               size="hero"
               class="text-white drop-shadow-lg"
             >
@@ -132,12 +132,12 @@ const description = entry.data.description;
             <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {entry.data.benefits.map(
                 (benefit: { text: string; icon: string }) => (
-                  <li class="flex items-start gap-3 bg-white dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-700 rounded-xl p-4 shadow-sm text-xl">
+                  <li class="flex items-start gap-3 bg-white dark:bg-grey-900/60 border border-grey-200 dark:border-grey-700 rounded-xl p-4 shadow-sm text-xl">
                     <Icon
                       name={benefit.icon}
-                      class="w-7 h-7 text-secondary-green dark:text-secondary-green mt-1 shrink-0"
+                      class="w-7 h-7 text-secondary dark:text-secondary mt-1 shrink-0"
                     />
-                    <span class="text-neutral-800 dark:text-neutral-200">
+                    <span class="text-grey-800 dark:text-grey-200">
                       {benefit.text}
                     </span>
                   </li>
@@ -156,11 +156,11 @@ const description = entry.data.description;
               {entry.data.process.map(
                 (step: { title: string; description: string }, idx: number) => (
                   <li class="mb-10 ml-8">
-                    <span class="absolute -left-5 flex items-center justify-center w-10 h-10 bg-secondary-orange text-white rounded-full ring-4 ring-white dark:ring-neutral-900 font-black text-xl">
+                    <span class="absolute -left-5 flex items-center justify-center w-10 h-10 bg-accent text-white rounded-full ring-4 ring-white dark:ring-grey-900 font-black text-xl">
                       {idx + 1}
                     </span>
                     <h3 class="text-2xl font-bold mb-1">{step.title}</h3>
-                    <p class="text-neutral-700 dark:text-neutral-300 text-xl">
+                    <p class="text-grey-700 dark:text-grey-300 text-xl">
                       {step.description}
                     </p>
                   </li>
@@ -219,7 +219,7 @@ const description = entry.data.description;
         </p>
         <a
           href="/contact"
-          class="inline-block px-10 py-4 bg-secondary-orange text-white font-bold rounded-full
+          class="inline-block px-10 py-4 bg-accent text-white font-bold rounded-full
                  hover-lift-shadow
                  text-xl md:text-2xl"
         >

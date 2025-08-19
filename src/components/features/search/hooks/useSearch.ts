@@ -1,11 +1,5 @@
 import { debounce } from "lodash-es";
-
-interface SearchResult {
-  title: string;
-  description: string;
-  category: string;
-  url: string;
-}
+import type { SearchResult } from "../types.js";
 
 export const useSearch = (
   input: HTMLInputElement,
@@ -56,13 +50,13 @@ export const useSearch = (
               <div class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                 ${suggestionMessage || "You might like..."}
               </div>
-              <div class="divide-y divide-gray-100 dark:divide-neutral-800">
+              <div class="divide-y divide-gray-100 dark:divide-text-primary">
                 ${suggestions
                   .map(
                     (result) => `
                       <a
                         href="${result.url}"
-                        class="block p-2 hover:bg-gray-50 dark:hover:bg-neutral-800 rounded-md transition-colors duration-150"
+                        class="block p-2 hover:bg-gray-50 dark:hover:bg-text-primary rounded-md transition-colors duration-150"
                         role="option"
                       >
                         <div class="font-medium text-gray-900 dark:text-gray-100">
@@ -99,7 +93,7 @@ export const useSearch = (
 
       // Render results
       resultsContainer.innerHTML = `
-        <div class="divide-y divide-gray-100 dark:divide-neutral-800">
+        <div class="divide-y divide-gray-100 dark:divide-text-primary">
           ${Object.entries(groupedResults)
             .map(
               ([category, categoryResults]) => `
@@ -112,7 +106,7 @@ export const useSearch = (
                       (result) => `
                         <a
                           href="${result.url}"
-                          class="block p-2 hover:bg-gray-50 dark:hover:bg-neutral-800 rounded-md transition-colors duration-150"
+                          class="block p-2 hover:bg-gray-50 dark:hover:bg-text-primary rounded-md transition-colors duration-150"
                           role="option"
                         >
                           <div class="font-medium text-gray-900 dark:text-gray-100">

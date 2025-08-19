@@ -1,44 +1,36 @@
 ---
 /**
- * Generic page header component for consistent page headers across the site
- * @component PageHeader
- *
- * @example
- * ```astro
- * <PageHeader
- *   title="Case Studies"
- *   description="Explore my portfolio of successful projects."
- * />
- * ```
+ * @fileoverview Page header component for consistent page titles.
+ * Supports different font families and professional styling.
  */
-import Heading from "@/components/ui/Heading.astro";
 
 interface Props {
-  /** The main title for the page header */
+  /** The heading text content */
   title: string;
-  /** Descriptive text for the page header */
-  description: string;
-  /** Font family for the heading - 'fraunces' or 'dm-sans' */
-  font?: "fraunces" | "dm-sans";
+  /** Optional description text */
+  description?: string;
+  /** Font family for the heading - 'inter' or 'dm-sans' */
+  font?: "inter" | "dm-sans";
+  /** Additional CSS classes */
+  class?: string;
 }
 
-const { title, description, font = "fraunces" } = Astro.props;
+const { title, description, font = "inter", class: className } = Astro.props;
+
+const baseClasses = "page-header";
+const fontClasses = font === "inter" ? "font-heading" : "font-body";
+const combinedClasses = [baseClasses, fontClasses, className]
+  .filter(Boolean)
+  .join(" ");
 ---
 
-<section
-  class="pt-32 md:pt-40 py-16 px-6 md:px-12 bg-surface dark:bg-surface-dark"
->
-  <div class="max-w-6xl mx-auto">
-    <Heading
-      level={1}
-      font={font}
-      size="custom"
-      class="text-6xl md:text-7xl lg:text-8xl !font-black mb-6"
-    >
-      {title}
-    </Heading>
-    <p class="text-xl md:text-2xl text-subheading max-w-3xl">
+<div class={combinedClasses}>
+  <h1 class="page-header__title">
+    {title}
+  </h1>
+  {description && (
+    <p class="page-header__description">
       {description}
     </p>
-  </div>
-</section>
+  )}
+</div>

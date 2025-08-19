@@ -1,10 +1,8 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import Container from "@/components/layout/Container.astro";
-import { type CollectionEntry } from "astro:content";
-import TagList from "@/components/ui/TagList.astro";
-import FormattedDate from "@/components/ui/FormattedDate.astro";
-import Heading from "@/components/ui/Heading.astro";
+import { type CollectionEntry, getCollection } from "astro:content";
+import CaseStudyHero from "@/components/features/case-studies/components/CaseStudyHero.astro";
 
 interface Props {
   caseStudy: CollectionEntry<"case-studies">;
@@ -25,100 +23,226 @@ const {
   results,
   author,
 } = caseStudy.data;
+
+// Related case studies: simple match by overlapping tags, exclude current
+const allCaseStudies = await getCollection("case-studies");
+const related = allCaseStudies
+  .filter((s) => s.slug !== caseStudy.slug)
+  .map((s) => ({
+    slug: s.slug,
+    title: s.data.title,
+    coverImage: s.data.coverImage,
+    client: s.data.client,
+    industry: s.data.industry,
+    score: (s.data.tags || []).filter((t: string) => (tags || []).includes(t))
+      .length,
+  }))
+  .filter((r) => r.score > 0)
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 3);
 ---
 
 <BaseLayout title={title} description={description} image={coverImage}>
   <Container>
-    <article class="prose prose-lg dark:prose-invert mx-auto pt-32 md:pt-40">
-      <header class="mb-8">
-        <Heading level={1} font="fraunces" size="xl" class="mb-4">
-          {title}
-        </Heading>
-        <div class="flex items-center gap-4 text-text-secondary mb-4">
-          <FormattedDate date={pubDate} />
-          <span>by {author}</span>
-        </div>
-        {tags && <TagList tags={tags} class="mb-6" />}
+    <article class="case-study-layout mx-auto pt-32 md:pt-40">
+      <!-- Hero Section -->
+      <CaseStudyHero
+        title={title}
+        description={description}
+        client={client}
+        industry={industry}
+        duration={duration}
+        coverImage={coverImage}
+        tags={tags}
+        pubDate={pubDate}
+        author={author}
+      />
 
+      <!-- Enhanced Project Overview Grid -->
+      <div class="case-study-layout__overview-grid">
+        <!-- Project Details -->
         <div
-          class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-surface dark:bg-surface-dark p-6 rounded-lg"
+          class="case-study-layout__overview-card case-study-layout__overview-card--details"
         >
-          <div>
-            <Heading
-              level={2}
-              font="dm-sans"
-              size="4xl"
-              class="mb-4 font-normal"
+          <div class="case-study-layout__overview-header">
+            <svg
+              class="case-study-layout__overview-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              Project Details
-            </Heading>
-            <dl class="space-y-2">
-              <div>
-                <dt class="font-medium">Client</dt>
-                <dd>{client}</dd>
-              </div>
-              <div>
-                <dt class="font-medium">Industry</dt>
-                <dd>{industry}</dd>
-              </div>
-              <div>
-                <dt class="font-medium">Duration</dt>
-                <dd>{duration}</dd>
-              </div>
-            </dl>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+              ></path>
+            </svg>
+            <h2 class="case-study-layout__overview-title">Project Details</h2>
           </div>
-          <div>
-            <Heading
-              level={2}
-              font="dm-sans"
-              size="4xl"
-              class="mb-4 font-normal"
+          <dl class="case-study-layout__overview-list">
+            <div class="case-study-layout__overview-item">
+              <dt class="case-study-layout__overview-label">Client</dt>
+              <dd class="case-study-layout__overview-value">{client}</dd>
+            </div>
+            <div class="case-study-layout__overview-item">
+              <dt class="case-study-layout__overview-label">Industry</dt>
+              <dd class="case-study-layout__overview-value">{industry}</dd>
+            </div>
+            <div class="case-study-layout__overview-item">
+              <dt class="case-study-layout__overview-label">Duration</dt>
+              <dd class="case-study-layout__overview-value">{duration}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Challenge Card -->
+        <div
+          class="case-study-layout__overview-card case-study-layout__overview-card--challenge"
+        >
+          <div class="case-study-layout__overview-header">
+            <svg
+              class="case-study-layout__overview-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              Overview
-            </Heading>
-            <dl class="space-y-2">
-              <div>
-                <dt class="font-medium">Challenge</dt>
-                <dd>{challenge}</dd>
-              </div>
-              <div>
-                <dt class="font-medium">Solution</dt>
-                <dd>{solution}</dd>
-              </div>
-              <div>
-                <dt class="font-medium">Results</dt>
-                <dd>
-                  {
-                    Array.isArray(results) ? (
-                      <ul class="list-disc list-inside">
-                        {results.map((result) => (
-                          <li>{result}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      results
-                    )
-                  }
-                </dd>
-              </div>
-            </dl>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+              ></path>
+            </svg>
+            <h2 class="case-study-layout__overview-title">Challenge</h2>
+          </div>
+          <p class="case-study-layout__overview-content">{challenge}</p>
+        </div>
+
+        <!-- Solution Card -->
+        <div
+          class="case-study-layout__overview-card case-study-layout__overview-card--solution"
+        >
+          <div class="case-study-layout__overview-header">
+            <svg
+              class="case-study-layout__overview-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              ></path>
+            </svg>
+            <h2 class="case-study-layout__overview-title">Solution</h2>
+          </div>
+          <p class="case-study-layout__overview-content">{solution}</p>
+        </div>
+
+        <!-- Results Card -->
+        <div
+          class="case-study-layout__overview-card case-study-layout__overview-card--results"
+        >
+          <div class="case-study-layout__overview-header">
+            <svg
+              class="case-study-layout__overview-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              ></path>
+            </svg>
+            <h2 class="case-study-layout__overview-title">Results</h2>
+          </div>
+          <div class="case-study-layout__overview-content">
+            {
+              Array.isArray(results) ? (
+                <ul class="case-study-layout__overview-results-list">
+                  {results.map((result) => (
+                    <li class="case-study-layout__overview-results-item">
+                      <svg
+                        class="case-study-layout__overview-results-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      <span>{result}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                results
+              )
+            }
           </div>
         </div>
-      </header>
+      </div>
 
-      {
-        coverImage && (
-          <img
-            src={coverImage}
-            alt={`${client} - ${title}`}
-            class="w-full h-[400px] object-cover rounded-lg mb-8"
-          />
-        )
-      }
-
-      <div class="case-study-content">
+      <!-- Content -->
+      <div class="case-study-content max-w-4xl mx-auto">
         <slot />
       </div>
+
+      {
+        related.length > 0 && (
+          <section class="mt-20" aria-labelledby="related-heading">
+            <div class="case-study-layout__related-header">
+              <h2 id="related-heading" class="case-study-layout__related-title">
+                Related Case Studies
+              </h2>
+              <p class="case-study-layout__related-subtitle">
+                Explore similar projects and solutions
+              </p>
+            </div>
+            <div class="case-study-layout__related-grid">
+              {related.map((r) => (
+                <a
+                  href={`/work/${r.slug}`}
+                  class="case-study-layout__related-card group"
+                  aria-label={`View case study: ${r.title}`}
+                >
+                  {r.coverImage && (
+                    <div class="case-study-layout__related-image">
+                      <img
+                        src={r.coverImage}
+                        alt=""
+                        aria-hidden="true"
+                        class="case-study-layout__related-image-img"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div class="case-study-layout__related-image-overlay" />
+                    </div>
+                  )}
+                  <div class="case-study-layout__related-content">
+                    <p class="case-study-layout__related-meta">
+                      {r.client} · {r.industry}
+                    </p>
+                    <h3 class="case-study-layout__related-title-text">
+                      {r.title}
+                    </h3>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        )
+      }
     </article>
   </Container>
 </BaseLayout>
@@ -126,40 +250,214 @@ const {
 <style>
   @reference "tailwindcss";
 
+  .case-study-layout {
+    @apply max-w-7xl;
+  }
+
+  /* Enhanced Overview Grid */
+  .case-study-layout__overview-grid {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20;
+  }
+
+  .case-study-layout__overview-card {
+    @apply bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900 rounded-3xl p-8 border border-neutral-200 dark:border-neutral-700 shadow-lg hover:shadow-xl transition-all duration-500;
+  }
+
+  .case-study-layout__overview-card--challenge {
+    @apply bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 border-red-200 dark:border-red-700;
+  }
+
+  .case-study-layout__overview-card--solution {
+    @apply bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-200 dark:border-blue-700;
+  }
+
+  .case-study-layout__overview-card--results {
+    @apply bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-200 dark:border-green-700;
+  }
+
+  .case-study-layout__overview-header {
+    @apply flex items-center gap-4 mb-6;
+  }
+
+  .case-study-layout__overview-title {
+    @apply text-2xl font-bold text-neutral-900 dark:text-white;
+  }
+
+  .case-study-layout__overview-icon {
+    @apply w-8 h-8 text-purple-600 dark:text-purple-400;
+  }
+
+  .case-study-layout__overview-list {
+    @apply space-y-4;
+  }
+
+  .case-study-layout__overview-item {
+    @apply flex items-center justify-between py-4 px-5 bg-white/70 dark:bg-black/30 rounded-xl backdrop-blur-sm;
+  }
+
+  .case-study-layout__overview-label {
+    @apply font-semibold text-neutral-600 dark:text-neutral-400 text-sm uppercase tracking-wide;
+  }
+
+  .case-study-layout__overview-value {
+    @apply text-neutral-900 dark:text-white font-semibold;
+  }
+
+  .case-study-layout__overview-content {
+    @apply text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed;
+  }
+
+  .case-study-layout__overview-results-list {
+    @apply space-y-4;
+  }
+
+  .case-study-layout__overview-results-item {
+    @apply flex items-start gap-4 text-neutral-700 dark:text-neutral-300;
+  }
+
+  .case-study-layout__overview-results-icon {
+    @apply w-6 h-6 text-green-600 dark:text-green-400 mt-1 flex-shrink-0;
+  }
+
+  /* Related Case Studies */
+  .case-study-layout__related-header {
+    @apply text-center mb-12;
+  }
+
+  .case-study-layout__related-title {
+    @apply text-3xl font-bold text-neutral-900 dark:text-white mb-4;
+  }
+
+  .case-study-layout__related-subtitle {
+    @apply text-xl text-neutral-600 dark:text-neutral-400;
+  }
+
+  .case-study-layout__related-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-8;
+  }
+
+  .case-study-layout__related-card {
+    @apply block rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-700 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 bg-white dark:bg-neutral-900;
+  }
+
+  .case-study-layout__related-image {
+    @apply relative aspect-[4/3] overflow-hidden;
+  }
+
+  .case-study-layout__related-image-img {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+
+  .case-study-layout__related-image-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500;
+  }
+
+  .case-study-layout__related-card:hover .case-study-layout__related-image-img {
+    @apply scale-110;
+  }
+
+  .case-study-layout__related-content {
+    @apply p-6;
+  }
+
+  .case-study-layout__related-meta {
+    @apply text-sm text-neutral-600 dark:text-neutral-400 mb-3;
+  }
+
+  .case-study-layout__related-title-text {
+    @apply text-lg font-semibold text-neutral-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300;
+  }
+
+  /* Content Styling */
   .case-study-content :global(img) {
-    @apply rounded-lg my-8;
+    @apply rounded-2xl my-12 shadow-lg dark:shadow-xl;
   }
 
   .case-study-content :global(blockquote) {
-    @apply border-l-4 border-purple-600 dark:border-purple-400 pl-4 italic my-8;
+    @apply border-l-4 border-purple-600 pl-8 italic my-12 text-xl text-neutral-600 dark:text-neutral-400 bg-gradient-to-r from-purple-50 to-transparent dark:from-purple-900/20 dark:to-transparent py-6 rounded-r-2xl;
   }
 
   .case-study-content :global(pre) {
-    @apply p-4 rounded-lg overflow-x-auto my-8;
+    @apply p-8 rounded-2xl overflow-x-auto my-12 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-lg;
+  }
+
+  .case-study-content :global(code) {
+    @apply bg-neutral-100 dark:bg-neutral-700 px-3 py-1 rounded-lg text-sm font-mono text-purple-600 dark:text-purple-400;
   }
 
   .case-study-content :global(h2) {
-    @apply mt-12 mb-6;
+    @apply mt-20 mb-10 text-4xl font-bold text-neutral-900 dark:text-white border-b-2 border-purple-200 dark:border-purple-800 pb-4;
   }
 
   .case-study-content :global(h3) {
-    @apply mt-8 mb-4;
+    @apply mt-16 mb-8 text-3xl font-semibold text-neutral-900 dark:text-white;
+  }
+
+  .case-study-content :global(h4) {
+    @apply mt-12 mb-6 text-2xl font-semibold text-neutral-900 dark:text-white;
   }
 
   .case-study-content :global(p) {
-    @apply mb-6 leading-relaxed;
+    @apply mb-8 leading-relaxed text-lg text-neutral-700 dark:text-neutral-300;
   }
 
   .case-study-content :global(ul) {
-    @apply list-disc list-inside mb-6;
+    @apply list-none space-y-4 mb-8;
+  }
+
+  .case-study-content :global(ul li) {
+    @apply flex items-start gap-4 text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed;
+  }
+
+  .case-study-content :global(ul li::before) {
+    @apply content-[''] w-3 h-3 bg-purple-600 rounded-full mt-3 flex-shrink-0;
   }
 
   .case-study-content :global(ol) {
-    @apply list-decimal list-inside mb-6;
+    @apply list-decimal list-inside space-y-4 mb-8;
+  }
+
+  .case-study-content :global(ol li) {
+    @apply text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed;
+  }
+
+  .case-study-content :global(ol li::marker) {
+    @apply text-purple-600 dark:text-purple-400 font-semibold;
   }
 
   .case-study-content :global(a) {
-    @apply text-purple-600 dark:text-purple-400 hover:underline;
+    @apply text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 underline decoration-2 underline-offset-4 transition-colors duration-300;
+  }
+
+  .case-study-content :global(strong) {
+    @apply font-semibold text-neutral-900 dark:text-white;
+  }
+
+  .case-study-content :global(em) {
+    @apply italic text-neutral-600 dark:text-neutral-500;
+  }
+
+  .case-study-content :global(table) {
+    @apply w-full border-collapse my-12 rounded-2xl overflow-hidden shadow-lg;
+  }
+
+  .case-study-content :global(th) {
+    @apply border border-neutral-200 dark:border-neutral-700 px-6 py-4 text-left font-semibold bg-neutral-50 dark:bg-neutral-800 text-neutral-900 dark:text-white;
+  }
+
+  .case-study-content :global(td) {
+    @apply border border-neutral-200 dark:border-neutral-700 px-6 py-4 text-neutral-700 dark:text-neutral-300;
+  }
+
+  .case-study-content :global(hr) {
+    @apply my-16 border-t-2 border-neutral-300 dark:border-neutral-600;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .case-study-layout__overview-grid {
+      @apply grid-cols-1;
+    }
   }
 </style>
 

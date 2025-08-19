@@ -1,7 +1,7 @@
 ---
-import { transitionDurationTokens } from "../../../styles/theme/transitions.ts";
+import { transitions } from "../../../styles/theme/transitions.ts";
 import { zIndex } from "../../../styles/theme/zIndex.ts";
-import { uiColours } from "../../../styles/theme/colors.ts";
+import { colors } from "../../../styles/theme/colors.ts";
 import { spacing } from "../../../styles/theme/spacing.ts";
 import { shadows } from "../../../styles/theme/shadows.ts";
 import { fontSize } from "../../../styles/theme/typography.ts";
@@ -22,14 +22,24 @@ import "../../../styles/components/theme-token-examples.css";
  * - Keyboard navigation: not interactive
  */
 
-const colourEntries: [string, string][] = Object.entries(uiColours);
+// Flatten colors for display (including nested grey scale)
+const flattenedColors: [string, string][] = [];
+Object.entries(colors).forEach(([name, value]) => {
+  if (typeof value === 'string') {
+    flattenedColors.push([name, value]);
+  } else if (typeof value === 'object') {
+    // Handle nested objects like grey scale
+    Object.entries(value).forEach(([subName, subValue]) => {
+      flattenedColors.push([`${name}-${subName}`, subValue]);
+    });
+  }
+});
+
 const spacingEntries: [string, string][] = Object.entries(spacing);
 const shadowEntries: [string, string][] = Object.entries(shadows);
 const fontSizeEntries: [string, string | number][] = Object.entries(fontSize);
 const radiusEntries: [string, string][] = Object.entries(radius);
-const transitionEntries: [string, string][] = Object.entries(
-  transitionDurationTokens
-);
+const transitionEntries: [string, string][] = Object.entries(transitions);
 const zIndexEntries: [string, string | number][] = Object.entries(zIndex);
 ---
 
@@ -37,7 +47,7 @@ const zIndexEntries: [string, string | number][] = Object.entries(zIndex);
   <h2>Colour Tokens</h2>
   <div class="token-demo">
     {
-      colourEntries.map(([name, value]: [string, string]) => (
+      flattenedColors.map(([name, value]) => (
         <div class={`token-demo__swatch bg-${name}`}>
           <span class="token-demo__label">
             {name}

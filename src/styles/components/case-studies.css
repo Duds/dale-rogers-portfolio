@@ -1,0 +1,327 @@
+@reference "tailwindcss";
+
+/* Case Studies Component Styles */
+
+/* Case Study Card */
+.case-study-card {
+  @apply bg-white dark:bg-neutral-900 rounded-3xl shadow-md dark:shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl dark:hover:shadow-xl hover:-translate-y-2 border border-neutral-200 dark:border-neutral-600;
+}
+
+.case-study-card__image-container {
+  @apply relative aspect-[4/3] w-full overflow-hidden;
+}
+
+.case-study-card__image {
+  @apply w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110;
+}
+
+.case-study-card__overlay {
+  @apply absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-300;
+}
+
+.case-study-card__client-badge {
+  @apply absolute top-4 left-4 inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-black/90 text-neutral-900 dark:text-white backdrop-blur-sm;
+}
+
+.case-study-card__content {
+  @apply p-8;
+}
+
+.case-study-card__title {
+  @apply text-2xl font-bold text-neutral-900 dark:text-white leading-tight hover:text-blue-600 dark:hover:text-neutral-400 transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-neutral-400 mb-4;
+}
+
+.case-study-card__description {
+  @apply text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed text-base;
+}
+
+.case-study-card__metadata {
+  @apply space-y-4 mb-6;
+}
+
+.case-study-card__metadata-grid {
+  @apply grid grid-cols-1 gap-3 text-sm;
+}
+
+.case-study-card__metadata-item {
+  @apply flex items-center justify-between py-2 px-3 bg-neutral-100 dark:bg-neutral-900 rounded-lg;
+}
+
+.case-study-card__metadata-label {
+  @apply font-semibold text-neutral-600 dark:text-neutral-400 uppercase tracking-wide text-xs;
+}
+
+.case-study-card__metadata-value {
+  @apply text-neutral-900 dark:text-white font-medium;
+}
+
+.case-study-card__tags {
+  @apply flex flex-wrap gap-2;
+}
+
+.case-study-card__tag {
+  @apply group-hover:bg-blue-600 group-hover:text-white transition-all duration-300;
+}
+
+.case-study-card__link-section {
+  @apply mt-6 pt-4 border-t border-neutral-200 dark:border-neutral-600;
+}
+
+.case-study-card__link {
+  @apply inline-flex items-center text-sm font-semibold text-blue-600 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-purple-300 transition-colors duration-300 group-hover:underline;
+}
+
+.case-study-card__link-icon {
+  @apply w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1;
+}
+
+/* Case Study Layout */
+.case-study-layout {
+  @apply max-w-7xl;
+}
+
+.case-study-layout__header {
+  @apply mb-16;
+}
+
+.case-study-layout__title-section {
+  @apply mb-12;
+}
+
+.case-study-layout__title {
+  @apply mb-6 leading-tight;
+}
+
+.case-study-layout__meta {
+  @apply flex flex-wrap items-center gap-6 text-neutral-600 dark:text-neutral-400 mb-8;
+}
+
+.case-study-layout__meta-item {
+  @apply flex items-center gap-2;
+}
+
+.case-study-layout__meta-icon {
+  @apply w-5 h-5;
+}
+
+.case-study-layout__tags {
+  @apply mb-8;
+}
+
+.case-study-layout__overview-grid {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12;
+}
+
+.case-study-layout__overview-card {
+  @apply bg-neutral-100 dark:bg-neutral-900 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-600;
+}
+
+.case-study-layout__overview-title {
+  @apply mb-6 font-semibold text-neutral-900 dark:text-white flex items-center gap-3;
+}
+
+.case-study-layout__overview-icon {
+  @apply w-6 h-6 text-blue-600 dark:text-neutral-400;
+}
+
+.case-study-layout__overview-list {
+  @apply space-y-4;
+}
+
+.case-study-layout__overview-item {
+  @apply flex items-center justify-between py-3 px-4 bg-white/50 dark:bg-black/20 rounded-lg;
+}
+
+.case-study-layout__overview-label {
+  @apply font-semibold text-neutral-600 dark:text-neutral-400;
+}
+
+.case-study-layout__overview-value {
+  @apply text-neutral-900 dark:text-white font-medium;
+}
+
+.case-study-layout__overview-section {
+  @apply space-y-2;
+}
+
+.case-study-layout__overview-section-label {
+  @apply font-semibold text-neutral-600 dark:text-neutral-400 text-sm uppercase tracking-wide;
+}
+
+.case-study-layout__overview-section-content {
+  @apply text-neutral-900 dark:text-white leading-relaxed;
+}
+
+.case-study-layout__overview-results-list {
+  @apply list-none space-y-2;
+}
+
+.case-study-layout__overview-results-item {
+  @apply flex items-start gap-3;
+}
+
+.case-study-layout__overview-results-icon {
+  @apply w-5 h-5 text-green-500 dark:text-green-400 mt-0.5 flex-shrink-0;
+}
+
+.case-study-layout__cover-image {
+  @apply mb-16;
+}
+
+.case-study-layout__cover-image-img {
+  @apply w-full h-[500px] md:h-[600px] object-cover rounded-2xl shadow-xl dark:shadow-2xl;
+}
+
+.case-study-layout__content {
+  @apply max-w-4xl mx-auto;
+}
+
+/* Case Study Content Typography */
+.case-study-content :global(img) {
+  @apply rounded-2xl my-12 shadow-md dark:shadow-lg;
+}
+
+.case-study-content :global(blockquote) {
+  @apply border-l-4 border-blue-600 pl-6 italic my-12 text-lg text-neutral-600 dark:text-neutral-400 bg-neutral-100/30 dark:bg-neutral-900/30 py-4 rounded-r-lg;
+}
+
+.case-study-content :global(pre) {
+  @apply p-6 rounded-2xl overflow-x-auto my-12 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-600;
+}
+
+.case-study-content :global(code) {
+  @apply bg-neutral-100 dark:bg-neutral-900 px-2 py-1 rounded text-sm font-mono;
+}
+
+.case-study-content :global(h2) {
+  @apply mt-16 mb-8 text-3xl font-bold text-neutral-900 dark:text-white;
+}
+
+.case-study-content :global(h3) {
+  @apply mt-12 mb-6 text-2xl font-semibold text-neutral-900 dark:text-white;
+}
+
+.case-study-content :global(h4) {
+  @apply mt-10 mb-4 text-xl font-semibold text-neutral-900 dark:text-white;
+}
+
+.case-study-content :global(p) {
+  @apply mb-8 leading-relaxed text-lg text-neutral-900 dark:text-white;
+}
+
+.case-study-content :global(ul) {
+  @apply list-none space-y-3 mb-8;
+}
+
+.case-study-content :global(ul li) {
+  @apply flex items-start gap-3 text-lg text-neutral-900 dark:text-white leading-relaxed;
+}
+
+.case-study-content :global(ul li::before) {
+  @apply content-[''] w-2 h-2 bg-blue-600 rounded-full mt-3 flex-shrink-0;
+}
+
+.case-study-content :global(ol) {
+  @apply list-decimal list-inside space-y-3 mb-8;
+}
+
+.case-study-content :global(ol li) {
+  @apply text-lg text-neutral-900 dark:text-white leading-relaxed;
+}
+
+.case-study-content :global(a) {
+  @apply text-blue-600 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-purple-300 underline decoration-2 underline-offset-4 transition-colors duration-300;
+}
+
+.case-study-content :global(strong) {
+  @apply font-semibold text-neutral-900 dark:text-white;
+}
+
+.case-study-content :global(em) {
+  @apply italic text-neutral-600 dark:text-neutral-400;
+}
+
+.case-study-content :global(table) {
+  @apply w-full border-collapse my-12;
+}
+
+.case-study-content :global(th) {
+  @apply border border-neutral-200 dark:border-neutral-600 px-4 py-3 text-left font-semibold bg-neutral-100 dark:bg-neutral-900;
+}
+
+.case-study-content :global(td) {
+  @apply border border-neutral-200 dark:border-neutral-600 px-4 py-3;
+}
+
+.case-study-content :global(hr) {
+  @apply my-12 border-t border-neutral-400 dark:border-neutral-600;
+}
+
+/* Work Index Page */
+.work-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20;
+}
+
+.case-studies-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10;
+}
+
+/* Enhanced hover effects for case study cards */
+.case-studies-grid :global(.group:hover) {
+  @apply transform transition-all duration-300;
+}
+
+.case-studies-grid :global(.group:hover h3 a) {
+  @apply text-blue-600 dark:text-neutral-400;
+}
+
+.case-studies-grid :global(.group:hover .tag) {
+  @apply bg-blue-600 text-white;
+}
+
+/* Empty state styling */
+.empty-state {
+  @apply flex items-center justify-center py-20;
+}
+
+.empty-state-content {
+  @apply text-center max-w-md mx-auto;
+}
+
+.empty-state-icon {
+  @apply w-16 h-16 text-neutral-600 dark:text-neutral-400 mx-auto mb-6;
+}
+
+.empty-state-title {
+  @apply text-2xl font-bold text-neutral-900 dark:text-white mb-4;
+}
+
+.empty-state-description {
+  @apply text-neutral-600 dark:text-neutral-400 leading-relaxed;
+}
+
+/* Responsive grid adjustments */
+@media (min-width: 768px) {
+  .case-studies-grid {
+    @apply gap-8;
+  }
+}
+
+@media (min-width: 1280px) {
+  .case-studies-grid {
+    @apply gap-10;
+  }
+}
+
+/* Enhanced hover effects for case study cards */
+.case-studies-grid :global(.group:hover) {
+  @apply transform transition-all duration-300;
+}
+
+.case-studies-grid :global(.group:hover h3 a) {
+  @apply text-blue-600 dark:text-neutral-400;
+}
+
+.case-studies-grid :global(.group:hover .tag) {
+  @apply bg-blue-600 text-white;
+}

@@ -13,9 +13,9 @@ const { class: className, content, ...props } = Astro.props;
 ---
 
 <SectionContainer class={`section-full py-32 ${className ?? ""}`} {...props}>
-  <div class="grid grid-cols-6 gap-8">
-    <div class="col-span-6 lg:col-span-4">
-      <div class="mb-6 text-2xl text-text-secondary prose prose-lg max-w-none">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="flex flex-col justify-center">
+      <div class="mb-6 text-2xl text-neutral-600 dark:text-neutral-400 prose prose-lg max-w-none">
         {
           content.map((paragraph) => (
             <p class="mb-6 fade-in-up" set:html={paragraph} data-fade />
@@ -23,7 +23,7 @@ const { class: className, content, ...props } = Astro.props;
         }
       </div>
       <div class="mt-12">
-        <Button variant="black" href="/contact" class="fade-in-up" data-fade>
+        <Button variant="primary" href="/contact" class="fade-in-up" data-fade>
           Let's Talk
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -58,6 +58,11 @@ const { class: className, content, ...props } = Astro.props;
   }
 
   :global(.strong) {
-    @apply text-neutral-900 dark:text-white font-bold;
+    @apply font-bold;
+    color: var(--color-text-primary);
+  }
+
+  .dark :global(.strong) {
+    color: var(--color-text-primary);
   }
 </style>

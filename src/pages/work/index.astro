@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "@/layouts/BaseLayout.astro";
 import CaseStudyCard from "@/components/features/case-studies/components/CaseStudyCard.astro";
 import PageHeader from "@/components/ui/PageHeader.astro";
+import Container from "@/components/layout/Container.astro";
 
 export const prerender = true;
 
@@ -11,42 +12,467 @@ const caseStudies = await getCollection("case-studies");
 const sortedCaseStudies = caseStudies.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+// Build filter data
+const industries = Array.from(
+  new Set(sortedCaseStudies.map((s) => s.data.industry).filter(Boolean))
+).sort();
+const tags = Array.from(
+  new Set(sortedCaseStudies.flatMap((s) => s.data.tags || []))
+).sort();
 ---
 
-<Layout title="Work | Dale Rogers - Full Stack Developer">
+<Layout title="Work & Case Studies | Dale Rogers - Full Stack Developer">
   <PageHeader
     title="Work & Case Studies"
     description="Explore my portfolio of successful projects and learn how I've helped clients achieve their goals through innovative solutions."
   />
 
-  <div class="container mx-auto px-4 py-12">
+  <div class="work-container">
+    <!-- Debug info -->
+    <div class="mb-4 p-4 bg-blue-100 dark:bg-blue-900 rounded-lg">
+      <p class="text-sm text-blue-800 dark:text-blue-200">
+        Debug: Found {sortedCaseStudies.length} case studies
+      </p>
+    </div>
+
+    <!-- Enhanced Accessible Filters -->
+    <section class="mb-12" aria-labelledby="filters-heading">
+      <div class="work-filters">
+        <h2 id="filters-heading" class="work-filters__title">
+          Filter Case Studies
+        </h2>
+        <p class="work-filters__subtitle">
+          Find projects by industry, technology, or focus area
+        </p>
+
+        <form id="filters" class="work-filters__form" onsubmit="return false">
+          <div class="work-filters__controls">
+            <label class="work-filters__control">
+              <span class="work-filters__label">Industry</span>
+              <select
+                id="filter-industry"
+                class="work-filters__select"
+                aria-describedby="industry-help"
+              >
+                <option value="">All Industries</option>
+                {industries.map((ind) => <option value={ind}>{ind}</option>)}
+              </select>
+              <span id="industry-help" class="work-filters__help"
+                >Filter by client industry</span
+              >
+            </label>
+
+            <label class="work-filters__control">
+              <span class="work-filters__label">Technology</span>
+              <select
+                id="filter-tag"
+                class="work-filters__select"
+                aria-describedby="tag-help"
+              >
+                <option value="">All Technologies</option>
+                {tags.map((t) => <option value={t}>{t}</option>)}
+              </select>
+              <span id="tag-help" class="work-filters__help"
+                >Filter by technology or methodology</span
+              >
+            </label>
+
+            <button
+              id="filters-clear"
+              type="button"
+              class="work-filters__clear"
+              aria-label="Clear all filters"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+              Clear Filters
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Results Summary -->
+    <div class="work-results-summary mb-8">
+      <p class="work-results-summary__text">
+        Showing <span id="results-count" class="font-semibold"
+          >{sortedCaseStudies.length}</span
+        > case studies
+      </p>
+    </div>
+
+    <!-- Case Studies Grid -->
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      class="case-studies-grid"
       id="case-studies-grid"
+      role="list"
+      aria-label="Case studies"
+      aria-live="polite"
+      aria-atomic="false"
     >
       {
         sortedCaseStudies.map((study) => (
-          <CaseStudyCard
-            title={study.data.title}
-            description={study.data.description}
-            client={study.data.client}
-            industry={study.data.industry}
-            duration={study.data.duration}
-            tags={study.data.tags}
-            href={`/work/${study.slug}`}
-            coverImage={study.data.coverImage}
-          />
+          <div role="listitem" class="case-studies-grid__item">
+            <CaseStudyCard
+              title={study.data.title}
+              description={study.data.description}
+              client={study.data.client}
+              industry={study.data.industry}
+              duration={study.data.duration}
+              tags={study.data.tags}
+              href={`/work/${study.slug}`}
+              coverImage={study.data.coverImage}
+            />
+          </div>
         ))
       }
     </div>
+
+    <!-- Enhanced Empty State -->
+    {
+      sortedCaseStudies.length === 0 && (
+        <div class="empty-state" role="status" aria-live="polite">
+          <div class="empty-state__content">
+            <div class="empty-state__icon">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h3 class="empty-state__title">No Case Studies Yet</h3>
+            <p class="empty-state__description">
+              I'm currently working on some exciting projects. Check back soon
+              for detailed case studies!
+            </p>
+          </div>
+        </div>
+      )
+    }
+
+    <!-- No Results State (for filtered results) -->
+    <div
+      id="no-results"
+      class="no-results hidden"
+      role="status"
+      aria-live="polite"
+    >
+      <div class="no-results__content">
+        <div class="no-results__icon">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <h3 class="no-results__title">No Results Found</h3>
+        <p class="no-results__description">
+          Try adjusting your filters or browse all case studies below.
+        </p>
+        <button id="show-all-results" class="no-results__button" type="button">
+          Show All Case Studies
+        </button>
+      </div>
+    </div>
   </div>
+
+  <script>
+    const grid = document.getElementById("case-studies-grid")!;
+    const selIndustry = document.getElementById(
+      "filter-industry"
+    ) as HTMLSelectElement;
+    const selTag = document.getElementById("filter-tag") as HTMLSelectElement;
+    const btnClear = document.getElementById(
+      "filters-clear"
+    ) as HTMLButtonElement;
+    const resultsCount = document.getElementById("results-count");
+    const noResults = document.getElementById("no-results");
+    const showAllResults = document.getElementById(
+      "show-all-results"
+    ) as HTMLButtonElement;
+
+    function updateResultsCount(visibleCount: number) {
+      if (resultsCount) {
+        resultsCount.textContent = visibleCount.toString();
+        resultsCount.setAttribute(
+          "aria-label",
+          `${visibleCount} case studies found`
+        );
+      }
+    }
+
+    function showNoResults() {
+      if (noResults) {
+        noResults.classList.remove("hidden");
+        grid.classList.add("hidden");
+        updateResultsCount(0);
+      }
+    }
+
+    function showResults() {
+      if (noResults) {
+        noResults.classList.add("hidden");
+        grid.classList.remove("hidden");
+      }
+    }
+
+    function matchesFilters(card: Element): boolean {
+      const industry = card.getAttribute("data-industry") || "";
+      const tags = (card.getAttribute("data-tags") || "").toLowerCase();
+      const filterIndustry = selIndustry.value;
+      const filterTag = selTag.value.toLowerCase();
+
+      if (filterIndustry && industry !== filterIndustry) return false;
+      if (
+        filterTag &&
+        !tags
+          .split(",")
+          .map((t) => t.trim())
+          .includes(filterTag)
+      )
+        return false;
+      return true;
+    }
+
+    function applyFilters() {
+      const items = grid.querySelectorAll("article");
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const show = matchesFilters(item);
+        const listItem = item.parentElement;
+
+        if (listItem) {
+          if (show) {
+            listItem.style.display = "block";
+            listItem.classList.add("opacity-100", "translate-y-0");
+            visibleCount++;
+          } else {
+            listItem.style.display = "none";
+          }
+        }
+      });
+
+      if (visibleCount === 0) {
+        showNoResults();
+      } else {
+        showResults();
+        updateResultsCount(visibleCount);
+      }
+
+      grid.setAttribute("aria-busy", "false");
+    }
+
+    function initFilters() {
+      grid.setAttribute("aria-busy", "true");
+
+      selIndustry.addEventListener("change", applyFilters);
+      selTag.addEventListener("change", applyFilters);
+
+      btnClear.addEventListener("click", (e) => {
+        e.preventDefault();
+        selIndustry.value = "";
+        selTag.value = "";
+        applyFilters();
+      });
+
+      showAllResults.addEventListener("click", () => {
+        selIndustry.value = "";
+        selTag.value = "";
+        applyFilters();
+      });
+
+      applyFilters();
+    }
+
+    // Respect reduced motion for animations
+    const style = document.createElement("style");
+    style.textContent = `
+      @media (prefers-reduced-motion: reduce) {
+        .group:hover { transform: none !important }
+        .case-studies-grid__item { transition: none !important }
+      }
+    `;
+    document.head.appendChild(style);
+
+    document.addEventListener("DOMContentLoaded", initFilters);
+  </script>
 </Layout>
 
 <style>
   @reference "tailwindcss";
 
-  /* Hover effect for case study cards using Tailwind directly */
-  .group:hover h2 {
-    @apply text-purple-600 dark:text-purple-400;
+  .work-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20;
+  }
+
+  /* Enhanced Filters */
+  .work-filters {
+    @apply bg-gradient-to-r from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900 rounded-3xl p-8 border border-neutral-200 dark:border-neutral-700 shadow-lg;
+  }
+
+  .work-filters__title {
+    @apply text-2xl font-bold text-neutral-900 dark:text-white mb-2;
+  }
+
+  .work-filters__subtitle {
+    @apply text-neutral-600 dark:text-neutral-400 mb-8;
+  }
+
+  .work-filters__form {
+    @apply space-y-6;
+  }
+
+  .work-filters__controls {
+    @apply flex flex-col lg:flex-row gap-6 items-start lg:items-end;
+  }
+
+  .work-filters__control {
+    @apply flex flex-col gap-2 flex-1;
+  }
+
+  .work-filters__label {
+    @apply text-sm font-semibold text-neutral-700 dark:text-neutral-300 uppercase tracking-wide;
+  }
+
+  .work-filters__select {
+    @apply border-2 border-neutral-300 dark:border-neutral-600 rounded-xl px-4 py-3 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200;
+  }
+
+  .work-filters__help {
+    @apply text-xs text-neutral-500 dark:text-neutral-500;
+  }
+
+  .work-filters__clear {
+    @apply inline-flex items-center gap-2 px-4 py-3 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded-xl;
+  }
+
+  /* Results Summary */
+  .work-results-summary {
+    @apply text-center;
+  }
+
+  .work-results-summary__text {
+    @apply text-lg text-neutral-600 dark:text-neutral-400;
+  }
+
+  /* Enhanced Grid */
+  .case-studies-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10;
+  }
+
+  .case-studies-grid__item {
+    @apply opacity-0 translate-y-4 transition-all duration-500 ease-out;
+  }
+
+  /* Enhanced hover effects for case study cards */
+  .case-studies-grid :global(.group:hover) {
+    @apply transform transition-all duration-500;
+  }
+
+  .case-studies-grid :global(.group:hover h3 a) {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  .case-studies-grid :global(.group:hover .tag) {
+    @apply bg-blue-600 text-white;
+  }
+
+  /* Empty State */
+  .empty-state {
+    @apply flex items-center justify-center py-20;
+  }
+
+  .empty-state__content {
+    @apply text-center max-w-md mx-auto;
+  }
+
+  .empty-state__icon {
+    @apply w-20 h-20 text-neutral-400 dark:text-neutral-600 mx-auto mb-8;
+  }
+
+  .empty-state__title {
+    @apply text-3xl font-bold text-neutral-900 dark:text-white mb-4;
+  }
+
+  .empty-state__description {
+    @apply text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed;
+  }
+
+  /* No Results State */
+  .no-results {
+    @apply flex items-center justify-center py-20;
+  }
+
+  .no-results.hidden {
+    @apply hidden;
+  }
+
+  .no-results__content {
+    @apply text-center max-w-md mx-auto;
+  }
+
+  .no-results__icon {
+    @apply w-20 h-20 text-neutral-400 dark:text-neutral-600 mx-auto mb-8;
+  }
+
+  .no-results__title {
+    @apply text-3xl font-bold text-neutral-900 dark:text-white mb-4;
+  }
+
+  .no-results__description {
+    @apply text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed mb-8;
+  }
+
+  .no-results__button {
+    @apply inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2;
+  }
+
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    .case-studies-grid {
+      @apply gap-8;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .case-studies-grid {
+      @apply gap-10;
+    }
+  }
+
+  /* Focus and hover states */
+  .work-filters__select:hover {
+    @apply border-neutral-400 dark:border-neutral-500;
+  }
+
+  .work-filters__clear:hover {
+    @apply bg-blue-50 dark:bg-blue-900/20;
   }
 </style>

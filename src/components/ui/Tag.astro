@@ -1,25 +1,33 @@
 ---
+/**
+ * @fileoverview Tag component for displaying labels and categories.
+ * Supports clickable tags with hover effects and professional styling.
+ */
+
 interface Props {
-  /** The text content of the tag */
   text: string;
-  /** Optional class to extend the tag styling */
-  class?: string;
-  /** Whether the tag is clickable (adds hover state) */
   clickable?: boolean;
+  href?: string;
+  class?: string;
 }
 
-const { text, class: className = "", clickable = false } = Astro.props;
+const { text, clickable = false, href, class: className } = Astro.props;
+
+const baseClasses = "tag";
+const clickableClasses = clickable ? "tag--clickable" : "";
+const combinedClasses = [baseClasses, clickableClasses, className]
+  .filter(Boolean)
+  .join(" ");
 ---
 
-<span
-  class:list={[
-    "inline-flex items-center px-3 py-1 text-xs font-medium",
-    "rounded-[9999px]", // Using a very large radius for pill shape
-    "bg-tag dark:bg-tag-dark text-tag-text dark:text-tag-text-dark",
-    clickable &&
-      "hover:bg-tag-hover dark:hover:bg-tag-hover-dark transition-colors cursor-pointer",
-    className,
-  ]}
->
-  {text}
-</span>
+{
+  clickable && href ? (
+    <a href={href} class={combinedClasses}>
+      {text}
+    </a>
+  ) : (
+    <span class={combinedClasses}>
+      {text}
+    </span>
+  )
+}

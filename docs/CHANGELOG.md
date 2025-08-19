@@ -40,6 +40,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `card` colour group in `tailwind.config.ts` generating `bg-card-purple`, `bg-card-green`, `bg-card-orange`, and `bg-card-black` utilities
 - Custom Tailwind plugin to auto-generate semantic utilities (`.bg-*`, `.text-*`, `.border-*`, `.ring-*`, spacing, sizing) from CSS variables
 - `generate-css-vars.ts` script ensuring CSS custom properties are generated from TypeScript theme tokens
+- Comprehensive layout patterns documentation (`LAYOUT_PATTERNS.md`)
+- Enhanced Container component with multiple width variants (default, narrow, wide, full)
+- Restored search functionality to navigation component
+- Integrated SearchInput component into Navigation.astro
+- Fixed missing @reference directive in services.css
+- Proper semantic navigation component with ARIA attributes
+- Mobile hamburger menu with smooth animations
+- Active page state detection and styling
+- Keyboard navigation and accessibility improvements
 
 ### Changed
 
@@ -67,6 +76,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactored all CSS to remove custom classes from @apply and enforce token-based utility usage throughout the codebase
 - Updated all documentation to clarify that contributors must directly update docs (README, changelog, code comments, etc.) as part of any change
 - Enforced token-based styling for all colours, spacing, radii, and other design values; Tailwind colour-numbered classes (e.g. -500) are no longer used
+- Replaced Fraunces serif font with Inter sans-serif for modern, bold headings
+- Enhanced Container component API with variant-based width options
+- Improved search input expansion functionality in navigation
+- Refactored Hero component to use Container instead of full-width layout
+- Updated Heading component to use Inter and DM Sans fonts instead of Fraunces
+- Removed gradient effects from Hero and Footer components for cleaner design
+- Updated Navigation component to include search functionality
+- Enhanced navigation CSS for proper search component integration
+- Fixed SearchInput component to use proper color tokens instead of theme() function
+- Converted navigation from generic list to proper nav component
+- Implemented proper WCAG AA compliant navigation structure
+- Added mobile-responsive navigation with hamburger menu
+- Enhanced navigation with active state indicators
 
 ### Fixed
 
@@ -81,6 +103,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Corrected American English spellings to Australian English
 - Extended Tailwind config to include `card` colour utilities, resolving missing `bg-card-*` errors
 - Removed invalid `border-border` and `dark:border-border-dark` classes in `ThemeToggle.astro`, replacing with `border-text`
+- Fixed search input expansion not working in navigation
+- Resolved theme toggle functionality issues
+- Fixed search input positioning and z-index conflicts
+- Fixed search expansion not working after page navigation in Astro
+- Search functionality now properly integrated in header navigation
+- Fixed Tailwind CSS build errors in services.css
+- Resolved theme toggle initialization issues
+- Fixed duplicate SearchResult interface in useSearch hook
+- Navigation now uses proper semantic HTML and ARIA roles
+- Mobile navigation properly prevents body scroll when open
+- Improved keyboard navigation and screen reader support
+- Navigation component now fully functional with proper styling and mobile menu
+- Fixed missing CSS import that was preventing navigation styles from loading
+- Fixed theme toggle functionality by resolving duplicate theme initialization scripts
+- Resolved CSS import order warnings in global.css
+- Fixed container centering issues by updating grid system from 6-column to 12-column layout
+- Updated Hero, AboutSection, and ServicesText components to use standard 12-column grid
+- **CaseStudiesBento Full-Width Issue**: Fixed the case studies bento section not being full-width by:
+  - Removing redundant inner container div with `max-w-7xl mx-auto` constraints
+  - Updating `container--full` CSS class to use higher specificity selectors (`.container.container--full`)
+  - Adding `!important` declarations for `max-width: 100%` and `width: 100%` to override conflicting CSS rules
+  - Restoring proper padding on both sides (`px-4 sm:px-6 lg:px-8`) for content spacing
+- **Container CSS Specificity**: Improved container CSS to prevent width constraints from being overridden by other CSS rules
+- **Navigation Centering**: Fixed navigation header centering by removing redundant container structure and ensuring proper CSS import
 
 ### Security
 

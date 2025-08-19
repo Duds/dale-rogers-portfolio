@@ -1,0 +1,43 @@
+@reference "tailwindcss";
+
+/* Professional Container Component Styles with proper theme tokens */
+.container {
+  @apply w-full px-4 sm:px-6 lg:px-8;
+}
+
+.container--standard {
+  @apply max-w-7xl mx-auto; /* ~80rem (1280px) - Standard content */
+}
+
+.container--narrow {
+  @apply max-w-4xl mx-auto; /* ~64rem (1024px) - Reading content */
+}
+
+/* Content margin variant - consistent margins for content sections */
+.container--content-margin {
+  @apply w-full px-6 md:px-12;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* More specific selector to override any conflicting styles */
+.container--full {
+  @apply w-full px-4 sm:px-6 lg:px-8; /* 100% width - Full viewport with padding on both sides */
+  max-width: 100% !important; /* Force override any max-width constraints */
+  width: 100% !important; /* Force override any width constraints */
+}
+
+/* Responsive padding adjustments */
+@media (min-width: 640px) {
+  .container {
+    @apply px-6;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    @apply px-8;
+  }
+}

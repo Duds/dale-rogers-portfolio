@@ -17,7 +17,7 @@ import Button from "@/components/ui/Button.astro";
       type="button"
       id="search-toggle"
       variant="ghost"
-      ghostColour="black"
+      ghostColour="grey"
       aria-label="Toggle search"
       tabindex="0"
       class="search-toggle"
@@ -61,43 +61,55 @@ import Button from "@/components/ui/Button.astro";
 
 <script>
   import { useSearch } from "./hooks/useSearch.js";
-  // import { uiColours } from '../../../styles/theme/colors.ts'; // Uncomment when migrating to theme tokens in JS/TS
 
-  const searchInput = document.getElementById(
-    "search-input"
-  ) as HTMLInputElement | null;
-  const searchResults = document.getElementById(
-    "search-results"
-  ) as HTMLDivElement | null;
-  const searchToggle = document.getElementById(
-    "search-toggle"
-  ) as HTMLButtonElement | null;
-  const searchForm = document.getElementById(
-    "search-form"
-  ) as HTMLFormElement | null;
-  const searchInputContainer = document.querySelector(
-    ".search-input-container"
-  ) as HTMLDivElement | null;
-
+  let searchInput: HTMLInputElement | null = null;
+  let searchResults: HTMLDivElement | null = null;
+  let searchToggle: HTMLButtonElement | null = null;
+  let searchForm: HTMLFormElement | null = null;
+  let searchInputContainer: HTMLDivElement | null = null;
   let expanded = false;
 
   function expandSearch() {
-    if (!searchForm || !searchInput || !searchInputContainer) return;
+    console.log("Attempting to expand search", {
+      searchForm: !!searchForm,
+      searchInput: !!searchInput,
+      searchInputContainer: !!searchInputContainer,
+    });
+
+    if (!searchForm || !searchInput || !searchInputContainer) {
+      console.warn("Cannot expand search - missing elements");
+      return;
+    }
+
     expanded = true;
     searchForm.classList.add("expanded");
     searchInputContainer.classList.add("expanded");
     searchInput.focus();
+
+    console.log("Search expanded successfully");
   }
 
   function collapseSearch() {
-    if (!searchForm || !searchInput || !searchResults || !searchInputContainer)
+    console.log("Attempting to collapse search");
+
+    if (
+      !searchForm ||
+      !searchInput ||
+      !searchResults ||
+      !searchInputContainer
+    ) {
+      console.warn("Cannot collapse search - missing elements");
       return;
+    }
+
     expanded = false;
     searchForm.classList.remove("expanded");
     searchInputContainer.classList.remove("expanded");
     searchInput.value = "";
     searchResults.classList.add("hidden");
     searchInput.setAttribute("aria-expanded", "false");
+
+    console.log("Search collapsed successfully");
   }
 
   function handleSearchToggle(e: Event) {
@@ -116,59 +128,155 @@ import Button from "@/components/ui/Button.astro";
     }
   }
 
-  // Wait for DOM to fully load
-  document.addEventListener("DOMContentLoaded", () => {
-    if (searchToggle && searchInput && searchForm) {
-      // Handle toggle button click
-      searchToggle.addEventListener("click", handleSearchToggle);
+  function setupSearch() {
+    // Reset search state when setting up
+    expanded = false;
 
+    // Get fresh references to DOM elements
+    searchInput = document.getElementById(
+      "search-input"
+    ) as HTMLInputElement | null;
+    searchResults = document.getElementById(
+      "search-results"
+    ) as HTMLDivElement | null;
+    searchToggle = document.getElementById(
+      "search-toggle"
+    ) as HTMLButtonElement | null;
+    searchForm = document.getElementById(
+      "search-form"
+    ) as HTMLFormElement | null;
+
+    // Try multiple ways to find the search input container
+    searchInputContainer = document.querySelector(
+      ".search-input-container"
+    ) as HTMLDivElement | null;
+    if (!searchInputContainer && searchForm) {
+      // Fallback: look for the container within the form
+      searchInputContainer = searchForm.querySelector(
+        ".search-input-container"
+      ) as HTMLDivElement | null;
+    }
+
+    // Debug logging
+    console.log("Setting up search with elements:", {
+      searchInput: !!searchInput,
+      searchResults: !!searchResults,
+      searchToggle: !!searchToggle,
+      searchForm: !!searchForm,
+      searchInputContainer: !!searchInputContainer,
+    });
+
+    if (searchToggle && searchInput && searchForm) {
+      // Remove existing event listeners to prevent duplicates
+      searchToggle.removeEventListener("click", handleSearchToggle);
+      searchInput.removeEventListener("focus", expandSearch);
+
+      // Add event listeners
+      searchToggle.addEventListener("click", handleSearchToggle);
       searchInput.addEventListener("focus", expandSearch);
 
       // Handle Enter key in input field
-      searchInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          // Allow normal form submission to the search page
-          // We don't need to prevent default here
-        }
-      });
+      searchInput.removeEventListener("keydown", handleEnterKey);
+      searchInput.addEventListener("keydown", handleEnterKey);
 
-      document.addEventListener("click", (event) => {
-        const target = event.target as Node | null;
-        if (
-          expanded &&
-          target &&
-          !searchForm.contains(target) &&
-          !searchResults?.contains(target)
-        ) {
-          collapseSearch();
-        }
-      });
+      // Setup search functionality
+      if (searchInput && searchResults && searchForm) {
+        const { handleSearch, handleKeyDown } = useSearch(
+          searchInput,
+          searchResults
+        );
 
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && expanded) {
-          collapseSearch();
-        }
+        // Remove existing listeners to prevent duplicates
+        searchInput.removeEventListener("input", handleSearch);
+        searchInput.removeEventListener("keydown", handleKeyDown);
+
+        // Add fresh listeners
+        searchInput.addEventListener("input", handleSearch);
+        searchInput.addEventListener("keydown", handleKeyDown);
+      }
+
+      // Ensure search is collapsed initially
+      if (searchForm.classList.contains("expanded")) {
+        searchForm.classList.remove("expanded");
+      }
+      if (searchInputContainer?.classList.contains("expanded")) {
+        searchInputContainer.classList.remove("expanded");
+      }
+      if (searchResults?.classList.contains("hidden") === false) {
+        searchResults.classList.add("hidden");
+      }
+
+      console.log("Search setup complete");
+    } else {
+      console.warn("Some search elements not found:", {
+        searchToggle: !!searchToggle,
+        searchInput: !!searchInput,
+        searchForm: !!searchForm,
       });
     }
 
-    if (searchInput && searchResults && searchForm) {
-      const { handleSearch, handleKeyDown } = useSearch(
-        searchInput,
-        searchResults
-      );
-      searchInput.addEventListener("input", handleSearch);
-      searchInput.addEventListener("keydown", handleKeyDown);
+    // Setup global event listeners
+    setupGlobalListeners();
+  }
+
+  function handleEnterKey(e: KeyboardEvent) {
+    if (e.key === "Enter") {
+      // Allow normal form submission to the search page
+      // We don't need to prevent default here
     }
+  }
+
+  function setupGlobalListeners() {
+    // Remove existing global listeners to prevent duplicates
+    document.removeEventListener("click", handleDocumentClick);
+    document.removeEventListener("keydown", handleDocumentKeydown);
+
+    // Add fresh global listeners
+    document.addEventListener("click", handleDocumentClick);
+    document.addEventListener("keydown", handleDocumentKeydown);
+  }
+
+  function handleDocumentClick(event: Event) {
+    const target = event.target as Node | null;
+    if (
+      expanded &&
+      target &&
+      !searchForm?.contains(target) &&
+      !searchResults?.contains(target)
+    ) {
+      collapseSearch();
+    }
+  }
+
+  function handleDocumentKeydown(e: KeyboardEvent) {
+    if (e.key === "Escape" && expanded) {
+      collapseSearch();
+    }
+  }
+
+  // Initialize on first load
+  document.addEventListener("DOMContentLoaded", () => {
+    // Small delay to ensure DOM is fully ready
+    setTimeout(setupSearch, 10);
+  });
+
+  // Re-initialize after Astro page navigation
+  document.addEventListener("astro:page-load", () => {
+    // Small delay to ensure DOM is fully ready after navigation
+    setTimeout(setupSearch, 10);
+  });
+  document.addEventListener("astro:after-swap", () => {
+    // Small delay to ensure DOM is fully ready after swap
+    setTimeout(setupSearch, 10);
   });
 </script>
 
 <style>
-  /* TODO: Migrate all CSS to use theme tokens from TypeScript in JS/TS logic or CSS-in-JS */
   .search-bar-container {
     position: relative;
     height: 3rem;
     width: 3rem;
-    z-index: 50; /* Ensure it's above other elements */
+    z-index: 50;
   }
 
   .search-form {
@@ -177,10 +285,12 @@ import Button from "@/components/ui/Button.astro";
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    transition: all 0.3s ease;
   }
 
   .search-form.expanded {
     width: auto;
+    z-index: 15;
   }
 
   /* Main search button styling to match navigation buttons */
@@ -188,23 +298,32 @@ import Button from "@/components/ui/Button.astro";
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    background-color: transparent; /* Match nav buttons with transparent bg */
+    background-color: transparent;
     border: 2px solid currentColor;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s;
-    color: var(--color-text);
+    color: #111827;
     z-index: 20;
     padding: 0;
-    position: relative; /* Ensure position is established for z-index */
+    position: relative;
+  }
+
+  .dark .search-toggle {
+    color: #ffffff;
   }
 
   /* Match hover style of other navigation buttons */
   .search-toggle:hover {
-    background-color: var(--color-text);
-    color: var(--color-background);
+    background-color: #111827;
+    color: #ffffff;
+  }
+
+  .dark .search-toggle:hover {
+    background-color: #ffffff;
+    color: #111827;
   }
 
   /* Direct SVG styling */
@@ -217,7 +336,7 @@ import Button from "@/components/ui/Button.astro";
 
   .search-input-container {
     position: absolute;
-    right: calc(100% + 0.75rem); /* Restore original positioning */
+    right: calc(100% + 0.75rem);
     top: 0;
     display: flex;
     align-items: center;
@@ -229,12 +348,20 @@ import Button from "@/components/ui/Button.astro";
       opacity 0.3s ease;
     opacity: 0;
     pointer-events: none;
+    z-index: 10;
+    background: #ffffff;
+    border-radius: 1.5rem;
+  }
+
+  .dark .search-input-container {
+    background: #111827;
   }
 
   .search-input-container.expanded {
     width: 16rem;
     opacity: 1;
     pointer-events: all;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   }
 
   .search-input {
@@ -242,12 +369,18 @@ import Button from "@/components/ui/Button.astro";
     height: 3rem;
     border: 2px solid currentColor;
     border-radius: 1.5rem;
-    background: var(--color-background);
+    background: #ffffff;
     padding: 0 1rem;
     font-size: 1rem;
     font-weight: 700;
     outline: none;
-    color: var(--color-text);
+    color: #111827;
+    min-width: 0;
+  }
+
+  .dark .search-input {
+    background: #111827;
+    color: #ffffff;
   }
 
   .search-results {
@@ -256,37 +389,23 @@ import Button from "@/components/ui/Button.astro";
     right: 0;
     width: 20rem;
     z-index: 10;
-    background: var(--color-background);
-    border: 2px solid var(--color-text);
+    background: #ffffff;
+    border: 2px solid #111827;
     border-radius: 1rem;
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
     max-height: 80vh;
     overflow-y: auto;
   }
 
-  /* Remove local CSS variable definitions, use theme tokens in JS/TS */
-  /*
-  :root {
-    --color-text: #000;
-    --color-background: #fff;
+  .dark .search-results {
+    background: #111827;
+    border-color: #ffffff;
   }
-  .dark {
-    --color-text: #fff;
-    --color-background: #171717;
-  }
-  */
-  /* TODO: Migrate all CSS to use CSS-in-JS or style props with uiColours tokens */
 
   @media (max-width: 768px) {
     .search-input-container.expanded {
       width: 70vw;
-      right: 100%; /* Restore original positioning */
-    }
-
-    .search-results {
-      width: 100%;
-      left: -50%; /* Restore original positioning */
-      min-width: 16rem;
+      right: 100%;
     }
   }
 </style>

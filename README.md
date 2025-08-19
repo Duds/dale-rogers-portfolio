@@ -91,17 +91,102 @@ pnpm update
 
 ## Design Token Workflow
 
-This project uses a modern, type-safe design token system:
+This project uses a modern, semantic design token system:
 
 - **Source of Truth:** All design tokens (colours, spacing, shadows, etc.) are defined in TypeScript files in `src/styles/theme/`.
-- **CSS Variable Generation:** Run `pnpm run generate-css-vars` to generate `src/styles/generated-tokens.css` with all tokens as CSS variables. This is automated before dev/build via `predev` and `prebuild` scripts.
-- **Usage:**
-  - CSS: Tokens are available as CSS variables (e.g., `var(--color-accent)`, `var(--shadow-lg)`, `var(--space-2)`).
-  - Tailwind: Tokens are imported into `tailwind.config.js` for consistent utility classes.
+- **Semantic Naming:** Colors use semantic names (e.g., `brand-highlight`, `text-primary`) instead of specific color names for easy refactoring.
+- **Dark Theme Support:** Built-in dark theme color overrides with automatic CSS variable switching.
+- **CSS Variable Generation:** Tokens are available as CSS variables (e.g., `var(--color-brand-highlight)`, `var(--color-text-primary)`).
+- **Migration Support:** Use `pnpm run migrate:theme` to automatically migrate from old color names to the new semantic system.
   - JS/TS: Tokens can be imported directly from TypeScript for use in components or scripts.
 - **Node Version:** Use `nvm use 20.19.2` before running scripts if using Node Version Manager (NVM). Node.js 20+ is required for Azure dependencies.
 
 This ensures a single source of truth for all design decisions, with full type safety and easy synchronisation between code and styles.
+
+## Theme System
+
+The portfolio uses a semantic color system that makes it easy to maintain and refactor colors:
+
+### Key Benefits
+
+- **Easy Refactoring**: Change colors in one place without updating components
+- **Semantic Naming**: Colors are named by purpose, not appearance
+- **Dark Theme**: Automatic dark mode support with proper contrast
+- **Consistency**: All components use the same color system
+
+### Quick Start
+
+```bash
+# Migrate existing components to new theme system
+pnpm run migrate:theme
+
+# View theme documentation
+cat docs/THEME_MIGRATION.md
+```
+
+### Color Categories
+
+- **Brand Colors**: `brand-highlight`, `brand-emphasis` (easily refactorable)
+- **Text Colors**: `text-primary`, `text-secondary`, `text-muted`
+- **Background Colors**: `background-primary`, `background-elevated`
+- **State Colors**: `state-success`, `state-warning`, `state-error`
+- **Interactive Colors**: `interactive-hover`, `interactive-focus`
+
+For complete documentation, see [docs/THEME_MIGRATION.md](docs/THEME_MIGRATION.md).
+
+## Image System
+
+### Overview
+
+The portfolio uses a comprehensive image system built on Unsplash stock photography for consistent, professional visual content.
+
+### Image Guidelines
+
+- **High Quality**: All images are high-resolution (minimum 2070px width) with professional composition
+- **Contextual Relevance**: Images directly relate to the content they accompany
+- **Accessibility**: Comprehensive alt text for all images following WCAG guidelines
+- **Consistency**: Maintained visual style across light and dark themes
+
+### Image Categories
+
+- **Case Studies**: Context-specific images representing project domains (Antarctic, education, travel, etc.)
+- **Services**: Professional business imagery aligned with service offerings
+- **Profile**: Professional business portrait for personal branding
+- **Supporting Content**: Relevant imagery for articles, values, and other content
+
+### Technical Implementation
+
+- **Source**: Unsplash CDN with optimized parameters for web performance
+- **Format**: JPEG with 80% quality for optimal file size
+- **Responsive**: Images scale appropriately across all device sizes
+- **Loading**: Optimized for fast loading and good user experience
+
+### Recent Updates
+
+- ✅ Replaced all missing/placeholder images with appropriate Unsplash alternatives
+- ✅ Enhanced alt text for improved accessibility
+- ✅ Eliminated duplicate image usage across unrelated content
+- ✅ Created comprehensive image guidelines documentation
+- ✅ Optimized image selections for better contextual relevance
+- ✅ Implemented lazy loading for improved performance
+- ✅ Added WebP support for modern browsers
+- ✅ Created intelligent image caching system
+- ✅ Automated accessibility auditing and compliance monitoring
+- ✅ **Added Unsplash cover images to all 15 articles for complete visual coverage**
+
+### **Advanced Image Features**
+
+- **Lazy Loading**: Automatic image loading as users scroll
+- **WebP Support**: Modern image format with JPEG fallback
+- **Smart Caching**: Service worker-based caching strategies
+- **Performance Monitoring**: Automated audits and optimization
+- **Accessibility Compliance**: WCAG AA standards with automated testing
+
+### Documentation
+
+- **Image Guidelines**: See `docs/image-guidelines.md` for detailed selection criteria
+- **Alt Text Standards**: Comprehensive alt text examples and best practices
+- **Visual Consistency**: Guidelines for maintaining cohesive visual identity
 
 ## Project Structure
 

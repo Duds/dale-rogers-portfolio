@@ -3,15 +3,13 @@ import Icon from "@/components/ui/Icon.astro";
 import Heading from "@/components/ui/Heading.astro";
 
 interface Props {
-  value: string | number;
+  value: string;
   label: string;
   icon?: string;
   class?: string;
-  /** Font family for the heading - 'fraunces' or 'dm-sans' */
-  font?: "fraunces" | "dm-sans";
 }
 
-const { value, label, icon, class: iconClass, font = "fraunces" } = Astro.props;
+const { value, label, icon, class: iconClass } = Astro.props;
 ---
 
 <div
@@ -28,9 +26,12 @@ const { value, label, icon, class: iconClass, font = "fraunces" } = Astro.props;
     )
   }
   <div>
-    <Heading level={3} font={font} size="4xl" class="text-heading">
+    <Heading
+      level={3}
+      class="text-heading text-2xl md:text-3xl lg:text-4xl font-bold  dark:text-white" style="color: var(--color-text-primary);"
+    >
       {value}
     </Heading>
-    <div class="text-2xl text-text-secondary font-semibold">{label}</div>
+    <div class="text-2xl  font-semibold" style="color: var(--color-text-secondary);">{label}</div>
   </div>
 </div>

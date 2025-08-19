@@ -2,10 +2,10 @@
 const { author, role } = Astro.props;
 ---
 <figure class="testimonial my-12">
-  <blockquote class="text-2xl md:text-3xl italic text-neutral-800 dark:text-neutral-100 mb-6 border-l-4 border-primary pl-6 font-serif">
+  <blockquote class="text-2xl md:text-3xl italic  dark:text-background-tertiary mb-6 border-l-4 border-primary pl-6 font-serif" style="color: var(--color-text-primary);">
     <slot />
   </blockquote>
-  <figcaption class="text-xl md:text-2xl text-neutral-700 dark:text-neutral-300 font-bold pl-6">
-    — {author}{role ? <span class="text-neutral-500 dark:text-neutral-400 font-normal">, {role}</span> : null}
+  <figcaption class="text-xl md:text-2xl  dark: font-bold pl-6" style="color: var(--color-text-disabled);" style="color: var(--color-text-secondary);">
+    — {author}{role ? <span class="dark: font-normal" style="color: var(--color-text-muted);" style="color: var(--color-text-tertiary);">, {role}</span> : null}
   </figcaption>
 </figure>
