@@ -1,0 +1,36 @@
+# Generated files and directories
+storybook-static/
+dist/
+.astro/
+node_modules/
+test-results/
+
+# Build outputs
+*.min.js
+*.bundle.js
+
+# Generated TypeScript files
+*.d.ts
+*.generated.ts
+
+# Configuration files
+*.config.js
+*.config.ts
+*.config.mjs
+*.config.cjs
+
+# Package manager files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Documentation and reports
+docs/
+reports/
+*.md
+*.html
+*.json
+
+# Scripts and utilities
+scripts/
+public/scripts/
