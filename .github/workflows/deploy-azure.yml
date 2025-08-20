@@ -137,6 +137,27 @@ jobs:
           echo "📋 Final production package.json structure:"
           cat dist/package.json
 
+          # Create a production-specific lockfile to avoid lockfile mismatch issues
+          echo "🔒 Creating production-specific lockfile..."
+          cd dist
+
+          # Remove the existing lockfile and create a fresh one for production
+          rm -f pnpm-lock.yaml
+
+          # Install dependencies to generate a new lockfile that matches production package.json
+          echo "📦 Installing dependencies to generate production lockfile..."
+          pnpm install --prod
+
+          # Verify the lockfile was created
+          if [ -f "pnpm-lock.yaml" ]; then
+            echo "✅ Production lockfile created successfully"
+            echo "📊 Lockfile size: $(wc -l < pnpm-lock.yaml) lines"
+          else
+            echo "⚠️  No lockfile generated, this might cause issues"
+          fi
+
+          cd ..
+
       - name: Set deployment variables
         run: |
           # Set environment-specific deployment variables
@@ -178,16 +199,12 @@ jobs:
 
           chmod +x dist/start.sh
 
-          # Copy package manager files and install dependencies
-          cp pnpm-lock.yaml dist/
-          cd dist
-
           # Debug: Show the production package.json contents
           echo "📋 Production package.json contents:"
-          cat package.json
+          cat dist/package.json
 
           # Double-check: Verify no prepare script exists (safety measure)
-          if grep -q '"prepare"' package.json; then
+          if grep -q '"prepare"' dist/package.json; then
             echo "❌ ERROR: prepare script still exists in production package.json"
             echo "This should have been removed in the 'Prepare production package.json' step"
             exit 1
@@ -195,9 +212,10 @@ jobs:
             echo "✅ No prepare script found in production package.json"
           fi
 
-          # Install production dependencies
+          # Install production dependencies with --no-frozen-lockfile to handle lockfile mismatch
           echo "📦 Installing production dependencies..."
-          pnpm install --prod --frozen-lockfile
+          echo "⚠️  Using --no-frozen-lockfile due to production package.json vs lockfile mismatch"
+          pnpm install --prod --no-frozen-lockfile
           cd ..
 
           # Create a zip file of the dist directory
