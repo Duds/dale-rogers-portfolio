@@ -1,6 +1,6 @@
-const plugin = require("tailwindcss/plugin");
+import plugin from "tailwindcss/plugin";
 
-module.exports = plugin(function ({ addUtilities, theme }) {
+export default plugin(function ({ addUtilities, theme }) {
   addUtilities({
     ".shadow-soft": {
       "@apply transition-shadow duration-normal ease-in-out": {},

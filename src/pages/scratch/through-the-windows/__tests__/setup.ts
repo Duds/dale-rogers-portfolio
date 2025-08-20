@@ -1,6 +1,3 @@
-/// <reference types="vitest" />
-/// <reference types="@testing-library/jest-dom" />
-
 import "@testing-library/jest-dom";
 import { expect, afterEach } from "vitest";
 import { cleanup } from "@testing-library/react";
@@ -16,7 +13,7 @@ afterEach(() => {
 
 // Add custom type declarations
 declare global {
-  namespace Vi {
-    interface JestAssertion<T = any> extends jest.Matchers<void, T> {}
+  interface Vi {
+    interface JestAssertion<T = unknown> extends jest.Matchers<void, T> {}
   }
 }

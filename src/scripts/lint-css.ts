@@ -12,8 +12,9 @@ function lintFile(filePath: string) {
     } else {
       console.log(`⚠️  ${filePath} minimal CSS content`);
     }
-  } catch (err: any) {
-    console.error(`❌ ${filePath} error:`, err.message || err);
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    console.error(`❌ ${filePath} error:`, errorMessage);
     process.exitCode = 1;
   }
 }
@@ -39,8 +40,9 @@ function lintAstroFile(filePath: string) {
       }
       blockIndex++;
     }
-  } catch (err: any) {
-    console.error(`❌ ${filePath} error:`, err.message || err);
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    console.error(`❌ ${filePath} error:`, errorMessage);
     process.exitCode = 1;
   }
 }

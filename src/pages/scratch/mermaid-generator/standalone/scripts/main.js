@@ -441,7 +441,7 @@ try {
     const observer = new MutationObserver(sendResizeMessage);
     observer.observe(document.body, { subtree: true, childList: true });
   }
-} catch (e) {
+} catch {
   // Ignore cross-origin errors
   console.log("Cross-origin communication not available");
 }
