@@ -177,32 +177,46 @@ afterEach(() => {
 
   // Reset IntersectionObserver and ResizeObserver
   if (global.IntersectionObserver) {
-    (global.IntersectionObserver as MockedFunction<typeof IntersectionObserver>).mockClear();
+    (
+      global.IntersectionObserver as MockedFunction<typeof IntersectionObserver>
+    ).mockClear();
   }
   if (global.ResizeObserver) {
-    (global.ResizeObserver as MockedFunction<typeof ResizeObserver>).mockClear();
+    (
+      global.ResizeObserver as MockedFunction<typeof ResizeObserver>
+    ).mockClear();
   }
 
   // Reset requestAnimationFrame
   if (
     global.requestAnimationFrame &&
-    typeof (global.requestAnimationFrame as MockedFunction<typeof requestAnimationFrame>).mockClear === "function"
+    typeof (
+      global.requestAnimationFrame as MockedFunction<
+        typeof requestAnimationFrame
+      >
+    ).mockClear === "function"
   ) {
-    (global.requestAnimationFrame as MockedFunction<typeof requestAnimationFrame>).mockClear();
+    (
+      global.requestAnimationFrame as MockedFunction<
+        typeof requestAnimationFrame
+      >
+    ).mockClear();
   }
   if (
     global.cancelAnimationFrame &&
-    typeof (global.cancelAnimationFrame as MockedFunction<typeof cancelAnimationFrame>).mockClear === "function"
+    typeof (
+      global.cancelAnimationFrame as MockedFunction<typeof cancelAnimationFrame>
+    ).mockClear === "function"
   ) {
-    (global.cancelAnimationFrame as MockedFunction<typeof cancelAnimationFrame>).mockClear();
+    (
+      global.cancelAnimationFrame as MockedFunction<typeof cancelAnimationFrame>
+    ).mockClear();
   }
 });
 
-// Global test utilities
+// Global test utilities - simplified for compatibility
 declare global {
-  interface Vi {
-    interface JestAssertion<T = unknown> extends jest.Matchers<void, T> {}
-  }
+  // Extend Vi types if needed for testing
 }
 
 export {};

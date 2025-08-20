@@ -277,11 +277,9 @@ export const cleanupHelpers = {
   },
 };
 
-// Global test utilities
+// Global test utilities - simplified for compatibility
 declare global {
-  namespace Vi {
-    interface JestAssertion<T = any> extends jest.Matchers<void, T> {}
-  }
+  // Extend Vi types if needed for testing
 }
 
 export {};
