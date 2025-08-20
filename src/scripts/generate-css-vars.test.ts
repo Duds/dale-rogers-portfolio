@@ -11,7 +11,7 @@ describe("Design Token CSS Variable Generation", () => {
 
   it("should contain a color variable", () => {
     const css = fs.readFileSync(generatedCssPath, "utf-8");
-    expect(css).toMatch(/--color-accent:/);
+    expect(css).toMatch(/--color-accent-main:/);
   });
 
   it("should contain a shadow variable", () => {
@@ -41,6 +41,6 @@ describe("Design Token CSS Variable Generation", () => {
 
   it("should contain a z-index variable", () => {
     const css = fs.readFileSync(generatedCssPath, "utf-8");
-    expect(css).toMatch(/--z-10:/);
+    expect(css).toMatch(/--z-dropdown:/);
   });
 });
