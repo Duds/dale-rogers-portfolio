@@ -16,7 +16,9 @@ export default defineConfig({
       "tests/e2e/**/*",
       "tests/**/*.spec.ts", // Exclude Playwright tests
       "**/*.spec.ts", // Exclude all Playwright tests
+      "tests/ui/*.test.tsx", // Exclude React tests for Astro components
       "src/pages/scratch/**/__tests__/**", // Exclude problematic scratch tests
+      "src/components/features/search/__tests__/**", // Exclude search tests with astro:content
       "node_modules/**",
       "dist/**",
       ".next/**",
