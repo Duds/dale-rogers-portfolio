@@ -79,6 +79,18 @@ jobs:
           # Create package.json with start script
           echo '{"scripts":{"start":"node server/entry.mjs"}}' > dist/package.json
 
+          # Create a proper startup script for Azure
+          cat > dist/start.sh << 'EOF'
+          #!/bin/bash
+          export PORT=8080
+          export HOST=0.0.0.0
+          export NODE_ENV=production
+          cd /home/site/wwwroot
+          exec node server/entry.mjs
+          EOF
+
+          chmod +x dist/start.sh
+
           # Copy package manager files
           cp pnpm-lock.yaml dist/
 
