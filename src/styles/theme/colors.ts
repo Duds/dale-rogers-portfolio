@@ -184,7 +184,7 @@ export const getColor = (
     current = current[key] as Record<string, unknown>;
   }
 
-  return current;
+  return current as string;
 };
 
 // CSS custom property generator

@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { globSync } from "glob";
+import { sync as globSync } from "glob";
 
 function lintFile(filePath: string) {
   try {
@@ -51,12 +51,12 @@ function main() {
   const cssFiles = allCssFiles.filter(
     (file) => path.basename(file) !== "base.css"
   );
-  for (const file of cssFiles) {
+  for (const file: string of cssFiles) {
     lintFile(file);
   }
   // Check <style> blocks in Astro components
   const astroFiles = globSync("src/components/**/*.astro");
-  for (const file of astroFiles) {
+  for (const file: string of astroFiles) {
     lintAstroFile(file);
   }
 }

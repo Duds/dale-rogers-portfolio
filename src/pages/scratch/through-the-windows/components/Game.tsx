@@ -380,7 +380,6 @@ export function Game({ config, onGameOver }: Props) {
   return (
     <div className="game">
       <GameControls
-        isActive={gameState.isActive}
         status={gameState.status}
         onStart={startGame}
         onPause={pauseGame}
