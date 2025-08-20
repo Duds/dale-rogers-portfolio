@@ -1,16 +1,42 @@
 ---
+/**
+ * @fileoverview Container component for consistent content width and spacing.
+ * Provides professional layout structure with responsive design.
+ */
+
+import "@/styles/components/container.css";
+
 interface Props {
+  /** Additional CSS classes */
   class?: string;
+  /** Whether to apply full-width layout */
   fullWidth?: boolean;
+  /** Whether to apply narrow width layout */
+  narrow?: boolean;
+  /** Whether to apply content margin variant (consistent margins for content sections) */
+  contentMargin?: boolean;
 }
 
-const { class: className = "", fullWidth = false } = Astro.props;
+const {
+  class: className,
+  fullWidth = false,
+  narrow = false,
+  contentMargin = false,
+} = Astro.props;
 
-const containerClass = fullWidth
-  ? "w-full px-8 md:px-12 lg:px-12"
-  : "max-w-7xl mx-auto px-8 md:px-12 lg:px-12";
+const baseClasses = "container";
+const widthClasses = fullWidth
+  ? "container--full"
+  : narrow
+    ? "container--narrow"
+    : contentMargin
+      ? "container--content-margin"
+      : "container--standard";
+const combinedClasses = [baseClasses, widthClasses, className]
+  .filter(Boolean)
+  .join(" ");
 ---
 
-<div class:list={[containerClass, className]}>
+<div class={combinedClasses}>
   <slot />
 </div>

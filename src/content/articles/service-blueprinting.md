@@ -4,6 +4,7 @@ description: "Learn how to create effective service blueprints to visualize and 
 pubDate: 2024-04-10
 tags: ["Service Design", "Blueprinting", "Methodology"]
 author: "Dale Rogers"
+coverImage: "https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2070&auto=format&fit=crop"
 ---
 
 # Service Blueprinting: A Practical Guide
@@ -13,6 +14,7 @@ Service blueprinting is a powerful tool for visualizing and improving service ex
 ## What is a Service Blueprint?
 
 A service blueprint is a diagram that visualizes:
+
 - The service process from the user's perspective
 - Front-stage and back-stage activities
 - Supporting processes and systems
@@ -72,6 +74,7 @@ A service blueprint typically includes:
 ## Using Blueprints for Improvement
 
 Service blueprints help you:
+
 - Identify pain points and opportunities
 - Improve service efficiency
 - Enhance user experience
@@ -81,9 +84,10 @@ Service blueprints help you:
 ## Conclusion
 
 Service blueprinting is a valuable tool for:
+
 - Understanding service complexity
 - Identifying improvement opportunities
 - Aligning teams and processes
 - Creating better service experiences
 
-By following this guide, you can create effective service blueprints that drive meaningful improvements in your services. 
+By following this guide, you can create effective service blueprints that drive meaningful improvements in your services.

@@ -23,10 +23,7 @@
       "hover:text-nav-text-hover",
       "hover:text-nav-text-hover-dark"
     ],
-    "allRemovedClasses": [
-      "bg-nav-bg-mobile",
-      "font-heading"
-    ]
+    "allRemovedClasses": ["bg-nav-bg-mobile", "font-heading"]
   },
   "details": [
     {
@@ -35,9 +32,7 @@
       "selectorLine": 17,
       "line": 18,
       "original": "@apply hidden md:hidden border-t border-nav-border-faint dark:border-nav-border-faint-dark bg-nav-bg-mobile dark:bg-nav-bg-mobile-dark backdrop-blur-sm;",
-      "removed": [
-        "bg-nav-bg-mobile"
-      ],
+      "removed": ["bg-nav-bg-mobile"],
       "kept": [
         "hidden",
         "md:hidden",
@@ -54,15 +49,8 @@
       "selectorLine": 5,
       "line": 6,
       "original": "@apply text-4xl md:text-5xl font-heading mb-4 text-heading;",
-      "removed": [
-        "font-heading"
-      ],
-      "kept": [
-        "text-4xl",
-        "md:text-5xl",
-        "mb-4",
-        "text-heading"
-      ]
+      "removed": ["font-heading"],
+      "kept": ["text-4xl", "md:text-5xl", "mb-4", "text-heading"]
     }
   ]
 }

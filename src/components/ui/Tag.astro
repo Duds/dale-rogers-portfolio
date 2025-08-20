@@ -1,0 +1,33 @@
+---
+/**
+ * @fileoverview Tag component for displaying labels and categories.
+ * Supports clickable tags with hover effects and professional styling.
+ */
+
+interface Props {
+  text: string;
+  clickable?: boolean;
+  href?: string;
+  class?: string;
+}
+
+const { text, clickable = false, href, class: className } = Astro.props;
+
+const baseClasses = "tag";
+const clickableClasses = clickable ? "tag--clickable" : "";
+const combinedClasses = [baseClasses, clickableClasses, className]
+  .filter(Boolean)
+  .join(" ");
+---
+
+{
+  clickable && href ? (
+    <a href={href} class={combinedClasses}>
+      {text}
+    </a>
+  ) : (
+    <span class={combinedClasses}>
+      {text}
+    </span>
+  )
+}

@@ -1,25 +1,179 @@
-/* Footer component styles migrated from global.css */
+@reference "tailwindcss";
+
+/* Professional Footer Component Styles with proper theme tokens */
 .footer {
-  @apply relative w-full py-20;
+  background-color: var(--color-background-primary);
 }
+
+/* Footer inner container - ALWAYS olive background for consistent branding */
 .footer-inner {
-  @apply rounded-3xl py-20 overflow-hidden w-full bg-black;
+  @apply rounded-3xl p-8 md:p-12;
+  background-color: var(--color-primary-dark); /* Always olive #1F2A00 */
 }
+
+.footer__content {
+  @apply space-y-12;
+}
+
+/* Acknowledgement of Country */
+.footer__acknowledgement {
+  @apply text-center pb-8 border-b;
+  border-color: var(--color-border-primary);
+}
+
+.footer__acknowledgement-text {
+  @apply text-sm md:text-base leading-relaxed max-w-4xl mx-auto;
+  color: #FFFFFF; /* Always white on olive background */
+}
+
+/* Slogan Section */
+.footer__slogan {
+  @apply text-center pb-8 border-b;
+  border-color: var(--color-border-primary);
+}
+
+.footer__slogan-text {
+  @apply text-2xl md:text-3xl font-bold mb-3;
+  color: #FFFFFF; /* Always white on olive background */
+}
+
+.footer__slogan-subtitle {
+  @apply text-base md:text-lg;
+  color: #FFFFFF; /* Always white on olive background */
+}
+
+.footer__main {
+  @apply flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8;
+}
+
+.footer__brand {
+  @apply space-y-2;
+}
+
+.footer__title {
+  @apply text-3xl md:text-4xl font-bold;
+  color: #FFFFFF; /* Always white on olive background */
+}
+
+.footer__description {
+  @apply text-lg;
+  color: #FFFFFF; /* Always white on olive background */
+}
+
+.footer__actions {
+  @apply flex-shrink-0;
+}
+
+.footer__links {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12;
+}
+
+.footer__section {
+  @apply space-y-4;
+}
+
+.footer__section-title {
+  @apply text-lg font-semibold mb-4;
+  color: #FFFFFF; /* Always white on olive background */
+}
+
+.footer__link-list {
+  @apply space-y-2;
+}
+
+.footer__link {
+  @apply transition-colors duration-300;
+  color: #FFFFFF; /* Always white on olive background */
+}
+
+.footer__link:hover {
+  color: #E8E0D9; /* Slightly muted white on hover for interaction feedback */
+}
+
+.footer__bottom {
+  @apply pt-8 border-t flex flex-col md:flex-row justify-between items-start md:items-center gap-4;
+  border-color: var(--color-border-secondary);
+}
+
+.footer__copyright {
+  color: #FFFFFF; /* Always white on olive background */
+}
+
+.footer__legal {
+  @apply flex gap-6;
+}
+
+.footer__legal-link {
+  @apply transition-colors duration-300;
+  color: #FFFFFF; /* Always white on olive background */
+}
+
+.footer__legal-link:hover {
+  color: #E8E0D9; /* Slightly muted white on hover for interaction feedback */
+}
+
+/* Footer heading styles - LIGHT for maximum contrast on dark background */
 .footer-heading {
-  @apply text-3xl font-medium text-white;
+  @apply text-lg font-semibold mb-4;
+  color: #FFFFFF; /* Always white on olive background */
 }
+
+/* Footer link styles - LIGHT for good contrast on dark background */
 .footer-link {
-  @apply text-xl transition-colors text-white;
+  @apply transition-colors duration-300;
+  color: #FFFFFF; /* Always white on olive background */
 }
-.text-footer-text-secondary {
-  @apply text-white/80;
+
+.footer-link:hover {
+  color: #E8E0D9; /* Slightly muted white on hover for interaction feedback */
 }
-.acknowledgement-slogan {
-  @apply text-white;
-}
+
+/* Footer copyright styles - LIGHT for good contrast on dark background */
 .footer-copyright {
-  @apply text-sm;
+  color: #FFFFFF; /* Always white on olive background */
 }
+
+/* Footer heart styles - ACCENT for good contrast on dark background */
 .footer-heart {
-  @apply mx-1;
+  color: var(--color-accent-main);
+}
+
+/* Footer main heading - ALWAYS white on olive background */
+.footer-main-heading {
+  color: #FFFFFF !important; /* Always white on olive background */
+}
+
+/* Acknowledgement text - LIGHT for good contrast on dark background */
+.text-footer-text-secondary {
+  color: #FFFFFF; /* Always white on olive background */
+}
+
+/* Acknowledgement slogan - LIGHT for maximum contrast on dark background */
+.acknowledgement-slogan {
+  @apply font-medium text-xl;
+  color: #FFFFFF; /* Always white on olive background */
+}
+
+/* Copyright section styles - inherits body background */
+.copyright-section {
+  @apply py-8;
+}
+
+/* Copyright text - DARK for good contrast on light body background */
+.copyright-text {
+  @apply text-base;
+  color: var(--color-text-secondary);
+}
+
+:root[data-theme="dark"] .copyright-text {
+  color: var(--color-text-disabled);
+}
+
+/* Copyright heart - BRIGHT RED for good contrast */
+.copyright-heart {
+  color: var(--color-accent-main);
+}
+
+:root[data-theme="dark"] .copyright-heart {
+  color: var(--color-accent-light);
 }

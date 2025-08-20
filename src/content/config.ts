@@ -32,7 +32,7 @@ const siteSectionSchema = z.object({
           title: z.string(),
           description: z.string(),
           icon: z.string(),
-        })
+        }),
       )
       .optional(),
     logos: z
@@ -42,7 +42,7 @@ const siteSectionSchema = z.object({
           url: z.string(),
           alt: z.string(),
           website: z.string().optional(),
-        })
+        }),
       )
       .optional(),
   }),
@@ -101,7 +101,7 @@ const scratchSchema = baseSchema.extend({
         name: z.string(),
         type: z.string(),
         content: z.string(),
-      })
+      }),
     )
     .optional(),
 });
@@ -116,7 +116,7 @@ const serviceDetailSchema = baseSchema.extend({
       z.object({
         text: z.string(),
         icon: z.string(),
-      })
+      }),
     )
     .optional(),
   process: z
@@ -124,7 +124,7 @@ const serviceDetailSchema = baseSchema.extend({
       z.object({
         title: z.string(),
         description: z.string(),
-      })
+      }),
     )
     .optional(),
   examples: z
@@ -134,7 +134,7 @@ const serviceDetailSchema = baseSchema.extend({
         description: z.string(),
         image: z.string().optional(),
         link: z.string().optional(),
-      })
+      }),
     )
     .optional(),
   relatedCaseStudies: z.array(z.string()).optional(),

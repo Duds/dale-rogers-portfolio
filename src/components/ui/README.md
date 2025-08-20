@@ -1,287 +1,285 @@
 # UI Components
 
-This directory contains reusable UI components that form the building blocks of our application.
+This directory contains reusable React components built with TypeScript and Tailwind CSS v4. All components are designed to be accessible, customizable, and well-documented.
 
-## Component Guidelines
+## 🎯 Design Principles
 
-- Components should be atomic and reusable
-- Follow the established theming system
-- Include proper TypeScript types
-- Implement accessibility features
-- Include proper documentation
+- **Accessibility First**: All components meet WCAG AA standards
+- **Type Safety**: Full TypeScript support with proper prop interfaces
+- **Customizable**: Flexible styling through Tailwind classes and CSS variables
+- **Composable**: Components can be combined to create complex UIs
+- **Consistent**: Unified design language and interaction patterns
 
-## Components List
+## 📚 Component Library
 
-- `Button.astro`: Reusable button component with variants
-- `Card.astro`: Card component for content containers
-- `Icon.astro`: Icon component with SVG support and type-safe icon names
-- `ThemeToggle.astro`: Theme toggle component for dark/light mode
+### Button
 
-## Theme System
+A versatile button component with multiple variants and sizes.
 
-### ThemeToggle Component
+**Features:**
 
-The `ThemeToggle` component provides a user interface for switching between light and dark themes. It follows these key principles:
+- 6 visual variants (default, secondary, destructive, outline, ghost, link)
+- 4 sizes (small, default, large, icon)
+- Full keyboard navigation support
+- Disabled state handling
+- Customizable through className prop
 
-1. **User Preference Detection**
+**Usage:**
 
-   ```typescript
-   const prefersDark = window.matchMedia(
-     "(prefers-color-scheme: dark)"
-   ).matches;
-   const currentTheme =
-     localStorage.getItem("theme") || (prefersDark ? "dark" : "light");
-   ```
+```tsx
+import { Button } from "@/components/ui/Button";
 
-2. **Persistence**
+<Button variant="primary" size="lg">
+  Click me
+</Button>;
+```
 
-   - Theme choice is stored in localStorage
-   - Persists across page reloads and sessions
-   - Falls back to system preference if no stored choice
+### Card
 
-3. **Implementation**
+A flexible card component with header, content, and footer sections.
 
-   ```astro
-   ---
-   import Icon from "./Icon.astro";
-   ---
+**Features:**
 
-   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-     <Icon name="sun" class="theme-icon-light w-6 h-6" />
-     <Icon name="moon" class="theme-icon-dark w-6 h-6" />
-   </button>
-   ```
+- Modular composition (CardHeader, CardTitle, CardDescription, etc.)
+- Responsive design
+- Customizable spacing and layout
+- Consistent with design system
 
-4. **Styling**
-   ```css
-   .theme-icon-light {
-     @apply block dark:hidden;
-   }
-   .theme-icon-dark {
-     @apply hidden dark:block;
-   }
-   ```
+**Usage:**
 
-### Usage in Components
+```tsx
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card";
 
-1. **Dark Mode Classes**
+<Card>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+  </CardHeader>
+  <CardContent>Card content goes here</CardContent>
+</Card>;
+```
 
-   - Use the `dark:` prefix for dark mode styles
-   - Example: `class="text-gray-900 dark:text-white"`
+## 🎨 Styling System
 
-2. **Theme Variables**
+### Tailwind CSS v4
 
-   ```css
-   :root {
-     --text-primary: #000000;
-     --bg-primary: #ffffff;
-   }
+All components use Tailwind CSS v4 with CSS custom properties for theming.
 
-   :root[class~="dark"] {
-     --text-primary: #ffffff;
-     --bg-primary: #000000;
-   }
-   ```
+### CSS Variables
 
-3. **Best Practices**
-   - Always provide both light and dark variants
-   - Use semantic colour variables
-   - Test components in both themes
-   - Consider contrast ratios
+Components automatically use the design system's CSS variables:
 
-### Integration Guide
+- `--background`, `--foreground`
+- `--primary`, `--secondary`
+- `--muted`, `--accent`
+- `--border`, `--ring`
 
-1. **Adding Theme Toggle**
+### Dark Mode
 
-   ```astro
-   ---
-   import ThemeToggle from "@/components/ui/ThemeToggle.astro";
-   ---
+Components automatically support dark mode through CSS variable overrides.
 
-   <ThemeToggle />
-   ```
+## 🧪 Development & Testing
 
-2. **Theme-Aware Components**
+### Storybook
 
-   ```astro
-   <div class="bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
-     <!-- Component content -->
-   </div>
-   ```
+All components have comprehensive Storybook stories:
 
-3. **Dynamic Themes**
-   - Theme changes are applied immediately
-   - No page reload required
-   - Smooth transitions with CSS
-
-### Accessibility
-
-1. **ARIA Support**
-
-   - Proper `aria-label` for toggle button
-   - Keyboard navigation support
-   - Focus states preserved in both themes
-
-2. **Contrast Requirements**
-
-   - All text meets WCAG 2.1 contrast requirements
-   - Interactive elements clearly visible
-   - Icons maintain clarity in both themes
-
-3. **Reduced Motion**
-   ```css
-   @media (prefers-reduced-motion: reduce) {
-     .theme-toggle {
-       transition: none;
-     }
-   }
-   ```
+```bash
+pnpm storybook
+```
 
 ### Testing
 
-1. **Theme Switching**
+Components include unit tests with React Testing Library:
 
-   - Test initial load behaviour
-   - Verify theme persistence
-   - Check system preference detection
+```bash
+pnpm test
+```
 
-2. **Visual Testing**
+### Type Checking
 
-   - Component appearance in both themes
-   - Transition animations
-   - Icon visibility
+Full TypeScript support with strict type checking:
 
-3. **Accessibility Testing**
-   - Screen reader compatibility
-   - Keyboard navigation
-   - Focus management
+```bash
+pnpm typecheck
+```
 
-## Icon Usage Guidelines
+## 📖 Documentation
 
-### Type Safety
+### Component APIs
 
-The `Icon` component uses TypeScript to ensure type safety for icon names. Available icons are:
+Each component includes:
 
-- `linkedin`, `github`, `mail` - Social icons
-- `strategy`, `research`, `blueprint`, `codesign`, `evaluation` - Service icons
-- `instagram` - Social media
-- `sun`, `moon` - Theme toggle
+- TypeScript interfaces
+- Prop descriptions
+- Usage examples
+- Accessibility notes
 
-### Best Practices
+### Storybook Stories
 
-1. **Type Safety**
+Interactive examples showing:
 
-   - Always use the correct icon name from the available options
-   - Use `as const` assertions when defining icon arrays/objects
-   - Define interfaces for components that use icons
+- All variants and states
+- Interactive controls
+- Responsive behavior
+- Accessibility features
 
-2. **Implementation Examples**
+## 🔧 Adding New Components
 
-   ```typescript
-   // Single icon usage
-   <Icon name="github" />;
+### 1. Create Component File
 
-   // Array of icons with type safety
-   const socialLinks = [
-     {
-       name: "Instagram",
-       icon: "instagram" as const,
-     },
-   ];
+```tsx
+// src/components/ui/NewComponent.tsx
+import React from 'react';
 
-   // Interface for components using icons
-   interface FeatureCard {
-     title: string;
-     icon: "strategy" | "research" | "blueprint" | "codesign" | "evaluation";
-   }
-   ```
+export interface NewComponentProps {
+  // Define props
+}
 
-3. **Adding New Icons**
-   - Add the icon name to the Props interface in `Icon.astro`
-   - Add the corresponding SVG in the component
-   - Update this documentation
-   - Update any relevant TypeScript interfaces
+export const NewComponent: React.FC<NewComponentProps> = ({ ... }) => {
+  // Implementation
+};
+```
 
-### Performance
+### 2. Create Stories File
 
-- Icons are inlined SVGs for optimal performance
-- No external icon libraries required
-- Minimal bundle size impact
+```tsx
+// src/components/ui/NewComponent.stories.tsx
+import type { Meta, StoryObj } from "@storybook/react";
+import { NewComponent } from "./NewComponent";
+
+const meta: Meta<typeof NewComponent> = {
+  title: "UI/NewComponent",
+  component: NewComponent,
+  tags: ["autodocs"],
+};
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    /* default props */
+  },
+};
+```
+
+### 3. Add Tests
+
+```tsx
+// src/components/ui/__tests__/NewComponent.test.tsx
+import { render, screen } from "@testing-library/react";
+import { NewComponent } from "../NewComponent";
+
+describe("NewComponent", () => {
+  it("renders correctly", () => {
+    render(<NewComponent />);
+    // Test implementation
+  });
+});
+```
+
+## 🎯 Best Practices
 
 ### Accessibility
 
-- Icons include proper ARIA labels
-- Decorative icons should use `aria-hidden="true"`
-- Interactive icons should have proper focus states
+- Use semantic HTML elements
+- Include proper ARIA attributes
+- Support keyboard navigation
+- Provide screen reader support
 
-## Usage
+### Performance
 
-Import UI components as needed:
+- Use React.memo for expensive components
+- Lazy load when appropriate
+- Optimize re-renders
+- Minimize bundle size
+
+### Styling
+
+- Use Tailwind utility classes
+- Leverage CSS custom properties
+- Support both themes
+- Maintain responsive design
+
+### TypeScript
+
+- Define complete interfaces
+- Use proper generic types
+- Include JSDoc comments
+- Maintain type safety
+
+## 🔗 Integration
+
+### Astro Integration
+
+Components can be used in Astro pages as React islands:
 
 ```astro
 ---
-import Button from '@/components/ui/Button.astro';
+import { Button } from '@/components/ui/Button';
 ---
 
-<Button variant="primary">Click Me</Button>
-```
-
-## Testing
-
-All UI components should have:
-
-- Unit tests for functionality
-- Visual regression tests
-- Accessibility tests
-
-## Contributing
-
-When adding new UI components:
-
-1. Follow the established naming conventions
-2. Add proper documentation
-3. Include usage examples
-4. Add necessary tests
-
-## Shadow System
-
-The shadow system provides consistent, accessible, and performant shadows across the application. It supports both light and dark modes, with smooth transitions and respect for user motion preferences.
-
-### Usage
-
-Import the shadow utilities:
-
-```astro
-import "@/styles/shadows.css";
-```
-
-Available classes:
-
-- `shadow-soft`: Base soft shadow
-- `shadow-soft-hover`: Interactive shadow that changes on hover
-
-### Features
-
-- **Dark Mode Support**: Shadows automatically adjust for dark mode
-- **Motion Preferences**: Transitions are disabled for users who prefer reduced motion
-- **Performance**: Uses CSS custom properties for efficient theme switching
-- **Accessibility**: Maintains sufficient contrast in both light and dark modes
-
-### Example
-
-```astro
-<div class="shadow-soft">
-  <!-- Content with base shadow -->
+<div>
+  <Button client:load variant="primary">
+    Interactive Button
+  </Button>
 </div>
-
-<button class="shadow-soft-hover">
-  <!-- Interactive element with hover effect -->
-</button>
 ```
 
-### Best Practices
+### Design System
 
-1. Use `shadow-soft` for static elements that need depth
-2. Apply `shadow-soft-hover` to interactive elements
-3. Ensure sufficient contrast between the element and its background
-4. Test shadows in both light and dark modes
+Components follow the established design system:
+
+- Consistent spacing scale
+- Unified color palette
+- Standard typography
+- Common interaction patterns
+
+## 📈 Roadmap
+
+### Planned Components
+
+- [ ] Input fields (text, email, password)
+- [ ] Form components (select, checkbox, radio)
+- [ ] Navigation components (breadcrumbs, pagination)
+- [ ] Feedback components (alert, toast, modal)
+- [ ] Data display (table, list, badge)
+
+### Enhancements
+
+- [ ] Animation system
+- [ ] Advanced theming
+- [ ] Component playground
+- [ ] Performance monitoring
+- [ ] Accessibility auditing
+
+## 🤝 Contributing
+
+### Code Standards
+
+- Follow TypeScript best practices
+- Include comprehensive tests
+- Write clear documentation
+- Maintain accessibility standards
+
+### Review Process
+
+- All changes require review
+- Tests must pass
+- Documentation must be updated
+- Accessibility must be verified
+
+## 📚 Resources
+
+### Documentation
+
+- [Component Library Guide](./storybook.md)
+- [Design System Documentation](../docs/design-system.md)
+- [Accessibility Guidelines](../docs/accessibility.md)
+
+### Tools
+
+- [Storybook](https://storybook.js.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [TypeScript](https://www.typescriptlang.org/)

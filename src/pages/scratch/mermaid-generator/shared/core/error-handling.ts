@@ -4,7 +4,7 @@
 export class MermaidError extends Error {
   constructor(
     message: string,
-    public code: string
+    public code: string,
   ) {
     super(message);
     this.name = "MermaidError";
@@ -14,7 +14,7 @@ export class MermaidError extends Error {
 export class ExportError extends Error {
   constructor(
     message: string,
-    public format: "svg" | "png"
+    public format: "svg" | "png",
   ) {
     super(message);
     this.name = "ExportError";
@@ -88,11 +88,11 @@ export class ErrorHandler {
   // Create Mermaid error
   createMermaidError(
     code: keyof typeof ErrorCodes.MERMAID,
-    message?: string
+    message?: string,
   ): MermaidError {
     return new MermaidError(
       message || ErrorMessages[ErrorCodes.MERMAID[code]],
-      ErrorCodes.MERMAID[code]
+      ErrorCodes.MERMAID[code],
     );
   }
 
@@ -115,7 +115,7 @@ export async function withErrorBoundary<T>(
   errorCode:
     | keyof typeof ErrorCodes.MERMAID
     | keyof typeof ErrorCodes.EXPORT
-    | keyof typeof ErrorCodes.EDITOR
+    | keyof typeof ErrorCodes.EDITOR,
 ): Promise<T> {
   try {
     return await operation();
@@ -135,7 +135,7 @@ export function withSyncErrorBoundary<T>(
   errorCode:
     | keyof typeof ErrorCodes.MERMAID
     | keyof typeof ErrorCodes.EXPORT
-    | keyof typeof ErrorCodes.EDITOR
+    | keyof typeof ErrorCodes.EDITOR,
 ): T {
   try {
     return operation();

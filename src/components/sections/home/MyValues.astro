@@ -1,6 +1,7 @@
 ---
-import SectionContainer from "@/components/layout/SectionContainer.astro";
 import Button from "@/components/ui/Button.astro";
+import Heading from "@/components/ui/Heading.astro";
+import Container from "@/components/layout/Container.astro";
 import "@/styles/components/my-values.css";
 
 interface Props {
@@ -20,18 +21,28 @@ interface Props {
 const {
   title = "My Values",
   subtitle = "Designing with empathy, accessibility and inclusivity at the forefront of everything I do.",
-  imageUrl = "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  imageUrl = "https://images.unsplash.com/photo-1600202751116-3e0226e1e7a0?q=80&w=2670&auto=format&fit=crop",
   buttonText = "Explore My Values",
   buttonLink = "/values",
 } = Astro.props;
 ---
 
-<SectionContainer class="my-values-section">
+<Container contentMargin={true} class="my-values-section">
   <div class="flex flex-col h-full">
     <!-- Headings above the card -->
     <div class="mb-4 md:mb-6 text-left">
-      <h2 class="my-values-heading">{title}</h2>
-      <h3 class="my-values-subheading">{subtitle}</h3>
+      <Heading
+        level={2}
+        class="my-values-title mb-2 md:mb-4 font-normal text-xl"
+      >
+        {title}
+      </Heading>
+      <Heading
+        level={3}
+        class="my-values-subtitle leading-tight text-2xl md:text-3xl font-bold"
+      >
+        {subtitle}
+      </Heading>
     </div>
     <!-- Photo card - full width, fills available space -->
     <div class="my-values-card">
@@ -45,7 +56,7 @@ const {
     </div>
     <!-- Button beneath the card -->
     <div class="my-values-button">
-      <Button variant="black" href={buttonLink}>
+      <Button variant="primary" href={buttonLink}>
         {buttonText}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -61,4 +72,4 @@ const {
       </Button>
     </div>
   </div>
-</SectionContainer>
+</Container>

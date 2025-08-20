@@ -8,18 +8,18 @@ export interface BaseProps
 export interface ButtonProps extends BaseProps {
   href?: string;
   /**
-   * Visual style variant of the button. Options: 'black', 'purple', 'orange', 'green', 'ghost'.
-   * @default 'black'
-   * @example <Button variant="purple">Purple Button</Button>
+   * Visual style variant of the button. Options: 'primary', 'secondary', 'accent', 'grey', 'ghost'.
+   * @default 'primary'
+   * @example <Button variant="secondary">Secondary Button</Button>
    */
-  variant?: "black" | "purple" | "orange" | "green" | "ghost";
+  variant?: "primary" | "secondary" | "accent" | "grey" | "ghost";
   /**
-   * Optional colour for ghost variant. Options: 'black', 'purple', 'orange', 'green'.
+   * Optional colour for ghost variant. Options: 'primary', 'secondary', 'accent', 'grey'.
    * Only applies when variant is 'ghost'.
-   * @default 'black'
-   * @example <Button variant="ghost" ghostColour="purple">Ghost Purple</Button>
+   * @default 'primary'
+   * @example <Button variant="ghost" ghostColour="secondary">Ghost Secondary</Button>
    */
-  ghostColour?: "black" | "purple" | "orange" | "green";
+  ghostColour?: "primary" | "secondary" | "accent" | "grey";
 }
 
 export interface CardProps extends BaseProps {

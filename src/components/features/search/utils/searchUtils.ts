@@ -51,7 +51,7 @@ export const searchUtils = {
         searchQuery,
         article.data.title,
         article.data.description,
-        article.data.tags?.join(" ") || ""
+        article.data.tags?.join(" ") || "",
       );
 
       return {
@@ -72,7 +72,7 @@ export const searchUtils = {
         caseStudy.data.title,
         caseStudy.data.description,
         caseStudy.data.tags?.join(" ") || "",
-        caseStudy.data.client || ""
+        caseStudy.data.client || "",
       );
 
       return {
@@ -92,7 +92,7 @@ export const searchUtils = {
         searchQuery,
         service.data.title,
         service.data.description,
-        service.data.tags?.join(" ") || ""
+        service.data.tags?.join(" ") || "",
       );
       return {
         item: service,
@@ -111,7 +111,7 @@ export const searchUtils = {
         searchQuery,
         scratch.data.title,
         scratch.data.description,
-        scratch.data.tags?.join(" ") || ""
+        scratch.data.tags?.join(" ") || "",
       );
       return {
         item: scratch,
@@ -147,7 +147,7 @@ export const searchUtils = {
     title: string,
     description: string,
     tags: string,
-    client: string = ""
+    client: string = "",
   ): number {
     let score = 0;
     const normQuery = query.toLowerCase();

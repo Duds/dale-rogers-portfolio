@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-08-19T01:29:23.171Z",
+  "summary": {
+    "totalImages": 67,
+    "compliantImages": 7,
+    "nonCompliantImages": 0,
+    "missingAltText": 0,
+    "poorAltText": 0,
+    "performanceIssues": 0
+  },
+  "issues": [],
+  "recommendations": [
+    {
+      "priority": "low",
+      "category": "best-practices",
+      "message": "Consider implementing lazy loading for images below the fold"
+    },
+    {
+      "priority": "low",
+      "category": "best-practices",
+      "message": "Use WebP format where possible for better compression"
+    }
+  ]
+}

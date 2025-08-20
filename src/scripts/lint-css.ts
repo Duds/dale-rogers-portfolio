@@ -48,7 +48,7 @@ async function main() {
   // Lint all CSS files under src/styles (excluding base.css which is imported via global.css)
   const allCssFiles = globSync("src/styles/**/*.css");
   const cssFiles = allCssFiles.filter(
-    (file) => path.basename(file) !== "base.css"
+    (file) => path.basename(file) !== "base.css",
   );
   for (const file of cssFiles) {
     await lintFile(file);

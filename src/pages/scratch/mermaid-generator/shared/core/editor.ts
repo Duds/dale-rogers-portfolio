@@ -4,10 +4,10 @@ import { EditorState } from "../types";
 // Initialize the editor
 export function setupEditor(): void {
   const textarea = document.getElementById(
-    "mermaid-input"
+    "mermaid-input",
   ) as HTMLTextAreaElement | null;
   const autoUpdateCheckbox = document.getElementById(
-    "auto-update"
+    "auto-update",
   ) as HTMLInputElement | null;
 
   if (!textarea || !autoUpdateCheckbox) {
@@ -169,10 +169,10 @@ ${content}
 // Handle input changes
 export function handleInput(): void {
   const textarea = document.getElementById(
-    "mermaid-input"
+    "mermaid-input",
   ) as HTMLTextAreaElement | null;
   const output = document.getElementById(
-    "mermaid-output"
+    "mermaid-output",
   ) as HTMLElement | null;
 
   if (!textarea || !output) {

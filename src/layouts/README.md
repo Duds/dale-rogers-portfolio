@@ -34,7 +34,6 @@ import Layout from '../layouts/Layout.astro';
 The main layout (`Layout.astro`) provides:
 
 1. **Document Structure**
-
    - HTML5 doctype
    - Language attribute
    - Viewport meta tag
@@ -42,7 +41,6 @@ The main layout (`Layout.astro`) provides:
    - Title and description meta tags
 
 2. **Common Elements**
-
    - Navigation bar (imported from components)
    - Footer (imported from components)
    - Main content area with proper semantic structure
@@ -55,13 +53,11 @@ The main layout (`Layout.astro`) provides:
 ## Best Practices
 
 1. **Consistency**
-
    - Use the main layout for all pages
    - Maintain consistent header/footer across pages
    - Follow semantic HTML structure
 
 2. **Performance**
-
    - Minimal JavaScript in layouts
    - Optimized CSS loading
    - Proper meta tags for SEO

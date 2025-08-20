@@ -1,0 +1,123 @@
+---
+/**
+ * Responsive Image Component
+ * Automatically generates srcset for different viewport sizes
+ * Provides WebP fallback for modern browsers
+ */
+
+export interface Props {
+  /** Source image path (relative to public/images) */
+  src: string;
+  /** Alt text for accessibility */
+  alt: string;
+  /** CSS classes for styling */
+  class?: string;
+  /** Width of the image */
+  width?: number;
+  /** Height of the image */
+  height?: number;
+  /** Lazy loading (default: true) */
+  loading?: 'lazy' | 'eager';
+  /** Priority loading for above-the-fold images */
+  priority?: boolean;
+  /** Custom sizes attribute */
+  sizes?: string;
+}
+
+const {
+  src,
+  alt,
+  class: className = '',
+  width,
+  height,
+  loading = 'lazy',
+  priority = false,
+  sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+} = Astro.props;
+
+// Generate responsive image sizes
+const generateSrcSet = (imagePath: string, baseWidth: number) => {
+  const sizes = [400, 800, 1200, 1600];
+  return sizes
+    .map(size => {
+      const ratio = size / baseWidth;
+      const actualWidth = Math.round(baseWidth * ratio);
+      return `${imagePath}?w=${actualWidth} ${actualWidth}w`;
+    })
+    .join(', ');
+};
+
+// Extract image info
+const imagePath = src.startsWith('/') ? src : `/images/${src}`;
+const baseWidth = width || 1200;
+const baseHeight = height || Math.round(baseWidth * 0.75);
+
+// Generate WebP version path
+const webpPath = imagePath.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+const originalPath = imagePath;
+
+// Set loading priority
+const loadingAttr = priority ? 'eager' : loading;
+const fetchPriority = priority ? 'high' : 'auto';
+---
+
+<picture class={className}>
+  <!-- WebP format for modern browsers -->
+  <source
+    type="image/webp"
+    srcset={generateSrcSet(webpPath, baseWidth)}
+    sizes={sizes}
+  />
+  
+  <!-- Fallback format -->
+  <img
+    src={originalPath}
+    srcset={generateSrcSet(originalPath, baseWidth)}
+    sizes={sizes}
+    alt={alt}
+    width={baseWidth}
+    height={baseHeight}
+    loading={loadingAttr}
+    fetchpriority={fetchPriority}
+    decoding="async"
+    class="w-full h-auto object-cover"
+  />
+</picture>
+
+<style>
+  picture {
+    display: block;
+    width: 100%;
+  }
+  
+  img {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  img[loading="lazy"] {
+    opacity: 0;
+  }
+  
+  img[loading="lazy"].loaded {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  // Lazy loading enhancement
+  document.addEventListener('DOMContentLoaded', () => {
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target as HTMLImageElement;
+          img.classList.add('loaded');
+          observer.unobserve(img);
+        }
+      });
+    });
+    
+    lazyImages.forEach(img => imageObserver.observe(img));
+  });
+</script>

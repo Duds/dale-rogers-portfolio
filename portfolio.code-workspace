@@ -2,14 +2,14 @@
   "folders": [
     {
       "name": "Dale Rogers Portfolio",
-      "path": "."
-    }
+      "path": ".",
+    },
   ],
   "settings": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit"
+      "source.fixAll.eslint": "explicit",
     },
     "editor.rulers": [100],
     "editor.tabSize": 2,
@@ -18,13 +18,13 @@
     "files.insertFinalNewline": true,
 
     "[astro]": {
-      "editor.defaultFormatter": "astro-build.astro-vscode"
+      "editor.defaultFormatter": "astro-build.astro-vscode",
     },
     "[typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "[markdown]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -32,19 +32,19 @@
       "editor.quickSuggestions": {
         "comments": "off",
         "strings": "off",
-        "other": "off"
-      }
+        "other": "off",
+      },
     },
 
     "files.associations": {
       "*.mdx": "markdown",
-      "*.astro": "astro"
+      "*.astro": "astro",
     },
 
     "search.exclude": {
       "**/node_modules": true,
       "**/dist": true,
-      "**/.git": true
+      "**/.git": true,
     },
 
     "git.enableSmartCommit": true,
@@ -53,10 +53,10 @@
 
     "tailwindCSS.experimental.classRegex": [
       ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-      ["cx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+      ["cx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ],
     "tailwindCSS.includeLanguages": {
-      "astro": "html"
+      "astro": "html",
     },
 
     "eslint.validate": ["javascript", "typescript", "astro"],
@@ -72,26 +72,26 @@
       "TODO",
       "XXX",
       "[ ]",
-      "[x]"
+      "[x]",
     ],
     "todo-tree.highlights.customHighlight": {
       "TODO": {
         "icon": "check",
-        "type": "line"
+        "type": "line",
       },
       "FIXME": {
         "icon": "bug",
-        "type": "line"
+        "type": "line",
       },
       "[ ]": {
         "icon": "check-circle",
-        "type": "line"
+        "type": "line",
       },
       "[x]": {
         "icon": "verified",
-        "type": "line"
-      }
-    }
+        "type": "line",
+      },
+    },
   },
   "extensions": {
     "recommendations": [
@@ -106,7 +106,7 @@
       "gruntfuggly.todo-tree",
       "Prisma.prisma",
       "ms-vscode.vscode-typescript-next",
-      "christian-kohler.path-intellisense"
-    ]
-  }
+      "christian-kohler.path-intellisense",
+    ],
+  },
 }

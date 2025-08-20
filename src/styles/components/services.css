@@ -1,16 +1,35 @@
+/**
+ * Services Component Styles - Semantic Color System
+ *
+ * Uses semantic color tokens that can be easily refactored
+ * without changing component code.
+ */
+
+@reference "tailwindcss";
+
 /* Services section component styles */
 .services-section {
-  @apply w-full bg-white dark:bg-neutral-950;
+  @apply w-full;
 }
 .services-container {
   @apply grid grid-cols-12 gap-8 mb-16;
 }
 .services-heading {
   /* Token-based class to add in markup: font-body */
-  @apply text-2xl font-semibold text-neutral-600 dark:text-neutral-400 mb-4;
+  @apply text-2xl font-semibold mb-4;
+  color: var(--color-text-secondary);
+}
+
+:root[data-theme="dark"] .services-heading {
+  color: var(--color-text-secondary);
 }
 .services-title {
-  @apply text-4xl text-neutral-900 dark:text-white leading-tight;
+  @apply text-4xl leading-tight;
+  color: var(--color-text-primary);
+}
+
+:root[data-theme="dark"] .services-title {
+  color: var(--color-text-primary);
 }
 .services-list {
   @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8;
@@ -18,6 +37,8 @@
 .services-card {
   /* 'group' utility removed; add 'group' to markup if needed */
   @apply relative overflow-hidden rounded-2xl transition-all duration-300 h-[600px] flex flex-col;
+  background-color: var(--color-background-tertiary);
+
   /* Micro animation: lift and shadow on hover */
   transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s cubic-bezier(.4,0,.2,1);
 }
@@ -31,20 +52,59 @@
 }
 .services-card-img {
   @apply absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105;
+
 }
 .services-card-gradient {
   @apply absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50 group-hover:to-black/60 transition-opacity duration-300;
+
 }
 .services-card-content {
   @apply p-8 flex flex-col flex-grow;
 }
 .services-card-title {
   /* Token-based class to add in markup: font-display */
-  @apply text-2xl text-white mb-3;
+  @apply text-2xl mb-3;
+  color: var(--color-text-primary);
 }
 .services-card-description {
-  @apply text-white/90;
+  color: var(--color-text-secondary);
 }
 .services-empty {
-  @apply col-span-full p-8 text-center text-neutral-600 dark:text-neutral-400;
+  @apply col-span-full p-8 text-center;
+  color: var(--color-text-secondary);
+}
+
+:root[data-theme="dark"] .services-empty {
+  color: var(--color-text-secondary);
+}
+
+/* Service variant color classes */
+.bg-purple {
+  background-color: var(--color-purple);
+}
+.bg-black {
+  background-color: var(--color-black);
+}
+.bg-green {
+  background-color: var(--color-green);
+}
+.bg-orange {
+  background-color: var(--color-orange);
+}
+
+.hover\:bg-purple-hover:hover {
+  background-color: var(--color-purple);
+  opacity: 0.9;
+}
+.hover\:bg-black-hover:hover {
+  background-color: var(--color-black);
+  opacity: 0.9;
+}
+.hover\:bg-green-hover:hover {
+  background-color: var(--color-green);
+  opacity: 0.9;
+}
+.hover\:bg-orange-hover:hover {
+  background-color: var(--color-orange);
+  opacity: 0.9;
 }

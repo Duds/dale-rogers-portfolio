@@ -1,0 +1,32 @@
+@reference "tailwindcss";
+
+/* Professional Tag Component Styles with proper theme tokens */
+.tag {
+  @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full transition-all duration-300;
+  background-color: var(--color-background-tertiary);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-secondary);
+}
+
+.tag--clickable {
+  @apply cursor-pointer;
+}
+
+.tag--clickable:hover {
+  background-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-primary);
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .tag {
+  background-color: var(--color-background-primary);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border-secondary);
+}
+
+:root[data-theme="dark"] .tag--clickable:hover {
+  background-color: var(--color-border-secondary);
+  color: var(--color-text-primary);
+  border-color: var(--color-text-tertiary);
+}

@@ -3,7 +3,7 @@
     "title": "Digital Strategy",
     "description": "Creating comprehensive digital roadmaps that align with your business objectives",
     "variant": "purple",
-    "imageUrl": "/images/services/digital-strategy.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
     "icon": "strategy",
     "link": "/services/digital-strategy"
   },
@@ -11,7 +11,7 @@
     "title": "Service Design",
     "description": "Designing seamless end-to-end services that delight users and drive business value",
     "variant": "black",
-    "imageUrl": "/images/services/service-design.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop",
     "icon": "design",
     "link": "/services/service-design"
   },
@@ -19,7 +19,7 @@
     "title": "Digital Transformation",
     "description": "Guiding organisations through digital change with proven methodologies",
     "variant": "green",
-    "imageUrl": "/images/services/digital-transformation.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop",
     "icon": "transform",
     "link": "/services/digital-transformation"
   },
@@ -27,7 +27,7 @@
     "title": "Innovation Consulting",
     "description": "Helping businesses innovate and stay ahead in the digital age",
     "variant": "orange",
-    "imageUrl": "/images/services/innovation.jpg",
+    "imageUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
     "icon": "innovate",
     "link": "/services/innovation-consulting"
   }

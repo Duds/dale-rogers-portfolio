@@ -24,11 +24,11 @@ interface Props {
   logos?: PartnerLogo[];
 }
 
-// Default logos array with all partners
+// Default logos array with all partners - theme-aware versions
 const defaultLogos: PartnerLogo[] = [
   {
     name: "University of Canberra",
-    url: "/images/logos/uc_logo_inline.png",
+    url: "/images/logos/university-of-canberra.png",
     alt: "University of Canberra logo",
     website: "https://www.canberra.edu.au",
   },
@@ -64,6 +64,17 @@ const defaultLogos: PartnerLogo[] = [
 ];
 
 const { title = "Trusted by", logos = defaultLogos } = Astro.props;
+
+// Function to get theme-appropriate logo URL
+function getLogoUrl(logoUrl: string): { light: string; dark: string } {
+  const extension = logoUrl.substring(logoUrl.lastIndexOf("."));
+  const baseName = logoUrl.substring(0, logoUrl.lastIndexOf("."));
+
+  return {
+    light: logoUrl,
+    dark: `${baseName}-dark${extension}`,
+  };
+}
 ---
 
 <SectionContainer class="partner-logos-section">
@@ -71,29 +82,42 @@ const { title = "Trusted by", logos = defaultLogos } = Astro.props;
     <h2 class="partner-logos-heading">{title}</h2>
     <div class="partner-logos-list">
       {
-        logos.map((logo) => (
-          <a
-            href={logo.website || "#"}
-            target={logo.website ? "_blank" : "_self"}
-            rel={logo.website ? "noopener noreferrer" : ""}
-            class:list={[
-              "partner-logo-link",
-              !logo.website ? "pointer-events-none" : "",
-            ]}
-            aria-label={
-              logo.website ? `Visit ${logo.name}'s website` : logo.name
-            }
-          >
-            <img
-              src={logo.url}
-              alt={logo.alt}
-              class="partner-logo-img"
-              loading="lazy"
-              width="auto"
-              height="48"
-            />
-          </a>
-        ))
+        logos.map((logo) => {
+          const logoUrls = getLogoUrl(logo.url);
+          return (
+            <a
+              href={logo.website || "#"}
+              target={logo.website ? "_blank" : "_self"}
+              rel={logo.website ? "noopener noreferrer" : ""}
+              class:list={[
+                "partner-logo-link",
+                !logo.website ? "pointer-events-none" : "",
+              ]}
+              aria-label={
+                logo.website ? `Visit ${logo.name}'s website` : logo.name
+              }
+            >
+              {/* Light theme logo */}
+              <img
+                src={logoUrls.light}
+                alt={logo.alt}
+                class="partner-logo-img partner-logo-light"
+                loading="lazy"
+                width="auto"
+                height="48"
+              />
+              {/* Dark theme logo */}
+              <img
+                src={logoUrls.dark}
+                alt={logo.alt}
+                class="partner-logo-img partner-logo-dark"
+                loading="lazy"
+                width="auto"
+                height="48"
+              />
+            </a>
+          );
+        })
       }
     </div>
   </div>

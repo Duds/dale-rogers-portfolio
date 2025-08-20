@@ -1,5 +1,14 @@
 ---
 import Icon from "@/components/ui/Icon.astro";
+import Heading from "@/components/ui/Heading.astro";
+
+interface Props {
+  value: string;
+  label: string;
+  icon?: string;
+  class?: string;
+}
+
 const { value, label, icon, class: iconClass } = Astro.props;
 ---
 
@@ -17,7 +26,12 @@ const { value, label, icon, class: iconClass } = Astro.props;
     )
   }
   <div>
-    <div class="text-4xl md:text-5xl font-black text-heading">{value}</div>
-    <div class="text-2xl text-text-secondary font-semibold">{label}</div>
+    <Heading
+      level={3}
+      class="text-heading text-2xl md:text-3xl lg:text-4xl font-bold  dark:text-white" style="color: var(--color-text-primary);"
+    >
+      {value}
+    </Heading>
+    <div class="text-2xl  font-semibold" style="color: var(--color-text-secondary);">{label}</div>
   </div>
 </div>

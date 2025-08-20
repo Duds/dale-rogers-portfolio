@@ -45,12 +45,10 @@ pages/
 Each page typically includes:
 
 1. **Layout**
-
    - Uses the main Layout component
    - Sets appropriate title and description
 
 2. **Content Structure**
-
    - Hero section (where applicable)
    - Main content area
    - Consistent spacing and typography
@@ -71,19 +69,16 @@ Each page typically includes:
 ## Best Practices
 
 1. **Page Structure**
-
    - Use semantic HTML
    - Follow consistent layout patterns
    - Implement proper heading hierarchy
 
 2. **Performance**
-
    - Optimize images and assets
    - Minimize JavaScript usage
    - Implement proper caching headers
 
 3. **SEO**
-
    - Set appropriate meta tags
    - Use semantic HTML
    - Implement proper heading structure
@@ -96,13 +91,11 @@ Each page typically includes:
 ## Development Guidelines
 
 1. **Creating New Pages**
-
    - Use the Layout component
    - Follow existing page patterns
    - Implement proper error handling
 
 2. **Dynamic Routes**
-
    - Use proper slug patterns
    - Implement 404 handling
    - Follow content collection structure

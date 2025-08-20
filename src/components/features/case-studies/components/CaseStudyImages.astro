@@ -15,7 +15,7 @@ const randomizedCaseStudies = [...caseStudies]
   .map((study) => ({
     title: study.data.title,
     coverImage: study.data.coverImage || "/images/placeholder.jpg",
-    slug: `/work/${study.slug}`,
+    slug: study.slug, // Just use the slug, not the full path
   }));
 
 // If we don't have enough case studies, add placeholders to make it 8
@@ -23,7 +23,7 @@ while (randomizedCaseStudies.length < 8) {
   randomizedCaseStudies.push({
     title: `Featured Project ${randomizedCaseStudies.length + 1}`,
     coverImage: `/images/placeholder-${(randomizedCaseStudies.length % 4) + 1}.jpg`,
-    slug: "/work",
+    slug: "coming-soon",
   });
 }
 ---
@@ -39,7 +39,7 @@ while (randomizedCaseStudies.length < 8) {
       {
         randomizedCaseStudies.map((study: CaseStudy) => (
           <a
-            href={study.slug}
+            href={`/work/${study.slug}`}
             class="case-study-card w-[60vw] md:w-[40vw] lg:w-[30vw] h-[70vh] md:h-[60vh] relative rounded-lg overflow-hidden group flex-shrink-0 shadow-xl"
           >
             <img

@@ -1,199 +1,172 @@
-## Usage Examples
+# 🎨 Design System Documentation
 
-### Colours
+## Overview
 
-**TypeScript:**
+This document provides an overview of the portfolio's design system documentation. The design system has evolved through several iterations to achieve a professional, sophisticated aesthetic.
 
+## **📚 Theme Documentation**
+
+### **Current Theme System**
+- **[THEME_PROFESSIONAL.md](./THEME_PROFESSIONAL.md)** - **🎯 ACTIVE** Professional theme system inspired by Index Ventures
+- **[THEME_SIMPLIFIED.md](./THEME_SIMPLIFIED.md)** - Previous simplified theme system (archived)
+- **[THEME.md](./THEME.md)** - This overview document
+
+## **🎨 Current Theme: Professional Design System**
+
+The portfolio now uses a **Professional Design System** inspired by the sophisticated aesthetic of [Index Ventures](https://land-book.com/websites/62694-index-ventures-index-ventures). This system emphasizes:
+
+### **Key Characteristics**
+- **Professional Credibility** - Colors that convey trust and expertise
+- **Modern Sophistication** - Clean, contemporary aesthetic
+- **Business Focus** - Design that supports professional communication
+- **Accessibility First** - WCAG AA compliance and readability
+- **Consistent Hierarchy** - Clear visual structure and information flow
+
+### **Color Palette**
+- **Primary**: Deep charcoal (`#1F2937`) - Professional, trustworthy
+- **Secondary**: Professional blue (`#3B82F6`) - Reliable, corporate
+- **Accent**: Emerald green (`#10B981`) - Growth, success
+- **Grey Scale**: Sophisticated 10-step neutral system
+- **Semantic Colors**: Clear success, warning, and error states
+
+### **Typography**
+- **Font Family**: Inter (professional, authoritative)
+- **Font Weights**: 9-weight scale from thin to black
+- **Font Sizes**: 13-size scale from xs to 9xl
+- **Line Heights**: 6-height scale for optimal readability
+- **Letter Spacing**: 6-spacing scale for text effects
+
+### **Spacing & Layout**
+- **Spacing Scale**: 30-value system from 0 to 96
+- **Shadow System**: Professional depth with 15 shadow variants
+- **Border Radius**: Refined 8-value radius system
+- **Z-Index**: Semantic layering system
+
+## **🔄 Theme Evolution**
+
+### **Phase 1: Original Theme**
+- Complex color system with nested objects
+- Multiple font families and inconsistent sizing
+- Extensive spacing and shadow options
+
+### **Phase 2: Simplified Theme**
+- Reduced color palette and simplified structure
+- Consolidated typography and spacing
+- Streamlined shadow and radius systems
+
+### **Phase 3: Professional Theme** ⭐ **CURRENT**
+- Inspired by Index Ventures design aesthetic
+- Professional color palette for business credibility
+- Sophisticated typography and spacing systems
+- Modern, accessible design principles
+
+## **📖 Documentation Structure**
+
+### **THEME_PROFESSIONAL.md** (Active)
+- Complete professional theme system documentation
+- Color palette with usage guidelines
+- Typography system with examples
+- Spacing, shadows, and radius specifications
+- Implementation guidelines and examples
+- Migration guide from previous themes
+
+### **THEME_SIMPLIFIED.md** (Archived)
+- Previous simplified theme system
+- Reference for migration and comparison
+- Historical context for design decisions
+
+### **THEME.md** (This Document)
+- Overview and navigation guide
+- Current theme status and characteristics
+- Theme evolution history
+- Documentation structure
+
+## **🚀 Getting Started**
+
+### **For New Developers**
+1. **Read**: [THEME_PROFESSIONAL.md](./THEME_PROFESSIONAL.md) for complete system overview
+2. **Explore**: Color palette and typography examples
+3. **Implement**: Use provided code examples and guidelines
+4. **Reference**: Token naming conventions and usage rules
+
+### **For Designers**
+1. **Review**: Color palette and typography scales
+2. **Understand**: Design principles and philosophy
+3. **Apply**: Consistent visual hierarchy and spacing
+4. **Maintain**: Professional aesthetic and accessibility
+
+### **For Content Creators**
+1. **Follow**: Typography hierarchy guidelines
+2. **Use**: Appropriate color combinations
+3. **Maintain**: Consistent spacing and layout
+4. **Ensure**: Accessibility and readability
+
+## **🔧 Implementation**
+
+### **Token Usage**
 ```typescript
-import { uiColours } from "./src/styles/theme/colors";
-const primary = uiColours.primary;
+// Colors
+"bg-primary"           // Deep charcoal background
+"text-secondary"       // Professional blue text
+"border-grey-200"      // Light grey border
+
+// Typography
+"text-3xl font-bold"   // Large bold heading
+"text-lg leading-relaxed" // Large relaxed body text
+
+// Spacing
+"p-6"                  // 24px padding
+"mb-8"                 // 32px bottom margin
+
+// Shadows
+"shadow-card"          // Card elevation
+"shadow-button-hover"  // Button hover depth
 ```
 
-**CSS:**
-
-```css
-.example {
-  color: var(--color-accent);
-}
-```
-
-**Tailwind:**
-
-```tsx
-<div className="bg-accent text-text">Example</div>
-```
-
-### Spacing
-
-**TypeScript:**
-
+### **Component Examples**
 ```typescript
-import { spacing } from "./src/styles/theme/spacing";
-const padding = spacing.md;
+// Professional button
+<button class="bg-primary text-white px-6 py-3 rounded-lg shadow-button hover:shadow-button-hover transition-all duration-300">
+  Get Started
+</button>
+
+// Professional card
+<div class="bg-white border border-grey-200 rounded-xl shadow-card hover:shadow-card-hover transition-shadow duration-300 p-6">
+  <h3 class="text-xl font-semibold text-grey-900 mb-3">Card Title</h3>
+  <p class="text-grey-600 leading-relaxed">Professional content.</p>
+</div>
 ```
 
-**CSS:**
+## **📋 Maintenance**
 
-```css
-.example {
-  padding: var(--space-4);
-}
-```
+### **Regular Updates**
+- **Color Audits**: Ensure accessibility compliance
+- **Typography Reviews**: Maintain readability standards
+- **Spacing Consistency**: Verify layout harmony
+- **Shadow Refinement**: Optimize depth perception
 
-**Tailwind:**
+### **Version Control**
+- **Theme Changes**: Document in changelog
+- **Breaking Changes**: Provide migration guides
+- **Deprecation**: Graceful transition periods
+- **Testing**: Validate across all components
 
-```tsx
-<div className="p-4">Example</div>
-```
+## **🎯 Future Considerations**
 
-### Shadows
+### **Potential Enhancements**
+- **Dark Mode**: Professional dark theme variant
+- **Component Library**: Storybook integration
+- **Design Tokens**: Figma plugin for designers
+- **Automation**: Automated accessibility testing
 
-**TypeScript:**
+### **Scalability**
+- **New Components**: Consistent token usage
+- **Brand Evolution**: Flexible color system
+- **Platform Expansion**: Cross-platform consistency
+- **Team Growth**: Clear documentation and guidelines
 
-```typescript
-import { shadows } from "./src/styles/theme/shadows";
-const cardShadow = shadows.md;
-```
+---
 
-**CSS:**
+**The Professional Design System provides a solid foundation for building a sophisticated, business-focused portfolio that conveys expertise and credibility.** 🎨✨
 
-```css
-.example {
-  box-shadow: var(--shadow-md);
-}
-```
-
-**Tailwind:**
-
-```tsx
-<div className="shadow-md">Example</div>
-```
-
-### Typography
-
-**TypeScript:**
-
-```typescript
-import { fontSize } from "./src/styles/theme/typography";
-const heading = fontSize.lg;
-```
-
-**CSS:**
-
-```css
-.example {
-  font-size: var(--text-lg);
-}
-```
-
-**Tailwind:**
-
-```tsx
-<div className="text-lg">Example</div>
-```
-
-### Radius
-
-**TypeScript:**
-
-```typescript
-import { radius } from "./src/styles/theme/radius";
-const rounded = radius.lg;
-```
-
-**CSS:**
-
-```css
-.example {
-  border-radius: var(--radius-lg);
-}
-```
-
-**Tailwind:**
-
-```tsx
-<div className="rounded-lg">Example</div>
-```
-
-### Transitions
-
-**TypeScript:**
-
-```typescript
-import { transitionDurationTokens } from "./src/styles/theme/transitions";
-const fast = transitionDurationTokens.fast;
-```
-
-**CSS:**
-
-```css
-.example {
-  transition-duration: var(--transition-fast);
-}
-```
-
-**Tailwind:**
-
-```tsx
-<div className="transition-fast">Example</div>
-```
-
-### Z-Index
-
-**TypeScript:**
-
-```typescript
-import { zIndex } from "./src/styles/theme/zIndex";
-const modal = zIndex.modal;
-```
-
-**CSS:**
-
-```css
-.example {
-  z-index: var(--z-10);
-}
-```
-
-**Tailwind:**
-
-```tsx
-<div className="z-10">Example</div>
-```
-
-## Token Class Reference
-
-| Token                 | Tailwind Class                                                               | CSS Variable                       | Example Usage                                                                              |
-| --------------------- | ---------------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------ |
-| nav-bg                | bg-nav-bg                                                                    | var(--color-nav-bg)                | `<nav class="bg-nav-bg">`                                                                  |
-| nav-link              | text-nav-link                                                                | var(--color-nav-link)              | `<a class="text-nav-link">`                                                                |
-| nav-link-hover-text   | text-nav-link-hover-text                                                     | var(--color-nav-link-hover-text)   | `<a class="hover:text-nav-link-hover-text">`                                               |
-| nav-border            | border-nav-border                                                            | var(--color-nav-border)            | `<div class="border-nav-border">`                                                          |
-| footer-bg             | bg-footer-bg                                                                 | var(--color-footer-bg)             | `<footer class="bg-footer-bg">`                                                            |
-| footer-text-secondary | text-footer-text-secondary                                                   | var(--color-footer-text-secondary) | `<p class="text-footer-text-secondary">`                                                   |
-| on-primary            | text-on-primary                                                              | var(--color-on-primary)            | `<span class="text-on-primary">`                                                           |
-| on-primary-dark       | text-on-primary-dark                                                         | var(--color-on-primary-dark)       | `<span class="text-on-primary-dark">`                                                      |
-| text-secondary        | text-text-secondary                                                          | var(--color-text-secondary)        | `<span class="text-text-secondary">`                                                       |
-| text-secondary-dark   | text-text-secondary-dark                                                     | var(--color-text-secondary-dark)   | `<span class="text-text-secondary-dark">`                                                  |
-| card                  | bg-card                                                                      | var(--color-card)                  | `<div class="bg-card">`                                                                    |
-| heading               | text-heading                                                                 | var(--color-heading)               | `<h2 class="text-heading">`                                                                |
-| subheading            | text-subheading                                                              | var(--color-subheading)            | `<p class="text-subheading">`                                                              |
-| info                  | bg-info, border-info, text-info                                              | var(--color-info)                  | `<div class="bg-info border-info text-info">`                                              |
-| tip                   | bg-tip, border-tip, text-tip                                                 | var(--color-tip)                   | `<div class="bg-tip border-tip text-tip">`                                                 |
-| warning               | bg-warning, border-warning, text-warning                                     | var(--color-warning)               | `<div class="bg-warning border-warning text-warning">`                                     |
-| australian-standard   | bg-australian-standard, border-australian-standard, text-australian-standard | var(--color-australian-standard)   | `<div class="bg-australian-standard border-australian-standard text-australian-standard">` |
-| service-purple        | bg-service-purple                                                            | var(--color-service-purple)        | `<div class="bg-service-purple">`                                                          |
-| service-black         | bg-service-black                                                             | var(--color-service-black)         | `<div class="bg-service-black">`                                                           |
-| service-green         | bg-service-green                                                             | var(--color-service-green)         | `<div class="bg-service-green">`                                                           |
-| service-orange        | bg-service-orange                                                            | var(--color-service-orange)        | `<div class="bg-service-orange">`                                                          |
-| service-purple-hover  | bg-service-purple-hover                                                      | var(--color-service-purple-hover)  | `<div class="hover:bg-service-purple-hover">`                                              |
-| service-black-hover   | bg-service-black-hover                                                       | var(--color-service-black-hover)   | `<div class="hover:bg-service-black-hover">`                                               |
-| service-green-hover   | bg-service-green-hover                                                       | var(--color-service-green-hover)   | `<div class="hover:bg-service-green-hover">`                                               |
-| service-orange-hover  | bg-service-orange-hover                                                      | var(--color-service-orange-hover)  | `<div class="hover:bg-service-orange-hover">`                                              |
-| status-in-progress    | bg-status-in-progress, text-status-in-progress                               | var(--color-status-in-progress)    | `<span class="bg-status-in-progress text-status-in-progress">`                             |
-| status-completed      | bg-status-completed, text-status-completed                                   | var(--color-status-completed)      | `<span class="bg-status-completed text-status-completed">`                                 |
-| status-abandoned      | bg-status-abandoned, text-status-abandoned                                   | var(--color-status-abandoned)      | `<span class="bg-status-abandoned text-status-abandoned">`                                 |
-| accent                | text-accent, bg-accent                                                       | var(--color-accent)                | `<span class="text-accent">`                                                               |
-| ...                   | ...                                                                          | ...                                | ...                                                                                        |
-
-_Add more as needed for your tokens._
+For complete details, see [THEME_PROFESSIONAL.md](./THEME_PROFESSIONAL.md).

@@ -1,1 +1,90 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Remove Custom @apply Report</title><style>body{font-family:sans-serif;}table{border-collapse:collapse;width:100%;}th,td{border:1px solid #ccc;padding:4px;}th{background:#f3f3f3;}tr:nth-child(even){background:#fafafa;}</style></head><body><h1>Remove Custom @apply Report</h1><h2>Summary</h2><ul><li>Total CSS files scanned: 15</li><li>Files with changes: 2</li><li>Total @apply rules with custom classes: 2</li><li>Custom classes used: <code>shadow-hover, text-balance, spinning-logo, animate-spin-slow, border-primary, border-primary-dark, bg-nav-bg, bg-nav-bg-dark, bg-nav-bg-mobile, bg-nav-bg-mobile-dark, font-heading, text-nav-text, text-nav-text-dark, hover:text-nav-text-hover, hover:text-nav-text-hover-dark</code></li><li>All removed classes: <code>bg-nav-bg-mobile, font-heading</code></li></ul><h2>Details</h2><table><tr><th>File</th><th>Selector</th><th>Line</th><th>Original @apply</th><th>Removed Classes</th><th>Kept Classes</th></tr><tr><td>src/styles/components/navigation.css</td><td>.navigation__mobile-menu</td><td>18</td><td><code>@apply hidden md:hidden border-t border-nav-border-faint dark:border-nav-border-faint-dark bg-nav-bg-mobile dark:bg-nav-bg-mobile-dark backdrop-blur-sm;</code></td><td><code>bg-nav-bg-mobile</code></td><td><code>hidden, md:hidden, border-t, border-nav-border-faint, dark:border-nav-border-faint-dark, dark:bg-nav-bg-mobile-dark, backdrop-blur-sm</code></td></tr><tr><td>src/styles/components/section-heading.css</td><td>.section-heading__title</td><td>6</td><td><code>@apply text-4xl md:text-5xl font-heading mb-4 text-heading;</code></td><td><code>font-heading</code></td><td><code>text-4xl, md:text-5xl, mb-4, text-heading</code></td></tr></table></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Remove Custom @apply Report</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 4px;
+      }
+      th {
+        background: #f3f3f3;
+      }
+      tr:nth-child(even) {
+        background: #fafafa;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Remove Custom @apply Report</h1>
+    <h2>Summary</h2>
+    <ul>
+      <li>Total CSS files scanned: 15</li>
+      <li>Files with changes: 2</li>
+      <li>Total @apply rules with custom classes: 2</li>
+      <li>
+        Custom classes used:
+        <code
+          >shadow-hover, text-balance, spinning-logo, animate-spin-slow,
+          border-primary, border-primary-dark, bg-nav-bg, bg-nav-bg-dark,
+          bg-nav-bg-mobile, bg-nav-bg-mobile-dark, font-heading, text-nav-text,
+          text-nav-text-dark, hover:text-nav-text-hover,
+          hover:text-nav-text-hover-dark</code
+        >
+      </li>
+      <li>All removed classes: <code>bg-nav-bg-mobile, font-heading</code></li>
+    </ul>
+    <h2>Details</h2>
+    <table>
+      <tr>
+        <th>File</th>
+        <th>Selector</th>
+        <th>Line</th>
+        <th>Original @apply</th>
+        <th>Removed Classes</th>
+        <th>Kept Classes</th>
+      </tr>
+      <tr>
+        <td>src/styles/components/navigation.css</td>
+        <td>.navigation__mobile-menu</td>
+        <td>18</td>
+        <td>
+          <code
+            >@apply hidden md:hidden border-t border-nav-border-faint
+            dark:border-nav-border-faint-dark bg-nav-bg-mobile
+            dark:bg-nav-bg-mobile-dark backdrop-blur-sm;</code
+          >
+        </td>
+        <td><code>bg-nav-bg-mobile</code></td>
+        <td>
+          <code
+            >hidden, md:hidden, border-t, border-nav-border-faint,
+            dark:border-nav-border-faint-dark, dark:bg-nav-bg-mobile-dark,
+            backdrop-blur-sm</code
+          >
+        </td>
+      </tr>
+      <tr>
+        <td>src/styles/components/section-heading.css</td>
+        <td>.section-heading__title</td>
+        <td>6</td>
+        <td>
+          <code
+            >@apply text-4xl md:text-5xl font-heading mb-4 text-heading;</code
+          >
+        </td>
+        <td><code>font-heading</code></td>
+        <td><code>text-4xl, md:text-5xl, mb-4, text-heading</code></td>
+      </tr>
+    </table>
+  </body>
+</html>

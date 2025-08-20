@@ -98,19 +98,16 @@ For better AI context and collaboration, maintain these documentation files:
 ## Best Practices for AI Context
 
 1. Use consistent file naming:
-
    - [ ] Component files: PascalCase (e.g., `ContactForm.astro`)
    - [ ] Utility files: camelCase (e.g., `emailUtils.ts`)
    - [ ] Documentation: UPPERCASE.md
 
 2. Add JSDoc comments for important functions:
-
    - [ ] Document email sending functions
    - [ ] Document content collection utilities
    - [ ] Document more utility functions
 
 3. Create README files in major directories:
-
    - [ ] `/src/components/README.md`
    - [ ] `/src/layouts/README.md`
    - [ ] `/src/pages/README.md`
@@ -122,7 +119,6 @@ For better AI context and collaboration, maintain these documentation files:
 ## Current Development Tasks
 
 - [ ] CaseStudyCard Component Improvements (Estimated: 1.5-2 hours)
-
   - [ ] Feature Enhancements (30 minutes)
     - [ ] Add image support
     - [ ] Implement card hover effects
@@ -290,9 +286,7 @@ For better AI context and collaboration, maintain these documentation files:
 ## JSDoc Implementation
 
 - [x] Site-wide JSDoc Documentation (Estimated: 4-5 hours)
-
   - [x] Component Documentation (2 hours)
-
     - [x] Add comprehensive interface documentation
       ```typescript
       /**
@@ -313,7 +307,6 @@ For better AI context and collaboration, maintain these documentation files:
     - [x] Add accessibility notes
 
   - [x] Utility Functions (1 hour)
-
     - [x] Document function parameters
     - [x] Add return type documentation
     - [x] Include usage examples
@@ -321,14 +314,12 @@ For better AI context and collaboration, maintain these documentation files:
     - [x] Add performance considerations
 
   - [x] Types and Interfaces (30 minutes)
-
     - [x] Document shared types
     - [x] Add interface descriptions
     - [x] Include property constraints
     - [x] Document generic types
 
   - [x] Constants and Configuration (30 minutes)
-
     - [x] Document environment variables
     - [x] Add configuration object documentation
     - [x] Include validation rules
@@ -391,16 +382,13 @@ For better AI context and collaboration, maintain these documentation files:
 ## Work and Search Implementation Priority Order
 
 1. [x] Work Page Core Improvements (Estimated: 9-11 hours)
-
    - [x] Layout and Spacing Fixes (2-3 hours) [PRIORITY 1]
-
      - [x] Add proper padding for fixed header
      - [x] Create hero section with intro copy
      - [x] Implement grid layout
      - [x] Test responsive behaviour
 
    - [x] Content Improvements (3-4 hours) [PRIORITY 1]
-
      - [x] Write introductory section
      - [x] Add key statistics
      - [x] Update experience metrics
@@ -414,9 +402,7 @@ For better AI context and collaboration, maintain these documentation files:
      - [x] Test visual consistency
 
 2. [ ] Work Page Pagination Implementation (Estimated: 8-10 hours) [NEW]
-
    - [ ] Server-side Pagination (4-5 hours)
-
      - [ ] Implement proper data fetching
      - [ ] Add page size configuration
      - [ ] Create pagination utilities
@@ -424,7 +410,6 @@ For better AI context and collaboration, maintain these documentation files:
      - [ ] Add error handling
 
    - [ ] Client-side Integration (2-3 hours)
-
      - [ ] Enhance load more functionality
      - [ ] Add loading states
      - [ ] Implement smooth transitions
@@ -438,9 +423,7 @@ For better AI context and collaboration, maintain these documentation files:
      - [ ] Implement usage analytics
 
 3. [ ] Work Page Filtering and Sorting (6-9 hours)
-
    - [ ] Filtering System (4-6 hours) [PRIORITY 2]
-
      - [ ] Add filter categories:
        - [ ] Industry sectors
        - [ ] Project type
@@ -460,9 +443,7 @@ For better AI context and collaboration, maintain these documentation files:
      - [ ] Test sort performance
 
 4. [ ] Semantic Search Implementation (Estimated: 12-15 hours)
-
    - [ ] Search Infrastructure Setup (4-5 hours) [PRIORITY 3]
-
      - [ ] Research and select search library
      - [ ] Set up search index generation
      - [ ] Implement content indexing pipeline
@@ -470,7 +451,6 @@ For better AI context and collaboration, maintain these documentation files:
      - [ ] Test search performance
 
    - [ ] Search UI Components (4-5 hours) [PRIORITY 3]
-
      - [ ] Design and implement search bar in header
      - [ ] Create search results overlay/modal
      - [ ] Add keyboard navigation for results
@@ -487,9 +467,7 @@ For better AI context and collaboration, maintain these documentation files:
      - [ ] Test search accuracy
 
 5. [ ] Optimisation and Enhancement (10-13 hours)
-
    - [ ] Mobile Optimisation (3-4 hours) [PRIORITY 4]
-
      - [ ] Design collapsible filter menu
      - [ ] Implement touch-friendly filters
      - [ ] Create responsive grid
@@ -497,7 +475,6 @@ For better AI context and collaboration, maintain these documentation files:
      - [ ] Test on various devices
 
    - [ ] Performance Considerations (2-3 hours) [PRIORITY 4]
-
      - [ ] Implement lazy loading
      - [ ] Add image placeholders
      - [ ] Set up filter result caching
@@ -505,7 +482,6 @@ For better AI context and collaboration, maintain these documentation files:
      - [ ] Conduct performance testing
 
    - [ ] Interaction Improvements (3-4 hours) [PRIORITY 4]
-
      - [ ] Add filter state transitions
      - [ ] Implement loading states
      - [ ] Add "Back to top" functionality

@@ -61,10 +61,10 @@ function processCssFile(filePath, customClasses) {
     if ((m = applyRegex.exec(line))) {
       const applyClasses = m[2].split(/\s+/);
       const removed = applyClasses.filter((cls) =>
-        customClasses.includes(cls.replace(/^\\/, ""))
+        customClasses.includes(cls.replace(/^\\/, "")),
       );
       const kept = applyClasses.filter(
-        (cls) => !customClasses.includes(cls.replace(/^\\/, ""))
+        (cls) => !customClasses.includes(cls.replace(/^\\/, "")),
       );
       if (removed.length > 0) {
         report.push({
@@ -116,7 +116,7 @@ function main() {
     totalApplyRules: allReports.length,
     customClasses,
     allRemovedClasses: Array.from(
-      new Set(allReports.flatMap((r) => r.removed))
+      new Set(allReports.flatMap((r) => r.removed)),
     ),
   };
   const jsonReport = { summary, details: allReports };

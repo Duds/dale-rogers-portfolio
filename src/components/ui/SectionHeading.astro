@@ -1,28 +1,27 @@
 ---
+/**
+ * @fileoverview Section heading component for consistent section titles.
+ * Supports different font families and professional styling.
+ */
+
 interface Props {
-  heading: string;
-  subheading?: string;
-  alignment?: "left" | "center" | "right";
+  /** The heading text content */
+  text: string;
+  /** Font family for the heading - 'inter' or 'dm-sans' */
+  font?: "inter" | "dm-sans";
+  /** Additional CSS classes */
+  class?: string;
 }
 
-const { heading, subheading, alignment = "left" } = Astro.props;
+const { text, font = "inter", class: className } = Astro.props;
 
-const alignmentClasses = {
-  left: "text-left",
-  center: "text-center mx-auto",
-  right: "text-right ml-auto",
-};
-
-import "@/styles/components/section-heading.css";
+const baseClasses = "section-heading";
+const fontClasses = font === "inter" ? "font-heading" : "font-body";
+const combinedClasses = [baseClasses, fontClasses, className]
+  .filter(Boolean)
+  .join(" ");
 ---
 
-<div class={`section-heading ${alignmentClasses[alignment]}`}>
-  <h2 class="section-heading__title text-heading">
-    {heading}
-  </h2>
-  {
-    subheading && (
-      <p class="section-heading__subtitle text-subheading">{subheading}</p>
-    )
-  }
-</div>
+<h2 class={combinedClasses}>
+  {text}
+</h2>

@@ -1,33 +1,59 @@
 import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
+import { resolve } from "path";
 
 export default defineConfig({
+  plugins: [react()],
   test: {
-    environment: "jsdom",
-    setupFiles: [
-      "./src/components/features/search/__tests__/setup.ts",
-      // "./src/pages/scratch/through-the-windows/__tests__/setup.ts",
-    ],
     globals: true,
+    environment: "jsdom",
+    setupFiles: ["./tests/setup/vitest.setup.ts"],
     include: [
-      "src/**/*.{test,spec}.{js,ts,jsx,tsx}",
-      // "src/pages/scratch/**/*.{test,spec}.{js,ts,jsx,tsx}",
+      "tests/**/*.{test,spec}.{js,ts,tsx}",
+      "src/**/*.{test,spec}.{js,ts,tsx}",
     ],
     exclude: [
-      "src/pages/scratch/**",
-      "**/node_modules/**",
-      "**/dist/**",
-      "**/cypress/**",
-      "**/.{idea,git,cache,output,temp}/**",
-      "**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*",
+      "tests/e2e/**/*",
+      "tests/**/*.spec.ts", // Exclude Playwright tests
+      "**/*.spec.ts", // Exclude all Playwright tests
+      "src/pages/scratch/**/__tests__/**", // Exclude problematic scratch tests
+      "node_modules/**",
+      "dist/**",
+      ".next/**",
+      "coverage/**",
     ],
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],
-      include: [
-        "src/**/*.{js,ts,jsx,tsx}",
-        // "src/pages/scratch/**/*.{js,ts,jsx,tsx}",
+      exclude: [
+        "tests/**/*",
+        "**/*.spec.ts",
+        "**/*.spec.js",
+        "node_modules/**",
+        "dist/**",
+        ".next/**",
+        "coverage/**",
+        "src/scripts/**",
+        "src/pages/**",
+        "src/layouts/**",
       ],
-      exclude: ["src/**/*.d.ts", "src/**/*.astro", "src/pages/scratch/**"],
+      thresholds: {
+        global: {
+          branches: 80,
+          functions: 80,
+          lines: 80,
+          statements: 80,
+        },
+      },
     },
+  },
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "./src"),
+      "~": resolve(__dirname, "./"),
+    },
+  },
+  esbuild: {
+    jsx: "automatic",
   },
 });

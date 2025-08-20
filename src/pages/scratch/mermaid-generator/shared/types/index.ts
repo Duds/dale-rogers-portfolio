@@ -51,7 +51,7 @@ export interface EditorState {
 export class MermaidError extends Error {
   constructor(
     message: string,
-    public code: string
+    public code: string,
   ) {
     super(message);
     this.name = "MermaidError";
@@ -61,7 +61,7 @@ export class MermaidError extends Error {
 export class ExportError extends Error {
   constructor(
     message: string,
-    public format: "svg" | "png"
+    public format: "svg" | "png",
   ) {
     super(message);
     this.name = "ExportError";

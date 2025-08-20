@@ -1,0 +1,78 @@
+@reference "tailwindcss";
+
+/* Professional Theme Toggle Component Styles - matches SearchInput exactly */
+.theme-toggle {
+  @apply relative w-10 h-10 rounded-full border-2 border-solid transition-all duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  background-color: transparent;
+  border-color: var(--color-text-secondary);
+  color: var(--color-text-secondary);
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-text-secondary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-text-secondary);
+}
+
+.theme-toggle__icon {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.theme-toggle__icon svg {
+  width: 20px !important;
+  height: 20px !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+}
+
+.theme-toggle__icon--light {
+  opacity: 1;
+}
+
+.dark .theme-toggle__icon--light,
+:root[data-theme="dark"] .theme-toggle__icon--light {
+  opacity: 0;
+}
+
+.theme-toggle__icon--dark {
+  opacity: 0;
+}
+
+.dark .theme-toggle__icon--dark,
+:root[data-theme="dark"] .theme-toggle__icon--dark {
+  opacity: 1;
+}
+
+/* Focus states */
+.theme-toggle:focus-visible {
+  @apply ring-2 ring-offset-2;
+  ring-color: var(--color-border-focus);
+  ring-offset-color: var(--color-background-secondary);
+}
+
+/* Dark mode adjustments - matches SearchInput exactly */
+.dark .theme-toggle,
+:root[data-theme="dark"] .theme-toggle {
+  background-color: transparent;
+  border-color: var(--color-text-secondary);
+  color: var(--color-text-secondary);
+}
+
+.dark .theme-toggle:hover,
+:root[data-theme="dark"] .theme-toggle:hover {
+  background-color: var(--color-text-secondary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-text-secondary);
+}
+
+.dark .theme-toggle:focus-visible,
+:root[data-theme="dark"] .theme-toggle:focus-visible {
+  ring-offset-color: var(--color-background-primary);
+}

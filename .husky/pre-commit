@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+# Check package manager compliance
+pnpm run check-pm
+
+# Run lint-staged for automated code quality
+pnpm lint-staged
+
+# Run other checks
+pnpm run check-tokens

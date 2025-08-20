@@ -1,52 +1,41 @@
 ---
 /**
- * @fileoverview Card component for displaying content in a consistent, styled container.
- * Can be rendered as a div or anchor element with optional hover effects.
+ * @fileoverview Card component for displaying content in a structured layout.
+ * Supports clickable cards with hover effects and professional styling.
  */
 
 import type { CardProps } from "./types";
-import "@/styles/components/card.css";
+import "../../styles/components/card.css";
 
-/**
- * Props interface for the Card component
- * @typedef {Object} CardProps
- * @property {string} [title] - Optional title to display at the top of the card
- * @property {string} [class] - Additional CSS classes to apply
- * @property {boolean} [clickable=false] - Whether to apply hover effects
- * @property {string} [href] - URL for anchor tag, if provided renders as <a> instead of <div>
- */
 interface Props extends CardProps {}
 
-const { title, class: className = "", clickable = false, href } = Astro.props;
+const { title, clickable = false, href, class: className, ...rest } = Astro.props;
 
-/**
- * Base styles applied to all cards
- * @type {string}
- */
 const baseClasses = "card";
-
-/**
- * Hover effects applied when clickable is true
- * @type {string}
- */
-const hoverClasses = clickable ? "card--clickable" : "";
-
-/**
- * Combines base styles, hover effects, and any additional classes
- * @type {string}
- */
-const classes = [baseClasses, hoverClasses, className]
+const clickableClasses = clickable ? "card--clickable" : "";
+const combinedClasses = [baseClasses, clickableClasses, className]
   .filter(Boolean)
   .join(" ");
-
-/**
- * Determines whether to render as an anchor or div element
- * @type {string}
- */
-const Element = href ? "a" : "div";
 ---
 
-<Element href={href} class={classes}>
-  {title && <h3 class="heading-3 mb-4">{title}</h3>}
-  <slot />
-</Element>
+{
+  clickable && href ? (
+    <a href={href} class={combinedClasses} {...rest}>
+      <div class="card__content">
+        {title && <h3 class="card__title">{title}</h3>}
+        <div class="card__body">
+          <slot />
+        </div>
+      </div>
+    </a>
+  ) : (
+    <div class={combinedClasses} {...rest}>
+      <div class="card__content">
+        {title && <h3 class="card__title">{title}</h3>}
+        <div class="card__body">
+          <slot />
+        </div>
+      </div>
+    </div>
+  )
+}

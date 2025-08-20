@@ -139,7 +139,6 @@ Feature-specific components organised by domain:
    ```
 
 3. **Component Organisation**
-
    - Each feature directory contains:
      - `components/`: Feature-specific components
      - `types/`: TypeScript types and interfaces

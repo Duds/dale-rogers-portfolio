@@ -15,28 +15,34 @@ interface Props {
   onResume: () => void;
 }
 
-export function GameControls({ isActive, status, onStart, onPause, onResume }: Props) {
+export function GameControls({
+  isActive,
+  status,
+  onStart,
+  onPause,
+  onResume,
+}: Props) {
   return (
     <div className="game-controls">
-      {status === 'idle' && (
+      {status === "idle" && (
         <button onClick={onStart} className="start-button">
           Start Game
         </button>
       )}
 
-      {status === 'playing' && (
+      {status === "playing" && (
         <button onClick={onPause} className="pause-button">
           Pause
         </button>
       )}
 
-      {status === 'paused' && (
+      {status === "paused" && (
         <button onClick={onResume} className="resume-button">
           Resume
         </button>
       )}
 
-      {status === 'gameover' && (
+      {status === "gameover" && (
         <button onClick={onStart} className="restart-button">
           Play Again
         </button>

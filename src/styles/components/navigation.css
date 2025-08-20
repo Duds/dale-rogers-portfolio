@@ -1,21 +1,223 @@
-/* Navigation component styles migrated from global.css */
+@reference "tailwindcss";
+
+/* Professional Navigation Component Styles */
 .navigation {
-  @apply fixed w-full top-0 z-50 transition-all duration-300 pt-4;
+  @apply backdrop-blur-md sticky top-0 z-50;
+  background-color: rgba(242, 242, 242, 0.9);
 }
-.navigation__container {
-  @apply rounded-3xl py-4;
+
+/* Dark theme support */
+:root[data-theme="dark"] .navigation {
+  background-color: rgba(31, 42, 0, 0.9);
+  border-color: var(--color-border-primary);
 }
+
+/* Removed .navigation__container as it's no longer needed - Container component handles layout */
+
+.navigation__content {
+  @apply flex items-center justify-between py-4 px-2;
+}
+
 .navigation__brand {
-  @apply text-3xl md:text-4xl font-bold transition-colors text-black dark:text-white;
+  @apply flex-shrink-0;
 }
+
+.navigation__logo {
+  @apply text-2xl font-bold transition-colors duration-300;
+  color: var(--color-text-primary);
+}
+
+.navigation__logo:hover {
+  color: var(--color-secondary-main);
+}
+
+/* Mobile Menu Toggle Button */
+.navigation__mobile-toggle {
+  @apply md:hidden flex flex-col items-center justify-center w-10 h-10 p-2 bg-transparent border-none cursor-pointer;
+}
+
+.navigation__mobile-toggle:focus {
+  @apply outline-none ring-2 ring-offset-2;
+  ring-color: var(--color-border-focus);
+  ring-offset-color: var(--color-background-primary);
+}
+
+.navigation__hamburger {
+  @apply flex flex-col items-center justify-center w-6 h-6;
+}
+
+.navigation__hamburger-line {
+  @apply w-full h-0.5 transition-all duration-300 ease-in-out;
+  background-color: var(--color-text-primary);
+}
+
+.navigation__hamburger-line:not(:last-child) {
+  @apply mb-1;
+}
+
+/* Hamburger animation when active */
+.navigation__mobile-toggle--active .navigation__hamburger-line:nth-child(1) {
+  @apply transform rotate-45 translate-y-2;
+}
+
+.navigation__mobile-toggle--active .navigation__hamburger-line:nth-child(2) {
+  @apply opacity-0;
+}
+
+.navigation__mobile-toggle--active .navigation__hamburger-line:nth-child(3) {
+  @apply transform -rotate-45 -translate-y-2;
+}
+
+.navigation__right {
+  @apply flex items-center space-x-6;
+}
+
+.navigation__search {
+  @apply flex-shrink-0;
+}
+
+.navigation__menu {
+  @apply hidden md:block;
+}
+
+.navigation__menu--open {
+  @apply block md:block;
+}
+
+.navigation__list {
+  @apply flex items-center space-x-6;
+}
+
+.navigation__item {
+  @apply list-none;
+}
+
+.navigation__contact {
+  @apply flex-shrink-0;
+}
+
+.navigation__theme {
+  @apply flex-shrink-0;
+}
+
 .navigation__link {
-  /* Custom classes removed: text-nav-link dark:text-nav-link-dark border-nav-border dark:border-nav-border-dark hover:bg-nav-link-hover hover:text-nav-link-hover-text dark:hover:bg-nav-link-hover-dark dark:hover:text-nav-link-hover-text-dark */
-  @apply text-xl md:text-2xl font-bold px-4 py-2 rounded-full transition-all duration-300;
+  @apply font-medium transition-all duration-300 px-4 py-2 rounded-full border-2 border-solid;
+  background-color: transparent;
+  border-color: var(--color-text-secondary);
+  color: var(--color-text-secondary);
 }
+
+.navigation__link:hover {
+  background-color: var(--color-text-secondary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-text-secondary);
+}
+
 .navigation__link--active {
-  /* Custom classes removed: bg-nav-link-active text-nav-link-active-text dark:bg-nav-link-active-dark dark:text-nav-link-active-text-dark */
+  @apply font-medium px-4 py-2 rounded-full border-2 border-solid;
+  background-color: var(--color-secondary-main);
+  color: var(--color-secondary-contrast);
+  border-color: var(--color-secondary-main);
 }
-.navigation__mobile-menu {
-  /* Custom classes removed: border-nav-border-faint dark:border-nav-border-faint-dark dark:bg-nav-bg-mobile-dark */
-  @apply hidden md:hidden border-t backdrop-blur-sm;
+
+.navigation__link--active:hover {
+  background-color: var(--color-secondary-dark);
+  border-color: var(--color-secondary-dark);
+}
+
+.navigation__link:focus {
+  @apply outline-none ring-2 ring-offset-2;
+  ring-color: var(--color-border-focus);
+  ring-offset-color: var(--color-background-primary);
+}
+
+.navigation__actions {
+  @apply flex items-center space-x-4;
+}
+
+/* Mobile menu styles */
+@media (max-width: 768px) {
+  .navigation__right {
+    @apply hidden;
+  }
+
+  .navigation__menu {
+    @apply fixed inset-x-0 top-full left-0 border-t shadow-lg z-40 transform -translate-y-2 opacity-0 invisible transition-all duration-300 ease-in-out;
+    background-color: var(--color-background-secondary);
+    border-color: var(--color-border-primary);
+  }
+
+  .navigation__menu--open {
+    @apply transform translate-y-0 opacity-100 visible;
+  }
+
+  .navigation__list {
+    @apply flex-col space-y-0 space-x-0 p-4;
+  }
+
+  .navigation__item {
+    @apply w-full;
+  }
+
+  .navigation__link {
+    @apply block w-full px-4 py-3 text-left border-b last:border-b-0 rounded-none;
+    border-color: var(--color-border-tertiary);
+    background-color: transparent;
+    color: var(--color-text-secondary);
+  }
+
+  .navigation__link:hover {
+    background-color: var(--color-text-secondary);
+    color: var(--color-text-inverse);
+  }
+
+  .navigation__link--active {
+    background-color: var(--color-secondary-main);
+    color: var(--color-secondary-contrast);
+    border-color: var(--color-secondary-main);
+  }
+
+  /* Mobile search and theme toggle */
+  .navigation__search,
+  .navigation__contact,
+  .navigation__theme {
+    @apply block w-full px-4 py-3 text-left border-b last:border-b-0;
+    border-color: var(--color-border-tertiary);
+  }
+
+  .navigation__search {
+    @apply flex justify-center;
+  }
+
+  .navigation__theme {
+    @apply flex justify-center;
+  }
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.navigation-open {
+  @apply overflow-hidden;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .navigation__link,
+  .navigation__hamburger-line,
+  .navigation__menu {
+    @apply transition-none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .navigation__link {
+    @apply border-2 border-solid;
+    border-color: var(--color-text-secondary);
+  }
+
+  .navigation__link:focus,
+  .navigation__link--active {
+    @apply border-2 border-solid;
+    border-color: var(--color-text-primary);
+  }
 }

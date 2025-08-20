@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- University of Canberra Dark Version - Simplified -->
+  <g>
+    <!-- UC Shield/Crest simplified -->
+    <rect x="10" y="10" width="30" height="40" rx="2" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <path d="M25 15 L30 25 L25 35 L20 25 Z" fill="#ffffff"/>
+    <text x="25" y="30" text-anchor="middle" fill="#ffffff" font-family="serif" font-size="8" font-weight="bold">UC</text>
+
+    <!-- University text -->
+    <text x="50" y="25" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">UNIVERSITY OF</text>
+    <text x="50" y="40" fill="#ffffff" font-family="Arial, sans-serif" font-size="14" font-weight="bold">CANBERRA</text>
+  </g>
+</svg>

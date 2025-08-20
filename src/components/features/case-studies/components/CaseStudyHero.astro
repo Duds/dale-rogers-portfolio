@@ -1,0 +1,229 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  client: string;
+  industry: string;
+  duration: string;
+  coverImage?: string;
+  tags: string[];
+  pubDate: Date;
+  author: string;
+}
+
+const {
+  title,
+  description,
+  client,
+  industry,
+  duration,
+  coverImage,
+  tags,
+  pubDate,
+  author,
+} = Astro.props;
+
+import TagList from "@/components/ui/TagList.astro";
+import FormattedDate from "@/components/ui/FormattedDate.astro";
+import Heading from "@/components/ui/Heading.astro";
+---
+
+<section class="case-study-hero">
+  <div class="case-study-hero__container">
+    <!-- Hero Content -->
+    <div class="case-study-hero__content">
+      <!-- Client Badge -->
+      <div class="case-study-hero__client-badge">
+        <span class="case-study-hero__client-text">{client}</span>
+        <span class="case-study-hero__industry-text">{industry}</span>
+      </div>
+
+      <!-- Title -->
+      <Heading
+        level={1}
+        class="case-study-hero__title text-4xl md:text-5xl lg:text-6xl font-bold  dark:text-white" style="color: var(--color-text-primary);"
+      >
+        {title}
+      </Heading>
+
+      <!-- Description -->
+      <p class="case-study-hero__description">
+        {description}
+      </p>
+
+      <!-- Meta Information -->
+      <div class="case-study-hero__meta">
+        <div class="case-study-hero__meta-item">
+          <svg
+            class="case-study-hero__meta-icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            ></path>
+          </svg>
+          <FormattedDate date={pubDate} />
+        </div>
+        <div class="case-study-hero__meta-item">
+          <svg
+            class="case-study-hero__meta-icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span>{duration}</span>
+        </div>
+        <div class="case-study-hero__meta-item">
+          <svg
+            class="case-study-hero__meta-icon"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            ></path>
+          </svg>
+          <span>by {author}</span>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      {
+        tags && tags.length > 0 && (
+          <div class="case-study-hero__tags">
+            <TagList tags={tags} class="gap-3" />
+          </div>
+        )
+      }
+    </div>
+
+    <!-- Hero Image -->
+    {
+      coverImage && (
+        <div class="case-study-hero__image">
+          <img
+            src={coverImage}
+            alt={`${client} - ${title}`}
+            class="case-study-hero__image-img"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="case-study-hero__image-overlay" />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  @reference "tailwindcss";
+
+  .case-study-hero {
+    @apply py-20 md:py-28 relative overflow-hidden;
+  }
+
+  .case-study-hero__container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10;
+  }
+
+  .case-study-hero__content {
+    @apply max-w-4xl mx-auto text-center mb-16;
+  }
+
+  .case-study-hero__client-badge {
+    @apply inline-flex items-center gap-3 mb-8 px-4 py-2 bg-white/90 dark:bg-black/90 backdrop-blur-sm rounded-full border border-neutral-200 dark:border-neutral-600 shadow-lg;
+  }
+
+  .case-study-hero__client-text {
+    @apply text-sm font-semibold text-neutral-900 dark:text-white;
+  }
+
+  .case-study-hero__industry-text {
+    @apply text-xs text-neutral-600 dark:text-neutral-400 px-2 py-1 bg-neutral-100 dark:bg-neutral-900 rounded-full;
+  }
+
+  .case-study-hero__title {
+    @apply mb-8 leading-tight;
+  }
+
+  .case-study-hero__description {
+    @apply text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 leading-relaxed mb-12 max-w-3xl mx-auto;
+  }
+
+  .case-study-hero__meta {
+    @apply flex flex-wrap items-center justify-center gap-8 text-neutral-600 dark:text-neutral-400 mb-10;
+  }
+
+  .case-study-hero__meta-item {
+    @apply flex items-center gap-3 text-sm md:text-base;
+  }
+
+  .case-study-hero__meta-icon {
+    @apply w-5 h-5 text-blue-600 dark:text-neutral-400;
+  }
+
+  .case-study-hero__tags {
+    @apply flex justify-center;
+  }
+
+  .case-study-hero__image {
+    @apply relative max-w-5xl mx-auto;
+  }
+
+  .case-study-hero__image-img {
+    @apply w-full h-[500px] md:h-[600px] object-cover rounded-3xl shadow-2xl dark:shadow-2xl;
+  }
+
+  .case-study-hero__image-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-3xl pointer-events-none;
+  }
+
+  /* Enhanced hover effects */
+  .case-study-hero__image-img {
+    @apply transition-transform duration-700 ease-out;
+  }
+
+  .case-study-hero__image:hover .case-study-hero__image-img {
+    @apply scale-105;
+  }
+
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    .case-study-hero__meta {
+      @apply gap-12;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .case-study-hero__content {
+      @apply text-left;
+    }
+
+    .case-study-hero__client-badge {
+      @apply justify-start;
+    }
+
+    .case-study-hero__meta {
+      @apply justify-start;
+    }
+
+    .case-study-hero__tags {
+      @apply justify-start;
+    }
+  }
+</style>

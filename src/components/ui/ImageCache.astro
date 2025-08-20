@@ -1,0 +1,237 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  priority?: boolean;
+  cacheStrategy?: 'cache-first' | 'network-first' | 'stale-while-revalidate';
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  class: className = "",
+  priority = false,
+  cacheStrategy = 'cache-first'
+} = Astro.props;
+
+// Generate cache key for the image
+const cacheKey = `image-${Buffer.from(src).toString('base64').substring(0, 8)}`;
+---
+
+<div class={`image-cache ${className}`} data-cache-key={cacheKey} data-strategy={cacheStrategy}>
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    class="image-cache__img"
+    loading={priority ? "eager" : "lazy"}
+    decoding="async"
+    data-original-src={src}
+  />
+</div>
+
+<style>
+  .image-cache {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .image-cache__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Loading states */
+  .image-cache__img[loading="lazy"] {
+    opacity: 0.7;
+  }
+
+  .image-cache__img[loading="lazy"]:not(.loaded) {
+    filter: blur(2px);
+  }
+
+  .image-cache__img.loaded {
+    opacity: 1;
+    filter: none;
+  }
+</style>
+
+<script>
+  // Image caching service worker registration
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw-image-cache.js')
+      .then(registration => {
+        console.log('Image cache service worker registered:', registration);
+      })
+      .catch(error => {
+        console.error('Image cache service worker registration failed:', error);
+      });
+  }
+
+  // Image loading and caching logic
+  class ImageCache {
+    private cache: Map<string, string>;
+    private loadingImages: Set<string>;
+
+    constructor() {
+      this.cache = new Map();
+      this.loadingImages = new Set();
+    }
+
+    async loadImage(src: string, strategy: string = 'cache-first'): Promise<string | null> {
+      const cacheKey = this.generateCacheKey(src);
+      
+      // Check if image is already cached
+      if (this.cache.has(cacheKey)) {
+        return this.cache.get(cacheKey) || null;
+      }
+
+      // Check if image is currently loading
+      if (this.loadingImages.has(src)) {
+        return new Promise(resolve => {
+          const checkLoaded = () => {
+            if (this.cache.has(cacheKey)) {
+              resolve(this.cache.get(cacheKey) || null);
+            } else {
+              setTimeout(checkLoaded, 100);
+            }
+          };
+          checkLoaded();
+        });
+      }
+
+      this.loadingImages.add(src);
+
+      try {
+        let imageData: string | null = null;
+
+        switch (strategy) {
+          case 'cache-first':
+            imageData = await this.loadFromCache(src) || await this.loadFromNetwork(src);
+            break;
+          case 'network-first':
+            imageData = await this.loadFromNetwork(src) || await this.loadFromCache(src);
+            break;
+          case 'stale-while-revalidate':
+            const cached = await this.loadFromCache(src);
+            if (cached) {
+              // Return cached version immediately
+              this.loadFromNetwork(src).then(networkData => {
+                if (networkData) {
+                  this.cache.set(cacheKey, networkData);
+                }
+              });
+              return cached;
+            }
+            imageData = await this.loadFromNetwork(src);
+            break;
+          default:
+            imageData = await this.loadFromNetwork(src);
+        }
+
+        if (imageData) {
+          this.cache.set(cacheKey, imageData);
+          return imageData;
+        }
+      } catch (error) {
+        console.error('Failed to load image:', src, error);
+      } finally {
+        this.loadingImages.delete(src);
+      }
+
+      return null;
+    }
+
+    async loadFromCache(src: string): Promise<string | null> {
+      try {
+        const cache = await caches.open('image-cache-v1');
+        const response = await cache.match(src);
+        if (response) {
+          const blob = await response.blob();
+          return URL.createObjectURL(blob);
+        }
+      } catch (error) {
+        console.error('Cache read failed:', error);
+      }
+      return null;
+    }
+
+    async loadFromNetwork(src: string): Promise<string | null> {
+      try {
+        const response = await fetch(src);
+        if (response.ok) {
+          const cache = await caches.open('image-cache-v1');
+          await cache.put(src, response.clone());
+          const blob = await response.blob();
+          return URL.createObjectURL(blob);
+        }
+      } catch (error) {
+        console.error('Network load failed:', error);
+      }
+      return null;
+    }
+
+    generateCacheKey(src: string): string {
+      return `image-${Buffer.from(src).toString('base64').substring(0, 8)}`;
+    }
+
+    // Preload critical images
+    preloadImages(imageUrls: string[]): void {
+      imageUrls.forEach(url => {
+        this.loadImage(url, 'cache-first');
+      });
+    }
+
+    // Clear cache
+    async clearCache(): Promise<void> {
+      try {
+        await caches.delete('image-cache-v1');
+        this.cache.clear();
+        console.log('Image cache cleared');
+      } catch (error) {
+        console.error('Failed to clear cache:', error);
+      }
+    }
+  }
+
+  // Initialize image cache
+  const imageCache = new ImageCache();
+
+  // Handle image loading
+  function handleImageLoad(): void {
+    const images = document.querySelectorAll('.image-cache__img');
+    
+    images.forEach(img => {
+      const imgElement = img as HTMLImageElement;
+      if (imgElement.complete) {
+        imgElement.classList.add('loaded');
+      } else {
+        imgElement.addEventListener('load', () => {
+          imgElement.classList.add('loaded');
+        });
+      }
+    });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handleImageLoad);
+  } else {
+    handleImageLoad();
+  }
+
+  // Re-initialize for dynamic content
+  document.addEventListener('astro:page-load', handleImageLoad);
+
+  // Expose image cache globally for debugging
+  (window as any).imageCache = imageCache;
+</script>

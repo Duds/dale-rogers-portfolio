@@ -79,7 +79,7 @@ import { glob } from "glob";
       <td>${e.file}</td>
       <td>${e.line}</td>
       <td>${e.text.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</td>
-    </tr>`
+    </tr>`,
           )
           .join("") || '<tr><td colspan="3">No entries</td></tr>';
       return `
@@ -130,7 +130,7 @@ import { glob } from "glob";
   };
   await fs.writeFile(jsonPath, JSON.stringify(report, null, 2), "utf-8");
   console.log(
-    `Reports written to ${htmlPath} and ${jsonPath} (${entries.length} issues found)`
+    `Reports written to ${htmlPath} and ${jsonPath} (${entries.length} issues found)`,
   );
   if (entries.length > 0) {
     console.error(`${entries.length} issues found, failing CI.`);
