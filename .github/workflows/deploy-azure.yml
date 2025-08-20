@@ -225,9 +225,19 @@ jobs:
           pnpm install --prod --no-frozen-lockfile --ignore-scripts
 
           # We're already in the dist directory, so no need to cd back and forth
-          # Create a zip file of the current directory (dist)
-          echo "📦 Creating deployment package..."
-          zip -r ../deployment.zip .
+          # Create a lean deployment package (exclude unnecessary files)
+          echo "📦 Creating optimized deployment package..."
+
+          # Create deployment package with only essential files
+          zip -r ../deployment.zip . \
+            -x "node_modules/.pnpm/*" \
+            -x "node_modules/@iconify-icons/*" \
+            -x "*.map" \
+            -x "*.d.ts" \
+            -x "tests/*" \
+            -x "__tests__/*" \
+            -x "*.test.*" \
+            -x "*.spec.*"
 
           # Go back to root directory for deployment
           cd ..
