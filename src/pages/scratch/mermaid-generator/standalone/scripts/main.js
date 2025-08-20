@@ -194,174 +194,171 @@ function setupAutoUpdate() {
   });
 }
 
-// Zoom in function
-function zoomIn() {
-  const zoomSlider = document.querySelector(".zoom-slider");
-  if (!zoomSlider) return;
+// Zoom in function - commented out due to unused
+// function zoomIn() {
+//   const zoomSlider = document.querySelector(".zoom-slider");
+//   if (!zoomSlider) return;
 
-  const newZoom = Math.min(state.zoom + 10, state.maxZoom);
-  zoomSlider.value = String(newZoom);
-  zoomSlider.dispatchEvent(new Event("input"));
-}
+//   const newZoom = Math.min(state.zoom + 10, state.maxZoom);
+//   zoomSlider.value = String(newZoom);
+//   zoomSlider.dispatchEvent(new Event("input"));
+// }
 
-// Zoom out function
-function zoomOut() {
-  const zoomSlider = document.querySelector(".zoom-slider");
-  if (!zoomSlider) return;
+// Zoom out function - commented out due to unused
+// function zoomOut() {
+//   const zoomSlider = document.querySelector(".zoom-slider");
+//   if (!zoomSlider) return;
 
-  const newZoom = Math.max(state.zoom - 10, state.minZoom);
-  zoomSlider.value = String(newZoom);
-  zoomSlider.dispatchEvent(new Event("input"));
-}
+//   const newZoom = Math.max(state.zoom - 10, state.minZoom);
+//   zoomSlider.value = String(newZoom);
+//   zoomSlider.dispatchEvent(new Event("input"));
+// }
 
-// Load example function
-function loadExample() {
-  const textarea = document.getElementById("mermaid-input");
-  if (!textarea) return;
+// Load example function - commented out due to unused
+// function loadExample() {
+//   const textarea = document.getElementById("mermaid-input");
+//   if (!textarea) return;
 
-  const example = `graph TD
-    A[Start] --> B{Is it?}
-    B -- Yes --> C[OK]
-    B -- No --> D[End]`;
+//   const example = `graph TD
+//     A[Start] --> B{Is it?}
+//     B -- Yes --> C[OK]
+//     B -- No --> D[End]`;
 
-  textarea.value = example;
-  renderDiagram();
-}
+//   textarea.value = example;
+//   renderDiagram();
+// }
 
-// Clear diagram function
-function clearDiagram() {
-  const textarea = document.getElementById("mermaid-input");
-  if (!textarea) return;
+// Clear diagram function - commented out due to unused
+// function clearDiagram() {
+//   const textarea = document.getElementById("mermaid-input");
+//   if (!textarea) return;
 
-  textarea.value = "";
-  renderDiagram();
-}
+//   textarea.value = "";
+//   renderDiagram();
+// }
 
-// Save template function
-function saveTemplate() {
-  const textarea = document.getElementById("mermaid-input");
-  if (!textarea) return;
+// Save template function - commented out due to unused
+// function saveTemplate() {
+//   const textarea = document.getElementById("mermaid-input");
+//   if (!textarea) return;
 
-  const content = textarea.value;
-  if (!content) {
-    alert("Please enter some Mermaid syntax first");
-    return;
-  }
+//   const content = textarea.value;
+//   if (!content) {
+//     alert("Please enter some Mermaid syntax first");
+//     return;
+//   }
 
-  const blob = new Blob([content], { type: "text/plain" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "mermaid-template.txt";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
+//   const blob = new Blob([content], { type: "text/plain" });
+//   const url = URL.createObjectURL(blob);
+//   const a = document.createElement("a");
+//   a.href = url;
+//   a.download = "mermaid-template.txt";
+//   document.body.appendChild(a);
+//   a.click();
+//   document.body.removeChild(a);
+//   URL.revokeObjectURL(url);
+// }
 
-// Save template as HTML function
-function saveTemplateAs() {
-  const textarea = document.getElementById("mermaid-input");
-  if (!textarea) return;
+// Save template as HTML function - commented out due to unused
+// function saveTemplateAs() {
+//   const textarea = document.getElementById("mermaid-input");
+//   if (!textarea) return;
 
-  const content = textarea.value;
-  if (!content) {
-    alert("Please enter some Mermaid syntax first");
-    return;
-  }
+//   const content = textarea.value;
+//   if (!content) {
+//     alert("Please enter some Mermaid syntax first");
+//     return;
+//   }
 
-  const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mermaid Diagram</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-    <style>
-        body { margin: 0; padding: 20px; }
-        .mermaid { display: flex; justify-content: center; }
-    </style>
-</head>
-<body>
-    <div class="mermaid">
-${content}
-    </div>
-    <script>
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'default',
-            securityLevel: 'loose'
-        });
-    </script>
-</body>
-</html>`;
+//   const html = `<!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <title>Mermaid Diagram</title>
+//     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+//     <style>
+//         body { margin: 0; padding: 20px; }
+//         .mermaid { display: flex; justify-content: center; }
+//     </style>
+// </head>
+// <body>
+//     <div class="mermaid">
+// ${content}
+//     </div>
+//     <script>
+//         mermaid.initialize({
+//             startOnLoad: true,
+//             theme: 'default',
+//             securityLevel: 'loose'
+//         });
+//     </script>
+// </body>
+// </html>`;
 
-  const blob = new Blob([html], { type: "text/html" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "mermaid-diagram.html";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
+//   const blob = new Blob([html], { type: "text/html" });
+//   const url = URL.createObjectURL(blob);
+//   const a = document.createElement("a");
+//   a.href = url;
+//   a.download = "mermaid-diagram.html";
+//   document.body.appendChild(a);
+//   a.click();
+//   document.body.removeChild(a);
+//   URL.revokeObjectURL(url);
+// }
 
-// Export SVG function
-function exportSvg() {
-  const output = document.getElementById("mermaid-output");
-  if (!output) return;
+// Export SVG function - commented out due to unused
+// function exportSvg() {
+//   const output = document.getElementById("mermaid-output");
+//   if (!output) return;
 
-  const svg = output.querySelector("svg");
-  if (!svg) {
-    alert("Please generate a diagram first");
-    return;
-  }
+//   const svg = output.querySelector("svg");
+//   if (!svg) {
+//     alert("Please generate a diagram first");
+//     return;
+//   }
 
-  const svgData = new XMLSerializer().serializeToString(svg);
-  const blob = new Blob([svgData], { type: "image/svg+xml" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "mermaid-diagram.svg";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
+//   const svgData = new XMLSerializer().serializeToString(svg);
+//   const blob = new Blob([svgData], { type: "image/svg+xml" });
+//   const url = URL.createObjectURL(blob);
+//   const a = document.createElement("a");
+//   a.href = url;
+//   a.download = "mermaid-diagram.svg";
+//   document.body.appendChild(a);
+//   a.click();
+//   document.body.removeChild(a);
+//   URL.revokeObjectURL(url);
+// }
 
-// Export PNG function
-function exportPng() {
-  const output = document.getElementById("mermaid-output");
-  if (!output) return;
+// Export PNG function - commented out due to unused
+// function exportPng() {
+//   const output = document.getElementById("mermaid-output");
+//   if (!output) return;
 
-  const svg = output.querySelector("svg");
-  if (!svg) {
-    alert("Please generate a diagram first");
-    return;
-  }
+//   const svg = output.querySelector("svg");
+//   if (!svg) return;
 
-  const svgData = new XMLSerializer().serializeToString(svg);
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  const img = new Image();
+//   const svgData = new XMLSerializer().serializeToString(svg);
+//   const canvas = document.createElement("canvas");
+//   const ctx = canvas.getContext("2d");
+//   const img = new Image();
 
-  img.onload = function () {
-    canvas.width = img.width;
-    canvas.height = img.height;
-    ctx.drawImage(img, 0, 0);
-    const pngUrl = canvas.toDataURL("image/png");
-    const a = document.createElement("a");
-    a.href = pngUrl;
-    a.download = "mermaid-diagram.png";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
+//   img.onload = function () {
+//     canvas.width = img.width;
+//     canvas.height = img.height;
+//     ctx.drawImage(img, 0, 0);
+//     const pngUrl = canvas.toDataURL("image/png");
+//     const a = document.createElement("a");
+//     a.href = pngUrl;
+//     a.download = "mermaid-diagram.png";
+//     document.body.appendChild(a);
+//     a.click();
+//     document.body.removeChild(a);
+//   };
 
-  img.src =
-    "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)));
-}
+//   img.src =
+//     "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)));
+// }
 
 // Render diagram function
 function renderDiagram() {
