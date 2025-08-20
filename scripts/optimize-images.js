@@ -72,7 +72,7 @@ function checkImageOptimizationTools() {
       logSuccess("ImageMagick available");
       logInfo(`Version: ${magickVersion.split("\n")[0]}`);
       return "imagemagick";
-    } catch (e) {
+    } catch {
       logWarning("ImageMagick not found");
     }
 
@@ -83,7 +83,7 @@ function checkImageOptimizationTools() {
         logSuccess("Sharp (Node.js) available");
         return "sharp";
       }
-    } catch (e) {
+    } catch {
       logWarning("Sharp not found");
     }
 

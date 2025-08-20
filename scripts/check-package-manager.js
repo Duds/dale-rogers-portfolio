@@ -6,7 +6,7 @@
  */
 
 import fs from "fs";
-import path from "path";
+// import path from "path";
 
 // Check for unwanted lockfiles
 const unwantedLockfiles = ["package-lock.json", "yarn.lock"];

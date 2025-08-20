@@ -1,17 +1,23 @@
-function r(s = "[data-fade]") {
-  if (typeof window > "u") return;
-  let o = document.querySelectorAll(s),
-    n = new window.IntersectionObserver(
-      (t) => {
-        t.forEach((e) => {
-          e.isIntersecting &&
-            (e.target.classList.add("visible"), n.unobserve(e.target));
-        });
-      },
-      { threshold: 0.15 },
-    );
-  o.forEach((t, e) => {
-    ((t.style.transitionDelay = `${e * 80}ms`), n.observe(t));
+function fadeInOnScroll(selector = "[data-fade]") {
+  if (typeof window === "undefined") return;
+
+  const elements = document.querySelectorAll(selector);
+  const observer = new window.IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  elements.forEach((element, index) => {
+    element.style.transitionDelay = `${index * 80}ms`;
+    observer.observe(element);
   });
 }
-export { r as fadeInOnScroll };
+
+export { fadeInOnScroll };
