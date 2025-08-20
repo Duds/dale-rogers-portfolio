@@ -1,13 +1,13 @@
-import { jsdom } from "jsdom";
+import { JSDOM } from "jsdom";
 import { vi } from "vitest";
 
 // Set up DOM environment for testing
-const dom = new jsdom("<!DOCTYPE html><html><body></body></html>", {
+const dom = new JSDOM("<!DOCTYPE html><html><body></body></html>", {
   url: "http://localhost",
 });
 
 // Mock window and document
-global.window = dom.window as unknown as typeof globalThis;
+global.window = dom.window as unknown as Window & typeof globalThis;
 global.document = dom.window.document;
 global.navigator = dom.window.navigator;
 global.location = dom.window.location;
@@ -43,8 +43,12 @@ global.IntersectionObserver = vi.fn().mockImplementation(() => ({
 }));
 
 // Mock requestAnimationFrame
-global.requestAnimationFrame = vi.fn((cb) => setTimeout(cb, 0));
-global.cancelAnimationFrame = vi.fn((id) => clearTimeout(id));
+global.requestAnimationFrame = vi.fn((cb: FrameRequestCallback) =>
+  setTimeout(cb, 0),
+) as unknown as typeof requestAnimationFrame;
+global.cancelAnimationFrame = vi.fn((id: number) =>
+  clearTimeout(id),
+) as unknown as typeof cancelAnimationFrame;
 
 // Mock console methods to reduce noise in tests
 global.console = {
