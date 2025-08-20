@@ -13,7 +13,7 @@ afterEach(() => {
 
 // Add custom type declarations
 declare global {
-  interface Vi {
+  namespace Vi {
     interface JestAssertion<T = unknown> extends jest.Matchers<void, T> {}
   }
 }
