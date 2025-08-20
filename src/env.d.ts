@@ -1,4 +1,3 @@
-/// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
 declare module "astro:content" {
@@ -6,7 +5,7 @@ declare module "astro:content" {
     ".mdx": Promise<{
       Content: import("astro").MarkdownInstance<{}>["Content"];
       headings: import("astro").MarkdownHeading[];
-      remarkPluginFrontmatter: Record<string, any>;
+      remarkPluginFrontmatter: Record<string, unknown>;
     }>;
   }
 }
@@ -17,12 +16,12 @@ declare module "astro:components" {
     lang?: string;
     theme?: string;
     wrap?: boolean;
-  }) => any;
+  }) => JSX.Element;
 }
 
 // Declare module for .astro components to fix TypeScript errors
 declare module "*.astro" {
-  const component: (props: any) => any;
+  const component: (props: Record<string, unknown>) => JSX.Element;
   export default component;
 }
 

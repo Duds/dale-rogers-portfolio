@@ -91,7 +91,7 @@ function getDirectorySize(dirPath) {
     }
 
     return totalSize;
-  } catch (error) {
+  } catch {
     return 0;
   }
 }

@@ -8,5 +8,5 @@ export function cn(...inputs: ClassValue[]) {
 // Base props interface for components
 export interface BaseProps {
   class?: string;
-  [key: string]: any;
+  [key: string]: string | number | boolean | undefined;
 }
