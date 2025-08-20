@@ -26,30 +26,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "pnpm"
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.14.0
+          cache: "npm"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: Run quality checks
         run: |
-          pnpm run typecheck
-          pnpm run lint
-          pnpm run format:check
+          npm run typecheck
+          npm run lint
+          npm run format:check
 
       - name: Run tests
-        run: pnpm run test:run
+        run: npm run test:run
 
       - name: Run E2E tests
-        run: pnpm run e2e
+        run: npm run e2e
 
       - name: Build application
-        run: pnpm run build
+        run: npm run build
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
@@ -71,6 +66,6 @@ jobs:
           if [ ${{ job.status }} == 'success' ]; then
             echo "✅ Deployment successful to ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production') || 'staging' }}"
           else
-            echo "❌ Deployment failed to ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production') || 'staging' }}"
+            echo "❌ Deployment failed to ${{ github.event.inputs.environment || (github.ref == 'heads/main' && 'production') || 'staging' }}"
             exit 1
           fi
