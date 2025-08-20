@@ -76,8 +76,8 @@ jobs:
 
       - name: Deploy to Azure Web App
         run: |
-          # Create package.json with start script
-          echo '{"scripts":{"start":"node server/entry.mjs"}}' > dist/package.json
+          # Create package.json with start script (no prepare script for production)
+          echo '{"scripts":{"start":"node server/entry.mjs"},"dependencies":{}}' > dist/package.json
 
           # Create a proper startup script for Azure
           cat > dist/start.sh << 'EOF'
