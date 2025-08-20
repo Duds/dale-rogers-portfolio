@@ -96,7 +96,7 @@ function checkImageOptimizationTools() {
       logSuccess("pngquant available");
       logInfo(`Version: ${pngquantVersion.split("\n")[0]}`);
       return "pngquant";
-    } catch (e) {
+    } catch {
       logWarning("pngquant not found");
     }
 
@@ -126,7 +126,7 @@ function analyzeImageSizes() {
       `find "${imagesPath}" -type f \\( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.webp" \\)`,
       {
         encoding: "utf8",
-      },
+      }
     )
       .split("\n")
       .filter(Boolean);
@@ -177,7 +177,7 @@ function optimizeWithImageMagick(imagePath, outputPath) {
       `magick "${imagePath}" -quality 85 -define webp:lossless=false "${outputPath}"`,
       {
         stdio: "pipe",
-      },
+      }
     );
     return true;
   } catch (error) {
@@ -193,7 +193,7 @@ function optimizeWithPngquant(imagePath, outputPath) {
       `pngquant --quality=65-80 --force --output "${outputPath}" "${imagePath}"`,
       {
         stdio: "pipe",
-      },
+      }
     );
     return true;
   } catch (error) {
@@ -280,7 +280,7 @@ async function optimizeImages(largeImages, tool) {
 
   logSection("📊 Optimization Results");
   logSuccess(
-    `Successfully optimized: ${successCount}/${largeImages.length} images`,
+    `Successfully optimized: ${successCount}/${largeImages.length} images`
   );
   logSuccess(`Total space saved: ${formatBytes(totalSaved)}`);
 

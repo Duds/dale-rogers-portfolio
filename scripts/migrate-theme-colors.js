@@ -9,11 +9,11 @@
  * Usage: node scripts/migrate-theme-colors.js
  */
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
+// const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
 
 // Color mapping from old to new system
@@ -238,4 +238,3 @@ function main() {
 
 // Run the migration
 main();
-

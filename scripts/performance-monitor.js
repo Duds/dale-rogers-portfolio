@@ -118,7 +118,7 @@ function getDirectorySize(dirPath) {
     }
 
     return totalSize;
-  } catch (error) {
+  } catch {
     return 0;
   }
 }
@@ -180,7 +180,7 @@ function analyzeBundlePerformance() {
     const clientAssessment = assessPerformance(
       "clientBundle",
       clientSize,
-      PERFORMANCE_BUDGETS.clientBundle,
+      PERFORMANCE_BUDGETS.clientBundle
     );
 
     results.client = {
@@ -195,7 +195,7 @@ function analyzeBundlePerformance() {
       "  Size",
       results.client.sizeFormatted,
       "",
-      clientAssessment.status,
+      clientAssessment.status
     );
     logInfo(`  Status: ${clientAssessment.message}`);
 
@@ -203,7 +203,7 @@ function analyzeBundlePerformance() {
     try {
       const clientFiles = execSync(
         `find "${clientPath}" -type f -name "*.js"`,
-        { encoding: "utf8" },
+        { encoding: "utf8" }
       )
         .split("\n")
         .filter(Boolean);
@@ -214,7 +214,7 @@ function analyzeBundlePerformance() {
         const fileAssessment = assessPerformance(
           "individualFile",
           fileSize,
-          PERFORMANCE_BUDGETS.individualFile,
+          PERFORMANCE_BUDGETS.individualFile
         );
 
         results.files.push({
@@ -226,11 +226,11 @@ function analyzeBundlePerformance() {
 
         if (fileAssessment.status !== "good") {
           logWarning(
-            `  ${fileName}: ${formatBytes(fileSize)} - ${fileAssessment.message}`,
+            `  ${fileName}: ${formatBytes(fileSize)} - ${fileAssessment.message}`
           );
         }
       }
-    } catch (error) {
+    } catch {
       logWarning("Could not analyze individual client files");
     }
   }
@@ -241,7 +241,7 @@ function analyzeBundlePerformance() {
     const serverAssessment = assessPerformance(
       "serverBundle",
       serverSize,
-      PERFORMANCE_BUDGETS.serverBundle,
+      PERFORMANCE_BUDGETS.serverBundle
     );
 
     results.server = {
@@ -256,7 +256,7 @@ function analyzeBundlePerformance() {
       "  Size",
       results.server.sizeFormatted,
       "",
-      serverAssessment.status,
+      serverAssessment.status
     );
     logInfo(`  Status: ${serverAssessment.message}`);
   }
@@ -312,7 +312,7 @@ function generatePerformanceReport(bundleResults, buildTime) {
     bundleResults?.files?.filter((f) => f.status !== "good") || [];
   if (largeFiles.length > 0) {
     report.summary.recommendations.push(
-      `Optimize ${largeFiles.length} large files`,
+      `Optimize ${largeFiles.length} large files`
     );
   }
 
@@ -344,7 +344,7 @@ function savePerformanceHistory(report) {
     if (existsSync(historyPath)) {
       history = JSON.parse(readFileSync(historyPath, "utf8"));
     }
-  } catch (error) {
+  } catch {
     logWarning("Could not read existing performance history");
   }
 
@@ -393,7 +393,7 @@ function showPerformanceTrends() {
         logWarning(`  Increased by ${formatBytes(change)} (${changePercent}%)`);
       } else if (change < 0) {
         logSuccess(
-          `  Decreased by ${formatBytes(Math.abs(change))} (${Math.abs(changePercent)}%)`,
+          `  Decreased by ${formatBytes(Math.abs(change))} (${Math.abs(changePercent)}%)`
         );
       } else {
         logInfo("  No change");
@@ -410,7 +410,7 @@ function showPerformanceTrends() {
         logWarning(`  Increased by ${change.toFixed(1)}s (${changePercent}%)`);
       } else if (change < 0) {
         logSuccess(
-          `  Decreased by ${Math.abs(change).toFixed(1)}s (${Math.abs(changePercent)}%)`,
+          `  Decreased by ${Math.abs(change).toFixed(1)}s (${Math.abs(changePercent)}%)`
         );
       } else {
         logInfo("  No change");
@@ -432,7 +432,7 @@ async function main() {
     const buildAssessment = assessPerformance(
       "buildTime",
       buildTime,
-      PERFORMANCE_BUDGETS.buildTime,
+      PERFORMANCE_BUDGETS.buildTime
     );
 
     logInfo("Build Performance:");

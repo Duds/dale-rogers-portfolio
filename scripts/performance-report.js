@@ -6,13 +6,10 @@
  */
 
 import { execSync } from "child_process";
-import { readFileSync, existsSync, statSync } from "fs";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import { existsSync, statSync } from "fs";
+import { join } from "path";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const projectRoot = join(__dirname, "..");
+const projectRoot = join(process.cwd());
 
 // Color codes for output
 const colors = {
@@ -63,13 +60,13 @@ function logMetric(label, value, unit, status = "info") {
   log(`${label}: ${value}${unit}`, color);
 }
 
-function formatBytes(bytes) {
-  if (bytes === 0) return "0 B";
-  const k = 1024;
-  const sizes = ["B", "KB", "MB", "GB"];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-}
+// function formatBytes(bytes) {
+//   if (bytes === 0) return "0 B";
+//   const k = 1024;
+//   const sizes = ["B", "KB", "MB", "GB"];
+//   const i = Math.floor(Math.log(bytes) / Math.log(k));
+//   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+// }
 
 function getDirectorySize(dirPath) {
   try {
@@ -87,7 +84,7 @@ function getDirectorySize(dirPath) {
       if (item && existsSync(item)) {
         try {
           totalSize += statSync(item).size;
-        } catch (e) {
+        } catch {
           // Skip files we can't access
         }
       }
