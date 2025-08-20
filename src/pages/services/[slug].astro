@@ -87,12 +87,7 @@ const description = entry.data.description;
                 <Icon name={entry.data.icon} class="w-10 h-10 text-white" />
               )
             }
-            <Heading
-              level={1}
-              font="inter"
-              size="hero"
-              class="text-white drop-shadow-lg"
-            >
+            <Heading level={1} class="text-white drop-shadow-lg">
               {entry.data.title}
             </Heading>
           </div>
@@ -132,7 +127,10 @@ const description = entry.data.description;
             <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {entry.data.benefits.map(
                 (benefit: { text: string; icon: string }) => (
-                  <li class="flex items-start gap-3 bg-white dark:bg-grey-900/60 border border-grey-200 dark:border-grey-700 rounded-xl p-4 shadow-sm text-xl">
+                  <li
+                    class="flex items-start gap-3 border border-grey-200 dark:border-grey-700 rounded-xl p-4 shadow-sm text-xl"
+                    style="background-color: var(--color-background-secondary);"
+                  >
                     <Icon
                       name={benefit.icon}
                       class="w-7 h-7 text-secondary dark:text-secondary mt-1 shrink-0"

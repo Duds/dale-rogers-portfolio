@@ -1,4 +1,4 @@
-import { colors } from "../styles/theme/colors.ts";
+import { colors, darkColors } from "../styles/theme/colors.ts";
 import { shadows } from "../styles/theme/shadows.ts";
 import { spacing } from "../styles/theme/spacing.ts";
 import { fontSize } from "../styles/theme/typography.ts";
@@ -46,6 +46,11 @@ ${cssVarsFromObject(fontSize, "text", true)}
 ${cssVarsFromObject(radius, "radius", true)}
 ${cssVarsFromObject(transitions, "transition", true)}
 ${cssVarsFromObject(zIndex, "z", true)}
+}
+
+/* Dark theme overrides using TypeScript theme tokens */
+:root[data-theme="dark"] {
+${cssVarsFromObject(darkColors, "color")}
 }
 `;
 

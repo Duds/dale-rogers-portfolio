@@ -25,12 +25,12 @@ const currentPath = Astro.url.pathname;
 
 // Navigation items
 const navItems = [
-  { href: "/", text: "Home", ariaLabel: "Go to homepage" },
-  { href: "/about", text: "About", ariaLabel: "Learn about Dale Rogers" },
   { href: "/work", text: "Work", ariaLabel: "View portfolio work" },
-  { href: "/services", text: "Services", ariaLabel: "View available services" },
-  { href: "/values", text: "Values", ariaLabel: "Learn about our values" },
-  { href: "/contact", text: "Contact", ariaLabel: "Get in touch" },
+  {
+    href: "/articles",
+    text: "Articles",
+    ariaLabel: "Read articles and insights",
+  },
 ];
 
 // Helper function to determine if a nav item is active
@@ -70,40 +70,60 @@ const isActive = (href: string): boolean => {
         </span>
       </button>
 
-      <!-- Navigation Menu -->
-      <div
-        class="navigation__menu"
-        id="main-navigation"
-        aria-labelledby="mobile-menu-button"
-      >
-        <ul class="navigation__list" role="menubar">
-          {
-            navItems.map((item) => {
-              const activeClass = isActive(item.href)
-                ? "navigation__link--active"
-                : "";
-              return (
-                <li class="navigation__item" role="none">
-                  <a
-                    href={item.href}
-                    class={`navigation__link ${activeClass}`}
-                    role="menuitem"
-                    aria-label={item.ariaLabel}
-                    aria-current={isActive(item.href) ? "page" : undefined}
-                  >
-                    {item.text}
-                  </a>
-                </li>
-              );
-            })
-          }
-        </ul>
-      </div>
+      <!-- All Navigation Items (Right Side) -->
+      <div class="navigation__right">
+        <!-- Search Input -->
+        <div class="navigation__search">
+          <SearchInput />
+        </div>
 
-      <!-- Actions: Search and Theme Toggle -->
-      <div class="navigation__actions">
-        <SearchInput />
-        <ThemeToggle />
+        <!-- Navigation Menu -->
+        <div
+          class="navigation__menu"
+          id="main-navigation"
+          aria-labelledby="mobile-menu-button"
+        >
+          <ul class="navigation__list" role="menubar">
+            {
+              navItems.map((item) => {
+                const activeClass = isActive(item.href)
+                  ? "navigation__link--active"
+                  : "";
+                return (
+                  <li class="navigation__item" role="none">
+                    <a
+                      href={item.href}
+                      class={`navigation__link ${activeClass}`}
+                      role="menuitem"
+                      aria-label={item.ariaLabel}
+                      aria-current={isActive(item.href) ? "page" : undefined}
+                    >
+                      {item.text}
+                    </a>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </div>
+
+        <!-- Contact Link -->
+        <div class="navigation__contact">
+          <a
+            href="/contact"
+            class="navigation__link"
+            role="menuitem"
+            aria-label="Get in touch"
+            aria-current={isActive("/contact") ? "page" : undefined}
+          >
+            Contact
+          </a>
+        </div>
+
+        <!-- Theme Toggle -->
+        <div class="navigation__theme">
+          <ThemeToggle />
+        </div>
       </div>
     </div>
   </Container>

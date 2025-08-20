@@ -2,6 +2,7 @@
 import Container from "@/components/layout/Container.astro";
 import "@/styles/components/footer.css";
 import Button from "@/components/ui/Button.astro";
+import { ArrowRight, Linkedin, BookOpen } from "lucide-astro";
 
 interface Link {
   name: string;
@@ -15,13 +16,13 @@ const currentYear = new Date().getFullYear();
 const socialLinks: Link[] = [
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/dale-rogers",
-    icon: "linkedin-white",
+    href: "https://linkedin.com/in/dalerogers",
+    icon: "linkedin",
   },
   {
     name: "Medium",
-    href: "https://medium.com/@dale-rogers",
-    icon: "medium-white",
+    href: "https://medium.com/@dalerogers",
+    icon: "medium",
   },
 ];
 
@@ -65,29 +66,18 @@ const infoLinks: Link[] = [
         <!-- Left side with CTA -->
         <div class="lg:col-span-2 space-y-8">
           <h2
-            class="text-4xl md:text-6xl font-display leading-tight md:leading-tight text-white"
-            id="gradient-text"
+            class="text-4xl md:text-6xl font-display leading-tight md:leading-tight footer-main-heading"
           >
             Transforming services,<br />enriching lives,<br />together
           </h2>
           <div>
             <Button
-              variant="primary"
+              variant="accent"
               href="/contact"
-              class="button button--primary text-2xl px-12 py-6"
+              class="button button--accent text-2xl px-12 py-6"
             >
               Get in touch
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd"></path>
-              </svg>
+              <ArrowRight class="h-6 w-6" />
             </Button>
           </div>
         </div>
@@ -101,7 +91,7 @@ const infoLinks: Link[] = [
                 {
                   sitemapLinks.map((link) => (
                     <li>
-                      <a href={link.href} class="footer-link hover:text-white">
+                      <a href={link.href} class="footer-link">
                         {link.name}
                       </a>
                     </li>
@@ -120,16 +110,13 @@ const infoLinks: Link[] = [
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex items-center footer-link hover:text-white"
+                        class="flex items-center footer-link"
                       >
-                        <img
-                          src={`/icons/${link.icon}.svg`}
-                          alt=""
-                          aria-hidden="true"
-                          class="w-5 h-5 mr-2"
-                          width="20"
-                          height="20"
-                        />
+                        {link.icon === "linkedin" ? (
+                          <Linkedin class="w-5 h-5 mr-2" aria-hidden="true" />
+                        ) : link.icon === "medium" ? (
+                          <BookOpen class="w-5 h-5 mr-2" aria-hidden="true" />
+                        ) : null}
                         {link.name}
                       </a>
                     </li>
@@ -144,7 +131,7 @@ const infoLinks: Link[] = [
                 {
                   infoLinks.map((link) => (
                     <li>
-                      <a href={link.href} class="footer-link hover:text-white">
+                      <a href={link.href} class="footer-link">
                         {link.name}
                       </a>
                     </li>

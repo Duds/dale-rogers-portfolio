@@ -4,7 +4,14 @@
 
 /* Case Study Card */
 .case-study-card {
-  @apply bg-white dark:bg-neutral-900 rounded-3xl shadow-md dark:shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl dark:hover:shadow-xl hover:-translate-y-2 border border-neutral-200 dark:border-neutral-600;
+  @apply rounded-3xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border;
+  background-color: var(--color-background-secondary);
+  border-color: var(--color-border-primary);
+}
+
+:root[data-theme="dark"] .case-study-card {
+  background-color: var(--color-background-primary);
+  border-color: var(--color-border-primary);
 }
 
 .case-study-card__image-container {
@@ -28,7 +35,20 @@
 }
 
 .case-study-card__title {
-  @apply text-2xl font-bold text-neutral-900 dark:text-white leading-tight hover:text-blue-600 dark:hover:text-neutral-400 transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-neutral-400 mb-4;
+  @apply text-2xl font-bold leading-tight transition-colors duration-300 mb-4;
+  color: var(--color-text-primary);
+}
+
+.case-study-card__title:hover {
+  color: var(--color-secondary-main);
+}
+
+:root[data-theme="dark"] .case-study-card__title {
+  color: var(--color-text-inverse);
+}
+
+:root[data-theme="dark"] .case-study-card__title:hover {
+  color: var(--color-text-disabled);
 }
 
 .case-study-card__description {
@@ -60,7 +80,12 @@
 }
 
 .case-study-card__tag {
-  @apply group-hover:bg-blue-600 group-hover:text-white transition-all duration-300;
+  @apply transition-all duration-300;
+}
+
+.case-study-card__tag:hover {
+  background-color: var(--color-secondary-main);
+  color: white;
 }
 
 .case-study-card__link-section {
@@ -68,7 +93,20 @@
 }
 
 .case-study-card__link {
-  @apply inline-flex items-center text-sm font-semibold text-blue-600 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-purple-300 transition-colors duration-300 group-hover:underline;
+  @apply inline-flex items-center text-sm font-semibold transition-colors duration-300 group-hover:underline;
+  color: var(--color-secondary-main);
+}
+
+.case-study-card__link:hover {
+  color: var(--color-secondary-dark);
+}
+
+:root[data-theme="dark"] .case-study-card__link {
+  color: var(--color-text-disabled);
+}
+
+:root[data-theme="dark"] .case-study-card__link:hover {
+  color: var(--color-accent-light);
 }
 
 .case-study-card__link-icon {
@@ -121,7 +159,12 @@
 }
 
 .case-study-layout__overview-icon {
-  @apply w-6 h-6 text-blue-600 dark:text-neutral-400;
+  @apply w-6 h-6;
+  color: var(--color-secondary-main);
+}
+
+:root[data-theme="dark"] .case-study-layout__overview-icon {
+  color: var(--color-text-disabled);
 }
 
 .case-study-layout__overview-list {
@@ -161,7 +204,12 @@
 }
 
 .case-study-layout__overview-results-icon {
-  @apply w-5 h-5 text-green-500 dark:text-green-400 mt-0.5 flex-shrink-0;
+  @apply w-5 h-5 mt-0.5 flex-shrink-0;
+  color: var(--color-state-success);
+}
+
+:root[data-theme="dark"] .case-study-layout__overview-results-icon {
+  color: var(--color-accent-light);
 }
 
 .case-study-layout__cover-image {
@@ -182,7 +230,15 @@
 }
 
 .case-study-content :global(blockquote) {
-  @apply border-l-4 border-blue-600 pl-6 italic my-12 text-lg text-neutral-600 dark:text-neutral-400 bg-neutral-100/30 dark:bg-neutral-900/30 py-4 rounded-r-lg;
+  @apply border-l-4 pl-6 italic my-12 text-lg py-4 rounded-r-lg;
+  border-color: var(--color-secondary-main);
+  color: var(--color-text-secondary);
+  background-color: var(--color-background-tertiary);
+}
+
+:root[data-theme="dark"] .case-study-content :global(blockquote) {
+  color: var(--color-text-disabled);
+  background-color: var(--color-background-tertiary);
 }
 
 .case-study-content :global(pre) {
@@ -218,7 +274,8 @@
 }
 
 .case-study-content :global(ul li::before) {
-  @apply content-[''] w-2 h-2 bg-blue-600 rounded-full mt-3 flex-shrink-0;
+  @apply content-[''] w-2 h-2 rounded-full mt-3 flex-shrink-0;
+  background-color: var(--color-secondary-main);
 }
 
 .case-study-content :global(ol) {
@@ -230,7 +287,20 @@
 }
 
 .case-study-content :global(a) {
-  @apply text-blue-600 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-purple-300 underline decoration-2 underline-offset-4 transition-colors duration-300;
+  @apply underline decoration-2 underline-offset-4 transition-colors duration-300;
+  color: var(--color-secondary-main);
+}
+
+.case-study-content :global(a):hover {
+  color: var(--color-secondary-dark);
+}
+
+:root[data-theme="dark"] .case-study-content :global(a) {
+  color: var(--color-text-disabled);
+}
+
+:root[data-theme="dark"] .case-study-content :global(a):hover {
+  color: var(--color-accent-light);
 }
 
 .case-study-content :global(strong) {
@@ -272,11 +342,16 @@
 }
 
 .case-studies-grid :global(.group:hover h3 a) {
-  @apply text-blue-600 dark:text-neutral-400;
+  color: var(--color-secondary-main);
+}
+
+:root[data-theme="dark"] .case-studies-grid :global(.group:hover h3 a) {
+  color: var(--color-text-disabled);
 }
 
 .case-studies-grid :global(.group:hover .tag) {
-  @apply bg-blue-600 text-white;
+  @apply text-white;
+  background-color: var(--color-secondary-main);
 }
 
 /* Empty state styling */

@@ -280,7 +280,8 @@ const related = allCaseStudies
   }
 
   .case-study-layout__overview-title {
-    @apply text-2xl font-bold text-neutral-900 dark:text-white;
+    @apply text-2xl font-bold;
+color: var(--color-text-primary);
   }
 
   .case-study-layout__overview-icon {
@@ -292,7 +293,8 @@ const related = allCaseStudies
   }
 
   .case-study-layout__overview-item {
-    @apply flex items-center justify-between py-4 px-5 bg-white/70 dark:bg-black/30 rounded-xl backdrop-blur-sm;
+    @apply flex items-center justify-between py-4 px-5 rounded-xl backdrop-blur-sm;
+background-color: rgba(255, 255, 255, 0.7);
   }
 
   .case-study-layout__overview-label {
@@ -300,7 +302,8 @@ const related = allCaseStudies
   }
 
   .case-study-layout__overview-value {
-    @apply text-neutral-900 dark:text-white font-semibold;
+    @apply font-semibold;
+color: var(--color-text-primary);
   }
 
   .case-study-layout__overview-content {

@@ -29,14 +29,24 @@ Object.defineProperty(window, "matchMedia", {
 vi.mock("../../ui/Icon.astro", () => ({
   default: {
     render: (props: { name: string; class?: string; size?: number }) => {
-      const img = document.createElement("img");
-      img.src = `/icons/${props.name}.svg`;
-      img.className = props.class || "";
-      img.width = props.size || 24;
-      img.height = props.size || 24;
-      img.setAttribute("aria-hidden", "true");
-      img.alt = "";
-      return img;
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("viewBox", "0 0 24 24");
+      svg.setAttribute("fill", "none");
+      svg.setAttribute("stroke", "currentColor");
+      svg.setAttribute("stroke-width", "2");
+      svg.setAttribute("stroke-linecap", "round");
+      svg.setAttribute("stroke-linejoin", "round");
+      svg.className = props.class || "";
+      svg.style.width = `${props.size || 24}px`;
+      svg.style.height = `${props.size || 24}px`;
+      svg.setAttribute("aria-hidden", "true");
+      
+      // Add a simple path to represent the icon
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5");
+      svg.appendChild(path);
+      
+      return svg;
     },
   },
 }));

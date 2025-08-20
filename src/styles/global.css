@@ -1,5 +1,14 @@
 @import "./generated-tokens.css";
 @import "tailwindcss";
+
+/* Tailwind CSS v4 Configuration */
+@theme {
+  --default-transition-duration: 150ms;
+  --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Configure dark mode to use data-theme attribute */
+@variant dark (:root[data-theme="dark"] &);
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
 @import "./components/base.css";
 
@@ -64,59 +73,11 @@
   --font-mono: "JetBrains Mono", "Fira Code", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-display: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Professional Color Scheme - Inspired by Index Ventures */
-  --color-primary: #1F2937;      /* Deep charcoal - professional, trustworthy */
-  --color-secondary: #3B82F6;    /* Professional blue - reliable, corporate */
-  --color-accent: #10B981;       /* Emerald green - growth, success */
-
-  /* Neutral Foundation */
-  --color-white: #FFFFFF;
-  --color-black: #111827;
-  --color-background: #FAFAFA;   /* Subtle off-white for depth */
-
-  /* Semantic Colors */
-  --color-success: #059669;      /* Deep emerald */
-  --color-warning: #D97706;      /* Warm amber */
-  --color-error: #DC2626;        /* Clear red */
-
-  /* Professional Grey Scale */
-  --color-grey-50: #F9FAFB;      /* Lightest background */
-  --color-grey-100: #F3F4F6;     /* Subtle borders */
-  --color-grey-200: #E5E7EB;     /* Light borders */
-  --color-grey-300: #D1D5DB;     /* Medium borders */
-  --color-grey-400: #9CA3AF;     /* Placeholder text */
-  --color-grey-500: #6B7280;     /* Secondary text */
-  --color-grey-600: #4B5563;     /* Body text */
-  --color-grey-700: #374151;     /* Strong text */
-  --color-grey-800: #1F2937;     /* Headings */
-  --color-grey-900: #111827;     /* Darkest text */
-
-  /* Business-focused accent colors */
-  --color-blue-50: #EFF6FF;
-  --color-blue-100: #DBEAFE;
-  --color-blue-500: #3B82F6;     /* Matches secondary */
-  --color-blue-600: #2563EB;
-  --color-blue-700: #1D4ED8;
-
-  /* Success and growth colors */
-  --color-green-50: #ECFDF5;
-  --color-green-100: #D1FAE5;
-  --color-green-500: #10B981;    /* Matches accent */
-  --color-green-600: #059669;
-  --color-green-700: #047857;
-
-  /* Warm accent colors for highlights */
-  --color-amber-50: #FFFBEB;
-  --color-amber-100: #FEF3C7;
-  --color-state-warning: #F59E0B;
-  --color-state-warning: #D97706;
+  /* Professional Color Scheme - Using TypeScript theme tokens */
+  /* All colors are now defined in src/styles/theme/colors.ts */
 }
 
-/* Dark mode overrides */
-.dark {
-  --color-bg: var(--color-black);
-  --color-text: #ffffff;
-}
+/* Dark mode overrides - Now handled by TypeScript theme tokens */
 
 @layer base {
   html {
@@ -136,7 +97,13 @@
 
   /* Selection styles */
   ::selection {
-    @apply bg-gray-100 text-black dark:bg-gray-800 dark:text-white;
+    background-color: var(--color-interactive-selected);
+    color: var(--color-text-primary);
+  }
+
+  :root[data-theme="dark"] ::selection {
+    background-color: var(--color-interactive-selected);
+    color: var(--color-text-inverse);
   }
 
   /* Scrollbar styles */
@@ -145,16 +112,45 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-gray-100 dark:bg-gray-800;
+    background-color: var(--color-background-tertiary);
+  }
+
+  :root[data-theme="dark"] ::-webkit-scrollbar-track {
+    background-color: var(--color-background-tertiary);
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600;
+    @apply rounded-full;
+    background-color: var(--color-border-secondary);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-border-primary);
+  }
+
+  :root[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background-color: var(--color-border-secondary);
+  }
+
+  :root[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-border-primary);
   }
 
   /* Default link styles */
   a {
-    @apply text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-purple-800;
+    color: var(--color-secondary-main);
+  }
+
+  a:hover {
+    color: var(--color-secondary-dark);
+  }
+
+  :root[data-theme="dark"] a {
+    color: var(--color-text-disabled);
+  }
+
+  :root[data-theme="dark"] a:hover {
+    color: var(--color-accent-light);
   }
 
   /* Default heading styles */
@@ -176,7 +172,13 @@
   /* Default list styles */
   ul,
   ol {
-    @apply list-inside text-gray-600 dark:text-gray-400;
+    @apply list-inside;
+    color: var(--color-text-secondary);
+  }
+
+  :root[data-theme="dark"] ul,
+  :root[data-theme="dark"] ol {
+    color: var(--color-text-disabled);
   }
 
   ul {
@@ -189,11 +191,23 @@
 
   /* Default table styles */
   table {
-    @apply w-full text-left text-sm text-gray-600 dark:text-gray-400;
+    @apply w-full text-left text-sm;
+    color: var(--color-text-secondary);
+  }
+
+  :root[data-theme="dark"] table {
+    color: var(--color-text-disabled);
   }
 
   thead {
-    @apply bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-800 dark:text-gray-300;
+    @apply text-xs uppercase;
+    background-color: var(--color-background-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  :root[data-theme="dark"] thead {
+    background-color: var(--color-background-tertiary);
+    color: var(--color-text-disabled);
   }
 
   th {
@@ -205,7 +219,12 @@
   }
 
   tr {
-    @apply border-b border-gray-200 dark:border-gray-700;
+    @apply border-b;
+    border-color: var(--color-border-secondary);
+  }
+
+  :root[data-theme="dark"] tr {
+    border-color: var(--color-border-secondary);
   }
 
   /* Default form element styles */
@@ -217,15 +236,62 @@
   input[type="url"],
   input[type="search"],
   textarea {
-    @apply block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 placeholder-gray-500 transition-colors focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-400;
+    @apply block w-full rounded-md border px-4 py-2 transition-colors focus:outline-none focus:ring-1;
+    background-color: var(--color-background-secondary);
+    border-color: var(--color-border-primary);
+    color: var(--color-text-primary);
+    placeholder-color: var(--color-text-disabled);
+  }
+
+  :root[data-theme="dark"] input[type="text"],
+  :root[data-theme="dark"] input[type="email"],
+  :root[data-theme="dark"] input[type="password"],
+  :root[data-theme="dark"] input[type="number"],
+  :root[data-theme="dark"] input[type="tel"],
+  :root[data-theme="dark"] input[type="url"],
+  :root[data-theme="dark"] input[type="search"],
+  :root[data-theme="dark"] textarea {
+    background-color: var(--color-background-primary);
+    color: var(--color-text-inverse);
+    placeholder-color: var(--color-text-disabled);
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="number"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="search"]:focus,
+  textarea:focus {
+    border-color: var(--color-border-focus);
+    ring-color: var(--color-border-focus);
   }
 
   select {
-    @apply block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 transition-colors focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100;
+    @apply block w-full rounded-md border px-4 py-2 transition-colors focus:outline-none focus:ring-1;
+    background-color: var(--color-background-secondary);
+    border-color: var(--color-border-primary);
+    color: var(--color-text-primary);
+  }
+
+  :root[data-theme="dark"] select {
+    background-color: var(--color-background-primary);
+    color: var(--color-text-inverse);
+  }
+
+  select:focus {
+    border-color: var(--color-border-focus);
+    ring-color: var(--color-border-focus);
   }
 
   label {
-    @apply mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300;
+    @apply mb-2 block text-sm font-medium;
+    color: var(--color-text-primary);
+  }
+
+  :root[data-theme="dark"] label {
+    color: var(--color-text-inverse);
   }
 
   /* Default button styles */
@@ -235,21 +301,47 @@
 
   /* Code block styles */
   pre {
-    @apply overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm text-white dark:bg-gray-800;
+    @apply overflow-x-auto rounded-lg p-4 text-sm;
+    background-color: var(--color-background-primary);
+    color: var(--color-text-primary);
+  }
+
+  :root[data-theme="dark"] pre {
+    background-color: var(--color-background-primary);
+    color: var(--color-text-inverse);
   }
 
   code {
-    @apply rounded-md bg-gray-100 px-1.5 py-0.5 text-sm text-gray-900 dark:bg-gray-800 dark:text-gray-100;
+    @apply rounded-md px-1.5 py-0.5 text-sm font-mono;
+    background-color: var(--color-background-tertiary);
+    color: var(--color-text-primary);
+  }
+
+  :root[data-theme="dark"] code {
+    background-color: var(--color-background-tertiary);
+    color: var(--color-text-inverse);
   }
 
   /* Blockquote styles */
   blockquote {
-    @apply border-l-4 border-blue-500 bg-gray-50 px-4 py-2 text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100;
+    @apply border-l-4 px-4 py-2;
+    border-color: var(--color-secondary-main);
+    background-color: var(--color-background-tertiary);
+    color: var(--color-text-secondary);
+  }
+
+  :root[data-theme="dark"] blockquote {
+    background-color: var(--color-background-tertiary);
+    color: var(--color-text-disabled);
   }
 
   /* HR styles */
   hr {
-    @apply border-gray-200 dark:border-gray-700;
+    border-color: var(--color-border-secondary);
+  }
+
+  :root[data-theme="dark"] hr {
+    border-color: var(--color-border-secondary);
   }
 }
 

@@ -2,13 +2,20 @@
 
 /* Professional Navigation Component Styles */
 .navigation {
-  @apply bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-600 sticky top-0 z-50;
+  @apply backdrop-blur-md sticky top-0 z-50;
+  background-color: rgba(242, 242, 242, 0.9);
+}
+
+/* Dark theme support */
+:root[data-theme="dark"] .navigation {
+  background-color: rgba(31, 42, 0, 0.9);
+  border-color: var(--color-border-primary);
 }
 
 /* Removed .navigation__container as it's no longer needed - Container component handles layout */
 
 .navigation__content {
-  @apply flex items-center justify-between py-4;
+  @apply flex items-center justify-between py-4 px-2;
 }
 
 .navigation__brand {
@@ -16,7 +23,12 @@
 }
 
 .navigation__logo {
-  @apply text-2xl font-bold text-neutral-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300;
+  @apply text-2xl font-bold transition-colors duration-300;
+  color: var(--color-text-primary);
+}
+
+.navigation__logo:hover {
+  color: var(--color-secondary-main);
 }
 
 /* Mobile Menu Toggle Button */
@@ -25,7 +37,9 @@
 }
 
 .navigation__mobile-toggle:focus {
-  @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-white dark:ring-offset-neutral-900;
+  @apply outline-none ring-2 ring-offset-2;
+  ring-color: var(--color-border-focus);
+  ring-offset-color: var(--color-background-primary);
 }
 
 .navigation__hamburger {
@@ -33,7 +47,8 @@
 }
 
 .navigation__hamburger-line {
-  @apply w-full h-0.5 bg-neutral-900 dark:bg-white transition-all duration-300 ease-in-out;
+  @apply w-full h-0.5 transition-all duration-300 ease-in-out;
+  background-color: var(--color-text-primary);
 }
 
 .navigation__hamburger-line:not(:last-child) {
@@ -53,7 +68,14 @@
   @apply transform -rotate-45 -translate-y-2;
 }
 
-/* Navigation Menu */
+.navigation__right {
+  @apply flex items-center space-x-6;
+}
+
+.navigation__search {
+  @apply flex-shrink-0;
+}
+
 .navigation__menu {
   @apply hidden md:block;
 }
@@ -63,23 +85,50 @@
 }
 
 .navigation__list {
-  @apply flex items-center space-x-8;
+  @apply flex items-center space-x-6;
 }
 
 .navigation__item {
   @apply list-none;
 }
 
+.navigation__contact {
+  @apply flex-shrink-0;
+}
+
+.navigation__theme {
+  @apply flex-shrink-0;
+}
+
 .navigation__link {
-  @apply text-neutral-600 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors duration-300 px-3 py-2 rounded-md;
+  @apply font-medium transition-all duration-300 px-4 py-2 rounded-full border-2 border-solid;
+  background-color: transparent;
+  border-color: var(--color-text-secondary);
+  color: var(--color-text-secondary);
+}
+
+.navigation__link:hover {
+  background-color: var(--color-text-secondary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-text-secondary);
 }
 
 .navigation__link--active {
-  @apply text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20;
+  @apply font-medium px-4 py-2 rounded-full border-2 border-solid;
+  background-color: var(--color-secondary-main);
+  color: var(--color-secondary-contrast);
+  border-color: var(--color-secondary-main);
+}
+
+.navigation__link--active:hover {
+  background-color: var(--color-secondary-dark);
+  border-color: var(--color-secondary-dark);
 }
 
 .navigation__link:focus {
-  @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-white dark:ring-offset-neutral-900;
+  @apply outline-none ring-2 ring-offset-2;
+  ring-color: var(--color-border-focus);
+  ring-offset-color: var(--color-background-primary);
 }
 
 .navigation__actions {
@@ -88,8 +137,14 @@
 
 /* Mobile menu styles */
 @media (max-width: 768px) {
+  .navigation__right {
+    @apply hidden;
+  }
+
   .navigation__menu {
-    @apply fixed inset-x-0 top-full left-0 bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-600 shadow-lg z-40 transform -translate-y-2 opacity-0 invisible transition-all duration-300 ease-in-out;
+    @apply fixed inset-x-0 top-full left-0 border-t shadow-lg z-40 transform -translate-y-2 opacity-0 invisible transition-all duration-300 ease-in-out;
+    background-color: var(--color-background-secondary);
+    border-color: var(--color-border-primary);
   }
 
   .navigation__menu--open {
@@ -105,11 +160,37 @@
   }
 
   .navigation__link {
-    @apply block w-full px-4 py-3 text-left border-b border-neutral-100 dark:border-neutral-800 last:border-b-0;
+    @apply block w-full px-4 py-3 text-left border-b last:border-b-0 rounded-none;
+    border-color: var(--color-border-tertiary);
+    background-color: transparent;
+    color: var(--color-text-secondary);
   }
 
-  .navigation__actions {
-    @apply space-x-2;
+  .navigation__link:hover {
+    background-color: var(--color-text-secondary);
+    color: var(--color-text-inverse);
+  }
+
+  .navigation__link--active {
+    background-color: var(--color-secondary-main);
+    color: var(--color-secondary-contrast);
+    border-color: var(--color-secondary-main);
+  }
+
+  /* Mobile search and theme toggle */
+  .navigation__search,
+  .navigation__contact,
+  .navigation__theme {
+    @apply block w-full px-4 py-3 text-left border-b last:border-b-0;
+    border-color: var(--color-border-tertiary);
+  }
+
+  .navigation__search {
+    @apply flex justify-center;
+  }
+
+  .navigation__theme {
+    @apply flex justify-center;
   }
 }
 
@@ -130,11 +211,13 @@ body.navigation-open {
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .navigation__link {
-    @apply border border-transparent;
+    @apply border-2 border-solid;
+    border-color: var(--color-text-secondary);
   }
 
   .navigation__link:focus,
   .navigation__link--active {
-    @apply border-current;
+    @apply border-2 border-solid;
+    border-color: var(--color-text-primary);
   }
 }

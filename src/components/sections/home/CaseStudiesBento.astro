@@ -68,7 +68,7 @@ const { class: className, ...props } = Astro.props;
       >
         Case Studies
       </Heading>
-      <Heading level={3} class="text-neutral-900 dark:text-white text-4xl md:text-5xl lg:text-6xl font-bold">
+      <Heading level={3} class="text-4xl md:text-5xl lg:text-6xl font-bold">
         Transforming Ideas into Digital Reality
       </Heading>
     </div>
@@ -95,7 +95,10 @@ const { class: className, ...props } = Astro.props;
               <span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">
                 {firstStudy.client}
               </span>
-              <h3 class="text-2xl font-bold text-neutral-900 dark:text-white group-hover:text-blue-600 transition-colors">
+              <h3
+                class="text-2xl font-bold transition-colors"
+                style="color: var(--color-text-primary);"
+              >
                 {firstStudy.title}
               </h3>
               <div class="flex flex-wrap gap-2">
@@ -132,7 +135,7 @@ const { class: className, ...props } = Astro.props;
                 <span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   {secondStudy.client}
                 </span>
-                <h3 class="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                <h3 class="text-xl font-bold transition-colors" style="color: var(--color-text-primary);">
                   {secondStudy.title}
                 </h3>
                 <div class="flex flex-wrap gap-2">
@@ -168,7 +171,7 @@ const { class: className, ...props } = Astro.props;
                 <span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   {thirdStudy.client}
                 </span>
-                <h3 class="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                <h3 class="text-xl font-bold transition-colors" style="color: var(--color-text-primary);">
                   {thirdStudy.title}
                 </h3>
                 <div class="flex flex-wrap gap-2">

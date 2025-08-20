@@ -2,7 +2,7 @@
 
 /* Professional Container Component Styles with proper theme tokens */
 .container {
-  @apply w-full px-4 sm:px-6 lg:px-8;
+  @apply w-full px-6 sm:px-8 lg:px-12;
 }
 
 .container--standard {
@@ -32,12 +32,12 @@
 /* Responsive padding adjustments */
 @media (min-width: 640px) {
   .container {
-    @apply px-6;
+    @apply px-8;
   }
 }
 
 @media (min-width: 1024px) {
   .container {
-    @apply px-8;
+    @apply px-12;
   }
 }

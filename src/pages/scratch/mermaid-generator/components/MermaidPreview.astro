@@ -1,5 +1,5 @@
 ---
-// MermaidPreview.astro
+import { Minus, Plus } from 'lucide-astro';
 ---
 
 <div class="mermaid-preview">
@@ -10,7 +10,7 @@
     </div>
     <div class="zoom-controls">
       <button onclick="window.zoomOut()" title="Zoom Out" class="zoom-button">
-        <svg viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z"></path></svg>
+        <Minus class="w-5 h-5" />
       </button>
       <input
         type="range"
@@ -22,9 +22,7 @@
       />
       <span class="zoom-value">100%</span>
       <button onclick="window.zoomIn()" title="Zoom In" class="zoom-button">
-        <svg viewBox="0 0 24 24"
-          ><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path></svg
-        >
+        <Plus class="w-5 h-5" />
       </button>
     </div>
   </div>
@@ -58,7 +56,7 @@
   }
 
   .zoom-button {
-    @apply p-1 bg-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors;
+    @apply p-1 bg-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors;
   }
 
   .zoom-button svg {

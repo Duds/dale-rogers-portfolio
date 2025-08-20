@@ -2,7 +2,13 @@
 
 /* Professional Heading Component Styles with proper theme tokens */
 .heading {
-  @apply font-bold tracking-tight text-neutral-900 dark:text-white;
+  @apply font-bold tracking-tight;
+  color: var(--color-text-primary);
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .heading {
+  color: var(--color-text-primary);
 }
 
 .heading--level-1 {

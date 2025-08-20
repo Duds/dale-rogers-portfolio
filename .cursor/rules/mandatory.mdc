@@ -3,20 +3,21 @@ description:
 globs:
 alwaysApply: true
 ---
+
 # Mandatory Project Rules
 
 @context {
-  "type": "documentation",
-  "purpose": "project_rules",
-  "format_version": "1.0.0",
-  "enforced_for": "all contributors",
-  "project": "Dale Rogers Portfolio"
+"type": "documentation",
+"purpose": "project_rules",
+"format_version": "1.0.0",
+"enforced_for": "all contributors",
+"project": "Dale Rogers Portfolio"
 }
 
 ## Documentation and Commit Enforcement
 
 - All contributors must directly update all relevant documentation files (README, changelog, code comments, architecture docs, etc.) as part of every change.
-- Do not just describe or suggest documentation updates—make the actual edits.
+- Do not just describe or suggest documentation updates, make the actual edits.
 - All changes must be committed and pushed before ending a session.
 - This rule is mandatory and applies to all code, content, and design changes.
 
@@ -65,26 +66,26 @@ alwaysApply: true
 ## Theme Principles
 
 @rules [
-  {
-    "id": "token_based_styling",
-    "severity": "error",
-    "description": "Always use token-based styling for all colours, spacing, radii, and other design values. Do not use Tailwind's default colour-numbered classes (e.g. -500)."
-  },
-  {
-    "id": "component_level_styles",
-    "severity": "warning",
-    "description": "Each component must import its own CSS, using theme tokens."
-  },
-  {
-    "id": "accessible_contrast",
-    "severity": "error",
-    "description": "All theme choices must meet WCAG AA contrast."
-  },
-  {
-    "id": "australian_standards",
-    "severity": "warning",
-    "description": "Date, currency, and spelling must follow en-AU conventions."
-  }
+{
+"id": "token_based_styling",
+"severity": "error",
+"description": "Always use token-based styling for all colours, spacing, radii, and other design values. Do not use Tailwind's default colour-numbered classes (e.g. -500)."
+},
+{
+"id": "component_level_styles",
+"severity": "warning",
+"description": "Each component must import its own CSS, using theme tokens."
+},
+{
+"id": "accessible_contrast",
+"severity": "error",
+"description": "All theme choices must meet WCAG AA contrast."
+},
+{
+"id": "australian_standards",
+"severity": "warning",
+"description": "Date, currency, and spelling must follow en-AU conventions."
+}
 ]
 
 ## Test Principles
@@ -98,17 +99,17 @@ alwaysApply: true
 ## Rules & When to Use
 
 @rules [
-  { "id": "component_organization", "severity": "error", "description": "For creating, moving, or refactoring components. Ensures correct directory, types, docs, and styles." },
-  { "id": "development_standards", "severity": "error", "description": "For all code changes. Enforces TypeScript, documentation, accessibility, and Australian standards." },
-  { "id": "theme_system", "severity": "error", "description": "For any theme or style changes. Use tokens, support both themes, and document changes." },
-  { "id": "performance", "severity": "warning", "description": "For optimising code, assets, or build. Use lazy loading, memoisation, and efficient CSS." },
-  { "id": "accessibility", "severity": "error", "description": "For any UI/UX changes. Follow WCAG, use semantic HTML, and test with screen readers." },
-  { "id": "github_workflow", "severity": "error", "description": "For all git operations. Use feature branches, semantic commits, PRs, and code reviews." },
-  { "id": "update_docs", "severity": "warning", "description": "Directly update all relevant documentation files (README, changelog, code comments, architecture docs, etc.) as part of your change. Do not just describe or suggest documentation updates—make the actual edits." },
-  { "id": "content_changes", "severity": "warning", "description": "For updating content. Separate content from code/styling, and use content collections." },
-  { "id": "content_collections", "severity": "warning", "description": "For managing structured content (case studies, articles, services). Use Astro content collections and types." },
-  { "id": "layout_patterns", "severity": "warning", "description": "For layout changes. Use standard layout components and patterns." },
-  { "id": "mdc", "severity": "info", "description": "For creating or editing .mdc rules files." }
+{ "id": "component_organization", "severity": "error", "description": "For creating, moving, or refactoring components. Ensures correct directory, types, docs, and styles." },
+{ "id": "development_standards", "severity": "error", "description": "For all code changes. Enforces TypeScript, documentation, accessibility, and Australian standards." },
+{ "id": "theme_system", "severity": "error", "description": "For any theme or style changes. Use tokens, support both themes, and document changes." },
+{ "id": "performance", "severity": "warning", "description": "For optimising code, assets, or build. Use lazy loading, memoisation, and efficient CSS." },
+{ "id": "accessibility", "severity": "error", "description": "For any UI/UX changes. Follow WCAG, use semantic HTML, and test with screen readers." },
+{ "id": "github_workflow", "severity": "error", "description": "For all git operations. Use feature branches, semantic commits, PRs, and code reviews." },
+{ "id": "update_docs", "severity": "warning", "description": "Directly update all relevant documentation files (README, changelog, code comments, architecture docs, etc.) as part of your change. Do not just describe or suggest documentation updates, make the actual edits." },
+{ "id": "content_changes", "severity": "warning", "description": "For updating content. Separate content from code/styling, and use content collections." },
+{ "id": "content_collections", "severity": "warning", "description": "For managing structured content (case studies, articles, services). Use Astro content collections and types." },
+{ "id": "layout_patterns", "severity": "warning", "description": "For layout changes. Use standard layout components and patterns." },
+{ "id": "mdc", "severity": "info", "description": "For creating or editing .mdc rules files." }
 ]
 
 ## Usage Guidance
@@ -127,4 +128,4 @@ alwaysApply: true
 
 ---
 
-*This file is mandatory. All contributors must read and follow these rules for every change.*
+_This file is mandatory. All contributors must read and follow these rules for every change._

@@ -2,7 +2,11 @@
 /**
  * @fileoverview Theme toggle component for switching between light and dark modes.
  * Features professional styling with smooth transitions and accessibility.
+ * Styling matches SearchInput component exactly for consistency.
  */
+
+import "@/styles/components/theme-toggle.css";
+import { Sun, Moon } from "lucide-astro";
 
 interface Props {
   /** Additional CSS classes */
@@ -12,9 +16,7 @@ interface Props {
 const { class: className } = Astro.props;
 
 const baseClasses = "theme-toggle";
-const combinedClasses = [baseClasses, className]
-  .filter(Boolean)
-  .join(" ");
+const combinedClasses = [baseClasses, className].filter(Boolean).join(" ");
 ---
 
 <button
@@ -25,85 +27,196 @@ const combinedClasses = [baseClasses, className]
   aria-pressed="false"
 >
   <span class="theme-toggle__icon theme-toggle__icon--light">
-    <svg
-      class="w-6 h-6"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-      />
-    </svg>
+    <Moon class="w-6 h-6" />
   </span>
   <span class="theme-toggle__icon theme-toggle__icon--dark">
-    <svg
-      class="w-6 h-6"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-      />
-    </svg>
+    <Sun class="w-6 h-6" />
   </span>
 </button>
 
-<script>
-  const initThemeToggle = () => {
-    const toggle = document.getElementById("theme-toggle");
-    const root = document.documentElement;
-    const iconLight = document.querySelector(".theme-toggle__icon--light");
-    const iconDark = document.querySelector(".theme-toggle__icon--dark");
+<script is:inline>
+  // Simple theme toggle implementation with comprehensive logging
+  function initThemeToggle() {
+    console.log("🎯 ThemeToggle: initThemeToggle() called");
 
-    if (!toggle || !iconLight || !iconDark) return;
+    const toggle = document.getElementById("theme-toggle");
+    if (!toggle) {
+      console.error("❌ ThemeToggle: theme-toggle button not found");
+      return;
+    }
+    console.log("✅ ThemeToggle: Button found:", toggle);
+
+    const root = document.documentElement;
+    console.log("✅ ThemeToggle: Root element:", root);
+    console.log(
+      "✅ ThemeToggle: Current data-theme:",
+      root.getAttribute("data-theme")
+    );
+    console.log(
+      "✅ ThemeToggle: Current dark class:",
+      root.classList.contains("dark")
+    );
 
     // Update toggle state based on current theme
-    const updateToggleState = () => {
-      const isDark = root.classList.contains("dark");
+    function updateToggleState() {
+      // Check both data-theme attribute and localStorage for consistency
+      const dataTheme = root.getAttribute("data-theme");
+      const storedTheme = localStorage.getItem("theme");
+      const currentTheme = dataTheme || storedTheme;
+
+      console.log(
+        "🔄 ThemeToggle: updateToggleState() - dataTheme:",
+        dataTheme,
+        "storedTheme:",
+        storedTheme,
+        "currentTheme:",
+        currentTheme
+      );
+
+      const isDark = currentTheme === "dark";
+      console.log("🔄 ThemeToggle: isDark:", isDark);
+
       toggle.setAttribute("aria-pressed", isDark.toString());
-    };
+      console.log("✅ ThemeToggle: Set aria-pressed to:", isDark.toString());
+
+      // Log current state for debugging
+      console.log(
+        "📊 ThemeToggle: Current state - data-theme:",
+        root.getAttribute("data-theme"),
+        "dark class:",
+        root.classList.contains("dark"),
+        "aria-pressed:",
+        toggle.getAttribute("aria-pressed")
+      );
+    }
 
     // Toggle theme function
-    const toggleTheme = () => {
-      const isDark = root.classList.contains("dark");
-      
-      if (isDark) {
-        root.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      } else {
-        root.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      }
-      
+    function toggleTheme() {
+      console.log("🔄 ThemeToggle: toggleTheme() called");
+
+      const currentTheme = root.getAttribute("data-theme");
+      const isDark = currentTheme === "dark";
+      const newTheme = isDark ? "light" : "dark";
+
+      console.log(
+        "🔄 ThemeToggle: Switching from",
+        currentTheme,
+        "to",
+        newTheme
+      );
+
+      // Set data-theme attribute for CSS custom properties
+      root.setAttribute("data-theme", newTheme);
+      console.log("✅ ThemeToggle: Set data-theme to:", newTheme);
+
+      // Also set class for Tailwind compatibility
+      root.classList.toggle("dark", newTheme === "dark");
+      console.log("✅ ThemeToggle: Set dark class to:", newTheme === "dark");
+
+      localStorage.setItem("theme", newTheme);
+      console.log("✅ ThemeToggle: Saved theme to localStorage:", newTheme);
+
       updateToggleState();
-    };
+    }
 
     // Event listeners
-    toggle.addEventListener("click", toggleTheme);
-    
+    toggle.addEventListener("click", (e) => {
+      console.log("🖱️ ThemeToggle: Click event triggered", e);
+      toggleTheme();
+    });
+    console.log("✅ ThemeToggle: Click event listener added");
+
     // Keyboard support
     toggle.addEventListener("keydown", (e) => {
+      console.log("⌨️ ThemeToggle: Keydown event:", e.key);
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
+        console.log("✅ ThemeToggle: Keyboard shortcut triggered");
         toggleTheme();
       }
     });
+    console.log("✅ ThemeToggle: Keyboard event listener added");
 
-    // Initial state update
-    updateToggleState();
-  };
+    // Initial state update - wait for theme to be initialized
+    function waitForTheme() {
+      // Check both data-theme attribute and localStorage for consistency
+      const dataTheme = root.getAttribute("data-theme");
+      const storedTheme = localStorage.getItem("theme");
+      const currentTheme = dataTheme || storedTheme;
 
-  // Initialize theme toggle on page load
-  document.addEventListener("astro:page-load", initThemeToggle);
-  document.addEventListener("DOMContentLoaded", initThemeToggle);
+      console.log(
+        "⏳ ThemeToggle: waitForTheme() - dataTheme:",
+        dataTheme,
+        "storedTheme:",
+        storedTheme,
+        "currentTheme:",
+        currentTheme
+      );
+
+      if (
+        currentTheme &&
+        currentTheme !== "undefined" &&
+        currentTheme !== "null"
+      ) {
+        console.log("✅ ThemeToggle: Theme found, updating state");
+        updateToggleState();
+      } else {
+        console.log("⏳ ThemeToggle: Theme not set yet, waiting...");
+        // Theme not set yet, wait a bit and try again
+        setTimeout(waitForTheme, 100);
+      }
+    }
+
+    // Also try to update state immediately if theme is already set
+    const immediateTheme = localStorage.getItem("theme");
+    if (immediateTheme) {
+      console.log(
+        "✅ ThemeToggle: Found immediate theme in localStorage:",
+        immediateTheme
+      );
+      updateToggleState();
+    }
+
+    console.log("🚀 ThemeToggle: Starting theme detection...");
+    waitForTheme();
+
+    console.log("✅ ThemeToggle: Initialization complete");
+  }
+
+  // Initialize when DOM is ready
+  console.log(
+    "🎯 ThemeToggle: Script loaded, document.readyState:",
+    document.readyState
+  );
+
+  if (document.readyState === "loading") {
+    console.log(
+      "⏳ ThemeToggle: DOM still loading, adding DOMContentLoaded listener"
+    );
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log("✅ ThemeToggle: DOMContentLoaded fired");
+      initThemeToggle();
+    });
+  } else {
+    console.log("✅ ThemeToggle: DOM ready, initializing immediately");
+    initThemeToggle();
+  }
+
+  // Listen for theme initialization event from BaseLayout
+  document.addEventListener("theme:initialized", (e) => {
+    console.log(
+      "✅ ThemeToggle: Theme initialization event received:",
+      e.detail
+    );
+    // Wait a bit for the DOM to update, then initialize
+    setTimeout(initThemeToggle, 50);
+  });
+
+  // Also initialize on Astro page navigation
+  document.addEventListener("astro:page-load", () => {
+    console.log("✅ ThemeToggle: Astro page-load fired");
+    initThemeToggle();
+  });
+
+  console.log("🎯 ThemeToggle: All event listeners set up");
 </script>

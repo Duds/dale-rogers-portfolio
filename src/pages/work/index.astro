@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import Layout from "@/layouts/BaseLayout.astro";
 import CaseStudyCard from "@/components/features/case-studies/components/CaseStudyCard.astro";
 import PageHeader from "@/components/ui/PageHeader.astro";
-import Container from "@/components/layout/Container.astro";
 
 export const prerender = true;
 
@@ -451,7 +450,7 @@ const tags = Array.from(
   }
 
   .no-results__button {
-    @apply inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2;
+    @apply inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2;
   }
 
   /* Responsive adjustments */

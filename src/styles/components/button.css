@@ -2,7 +2,7 @@
 
 /* Professional Button Component Styles with proper theme tokens */
 .button {
-  @apply inline-flex items-center gap-2 px-6 py-3 text-base font-medium transition-all duration-300 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2;
+  @apply inline-flex items-center gap-2 px-6 py-3 text-base font-medium transition-all duration-300 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.2s;
@@ -25,7 +25,12 @@
 
 /* Secondary Button - Professional blue */
 .button--secondary {
-  @apply bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg;
+  @apply text-white shadow-md hover:shadow-lg;
+  background-color: var(--color-secondary-main);
+}
+
+.button--secondary:hover {
+  background-color: var(--color-secondary-dark);
 }
 
 /* Accent Button - Emerald green */
@@ -61,18 +66,18 @@
 }
 
 /* Dark mode adjustments */
-.dark .button--ghost {
+:root[data-theme="dark"] .button--ghost {
   border-color: var(--color-text-disabled);
   color: var(--color-text-disabled);
 }
 
-.dark .button--ghost:hover {
+:root[data-theme="dark"] .button--ghost:hover {
   background-color: var(--color-text-primary);
   color: var(--color-text-inverse);
   border-color: var(--color-text-primary);
 }
 
-.dark .button--ghost:hover {
+:root[data-theme="dark"] .button--ghost:hover {
   background-color: var(--color-text-inverse);
   color: var(--color-text-primary);
   border-color: var(--color-text-primary);

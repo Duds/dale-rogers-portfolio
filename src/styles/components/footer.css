@@ -2,12 +2,13 @@
 
 /* Professional Footer Component Styles with proper theme tokens */
 .footer {
-  @apply bg-white dark:bg-gray-900;
+  background-color: var(--color-background-primary);
 }
 
-/* Footer inner container - black card with rounded corners and internal padding */
+/* Footer inner container - ALWAYS olive background for consistent branding */
 .footer-inner {
-  @apply bg-neutral-900 rounded-3xl p-8 md:p-12;
+  @apply rounded-3xl p-8 md:p-12;
+  background-color: var(--color-primary-dark); /* Always olive #1F2A00 */
 }
 
 .footer__content {
@@ -16,24 +17,29 @@
 
 /* Acknowledgement of Country */
 .footer__acknowledgement {
-  @apply text-center pb-8 border-b border-neutral-700;
+  @apply text-center pb-8 border-b;
+  border-color: var(--color-border-primary);
 }
 
 .footer__acknowledgement-text {
-  @apply text-neutral-300 text-sm md:text-base leading-relaxed max-w-4xl mx-auto;
+  @apply text-sm md:text-base leading-relaxed max-w-4xl mx-auto;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
 /* Slogan Section */
 .footer__slogan {
-  @apply text-center pb-8 border-b border-neutral-700;
+  @apply text-center pb-8 border-b;
+  border-color: var(--color-border-primary);
 }
 
 .footer__slogan-text {
-  @apply text-2xl md:text-3xl font-bold text-white mb-3;
+  @apply text-2xl md:text-3xl font-bold mb-3;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
 .footer__slogan-subtitle {
-  @apply text-neutral-300 text-base md:text-lg;
+  @apply text-base md:text-lg;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
 .footer__main {
@@ -46,10 +52,12 @@
 
 .footer__title {
   @apply text-3xl md:text-4xl font-bold;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
 .footer__description {
-  @apply text-neutral-400 text-lg;
+  @apply text-lg;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
 .footer__actions {
@@ -65,7 +73,8 @@
 }
 
 .footer__section-title {
-  @apply text-lg font-semibold text-white mb-4;
+  @apply text-lg font-semibold mb-4;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
 .footer__link-list {
@@ -73,15 +82,21 @@
 }
 
 .footer__link {
-  @apply text-neutral-400 hover:text-white transition-colors duration-300;
+  @apply transition-colors duration-300;
+  color: #FFFFFF; /* Always white on olive background */
+}
+
+.footer__link:hover {
+  color: #E8E0D9; /* Slightly muted white on hover for interaction feedback */
 }
 
 .footer__bottom {
-  @apply pt-8 border-t border-neutral-600 flex flex-col md:flex-row justify-between items-start md:items-center gap-4;
+  @apply pt-8 border-t flex flex-col md:flex-row justify-between items-start md:items-center gap-4;
+  border-color: var(--color-border-secondary);
 }
 
 .footer__copyright {
-  @apply text-neutral-400;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
 .footer__legal {
@@ -89,37 +104,54 @@
 }
 
 .footer__legal-link {
-  @apply text-neutral-400 hover:text-white transition-colors duration-300;
+  @apply transition-colors duration-300;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
-/* Footer heading styles - WHITE for maximum contrast on black */
+.footer__legal-link:hover {
+  color: #E8E0D9; /* Slightly muted white on hover for interaction feedback */
+}
+
+/* Footer heading styles - LIGHT for maximum contrast on dark background */
 .footer-heading {
-  @apply text-lg font-semibold text-white mb-4;
+  @apply text-lg font-semibold mb-4;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
-/* Footer link styles - LIGHT GRAY for good contrast, WHITE on hover */
+/* Footer link styles - LIGHT for good contrast on dark background */
 .footer-link {
-  @apply text-neutral-200 hover:text-white transition-colors duration-300;
+  @apply transition-colors duration-300;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
-/* Footer copyright styles - LIGHT GRAY for good contrast */
+.footer-link:hover {
+  color: #E8E0D9; /* Slightly muted white on hover for interaction feedback */
+}
+
+/* Footer copyright styles - LIGHT for good contrast on dark background */
 .footer-copyright {
-  @apply text-neutral-200;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
-/* Footer heart styles - BRIGHT RED for good contrast */
+/* Footer heart styles - ACCENT for good contrast on dark background */
 .footer-heart {
-  @apply text-red-400;
+  color: var(--color-accent-main);
 }
 
-/* Acknowledgement text - LIGHT GRAY for good contrast on black */
+/* Footer main heading - ALWAYS white on olive background */
+.footer-main-heading {
+  color: #FFFFFF !important; /* Always white on olive background */
+}
+
+/* Acknowledgement text - LIGHT for good contrast on dark background */
 .text-footer-text-secondary {
-  @apply text-neutral-200;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
-/* Acknowledgement slogan - WHITE for maximum contrast */
+/* Acknowledgement slogan - LIGHT for maximum contrast on dark background */
 .acknowledgement-slogan {
-  @apply text-white font-medium text-xl;
+  @apply font-medium text-xl;
+  color: #FFFFFF; /* Always white on olive background */
 }
 
 /* Copyright section styles - inherits body background */
@@ -129,10 +161,19 @@
 
 /* Copyright text - DARK for good contrast on light body background */
 .copyright-text {
-  @apply text-neutral-700 dark:text-neutral-300 text-base;
+  @apply text-base;
+  color: var(--color-text-secondary);
+}
+
+:root[data-theme="dark"] .copyright-text {
+  color: var(--color-text-disabled);
 }
 
 /* Copyright heart - BRIGHT RED for good contrast */
 .copyright-heart {
-  @apply text-red-500 dark:text-red-400;
+  color: var(--color-accent-main);
+}
+
+:root[data-theme="dark"] .copyright-heart {
+  color: var(--color-accent-light);
 }

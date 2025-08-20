@@ -6,9 +6,20 @@
 }
 
 .page-header__title {
-  @apply text-5xl md:text-6xl lg:text-7xl font-black text-neutral-900 dark:text-white leading-tight mb-6;
+  @apply text-5xl md:text-6xl lg:text-7xl font-black leading-tight mb-6;
+  color: var(--color-text-primary);
 }
 
 .page-header__description {
-  @apply text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed;
+  @apply text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed;
+  color: var(--color-text-secondary);
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .page-header__title {
+  color: var(--color-text-primary);
+}
+
+:root[data-theme="dark"] .page-header__description {
+  color: var(--color-text-secondary);
 }

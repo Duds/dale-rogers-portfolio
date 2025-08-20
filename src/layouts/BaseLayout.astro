@@ -49,7 +49,7 @@ const {
     <!-- Use the new dark mode utility as early as possible -->
     <script is:inline>
       // Initialize theme from localStorage or system preference
-      (function () {
+      function initializeTheme() {
         const THEME_KEY = "theme";
         const stored = localStorage.getItem(THEME_KEY);
         const prefersDark = window.matchMedia(
@@ -62,14 +62,33 @@ const {
               ? "dark"
               : "light";
 
+        // Set data-theme attribute instead of class
+        document.documentElement.setAttribute("data-theme", theme);
+        // Also set the class for Tailwind compatibility
         document.documentElement.classList.toggle("dark", theme === "dark");
-      })();
+        
+        // Log for debugging
+        console.log("🎨 BaseLayout: Theme initialized to:", theme);
+        console.log("🎨 BaseLayout: localStorage theme:", stored);
+        console.log("🎨 BaseLayout: System prefers dark:", prefersDark);
+        
+        // Dispatch a custom event to notify other scripts that theme is ready
+        document.dispatchEvent(new CustomEvent("theme:initialized", { detail: { theme } }));
+      }
+      
+      // Run immediately if DOM is ready, otherwise wait
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializeTheme);
+      } else {
+        initializeTheme();
+      }
     </script>
 
     <ViewTransitions />
   </head>
   <body
-    class="font-body text-gray-900 dark:text-white bg-white dark:bg-gray-900 min-h-screen flex flex-col"
+    class="font-body text-gray-900 min-h-screen flex flex-col"
+    style="background-color: var(--color-background-primary); color: var(--color-text-primary);"
   >
     <Header />
     <main class="flex-grow">

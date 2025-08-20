@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="300"
+   height="60"
+   viewBox="0 0 300 60"
+   fill="none"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_553_1742)">
+    <!-- Simplified Tasmania Education logo for dark mode -->
+    <!-- Converting all dark fills to white for visibility on dark backgrounds -->
+    <path
+       d="m 32.8271,30.1589 c 1.5598,0.5798 2.2551,0.6734 4.4566,0.4676 -1.1141,0.5915 -0.6685,1.5126 -2.4689,1.2882 -1.6868,-0.2104 -1.1676,-0.8416 -1.9877,-1.7558 z"
+       fill="#ffffff" />
+    <path
+       d="m 19.9655,11.8508 c 0,0 -0.1604,-1.1876 -3.0304,-4.94931 4.1579,1.55471 5.125,2.23504 7.6229,4.45371 -1.5416,0.0266 -3.0781,0.1925 -4.5925,0.4956 z"
+       fill="#ffffff" />
+    <path
+       d="m 45.6263,11.9537 c 0.8571,-3.25166 2.3983,-6.26031 4.51,-8.80453 -4.1156,1.89604 -6.2258,5.61097 -7.1304,8.23643 0.8611,0.2474 1.7363,0.4372 2.6204,0.5681 z"
+       fill="#ffffff" />
+
+    <!-- Text elements converted to white -->
+    <text x="70" y="20" fill="#ffffff" font-family="Arial, sans-serif" font-size="8" font-weight="bold">TASMANIAN DEPARTMENT OF</text>
+    <text x="70" y="35" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">EDUCATION</text>
+    <text x="70" y="48" fill="#ffffff" font-family="Arial, sans-serif" font-size="8">Children and Young People</text>
+  </g>
+
+  <defs>
+    <clipPath id="clip0_553_1742">
+      <rect width="300" height="60" fill="white"/>
+    </clipPath>
+  </defs>
+</svg>

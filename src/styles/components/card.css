@@ -25,15 +25,15 @@
 }
 
 /* Dark mode adjustments */
-.dark .card {
+:root[data-theme="dark"] .card {
   background-color: var(--color-background-primary);
   border-color: var(--color-border-primary);
 }
 
-.dark .card__title {
+:root[data-theme="dark"] .card__title {
   color: var(--color-text-primary);
 }
 
-.dark .card__body {
+:root[data-theme="dark"] .card__body {
   color: var(--color-text-muted);
 }

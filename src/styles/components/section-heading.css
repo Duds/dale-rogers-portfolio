@@ -2,5 +2,11 @@
 
 /* Professional Section Heading Component Styles with proper theme tokens */
 .section-heading {
-  @apply text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-white leading-tight mb-6;
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6;
+  color: var(--color-text-primary);
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .section-heading {
+  color: var(--color-text-primary);
 }

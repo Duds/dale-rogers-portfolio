@@ -21,10 +21,13 @@ export function getTheme(): Theme {
 }
 
 /**
- * Set the theme and update <html> class
+ * Set the theme and update <html> data-theme attribute and class
  */
 export function setTheme(theme: Theme) {
   if (typeof document === "undefined") return;
+  // Set data-theme attribute for CSS custom properties
+  document.documentElement.setAttribute("data-theme", theme);
+  // Also set class for Tailwind compatibility
   document.documentElement.classList.toggle("dark", theme === "dark");
   localStorage.setItem(THEME_KEY, theme);
 }

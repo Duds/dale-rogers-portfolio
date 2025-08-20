@@ -19,7 +19,7 @@ This is the personal portfolio for Dale Rogers, built with Astro, TypeScript, an
 - **Token-based styling is mandatory**: All colours, spacing, radii, and other design values use CSS variables (tokens). Do not use Tailwind's default colour-numbered classes (e.g. `-500`).
 - **No custom classes in @apply**: Custom token-based utility classes (e.g. `bg-primary`, `text-primary`) must not be used in `@apply` rules. Use them directly in markup.
 - **Component-level styles**: Each component imports its own CSS, using theme tokens.
-- **Direct documentation updates**: When making changes, you must directly update all relevant documentation files (README, changelog, code comments, architecture docs, etc.) as part of your change. Do not just describe or suggest documentation updates—make the actual edits.
+- **Direct documentation updates**: When making changes, you must directly update all relevant documentation files (README, changelog, code comments, architecture docs, etc.) as part of your change. Do not just describe or suggest documentation updates, make the actual edits.
 
 ## Quick Start
 

@@ -12,7 +12,7 @@ A generative ambient scene built in Astro.js with Canvas. This experience invite
 - **Control**: Arrow keys (left/right), Spacebar (bell)
 - **Tone**: Ambient, quiet, observational
 - **Visual Style**: Layered paper-cut aesthetic with silhouette figures and parallax movement
-- **Goal**: Explore, observe, and discover—no destination required.
+- **Goal**: Explore, observe, and discover, no destination required.
 
 ---
 
