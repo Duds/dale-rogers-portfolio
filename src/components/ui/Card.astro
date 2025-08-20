@@ -1,41 +1,79 @@
 ---
-/**
- * @fileoverview Card component for displaying content in a structured layout.
- * Supports clickable cards with hover effects and professional styling.
- */
+export interface Props {
+  /** Title displayed at the top of the card */
+  title?: string;
+  /** Description text below the title */
+  description?: string;
+  /** URL of the card image */
+  image?: string;
+  /** URL for the card link */
+  link?: string;
+  /** Array of tags to display */
+  tags?: string[];
+  /** Visual variant of the card */
+  variant?: "default" | "featured" | "compact";
+  /** Additional CSS classes */
+  class?: string;
+}
 
-import type { CardProps } from "./types";
-import "../../styles/components/card.css";
+const {
+  title,
+  description,
+  image,
+  link,
+  tags = [],
+  variant = "default",
+  class: className = "",
+  ...props
+} = Astro.props;
 
-interface Props extends CardProps {}
-
-const { title, clickable = false, href, class: className, ...rest } = Astro.props;
-
-const baseClasses = "card";
-const clickableClasses = clickable ? "card--clickable" : "";
-const combinedClasses = [baseClasses, clickableClasses, className]
+const baseClasses = ["card-base", variant && `card-${variant}`, className]
   .filter(Boolean)
   .join(" ");
 ---
 
-{
-  clickable && href ? (
-    <a href={href} class={combinedClasses} {...rest}>
-      <div class="card__content">
-        {title && <h3 class="card__title">{title}</h3>}
-        <div class="card__body">
-          <slot />
+{link ? (
+  <a href={link} class="card-link">
+    <div class={baseClasses} {...props}>
+      {image && (
+        <div class="card-image">
+          <img src={image} alt={title || "Card image"} />
         </div>
-      </div>
-    </a>
-  ) : (
-    <div class={combinedClasses} {...rest}>
-      <div class="card__content">
-        {title && <h3 class="card__title">{title}</h3>}
-        <div class="card__body">
-          <slot />
-        </div>
+      )}
+      
+      <div class="card-content">
+        {title && <h3 class="card-title">{title}</h3>}
+        {description && <p class="card-description">{description}</p>}
+        
+        {tags.length > 0 && (
+          <div class="card-tags">
+            {tags.map((tag) => (
+              <span class="card-tag">{tag}</span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
-  )
-}
+  </a>
+) : (
+  <div class={baseClasses} {...props}>
+    {image && (
+      <div class="card-image">
+        <img src={image} alt={title || "Card image"} />
+      </div>
+    )}
+    
+    <div class="card-content">
+      {title && <h3 class="card-title">{title}</h3>}
+      {description && <p class="card-description">{description}</p>}
+      
+      {tags.length > 0 && (
+        <div class="card-tags">
+          {tags.map((tag) => (
+            <span class="card-tag">{tag}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+)}
