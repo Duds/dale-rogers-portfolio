@@ -1,7 +1,6 @@
 import { vi } from "vitest";
 import type { ReactElement } from "react";
 import { render, type RenderOptions } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
 // Test wrapper component for providers
 export const TestWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -18,8 +17,6 @@ export const renderWithProviders = (
 
 // Mock utilities
 export const mockConsole = () => {
-  const originalConsole = { ...console };
-
   beforeAll(() => {
     vi.spyOn(console, "log").mockImplementation(() => {});
     vi.spyOn(console, "warn").mockImplementation(() => {});
@@ -31,7 +28,7 @@ export const mockConsole = () => {
   });
 };
 
-export const mockFetch = (response: any, status = 200) => {
+export const mockFetch = (response: unknown, status = 200) => {
   global.fetch = vi.fn().mockResolvedValue({
     ok: status < 400,
     status,
@@ -174,12 +171,10 @@ export const testData = {
 
 // Event creators
 export const createEvent = {
-  click: (element: Element) => new MouseEvent("click", { bubbles: true }),
-  change: (element: Element, value: string) =>
-    new Event("change", { bubbles: true }),
-  input: (element: Element, value: string) =>
-    new Event("input", { bubbles: true }),
-  submit: (element: Element) => new Event("submit", { bubbles: true }),
+  click: () => new MouseEvent("click", { bubbles: true }),
+  change: () => new Event("change", { bubbles: true }),
+  input: () => new Event("input", { bubbles: true }),
+  submit: () => new Event("submit", { bubbles: true }),
   keydown: (key: string, options = {}) =>
     new KeyboardEvent("keydown", {
       key,
@@ -250,7 +245,7 @@ export const accessibilityHelpers = {
 
 // Performance helpers
 export const performanceHelpers = {
-  measureTime: async (fn: () => Promise<any> | any) => {
+  measureTime: async (fn: () => Promise<unknown> | unknown) => {
     const start = performance.now();
     const result = await fn();
     const end = performance.now();
