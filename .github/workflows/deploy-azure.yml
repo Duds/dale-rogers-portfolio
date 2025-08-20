@@ -230,6 +230,7 @@ jobs:
 
           # Create deployment package with only essential files
           zip -r ../deployment.zip . \
+            -x ".pnpm-store/*" \
             -x "node_modules/.pnpm/*" \
             -x "node_modules/@iconify-icons/*" \
             -x "*.map" \
