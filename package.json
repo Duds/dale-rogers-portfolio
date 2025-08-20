@@ -35,6 +35,9 @@
     "fix:all": "node scripts/fix-all-classes.js",
     "audit:images": "node src/scripts/audit-images.js",
     "audit:images:fix": "node src/scripts/audit-images.js --fix",
+    "deploy:test": "./scripts/quick-deployment-test.sh",
+    "deploy:test:full": "./scripts/test-deployment-locally.sh",
+    "deploy:test:clean": "./scripts/test-deployment-locally.sh --clean",
     "prepare": "husky",
     "commit": "git-cz",
     "commit:lint": "commitlint --edit"
