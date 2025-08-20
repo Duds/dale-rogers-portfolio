@@ -93,7 +93,6 @@ jobs:
 
           # Copy package manager files and install dependencies
           cp pnpm-lock.yaml dist/
-          cp package.json dist/
           cd dist
           pnpm install --prod --frozen-lockfile
           cd ..
