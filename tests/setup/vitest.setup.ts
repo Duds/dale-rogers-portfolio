@@ -1,5 +1,6 @@
 import "@testing-library/jest-dom";
 import { vi, afterEach, beforeEach } from "vitest";
+import type { MockedFunction } from "vitest";
 
 // Mock matchMedia for responsive design testing
 Object.defineProperty(window, "matchMedia", {
@@ -162,7 +163,7 @@ beforeEach(() => {
 
   // Reset fetch mock
   if (global.fetch) {
-    (global.fetch as any).mockClear();
+    (global.fetch as MockedFunction<typeof fetch>).mockClear();
   }
 });
 
@@ -176,31 +177,31 @@ afterEach(() => {
 
   // Reset IntersectionObserver and ResizeObserver
   if (global.IntersectionObserver) {
-    (global.IntersectionObserver as any).mockClear();
+    (global.IntersectionObserver as MockedFunction<typeof IntersectionObserver>).mockClear();
   }
   if (global.ResizeObserver) {
-    (global.ResizeObserver as any).mockClear();
+    (global.ResizeObserver as MockedFunction<typeof ResizeObserver>).mockClear();
   }
 
   // Reset requestAnimationFrame
   if (
     global.requestAnimationFrame &&
-    typeof (global.requestAnimationFrame as any).mockClear === "function"
+    typeof (global.requestAnimationFrame as MockedFunction<typeof requestAnimationFrame>).mockClear === "function"
   ) {
-    (global.requestAnimationFrame as any).mockClear();
+    (global.requestAnimationFrame as MockedFunction<typeof requestAnimationFrame>).mockClear();
   }
   if (
     global.cancelAnimationFrame &&
-    typeof (global.cancelAnimationFrame as any).mockClear === "function"
+    typeof (global.cancelAnimationFrame as MockedFunction<typeof cancelAnimationFrame>).mockClear === "function"
   ) {
-    (global.cancelAnimationFrame as any).mockClear();
+    (global.cancelAnimationFrame as MockedFunction<typeof cancelAnimationFrame>).mockClear();
   }
 });
 
 // Global test utilities
 declare global {
-  namespace Vi {
-    interface JestAssertion<T = any> extends jest.Matchers<void, T> {}
+  interface Vi {
+    interface JestAssertion<T = unknown> extends jest.Matchers<void, T> {}
   }
 }
 
