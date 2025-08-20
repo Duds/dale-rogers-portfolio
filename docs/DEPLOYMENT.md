@@ -19,6 +19,8 @@ This document outlines the deployment process for the portfolio website, ensurin
 - Branch: `staging`
 - Auto-deploys: Yes
 - Region: Sydney, Australia
+- **Azure Web App**: `dale-rogers-portfolio-staging`
+- **Resource Group**: `dale-rogers-portfolio-rg`
 
 ### Production
 
@@ -26,28 +28,35 @@ This document outlines the deployment process for the portfolio website, ensurin
 - Branch: `main`
 - Auto-deploys: Yes
 - Region: Sydney, Australia
+- **Azure Web App**: `dale-rogers-portfolio`
+- **Resource Group**: `dale-rogers-portfolio-rg`
 
 ## Deployment Process
 
 ### Prerequisites
 
-- Node.js 18+
-- pnpm 8+
-- Vercel CLI
+- Node.js 20+
+- pnpm 10.14.0+
+- Azure CLI configured
 - Environment variables configured
 
 ### Environment Variables
 
 ```env
-# Required
-SITE_URL=https://dalerogers.dev
-NODE_ENV=production
-DATABASE_URL=your_database_url
+# Required for Azure deployment
+AZURE_CREDENTIALS=your_azure_service_principal_credentials
+AZURE_WEBAPP_URL=https://dale-rogers-portfolio.azurewebsites.net
+AZURE_STAGING_WEBAPP_URL=https://dale-rogers-portfolio-staging.azurewebsites.net
 
 # Optional
-ANALYTICS_ID=your_analytics_id
-SENTRY_DSN=your_sentry_dsn
+NODE_ENV=production
 ```
+
+### Azure Resources Required
+
+1. **Resource Group**: `dale-rogers-portfolio-rg`
+2. **Production Web App**: `dale-rogers-portfolio`
+3. **Staging Web App**: `dale-rogers-portfolio-staging`
 
 ### Deployment Steps
 
@@ -61,20 +70,20 @@ SENTRY_DSN=your_sentry_dsn
    pnpm build
 
    # Run tests
-   pnpm test
+   pnpm test:run
    ```
 
 2. **Deployment**
 
-   ```bash
-   # Deploy to Vercel
-   vercel deploy --prod
-   ```
+   The deployment is automated via GitHub Actions:
+   - **Staging**: Push to `staging` branch
+   - **Production**: Push to `main` branch
+   - **Manual**: Use workflow dispatch with environment selection
 
 3. **Verification**
-   - Check deployment status
+   - Check deployment status in GitHub Actions
    - Run smoke tests
-   - Verify analytics
+   - Verify health endpoints
    - Monitor error rates
 
 ## Continuous Deployment
@@ -82,191 +91,183 @@ SENTRY_DSN=your_sentry_dsn
 ### GitHub Actions Workflow
 
 ```yaml
-name: Deploy
+name: Deploy to Azure
 on:
   push:
-    branches: [main, staging, develop]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to Vercel
-        uses: vercel/actions/deploy@v2
+    branches: [main, staging]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy to"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - staging
+          - production
 ```
 
 ### Quality Gates
 
-- All tests passing
-- TypeScript compilation successful
-- No ESLint errors
-- Performance benchmarks met
-- Security scan passed
+- TypeScript compilation
+- ESLint checks
+- Prettier formatting
+- Unit tests passing
+- Build successful
 
-## Rollback Procedure
+## Troubleshooting
 
-1. **Identify Issue**
-   - Monitor error rates
-   - Check user reports
-   - Review logs
+### Common Deployment Issues
 
-2. **Initiate Rollback**
+#### 1. Azure Resource Not Found
 
-   ```bash
-   # Revert to previous deployment
-   vercel rollback
-   ```
+**Symptoms**:
 
-3. **Verify Rollback**
-   - Check application status
-   - Verify functionality
-   - Monitor metrics
+- Error: "Resource group 'dale-rogers-portfolio-rg' could not be found"
+- Error: "Web app 'dale-rogers-portfolio-staging' not found"
 
-## Performance Monitoring
+**Solutions**:
 
-### Metrics
+```bash
+# Check if resource group exists
+az group show --name dale-rogers-portfolio-rg
 
-- Page load time
-- Time to interactive
-- First contentful paint
-- Core Web Vitals
-- Error rates
+# Create resource group if missing
+az group create --name dale-rogers-portfolio-rg --location australiaeast
 
-### Tools
+# Check if web apps exist
+az webapp list --resource-group dale-rogers-portfolio-rg
 
-- Vercel Analytics
-- Google Analytics
-- Sentry
-- DataDog
-
-## Security Measures
-
-### SSL/TLS
-
-- Enforced HTTPS
-- TLS 1.3
-- HSTS enabled
-- Secure cookies
-
-### Headers
-
-```nginx
-# Security headers
-add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-add_header X-Frame-Options "SAMEORIGIN" always;
-add_header X-XSS-Protection "1; mode=block" always;
-add_header X-Content-Type-Options "nosniff" always;
+# Create staging web app if missing
+az webapp create \
+  --resource-group dale-rogers-portfolio-rg \
+  --plan dale-rogers-portfolio-plan \
+  --name dale-rogers-portfolio-staging \
+  --runtime "NODE|20-lts"
 ```
 
-## Backup Strategy
+#### 2. Missing Environment Variables
 
-### Database Backups
+**Symptoms**:
 
-- Daily automated backups
-- 30-day retention
-- Encrypted storage
-- Regular restore testing
+- Error: "AZURE_CREDENTIALS not found"
+- Error: "AZURE_STAGING_WEBAPP_URL not found"
 
-### Asset Backups
+**Solutions**:
 
-- CDN replication
-- Geographic redundancy
-- Version control
-- Regular integrity checks
+1. Check GitHub repository secrets
+2. Add missing secrets:
+   - `AZURE_CREDENTIALS`: Azure service principal credentials
+   - `AZURE_WEBAPP_URL`: Production web app URL
+   - `AZURE_STAGING_WEBAPP_URL`: Staging web app URL
 
-## Maintenance Windows
+#### 3. Build Failures
 
-### Scheduled Maintenance
+**Symptoms**:
 
-- Time: 02:00-04:00 AEST
-- Frequency: Monthly
-- Notification: 7 days prior
-- Status page updates
+- Error: "Production package.json not found"
+- Error: "prepare script still exists"
 
-### Emergency Maintenance
+**Solutions**:
 
-- Immediate response
-- Status page updates
-- User notifications
-- Post-mortem reports
+1. Check build output in `dist/` directory
+2. Verify `package.json` was created correctly
+3. Ensure no `prepare` script in production build
 
-## Monitoring
+#### 4. Health Check Failures
 
-### Uptime Monitoring
+**Symptoms**:
 
-- Pingdom
-- UptimeRobot
-- Status page
-- Alert notifications
+- Error: "Health endpoint failed"
+- Deployment succeeds but health check fails
 
-### Performance Monitoring
+**Solutions**:
 
-- Vercel Analytics
-- Lighthouse CI
-- Core Web Vitals
-- User timing metrics
+1. Check web app is running
+2. Verify health endpoint `/api/health` is accessible
+3. Check web app configuration and environment variables
 
-## Incident Response
+### Manual Deployment
 
-### Process
+If automated deployment fails, you can deploy manually:
 
-1. Detection
-2. Response
-3. Resolution
-4. Post-mortem
-5. Prevention
+```bash
+# Build the project
+pnpm build
 
-### Communication
+# Create production package.json
+node -e "
+  const fs = require('fs');
+  const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+  const prodPkg = {
+    name: pkg.name,
+    type: pkg.type,
+    version: pkg.version,
+    private: pkg.private,
+    engines: pkg.engines,
+    dependencies: pkg.dependencies,
+    scripts: { start: 'node server/entry.mjs' }
+  };
+  fs.writeFileSync('dist/package.json', JSON.stringify(prodPkg, null, 2));
+"
 
-- Status page updates
-- Email notifications
-- Social media updates
-- Support channels
+# Install production dependencies
+cd dist
+pnpm install --prod --frozen-lockfile
+cd ..
 
-## Documentation
+# Deploy to Azure
+az webapp deployment source config-zip \
+  --resource-group dale-rogers-portfolio-rg \
+  --name dale-rogers-portfolio-staging \
+  --src dist/deployment.zip
+```
 
-### Deployment Records
+### Debugging Commands
 
-- Version deployed
-- Deployment time
-- Configuration changes
-- Environment variables
+```bash
+# Check Azure web app status
+az webapp show --resource-group dale-rogers-portfolio-rg --name dale-rogers-portfolio-staging
 
-### Change Log
+# Check web app logs
+az webapp log tail --resource-group dale-rogers-portfolio-rg --name dale-rogers-portfolio-staging
 
-- Feature updates
-- Bug fixes
-- Security patches
-- Performance improvements
+# Check deployment history
+az webapp deployment list --resource-group dale-rogers-portfolio-rg --name dale-rogers-portfolio-staging
 
-## Contact
+# Test health endpoint
+curl -f https://dale-rogers-portfolio-staging.azurewebsites.net/api/health
+```
 
-### Support
+## Security Considerations
 
-- Email: support@dalerogers.dev
-- Hours: 09:00-17:00 AEST
-- Response time: < 4 hours
-- Emergency: 24/7
+1. **Azure Credentials**: Use service principal with minimal required permissions
+2. **Environment Isolation**: Separate staging and production resources
+3. **Secrets Management**: Store sensitive data in GitHub secrets
+4. **Access Control**: Limit who can trigger deployments
 
-### Escalation
+## Monitoring and Alerts
 
-1. On-call engineer
-2. Technical lead
-3. System administrator
-4. Project manager
+1. **Azure Application Insights**: Monitor web app performance
+2. **GitHub Actions**: Track deployment success/failure rates
+3. **Health Checks**: Automated endpoint monitoring
+4. **Error Tracking**: Monitor application errors and exceptions
 
-## Resources
+## Rollback Procedures
 
-### Documentation
+1. **Immediate Rollback**: Use Azure Web App deployment slots
+2. **Code Rollback**: Revert to previous commit and redeploy
+3. **Database Rollback**: Restore from backup if needed
 
-- [Vercel Docs](https://vercel.com/docs)
-- [GitHub Actions](https://docs.github.com/actions)
-- [Astro Deployment](https://docs.astro.build/guides/deploy)
+## Best Practices
 
-### Tools
+1. **Always test in staging first**
+2. **Use semantic versioning for releases**
+3. **Monitor deployment metrics**
+4. **Keep deployment logs for debugging**
+5. **Automate health checks and monitoring**
+6. **Use blue-green deployment for zero-downtime updates**
 
-- [Vercel CLI](https://vercel.com/cli)
-- [pnpm](https://pnpm.io)
-- [TypeScript](https://www.typescriptlang.org)
-- [ESLint](https://eslint.org)
+---
+
+**Note**: This deployment guide is specific to Azure Web Apps. For other platforms, refer to their respective documentation.

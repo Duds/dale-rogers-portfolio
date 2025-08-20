@@ -1,4 +1,16 @@
 name: Deploy to Azure
+# This workflow handles deployment to Azure Web App
+#
+# HUSKY ISSUE FIX:
+# The original package.json contains a "prepare": "husky" script that runs during
+# npm/pnpm install. This fails in CI/CD environments because:
+# 1. Husky is only in devDependencies
+# 2. The prepare script runs automatically during install
+# 3. CI/CD environments don't have Git hooks setup
+#
+# SOLUTION:
+# We create a production package.json without the prepare script and devDependencies,
+# plus add .npmrc with ignore-scripts=true as a backup safety measure.
 on:
   push:
     branches: [main, staging]
@@ -74,18 +86,85 @@ jobs:
       - name: Install zip
         run: sudo apt-get update && sudo apt-get install -y zip
 
+      - name: Prepare production package.json
+        run: |
+          # This step creates a production package.json without the prepare script
+          # that causes Husky to run during deployment, which fails in CI/CD environments
+
+          # Debug: Show original package.json scripts section
+          echo "📋 Original package.json scripts:"
+          node -e "console.log(JSON.stringify(JSON.parse(require('fs').readFileSync('package.json', 'utf8')).scripts, null, 2))"
+
+          # Create a production package.json without prepare script and devDependencies
+          node -e "
+            try {
+              const fs = require('fs');
+              const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+
+              // Create production package.json
+              const prodPkg = {
+                name: pkg.name,
+                type: pkg.type,
+                version: pkg.version,
+                private: pkg.private,
+                engines: pkg.engines,
+                dependencies: pkg.dependencies,
+                scripts: {
+                  start: 'node server/entry.mjs'
+                }
+              };
+
+              fs.writeFileSync('dist/package.json', JSON.stringify(prodPkg, null, 2));
+              console.log('✅ Successfully created production package.json');
+
+              // Verify the file was created correctly
+              const createdPkg = JSON.parse(fs.readFileSync('dist/package.json', 'utf8'));
+              if (createdPkg.prepare || createdPkg.devDependencies) {
+                throw new Error('Production package.json still contains prepare script or devDependencies');
+              }
+              console.log('✅ Production package.json verified successfully');
+            } catch (error) {
+              console.error('❌ Error creating production package.json:', error);
+              process.exit(1);
+            }
+          "
+
+          # Create .npmrc to disable prepare scripts globally as a backup
+          echo "ignore-scripts=true" > dist/.npmrc
+          echo "✅ Created .npmrc to disable all scripts during npm install"
+
+          # Show final production package.json structure
+          echo "📋 Final production package.json structure:"
+          cat dist/package.json
+
+      - name: Set deployment variables
+        run: |
+          # Set environment-specific deployment variables
+          if [ "${{ github.event.inputs.environment }}" = "production" ] || [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "🚀 Deploying to PRODUCTION environment"
+            echo "WEBAPP_NAME=dale-rogers-portfolio" >> $GITHUB_ENV
+            echo "RESOURCE_GROUP=dale-rogers-portfolio-rg" >> $GITHUB_ENV
+            echo "DEPLOYMENT_URL=${{ secrets.AZURE_WEBAPP_URL }}" >> $GITHUB_ENV
+          else
+            echo "🧪 Deploying to STAGING environment"
+            echo "WEBAPP_NAME=dale-rogers-portfolio-staging" >> $GITHUB_ENV
+            echo "RESOURCE_GROUP=dale-rogers-portfolio-rg" >> $GITHUB_ENV
+            echo "DEPLOYMENT_URL=${{ secrets.AZURE_STAGING_WEBAPP_URL }}" >> $GITHUB_ENV
+          fi
+
+          echo "📋 Deployment Configuration:"
+          echo "  Web App: ${{ env.WEBAPP_NAME }}"
+          echo "  Resource Group: ${{ env.RESOURCE_GROUP }}"
+          echo "  Environment: ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production') || 'staging' }}"
+
       - name: Deploy to Azure Web App
         run: |
-          # Copy original package.json and remove prepare script to avoid husky issues
-          cp package.json dist/
-          cd dist
-          # Remove the prepare script from package.json
-          node -e "
-            const pkg = JSON.parse(require('fs').readFileSync('package.json', 'utf8'));
-            delete pkg.prepare;
-            require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));
-          "
-          cd ..
+          # Verify production package.json exists (created in previous step)
+          if [ ! -f "dist/package.json" ]; then
+            echo "❌ ERROR: Production package.json not found in dist directory"
+            echo "This should have been created in the 'Prepare production package.json' step"
+            exit 1
+          fi
 
           # Create a proper startup script for Azure
           cat > dist/start.sh << 'EOF'
@@ -102,6 +181,22 @@ jobs:
           # Copy package manager files and install dependencies
           cp pnpm-lock.yaml dist/
           cd dist
+
+          # Debug: Show the production package.json contents
+          echo "📋 Production package.json contents:"
+          cat package.json
+
+          # Double-check: Verify no prepare script exists (safety measure)
+          if grep -q '"prepare"' package.json; then
+            echo "❌ ERROR: prepare script still exists in production package.json"
+            echo "This should have been removed in the 'Prepare production package.json' step"
+            exit 1
+          else
+            echo "✅ No prepare script found in production package.json"
+          fi
+
+          # Install production dependencies
+          echo "📦 Installing production dependencies..."
           pnpm install --prod --frozen-lockfile
           cd ..
 
@@ -110,21 +205,35 @@ jobs:
           zip -r ../deployment.zip .
           cd ..
 
-          # Deploy using Azure CLI
+          # Deploy using Azure CLI with environment-specific configuration
+          echo "🚀 Deploying to Azure Web App: ${{ env.WEBAPP_NAME }}"
+          echo "📁 Resource Group: ${{ env.RESOURCE_GROUP }}"
+
           az webapp deployment source config-zip \
-            --resource-group dale-rogers-portfolio-rg \
-            --name dale-rogers-portfolio \
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --name ${{ env.WEBAPP_NAME }} \
             --src deployment.zip \
             --timeout 1800
 
       - name: Health check
         run: |
           # Wait for deployment to complete
+          echo "⏳ Waiting for deployment to complete..."
           sleep 30
+
           # Basic health check - try root URL first, then health endpoint
-          echo "Testing root URL..."
-          curl -f ${{ secrets.AZURE_WEBAPP_URL }}/ || echo "Root URL failed, trying health endpoint..."
-          curl -f ${{ secrets.AZURE_WEBAPP_URL }}/api/health || echo "Health endpoint failed, but deployment succeeded"
+          echo "🏥 Testing deployment health..."
+
+          if [ -n "${{ env.DEPLOYMENT_URL }}" ]; then
+            echo "🔍 Testing root URL: ${{ env.DEPLOYMENT_URL }}/"
+            curl -f ${{ env.DEPLOYMENT_URL }}/ || echo "⚠️  Root URL failed, trying health endpoint..."
+
+            echo "🔍 Testing health endpoint: ${{ env.DEPLOYMENT_URL }}/api/health"
+            curl -f ${{ env.DEPLOYMENT_URL }}/api/health || echo "⚠️  Health endpoint failed, but deployment succeeded"
+          else
+            echo "⚠️  No deployment URL configured, skipping health check"
+          fi
+
           echo "✅ Deployment completed successfully!"
 
       - name: Notify deployment status
@@ -132,7 +241,11 @@ jobs:
         run: |
           if [ ${{ job.status }} == 'success' ]; then
             echo "✅ Deployment successful to ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production') || 'staging' }}"
+            echo "🌐 Web App: ${{ env.WEBAPP_NAME }}"
+            echo "📁 Resource Group: ${{ env.RESOURCE_GROUP }}"
           else
             echo "❌ Deployment failed to ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production') || 'staging' }}"
+            echo "🌐 Web App: ${{ env.WEBAPP_NAME }}"
+            echo "📁 Resource Group: ${{ env.RESOURCE_GROUP }}"
             exit 1
           fi
