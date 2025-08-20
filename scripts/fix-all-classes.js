@@ -204,7 +204,7 @@ function fixFile(filePath) {
           (match, before, after) => {
             const newClasses = (before + after).trim();
             return `class="${newClasses}" ${replacement}`;
-          }
+          },
         );
 
         // Replace standalone classes in class attributes
@@ -220,7 +220,7 @@ function fixFile(filePath) {
               "\n  " +
               replacement.replace('style="', "").replace('"', ";")
             );
-          }
+          },
         );
 
         // Replace standalone classes
@@ -250,7 +250,7 @@ function main() {
 
   if (!fs.existsSync(srcDir)) {
     console.error(
-      "❌ src directory not found. Run this script from the project root."
+      "❌ src directory not found. Run this script from the project root.",
     );
     process.exit(1);
   }

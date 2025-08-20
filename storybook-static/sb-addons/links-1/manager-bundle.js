@@ -1,3 +1,59 @@
-try{
-(()=>{var h=__STORYBOOK_API__,{ActiveTabs:c,Consumer:y,ManagerContext:b,Provider:O,RequestResponseError:T,addons:l,combineParameters:k,controlOrMetaKey:E,controlOrMetaSymbol:v,eventMatchesShortcut:A,eventToShortcut:P,experimental_MockUniversalStore:M,experimental_UniversalStore:I,experimental_requestResponse:R,experimental_useUniversalStore:f,isMacLike:U,isShortcutTaken:C,keyToSymbol:D,merge:L,mockChannel:N,optionOrAltSymbol:x,shortcutMatchesShortcut:G,shortcutToHumanString:V,types:B,useAddonState:K,useArgTypes:H,useArgs:Y,useChannel:q,useGlobalTypes:Q,useGlobals:z,useParameter:$,useSharedState:w,useStoryPrepared:J,useStorybookApi:j,useStorybookState:F}=__STORYBOOK_API__;var e="storybook/links",d={NAVIGATE:`${e}/navigate`,REQUEST:`${e}/request`,RECEIVE:`${e}/receive`};l.register(e,o=>{o.on(d.REQUEST,({kind:n,name:a})=>{let m=o.storyId(n,a);o.emit(d.RECEIVE,m)})});})();
-}catch(e){ console.error("[Storybook] One of your manager-entries failed: " + import.meta.url, e); }
+try {
+  (() => {
+    var h = __STORYBOOK_API__,
+      {
+        ActiveTabs: c,
+        Consumer: y,
+        ManagerContext: b,
+        Provider: O,
+        RequestResponseError: T,
+        addons: l,
+        combineParameters: k,
+        controlOrMetaKey: E,
+        controlOrMetaSymbol: v,
+        eventMatchesShortcut: A,
+        eventToShortcut: P,
+        experimental_MockUniversalStore: M,
+        experimental_UniversalStore: I,
+        experimental_requestResponse: R,
+        experimental_useUniversalStore: f,
+        isMacLike: U,
+        isShortcutTaken: C,
+        keyToSymbol: D,
+        merge: L,
+        mockChannel: N,
+        optionOrAltSymbol: x,
+        shortcutMatchesShortcut: G,
+        shortcutToHumanString: V,
+        types: B,
+        useAddonState: K,
+        useArgTypes: H,
+        useArgs: Y,
+        useChannel: q,
+        useGlobalTypes: Q,
+        useGlobals: z,
+        useParameter: $,
+        useSharedState: w,
+        useStoryPrepared: J,
+        useStorybookApi: j,
+        useStorybookState: F,
+      } = __STORYBOOK_API__;
+    var e = "storybook/links",
+      d = {
+        NAVIGATE: `${e}/navigate`,
+        REQUEST: `${e}/request`,
+        RECEIVE: `${e}/receive`,
+      };
+    l.register(e, (o) => {
+      o.on(d.REQUEST, ({ kind: n, name: a }) => {
+        let m = o.storyId(n, a);
+        o.emit(d.RECEIVE, m);
+      });
+    });
+  })();
+} catch (e) {
+  console.error(
+    "[Storybook] One of your manager-entries failed: " + import.meta.url,
+    e,
+  );
+}

@@ -1,1 +1,3 @@
-var a="theme",e={[a]:""};export{e as initialGlobals};
+var a = "theme",
+  e = { [a]: "" };
+export { e as initialGlobals };

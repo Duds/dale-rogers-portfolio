@@ -9,7 +9,7 @@ self.addEventListener("install", (event) => {
     caches.open(CACHE_NAME).then((cache) => {
       console.log("Image cache service worker installed");
       return cache;
-    })
+    }),
   );
 });
 
@@ -24,9 +24,9 @@ self.addEventListener("activate", (event) => {
             console.log("Deleting old cache:", cacheName);
             return caches.delete(cacheName);
           }
-        })
+        }),
       );
-    })
+    }),
   );
 });
 
@@ -171,7 +171,7 @@ self.addEventListener("message", (event) => {
         .catch((error) => {
           console.error("Failed to clear cache:", error);
           event.ports[0].postMessage({ success: false, error: error.message });
-        })
+        }),
     );
   }
 
@@ -191,7 +191,7 @@ self.addEventListener("message", (event) => {
         .catch((error) => {
           console.error("Failed to get cache info:", error);
           event.ports[0].postMessage({ success: false, error: error.message });
-        })
+        }),
     );
   }
 });
@@ -221,5 +221,5 @@ setInterval(
       console.error("Cache cleanup failed:", error);
     }
   },
-  24 * 60 * 60 * 1000
+  24 * 60 * 60 * 1000,
 ); // Run every 24 hours

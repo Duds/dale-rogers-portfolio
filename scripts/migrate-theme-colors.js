@@ -198,7 +198,7 @@ function main() {
 
   if (!fs.existsSync(srcDir)) {
     console.error(
-      "❌ src directory not found. Run this script from the project root."
+      "❌ src directory not found. Run this script from the project root.",
     );
     process.exit(1);
   }

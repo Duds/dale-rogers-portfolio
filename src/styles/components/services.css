@@ -40,11 +40,16 @@
   background-color: var(--color-background-tertiary);
 
   /* Micro animation: lift and shadow on hover */
-  transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s cubic-bezier(.4,0,.2,1);
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.services-card:hover, .services-card:focus-visible {
+.services-card:hover,
+.services-card:focus-visible {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18), 0 1.5px 6px 0 rgba(0,0,0,0.10);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.18),
+    0 1.5px 6px 0 rgba(0, 0, 0, 0.1);
   z-index: 2;
 }
 .services-card-image {
@@ -52,11 +57,9 @@
 }
 .services-card-img {
   @apply absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105;
-
 }
 .services-card-gradient {
   @apply absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50 group-hover:to-black/60 transition-opacity duration-300;
-
 }
 .services-card-content {
   @apply p-8 flex flex-col flex-grow;

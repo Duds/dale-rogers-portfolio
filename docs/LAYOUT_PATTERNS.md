@@ -7,9 +7,11 @@ This document outlines all available layout patterns and container width options
 The main `Container` component provides several width variants:
 
 ### 1. Default Container (`variant="default"`)
+
 - **Width**: `max-w-7xl` (~80rem / 1280px)
 - **Use Case**: Standard content sections, main page content
 - **Example**:
+
 ```astro
 <Container>
   <h1>Main Content</h1>
@@ -18,9 +20,11 @@ The main `Container` component provides several width variants:
 ```
 
 ### 2. Narrow Container (`variant="narrow"`)
+
 - **Width**: `max-w-4xl` (~64rem / 1024px)
 - **Use Case**: Reading content, articles, focused content
 - **Example**:
+
 ```astro
 <Container variant="narrow">
   <article>
@@ -31,9 +35,11 @@ The main `Container` component provides several width variants:
 ```
 
 ### 3. Wide Container (`variant="wide"`)
+
 - **Width**: `max-w-7xl` (~80rem / 1280px)
 - **Use Case**: Wide content, galleries, complex layouts
 - **Example**:
+
 ```astro
 <Container variant="wide">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -43,9 +49,11 @@ The main `Container` component provides several width variants:
 ```
 
 ### 4. Full Width Container (`variant="full"`)
+
 - **Width**: `100%` (full viewport width)
 - **Use Case**: Hero sections, full-width backgrounds, immersive content
 - **Example**:
+
 ```astro
 <Container variant="full">
   <div class="bg-gradient-to-r from-purple-500 to-pink-500">
@@ -66,6 +74,7 @@ The `SectionContainer` component provides consistent horizontal padding:
 ```
 
 **Features**:
+
 - Full width (`w-full`)
 - Consistent horizontal padding (`px-6 md:px-12`)
 - Ideal for section backgrounds and full-width content
@@ -73,6 +82,7 @@ The `SectionContainer` component provides consistent horizontal padding:
 ## Global CSS Layout Classes
 
 ### Section Layout Classes
+
 ```css
 .section-full {
   @apply w-full;
@@ -92,6 +102,7 @@ The `SectionContainer` component provides consistent horizontal padding:
 ```
 
 ### Usage Examples
+
 ```astro
 <!-- Full width section -->
 <section class="section-full bg-gray-100">
@@ -117,21 +128,25 @@ All containers use consistent responsive breakpoints:
 ## Layout Best Practices
 
 ### 1. Content Hierarchy
+
 - Use `Container` for main page content
 - Use `SectionContainer` for full-width sections
 - Use `variant="narrow"` for reading-focused content
 
 ### 2. Responsive Design
+
 - All containers are mobile-first
 - Padding scales appropriately across breakpoints
 - Content remains readable on all devices
 
 ### 3. Consistent Spacing
+
 - Horizontal padding is consistent across all variants
 - Vertical spacing should use Tailwind spacing scale
 - Maintain visual rhythm across sections
 
 ### 4. Accessibility
+
 - Ensure sufficient contrast between content and backgrounds
 - Maintain readable line lengths (max ~65-75 characters)
 - Use semantic HTML structure
@@ -139,6 +154,7 @@ All containers use consistent responsive breakpoints:
 ## Migration Guide
 
 ### From Old Container Usage
+
 ```astro
 <!-- Old -->
 <Container fullWidth>Content</Container>
@@ -148,6 +164,7 @@ All containers use consistent responsive breakpoints:
 ```
 
 ### From Global CSS Classes
+
 ```astro
 <!-- Old -->
 <div class="section-content">Content</div>
@@ -159,6 +176,7 @@ All containers use consistent responsive breakpoints:
 ## Examples by Use Case
 
 ### Blog Post Layout
+
 ```astro
 <Container variant="narrow">
   <article>
@@ -169,6 +187,7 @@ All containers use consistent responsive breakpoints:
 ```
 
 ### Portfolio Grid
+
 ```astro
 <Container variant="wide">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -178,6 +197,7 @@ All containers use consistent responsive breakpoints:
 ```
 
 ### Hero Section
+
 ```astro
 <SectionContainer>
   <div class="bg-gradient-to-r from-purple-500 to-pink-500 py-20">
@@ -189,6 +209,7 @@ All containers use consistent responsive breakpoints:
 ```
 
 ### Contact Form
+
 ```astro
 <Container variant="narrow">
   <form class="space-y-6">

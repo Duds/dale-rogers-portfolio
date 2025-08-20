@@ -31,11 +31,11 @@ function lintAstroFile(filePath: string) {
       const cssBlock = match[1]!;
       if (cssBlock.includes("{") && cssBlock.includes("}")) {
         console.log(
-          `✅ ${filePath} [style block ${blockIndex}] basic validation passed`
+          `✅ ${filePath} [style block ${blockIndex}] basic validation passed`,
         );
       } else {
         console.log(
-          `⚠️  ${filePath} [style block ${blockIndex}] minimal CSS content`
+          `⚠️  ${filePath} [style block ${blockIndex}] minimal CSS content`,
         );
       }
       blockIndex++;
@@ -51,7 +51,7 @@ function main() {
   // Check all CSS files under src/styles (excluding base.css which is imported via global.css)
   const allCssFiles = globSync("src/styles/**/*.css");
   const cssFiles = allCssFiles.filter(
-    (file) => path.basename(file) !== "base.css"
+    (file) => path.basename(file) !== "base.css",
   );
   for (const file of cssFiles) {
     lintFile(file);

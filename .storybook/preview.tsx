@@ -11,7 +11,7 @@ const preview: Preview = {
         date: /Date$/i,
       },
       expanded: true,
-      sort: 'requiredFirst',
+      sort: "requiredFirst",
     },
     backgrounds: {
       default: "light",
@@ -38,30 +38,30 @@ const preview: Preview = {
     docs: {
       toc: true,
       source: {
-        state: 'open',
+        state: "open",
       },
     },
     viewport: {
       viewports: {
         mobile: {
-          name: 'Mobile',
+          name: "Mobile",
           styles: {
-            width: '375px',
-            height: '667px',
+            width: "375px",
+            height: "667px",
           },
         },
         tablet: {
-          name: 'Tablet',
+          name: "Tablet",
           styles: {
-            width: '768px',
-            height: '1024px',
+            width: "768px",
+            height: "1024px",
           },
         },
         desktop: {
-          name: 'Desktop',
+          name: "Desktop",
           styles: {
-            width: '1200px',
-            height: '800px',
+            width: "1200px",
+            height: "800px",
           },
         },
       },
@@ -70,11 +70,11 @@ const preview: Preview = {
       config: {
         rules: [
           {
-            id: 'color-contrast',
+            id: "color-contrast",
             enabled: true,
           },
           {
-            id: 'heading-order',
+            id: "heading-order",
             enabled: true,
           },
         ],
@@ -105,9 +105,13 @@ const preview: Preview = {
   decorators: [
     (Story, context) => {
       const theme = context.globals.theme;
-      return React.createElement('div', {
-        className: theme === "dark" ? "dark" : ""
-      }, React.createElement(Story));
+      return React.createElement(
+        "div",
+        {
+          className: theme === "dark" ? "dark" : "",
+        },
+        React.createElement(Story),
+      );
     },
   ],
 };

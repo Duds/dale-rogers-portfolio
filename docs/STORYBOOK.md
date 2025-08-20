@@ -71,12 +71,14 @@ The preview configuration provides:
 ### Currently Working Components
 
 #### Button Component ✅
+
 - **Variants**: Default, secondary, destructive, outline, ghost, link
 - **Sizes**: Small, default, large, icon
 - **States**: Default, disabled, hover, focus
 - **Examples**: All variants, all sizes, interactive states
 
 #### Card Component ✅
+
 - **Variants**: Default, clickable, link, with/without title
 - **Content Types**: Rich content, case studies, services
 - **Layouts**: Responsive grid, custom styling

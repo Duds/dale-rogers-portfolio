@@ -378,4 +378,3 @@ const variantStyles = {
 ```
 
 This migration makes the codebase more maintainable and allows for easy theming changes in the future.
-

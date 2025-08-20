@@ -1,0 +1,23 @@
+# Build outputs
+dist/
+.astro/
+storybook-static/
+
+# Dependencies
+node_modules/
+
+# Generated files
+pnpm-lock.yaml
+*.lock
+
+# Test results
+test-results/
+
+# Reports
+reports/
+*.html
+*.json
+
+# Standalone builds
+src/pages/scratch/*/standalone/
+src/pages/scratch/*/build.js

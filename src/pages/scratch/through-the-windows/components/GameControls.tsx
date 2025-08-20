@@ -13,12 +13,7 @@ interface Props {
   onResume: () => void;
 }
 
-export function GameControls({
-  status,
-  onStart,
-  onPause,
-  onResume,
-}: Props) {
+export function GameControls({ status, onStart, onPause, onResume }: Props) {
   return (
     <div className="game-controls">
       {status === "idle" && (

@@ -23,7 +23,7 @@
 
 .footer__acknowledgement-text {
   @apply text-sm md:text-base leading-relaxed max-w-4xl mx-auto;
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 /* Slogan Section */
@@ -34,12 +34,12 @@
 
 .footer__slogan-text {
   @apply text-2xl md:text-3xl font-bold mb-3;
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 .footer__slogan-subtitle {
   @apply text-base md:text-lg;
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 .footer__main {
@@ -52,12 +52,12 @@
 
 .footer__title {
   @apply text-3xl md:text-4xl font-bold;
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 .footer__description {
   @apply text-lg;
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 .footer__actions {
@@ -74,7 +74,7 @@
 
 .footer__section-title {
   @apply text-lg font-semibold mb-4;
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 .footer__link-list {
@@ -83,11 +83,11 @@
 
 .footer__link {
   @apply transition-colors duration-300;
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 .footer__link:hover {
-  color: #E8E0D9; /* Slightly muted white on hover for interaction feedback */
+  color: #e8e0d9; /* Slightly muted white on hover for interaction feedback */
 }
 
 .footer__bottom {
@@ -96,7 +96,7 @@
 }
 
 .footer__copyright {
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 .footer__legal {
@@ -105,32 +105,32 @@
 
 .footer__legal-link {
   @apply transition-colors duration-300;
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 .footer__legal-link:hover {
-  color: #E8E0D9; /* Slightly muted white on hover for interaction feedback */
+  color: #e8e0d9; /* Slightly muted white on hover for interaction feedback */
 }
 
 /* Footer heading styles - LIGHT for maximum contrast on dark background */
 .footer-heading {
   @apply text-lg font-semibold mb-4;
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 /* Footer link styles - LIGHT for good contrast on dark background */
 .footer-link {
   @apply transition-colors duration-300;
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 .footer-link:hover {
-  color: #E8E0D9; /* Slightly muted white on hover for interaction feedback */
+  color: #e8e0d9; /* Slightly muted white on hover for interaction feedback */
 }
 
 /* Footer copyright styles - LIGHT for good contrast on dark background */
 .footer-copyright {
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 /* Footer heart styles - ACCENT for good contrast on dark background */
@@ -140,18 +140,18 @@
 
 /* Footer main heading - ALWAYS white on olive background */
 .footer-main-heading {
-  color: #FFFFFF !important; /* Always white on olive background */
+  color: #ffffff !important; /* Always white on olive background */
 }
 
 /* Acknowledgement text - LIGHT for good contrast on dark background */
 .text-footer-text-secondary {
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 /* Acknowledgement slogan - LIGHT for maximum contrast on dark background */
 .acknowledgement-slogan {
   @apply font-medium text-xl;
-  color: #FFFFFF; /* Always white on olive background */
+  color: #ffffff; /* Always white on olive background */
 }
 
 /* Copyright section styles - inherits body background */

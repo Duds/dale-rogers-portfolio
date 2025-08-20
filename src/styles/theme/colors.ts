@@ -168,7 +168,7 @@ export type ColorScale = keyof typeof colors.primary;
 // Helper function to get color with dark theme support
 export const getColor = (
   colorPath: string,
-  isDark: boolean = false
+  isDark: boolean = false,
 ): string => {
   const path = colorPath.split(".");
   const colorObj = isDark ? darkColors : colors;
@@ -177,7 +177,7 @@ export const getColor = (
   for (const key of path) {
     if (current[key] === undefined) {
       console.warn(
-        `Color path "${colorPath}" not found in ${isDark ? "dark" : "light"} theme`
+        `Color path "${colorPath}" not found in ${isDark ? "dark" : "light"} theme`,
       );
       return "#000000"; // Fallback
     }
@@ -189,7 +189,7 @@ export const getColor = (
 
 // CSS custom property generator
 export const generateCSSVariables = (
-  isDark: boolean = false
+  isDark: boolean = false,
 ): Record<string, string> => {
   const colorObj = isDark ? darkColors : colors;
   const variables: Record<string, string> = {};

@@ -7,6 +7,7 @@ The Container system provides standardized layout patterns for consistent margin
 ## Container Variants
 
 ### 1. `container--standard` (Default)
+
 - **Purpose**: Standard content width with centered layout
 - **Width**: `max-w-7xl` (~80rem/1280px)
 - **Margins**: `mx-auto` (centered)
@@ -14,6 +15,7 @@ The Container system provides standardized layout patterns for consistent margin
 - **Use Case**: Main content areas, articles, standard pages
 
 ### 2. `container--narrow`
+
 - **Purpose**: Narrow content width for reading-focused content
 - **Width**: `max-w-4xl` (~64rem/1024px)
 - **Margins**: `mx-auto` (centered)
@@ -21,6 +23,7 @@ The Container system provides standardized layout patterns for consistent margin
 - **Use Case**: Blog posts, reading content, focused text
 
 ### 3. `container--full`
+
 - **Purpose**: Edge-to-edge full width with no content margins
 - **Width**: `100%` (full viewport)
 - **Margins**: None
@@ -28,6 +31,7 @@ The Container system provides standardized layout patterns for consistent margin
 - **Use Case**: Hero sections, full-width backgrounds, edge-to-edge layouts
 
 ### 4. `container--content-margin` ⭐ **NEW**
+
 - **Purpose**: Full width with consistent content margins
 - **Width**: `100%` (full viewport)
 - **Margins**: None
@@ -37,6 +41,7 @@ The Container system provides standardized layout patterns for consistent margin
 ## Usage Examples
 
 ### Standard Content
+
 ```astro
 <Container>
   <!-- Standard centered content -->
@@ -44,6 +49,7 @@ The Container system provides standardized layout patterns for consistent margin
 ```
 
 ### Full Width (Edge-to-Edge)
+
 ```astro
 <Container fullWidth={true}>
   <!-- Full width with no content margins -->
@@ -51,6 +57,7 @@ The Container system provides standardized layout patterns for consistent margin
 ```
 
 ### Content Margins (Recommended for Sections)
+
 ```astro
 <Container contentMargin={true}>
   <!-- Full width with consistent content margins -->
@@ -58,6 +65,7 @@ The Container system provides standardized layout patterns for consistent margin
 ```
 
 ### Narrow Content
+
 ```astro
 <Container narrow={true}>
   <!-- Narrow centered content -->
@@ -67,6 +75,7 @@ The Container system provides standardized layout patterns for consistent margin
 ## Implementation in Components
 
 ### Footer
+
 ```astro
 <Container contentMargin={true}>
   <div class="footer-inner">
@@ -76,6 +85,7 @@ The Container system provides standardized layout patterns for consistent margin
 ```
 
 ### MyValues
+
 ```astro
 <Container contentMargin={true} class="my-values-section">
   <!-- Content with consistent margins -->
@@ -83,6 +93,7 @@ The Container system provides standardized layout patterns for consistent margin
 ```
 
 ### CaseStudiesBento
+
 ```astro
 <Container contentMargin={true}>
   <!-- Content with consistent margins -->
@@ -108,6 +119,7 @@ The system uses CSS custom properties for consistent spacing:
 ```
 
 This provides:
+
 - **Mobile**: `px-6` (24px)
 - **Medium+**: `px-12` (48px)
 

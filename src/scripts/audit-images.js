@@ -56,14 +56,14 @@ function validateAltText(altText) {
 
   if (trimmedAlt.length < CONFIG.minAltLength) {
     issues.push(
-      `Alt text too short (${trimmedAlt.length} chars, minimum ${CONFIG.minAltLength})`
+      `Alt text too short (${trimmedAlt.length} chars, minimum ${CONFIG.minAltLength})`,
     );
     auditResults.summary.poorAltText++;
   }
 
   if (trimmedAlt.length > CONFIG.maxAltLength) {
     issues.push(
-      `Alt text too long (${trimmedAlt.length} chars, maximum ${CONFIG.maxAltLength})`
+      `Alt text too long (${trimmedAlt.length} chars, maximum ${CONFIG.maxAltLength})`,
     );
     auditResults.summary.poorAltText++;
   }
@@ -84,7 +84,7 @@ function validateAltText(altText) {
 
   // Check for contextual relevance
   const hasContext = CONFIG.requiredAltKeywords.some((keyword) =>
-    trimmedAlt.toLowerCase().includes(keyword)
+    trimmedAlt.toLowerCase().includes(keyword),
   );
 
   if (!hasContext && trimmedAlt.length > 20) {
@@ -144,7 +144,7 @@ async function auditMDXFiles() {
 
             const performanceIssues = validateImagePerformance(
               filePath,
-              imageUrl
+              imageUrl,
             );
             if (performanceIssues.length > 0) {
               auditResults.issues.push({
@@ -181,7 +181,7 @@ async function auditMDXFiles() {
             const altIssues = validateAltText(altText);
             const performanceIssues = validateImagePerformance(
               filePath,
-              imageUrl
+              imageUrl,
             );
 
             if (altIssues.length > 0 || performanceIssues.length > 0) {
@@ -238,7 +238,7 @@ async function auditAstroFiles() {
             const altIssues = validateAltText(altText);
             const performanceIssues = validateImagePerformance(
               filePath,
-              imageUrl
+              imageUrl,
             );
 
             if (altIssues.length > 0 || performanceIssues.length > 0) {
@@ -325,7 +325,7 @@ function generateReport() {
   console.log(`🚫 Missing Alt Text: ${auditResults.summary.missingAltText}`);
   console.log(`⚠️  Poor Alt Text: ${auditResults.summary.poorAltText}`);
   console.log(
-    `🐌 Performance Issues: ${auditResults.summary.performanceIssues}`
+    `🐌 Performance Issues: ${auditResults.summary.performanceIssues}`,
   );
 
   if (auditResults.issues.length > 0) {

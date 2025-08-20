@@ -20,12 +20,12 @@ function cssVarsFromObject(
   dashCaseKeys = false,
 ) {
   const vars: string[] = [];
-  
+
   Object.entries(obj).forEach(([key, value]) => {
-    if (typeof value === 'string' || typeof value === 'number') {
+    if (typeof value === "string" || typeof value === "number") {
       const varName = dashCaseKeys ? key : toKebabCase(key);
       vars.push(`  --${prefix}-${varName}: ${value};`);
-    } else if (typeof value === 'object') {
+    } else if (typeof value === "object") {
       // Handle nested objects like grey scale
       Object.entries(value).forEach(([subKey, subValue]) => {
         const varName = `${key}-${subKey}`;
@@ -33,8 +33,8 @@ function cssVarsFromObject(
       });
     }
   });
-  
-  return vars.join('\n');
+
+  return vars.join("\n");
 }
 
 const css = `

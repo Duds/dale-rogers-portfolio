@@ -188,7 +188,7 @@ function fixCSSFile(filePath) {
         (match) => {
           const newMatch = match.replace(invalidClass, "");
           return newMatch + "\n  " + replacement;
-        }
+        },
       );
 
       // Replace standalone classes
@@ -217,7 +217,7 @@ function main() {
 
   if (!fs.existsSync(stylesDir)) {
     console.error(
-      "❌ src/styles directory not found. Run this script from the project root."
+      "❌ src/styles directory not found. Run this script from the project root.",
     );
     process.exit(1);
   }
