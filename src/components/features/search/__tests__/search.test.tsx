@@ -1,89 +1,129 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import type { SearchResult, SearchQuery } from "../types";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import type { types } from "../types.js";
+import { SearchInput } from "../SearchInput.astro";
+import { SearchResults } from "../SearchResults.astro";
+import { searchUtils } from "../utils/searchUtils.js";
 
 // Mock the search utilities
-vi.mock("../utils/searchUtils", () => ({
+jest.mock("../utils/searchUtils.js", () => ({
   searchUtils: {
-    search: vi.fn().mockImplementation(async (query: string) => {
-      if (query === "error") {
-        throw new Error("Search failed");
-      }
-      return [
-        {
-          title: "Test Article 1",
-          description: "This is a test article description",
-          category: "Articles",
-          url: "/articles/test-article-1",
-        },
-        {
-          title: "Test Case Study 1",
-          description: "This is a test case study description",
-          category: "Case Studies",
-          url: "/case-studies/test-case-study-1",
-        },
-      ];
-    }),
+    search: jest.fn(),
   },
 }));
 
-describe("Search Types and Utilities", () => {
+// Mock the content collections
+jest.mock("astro:content", () => ({
+  getCollection: jest.fn(),
+}));
+
+describe("Search Components", () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
-  describe("SearchResult Type", () => {
-    it("should have correct structure", () => {
-      const mockResult: SearchResult = {
+  describe("SearchInput", () => {
+    it("renders search input field", () => {
+      render(<SearchInput />);
+      const searchInput = screen.getByPlaceholderText(/search/i);
+      expect(searchInput).toBeInTheDocument();
+    });
+
+    it("handles input changes", () => {
+      render(<SearchInput />);
+      const searchInput = screen.getByPlaceholderText(/search/i);
+
+      fireEvent.change(searchInput, { target: { value: "test query" } });
+      expect(searchInput).toHaveValue("test query");
+    });
+
+    it("triggers search on submit", async () => {
+      (searchUtils.search as jest.Mock).mockResolvedValue([
+        {
+          title: "Test Article",
+          description: "Test description",
+          category: "Articles",
+          url: "/articles/test",
+        },
+      ]);
+
+      render(<SearchInput />);
+      const searchInput = screen.getByPlaceholderText(/search/i);
+      const form = searchInput.closest("form");
+
+      fireEvent.change(searchInput, { target: { value: "test" } });
+      fireEvent.submit(form!);
+
+      await waitFor(() => {
+        expect(searchUtils.search).toHaveBeenCalledWith("test");
+      });
+    });
+  });
+
+  describe("SearchResults", () => {
+    const mockResults: types.SearchResult[] = [
+      {
         title: "Test Article",
         description: "Test description",
         category: "Articles",
-        url: "/test-article",
-      };
+        url: "/articles/test",
+      },
+      {
+        title: "Test Case Study",
+        description: "Test case study description",
+        category: "Case Studies",
+        url: "/case-studies/test",
+      },
+    ];
 
-      expect(mockResult).toHaveProperty("title");
-      expect(mockResult).toHaveProperty("description");
-      expect(mockResult).toHaveProperty("category");
-      expect(mockResult).toHaveProperty("url");
-      expect(typeof mockResult.title).toBe("string");
-      expect(typeof mockResult.description).toBe("string");
-      expect(typeof mockResult.category).toBe("string");
-      expect(typeof mockResult.url).toBe("string");
+    it("renders search results", () => {
+      render(<SearchResults results={mockResults} />);
+
+      expect(screen.getByText("Test Article")).toBeInTheDocument();
+      expect(screen.getByText("Test Case Study")).toBeInTheDocument();
+      expect(screen.getByText("Articles")).toBeInTheDocument();
+      expect(screen.getByText("Case Studies")).toBeInTheDocument();
+    });
+
+    it("renders no results message when empty", () => {
+      render(<SearchResults results={[]} />);
+
+      expect(screen.getByText(/no results found/i)).toBeInTheDocument();
+    });
+
+    it("renders correct number of results", () => {
+      render(<SearchResults results={mockResults} />);
+
+      const resultItems = screen.getAllByRole("link");
+      expect(resultItems).toHaveLength(2);
     });
   });
 
-  describe("SearchQuery Type", () => {
-    it("should have correct structure", () => {
-      const mockQuery: SearchQuery = {
-        query: "test",
-        category: "all",
-        limit: 10,
-      };
+  describe("SearchUtils", () => {
+    it("returns featured results when no query provided", async () => {
+      const results = await searchUtils.search("");
 
-      expect(mockQuery).toHaveProperty("query");
-      expect(mockQuery).toHaveProperty("category");
-      expect(mockQuery).toHaveProperty("limit");
-      expect(typeof mockQuery.query).toBe("string");
-      expect(typeof mockQuery.category).toBe("string");
-      expect(typeof mockQuery.limit).toBe("number");
+      expect(results).toBeDefined();
+      expect(Array.isArray(results)).toBe(true);
     });
-  });
 
-  describe("Search Utilities Mock", () => {
-    it("should mock search function correctly", async () => {
-      const { searchUtils } = await import("../utils/searchUtils");
-
+    it("performs search with query", async () => {
       const results = await searchUtils.search("test");
-      expect(results).toHaveLength(2);
-      expect(results[0].title).toBe("Test Article 1");
-      expect(results[1].title).toBe("Test Case Study 1");
+
+      expect(results).toBeDefined();
+      expect(Array.isArray(results)).toBe(true);
     });
 
-    it("should handle search errors", async () => {
-      const { searchUtils } = await import("../utils/searchUtils");
-
-      await expect(searchUtils.search("error")).rejects.toThrow(
-        "Search failed",
+    it("calculates relevance scores", () => {
+      const score = searchUtils.calculateRelevanceScore(
+        "test",
+        "Test Title",
+        "Test description",
+        "test, example",
+        "additional text",
       );
+
+      expect(typeof score).toBe("number");
+      expect(score).toBeGreaterThan(0);
     });
   });
 });

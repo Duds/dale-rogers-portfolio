@@ -1,14 +1,17 @@
+import { jsdom } from "jsdom";
 import { vi } from "vitest";
-import { JSDOM } from "jsdom";
 
-const dom = new JSDOM("<!DOCTYPE html><html><body></body></html>", {
+// Set up DOM environment for testing
+const dom = new jsdom("<!DOCTYPE html><html><body></body></html>", {
   url: "http://localhost",
 });
 
-// Properly type the global objects
+// Mock window and document
+global.window = dom.window as unknown as typeof globalThis;
 global.document = dom.window.document;
-(global as { window: typeof dom.window }).window = dom.window;
-global.navigator = dom.window.navigator as Navigator;
+global.navigator = dom.window.navigator;
+global.location = dom.window.location;
+global.history = dom.window.history;
 
 // Mock matchMedia
 Object.defineProperty(window, "matchMedia", {
@@ -17,36 +20,61 @@ Object.defineProperty(window, "matchMedia", {
     matches: false,
     media: query,
     onchange: null,
-    addListener: vi.fn(),
-    removeListener: vi.fn(),
+    addListener: vi.fn(), // deprecated
+    removeListener: vi.fn(), // deprecated
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
     dispatchEvent: vi.fn(),
   })),
 });
 
-// Mock Astro components
-vi.mock("../../ui/Icon.astro", () => ({
-  default: {
-    render: (props: { name: string; class?: string; size?: number }) => {
-      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      svg.setAttribute("viewBox", "0 0 24 24");
-      svg.setAttribute("fill", "none");
-      svg.setAttribute("stroke", "currentColor");
-      svg.setAttribute("stroke-width", "2");
-      svg.setAttribute("stroke-linecap", "round");
-      svg.setAttribute("stroke-linejoin", "round");
-      svg.className = props.class || "";
-      svg.style.width = `${props.size || 24}px`;
-      svg.style.height = `${props.size || 24}px`;
-      svg.setAttribute("aria-hidden", "true");
-      
-      // Add a simple path to represent the icon
-      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      path.setAttribute("d", "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5");
-      svg.appendChild(path);
-      
-      return svg;
-    },
-  },
+// Mock ResizeObserver
+global.ResizeObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
 }));
+
+// Mock IntersectionObserver
+global.IntersectionObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
+
+// Mock requestAnimationFrame
+global.requestAnimationFrame = vi.fn((cb) => setTimeout(cb, 0));
+global.cancelAnimationFrame = vi.fn((id) => clearTimeout(id));
+
+// Mock console methods to reduce noise in tests
+global.console = {
+  ...console,
+  warn: vi.fn(),
+  error: vi.fn(),
+  log: vi.fn(),
+  info: vi.fn(),
+  debug: vi.fn(),
+};
+
+// Mock fetch
+global.fetch = vi.fn();
+
+// Mock localStorage
+const localStorageMock = {
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  removeItem: vi.fn(),
+  clear: vi.fn(),
+  length: 0,
+  key: vi.fn(),
+};
+global.localStorage = localStorageMock;
+
+// Mock sessionStorage
+global.sessionStorage = localStorageMock;
+
+// Clean up after each test
+afterEach(() => {
+  vi.clearAllMocks();
+  document.body.innerHTML = "";
+});
