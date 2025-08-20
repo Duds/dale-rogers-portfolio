@@ -2,7 +2,7 @@
 
 import { promises as fs } from "fs";
 import path from "path";
-import { glob } from "glob";
+import { globSync } from "glob";
 
 (async () => {
   const patterns = ["src/**/*.astro", "src/**/*.mdc"];
@@ -17,7 +17,7 @@ import { glob } from "glob";
   const entries: Entry[] = [];
 
   for (const pattern of patterns) {
-    const files = await glob(pattern, {
+    const files = globSync(pattern, {
       ignore: ["**/node_modules/**", "**/.cursor/**"],
     });
     for (const file of files) {

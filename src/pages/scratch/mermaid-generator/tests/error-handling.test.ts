@@ -39,9 +39,7 @@ describe("Error Handling System", () => {
       throw error;
     };
 
-    await expect(withErrorBoundary(operation, "INIT_FAILED")).rejects.toThrow(
-      error,
-    );
+    await expect(withErrorBoundary(operation)).rejects.toThrow(error);
     expect(mockListener).toHaveBeenCalledWith(error);
   });
 
@@ -51,9 +49,7 @@ describe("Error Handling System", () => {
       throw error;
     };
 
-    expect(() => withSyncErrorBoundary(operation, "INIT_FAILED")).toThrow(
-      error,
-    );
+    expect(() => withSyncErrorBoundary(operation)).toThrow(error);
     expect(mockListener).toHaveBeenCalledWith(error);
   });
 

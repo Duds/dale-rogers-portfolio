@@ -1,5 +1,5 @@
 // Mermaid Generator Core Utilities
-import type { DiagramConfig, ExportOptions, EditorState } from "../types/index.js";
+import type { DiagramConfig, EditorState } from "../types/index.js";
 
 export const defaultConfig: DiagramConfig = {
   theme: "default",
@@ -48,7 +48,7 @@ export function applyTheme(): void {
 
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait: number,
+  wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
   return (...args: Parameters<T>) => {

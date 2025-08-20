@@ -3,8 +3,6 @@
  * @component GameControls
  */
 interface Props {
-  /** Whether the game is currently active */
-  isActive: boolean;
   /** Current game status */
   status: "idle" | "playing" | "paused" | "gameover";
   /** Handler for starting the game */
@@ -16,7 +14,6 @@ interface Props {
 }
 
 export function GameControls({
-  isActive,
   status,
   onStart,
   onPause,
