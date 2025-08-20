@@ -112,10 +112,6 @@ export const errorHandler = ErrorHandler.getInstance();
 // Error boundary for async operations
 export async function withErrorBoundary<T>(
   operation: () => Promise<T>,
-  errorCode:
-    | keyof typeof ErrorCodes.MERMAID
-    | keyof typeof ErrorCodes.EXPORT
-    | keyof typeof ErrorCodes.EDITOR,
 ): Promise<T> {
   try {
     return await operation();
@@ -130,13 +126,7 @@ export async function withErrorBoundary<T>(
 }
 
 // Error boundary for sync operations
-export function withSyncErrorBoundary<T>(
-  operation: () => T,
-  errorCode:
-    | keyof typeof ErrorCodes.MERMAID
-    | keyof typeof ErrorCodes.EXPORT
-    | keyof typeof ErrorCodes.EDITOR,
-): T {
+export function withSyncErrorBoundary<T>(operation: () => T): T {
   try {
     return operation();
   } catch (error) {
@@ -147,4 +137,12 @@ export function withSyncErrorBoundary<T>(
     }
     throw error;
   }
+}
+
+export function handleMermaidError(
+  error: Error,
+  context: string,
+): MermaidError {
+  const errorMessage = `Mermaid error in ${context}: ${error.message}`;
+  return new MermaidError(errorMessage, "MERMAID_UNKNOWN_ERROR");
 }

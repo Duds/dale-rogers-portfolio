@@ -1,40 +1,66 @@
-import React from "react";
-import { cn } from "../../lib/utils";
+import type { BaseProps } from "../../lib/utils.js";
 
-export interface CardProps {
+export interface CardProps extends BaseProps {
+  /** Title displayed at the top of the card */
   title?: string;
-  clickable?: boolean;
-  href?: string;
-  class?: string;
-  children: React.ReactNode;
+  /** Description text below the title */
+  description?: string;
+  /** URL of the card image */
+  image?: string;
+  /** URL for the card link */
+  link?: string;
+  /** Array of tags to display */
+  tags?: string[];
+  /** Visual variant of the card */
+  variant?: "default" | "featured" | "compact";
 }
 
-const Card: React.FC<CardProps> = ({
+export default function Card({
   title,
-  clickable = false,
-  href,
+  description,
+  image,
+  link,
+  tags,
+  variant = "default",
   class: className,
-  children,
-}) => {
-  const baseClasses = "border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-sm";
-  const clickableClasses = clickable ? "cursor-pointer hover:shadow-md transition-shadow" : "";
-  const combinedClasses = cn(baseClasses, clickableClasses, className);
+  ...props
+}: CardProps) {
+  const baseClasses = ["card-base", variant && `card-${variant}`, className]
+    .filter(Boolean)
+    .join(" ");
 
-  if (href) {
+  const CardContent = () => (
+    <div class={baseClasses} {...props}>
+      {image && (
+        <div class="card-image">
+          <img src={image} alt={title || "Card image"} />
+        </div>
+      )}
+
+      <div class="card-content">
+        {title && <h3 class="card-title">{title}</h3>}
+        {description && <p class="card-description">{description}</p>}
+
+        {tags && tags.length > 0 && (
+          <div class="card-tags">
+            {tags.map((tag) => (
+              <span key={tag} class="card-tag">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  if (link) {
     return (
-      <a href={href} className={combinedClasses} style={{ backgroundColor: 'var(--color-background-secondary)' }}>
-        {title && <h3 className="text-lg font-semibold mb-3" style={{ color: 'var(--color-text-primary)' }}>{title}</h3>}
-        {children}
+      <a href={link} class="card-link">
+        <CardContent />
       </a>
     );
   }
 
-  return (
-    <div className={combinedClasses} style={{ backgroundColor: 'var(--color-background-secondary)' }}>
-              {title && <h3 className="text-lg font-semibold mb-3" style={{ color: 'var(--color-text-primary)' }}>{title}</h3>}
-      {children}
-    </div>
-  );
-};
-
-export { Card };
+  return <CardContent />;
+}
