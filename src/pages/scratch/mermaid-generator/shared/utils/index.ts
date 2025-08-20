@@ -1,5 +1,5 @@
 // Mermaid Generator Core Utilities
-import type { DiagramConfig, ExportOptions, EditorState } from "../types";
+import type { DiagramConfig, ExportOptions, EditorState } from "../types/index.js";
 
 export const defaultConfig: DiagramConfig = {
   theme: "default",
@@ -38,11 +38,11 @@ export const defaultState: EditorState = {
   theme: "default",
 };
 
-export function exportDiagram(svg: SVGElement, options: ExportOptions): void {
+export function exportDiagram(): void {
   // Implementation will be moved from PoC
 }
 
-export function applyTheme(svg: SVGElement, config: DiagramConfig): void {
+export function applyTheme(): void {
   // Implementation will be moved from PoC
 }
 

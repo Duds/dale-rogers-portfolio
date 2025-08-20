@@ -1,5 +1,4 @@
 // preview.ts - Shared preview functionality
-import type { MermaidPreviewProps } from "../types/index.js";
 
 // Declare mermaid global
 declare const mermaid: {

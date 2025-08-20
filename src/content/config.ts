@@ -155,7 +155,6 @@ export const collections = {
   scratch: defineCollection({
     type: "content",
     schema: scratchSchema,
-    format: ["md", "mdx"],
   }),
   services: defineCollection({
     type: "content",

@@ -4,8 +4,8 @@ import {
   ErrorHandler,
   withErrorBoundary,
   withSyncErrorBoundary,
-} from "../shared/core/error-handling";
-import { MermaidError, ExportError } from "../shared/types";
+} from "../shared/core/error-handling.js";
+import { MermaidError, ExportError } from "../shared/types/index.js";
 
 describe("Error Handling System", () => {
   let mockListener: (error: Error) => void;
