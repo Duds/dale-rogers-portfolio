@@ -215,7 +215,13 @@ jobs:
           # Install production dependencies with --no-frozen-lockfile to handle lockfile mismatch
           echo "📦 Installing production dependencies..."
           echo "⚠️  Using --no-frozen-lockfile due to production package.json vs lockfile mismatch"
-          pnpm install --prod --no-frozen-lockfile
+
+          # Disable prepare scripts to prevent husky from running
+          export npm_config_ignore_scripts=true
+          export pnpm_ignore_scripts=true
+
+          # Install with explicit ignore-scripts flag
+          pnpm install --prod --no-frozen-lockfile --ignore-scripts
           cd ..
 
           # Create a zip file of the dist directory

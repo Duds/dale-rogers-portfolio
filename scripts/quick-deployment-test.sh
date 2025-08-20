@@ -57,7 +57,7 @@ node -e "
 
 # Test 3: Dependency installation
 print_info "3. Testing dependency installation..."
-if pnpm install --prod --no-frozen-lockfile; then
+if pnpm install --prod --no-frozen-lockfile --ignore-scripts; then
     print_success "Dependencies installed"
 else
     print_error "Dependency installation failed"
