@@ -7,8 +7,8 @@ const dom = new JSDOM("<!DOCTYPE html><html><body></body></html>", {
 
 // Properly type the global objects
 global.document = dom.window.document;
-(global as any).window = dom.window;
-global.navigator = dom.window.navigator as any;
+(global as { window: typeof dom.window }).window = dom.window;
+global.navigator = dom.window.navigator as Navigator;
 
 // Mock matchMedia
 Object.defineProperty(window, "matchMedia", {

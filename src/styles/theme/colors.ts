@@ -173,7 +173,7 @@ export const getColor = (
   const path = colorPath.split(".");
   const colorObj = isDark ? darkColors : colors;
 
-  let current: any = colorObj;
+  let current: Record<string, unknown> = colorObj;
   for (const key of path) {
     if (current[key] === undefined) {
       console.warn(
@@ -181,7 +181,7 @@ export const getColor = (
       );
       return "#000000"; // Fallback
     }
-    current = current[key];
+    current = current[key] as Record<string, unknown>;
   }
 
   return current;
@@ -194,13 +194,13 @@ export const generateCSSVariables = (
   const colorObj = isDark ? darkColors : colors;
   const variables: Record<string, string> = {};
 
-  const flattenColors = (obj: any, prefix: string = "") => {
+  const flattenColors = (obj: Record<string, unknown>, prefix: string = "") => {
     for (const [key, value] of Object.entries(obj)) {
       const fullKey = prefix ? `${prefix}-${key}` : key;
       if (typeof value === "string") {
         variables[`--color-${fullKey}`] = value;
       } else if (typeof value === "object" && value !== null) {
-        flattenColors(value, fullKey);
+        flattenColors(value as Record<string, unknown>, fullKey);
       }
     }
   };
