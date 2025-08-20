@@ -44,8 +44,11 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{json,md,yml,yaml,astro,css}": [
+    "*.{json,md,yml,yaml,css}": [
       "prettier --write"
+    ],
+    "*.astro": [
+      "eslint --fix"
     ]
   },
   "config": {

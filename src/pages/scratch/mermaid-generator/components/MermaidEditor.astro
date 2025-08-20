@@ -37,10 +37,10 @@ import MermaidControls from "./MermaidControls.astro";
 </style>
 
 <script>
-  import { setupEditor } from "../shared/core/editor.js";
+  import { initializeEditor } from "../shared/core/editor.js";
 
   // Initialize editor when component is mounted
   document.addEventListener("DOMContentLoaded", () => {
-    setupEditor();
+    initializeEditor();
   });
 </script>
