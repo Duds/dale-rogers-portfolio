@@ -51,12 +51,12 @@ function main() {
   const cssFiles = allCssFiles.filter(
     (file) => path.basename(file) !== "base.css"
   );
-  for (const file: string of cssFiles) {
+  for (const file of cssFiles) {
     lintFile(file);
   }
   // Check <style> blocks in Astro components
   const astroFiles = globSync("src/components/**/*.astro");
-  for (const file: string of astroFiles) {
+  for (const file of astroFiles) {
     lintAstroFile(file);
   }
 }
