@@ -1,5 +1,6 @@
 name: Deploy to Azure
 # This workflow handles deployment to Azure Web App
+# TESTING: Triggering deployment to verify staging environment setup
 #
 # HUSKY ISSUE FIX:
 # The original package.json contains a "prepare": "husky" script that runs during
