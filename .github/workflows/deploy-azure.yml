@@ -76,6 +76,12 @@ jobs:
 
       - name: Deploy to Azure Web App
         run: |
+          # Create package.json with start script
+          echo '{"scripts":{"start":"node server/entry.mjs"}}' > dist/package.json
+
+          # Copy package manager files
+          cp pnpm-lock.yaml dist/
+
           # Create a zip file of the dist directory
           cd dist
           zip -r ../deployment.zip .
