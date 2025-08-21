@@ -230,16 +230,20 @@ jobs:
 
           # Create deployment package with only essential files
           # Instead of excluding files, we'll only include what we need
-          # We're currently in the dist directory, so we need to go back to project root first
-          # GitHub Actions has nested structure: /work/repo-name/repo-name/dist/
-          # We need to go up THREE levels: dist -> dale-rogers-portfolio -> dale-rogers-portfolio -> work
-          cd ../../..
+          # Use GitHub Actions workspace variable for reliable path resolution
+          # This avoids the complexity of relative path navigation
+          echo "📁 Current directory: $(pwd)"
+          echo "📁 GitHub workspace: $GITHUB_WORKSPACE"
+
+          # Go to the workspace root (where the dist directory is located)
+          cd "$GITHUB_WORKSPACE"
 
           # Create a clean deployment directory
           mkdir -p deployment-package
           cd deployment-package
 
-          # Copy only essential files (we're now in deployment-package, so dist is at ../dist)
+          # Copy only essential files from the dist directory
+          echo "📦 Copying essential files from dist directory..."
           cp -r ../dist/server ./
           cp -r ../dist/client ./
           cp ../dist/entry.mjs ./
