@@ -111,7 +111,7 @@ jobs:
                 engines: pkg.engines,
                 dependencies: pkg.dependencies,
                 scripts: {
-                  start: 'node server/entry.mjs'
+                  start: 'node entry.mjs'
                 }
               };
 
@@ -195,7 +195,7 @@ jobs:
           export HOST=0.0.0.0
           export NODE_ENV=production
           cd /home/site/wwwroot
-          exec node server/entry.mjs
+          exec node entry.mjs
           EOF
 
           chmod +x dist/start.sh
