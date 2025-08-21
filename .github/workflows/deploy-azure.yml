@@ -233,6 +233,8 @@ jobs:
             -x ".pnpm-store/*" \
             -x "node_modules/.pnpm/*" \
             -x "node_modules/@iconify-icons/*" \
+            -x "node_modules/lucide-astro/dist/*" \
+            -x "node_modules/lucide-react/dist/*" \
             -x "*.map" \
             -x "*.d.ts" \
             -x "tests/*" \
