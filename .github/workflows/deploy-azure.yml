@@ -225,28 +225,29 @@ jobs:
           pnpm install --prod --no-frozen-lockfile --ignore-scripts
 
           # We're already in the dist directory, so no need to cd back and forth
-          # Create a lean deployment package (exclude unnecessary files)
+          # Create a lean deployment package (only include essential files)
           echo "📦 Creating optimized deployment package..."
 
           # Create deployment package with only essential files
-          zip -r ../deployment.zip . \
-            -x ".pnpm-store/*" \
-            -x "node_modules/.pnpm/*" \
-            -x "node_modules/@iconify-icons/*" \
-            -x "node_modules/lucide-astro/dist/*" \
-            -x "node_modules/lucide-react/dist/*" \
-            -x "node_modules/@iconify/*" \
-            -x "node_modules/*.map" \
-            -x "node_modules/*.d.ts" \
-            -x "*.map" \
-            -x "*.d.ts" \
-            -x "tests/*" \
-            -x "__tests__/*" \
-            -x "*.test.*" \
-            -x "*.spec.*"
-
-          # Go back to root directory for deployment
+          # Instead of excluding files, we'll only include what we need
           cd ..
+
+          # Create a clean deployment directory
+          mkdir -p deployment-package
+          cd deployment-package
+
+          # Copy only essential files
+          cp -r ../dist/server ./
+          cp -r ../dist/client ./
+          cp -r ../dist/entry.mjs ./
+          cp ../dist/package.json ./
+
+          # Create the deployment zip from the clean directory
+          zip -r ../deployment.zip .
+
+          # Clean up
+          cd ..
+          rm -rf deployment-package
 
           # Deploy using Azure CLI with environment-specific configuration
           echo "🚀 Deploying to Azure Web App: ${{ env.WEBAPP_NAME }}"
