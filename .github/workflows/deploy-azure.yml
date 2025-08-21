@@ -236,10 +236,10 @@ jobs:
           mkdir -p deployment-package
           cd deployment-package
 
-          # Copy only essential files
+          # Copy only essential files (we're now in deployment-package, so dist is at ../dist)
           cp -r ../dist/server ./
           cp -r ../dist/client ./
-          cp -r ../dist/entry.mjs ./
+          cp ../dist/entry.mjs ./
           cp ../dist/package.json ./
 
           # Create the deployment zip from the clean directory
