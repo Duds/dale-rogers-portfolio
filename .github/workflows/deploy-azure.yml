@@ -238,12 +238,27 @@ jobs:
           # Go to the workspace root (where the dist directory is located)
           cd "$GITHUB_WORKSPACE"
 
+          # Debug: show what's in the workspace root
+          echo "📁 Workspace root contents:"
+          ls -la
+          echo "📁 Looking for dist directory..."
+          if [ -d "dist" ]; then
+            echo "✅ dist directory found at workspace root"
+            ls -la dist/
+          else
+            echo "❌ dist directory not found at workspace root"
+            echo "📁 Searching for dist directory..."
+            find . -name "dist" -type d 2>/dev/null || echo "No dist directory found"
+          fi
+
           # Create a clean deployment directory
           mkdir -p deployment-package
           cd deployment-package
 
           # Copy only essential files from the dist directory
+          # Since we're in deployment-package and dist is at the same level, we use ../dist/
           echo "📦 Copying essential files from dist directory..."
+          echo "📁 Copying from: ../dist/"
           cp -r ../dist/server ./
           cp -r ../dist/client ./
           cp ../dist/entry.mjs ./
