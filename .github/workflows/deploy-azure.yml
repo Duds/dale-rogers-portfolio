@@ -255,7 +255,7 @@ jobs:
           mkdir -p deployment-package
           cd deployment-package
 
-          # Copy only essential files from the dist directory
+                    # Copy only essential files from the dist directory
           # Since we're in deployment-package and dist is at the same level, we use ../dist/
           echo "📦 Copying essential files from dist directory..."
           echo "📁 Copying from: ../dist/"
@@ -281,20 +281,6 @@ jobs:
             exit 1
           fi
 
-          # Look for entry.mjs file - it might be in a different location
-          if [ -f "../dist/entry.mjs" ]; then
-            echo "✅ Copying entry.mjs..."
-            cp ../dist/entry.mjs ./
-          elif [ -f "../dist/server/entry.mjs" ]; then
-            echo "✅ Copying entry.mjs from server subdirectory..."
-            cp ../dist/server/entry.mjs ./
-          else
-            echo "❌ entry.mjs not found in dist or dist/server"
-            echo "📁 Searching for entry.mjs..."
-            find ../dist -name "entry.mjs" 2>/dev/null || echo "No entry.mjs found"
-            exit 1
-          fi
-
           # Copy package.json
           if [ -f "../dist/package.json" ]; then
             echo "✅ Copying package.json..."
@@ -303,6 +289,12 @@ jobs:
             echo "❌ package.json not found in dist"
             exit 1
           fi
+
+          # Verify the final structure
+          echo "📁 Final deployment package structure:"
+          ls -la
+          echo "📁 Server directory contents:"
+          ls -la server/
 
           # Create the deployment zip from the clean directory
           zip -r ../deployment.zip .
