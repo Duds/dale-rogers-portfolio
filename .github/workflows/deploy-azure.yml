@@ -232,7 +232,8 @@ jobs:
           # Instead of excluding files, we'll only include what we need
           # We're currently in the dist directory, so we need to go back to project root first
           # GitHub Actions has nested structure: /work/repo-name/repo-name/dist/
-          cd ../..
+          # We need to go up THREE levels: dist -> dale-rogers-portfolio -> dale-rogers-portfolio -> work
+          cd ../../..
 
           # Create a clean deployment directory
           mkdir -p deployment-package
