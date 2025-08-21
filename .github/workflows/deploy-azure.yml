@@ -238,6 +238,13 @@ jobs:
           cd deployment-package
 
           # Copy only essential files (we're now in deployment-package, so dist is at ../dist)
+          # Debug: show current directory and what we're trying to copy
+          echo "Current directory: $(pwd)"
+          echo "Contents of parent directory:"
+          ls -la ../
+          echo "Contents of ../dist:"
+          ls -la ../dist/
+
           cp -r ../dist/server ./
           cp -r ../dist/client ./
           cp ../dist/entry.mjs ./
