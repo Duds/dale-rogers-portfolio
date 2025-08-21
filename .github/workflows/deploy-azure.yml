@@ -259,10 +259,50 @@ jobs:
           # Since we're in deployment-package and dist is at the same level, we use ../dist/
           echo "📦 Copying essential files from dist directory..."
           echo "📁 Copying from: ../dist/"
-          cp -r ../dist/server ./
-          cp -r ../dist/client ./
-          cp ../dist/entry.mjs ./
-          cp ../dist/package.json ./
+
+          # Check what files actually exist in the dist directory
+          echo "📁 Files in dist directory:"
+          ls -la ../dist/
+
+          # Copy server and client directories
+          if [ -d "../dist/server" ]; then
+            echo "✅ Copying server directory..."
+            cp -r ../dist/server ./
+          else
+            echo "❌ server directory not found in dist"
+            exit 1
+          fi
+
+          if [ -d "../dist/client" ]; then
+            echo "✅ Copying client directory..."
+            cp -r ../dist/client ./
+          else
+            echo "❌ client directory not found in dist"
+            exit 1
+          fi
+
+          # Look for entry.mjs file - it might be in a different location
+          if [ -f "../dist/entry.mjs" ]; then
+            echo "✅ Copying entry.mjs..."
+            cp ../dist/entry.mjs ./
+          elif [ -f "../dist/server/entry.mjs" ]; then
+            echo "✅ Copying entry.mjs from server subdirectory..."
+            cp ../dist/server/entry.mjs ./
+          else
+            echo "❌ entry.mjs not found in dist or dist/server"
+            echo "📁 Searching for entry.mjs..."
+            find ../dist -name "entry.mjs" 2>/dev/null || echo "No entry.mjs found"
+            exit 1
+          fi
+
+          # Copy package.json
+          if [ -f "../dist/package.json" ]; then
+            echo "✅ Copying package.json..."
+            cp ../dist/package.json ./
+          else
+            echo "❌ package.json not found in dist"
+            exit 1
+          fi
 
           # Create the deployment zip from the clean directory
           zip -r ../deployment.zip .
