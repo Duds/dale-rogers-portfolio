@@ -7,6 +7,8 @@ import Layout from "@/layouts/BaseLayout.astro";
 import ArticleCard from "@/components/features/articles/components/ArticleCard.astro";
 import Pagination from "@/components/ui/Pagination.astro";
 import PageHeader from "@/components/ui/PageHeader.astro";
+import Container from "@/components/layout/Container.astro";
+import "@/styles/components/articles-page.css";
 
 export const prerender = true;
 
@@ -39,45 +41,100 @@ const getPageUrl = (pageNum: number) => {
 };
 ---
 
-<Layout title="Articles | Dale Rogers">
-  <PageHeader
-    title="Articles"
-    description="Thoughts and insights on service design, digital strategy, and technology"
-  />
+<Layout
+  title="Articles | Dale Rogers - Service Designer and Digital Strategist"
+  description="Thoughts and insights on service design, digital strategy, and technology"
+>
+  <Container narrow={true}>
+    <PageHeader
+      title="Articles"
+      description="Thoughts and insights on service design, digital strategy, and technology"
+    />
+  </Container>
 
-  <div class="container mx-auto px-4 py-12">
-    <div
-      class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-      id="articles-grid"
-    >
+  <Container>
+    <div class="articles-page">
+      <!-- Results Summary -->
+      <div class="articles-results-summary">
+        <p class="articles-results-summary__text">
+          Showing <span class="articles-results-summary__count">
+            {page.data.length}
+          </span> of {page.data.length * page.lastPage} articles
+          {
+            page.lastPage > 1 &&
+              ` (Page ${page.currentPage} of ${page.lastPage})`
+          }
+        </p>
+      </div>
+
+      <!-- Articles Grid -->
+      <div
+        class="articles-grid"
+        id="articles-grid"
+        role="list"
+        aria-label="Articles"
+        aria-live="polite"
+        aria-atomic="false"
+      >
+        {
+          page.data.map((article) => (
+            <div role="listitem" class="articles-grid__item">
+              <ArticleCard
+                title={article.data.title}
+                description={article.data.description}
+                pubDate={article.data.pubDate}
+                author={article.data.author}
+                tags={article.data.tags}
+                href={`/articles/${article.slug}`}
+                coverImage={article.data.coverImage}
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Pagination -->
       {
-        page.data.map((article) => (
-          <ArticleCard
-            title={article.data.title}
-            description={article.data.description}
-            pubDate={article.data.pubDate}
-            author={article.data.author}
-            tags={article.data.tags}
-            href={`/articles/${article.slug}`}
-            coverImage={article.data.coverImage}
+        page.lastPage > 1 && (
+          <Pagination
+            currentPage={page.currentPage}
+            totalPages={page.lastPage}
+            getPageUrl={getPageUrl}
           />
-        ))
+        )
+      }
+
+      <!-- Enhanced Empty State -->
+      {
+        page.data.length === 0 && (
+          <div class="empty-state" role="status" aria-live="polite">
+            <div class="empty-state__content">
+              <div class="empty-state__icon">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+              </div>
+              <h3 class="empty-state__title">No Articles Yet</h3>
+              <p class="empty-state__description">
+                I'm currently working on some exciting content. Check back soon
+                for new articles and insights!
+              </p>
+            </div>
+          </div>
+        )
       }
     </div>
-
-    <Pagination
-      currentPage={page.currentPage}
-      totalPages={page.lastPage}
-      getPageUrl={getPageUrl}
-    />
-  </div>
+  </Container>
 </Layout>
 
-<style>
-  @reference "tailwindcss";
 
-  /* Hover effect for article cards */
-  .group:hover h3 {
-    @apply text-purple-600 dark:text-purple-400;
-  }
-</style>

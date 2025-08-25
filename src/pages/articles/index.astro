@@ -1,67 +1,80 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
+import Layout from "@/layouts/BaseLayout.astro";
 import Container from "@/components/layout/Container.astro";
-import { getCollection } from "astro:content";
-import FormattedDate from "@/components/ui/FormattedDate.astro";
-import TagList from "@/components/ui/TagList.astro";
-
-const articles = await getCollection("articles", ({ data }) => {
-  return !data.draft;
-});
-
-// Sort articles by date in descending order
-const sortedArticles = articles.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+import PageHeader from "@/components/ui/PageHeader.astro";
+import "@/styles/components/articles-page.css";
 
 export const prerender = true;
-
-// Add layout and define a redirect
-import Layout from "@/layouts/BaseLayout.astro";
 ---
 
-<Layout title="Redirecting to Articles">
-  <meta http-equiv="refresh" content="0;url=/articles/1" />
-  <p>Redirecting to <a href="/articles/1">Articles</a>...</p>
-</Layout>
-
-<BaseLayout
-  title="Articles | Dale Rogers"
+<Layout
+  title="Articles | Dale Rogers - Service Designer and Digital Strategist"
   description="Thoughts and insights on service design, digital strategy, and technology"
 >
+  <Container narrow={true}>
+    <PageHeader
+      title="Articles"
+      description="Thoughts and insights on service design, digital strategy, and technology"
+    />
+  </Container>
+
   <Container>
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl font-bold mb-8">Articles</h1>
-      <div class="space-y-12">
-        {
-          sortedArticles.map((article) => (
-            <article class="group">
-              <a href={`/articles/${article.slug}`} class="block">
-                {article.data.coverImage && (
-                  <img
-                    src={article.data.coverImage}
-                    alt={article.data.title}
-                    class="w-full h-64 object-cover rounded-lg mb-4 transition-transform group-hover:scale-102"
-                  />
-                )}
-                <div class="space-y-2">
-                  <h2 class="text-2xl font-bold group-hover:text-primary transition-colors">
-                    {article.data.title}
-                  </h2>
-                  <div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
-                    <FormattedDate date={article.data.pubDate} />
-                    <span>by {article.data.author}</span>
+    <div class="articles-page">
+      <!-- Skeleton Loading -->
+      <div
+        class="articles-skeleton"
+        role="status"
+        aria-label="Loading articles"
+      >
+        <!-- Results Summary Skeleton -->
+        <div class="articles-results-summary">
+          <div class="articles-results-summary__skeleton">
+            <div class="skeleton-line skeleton-line--short"></div>
+          </div>
+        </div>
+
+        <!-- Articles Grid Skeleton -->
+        <div class="articles-grid articles-grid--skeleton">
+          {
+            Array.from({ length: 6 }).map(() => (
+              <div class="articles-grid__item articles-grid__item--skeleton">
+                <div class="article-skeleton">
+                  <div class="article-skeleton__image" />
+                  <div class="article-skeleton__content">
+                    <div class="article-skeleton__meta">
+                      <div class="skeleton-line skeleton-line--short" />
+                      <div class="skeleton-line skeleton-line--short" />
+                    </div>
+                    <div class="article-skeleton__title skeleton-line" />
+                    <div class="article-skeleton__description">
+                      <div class="skeleton-line" />
+                      <div class="skeleton-line skeleton-line--short" />
+                    </div>
+                    <div class="article-skeleton__tags">
+                      <div class="skeleton-tag" />
+                      <div class="skeleton-tag" />
+                      <div class="skeleton-tag" />
+                    </div>
                   </div>
-                  {article.data.tags && <TagList tags={article.data.tags} />}
-                  <p class="text-gray-600 dark:text-gray-400 line-clamp-3">
-                    {article.data.description}
-                  </p>
                 </div>
-              </a>
-            </article>
-          ))
-        }
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Pagination Skeleton -->
+        <div class="pagination-skeleton">
+          <div class="skeleton-button skeleton-button--prev"></div>
+          <div class="skeleton-button skeleton-button--next"></div>
+        </div>
       </div>
     </div>
   </Container>
-</BaseLayout>
+
+  <script>
+    // Redirect to first page after a brief delay to show skeleton
+    setTimeout(() => {
+      window.location.href = "/articles/1";
+    }, 1500);
+  </script>
+</Layout>

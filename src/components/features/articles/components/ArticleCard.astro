@@ -17,7 +17,7 @@ import FormattedDate from "@/components/ui/FormattedDate.astro";
 ---
 
 <article
-  class="group bg-card dark:bg-card-dark rounded-card shadow-soft dark:shadow-soft-dark overflow-hidden transition-all duration-300 hover:shadow-elevated dark:hover:shadow-elevated-dark hover:-translate-y-1"
+  class="group bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl dark:hover:shadow-2xl hover:-translate-y-1"
 >
   {
     coverImage && (
@@ -37,19 +37,19 @@ import FormattedDate from "@/components/ui/FormattedDate.astro";
 
   <div class="p-6">
     <h3
-      class="text-2xl font-heading font-bold text-heading dark:text-heading-dark mb-2"
+      class="text-2xl font-bold text-gray-900 dark:text-white mb-2"
     >
       <a
         href={href}
-        class="hover:text-accent dark:hover:text-accent transition-colors"
+        class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
       >
         {title}
       </a>
     </h3>
 
-    <p class="mb-4" style="color: var(--color-text-secondary);">{description}</p>
+    <p class="mb-4 text-gray-600 dark:text-gray-400">{description}</p>
 
-    <div class="flex flex-wrap gap-md mb-6 text-sm" style="color: var(--color-text-secondary);">
+    <div class="flex flex-wrap gap-4 mb-6 text-sm text-gray-600 dark:text-gray-400">
       <div>
         <FormattedDate date={pubDate} />
       </div>
