@@ -25,7 +25,8 @@ const tags = Array.from(
 ).sort();
 
 // Get current page from URL params
-const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
+const pageParam = Astro.url.searchParams.get("page");
+const currentPage = pageParam && !isNaN(parseInt(pageParam, 10)) ? parseInt(pageParam, 10) : 1;
 const totalPages = Math.ceil(sortedCaseStudies.length / ITEMS_PER_PAGE);
 
 // Validate current page
