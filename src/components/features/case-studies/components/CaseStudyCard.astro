@@ -46,15 +46,14 @@ import "@/styles/components/case-studies.css";
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500" />
 
-        <!-- Client badge overlay -->
-        <div class="absolute top-4 left-4">
-          <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-white/95 dark:bg-black/95  dark:text-white backdrop-blur-sm shadow-lg border border-white/20 dark:border-black/20" style="color: var(--color-text-primary);">
+        <!-- Badge container with flexbox for proper stacking -->
+        <div class="absolute top-4 left-4 flex flex-col gap-2 max-w-[calc(100%-2rem)]">
+          <!-- Client badge -->
+          <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-white/95 dark:bg-black/95 dark:text-white backdrop-blur-sm shadow-lg border border-white/20 dark:border-black/20 break-words text-wrap" style="color: var(--color-text-primary);">
             {client}
           </span>
-        </div>
-
-        <!-- Industry badge overlay -->
-        <div class="absolute top-4 right-4">
+          
+          <!-- Industry badge -->
           <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-orange-600/90 text-white backdrop-blur-sm shadow-lg" style="background-color: var(--color-accent-main);">
             {industry}
           </span>
