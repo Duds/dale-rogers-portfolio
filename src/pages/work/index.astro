@@ -2,7 +2,6 @@
 import Layout from "@/layouts/BaseLayout.astro";
 import Container from "@/components/layout/Container.astro";
 import PageHeader from "@/components/ui/PageHeader.astro";
-import Skeleton from "@/components/ui/Skeleton.astro";
 import "@/styles/components/work-page.css";
 
 export const prerender = true;
@@ -30,7 +29,7 @@ export const prerender = true;
         <!-- Results Summary Skeleton -->
         <div class="work-results-summary">
           <div class="work-results-summary__skeleton">
-            <Skeleton className="h-4 w-1/3" />
+            <div class="skeleton-line skeleton-line--short"></div>
           </div>
         </div>
 
@@ -40,23 +39,23 @@ export const prerender = true;
             Array.from({ length: 6 }).map(() => (
               <div class="case-studies-grid__item case-studies-grid__item--skeleton">
                 <div class="case-study-skeleton">
-                  <Skeleton className="w-full h-48" />
+                  <div class="case-study-skeleton__image" />
                   <div class="case-study-skeleton__content">
                     <div class="case-study-skeleton__badges">
-                      <Skeleton className="h-6 w-32 rounded-full" />
-                      <Skeleton className="h-6 w-24 rounded-full" />
+                      <div class="skeleton-badge skeleton-badge--client" />
+                      <div class="skeleton-badge skeleton-badge--industry" />
                     </div>
-                    <Skeleton className="h-4 w-full" />
+                    <div class="case-study-skeleton__title skeleton-line" />
                     <div class="case-study-skeleton__description">
-                      <Skeleton className="h-4 w-full" />
-                      <Skeleton className="h-4 w-1/2" />
+                      <div class="skeleton-line" />
+                      <div class="skeleton-line skeleton-line--short" />
                     </div>
                     <div class="case-study-skeleton__tags">
-                      <Skeleton className="h-6 w-16 rounded-full" />
-                      <Skeleton className="h-6 w-16 rounded-full" />
-                      <Skeleton className="h-6 w-16 rounded-full" />
+                      <div class="skeleton-tag" />
+                      <div class="skeleton-tag" />
+                      <div class="skeleton-tag" />
                     </div>
-                    <Skeleton className="h-4 w-24" />
+                    <div class="case-study-skeleton__link skeleton-line skeleton-line--short" />
                   </div>
                 </div>
               </div>
@@ -66,8 +65,8 @@ export const prerender = true;
 
         <!-- Pagination Skeleton -->
         <div class="pagination-skeleton">
-          <Skeleton className="h-10 w-24" />
-          <Skeleton className="h-10 w-24" />
+          <div class="skeleton-button skeleton-button--prev"></div>
+          <div class="skeleton-button skeleton-button--next"></div>
         </div>
       </div>
     </div>

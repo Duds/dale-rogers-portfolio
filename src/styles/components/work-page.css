@@ -217,6 +217,14 @@
   @apply mb-8;
 }
 
+.skeleton-line {
+  @apply bg-gray-200 dark:bg-gray-700 rounded h-4 mb-2;
+}
+
+.skeleton-line--short {
+  @apply w-1/3;
+}
+
 .case-studies-grid--skeleton .case-studies-grid__item {
   @apply opacity-50;
 }
@@ -224,6 +232,10 @@
 .case-study-skeleton {
   @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden;
   height: 400px;
+}
+
+.case-study-skeleton__image {
+  @apply bg-gray-200 dark:bg-gray-700 w-full h-48;
 }
 
 .case-study-skeleton__content {
@@ -234,6 +246,22 @@
   @apply flex flex-col gap-2;
 }
 
+.skeleton-badge {
+  @apply bg-gray-200 dark:bg-gray-700 rounded-full h-6;
+}
+
+.skeleton-badge--client {
+  @apply w-32;
+}
+
+.skeleton-badge--industry {
+  @apply w-24;
+}
+
+.case-study-skeleton__title {
+  @apply w-full;
+}
+
 .case-study-skeleton__description {
   @apply space-y-2;
 }
@@ -242,6 +270,18 @@
   @apply flex gap-2 flex-wrap;
 }
 
+.skeleton-tag {
+  @apply bg-gray-200 dark:bg-gray-700 rounded-full h-6 w-16;
+}
+
+.case-study-skeleton__link {
+  @apply w-24;
+}
+
 .pagination-skeleton {
   @apply flex justify-between items-center mt-12;
+}
+
+.skeleton-button {
+  @apply bg-gray-200 dark:bg-gray-700 rounded-lg h-10 w-24;
 }
