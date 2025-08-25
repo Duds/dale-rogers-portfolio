@@ -1,12 +1,41 @@
 @reference "tailwindcss";
 
-/* TagList component styles migrated from global.css */
+/* TagList component styles - Enhanced badge design with theme tokens */
 .tag-list {
-  @apply inline-flex items-center px-3 py-1 rounded-full text-sm transition-colors;
+  @apply inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200;
+  background-color: var(--color-background-tertiary);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-secondary);
 }
+
+.tag-list:hover {
+  background-color: var(--color-accent-main);
+  color: var(--color-accent-contrast);
+  border-color: var(--color-accent-main);
+  transform: translateY(-0.125rem);
+  box-shadow: var(--shadow-sm);
+}
+
 .tag-list--active {
-  /* Token-based classes to add in markup: bg-tag-active text-tag-active-text dark:bg-tag-active-dark dark:text-tag-active-text-dark */
+  background-color: var(--color-accent-main);
+  color: var(--color-accent-contrast);
+  border-color: var(--color-accent-main);
+  box-shadow: var(--shadow-sm);
 }
+
+.tag-list--active:hover {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+}
+
 .tag-list--default {
-  /* Token-based classes to add in markup: bg-tag-default hover:bg-tag-default-hover dark:bg-tag-default-dark dark:hover:bg-tag-default-hover-dark */
+  background-color: var(--color-background-tertiary);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-secondary);
+}
+
+.tag-list--default:hover {
+  background-color: var(--color-accent-main);
+  color: var(--color-accent-contrast);
+  border-color: var(--color-accent-main);
 }

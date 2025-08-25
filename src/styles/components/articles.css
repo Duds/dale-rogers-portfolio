@@ -1,0 +1,185 @@
+@reference "tailwindcss";
+
+/* Articles Component Styles */
+
+/* Article Card */
+.article-card {
+  @apply rounded-3xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border;
+  background-color: var(--color-background-secondary);
+  border-color: var(--color-border-primary);
+}
+
+:root[data-theme='dark'] .article-card {
+  background-color: var(--color-background-primary);
+  border-color: var(--color-border-primary);
+}
+
+.article-card__image-container {
+  @apply relative aspect-[4/3] w-full overflow-hidden;
+}
+
+.article-card__image {
+  @apply w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110;
+}
+
+.article-card__overlay {
+  @apply absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-300;
+}
+
+.article-card__author-badge {
+  @apply absolute top-4 left-4 inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-black/90 text-neutral-900 dark:text-white backdrop-blur-sm;
+}
+
+.article-card__date-badge {
+  @apply absolute top-4 left-4 inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-sm shadow-lg;
+  background-color: var(--color-accent-main);
+  color: var(--color-accent-contrast);
+}
+
+.article-card__content {
+  @apply p-8;
+}
+
+.article-card__title {
+  @apply text-2xl font-bold leading-tight transition-colors duration-300 mb-4;
+  color: var(--color-text-primary);
+}
+
+.article-card__title:hover {
+  color: var(--color-accent-main);
+}
+
+:root[data-theme='dark'] .article-card__title {
+  color: var(--color-text-inverse);
+}
+
+:root[data-theme='dark'] .article-card__title:hover {
+  color: var(--color-accent-main);
+}
+
+.article-card__description {
+  @apply text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed text-base;
+  color: var(--color-text-secondary);
+}
+
+.article-card__metadata {
+  @apply space-y-4 mb-6;
+}
+
+.article-card__metadata-grid {
+  @apply grid grid-cols-1 gap-3 text-sm;
+}
+
+.article-card__metadata-item {
+  @apply flex items-center justify-between py-2 px-3 rounded-lg border;
+  background: linear-gradient(
+    to right,
+    var(--color-background-tertiary),
+    var(--color-background-secondary)
+  );
+  border-color: var(--color-border-primary);
+}
+
+.article-card__metadata-label {
+  @apply font-semibold uppercase tracking-wide text-xs;
+  color: var(--color-text-muted);
+}
+
+.article-card__metadata-value {
+  @apply font-medium;
+  color: var(--color-text-primary);
+}
+
+.article-card__tags {
+  @apply flex flex-wrap gap-2;
+}
+
+.article-card__tag {
+  @apply transition-all duration-300 border rounded-full px-3 py-1.5 text-xs font-medium;
+  background-color: var(--color-background-tertiary);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border-secondary);
+}
+
+.article-card__tag:hover {
+  background-color: var(--color-accent-main);
+  color: var(--color-accent-contrast);
+  border-color: var(--color-accent-main);
+  transform: translateY(-0.125rem);
+  box-shadow: var(--shadow-sm);
+}
+
+.article-card__link-section {
+  @apply mt-6 pt-4 border-t;
+  border-color: var(--color-border-primary);
+}
+
+.article-card__link {
+  @apply inline-flex items-center text-sm font-semibold transition-colors duration-300 group-hover:underline;
+  color: var(--color-accent-main);
+}
+
+.article-card__link:hover {
+  color: var(--color-accent-dark);
+}
+
+/* Enhanced hover effects */
+.article-card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.article-card:hover .article-card__image {
+  transform: scale(1.05);
+}
+
+/* Focus states for accessibility */
+.article-card__title:focus-visible,
+.article-card__link:focus-visible {
+  outline: 2px solid var(--color-accent-main);
+  outline-offset: 2px;
+  border-radius: 0.375rem;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .article-card__content {
+    @apply p-6;
+  }
+}
+
+@media (min-width: 1280px) {
+  .article-card__content {
+    @apply p-8;
+  }
+}
+
+/* Animation for card entrance */
+.article-card {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .article-card {
+    animation: none;
+  }
+
+  .article-card__image {
+    transition: none;
+  }
+
+  .article-card:hover .article-card__image {
+    transform: none;
+  }
+}

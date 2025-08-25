@@ -9,11 +9,11 @@ Components are organised by feature and type:
 ```
 src/components/
 ├── features/      # Feature-specific components
-│   ├── case-studies/
-│   ├── articles/
-│   └── scratch/
-├── layout/        # Layout components
-└── ui/           # Reusable UI components
+│   ├── case-studies/     # Case study components (CaseStudyCard, etc.)
+│   ├── articles/         # Article components (ArticleCard, etc.)
+│   └── scratch/          # Scratch post components
+├── layout/        # Layout components (Container, Header, Footer)
+└── ui/           # Reusable UI components (Button, Pagination, etc.)
 ```
 
 ## Component Requirements
@@ -74,11 +74,13 @@ Components require comprehensive JSDoc documentation:
 
 ### 3. Styling
 
-- Use TailwindCSS for styling
-- Follow BEM-like class naming
-- Support dark mode where applicable
-- Maintain responsive design
-- Use CSS variables for theming
+- Use TailwindCSS with theme tokens (CSS custom properties)
+- Follow BEM-like class naming conventions
+- Support both light and dark themes
+- Maintain responsive design principles
+- Use semantic color tokens (e.g., `var(--color-accent-main)`, `var(--color-text-primary)`)
+- Implement consistent hover effects and transitions
+- Follow component-specific CSS file structure in `src/styles/components/`
 
 ### 4. Accessibility
 

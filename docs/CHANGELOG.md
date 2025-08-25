@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Enhanced Articles page with consistent theming and best practices from Work page
+- Improved ArticleCard component with badge styling and theme token usage
+- Created articles-page.css with comprehensive theming and skeleton loading
+- Created articles.css for ArticleCard component styling
+- Enhanced TagList component with badge styling and rust color theming
+- Improved contrast and accessibility across Articles and Work pages
+- Consistent skeleton loading patterns for both Articles and Work pages
+- Unified theming approach using CSS custom properties throughout
+
 - Contact form with Nodemailer integration
 - Colophon page detailing site architecture
 - Privacy Policy page with comprehensive data handling information
@@ -52,6 +61,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Standardized Articles and Work pages to use identical structure and theming patterns
+- Updated ArticleCard component to match CaseStudyCard styling and accessibility
+- Migrated Articles page from direct content rendering to skeleton loading with redirect pattern
+- Enhanced Articles page with Container usage, results summary, and improved empty states
+- Unified hover effects and color schemes using rust accent colors across both pages
+- Improved spacing and typography consistency between Articles and Work pages
+
 - Migrated from PHP/MySQL to Astro
 - Updated hosting configuration for static deployment
 - Improved email handling with Gmail SMTP
@@ -91,6 +107,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced navigation with active state indicators
 
 ### Fixed
+
+- Removed date badge overlay from ArticleCard thumbnails for cleaner design
+- Fixed missing articles.css import error by creating comprehensive component styles
+- Resolved theming inconsistencies between Articles and Work pages
+- Improved contrast ratios and accessibility compliance across both pages
 
 - Accessibility issues in navigation components
 - Image optimisation pipeline

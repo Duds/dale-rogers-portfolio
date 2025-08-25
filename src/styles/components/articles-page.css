@@ -12,11 +12,13 @@
   }
 
   .articles-results-summary__text {
-    @apply text-lg text-gray-600 dark:text-gray-400;
+    @apply text-lg;
+    color: var(--color-text-secondary);
   }
 
   .articles-results-summary__count {
-    @apply font-semibold text-gray-900 dark:text-white;
+    @apply font-semibold;
+    color: var(--color-text-primary);
   }
 
   /* Enhanced Grid */
@@ -28,17 +30,25 @@
     @apply opacity-0 translate-y-4 transition-all duration-500 ease-out;
   }
 
-  /* Enhanced hover effects for article cards */
+  /* Enhanced hover effects for article cards with theme tokens */
   .articles-grid :global(.group:hover) {
     @apply transform transition-all duration-500;
   }
 
   .articles-grid :global(.group:hover h3 a) {
-    @apply text-orange-600 dark:text-orange-400;
+    color: var(--color-accent-main);
   }
 
-  .articles-grid :global(.group:hover .tag) {
-    @apply bg-orange-600 text-white;
+  .articles-grid :global(.group:hover .tag-list) {
+    background-color: var(--color-accent-main);
+    color: var(--color-accent-contrast);
+    border-color: var(--color-accent-main);
+  }
+
+  .articles-grid :global(.group:hover .tag-list--default) {
+    background-color: var(--color-accent-main);
+    color: var(--color-accent-contrast);
+    border-color: var(--color-accent-main);
   }
 
   /* Pagination */
@@ -56,15 +66,18 @@
   }
 
   .empty-state__icon {
-    @apply w-20 h-20 text-gray-400 dark:text-gray-600 mx-auto mb-8;
+    @apply w-20 h-20 mx-auto mb-8;
+    color: var(--color-text-muted);
   }
 
   .empty-state__title {
-    @apply text-3xl font-bold text-gray-900 dark:text-white mb-4;
+    @apply text-3xl font-bold mb-4;
+    color: var(--color-text-primary);
   }
 
   .empty-state__description {
-    @apply text-lg text-gray-600 dark:text-gray-400 leading-relaxed;
+    @apply text-lg leading-relaxed;
+    color: var(--color-text-secondary);
   }
 
   /* No Results State */
@@ -81,19 +94,33 @@
   }
 
   .no-results__icon {
-    @apply w-20 h-20 text-gray-400 dark:text-gray-600 mx-auto mb-8;
+    @apply w-20 h-20 mx-auto mb-8;
+    color: var(--color-text-muted);
   }
 
   .no-results__title {
-    @apply text-3xl font-bold text-gray-900 dark:text-white mb-4;
+    @apply text-3xl font-bold mb-4;
+    color: var(--color-text-primary);
   }
 
   .no-results__description {
-    @apply text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-8;
+    @apply text-lg leading-relaxed mb-8;
+    color: var(--color-text-secondary);
   }
 
   .no-results__button {
-    @apply inline-flex items-center px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-offset-2;
+    @apply inline-flex items-center px-6 py-3 text-white font-semibold rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    background-color: var(--color-accent-main);
+    box-shadow: var(--shadow-button);
+  }
+
+  .no-results__button:hover {
+    background-color: var(--color-accent-dark);
+    box-shadow: var(--shadow-button-hover);
+  }
+
+  .no-results__button:focus {
+    box-shadow: var(--shadow-focus);
   }
 
   /* Responsive adjustments */
@@ -114,15 +141,33 @@
     animation: fadeInUp 0.6s ease-out forwards;
   }
 
-  .articles-grid__item:nth-child(1) { animation-delay: 0.1s; }
-  .articles-grid__item:nth-child(2) { animation-delay: 0.2s; }
-  .articles-grid__item:nth-child(3) { animation-delay: 0.3s; }
-  .articles-grid__item:nth-child(4) { animation-delay: 0.4s; }
-  .articles-grid__item:nth-child(5) { animation-delay: 0.5s; }
-  .articles-grid__item:nth-child(6) { animation-delay: 0.6s; }
-  .articles-grid__item:nth-child(7) { animation-delay: 0.7s; }
-  .articles-grid__item:nth-child(8) { animation-delay: 0.8s; }
-  .articles-grid__item:nth-child(9) { animation-delay: 0.9s; }
+  .articles-grid__item:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .articles-grid__item:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .articles-grid__item:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .articles-grid__item:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  .articles-grid__item:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+  .articles-grid__item:nth-child(6) {
+    animation-delay: 0.6s;
+  }
+  .articles-grid__item:nth-child(7) {
+    animation-delay: 0.7s;
+  }
+  .articles-grid__item:nth-child(8) {
+    animation-delay: 0.8s;
+  }
+  .articles-grid__item:nth-child(9) {
+    animation-delay: 0.9s;
+  }
 
   @keyframes fadeInUp {
     from {
@@ -155,7 +200,8 @@
 }
 
 .skeleton-line {
-  @apply bg-gray-200 dark:bg-gray-700 rounded h-4 mb-2 relative overflow-hidden;
+  @apply rounded h-4 mb-2 relative overflow-hidden;
+  background-color: var(--color-background-tertiary);
   animation: skeleton-shimmer 2s infinite;
 }
 
@@ -168,12 +214,14 @@
 }
 
 .article-skeleton {
-  @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden;
+  @apply rounded-lg shadow-md overflow-hidden;
+  background-color: var(--color-background-secondary);
   height: 400px;
 }
 
 .article-skeleton__image {
-  @apply bg-gray-200 dark:bg-gray-700 w-full h-48 relative overflow-hidden;
+  @apply w-full h-48 relative overflow-hidden;
+  background-color: var(--color-background-tertiary);
   animation: skeleton-shimmer 2s infinite;
 }
 
@@ -198,7 +246,8 @@
 }
 
 .skeleton-tag {
-  @apply bg-gray-200 dark:bg-gray-700 rounded-full h-6 w-16 relative overflow-hidden;
+  @apply rounded-full h-6 w-16 relative overflow-hidden;
+  background-color: var(--color-background-tertiary);
   animation: skeleton-shimmer 2s infinite;
 }
 
@@ -207,7 +256,8 @@
 }
 
 .skeleton-button {
-  @apply bg-gray-200 dark:bg-gray-700 rounded-lg h-10 w-24 relative overflow-hidden;
+  @apply rounded-lg h-10 w-24 relative overflow-hidden;
+  background-color: var(--color-background-tertiary);
   animation: skeleton-shimmer 2s infinite;
 }
 
@@ -227,22 +277,9 @@
 .skeleton-button {
   background: linear-gradient(
     90deg,
-    var(--tw-gradient-from, #f3f4f6) 25%,
-    var(--tw-gradient-via, #e5e7eb) 37%,
-    var(--tw-gradient-to, #f3f4f6) 63%
-  );
-  background-size: 400px 100%;
-}
-
-.dark .skeleton-line,
-.dark .article-skeleton__image,
-.dark .skeleton-tag,
-.dark .skeleton-button {
-  background: linear-gradient(
-    90deg,
-    #374151 25%,
-    #4b5563 37%,
-    #374151 63%
+    var(--color-background-tertiary) 25%,
+    var(--color-background-primary) 37%,
+    var(--color-background-tertiary) 63%
   );
   background-size: 400px 100%;
 }

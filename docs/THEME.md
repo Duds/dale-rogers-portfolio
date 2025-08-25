@@ -7,6 +7,7 @@ This document provides an overview of the portfolio's design system documentatio
 ## **📚 Theme Documentation**
 
 ### **Current Theme System**
+
 - **[THEME_PROFESSIONAL.md](./THEME_PROFESSIONAL.md)** - **🎯 ACTIVE** Professional theme system inspired by Index Ventures
 - **[THEME_SIMPLIFIED.md](./THEME_SIMPLIFIED.md)** - Previous simplified theme system (archived)
 - **[THEME.md](./THEME.md)** - This overview document
@@ -16,20 +17,25 @@ This document provides an overview of the portfolio's design system documentatio
 The portfolio now uses a **Professional Design System** inspired by the sophisticated aesthetic of [Index Ventures](https://land-book.com/websites/62694-index-ventures-index-ventures). This system emphasizes:
 
 ### **Key Characteristics**
+
 - **Professional Credibility** - Colors that convey trust and expertise
 - **Modern Sophistication** - Clean, contemporary aesthetic
 - **Business Focus** - Design that supports professional communication
 - **Accessibility First** - WCAG AA compliance and readability
 - **Consistent Hierarchy** - Clear visual structure and information flow
+- **Australian Identity** - Warm rust accents that reflect local character
+- **Unified Theming** - Consistent use of CSS custom properties across all components
 
 ### **Color Palette**
+
 - **Primary**: Deep charcoal (`#1F2937`) - Professional, trustworthy
 - **Secondary**: Professional blue (`#3B82F6`) - Reliable, corporate
-- **Accent**: Emerald green (`#10B981`) - Growth, success
+- **Accent**: Rust orange (`#D97706`) - Warm, approachable, Australian-inspired
 - **Grey Scale**: Sophisticated 10-step neutral system
 - **Semantic Colors**: Clear success, warning, and error states
 
 ### **Typography**
+
 - **Font Family**: Inter (professional, authoritative)
 - **Font Weights**: 9-weight scale from thin to black
 - **Font Sizes**: 13-size scale from xs to 9xl
@@ -37,6 +43,7 @@ The portfolio now uses a **Professional Design System** inspired by the sophisti
 - **Letter Spacing**: 6-spacing scale for text effects
 
 ### **Spacing & Layout**
+
 - **Spacing Scale**: 30-value system from 0 to 96
 - **Shadow System**: Professional depth with 15 shadow variants
 - **Border Radius**: Refined 8-value radius system
@@ -45,16 +52,19 @@ The portfolio now uses a **Professional Design System** inspired by the sophisti
 ## **🔄 Theme Evolution**
 
 ### **Phase 1: Original Theme**
+
 - Complex color system with nested objects
 - Multiple font families and inconsistent sizing
 - Extensive spacing and shadow options
 
 ### **Phase 2: Simplified Theme**
+
 - Reduced color palette and simplified structure
 - Consolidated typography and spacing
 - Streamlined shadow and radius systems
 
 ### **Phase 3: Professional Theme** ⭐ **CURRENT**
+
 - Inspired by Index Ventures design aesthetic
 - Professional color palette for business credibility
 - Sophisticated typography and spacing systems
@@ -63,6 +73,7 @@ The portfolio now uses a **Professional Design System** inspired by the sophisti
 ## **📖 Documentation Structure**
 
 ### **THEME_PROFESSIONAL.md** (Active)
+
 - Complete professional theme system documentation
 - Color palette with usage guidelines
 - Typography system with examples
@@ -71,11 +82,13 @@ The portfolio now uses a **Professional Design System** inspired by the sophisti
 - Migration guide from previous themes
 
 ### **THEME_SIMPLIFIED.md** (Archived)
+
 - Previous simplified theme system
 - Reference for migration and comparison
 - Historical context for design decisions
 
 ### **THEME.md** (This Document)
+
 - Overview and navigation guide
 - Current theme status and characteristics
 - Theme evolution history
@@ -84,18 +97,21 @@ The portfolio now uses a **Professional Design System** inspired by the sophisti
 ## **🚀 Getting Started**
 
 ### **For New Developers**
+
 1. **Read**: [THEME_PROFESSIONAL.md](./THEME_PROFESSIONAL.md) for complete system overview
 2. **Explore**: Color palette and typography examples
 3. **Implement**: Use provided code examples and guidelines
 4. **Reference**: Token naming conventions and usage rules
 
 ### **For Designers**
+
 1. **Review**: Color palette and typography scales
 2. **Understand**: Design principles and philosophy
 3. **Apply**: Consistent visual hierarchy and spacing
 4. **Maintain**: Professional aesthetic and accessibility
 
 ### **For Content Creators**
+
 1. **Follow**: Typography hierarchy guidelines
 2. **Use**: Appropriate color combinations
 3. **Maintain**: Consistent spacing and layout
@@ -104,26 +120,28 @@ The portfolio now uses a **Professional Design System** inspired by the sophisti
 ## **🔧 Implementation**
 
 ### **Token Usage**
+
 ```typescript
 // Colors
-"bg-primary"           // Deep charcoal background
-"text-secondary"       // Professional blue text
-"border-grey-200"      // Light grey border
+'bg-primary'; // Deep charcoal background
+'text-secondary'; // Professional blue text
+'border-grey-200'; // Light grey border
 
 // Typography
-"text-3xl font-bold"   // Large bold heading
-"text-lg leading-relaxed" // Large relaxed body text
+'text-3xl font-bold'; // Large bold heading
+'text-lg leading-relaxed'; // Large relaxed body text
 
 // Spacing
-"p-6"                  // 24px padding
-"mb-8"                 // 32px bottom margin
+'p-6'; // 24px padding
+'mb-8'; // 32px bottom margin
 
 // Shadows
-"shadow-card"          // Card elevation
-"shadow-button-hover"  // Button hover depth
+'shadow-card'; // Card elevation
+'shadow-button-hover'; // Button hover depth
 ```
 
 ### **Component Examples**
+
 ```typescript
 // Professional button
 <button class="bg-primary text-white px-6 py-3 rounded-lg shadow-button hover:shadow-button-hover transition-all duration-300">
@@ -140,12 +158,14 @@ The portfolio now uses a **Professional Design System** inspired by the sophisti
 ## **📋 Maintenance**
 
 ### **Regular Updates**
+
 - **Color Audits**: Ensure accessibility compliance
 - **Typography Reviews**: Maintain readability standards
 - **Spacing Consistency**: Verify layout harmony
 - **Shadow Refinement**: Optimize depth perception
 
 ### **Version Control**
+
 - **Theme Changes**: Document in changelog
 - **Breaking Changes**: Provide migration guides
 - **Deprecation**: Graceful transition periods
@@ -154,12 +174,14 @@ The portfolio now uses a **Professional Design System** inspired by the sophisti
 ## **🎯 Future Considerations**
 
 ### **Potential Enhancements**
+
 - **Dark Mode**: Professional dark theme variant
 - **Component Library**: Storybook integration
 - **Design Tokens**: Figma plugin for designers
 - **Automation**: Automated accessibility testing
 
 ### **Scalability**
+
 - **New Components**: Consistent token usage
 - **Brand Evolution**: Flexible color system
 - **Platform Expansion**: Cross-platform consistency
