@@ -36,12 +36,12 @@ interface Props {
 
 const { page } = Astro.props as Props;
 
-const getPageUrl = (pageNum: number) => {
-  return pageNum === 1 ? "/work" : `/work/${pageNum}`;
-};
+  const getPageUrl = (pageNum: number) => {
+    return pageNum === 1 ? "/work/1" : `/work/${pageNum}`;
+  };
 ---
 
-<Layout 
+<Layout
   title="Work & Case Studies | Dale Rogers - Service Designer and Digital Strategist"
   description="Explore my portfolio of successful projects and learn how I've helped clients achieve their goals through innovative service design solutions."
 >
@@ -60,7 +60,10 @@ const getPageUrl = (pageNum: number) => {
           Showing <span class="work-results-summary__count">
             {page.data.length}
           </span> of {page.data.length * page.lastPage} case studies
-          {page.lastPage > 1 && ` (Page ${page.currentPage} of ${page.lastPage})`}
+          {
+            page.lastPage > 1 &&
+              ` (Page ${page.currentPage} of ${page.lastPage})`
+          }
         </p>
       </div>
 

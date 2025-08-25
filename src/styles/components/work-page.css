@@ -207,3 +207,124 @@
     }
   }
 }
+
+/* Skeleton Loading Styles */
+.work-skeleton {
+  @apply animate-pulse;
+}
+
+.work-results-summary__skeleton {
+  @apply mb-8;
+}
+
+.skeleton-line {
+  @apply bg-gray-200 dark:bg-gray-700 rounded h-4 mb-2;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-line--short {
+  @apply w-1/3;
+}
+
+.case-studies-grid--skeleton .case-studies-grid__item {
+  @apply opacity-50;
+}
+
+.case-study-skeleton {
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden;
+  height: 400px;
+}
+
+.case-study-skeleton__image {
+  @apply bg-gray-200 dark:bg-gray-700 w-full h-48;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.case-study-skeleton__content {
+  @apply p-4 space-y-3;
+}
+
+.case-study-skeleton__badges {
+  @apply flex flex-col gap-2;
+}
+
+.skeleton-badge {
+  @apply bg-gray-200 dark:bg-gray-700 rounded-full h-6;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-badge--client {
+  @apply w-32;
+}
+
+.skeleton-badge--industry {
+  @apply w-24;
+}
+
+.case-study-skeleton__title {
+  @apply w-full;
+}
+
+.case-study-skeleton__description {
+  @apply space-y-2;
+}
+
+.case-study-skeleton__tags {
+  @apply flex gap-2 flex-wrap;
+}
+
+.skeleton-tag {
+  @apply bg-gray-200 dark:bg-gray-700 rounded-full h-6 w-16;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.case-study-skeleton__link {
+  @apply w-24;
+}
+
+.pagination-skeleton {
+  @apply flex justify-between items-center mt-12;
+}
+
+.skeleton-button {
+  @apply bg-gray-200 dark:bg-gray-700 rounded-lg h-10 w-24;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.loading-message {
+  @apply fixed inset-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm flex items-center justify-center z-50;
+}
+
+.loading-message__content {
+  @apply text-center space-y-4;
+}
+
+.loading-message__spinner {
+  @apply w-12 h-12 border-4 border-orange-200 border-t-orange-600 rounded-full animate-spin mx-auto;
+}
+
+.loading-message__text {
+  @apply text-lg font-medium text-gray-700 dark:text-gray-300;
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Dark mode adjustments for skeleton */
+.dark .skeleton-line,
+.dark .case-study-skeleton__image,
+.dark .skeleton-badge,
+.dark .skeleton-tag,
+.dark .skeleton-button {
+  @apply bg-gray-700;
+}
+
+.dark .loading-message__spinner {
+  @apply border-orange-700 border-t-orange-400;
+}
