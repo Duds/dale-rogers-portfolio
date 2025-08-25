@@ -1,4 +1,7 @@
 ---
+import { ChevronRight } from 'lucide-astro';
+import "@/styles/components/case-studies.css";
+
 interface Props {
   title: string;
   description: string;
@@ -20,10 +23,6 @@ const {
   href,
   coverImage,
 } = Astro.props;
-
-import Tag from "@/components/ui/Tag.astro";
-import { ChevronRight } from 'lucide-astro';
-import "@/styles/components/case-studies.css";
 ---
 
 <article
@@ -47,12 +46,12 @@ import "@/styles/components/case-studies.css";
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500" />
 
         <!-- Badge container with flexbox for proper stacking -->
-        <div class="absolute top-4 left-4 flex flex-col gap-2">
+        <div class="absolute top-4 left-4 flex flex-col gap-2 max-w-[calc(100%-2rem)]">
           <!-- Client badge -->
           <span class="w-fit inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-white/95 dark:bg-black/95 dark:text-white backdrop-blur-sm shadow-lg border border-white/20 dark:border-black/20 break-words text-wrap" style="color: var(--color-text-primary);">
             {client}
           </span>
- 
+
           <!-- Industry badge -->
           <span class="w-fit inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-orange-600/90 text-white backdrop-blur-sm shadow-lg" style="background-color: var(--color-accent-main);">
             {industry}
@@ -94,12 +93,16 @@ import "@/styles/components/case-studies.css";
       </div>
     </div>
 
-    <!-- Tags with enhanced styling -->
+    <!-- Tags with badge styling -->
     <div class="flex flex-wrap gap-3 mb-6">
       {
         tags.slice(0, 3).map((tag) => (
-          <a href={`/tags/${tag.toLowerCase()}`} class="group/tag" aria-label={`View tag: ${tag}`}>
-            <Tag text={tag} clickable={true} class="group-hover/tag:bg-orange-700 group-hover/tag:text-white transition-all duration-300 text-sm" />
+          <a
+            href={`/tags/${tag.toLowerCase()}`}
+            class="group/tag inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 hover:bg-orange-200 dark:hover:bg-orange-800/50 transition-all duration-300 border border-orange-200 dark:border-orange-700"
+            aria-label={`View tag: ${tag}`}
+          >
+            {tag}
           </a>
         ))
       }
