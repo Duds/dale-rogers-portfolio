@@ -7,8 +7,6 @@ import Pagination from "@/components/ui/Pagination.astro";
 import Container from "@/components/layout/Container.astro";
 import "@/styles/components/work-page.css";
 
-export const prerender = true;
-
 // Pagination configuration
 const ITEMS_PER_PAGE = 6;
 
@@ -50,7 +48,7 @@ const getPageUrl = (page: number) => {
 };
 ---
 
-<Layout 
+<Layout
   title="Work & Case Studies | Dale Rogers - Service Designer and Digital Strategist"
   description="Explore my portfolio of successful projects and learn how I've helped clients achieve their goals through innovative service design solutions."
 >
@@ -123,8 +121,7 @@ const getPageUrl = (page: number) => {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
+                  d="M6 18L18 6M6 6l12 12"></path>
               </svg>
               Clear Filters
             </button>
@@ -170,13 +167,15 @@ const getPageUrl = (page: number) => {
       </div>
 
       <!-- Pagination -->
-      {totalPages > 1 && (
-        <Pagination
-          currentPage={validPage}
-          totalPages={totalPages}
-          getPageUrl={getPageUrl}
-        />
-      )}
+      {
+        totalPages > 1 && (
+          <Pagination
+            currentPage={validPage}
+            totalPages={totalPages}
+            getPageUrl={getPageUrl}
+          />
+        )
+      }
 
       <!-- Enhanced Empty State -->
       {
@@ -227,15 +226,18 @@ const getPageUrl = (page: number) => {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </div>
           <h3 class="no-results__title">No Results Found</h3>
           <p class="no-results__description">
             Try adjusting your filters or browse all case studies below.
           </p>
-          <button id="show-all-results" class="no-results__button" type="button">
+          <button
+            id="show-all-results"
+            class="no-results__button"
+            type="button"
+          >
             Show All Case Studies
           </button>
         </div>
