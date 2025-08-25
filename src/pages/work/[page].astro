@@ -1,0 +1,136 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+
+import Layout from "@/layouts/BaseLayout.astro";
+import CaseStudyCard from "@/components/features/case-studies/components/CaseStudyCard.astro";
+import Pagination from "@/components/ui/Pagination.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Container from "@/components/layout/Container.astro";
+import "@/styles/components/work-page.css";
+
+export const prerender = true;
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const ITEMS_PER_PAGE = 6;
+
+  const caseStudies = await getCollection("case-studies");
+
+  const sortedCaseStudies = caseStudies.sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+
+  return paginate(sortedCaseStudies, {
+    pageSize: ITEMS_PER_PAGE,
+  });
+};
+
+interface Props {
+  page: {
+    data: CollectionEntry<"case-studies">[];
+    currentPage: number;
+    lastPage: number;
+  };
+}
+
+const { page } = Astro.props as Props;
+
+const getPageUrl = (pageNum: number) => {
+  return pageNum === 1 ? "/work" : `/work/${pageNum}`;
+};
+---
+
+<Layout 
+  title="Work & Case Studies | Dale Rogers - Service Designer and Digital Strategist"
+  description="Explore my portfolio of successful projects and learn how I've helped clients achieve their goals through innovative service design solutions."
+>
+  <Container narrow={true}>
+    <PageHeader
+      title="Work & Case Studies"
+      description="Explore my portfolio of successful projects and learn how I've helped clients achieve their goals through innovative service design solutions."
+    />
+  </Container>
+
+  <Container>
+    <div class="work-page">
+      <!-- Results Summary -->
+      <div class="work-results-summary">
+        <p class="work-results-summary__text">
+          Showing <span class="work-results-summary__count">
+            {page.data.length}
+          </span> of {page.data.length * page.lastPage} case studies
+          {page.lastPage > 1 && ` (Page ${page.currentPage} of ${page.lastPage})`}
+        </p>
+      </div>
+
+      <!-- Case Studies Grid -->
+      <div
+        class="case-studies-grid"
+        id="case-studies-grid"
+        role="list"
+        aria-label="Case studies"
+        aria-live="polite"
+        aria-atomic="false"
+      >
+        {
+          page.data.map((study) => (
+            <div role="listitem" class="case-studies-grid__item">
+              <CaseStudyCard
+                title={study.data.title}
+                description={study.data.description}
+                client={study.data.client}
+                industry={study.data.industry}
+                duration={study.data.duration}
+                tags={study.data.tags}
+                href={`/work/${study.slug}`}
+                coverImage={study.data.coverImage}
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Pagination -->
+      {
+        page.lastPage > 1 && (
+          <Pagination
+            currentPage={page.currentPage}
+            totalPages={page.lastPage}
+            getPageUrl={getPageUrl}
+          />
+        )
+      }
+
+      <!-- Enhanced Empty State -->
+      {
+        page.data.length === 0 && (
+          <div class="empty-state" role="status" aria-live="polite">
+            <div class="empty-state__content">
+              <div class="empty-state__icon">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+              </div>
+              <h3 class="empty-state__title">No Case Studies Yet</h3>
+              <p class="empty-state__description">
+                I'm currently working on some exciting projects. Check back soon
+                for detailed case studies!
+              </p>
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </Container>
+</Layout>
