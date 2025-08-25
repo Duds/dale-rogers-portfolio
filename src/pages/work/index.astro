@@ -10,7 +10,7 @@ import "@/styles/components/work-page.css";
 export const prerender = true;
 
 // Pagination configuration
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 6;
 
 // Get all case studies and sort by publication date
 const caseStudies = await getCollection("case-studies");
@@ -54,10 +54,12 @@ const getPageUrl = (page: number) => {
   title="Work & Case Studies | Dale Rogers - Service Designer and Digital Strategist"
   description="Explore my portfolio of successful projects and learn how I've helped clients achieve their goals through innovative service design solutions."
 >
-  <PageHeader
-    title="Work & Case Studies"
-    description="Explore my portfolio of successful projects and learn how I've helped clients achieve their goals through innovative service design solutions."
-  />
+  <Container narrow={true}>
+    <PageHeader
+      title="Work & Case Studies"
+      description="Explore my portfolio of successful projects and learn how I've helped clients achieve their goals through innovative service design solutions."
+    />
+  </Container>
 
   <Container>
     <div class="work-page">
@@ -173,7 +175,6 @@ const getPageUrl = (page: number) => {
           currentPage={validPage}
           totalPages={totalPages}
           getPageUrl={getPageUrl}
-          class="work-pagination"
         />
       )}
 
