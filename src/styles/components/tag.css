@@ -2,10 +2,12 @@
 
 /* Professional Tag Component Styles with proper theme tokens */
 .tag {
-  @apply inline-flex items-center px-3 py-1 text-xs font-medium rounded-full transition-all duration-300;
-  background-color: var(--color-background-tertiary);
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-border-secondary);
+  @apply inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-300;
+  background-color: var(--color-accent-main);
+  color: var(--color-accent-contrast);
+  border: 1px solid var(--color-accent-main);
+  margin: 0.125rem;
+  min-width: fit-content;
 }
 
 .tag--clickable {
@@ -13,20 +15,34 @@
 }
 
 .tag--clickable:hover {
-  background-color: var(--color-border-primary);
-  color: var(--color-text-primary);
-  border-color: var(--color-border-primary);
+  background-color: var(--color-accent-dark);
+  color: var(--color-accent-contrast);
+  border-color: var(--color-accent-dark);
+  transform: translateY(-1px);
 }
 
 /* Dark mode adjustments */
 :root[data-theme="dark"] .tag {
-  background-color: var(--color-background-primary);
-  color: var(--color-text-secondary);
-  border-color: var(--color-border-secondary);
+  background-color: var(--color-accent-main);
+  color: var(--color-accent-contrast);
+  border-color: var(--color-accent-main);
 }
 
 :root[data-theme="dark"] .tag--clickable:hover {
-  background-color: var(--color-border-secondary);
-  color: var(--color-text-primary);
-  border-color: var(--color-text-tertiary);
+  background-color: var(--color-accent-dark);
+  color: var(--color-accent-contrast);
+  border-color: var(--color-accent-dark);
+}
+
+/* Ensure tags don't overlap */
+.tag + .tag {
+  margin-left: 0.25rem;
+}
+
+/* Responsive tag sizing */
+@media (max-width: 640px) {
+  .tag {
+    @apply px-2 py-1 text-xs;
+    margin: 0.125rem;
+  }
 }

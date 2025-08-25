@@ -65,8 +65,8 @@ const nextUrl = hasNext ? getPageUrl(currentPage + 1) : "#";
     class={`btn-base inline-flex items-center gap-2 px-6 py-3 rounded-full text-lg font-medium transition-all duration-normal
       ${
         hasPrevious
-          ? "bg-white dark:  dark:text-white hover: hover:text-white dark:hover:bg-white dark:hover: shadow-md hover:shadow-lg hover:-translate-y-0.5"
-          : " dark:  dark: cursor-not-allowed"
+          ? "bg-white dark:bg-gray-800 dark:text-white hover:bg-orange-50 hover:text-orange-700 dark:hover:bg-orange-900/20 dark:hover:text-orange-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+          : "bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed"
       }`}
     aria-disabled={!hasPrevious}
     tabindex={hasPrevious ? 0 : -1}
@@ -87,7 +87,7 @@ const nextUrl = hasNext ? getPageUrl(currentPage + 1) : "#";
   </a>
 
   <span
-    class="text-lg font-medium  dark:" style="color: var(--color-text-muted);" style="color: var(--color-text-secondary);"
+    class="text-lg font-medium text-gray-700 dark:text-gray-300"
     aria-live="polite"
   >
     Page {currentPage} of {totalPages}
@@ -98,8 +98,8 @@ const nextUrl = hasNext ? getPageUrl(currentPage + 1) : "#";
     class={`btn-base inline-flex items-center gap-2 px-6 py-3 rounded-full text-lg font-medium transition-all duration-normal
       ${
         hasNext
-          ? "bg-white dark:  dark:text-white hover: hover:text-white dark:hover:bg-white dark:hover: shadow-md hover:shadow-lg hover:-translate-y-0.5"
-          : " dark:  dark: cursor-not-allowed"
+          ? "bg-white dark:bg-gray-800 dark:text-white hover:bg-orange-50 hover:text-orange-700 dark:hover:bg-orange-900/20 dark:hover:text-orange-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+          : "bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed"
       }`}
     aria-disabled={!hasNext}
     tabindex={hasNext ? 0 : -1}
