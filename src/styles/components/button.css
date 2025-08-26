@@ -2,10 +2,29 @@
 
 /* Professional Button Component Styles with proper theme tokens */
 .button {
-  @apply inline-flex items-center gap-2 px-6 py-3 text-base font-medium transition-all duration-300 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
   transition:
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 0.2s;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
 }
 
 .button:hover,
@@ -66,18 +85,18 @@
 }
 
 /* Dark mode adjustments */
-:root[data-theme="dark"] .button--ghost {
+:root[data-theme='dark'] .button--ghost {
   border-color: var(--color-text-disabled);
   color: var(--color-text-disabled);
 }
 
-:root[data-theme="dark"] .button--ghost:hover {
+:root[data-theme='dark'] .button--ghost:hover {
   background-color: var(--color-text-primary);
   color: var(--color-text-inverse);
   border-color: var(--color-text-primary);
 }
 
-:root[data-theme="dark"] .button--ghost:hover {
+:root[data-theme='dark'] .button--ghost:hover {
   background-color: var(--color-text-inverse);
   color: var(--color-text-primary);
   border-color: var(--color-text-primary);

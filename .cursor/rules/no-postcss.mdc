@@ -1,0 +1,128 @@
+# No PostCSS Rule
+
+## 🚫 PostCSS is Forbidden
+
+**PostCSS is NOT allowed** in this project. We use Tailwind CSS v4 with the Vite plugin for optimal performance and developer experience.
+
+## ✅ Required Configuration
+
+### Tailwind CSS v4 Setup
+
+**Always configure Tailwind CSS v4 inside `astro.config.mjs`:**
+
+```typescript
+// astro.config.mjs - CORRECT
+import { defineConfig } from 'astro/config';
+import tailwind from '@tailwindcss/vite';
+
+export default defineConfig({
+  // ... other config
+  vite: {
+    plugins: [tailwind()],
+    // Tailwind CSS v4 processed through Vite plugin for best DX and HMR
+  },
+});
+```
+
+### CSS Import Structure
+
+**Main CSS file (`src/styles/global.css`):**
+```css
+@import "./generated-tokens.css";
+@import "tailwindcss";
+/* Other imports must come after Tailwind import */
+```
+
+**Component CSS files:**
+```css
+@reference "tailwindcss";
+
+.component {
+  @apply bg-white text-black;
+}
+```
+
+## ❌ Forbidden Patterns
+
+### Never Use These
+
+1. **PostCSS configuration files:**
+   - `postcss.config.js`
+   - `postcss.config.mjs`
+   - `postcss.config.cjs`
+
+2. **PostCSS packages:**
+   - `postcss`
+   - `autoprefixer`
+   - `@tailwindcss/postcss`
+   - Any PostCSS plugins
+
+3. **Separate Vite config for Tailwind:**
+   - `vite.config.ts` with Tailwind plugin
+   - Tailwind configuration outside Astro config
+
+4. **Legacy Tailwind directives:**
+   - `@tailwind base`
+   - `@tailwind components`
+   - `@tailwind utilities`
+
+## 🔧 Troubleshooting
+
+### If @apply Directives Don't Work
+
+**Check these common issues:**
+
+1. **Tailwind plugin in wrong location:**
+   - ❌ Separate `vite.config.ts` file
+   - ✅ Inside `astro.config.mjs` in `vite.plugins`
+
+2. **CSS import order:**
+   - ❌ `@import` statements after other directives
+   - ✅ All `@import` statements must come first
+
+3. **Missing @reference directive:**
+   - ❌ Component CSS files without `@reference "tailwindcss"`
+   - ✅ Every component CSS file needs the reference directive
+
+### Quick Fix
+
+```bash
+# If @apply directives aren't working:
+# 1. Move Tailwind plugin to astro.config.mjs
+# 2. Remove separate vite.config.ts
+# 3. Ensure CSS import order is correct
+# 4. Verify @reference directives are present
+```
+
+## 📚 Why This Rule Exists
+
+1. **Performance**: Tailwind CSS v4 with Vite plugin is faster than PostCSS
+2. **Simplicity**: No complex PostCSS configuration needed
+3. **Integration**: Better integration with Astro's build pipeline
+4. **Maintenance**: Fewer dependencies and configuration files
+5. **Experience**: Better hot module replacement and development experience
+
+## 🚨 Enforcement
+
+- **Build failures**: Any PostCSS usage will cause build failures
+- **Code reviews**: PostCSS-related changes will be rejected
+- **Dependencies**: PostCSS packages will be removed during dependency audits
+- **Documentation**: All PostCSS references will be updated to reflect current approach
+
+## 📝 Migration Notes
+
+If you encounter PostCSS-related code:
+
+1. **Remove PostCSS configuration files**
+2. **Move Tailwind plugin to `astro.config.mjs`**
+3. **Update CSS import structure**
+4. **Add `@reference "tailwindcss"` to component CSS files**
+5. **Test that `@apply` directives work correctly**
+
+---
+
+**Remember**: Tailwind CSS v4 + Vite plugin = Better performance, simpler configuration, and optimal developer experience! 🚀
+description:
+globs:
+alwaysApply: true
+---

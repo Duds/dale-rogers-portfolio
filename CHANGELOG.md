@@ -2,50 +2,63 @@
 
 All notable changes to this project will be documented in this file.
 
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 ## [Unreleased]
-
-### Added
-
-- Comprehensive image system using Unsplash stock photography
-- Image guidelines documentation (`docs/image-guidelines.md`)
-- Enhanced alt text for improved accessibility
-- Professional business imagery across all content types
-- **LazyImage Component**: Intersection observer-based lazy loading
-- **OptimizedImage Component**: WebP support with responsive images
-- **ImageCache Component**: Service worker-based caching strategies
-- **Automated Image Auditing**: Accessibility and performance compliance checking
-- **Service Worker**: Offline image caching and optimization
-- **Complete Article Coverage**: Added Unsplash cover images to all 15 articles
-
-### Changed
-
-- Replaced all missing/placeholder images with contextually appropriate alternatives
-- Optimized image selections for better visual consistency
-- Eliminated duplicate image usage across unrelated content
-- Updated profile image to professional business portrait
-- **Alt Text Optimization**: Shortened to meet WCAG character limits
-- **Performance Enhancement**: Implemented lazy loading and WebP support
-- **Caching Strategy**: Added intelligent image caching with multiple strategies
 
 ### Fixed
 
-- Missing cover images for case studies and services
-- Inconsistent image quality and relevance
-- Accessibility issues with missing alt text
-- Visual inconsistency across different content sections
-- **Alt Text Compliance**: All images now meet WCAG AA standards
-- **Performance Issues**: Lazy loading and caching for faster loading
-- **Accessibility Violations**: Automated auditing and compliance monitoring
+- **@apply directives not working**: Fixed Tailwind CSS v4 configuration issue where `@apply` directives were not being processed
+  - Moved Tailwind CSS Vite plugin configuration from separate `vite.config.ts` to `astro.config.mjs`
+  - Ensured proper integration with Astro's build pipeline
+  - All component CSS files now properly expand `@apply` directives
+- **CSS import order**: Fixed CSS import order to ensure all `@import` statements come before other directives
 
-### Technical
+### Added
 
-- Standardized image URL format with optimized Unsplash parameters
-- Implemented consistent image dimensions (2070px width minimum)
-- Added image metadata tracking for future maintenance
-- Created image inventory management system
-- **Lazy Loading Implementation**: Intersection observer with placeholder support
-- **WebP Format Support**: Automatic format detection and fallback
-- **Service Worker Integration**: Offline caching and background updates
-- **Automated Auditing**: Script-based compliance checking and reporting
+- **No PostCSS rule**: Created `.cursor/rules/no-postcss.mdc` to prevent PostCSS usage
+  - Enforces Tailwind CSS v4 with Vite plugin configuration
+  - Prevents configuration issues that cause `@apply` directive failures
+  - Documents correct CSS import structure and component CSS setup
 
-## [Previous Versions]
+### Changed
+
+- **Configuration structure**: Moved Tailwind CSS Vite plugin configuration to `astro.config.mjs`
+  - Removed separate `vite.config.ts` file
+  - Ensures proper integration with Astro's build process
+  - Maintains optimal developer experience with hot module replacement
+
+### Documentation
+
+- **Troubleshooting guide**: Added comprehensive troubleshooting section for `@apply` directive issues
+  - Documents symptoms, root causes, and solutions
+  - Provides correct vs. incorrect configuration examples
+  - Includes prevention tips and quick fixes
+
+## [0.0.1] - 2025-01-XX
+
+### Added
+
+- Initial project setup
+- Astro-based portfolio website
+- Tailwind CSS v4 with Vite plugin
+- Component-based architecture
+- Responsive design system
+- Dark/light theme support
+- Content management system
+- Testing infrastructure with Playwright
+- Storybook for component development
+- Comprehensive documentation
+
+### Changed
+
+- Migrated from React components to Astro components
+- Implemented new theme system with design tokens
+- Refactored CSS architecture for better maintainability
+
+### Removed
+
+- PostCSS dependencies and configuration
+- Legacy Tailwind CSS v3 configuration
+- React-specific dependencies and components
