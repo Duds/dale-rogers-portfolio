@@ -32,49 +32,48 @@
     },
     {
       "route": "/work/*",
-      "serve": "/work/index.html"
+      "rewrite": "/work/index.html"
     },
     {
       "route": "/articles/*",
-      "serve": "/articles/index.html"
+      "rewrite": "/articles/index.html"
     },
     {
       "route": "/services/*",
-      "serve": "/services/index.html"
+      "rewrite": "/services/index.html"
     },
     {
       "route": "/tags/*",
-      "serve": "/tags/index.html"
+      "rewrite": "/tags/index.html"
     },
     {
       "route": "/about",
-      "serve": "/about/index.html"
+      "rewrite": "/about/index.html"
     },
     {
       "route": "/contact",
-      "serve": "/contact/index.html"
+      "rewrite": "/contact/index.html"
     },
     {
       "route": "/capabilities",
-      "serve": "/capabilities/index.html"
+      "rewrite": "/capabilities/index.html"
     },
     {
       "route": "/colophon",
-      "serve": "/colophon/index.html"
+      "rewrite": "/colophon/index.html"
     },
     {
       "route": "/",
-      "serve": "/index.html"
+      "rewrite": "/index.html"
     }
   ],
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": ["/images/*", "/_astro/*", "/*.{css,js,png,jpg,jpeg,gif,svg,ico,woff,woff2}"]
   },
-  "platformErrorOverrides": [
-    {
-      "errorType": "NotFound",
-      "serve": "/404.html"
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html"
     }
-  ]
+  }
 }
