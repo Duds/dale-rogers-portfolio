@@ -2,271 +2,222 @@
 
 ## Overview
 
-This document outlines the deployment process for the portfolio website, ensuring consistent and reliable deployments across environments.
+This portfolio site is deployed using **Azure Static Web Apps (SWA)**, which provides a modern, serverless hosting solution that's perfect for static Astro sites.
 
-## Environments
+## Why Azure Static Web Apps?
 
-### Development
+- **Simpler**: No Docker containers or server management
+- **Cheaper**: Pay-per-use pricing with generous free tier
+- **Faster**: Global CDN with edge locations
+- **Purpose-built**: Optimized for static sites and JAMstack applications
+- **Automatic**: CI/CD integration with GitHub
 
-- URL: https://dev.dalerogers.dev
-- Branch: `develop`
-- Auto-deploys: Yes
-- Region: Sydney, Australia
+## Architecture
 
-### Staging
+### Static Output
 
-- URL: https://staging.dalerogers.dev
-- Branch: `staging`
-- Auto-deploys: Yes
-- Region: Sydney, Australia
+- **Build Output**: `astro build` generates static HTML/CSS/JS files
+- **No Server**: All pages are pre-rendered at build time
+- **CDN**: Content served from Azure's global edge network
 
-### Production
+### Deployment Flow
 
-- URL: https://dalerogers.dev
-- Branch: `main`
-- Auto-deploys: Yes
-- Region: Sydney, Australia
+1. **GitHub Push** → Triggers GitHub Actions workflow
+2. **Build** → `pnpm install && pnpm build`
+3. **Deploy** → Files uploaded to Azure Static Web Apps
+4. **CDN** → Content distributed globally
 
-## Deployment Process
+## Setup Instructions
 
-### Prerequisites
+### 1. Azure Static Web Apps
 
-- Node.js 18+
-- pnpm 8+
-- Vercel CLI
-- Environment variables configured
-
-### Environment Variables
-
-```env
-# Required
-SITE_URL=https://dalerogers.dev
-NODE_ENV=production
-DATABASE_URL=your_database_url
-
-# Optional
-ANALYTICS_ID=your_analytics_id
-SENTRY_DSN=your_sentry_dsn
-```
-
-### Deployment Steps
-
-1. **Preparation**
+1. **Create SWA Resource**:
 
    ```bash
-   # Install dependencies
-   pnpm install
-
-   # Build project
-   pnpm build
-
-   # Run tests
-   pnpm test
+   az staticwebapp create \
+     --name dale-rogers-portfolio \
+     --resource-group your-resource-group \
+     --source https://github.com/yourusername/dale-rogers-portfolio \
+     --branch main \
+     --app-location "/" \
+     --output-location "dist"
    ```
 
-2. **Deployment**
-
+2. **Configure Custom Domain**:
    ```bash
-   # Deploy to Vercel
-   vercel deploy --prod
+   az staticwebapp hostname add \
+     --name dale-rogers-portfolio \
+     --hostname dalerogers.com.au
    ```
 
-3. **Verification**
-   - Check deployment status
-   - Run smoke tests
-   - Verify analytics
-   - Monitor error rates
+### 2. GitHub Actions
 
-## Continuous Deployment
+The `.github/workflows/azure-static-web-apps.yml` workflow automatically:
 
-### GitHub Actions Workflow
+- Builds the project with `pnpm run build`
+- Deploys to Azure Static Web Apps
+- Handles preview deployments for pull requests
 
-```yaml
-name: Deploy
-on:
-  push:
-    branches: [main, staging, develop]
+### 3. Environment Variables
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to Vercel
-        uses: vercel/actions/deploy@v2
+No environment variables needed for static deployment.
+
+## Build Process
+
+### Local Development
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm run dev
+
+# Build for production
+pnpm run build
+
+# Preview production build
+pnpm run preview
 ```
 
-### Quality Gates
+### Production Build
 
-- All tests passing
-- TypeScript compilation successful
-- No ESLint errors
-- Performance benchmarks met
-- Security scan passed
-
-## Rollback Procedure
-
-1. **Identify Issue**
-   - Monitor error rates
-   - Check user reports
-   - Review logs
-
-2. **Initiate Rollback**
-
-   ```bash
-   # Revert to previous deployment
-   vercel rollback
-   ```
-
-3. **Verify Rollback**
-   - Check application status
-   - Verify functionality
-   - Monitor metrics
-
-## Performance Monitoring
-
-### Metrics
-
-- Page load time
-- Time to interactive
-- First contentful paint
-- Core Web Vitals
-- Error rates
-
-### Tools
-
-- Vercel Analytics
-- Google Analytics
-- Sentry
-- DataDog
-
-## Security Measures
-
-### SSL/TLS
-
-- Enforced HTTPS
-- TLS 1.3
-- HSTS enabled
-- Secure cookies
-
-### Headers
-
-```nginx
-# Security headers
-add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
-add_header X-Frame-Options "SAMEORIGIN" always;
-add_header X-XSS-Protection "1; mode=block" always;
-add_header X-Content-Type-Options "nosniff" always;
+```bash
+pnpm run build:swa
 ```
 
-## Backup Strategy
+This command builds the project and outputs files to the `dist/` directory.
 
-### Database Backups
+## Configuration Files
 
-- Daily automated backups
-- 30-day retention
-- Encrypted storage
-- Regular restore testing
+### `astro.config.mjs`
 
-### Asset Backups
+```javascript
+export default defineConfig({
+  output: 'static', // Static output mode
+  site: 'https://dale-rogers.com.au',
+  // ... other config
+});
+```
 
-- CDN replication
-- Geographic redundancy
-- Version control
-- Regular integrity checks
+### `staticwebapp.config.json`
 
-## Maintenance Windows
+- **Routing**: Handles SPA routing and fallbacks
+- **Caching**: Optimized cache headers for assets
+- **Security**: Headers and redirects
 
-### Scheduled Maintenance
+### `.github/workflows/azure-static-web-apps.yml`
 
-- Time: 02:00-04:00 AEST
-- Frequency: Monthly
-- Notification: 7 days prior
-- Status page updates
+- **Build**: Node.js 20 + pnpm setup
+- **Deploy**: Automatic deployment to Azure
+- **Preview**: PR-based preview deployments
 
-### Emergency Maintenance
+## Performance Features
 
-- Immediate response
-- Status page updates
-- User notifications
-- Post-mortem reports
+### Caching Strategy
 
-## Monitoring
+- **Assets**: Immutable cache for CSS/JS files (1 year)
+- **Images**: Long-term caching for static assets
+- **HTML**: Appropriate cache headers for content
 
-### Uptime Monitoring
+### CDN Benefits
 
-- Pingdom
-- UptimeRobot
-- Status page
-- Alert notifications
+- **Global Distribution**: Content served from edge locations
+- **Automatic Scaling**: Handles traffic spikes seamlessly
+- **HTTPS**: Automatic SSL/TLS certificates
 
-### Performance Monitoring
+## Monitoring & Analytics
 
-- Vercel Analytics
-- Lighthouse CI
-- Core Web Vitals
-- User timing metrics
+### Azure Insights
 
-## Incident Response
+- **Performance**: Page load times and metrics
+- **Errors**: Client-side error tracking
+- **Usage**: Traffic patterns and user behavior
 
-### Process
+### Custom Analytics
 
-1. Detection
-2. Response
-3. Resolution
-4. Post-mortem
-5. Prevention
+- **Google Analytics**: Client-side tracking
+- **Performance Monitoring**: Core Web Vitals
 
-### Communication
+## Troubleshooting
 
-- Status page updates
-- Email notifications
-- Social media updates
-- Support channels
+### Common Issues
 
-## Documentation
+1. **Build Failures**:
 
-### Deployment Records
+   ```bash
+   # Check for TypeScript errors
+   pnpm run typecheck
 
-- Version deployed
-- Deployment time
-- Configuration changes
-- Environment variables
+   # Verify build locally
+   pnpm run build
+   ```
 
-### Change Log
+2. **Deployment Issues**:
+   - Check GitHub Actions logs
+   - Verify Azure Static Web Apps configuration
+   - Ensure build output is in `dist/` directory
 
-- Feature updates
-- Bug fixes
-- Security patches
-- Performance improvements
+3. **Routing Problems**:
+   - Verify `staticwebapp.config.json` configuration
+   - Check for proper fallback routes
+   - Test navigation fallbacks
 
-## Contact
+### Debug Commands
 
-### Support
+```bash
+# Check build output
+ls -la dist/
 
-- Email: support@dalerogers.dev
-- Hours: 09:00-17:00 AEST
-- Response time: < 4 hours
-- Emergency: 24/7
+# Verify static files
+find dist/ -name "*.html" | head -5
 
-### Escalation
+# Test local preview
+pnpm run preview
+```
 
-1. On-call engineer
-2. Technical lead
-3. System administrator
-4. Project manager
+## Migration from Docker
 
-## Resources
+### What Changed
 
-### Documentation
+- **Removed**: Dockerfile, docker-compose.yml
+- **Removed**: @astrojs/node adapter
+- **Removed**: Server-side API routes
+- **Added**: Static output configuration
+- **Added**: Azure Static Web Apps workflow
 
-- [Vercel Docs](https://vercel.com/docs)
-- [GitHub Actions](https://docs.github.com/actions)
-- [Astro Deployment](https://docs.astro.build/guides/deploy)
+### Benefits
 
-### Tools
+- **Simpler**: No container orchestration
+- **Faster**: Direct file serving from CDN
+- **Cheaper**: Pay-per-use pricing
+- **Reliable**: Azure-managed infrastructure
 
-- [Vercel CLI](https://vercel.com/cli)
-- [pnpm](https://pnpm.io)
-- [TypeScript](https://www.typescriptlang.org)
-- [ESLint](https://eslint.org)
+## Future Considerations
+
+### Potential Enhancements
+
+- **API Routes**: Azure Functions for dynamic functionality
+- **Database**: Azure Cosmos DB for content management
+- **Search**: Azure Cognitive Search for advanced search
+- **Media**: Azure Media Services for video content
+
+### Scaling
+
+- **Automatic**: Azure handles traffic scaling
+- **Global**: CDN distribution worldwide
+- **Cost-effective**: Pay only for what you use
+
+## Support
+
+For deployment issues:
+
+1. Check GitHub Actions logs
+2. Review Azure Static Web Apps diagnostics
+3. Consult Azure documentation
+4. Contact Azure support if needed
+
+---
+
+**Last Updated**: December 2024
+**Version**: 2.0 (Azure Static Web Apps)

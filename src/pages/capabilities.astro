@@ -1,79 +1,83 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import Icon from "@/components/ui/Icon.astro";
-import Card from "@/components/ui/Card.astro";
-import Button from "@/components/ui/Button.astro";
+import Layout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/layout/Container.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
 
-interface Capability {
-  title: string;
-  description: string;
-  icon: "strategy" | "research" | "blueprint" | "codesign" | "evaluation";
-}
-
-const capabilities: Capability[] = [
-  {
-    title: "Service Strategy",
-    description:
-      "Developing service visions and strategies that align with business goals and user needs.",
-    icon: "strategy",
-  },
-  {
-    title: "User Research",
-    description:
-      "Conducting qualitative and quantitative research to understand user needs and behaviors.",
-    icon: "research",
-  },
-  {
-    title: "Service Blueprinting",
-    description:
-      "Mapping service experiences to identify pain points and opportunities for improvement.",
-    icon: "blueprint",
-  },
-  {
-    title: "Co-design",
-    description:
-      "Facilitating collaborative design sessions with stakeholders and users.",
-    icon: "codesign",
-  },
-  {
-    title: "Evaluation",
-    description:
-      "Measuring service performance and impact through metrics and user feedback.",
-    icon: "evaluation",
-  },
-];
+export const prerender = true;
 ---
 
-<Layout title="Capabilities">
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="font-display text-4xl text-text mb-6">Capabilities</h1>
+<Layout title="Capabilities | Dale Rogers - Service Designer and Digital Strategist">
+  <main class="pt-32 md:pt-40">
+    <Container narrow={true}>
+      <PageHeader
+        title="Capabilities"
+        description="Comprehensive service design capabilities to help organizations create better experiences"
+      />
+    </Container>
 
-    <div class="grid md:grid-cols-2 gap-8 mb-12">
-      <div>
-        <p class="mb-4" style="color: var(--color-text-secondary);">
-          I offer a comprehensive range of service design capabilities to help
-          organizations create better experiences for their users.
-        </p>
-        <p class="mb-4" style="color: var(--color-text-secondary);">
-          From research to implementation, I work closely with clients to
-          understand their needs and deliver solutions that drive meaningful
-          change.
-        </p>
-        <Button href="/contact" variant="primary">Get in Touch</Button>
+    <Container>
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <div>
+          <p class="mb-4 text-lg" style="color: var(--color-text-secondary);">
+            I offer a comprehensive range of service design capabilities to help organizations
+            create better experiences for their users.
+          </p>
+          <p class="mb-4 text-lg" style="color: var(--color-text-secondary);">
+            From research to implementation, I work closely with clients to understand their needs
+            and deliver solutions that drive meaningful change.
+          </p>
+          <a
+            href="/contact"
+            class="inline-block bg-primary text-white px-8 py-4 rounded-full font-semibold hover:bg-primary/90 transition-colors"
+          >
+            Get in Touch
+          </a>
+        </div>
       </div>
-    </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {
-        capabilities.map((capability) => (
-          <Card title={capability.title}>
-            <div class="flex items-start space-x-4">
-              <Icon name={capability.icon} class="w-8 h-8 text-primary" />
-              <p class="" style="color: var(--color-text-secondary);">{capability.description}</p>
-            </div>
-          </Card>
-        ))
-      }
-    </div>
-  </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+          <h3 class="font-semibold text-xl mb-4">Service Strategy</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">
+            Developing service visions and strategies that align with business goals and user needs.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+          <h3 class="font-semibold text-xl mb-4">User Research</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">
+            Conducting qualitative and quantitative research to understand user needs and behaviors.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+          <h3 class="font-semibold text-xl mb-4">Service Blueprinting</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">
+            Mapping service experiences to identify pain points and opportunities for improvement.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+          <h3 class="font-semibold text-xl mb-4">Co-design</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">
+            Facilitating collaborative design sessions with stakeholders and users.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+          <h3 class="font-semibold text-xl mb-4">Evaluation</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">
+            Measuring service performance and impact through metrics and user feedback.
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+          <h3 class="font-semibold text-xl mb-4">Digital Transformation</h3>
+          <p class="text-neutral-600 dark:text-neutral-400">
+            Modernizing legacy systems with user-first approach and strategic thinking.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </main>
 </Layout>

@@ -1,13 +1,16 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import Button from "@/components/ui/Button.astro";
-import Card from "@/components/ui/Card.astro";
-import Container from "@/components/layout/Container.astro";
-import OptimizedImage from "@/components/ui/OptimizedImage.astro";
+import Layout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/ui/Button.astro';
+import Card from '@/components/ui/Card.astro';
+import Container from '@/components/layout/Container.astro';
+import OptimizedImage from '@/components/ui/OptimizedImage.astro';
+import '@/styles/components/about-section.css';
+
+export const prerender = true;
 
 // Image imports can be added here once we have them
 const profileImage =
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070&auto=format&fit=crop"; // Professional business portrait
+  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070&auto=format&fit=crop'; // Professional business portrait
 ---
 
 <Layout title="About Me | Dale Rogers">
@@ -21,23 +24,17 @@ const profileImage =
           >
             About me
           </h1>
-          <p
-            class="text-2xl md:text-3xl text-neutral-600 dark:text-neutral-300 mb-8"
-          >
-            I'm a dreamer, designer, tinkerer and doer. I fell in love with
-            service and strategic design because it is the place, I can create
-            impact.
+          <p class="text-2xl md:text-3xl text-neutral-600 dark:text-neutral-300 mb-8">
+            I'm a dreamer, designer, tinkerer and doer. I fell in love with service and strategic
+            design because it is the place, I can create impact.
           </p>
           <p class="text-xl text-neutral-600 dark:text-neutral-300">
-            I dig into an idea to determine what is authentic, human, and
-            relevant. Then I use all the tools of tech and design to bring it to
-            life. To create a solution and design that is tangible,
-            experiential, supportive and sustainable.
+            I dig into an idea to determine what is authentic, human, and relevant. Then I use all
+            the tools of tech and design to bring it to life. To create a solution and design that
+            is tangible, experiential, supportive and sustainable.
           </p>
         </div>
-        <div
-          class="relative aspect-square rounded-2xl overflow-hidden shadow-2xl"
-        >
+        <div class="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
           <OptimizedImage
             src={profileImage}
             alt="Dale Rogers - Professional business portrait"
@@ -52,23 +49,18 @@ const profileImage =
 
     <!-- Location Section -->
     <Container class="mb-24">
-      <div
-        class="bg-neutral-100 dark:bg-neutral-800/50 rounded-3xl p-8 md:p-12"
-      >
+      <div class="bg-neutral-100 dark:bg-neutral-800/50 rounded-3xl p-8 md:p-12">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2
-              class="font-display text-3xl md:text-4xl text-primary dark:text-primary mb-6"
-            >
+            <h2 class="font-display text-3xl md:text-4xl text-primary dark:text-primary mb-6">
               I'm in Canberra, Australia
             </h2>
             <p class="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
-              But I'm not constrained by geography or time zones. Collaboration
-              is key! I've helped organisations in Australia, and the US use the
-              power of design to create a positive social impact with
-              technology.
+              But I'm not constrained by geography or time zones. Collaboration is key! I've helped
+              organisations in Australia, and the US use the power of design to create a positive
+              social impact with technology.
             </p>
-            <Button variant="purple" href="/contact">Get in touch</Button>
+            <Button variant="primary" href="/contact">Get in touch</Button>
           </div>
           <div class="relative aspect-video rounded-2xl overflow-hidden">
             <img
@@ -96,9 +88,8 @@ const profileImage =
             Collaboration builds quality
           </h3>
           <p class="text-grey-600 dark:text-grey-400">
-            Every day, I practice genuine collaboration, building on one
-            another's concepts and sketches until it's impossible to say where
-            the idea came from in the first place.
+            Every day, I practice genuine collaboration, building on one another's concepts and
+            sketches until it's impossible to say where the idea came from in the first place.
           </p>
         </Card>
         <Card>
@@ -106,9 +97,8 @@ const profileImage =
             Push a little further
           </h3>
           <p class="text-grey-600 dark:text-grey-400">
-            I constantly push boundaries, challenge standards, and redefine
-            what's possible. Yes, that makes my job a lot of work, but it's also
-            what makes it so worthwhile.
+            I constantly push boundaries, challenge standards, and redefine what's possible. Yes,
+            that makes my job a lot of work, but it's also what makes it so worthwhile.
           </p>
         </Card>
         <Card>
@@ -116,9 +106,8 @@ const profileImage =
             Be good to work with
           </h3>
           <p class="text-grey-600 dark:text-grey-400">
-            Be nice. Be optimistic. Be supportive. Treat tough problems as
-            interesting challenges. Be critical, not cynical. That's the
-            attitude I bring to my work every day.
+            Be nice. Be optimistic. Be supportive. Treat tough problems as interesting challenges.
+            Be critical, not cynical. That's the attitude I bring to my work every day.
           </p>
         </Card>
         <Card>
@@ -126,9 +115,8 @@ const profileImage =
             Details make the difference
           </h3>
           <p class="text-grey-600 dark:text-grey-400">
-            I care about all the little things, the stuff no one else will
-            notice, because that meticulous commitment to excellence is exactly
-            what sets me apart.
+            I care about all the little things, the stuff no one else will notice, because that
+            meticulous commitment to excellence is exactly what sets me apart.
           </p>
         </Card>
         <Card>
@@ -136,8 +124,8 @@ const profileImage =
             Work with only the brightest
           </h3>
           <p class="text-grey-600 dark:text-grey-400">
-            In my collaborators, partners, and clients, I seek out people who
-            take pride in their work and genuinely excel at it.
+            In my collaborators, partners, and clients, I seek out people who take pride in their
+            work and genuinely excel at it.
           </p>
         </Card>
         <Card>
@@ -145,9 +133,9 @@ const profileImage =
             Always get it done
           </h3>
           <p class="text-grey-600 dark:text-grey-400">
-            When I say I'll deliver, I do. When Plan A doesn't work, I don't
-            make excuses I start executing Plan B. You won't see me in a suit
-            very often, but my work ethic is 100% professional.
+            When I say I'll deliver, I do. When Plan A doesn't work, I don't make excuses I start
+            executing Plan B. You won't see me in a suit very often, but my work ethic is 100%
+            professional.
           </p>
         </Card>
       </div>
@@ -155,17 +143,13 @@ const profileImage =
 
     <!-- CTA Section -->
     <Container class="mb-24">
-      <div
-        class="bg-grey-900 dark:bg-grey-800 text-primary rounded-3xl p-8 md:p-12 text-center"
-      >
-        <h2 class="font-display text-3xl md:text-4xl mb-6">
-          Ready to collaborate?
-        </h2>
+      <div class="bg-grey-900 dark:bg-grey-800 text-primary rounded-3xl p-8 md:p-12 text-center">
+        <h2 class="font-display text-3xl md:text-4xl mb-6">Ready to collaborate?</h2>
         <p class="text-xl mb-8 max-w-2xl mx-auto">
-          Let's work together to create impactful solutions that transform how
-          your organisation delivers value.
+          Let's work together to create impactful solutions that transform how your organisation
+          delivers value.
         </p>
-        <Button variant="purple" href="/contact">
+        <Button variant="primary" href="/contact">
           Start a conversation
           <svg
             xmlns="http://www.w3.org/2000/svg"

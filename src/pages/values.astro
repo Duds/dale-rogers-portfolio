@@ -1,277 +1,122 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import Container from "@/components/layout/Container.astro";
-import Button from "@/components/ui/Button.astro";
-import Heading from "@/components/ui/Heading.astro";
+import Layout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/layout/Container.astro';
+import PageHeader from '@/components/ui/PageHeader.astro';
 
-const content = {
-  title: "Values That Drive Impact",
-  subtitle:
-    "Principles that shape how I approach every project and collaboration",
-  values: [
-    {
-      name: "Human-Centred Design",
-      description:
-        "Every decision starts with understanding real people's needs, challenges, and aspirations. I prioritise user research and evidence-based insights over assumptions.",
-      icon: "👥",
-    },
-    {
-      name: "Practical Innovation",
-      description:
-        "Balancing creative vision with real-world constraints. I deliver solutions that are both forward-thinking and immediately implementable.",
-      icon: "💡",
-    },
-    {
-      name: "Collaborative Excellence",
-      description:
-        "Great design emerges from diverse perspectives. I foster open dialogue and genuine partnerships with stakeholders at every level.",
-      icon: "🤝",
-    },
-    {
-      name: "Evidence-Based Decisions",
-      description:
-        "Data and research guide every choice. I validate design decisions through rigorous testing and user feedback to ensure measurable impact.",
-      icon: "📊",
-    },
-    {
-      name: "Sustainable Solutions",
-      description:
-        "Creating lasting value means thinking long-term. I design systems and services that can evolve and scale with your organisation's needs.",
-      icon: "🌱",
-    },
-    {
-      name: "Pragmatic Execution",
-      description:
-        "Getting things done without compromising on quality. I maintain high standards while ensuring timely, efficient delivery of solutions.",
-      icon: "🎯",
-    },
-  ],
-  caseStudies: [
-    {
-      title: "Department of Education Portal Redesign",
-      description:
-        "Applied human-centred design and evidence-based decision making to transform a complex educational portal into an intuitive platform serving over 50,000 users.",
-      values: ["Human-Centred Design", "Evidence-Based Decisions"],
-      metrics: ["92% user satisfaction", "45% reduction in support tickets"],
-      image:
-        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2940&auto=format&fit=crop",
-    },
-    {
-      title: "BHP Safety Systems Integration",
-      description:
-        "Balanced innovation with practicality to deliver a unified safety reporting system that scales across multiple mining sites while meeting strict compliance requirements.",
-      values: ["Practical Innovation", "Sustainable Solutions"],
-      metrics: ["30% faster incident reporting", "100% compliance maintained"],
-      image:
-        "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=2940&auto=format&fit=crop",
-    },
-  ],
-  testimonials: [
-    {
-      quote:
-        "Dale's pragmatic approach to service design helped us navigate complex stakeholder requirements while delivering real value to our users.",
-      author: "Sarah Thompson",
-      role: "Digital Transformation Lead",
-      organisation: "Transport for NSW",
-      values: ["Pragmatic Execution", "Collaborative Excellence"],
-    },
-    {
-      quote:
-        "The evidence-based methodology Dale brought to our project ensured we made decisions based on real user needs rather than assumptions.",
-      author: "Michael Chen",
-      role: "Head of Product",
-      organisation: "University of Canberra",
-      values: ["Evidence-Based Decisions", "Human-Centred Design"],
-    },
-  ],
-};
-
-interface Value {
-  name: string;
-  description: string;
-  icon: string;
-}
-
-interface CaseStudy {
-  title: string;
-  description: string;
-  values: string[];
-  metrics: string[];
-  image: string;
-}
-
-interface Testimonial {
-  quote: string;
-  author: string;
-  role: string;
-  organisation: string;
-  values: string[];
-}
+export const prerender = true;
 ---
 
-<Layout title="My Values | Dale Rogers">
+<Layout title="My Values | Dale Rogers - Service Designer and Digital Strategist">
   <main class="pt-32 md:pt-40 pb-16 md:pb-24">
     <Container>
       <div class="max-w-3xl mx-auto text-center mb-16 md:mb-20">
-        <Heading level={1} font="inter" size="custom" class="mb-6">
-          {content.title}
-        </Heading>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-white mb-6"
+        >
+          My Values
+        </h1>
         <p class="text-lg md:text-xl text-neutral-600 dark:text-neutral-300">
-          {content.subtitle}
+          Principles that shape how I approach every project and collaboration
         </p>
       </div>
 
-      <div
-        class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-20 md:mb-24"
-      >
-        {
-          content.values.map((value: Value) => (
-            <div class="p-6 md:p-8 rounded-2xl shadow-soft dark:shadow-soft-dark border border-neutral-200 dark:border-neutral-700 hover:border-primary dark:hover:border-primary-dark transition-all durat
-style="background-color: var(--color-background-secondary);"ion-300">
-              <div class="text-4xl mb-4 text-primary dark:text-primary-dark">
-                {value.icon}
-              </div>
-              <Heading level={3} font="inter" size="2xl" class="mb-3">
-                {value.name}
-              </Heading>
-              <p class="text-base md:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                {value.description}
-              </p>
-            </div>
-          ))
-        }
-      </div>
-
-      <div class="mb-20 md:mb-24">
-        <h2
-          class="text-3xl md:text-4xl font-black font-heading text-neutral-900 dark:text-white text-center mb-12 md:mb-16"
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-20 md:mb-24">
+        <div
+          class="p-6 md:p-8 rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary transition-all duration-300"
+          style="background-color: var(--color-background-secondary);"
         >
-          Values in Action
-        </h2>
-        <div class="space-y-12 md:space-y-16">
-          {
-            content.caseStudies.map((study: CaseStudy) => (
-              <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-                <div class="order-2 lg:order-1">
-                  <h3 class="text-2xl md:text-3xl font-bold font-heading text-neutral-900 dark:text-white mb-4">
-                    {study.title}
-                  </h3>
-                  <p class="text-lg text-neutral-600 dark:text-neutral-300 mb-6 leading-relaxed">
-                    {study.description}
-                  </p>
-                  <div class="mb-6">
-                    <h4 class="text-sm font-semibold uppercase tracking-wider text-grey-500 dark:text-grey-400 mb-3">
-                      Values Applied:
-                    </h4>
-                    <div class="flex flex-wrap gap-2">
-                      {study.values.map((value) => (
-                        <span class="px-3 py-1 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary rounded-full text-sm font-medium">
-                          {value}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 class="text-sm font-semibold uppercase tracking-wider text-grey-500 dark:text-grey-400 mb-3">
-                      Key Outcomes:
-                    </h4>
-                    <ul class="list-disc list-inside space-y-1 text-lg text-grey-600 dark:text-grey-300">
-                      {study.metrics.map((metric) => (
-                        <li>{metric}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <div class="order-1 lg:order-2">
-                  <img
-                    src={study.image}
-                    alt={study.title}
-                    class="rounded-2xl shadow-lg w-full h-64 md:h-80 object-cover"
-                  />
-                </div>
-              </div>
-            ))
-          }
+          <div class="text-4xl mb-4 text-primary">👥</div>
+          <h3 class="text-2xl font-bold text-neutral-900 dark:text-white mb-3">
+            Human-Centred Design
+          </h3>
+          <p class="text-base md:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
+            Every decision starts with understanding real people's needs, challenges, and
+            aspirations. I prioritise user research and evidence-based insights over assumptions.
+          </p>
+        </div>
+
+        <div
+          class="p-6 md:p-8 rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary transition-all duration-300"
+          style="background-color: var(--color-background-secondary);"
+        >
+          <div class="text-4xl mb-4 text-primary">💡</div>
+          <h3 class="text-2xl font-bold text-neutral-900 dark:text-white mb-3">
+            Practical Innovation
+          </h3>
+          <p class="text-base md:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
+            Balancing creative vision with real-world constraints. I deliver solutions that are both
+            forward-thinking and immediately implementable.
+          </p>
+        </div>
+
+        <div
+          class="p-6 md:p-8 rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary transition-all duration-300"
+          style="background-color: var(--color-background-secondary);"
+        >
+          <div class="text-4xl mb-4 text-primary">🤝</div>
+          <h3 class="text-2xl font-bold text-neutral-900 dark:text-white mb-3">
+            Collaborative Excellence
+          </h3>
+          <p class="text-base md:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
+            Great design emerges from diverse perspectives. I foster open dialogue and genuine
+            partnerships with stakeholders at every level.
+          </p>
+        </div>
+
+        <div
+          class="p-6 md:p-8 rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary transition-all duration-300"
+          style="background-color: var(--color-background-secondary);"
+        >
+          <div class="text-4xl mb-4 text-primary">📊</div>
+          <h3 class="text-2xl font-bold text-neutral-900 dark:text-white mb-3">
+            Evidence-Based Decisions
+          </h3>
+          <p class="text-base md:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
+            Data and research guide every choice. I validate design decisions through rigorous
+            testing and user feedback to ensure measurable impact.
+          </p>
+        </div>
+
+        <div
+          class="p-6 md:p-8 rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary transition-all duration-300"
+          style="background-color: var(--color-background-secondary);"
+        >
+          <div class="text-4xl mb-4 text-primary">🌱</div>
+          <h3 class="text-2xl font-bold text-neutral-900 dark:text-white mb-3">
+            Sustainable Impact
+          </h3>
+          <p class="text-base md:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
+            I design for long-term value, creating solutions that not only solve immediate problems
+            but also contribute to lasting positive change.
+          </p>
+        </div>
+
+        <div
+          class="p-6 md:p-8 rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary transition-all duration-300"
+          style="background-color: var(--color-background-secondary);"
+        >
+          <div class="text-4xl mb-4 text-primary">🎯</div>
+          <h3 class="text-2xl font-bold text-neutral-900 dark:text-white mb-3">
+            Pragmatic Execution
+          </h3>
+          <p class="text-base md:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
+            Getting things done without compromising on quality. I maintain high standards while
+            ensuring timely, efficient delivery of solutions.
+          </p>
         </div>
       </div>
 
-      <div class="mb-20 md:mb-24">
-        <h2
-          class="text-3xl md:text-4xl font-black font-heading text-grey-900 dark:text-white text-center mb-12 md:mb-16"
+      <div class="text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-8">
+          Ready to work with someone who shares your values?
+        </h2>
+        <a
+          href="/contact"
+          class="inline-block bg-primary text-white px-8 py-4 rounded-full font-semibold hover:bg-primary/90 transition-colors"
         >
-          What Clients Say
-        </h2>
-        <div class="grid md:grid-cols-2 gap-6 md:gap-8">
-          {
-            content.testimonials.map((testimonial: Testimonial) => (
-              <div class="bg-white dark:bg-grey-900/60 rounded-2xl shadow-md dark:shadow-lg border border-grey-200 dark:border-grey-700 p-6 md:p-8">
-                <div class="text-5xl text-primary dark:text-primary mb-4 opacity-50">
-                  "
-                </div>
-                <blockquote class="text-lg text-grey-700 dark:text-grey-200 mb-6 italic leading-relaxed">
-                  {testimonial.quote}
-                </blockquote>
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-grey-200 dark:border-grey-700">
-                  <div class="text-sm">
-                    <cite class="not-italic font-semibold text-grey-900 dark:text-white block">
-                      {testimonial.author}
-                    </cite>
-                    <span class="text-grey-500 dark:text-grey-400">
-                      {testimonial.role}, {testimonial.organisation}
-                    </span>
-                  </div>
-                  <div class="flex flex-wrap gap-2">
-                    {testimonial.values.map((value) => (
-                      <span class="px-2 py-0.5 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary rounded-full text-xs font-medium">
-                        {value}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-
-      <div
-        class="bg-primary dark:bg-primary text-white rounded-3xl p-8 md:p-12 text-center"
-      >
-        <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4">
-          Ready to create impact together?
-        </h2>
-        <p class="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-          Let's collaborate to build services that align with your values and
-          deliver real results.
-        </p>
-        <Button variant="purple" href="/contact">
-          Start a conversation
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 ml-2"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"></path>
-          </svg>
-        </Button>
+          Let's Connect
+        </a>
       </div>
     </Container>
   </main>
 </Layout>
-
-<style>
-  .shadow-soft {
-    box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.05),
-      0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  }
-  .shadow-soft-dark {
-    box-shadow:
-      0 4px 6px -1px rgba(255, 255, 255, 0.05),
-      0 2px 4px -1px rgba(255, 255, 255, 0.03);
-  }
-</style>

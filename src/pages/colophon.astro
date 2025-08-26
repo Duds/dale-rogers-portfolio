@@ -1,7 +1,9 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import Container from "@/components/layout/Container.astro";
-import SectionHeading from "@/components/ui/SectionHeading.astro";
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/layout/Container.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+
+export const prerender = true;
 ---
 
 <BaseLayout
@@ -10,42 +12,32 @@ import SectionHeading from "@/components/ui/SectionHeading.astro";
 >
   <Container>
     <div class="max-w-4xl mx-auto py-20">
-      <SectionHeading
-        heading="Colophon"
-        subheading="Last Updated: 10/11/2023"
-        alignment="left"
-      />
+      <SectionHeading heading="Colophon" subheading="Last Updated: 10/11/2023" alignment="left" />
 
       <div class="prose prose-lg dark:prose-invert mt-10">
         <section class="mb-8">
           <h2 class="text-2xl font-semibold mt-8 mb-4">About This Site</h2>
-          <p>
-            Want to take a look under the hood of this website? Wonder no more!
-          </p>
+          <p>Want to take a look under the hood of this website? Wonder no more!</p>
         </section>
 
         <section class="mb-8">
           <h2 class="text-2xl font-semibold mt-8 mb-4">Technology Stack</h2>
           <ul class="list-disc ml-6 mb-4">
             <li>
-              <strong>Framework:</strong> Built with <a
-                href="https://astro.build">Astro</a
-              >, a modern static site generator that delivers lightning-fast
-              performance. I chose Astro over WordPress as it provides better
-              performance and security for a portfolio site.
+              <strong>Framework:</strong> Built with <a href="https://astro.build">Astro</a>, a
+              modern static site generator that delivers lightning-fast performance. I chose Astro
+              over WordPress as it provides better performance and security for a portfolio site.
             </li>
             <li>
               <strong>Styling:</strong>
-              <a href="https://tailwindcss.com">Tailwind CSS</a> for utility-first
-              styling and consistent design
+              <a href="https://tailwindcss.com">Tailwind CSS</a> for utility-first styling and consistent
+              design
             </li>
             <li>
-              <strong>Typography:</strong> Custom font stack using system fonts for
-              optimal performance
+              <strong>Typography:</strong> Custom font stack using system fonts for optimal performance
             </li>
             <li>
-              <strong>Icons:</strong> Custom SVG icon system for crisp, scalable
-              graphics
+              <strong>Icons:</strong> Custom SVG icon system for crisp, scalable graphics
             </li>
             <li>
               <strong>Contact Form:</strong> Server-side email handling using <a
@@ -58,13 +50,11 @@ import SectionHeading from "@/components/ui/SectionHeading.astro";
         <section class="mb-8">
           <h2 class="text-2xl font-semibold mt-8 mb-4">Hosting</h2>
           <p>
-            This site is hosted by <a href="https://crazydomains.com.au"
-              >CrazyDomains</a
-            > using their Linux hosting package. Since moving to Astro, the site
-            is now statically generated and deployed, making it faster and more secure
-            than the previous PHP-based setup. The contact form is handled server-side
-            using <a href="https://nodejs.org">Node.js</a>, allowing for
-            seamless email integration while maintaining the site's performance.
+            This site is hosted by <a href="https://crazydomains.com.au">CrazyDomains</a> using their
+            Linux hosting package. Since moving to Astro, the site is now statically generated and deployed,
+            making it faster and more secure than the previous PHP-based setup. The contact form is handled
+            server-side using <a href="https://nodejs.org">Node.js</a>, allowing for seamless email
+            integration while maintaining the site's performance.
           </p>
         </section>
 
@@ -77,18 +67,16 @@ import SectionHeading from "@/components/ui/SectionHeading.astro";
             </li>
             <li>
               <strong>Code Quality:</strong>
-              <a href="https://eslint.org">ESLint</a> and <a
-                href="https://prettier.io">Prettier</a
-              > for consistent code style
+              <a href="https://eslint.org">ESLint</a> and <a href="https://prettier.io">Prettier</a>
+              for consistent code style
             </li>
             <li>
               <strong>Development:</strong>
-              <a href="https://code.visualstudio.com">VS Code</a> with custom extensions
-              for enhanced productivity
+              <a href="https://code.visualstudio.com">VS Code</a> with custom extensions for enhanced
+              productivity
             </li>
             <li>
-              <strong>Deployment:</strong> Automated deployment pipeline for seamless
-              updates
+              <strong>Deployment:</strong> Automated deployment pipeline for seamless updates
             </li>
           </ul>
         </section>
@@ -96,13 +84,12 @@ import SectionHeading from "@/components/ui/SectionHeading.astro";
         <section class="mb-8">
           <h2 class="text-2xl font-semibold mt-8 mb-4">Design Tools</h2>
           <p>
-            I swapped out the Adobe Creative Suite two years ago because I
-            wasn't happy with the continuous and ongoing subscription fees. I
-            now use <a href="https://affinity.serif.com/designer"
-              >Affinity Designer</a
-            > and <a href="https://affinity.serif.com/photo">Affinity Photo</a> for
-            all my image editing needs. I'm also a big fan of <a
-              href="https://www.omnigroup.com/omnigraffle">OmniGraffle</a
+            I swapped out the Adobe Creative Suite two years ago because I wasn't happy with the
+            continuous and ongoing subscription fees. I now use <a
+              href="https://affinity.serif.com/designer">Affinity Designer</a
+            > and <a href="https://affinity.serif.com/photo">Affinity Photo</a> for all my image editing
+            needs. I'm also a big fan of <a href="https://www.omnigroup.com/omnigraffle"
+              >OmniGraffle</a
             > when creating design artefacts. Finally, I must attribute <a
               href="https://thenounproject.com">the noun project</a
             >; it is a never-ending source of inspiration and procrastination.
@@ -114,21 +101,17 @@ import SectionHeading from "@/components/ui/SectionHeading.astro";
           <ul class="list-disc ml-6 mb-4">
             <li>
               <strong>Accessibility:</strong>
-              <a href="https://www.w3.org/WAI/standards-guidelines/wcag/"
-                >WCAG 2.1</a
-              > guidelines followed for inclusive design
+              <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">WCAG 2.1</a> guidelines followed
+              for inclusive design
             </li>
             <li>
-              <strong>Performance:</strong> Optimized assets and minimal JavaScript
-              for fast loading
+              <strong>Performance:</strong> Optimized assets and minimal JavaScript for fast loading
             </li>
             <li>
-              <strong>Responsive:</strong> Mobile-first approach ensuring great experience
-              on all devices
+              <strong>Responsive:</strong> Mobile-first approach ensuring great experience on all devices
             </li>
             <li>
-              <strong>Dark Mode:</strong> Carefully crafted dark theme for reduced
-              eye strain
+              <strong>Dark Mode:</strong> Carefully crafted dark theme for reduced eye strain
             </li>
           </ul>
         </section>
@@ -136,10 +119,9 @@ import SectionHeading from "@/components/ui/SectionHeading.astro";
         <section class="mb-8">
           <h2 class="text-2xl font-semibold mt-8 mb-4">Web Analytics</h2>
           <p>
-            I use <a href="https://umami.is">Umami Analytics</a> to check if my mum
-            has visited the site lately. It's a privacy-focused, open-source alternative
-            to Google Analytics that I self-host alongside the website. No cookies,
-            no personal data collection, just simple, ethical analytics.
+            I use <a href="https://umami.is">Umami Analytics</a> to check if my mum has visited the site
+            lately. It's a privacy-focused, open-source alternative to Google Analytics that I self-host
+            alongside the website. No cookies, no personal data collection, just simple, ethical analytics.
           </p>
         </section>
 
@@ -147,10 +129,8 @@ import SectionHeading from "@/components/ui/SectionHeading.astro";
           <h2 class="text-2xl font-semibold mt-8 mb-4">Open Source</h2>
           <p>
             This site's source code is available on <a
-              href="https://github.com/dale-rogers/dale-rogers-portfolio"
-              >GitHub</a
-            >. Feel free to explore how it's built or use it as inspiration for
-            your own projects.
+              href="https://github.com/dale-rogers/dale-rogers-portfolio">GitHub</a
+            >. Feel free to explore how it's built or use it as inspiration for your own projects.
           </p>
         </section>
       </div>

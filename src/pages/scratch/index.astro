@@ -1,14 +1,14 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import Container from "@/components/layout/Container.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
-import FormattedDate from "@/components/ui/FormattedDate.astro";
-import TagList from "@/components/ui/TagList.astro";
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/layout/Container.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import FormattedDate from '@/components/ui/FormattedDate.astro';
+import TagList from '@/components/ui/TagList.astro';
 
-type ScratchPost = CollectionEntry<"scratch">;
-type StatusType = "in-progress" | "complete" | "abandoned" | "draft";
+type ScratchPost = CollectionEntry<'scratch'>;
+type StatusType = 'in-progress' | 'complete' | 'abandoned' | 'draft';
 
-const scratchPosts = await getCollection("scratch");
+const scratchPosts = await getCollection('scratch');
 
 // Sort scratch posts by date in descending order
 const sortedPosts = scratchPosts.sort(
@@ -18,7 +18,7 @@ const sortedPosts = scratchPosts.sort(
 // Group posts by status
 const groupedPosts = sortedPosts.reduce(
   (acc, post) => {
-    const status = (post.data.status || "draft") as StatusType;
+    const status = (post.data.status || 'draft') as StatusType;
     if (!acc[status]) {
       acc[status] = [];
     }
@@ -28,18 +28,13 @@ const groupedPosts = sortedPosts.reduce(
   {} as Record<StatusType, ScratchPost[]>
 );
 
-const statusOrder: StatusType[] = [
-  "in-progress",
-  "complete",
-  "abandoned",
-  "draft",
-];
+const statusOrder: StatusType[] = ['in-progress', 'complete', 'abandoned', 'draft'];
 
 const statusStyles: Record<StatusType, string> = {
-  "in-progress": "bg-yellow-100 text-yellow-800",
-  complete: "bg-green-100 text-green-800",
-  abandoned: "bg-red-100 text-red-800",
-  draft: "bg-gray-100 text-gray-800",
+  'in-progress': 'bg-yellow-100 text-yellow-800',
+  complete: 'bg-green-100 text-green-800',
+  abandoned: 'bg-red-100 text-red-800',
+  draft: 'bg-gray-100 text-gray-800',
 };
 ---
 
@@ -51,21 +46,19 @@ const statusStyles: Record<StatusType, string> = {
     <div class="max-w-4xl mx-auto">
       <h1 class="text-4xl font-bold mb-8">Scratch</h1>
       <p class="text-gray-600 dark:text-gray-400 mb-12">
-        This is where I share my work in progress, experiments, and sometimes
-        abandoned ideas. It's a space for exploration and learning in public.
+        This is where I share my work in progress, experiments, and sometimes abandoned ideas. It's
+        a space for exploration and learning in public.
       </p>
 
       {
         statusOrder.map(
-          (status) =>
+          status =>
             groupedPosts[status] &&
             groupedPosts[status].length > 0 && (
               <div class="mb-16">
-                <h2 class="text-2xl font-bold mb-6 capitalize">
-                  {status.replace("-", " ")}
-                </h2>
+                <h2 class="text-2xl font-bold mb-6 capitalize">{status.replace('-', ' ')}</h2>
                 <div class="space-y-12">
-                  {groupedPosts[status].map((post) => (
+                  {groupedPosts[status].map(post => (
                     <article class="group">
                       <a href={`/scratch/${post.slug}`} class="block">
                         {post.data.coverImage && (
@@ -82,11 +75,8 @@ const statusStyles: Record<StatusType, string> = {
                           <div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
                             <FormattedDate date={post.data.pubDate} />
                             <span>by {post.data.author}</span>
-                            <span
-                              class={`px-3 py-1 rounded-full text-sm ${statusStyles[status]}`}
-                            >
-                              {status.charAt(0).toUpperCase() +
-                                status.slice(1).replace("-", " ")}
+                            <span class={`px-3 py-1 rounded-full text-sm ${statusStyles[status]}`}>
+                              {status.charAt(0).toUpperCase() + status.slice(1).replace('-', ' ')}
                             </span>
                           </div>
                           {post.data.tags && <TagList tags={post.data.tags} />}
@@ -105,3 +95,4 @@ const statusStyles: Record<StatusType, string> = {
     </div>
   </Container>
 </BaseLayout>
+export const prerender = true;

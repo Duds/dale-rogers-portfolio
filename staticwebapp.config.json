@@ -1,0 +1,80 @@
+{
+  "routes": [
+    {
+      "route": "/_astro/*",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/images/*",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/favicon.svg",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/*.js",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/*.css",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/work/*",
+      "serve": "/work/index.html"
+    },
+    {
+      "route": "/articles/*",
+      "serve": "/articles/index.html"
+    },
+    {
+      "route": "/services/*",
+      "serve": "/services/index.html"
+    },
+    {
+      "route": "/tags/*",
+      "serve": "/tags/index.html"
+    },
+    {
+      "route": "/about",
+      "serve": "/about/index.html"
+    },
+    {
+      "route": "/contact",
+      "serve": "/contact/index.html"
+    },
+    {
+      "route": "/capabilities",
+      "serve": "/capabilities/index.html"
+    },
+    {
+      "route": "/colophon",
+      "serve": "/colophon/index.html"
+    },
+    {
+      "route": "/",
+      "serve": "/index.html"
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/images/*", "/_astro/*", "/*.{css,js,png,jpg,jpeg,gif,svg,ico,woff,woff2}"]
+  },
+  "platformErrorOverrides": [
+    {
+      "errorType": "NotFound",
+      "serve": "/404.html"
+    }
+  ]
+}

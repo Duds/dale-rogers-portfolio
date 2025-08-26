@@ -1,14 +1,14 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import Container from "@/components/layout/Container.astro";
-import TagList from "@/components/ui/TagList.astro";
-import Heading from "@/components/ui/Heading.astro";
-import { getCollection } from "astro:content";
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/layout/Container.astro';
+import TagList from '@/components/ui/TagList.astro';
+import Heading from '@/components/ui/Heading.astro';
+import { getCollection } from 'astro:content';
 
 // Get all content
-const articles = await getCollection("articles");
-const caseStudies = await getCollection("case-studies");
-const scratchPosts = await getCollection("scratch");
+const articles = await getCollection('articles');
+const caseStudies = await getCollection('case-studies');
+const scratchPosts = await getCollection('scratch');
 
 // Combine all content
 const allContent = [...articles, ...caseStudies, ...scratchPosts];
@@ -16,7 +16,7 @@ const allContent = [...articles, ...caseStudies, ...scratchPosts];
 // Get tag counts
 const tagCounts = allContent.reduce(
   (acc, entry) => {
-    entry.data.tags?.forEach((tag) => {
+    entry.data.tags?.forEach(tag => {
       const normalizedTag = tag.toLowerCase();
       acc[normalizedTag] = (acc[normalizedTag] || 0) + 1;
     });
@@ -26,18 +26,16 @@ const tagCounts = allContent.reduce(
 );
 
 // Sort tags by count (descending) and then alphabetically
-const sortedTags = Object.entries(tagCounts).sort(
-  ([tagA, countA], [tagB, countB]) => {
-    // Explicitly type the counts as numbers
-    const numCountA = countA as number;
-    const numCountB = countB as number;
+const sortedTags = Object.entries(tagCounts).sort(([tagA, countA], [tagB, countB]) => {
+  // Explicitly type the counts as numbers
+  const numCountA = countA as number;
+  const numCountB = countB as number;
 
-    if (numCountA === numCountB) {
-      return tagA.localeCompare(tagB);
-    }
-    return numCountB - numCountA;
+  if (numCountA === numCountB) {
+    return tagA.localeCompare(tagB);
   }
-);
+  return numCountB - numCountA;
+});
 
 // Get just the tag names for the TagList component
 const allTags = sortedTags.map(([tag]) => tag);
@@ -46,12 +44,10 @@ const allTags = sortedTags.map(([tag]) => tag);
 <BaseLayout title="Tags | Dale Rogers" description="Browse content by tags">
   <Container class="py-16">
     <div class="max-w-4xl mx-auto">
-      <Heading level={1} font="inter" size="xl" class="mb-8">
-        Browse by Tag
-      </Heading>
+      <Heading level={1} font="inter" size="xl" class="mb-8"> Browse by Tag </Heading>
       <p class="text-gray-600 dark:text-gray-400 mb-12">
-        Browse all content by tags. Click on a tag to see related articles, case
-        studies, and scratch posts.
+        Browse all content by tags. Click on a tag to see related articles, case studies, and
+        scratch posts.
       </p>
 
       <div class="mb-10">
@@ -74,7 +70,7 @@ const allTags = sortedTags.map(([tag]) => tag);
                 {tag.charAt(0).toUpperCase() + tag.slice(1)}
               </Heading>
               <p class="text-gray-600 dark:text-gray-400">
-                {count} item{count === 1 ? "" : "s"}
+                {count} item{count === 1 ? '' : 's'}
               </p>
             </a>
           ))
@@ -83,3 +79,4 @@ const allTags = sortedTags.map(([tag]) => tag);
     </div>
   </Container>
 </BaseLayout>
+export const prerender = true;
