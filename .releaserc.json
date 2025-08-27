@@ -14,7 +14,8 @@
       "@semantic-release/git",
       {
         "assets": ["package.json", "CHANGELOG.md"],
-        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
+        "format": "chore(release): ${nextRelease.version} [skip ci]"
       }
     ],
     [
@@ -75,5 +76,15 @@
   ],
   "parserOpts": {
     "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
+  },
+  "writerOpts": {
+    "groupBy": "type",
+    "commitGroupsSort": "title",
+    "commitsSort": "header",
+    "noteGroupsSort": "title",
+    "notesSort": "text",
+    "mainTemplate": "# {{version}} ({{date}})\n\n{{#if @root.linkCompare~}}\n[Compare Changes]({{compareUrl previousTag tag}})\n{{~/if}}\n\n{{#each groups}}\n## {{title}}\n{{#each commits}}\n{{> commit root=@root}}\n{{/each}}\n\n{{/each}}\n{{#if @root.linkReferences~}}\n{{#each references}}\n[{{repository.name}}#{{commit}}]({{href}}) {{commitMessage}}\n{{/each}}\n{{/if}}",
+    "commitPartial": "* {{#if scope}}**{{scope}}:** {{/if}}{{subject}}{{#if references}} ({{#each references}}{{#if @root.linkReferences}}[{{repository.name}}#{{commit}}]({{href}}){{else}}{{repository.name}}#{{commit}}{{/if}}{{#unless @last}}, {{/unless}}{{/each}}){{/if}}\n",
+    "noteTemplate": "{{#if @root.linkReferences~}}\n{{#each references}}[{{repository.name}}#{{commit}}]({{href}}) {{commitMessage}}{{/each}}\n{{else}}\n{{#each references}}{{repository.name}}#{{commit}} {{commitMessage}}{{/each}}\n{{/if}}\n{{/if}}"
   }
 }

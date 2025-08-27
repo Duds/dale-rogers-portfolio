@@ -1,29 +1,38 @@
 module.exports = {
-  extends: ["@commitlint/config-conventional"],
+  extends: ['@commitlint/config-conventional'],
   rules: {
-    // Enforce conventional commit format
-    "type-enum": [
+    // Increase line length limits to accommodate semantic-release changelogs
+    'body-max-line-length': [2, 'always', 200],
+    'footer-max-line-length': [2, 'always', 200],
+    'footer-leading-blank': [1, 'always'],
+    
+    // Be more lenient with automated releases
+    'subject-case': [1, 'never', ['sentence-case', 'start-case', 'pascal-case', 'upper-case']],
+    'subject-empty': [2, 'never'],
+    'subject-full-stop': [2, 'never', '.'],
+    'type-case': [2, 'always', 'lower-case'],
+    'type-empty': [2, 'never'],
+    
+    // Allow longer subject lines for better descriptions
+    'subject-max-length': [2, 'always', 100],
+    
+    // Ensure conventional commit types are followed
+    'type-enum': [
       2,
-      "always",
+      'always',
       [
-        "feat", // New features
-        "fix", // Bug fixes
-        "docs", // Documentation changes
-        "style", // Code style changes (formatting, missing semicolons, etc.)
-        "refactor", // Code refactoring
-        "perf", // Performance improvements
-        "test", // Adding or updating tests
-        "chore", // Maintenance tasks, dependencies, etc.
-        "ci", // CI/CD changes
-        "build", // Build system changes
-        "revert", // Revert previous commits
-      ],
-    ],
-    "type-case": [2, "always", "lowercase"],
-    "type-empty": [2, "never"],
-    "subject-case": [2, "always", "lowercase"],
-    "subject-empty": [2, "never"],
-    "subject-full-stop": [2, "never", "."],
-    "subject-max-length": [2, "always", 72],
-  },
+        'feat',
+        'fix',
+        'docs',
+        'style',
+        'refactor',
+        'perf',
+        'test',
+        'chore',
+        'ci',
+        'build',
+        'revert'
+      ]
+    ]
+  }
 };
