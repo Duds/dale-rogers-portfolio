@@ -20,14 +20,26 @@ const {
 
 // Environment detection
 const isDev = import.meta.env.DEV;
-const isPreview =
-  Astro.url.hostname.includes('preview') || Astro.url.hostname.includes('azurestaticapps.net');
+const isPreview = Astro.url.hostname.includes('preview');
+const isProduction = Astro.url.hostname.includes('wonderful-pond-07724bc03.1.azurestaticapps.net');
 
 // Version information
-const version = '0.0.2';
+const version = '1.0.5';
 const buildTime = new Date().toISOString();
-const environment = isDev ? 'development' : isPreview ? 'preview' : 'production';
-const deployment = isDev ? 'local' : isPreview ? 'azure-preview' : 'azure-production';
+const environment = isDev
+  ? 'development'
+  : isPreview
+    ? 'preview'
+    : isProduction
+      ? 'production'
+      : 'unknown';
+const deployment = isDev
+  ? 'local'
+  : isPreview
+    ? 'azure-preview'
+    : isProduction
+      ? 'azure-production'
+      : 'unknown';
 
 // Get commit hash from environment or use fallback
 const commitHash = import.meta.env.ASTRO_COMMIT_HASH || 'local';

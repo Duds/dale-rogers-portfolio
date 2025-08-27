@@ -18,14 +18,20 @@ interface Props {
 const { class: className } = Astro.props;
 
 // Get version from package.json (this will be replaced at build time)
-const version = '0.0.2';
+const version = '1.0.5';
 
 // Determine environment at build time
 const isDev = import.meta.env.DEV;
-const isPreview =
-  Astro.url.hostname.includes('preview') || Astro.url.hostname.includes('azurestaticapps.net');
-const environment = isDev ? 'dev' : isPreview ? 'preview' : 'prod';
-const environmentClass = isDev ? 'env-dev' : isPreview ? 'env-preview' : 'env-prod';
+const isPreview = Astro.url.hostname.includes('preview');
+const isProduction = Astro.url.hostname.includes('wonderful-pond-07724bc03.1.azurestaticapps.net');
+const environment = isDev ? 'dev' : isPreview ? 'preview' : isProduction ? 'prod' : 'unknown';
+const environmentClass = isDev
+  ? 'env-dev'
+  : isPreview
+    ? 'env-preview'
+    : isProduction
+      ? 'env-prod'
+      : 'env-unknown';
 
 // Get additional build info if available
 const commitHash = import.meta.env.ASTRO_COMMIT_HASH || 'local';
