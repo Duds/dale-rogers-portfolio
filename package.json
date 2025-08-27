@@ -1,7 +1,7 @@
 {
   "name": "dale-rogers-portfolio",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "packageManager": "pnpm@10.14.0",
   "scripts": {
@@ -38,7 +38,10 @@
     "audit:images:fix": "node src/scripts/audit-images.js --fix",
     "prepare": "husky",
     "commit": "git-cz",
-    "commit:lint": "commitlint --edit"
+    "commit:lint": "commitlint --edit",
+    "release": "semantic-release",
+    "release:dry-run": "semantic-release --dry-run",
+    "version:sync": "node scripts/sync-version.js"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
@@ -79,6 +82,12 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@playwright/test": "^1.52.0",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.4",
+    "@semantic-release/npm": "^12.0.2",
+    "@semantic-release/release-notes-generator": "^14.0.3",
     "@storybook/addon-a11y": "^8.6.14",
     "@storybook/addon-essentials": "^8.6.14",
     "@storybook/addon-interactions": "^8.6.14",
@@ -118,6 +127,7 @@
     "playwright": "^1.52.0",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
+    "semantic-release": "^24.2.7",
     "sharp": "^0.34.3",
     "storybook": "^8.6.14",
     "tailwind-merge": "^3.3.1",

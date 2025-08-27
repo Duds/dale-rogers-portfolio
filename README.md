@@ -277,3 +277,22 @@ For technical issues or questions:
 **Built with ❤️ using Astro, TypeScript, and Tailwind CSS**
 
 **Deployed on Azure Static Web Apps for optimal performance and reliability**
+
+## 🚀 Automated Releases
+
+This portfolio uses **semantic-release** for automated version management:
+
+- **Automatic versioning** based on conventional commit messages
+- **Zero manual version updates** - just commit with proper format
+- **Automated changelog generation** and GitHub releases
+- **Version synchronization** across all components
+
+### **Commit Types**
+- `feat:` → Minor version bump (new features)
+- `fix:` → Patch version bump (bug fixes)
+- `docs:` → Patch version bump (documentation)
+- `BREAKING CHANGE:` → Major version bump
+
+See [RELEASE_PROCESS.md](docs/RELEASE_PROCESS.md) for complete documentation.
+
+## 🛠️ Development

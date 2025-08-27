@@ -2,6 +2,7 @@
 import Container from "@/components/layout/Container.astro";
 import "@/styles/components/footer.css";
 import Button from "@/components/ui/Button.astro";
+import VersionBadge from "@/components/ui/VersionBadge.astro";
 import { ArrowRight, Linkedin, BookOpen } from "lucide-astro";
 
 interface Link {
@@ -155,10 +156,13 @@ const infoLinks: Link[] = [
       <p class="copyright-text">
         &copy; {currentYear} Dale Rogers. All rights reserved.
       </p>
-      <p class="copyright-text flex items-center">
-        Made with <span class="copyright-heart">❤️</span> in Canberra (Ngunnawal
-        Country)
-      </p>
+      <div class="flex items-center gap-4">
+        <VersionBadge />
+        <p class="copyright-text flex items-center">
+          Made with <span class="copyright-heart">❤️</span> in Canberra (Ngunnawal
+          Country)
+        </p>
+      </div>
     </div>
   </Container>
 </div>

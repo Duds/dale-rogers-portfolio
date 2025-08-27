@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Automated Release System**: Implemented semantic-release for automatic version management
+  - **Semantic Release**: Automatic version increments based on conventional commit messages
+  - **Version Sync Script**: Automatically updates version numbers across all component files
+  - **GitHub Actions Integration**: Automated releases triggered by pushes to main branch
+  - **Conventional Commits**: Enforced commit message format for consistent versioning
+  - **Zero Manual Version Management**: Version numbers, changelogs, and releases are fully automated
+
+- **Version Badge Component**: Added comprehensive version tracking and environment detection
+  - New `VersionBadge` component displays version number and deployment environment
+  - Footer now shows version badge with environment-specific styling
+  - Automatic environment detection (dev/preview/prod) with visual indicators
+  - Build-time environment variables injected via GitHub Actions workflows
+  - Hover tooltips show branch and commit hash information
+
+- **Enhanced Environment Detection**: Improved deployment environment identification
+  - Automatic detection of Azure Static Web Apps preview vs production
+  - Build-time injection of commit hash, branch name, and environment
+  - Console logging of comprehensive version information
+  - Meta tags for version, build time, and deployment details
+
 ### Fixed
 
 - **@apply directives not working**: Fixed Tailwind CSS v4 configuration issue where `@apply` directives were not being processed
@@ -15,26 +37,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - All component CSS files now properly expand `@apply` directives
 - **CSS import order**: Fixed CSS import order to ensure all `@import` statements come before other directives
 
-### Added
-
-- **No PostCSS rule**: Created `.cursor/rules/no-postcss.mdc` to prevent PostCSS usage
-  - Enforces Tailwind CSS v4 with Vite plugin configuration
-  - Prevents configuration issues that cause `@apply` directive failures
-  - Documents correct CSS import structure and component CSS setup
-
 ### Changed
 
-- **Configuration structure**: Moved Tailwind CSS Vite plugin configuration to `astro.config.mjs`
-  - Removed separate `vite.config.ts` file
-  - Ensures proper integration with Astro's build process
-  - Maintains optimal developer experience with hot module replacement
+- **Package version**: Updated from v0.0.1 to v0.0.2 for consistency
+- **GitHub Actions workflows**: Enhanced with build-time environment variable injection
+  - Added `ASTRO_COMMIT_HASH`, `ASTRO_BRANCH`, and `ASTRO_ENVIRONMENT` variables
+  - Improved version tracking and deployment identification
+- **Astro configuration**: Added environment variable passthrough for build-time data
+- **BaseLayout**: Enhanced with comprehensive version information and environment detection
 
 ### Documentation
 
-- **Troubleshooting guide**: Added comprehensive troubleshooting section for `@apply` directive issues
-  - Documents symptoms, root causes, and solutions
-  - Provides correct vs. incorrect configuration examples
-  - Includes prevention tips and quick fixes
+- **Deployment documentation**: Updated with version badge and environment detection details
+- **Version information**: Added comprehensive documentation of new versioning features
+- **Environment detection**: Documented automatic environment identification system
 
 ## [0.0.1] - 2025-01-XX
 

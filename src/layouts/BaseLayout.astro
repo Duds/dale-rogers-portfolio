@@ -17,6 +17,21 @@ const {
   image = '/images/og-image.jpg',
   canonicalURL = Astro.url,
 } = Astro.props;
+
+// Environment detection
+const isDev = import.meta.env.DEV;
+const isPreview =
+  Astro.url.hostname.includes('preview') || Astro.url.hostname.includes('azurestaticapps.net');
+
+// Version information
+const version = '0.0.2';
+const buildTime = new Date().toISOString();
+const environment = isDev ? 'development' : isPreview ? 'preview' : 'production';
+const deployment = isDev ? 'local' : isPreview ? 'azure-preview' : 'azure-production';
+
+// Get commit hash from environment or use fallback
+const commitHash = import.meta.env.ASTRO_COMMIT_HASH || 'local';
+const branch = import.meta.env.ASTRO_BRANCH || (isDev ? 'dev' : isPreview ? 'preview' : 'main');
 ---
 
 <!doctype html>
@@ -29,21 +44,25 @@ const {
     <meta name="generator" content={Astro.generator} />
 
     <!-- Version Information -->
-    <meta name="version" content="0.0.2" />
-    <meta name="build-time" content={new Date().toISOString()} />
-    <meta name="environment" content={import.meta.env.MODE} />
-    <meta name="deployment" content={import.meta.env.DEV ? 'development' : 'production'} />
+    <meta name="version" content={version} />
+    <meta name="build-time" content={buildTime} />
+    <meta name="environment" content={environment} />
+    <meta name="deployment" content={deployment} />
+    <meta name="commit-hash" content={commitHash} />
+    <meta name="branch" content={branch} />
 
     <!-- Version Display Script -->
     <script is:inline>
       // Display version information in console and optionally in UI
       const versionInfo = {
-        version: '0.0.2',
-        buildTime: new Date().toISOString(),
-        environment: 'production',
-        deployment: 'production',
-        commitHash: 'local',
-        branch: 'main',
+        version: '{version}',
+        buildTime: '{buildTime}',
+        environment: '{environment}',
+        deployment: '{deployment}',
+        commitHash: '{commitHash}',
+        branch: '{branch}',
+        url: window.location.href,
+        userAgent: navigator.userAgent,
       };
 
       console.log('🚀 Portfolio Version Info:', versionInfo);

@@ -47,6 +47,10 @@ jobs:
 
       - name: Build
         run: pnpm run build
+        env:
+          ASTRO_COMMIT_HASH: ${{ github.sha }}
+          ASTRO_BRANCH: ${{ github.ref_name }}
+          ASTRO_ENVIRONMENT: production
 
       - name: Deploy to Production
         uses: Azure/static-web-apps-deploy@v1

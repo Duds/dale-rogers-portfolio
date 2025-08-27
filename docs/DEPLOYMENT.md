@@ -15,25 +15,35 @@ This portfolio site is deployed using **Azure Static Web Apps (SWA)**, which pro
 - **Last Deployment**: December 2024 (commit `0796c20`)
 - **Current Version**: v0.0.2
 
-## Versioning and Environment Identification
+## Version Information
+
+### Version Badge
+
+The portfolio now includes a version badge in the footer that displays:
+- **Version Number**: Current package version (e.g., v0.0.2)
+- **Environment**: Development, Preview, or Production
+- **Build Info**: Hover tooltip shows branch and commit hash
+
+### Environment Detection
+
+The system automatically detects the deployment environment:
+
+- **Development**: Local development server (`pnpm run dev`)
+- **Preview**: Azure Static Web Apps preview environment (preview branch)
+- **Production**: Azure Static Web Apps production environment (main branch)
+
+### Build-Time Variables
+
+GitHub Actions workflows inject the following environment variables:
+- `ASTRO_COMMIT_HASH`: Git commit SHA for version tracking
+- `ASTRO_BRANCH`: Source branch name
+- `ASTRO_ENVIRONMENT`: Deployment environment (preview/production)
 
 ### Version Display
 
-The site includes version information in multiple places:
-
-1. **Navigation Badge**: Shows `v0.0.2 prod` in the top navigation
-2. **Console Logs**: Version info logged to browser console
-3. **Meta Tags**: Version, build time, and environment in HTML head
-4. **Environment Colors**:
-   - 🟢 **Green**: Production environment
-   - 🟡 **Yellow**: Preview environment
-   - 🔵 **Blue**: Development environment
-
-### Environment URLs
-
-- **Production**: `wonderful-pond-07724bc03.1.azurestaticapps.net` (Main branch)
-- **Preview**: `wonderful-pond-07724bc03-preview.westeurope.1.azurestaticapps.net` (Preview branch)
-- **Development**: Local development server
+- **Console Logging**: Version information logged to browser console
+- **Meta Tags**: Version, environment, and build time in HTML head
+- **Footer Badge**: Visual indicator with environment-specific styling
 
 ## Why Azure Static Web Apps?
 

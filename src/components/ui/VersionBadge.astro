@@ -1,0 +1,41 @@
+---
+/**
+ * Version Badge Component
+ * Displays version information and deployment environment
+ * @component VersionBadge
+ * @example
+ * ```astro
+ * <VersionBadge />
+ * ```
+ */
+import '@/styles/components/version-badge.css';
+
+interface Props {
+  /** Custom class names */
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+// Get version from package.json (this will be replaced at build time)
+const version = '0.0.2';
+
+// Determine environment at build time
+const isDev = import.meta.env.DEV;
+const isPreview =
+  Astro.url.hostname.includes('preview') || Astro.url.hostname.includes('azurestaticapps.net');
+const environment = isDev ? 'dev' : isPreview ? 'preview' : 'prod';
+const environmentClass = isDev ? 'env-dev' : isPreview ? 'env-preview' : 'env-prod';
+
+// Get additional build info if available
+const commitHash = import.meta.env.ASTRO_COMMIT_HASH || 'local';
+const branch = import.meta.env.ASTRO_BRANCH || (isDev ? 'dev' : isPreview ? 'preview' : 'main');
+---
+
+<div
+  class={`version-badge ${environmentClass} ${className || ''}`}
+  title={`Branch: ${branch} | Commit: ${commitHash}`}
+>
+  <span class="version-badge__version">v{version}</span>
+  <span class="version-badge__environment">{environment}</span>
+</div>
