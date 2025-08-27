@@ -1,4 +1,3 @@
-/// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
 // Extend the import.meta.env interface with custom variables
@@ -11,9 +10,9 @@ interface ImportMetaEnv {
 declare module 'astro:content' {
   interface Render {
     '.mdx': Promise<{
-      Content: import('astro').MarkdownInstance<{}>['Content'];
+      Content: import('astro').MarkdownInstance<Record<string, never>>['Content'];
       headings: import('astro').MarkdownHeading[];
-      remarkPluginFrontmatter: Record<string, any>;
+      remarkPluginFrontmatter: Record<string, unknown>;
     }>;
   }
 }
@@ -24,12 +23,12 @@ declare module 'astro:components' {
     lang?: string;
     theme?: string;
     wrap?: boolean;
-  }) => any;
+  }) => unknown;
 }
 
 // Declare module for .astro components to fix TypeScript errors
 declare module '*.astro' {
-  const component: (props: any) => any;
+  const component: (props: Record<string, unknown>) => unknown;
   export default component;
 }
 
