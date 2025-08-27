@@ -1,79 +1,36 @@
 {
   "routes": [
     {
-      "route": "/_astro/*",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
+      "route": "/api/*",
+      "allowedRoles": ["anonymous"]
     },
     {
-      "route": "/images/*",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
+      "route": "/admin/*",
+      "allowedRoles": ["authenticated"]
     },
     {
-      "route": "/favicon.svg",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "route": "/*.js",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "route": "/*.css",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "route": "/work/*",
-      "rewrite": "/work/index.html"
-    },
-    {
-      "route": "/articles/*",
-      "rewrite": "/articles/index.html"
-    },
-    {
-      "route": "/services/*",
-      "rewrite": "/services/index.html"
-    },
-    {
-      "route": "/tags/*",
-      "rewrite": "/tags/index.html"
-    },
-    {
-      "route": "/about",
-      "rewrite": "/about/index.html"
-    },
-    {
-      "route": "/contact",
-      "rewrite": "/contact/index.html"
-    },
-    {
-      "route": "/capabilities",
-      "rewrite": "/capabilities/index.html"
-    },
-    {
-      "route": "/colophon",
-      "rewrite": "/colophon/index.html"
-    },
-    {
-      "route": "/",
-      "rewrite": "/index.html"
+      "route": "/*",
+      "serve": "/index.html",
+      "statusCode": 200
     }
   ],
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/images/*", "/_astro/*", "/*.{css,js,png,jpg,jpeg,gif,svg,ico,woff,woff2}"]
+    "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/js/*", "/api/*"]
   },
   "responseOverrides": {
     "404": {
-      "rewrite": "/404.html"
+      "rewrite": "/404.html",
+      "statusCode": 200
     }
+  },
+  "globalHeaders": {
+    "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none';",
+    "x-frame-options": "DENY",
+    "x-content-type-options": "nosniff",
+    "referrer-policy": "strict-origin-when-cross-origin"
+  },
+  "mimeTypes": {
+    ".json": "text/json"
   }
 }
