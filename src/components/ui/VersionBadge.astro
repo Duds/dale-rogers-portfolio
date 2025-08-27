@@ -22,16 +22,46 @@ const version = '1.0.5';
 
 // Determine environment at build time
 const isDev = import.meta.env.DEV;
-const isPreview = Astro.url.hostname.includes('preview');
-const isProduction = Astro.url.hostname.includes('wonderful-pond-07724bc03.1.azurestaticapps.net');
-const environment = isDev ? 'dev' : isPreview ? 'preview' : isProduction ? 'prod' : 'unknown';
-const environmentClass = isDev
-  ? 'env-dev'
-  : isPreview
-    ? 'env-preview'
-    : isProduction
-      ? 'env-prod'
-      : 'env-unknown';
+const hostname = Astro.url.hostname;
+
+// More robust environment detection
+const isPreview = hostname.includes('preview') || hostname.includes('preview.westeurope');
+const isProduction =
+  hostname.includes('wonderful-pond-07724bc03.1.azurestaticapps.net') &&
+  !hostname.includes('preview');
+
+// Use ASTRO_ENVIRONMENT as fallback if hostname detection fails
+const astroEnv = import.meta.env.ASTRO_ENVIRONMENT;
+
+// Debug logging for environment detection
+console.log('🔍 VersionBadge Environment Detection:', {
+  hostname,
+  isDev,
+  isPreview,
+  isProduction,
+  ASTRO_ENVIRONMENT: astroEnv,
+});
+
+// Environment detection with fallback to ASTRO_ENVIRONMENT
+let environment = 'unknown';
+if (isDev) {
+  environment = 'dev';
+} else if (isPreview) {
+  environment = 'preview';
+} else if (isProduction) {
+  environment = 'prod';
+} else if (astroEnv) {
+  // Fallback to build-time environment variable
+  environment = astroEnv === 'production' ? 'prod' : astroEnv;
+}
+const environmentClass =
+  environment === 'dev'
+    ? 'env-dev'
+    : environment === 'preview'
+      ? 'env-preview'
+      : environment === 'prod'
+        ? 'env-prod'
+        : 'env-unknown';
 
 // Get additional build info if available
 const commitHash = import.meta.env.ASTRO_COMMIT_HASH || 'local';
