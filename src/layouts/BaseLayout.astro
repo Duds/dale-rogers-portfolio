@@ -1,8 +1,8 @@
 ---
-import { ViewTransitions } from "astro:transitions";
-import Header from "@/components/layout/Header.astro";
-import Footer from "@/components/layout/Footer.astro";
-import "@/styles/global.css";
+import { ViewTransitions } from 'astro:transitions';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import '@/styles/global.css';
 
 interface Props {
   title: string;
@@ -13,8 +13,8 @@ interface Props {
 
 const {
   title,
-  description = "Dale Rogers - Service Designer and Digital Strategist",
-  image = "/images/og-image.jpg",
+  description = 'Dale Rogers - Service Designer and Digital Strategist',
+  image = '/images/og-image.jpg',
   canonicalURL = Astro.url,
 } = Astro.props;
 ---
@@ -27,6 +27,30 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Version Information -->
+    <meta name="version" content="0.0.2" />
+    <meta name="build-time" content={new Date().toISOString()} />
+    <meta name="environment" content={import.meta.env.MODE} />
+    <meta name="deployment" content={import.meta.env.DEV ? 'development' : 'production'} />
+
+    <!-- Version Display Script -->
+    <script is:inline>
+      // Display version information in console and optionally in UI
+      const versionInfo = {
+        version: '0.0.2',
+        buildTime: new Date().toISOString(),
+        environment: 'production',
+        deployment: 'production',
+        commitHash: 'local',
+        branch: 'main',
+      };
+
+      console.log('🚀 Portfolio Version Info:', versionInfo);
+
+      // Add version info to window for debugging
+      window.portfolioVersion = versionInfo;
+    </script>
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
@@ -51,35 +75,29 @@ const {
     <script is:inline>
       // Initialize theme from localStorage or system preference
       function initializeTheme() {
-        const THEME_KEY = "theme";
+        const THEME_KEY = 'theme';
         const stored = localStorage.getItem(THEME_KEY);
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const theme =
-          stored === "dark" || stored === "light"
-            ? stored
-            : prefersDark
-              ? "dark"
-              : "light";
+          stored === 'dark' || stored === 'light' ? stored : prefersDark ? 'dark' : 'light';
 
         // Set data-theme attribute instead of class
-        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.setAttribute('data-theme', theme);
         // Also set the class for Tailwind compatibility
-        document.documentElement.classList.toggle("dark", theme === "dark");
-        
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+
         // Log for debugging
-        console.log("🎨 BaseLayout: Theme initialized to:", theme);
-        console.log("🎨 BaseLayout: localStorage theme:", stored);
-        console.log("🎨 BaseLayout: System prefers dark:", prefersDark);
-        
+        console.log('🎨 BaseLayout: Theme initialized to:', theme);
+        console.log('🎨 BaseLayout: localStorage theme:', stored);
+        console.log('🎨 BaseLayout: System prefers dark:', prefersDark);
+
         // Dispatch a custom event to notify other scripts that theme is ready
-        document.dispatchEvent(new CustomEvent("theme:initialized", { detail: { theme } }));
+        document.dispatchEvent(new CustomEvent('theme:initialized', { detail: { theme } }));
       }
-      
+
       // Run immediately if DOM is ready, otherwise wait
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initializeTheme);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeTheme);
       } else {
         initializeTheme();
       }

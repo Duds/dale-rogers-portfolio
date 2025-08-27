@@ -5,10 +5,10 @@
  * and proper semantic navigation with accessibility features.
  */
 
-import ThemeToggle from "@/components/ui/ThemeToggle.astro";
-import SearchInput from "@/components/features/search/SearchInput.astro";
-import Container from "./Container.astro";
-import "@/styles/components/navigation.css";
+import ThemeToggle from '@/components/ui/ThemeToggle.astro';
+import SearchInput from '@/components/features/search/SearchInput.astro';
+import Container from './Container.astro';
+import '@/styles/components/navigation.css';
 
 interface Props {
   /** Additional CSS classes */
@@ -17,25 +17,25 @@ interface Props {
 
 const { class: className } = Astro.props;
 
-const baseClasses = "navigation";
-const combinedClasses = [baseClasses, className].filter(Boolean).join(" ");
+const baseClasses = 'navigation';
+const combinedClasses = [baseClasses, className].filter(Boolean).join(' ');
 
 // Get current path for active state detection
 const currentPath = Astro.url.pathname;
 
 // Navigation items
 const navItems = [
-  { href: "/work", text: "Work", ariaLabel: "View portfolio work" },
+  { href: '/work', text: 'Work', ariaLabel: 'View portfolio work' },
   {
-    href: "/articles",
-    text: "Articles",
-    ariaLabel: "Read articles and insights",
+    href: '/articles',
+    text: 'Articles',
+    ariaLabel: 'Read articles and insights',
   },
 ];
 
 // Helper function to determine if a nav item is active
 const isActive = (href: string): boolean => {
-  if (href === "/") return currentPath === "/";
+  if (href === '/') return currentPath === '/';
   return currentPath.startsWith(href);
 };
 ---
@@ -45,13 +45,14 @@ const isActive = (href: string): boolean => {
     <div class="navigation__content">
       <!-- Brand/Logo -->
       <div class="navigation__brand">
-        <a
-          href="/"
-          class="navigation__logo"
-          aria-label="Dale Rogers - Homepage"
-        >
-          Dale Rogers
-        </a>
+        <a href="/" class="navigation__logo" aria-label="Dale Rogers - Homepage"> Dale Rogers </a>
+        <!-- Version Badge -->
+        <div class="navigation__version">
+          <span class="version-badge">
+            v0.0.2
+            <span class="version-environment">prod</span>
+          </span>
+        </div>
       </div>
 
       <!-- Mobile Menu Button -->
@@ -78,17 +79,11 @@ const isActive = (href: string): boolean => {
         </div>
 
         <!-- Navigation Menu -->
-        <div
-          class="navigation__menu"
-          id="main-navigation"
-          aria-labelledby="mobile-menu-button"
-        >
+        <div class="navigation__menu" id="main-navigation" aria-labelledby="mobile-menu-button">
           <ul class="navigation__list" role="menubar">
             {
-              navItems.map((item) => {
-                const activeClass = isActive(item.href)
-                  ? "navigation__link--active"
-                  : "";
+              navItems.map(item => {
+                const activeClass = isActive(item.href) ? 'navigation__link--active' : '';
                 return (
                   <li class="navigation__item" role="none">
                     <a
@@ -96,7 +91,7 @@ const isActive = (href: string): boolean => {
                       class={`navigation__link ${activeClass}`}
                       role="menuitem"
                       aria-label={item.ariaLabel}
-                      aria-current={isActive(item.href) ? "page" : undefined}
+                      aria-current={isActive(item.href) ? 'page' : undefined}
                     >
                       {item.text}
                     </a>
@@ -114,7 +109,7 @@ const isActive = (href: string): boolean => {
             class="navigation__link"
             role="menuitem"
             aria-label="Get in touch"
-            aria-current={isActive("/contact") ? "page" : undefined}
+            aria-current={isActive('/contact') ? 'page' : undefined}
           >
             Contact
           </a>
@@ -134,54 +129,48 @@ const isActive = (href: string): boolean => {
    * Mobile navigation toggle functionality
    */
   function initMobileNavigation() {
-    const mobileButton = document.getElementById("mobile-menu-button");
-    const navigation = document.getElementById("main-navigation");
+    const mobileButton = document.getElementById('mobile-menu-button');
+    const navigation = document.getElementById('main-navigation');
 
     if (!mobileButton || !navigation) return;
 
     const toggleMobileMenu = () => {
-      const isExpanded = mobileButton.getAttribute("aria-expanded") === "true";
+      const isExpanded = mobileButton.getAttribute('aria-expanded') === 'true';
       const newState = !isExpanded;
 
-      mobileButton.setAttribute("aria-expanded", newState.toString());
-      mobileButton.classList.toggle(
-        "navigation__mobile-toggle--active",
-        newState
-      );
-      navigation.classList.toggle("navigation__menu--open", newState);
+      mobileButton.setAttribute('aria-expanded', newState.toString());
+      mobileButton.classList.toggle('navigation__mobile-toggle--active', newState);
+      navigation.classList.toggle('navigation__menu--open', newState);
 
       // Prevent body scroll when menu is open
-      document.body.classList.toggle("navigation-open", newState);
+      document.body.classList.toggle('navigation-open', newState);
     };
 
     // Toggle on button click
-    mobileButton.addEventListener("click", toggleMobileMenu);
+    mobileButton.addEventListener('click', toggleMobileMenu);
 
     // Close menu when clicking outside
-    document.addEventListener("click", (event) => {
+    document.addEventListener('click', event => {
       const target = event.target as Node;
       if (!mobileButton.contains(target) && !navigation.contains(target)) {
-        if (mobileButton.getAttribute("aria-expanded") === "true") {
+        if (mobileButton.getAttribute('aria-expanded') === 'true') {
           toggleMobileMenu();
         }
       }
     });
 
     // Close menu on escape key
-    document.addEventListener("keydown", (event) => {
-      if (
-        event.key === "Escape" &&
-        mobileButton.getAttribute("aria-expanded") === "true"
-      ) {
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && mobileButton.getAttribute('aria-expanded') === 'true') {
         toggleMobileMenu();
       }
     });
 
     // Close menu when navigating to a new page
     const navLinks = navigation.querySelectorAll('a[role="menuitem"]');
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        if (mobileButton.getAttribute("aria-expanded") === "true") {
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (mobileButton.getAttribute('aria-expanded') === 'true') {
           toggleMobileMenu();
         }
       });
@@ -189,8 +178,8 @@ const isActive = (href: string): boolean => {
   }
 
   // Initialize on DOM content loaded
-  document.addEventListener("DOMContentLoaded", initMobileNavigation);
+  document.addEventListener('DOMContentLoaded', initMobileNavigation);
 
   // Re-initialize on Astro page navigation
-  document.addEventListener("astro:page-load", initMobileNavigation);
+  document.addEventListener('astro:page-load', initMobileNavigation);
 </script>

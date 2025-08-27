@@ -1,158 +1,127 @@
 @reference "tailwindcss";
 
-/* Professional Navigation Component Styles */
+/* Navigation Component Styles */
+
 .navigation {
-  @apply backdrop-blur-md sticky top-0 z-50;
-  background-color: rgba(242, 242, 242, 0.9);
+  @apply relative z-50 w-full transition-all duration-300;
 }
-
-/* Dark theme support */
-:root[data-theme="dark"] .navigation {
-  background-color: rgba(31, 42, 0, 0.9);
-  border-color: var(--color-border-primary);
-}
-
-/* Removed .navigation__container as it's no longer needed - Container component handles layout */
 
 .navigation__content {
-  @apply flex items-center justify-between py-4 px-2;
+  @apply flex items-center justify-between py-4;
 }
 
 .navigation__brand {
-  @apply flex-shrink-0;
+  @apply flex items-center gap-3;
 }
 
 .navigation__logo {
-  @apply text-2xl font-bold transition-colors duration-300;
-  color: var(--color-text-primary);
+  @apply font-heading text-xl font-bold text-primary-black dark:text-white transition-colors duration-200 hover:text-primary-purple dark:hover:text-primary-purple;
 }
 
-.navigation__logo:hover {
-  color: var(--color-secondary-main);
+/* Version Badge Styles */
+.navigation__version {
+  @apply flex items-center;
 }
 
-/* Mobile Menu Toggle Button */
+.version-badge {
+  @apply inline-flex items-center gap-1 px-2 py-1 text-xs font-mono bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded border border-gray-200 dark:border-gray-700;
+}
+
+.version-environment {
+  @apply px-1.5 py-0.5 text-[10px] font-bold uppercase bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded;
+}
+
+/* Environment-specific colors */
+.navigation[data-environment='preview'] .version-environment {
+  @apply bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300;
+}
+
+.navigation[data-environment='development'] .version-environment {
+  @apply bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300;
+}
+
 .navigation__mobile-toggle {
-  @apply md:hidden flex flex-col items-center justify-center w-10 h-10 p-2 bg-transparent border-none cursor-pointer;
-}
-
-.navigation__mobile-toggle:focus {
-  @apply outline-none ring-2 ring-offset-2;
-  ring-color: var(--color-border-focus);
-  ring-offset-color: var(--color-background-primary);
+  @apply lg:hidden flex flex-col justify-center items-center w-8 h-8 p-1 rounded-md transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800;
 }
 
 .navigation__hamburger {
-  @apply flex flex-col items-center justify-center w-6 h-6;
+  @apply relative w-6 h-6;
 }
 
 .navigation__hamburger-line {
-  @apply w-full h-0.5 transition-all duration-300 ease-in-out;
-  background-color: var(--color-text-primary);
+  @apply absolute left-0 w-6 h-0.5 bg-gray-900 dark:bg-white transition-all duration-300;
 }
 
-.navigation__hamburger-line:not(:last-child) {
-  @apply mb-1;
+.navigation__hamburger-line:nth-child(1) {
+  @apply top-2;
 }
 
-/* Hamburger animation when active */
-.navigation__mobile-toggle--active .navigation__hamburger-line:nth-child(1) {
-  @apply transform rotate-45 translate-y-2;
+.navigation__hamburger-line:nth-child(2) {
+  @apply top-4;
 }
 
-.navigation__mobile-toggle--active .navigation__hamburger-line:nth-child(2) {
+.navigation__hamburger-line:nth-child(3) {
+  @apply top-6;
+}
+
+/* Mobile menu open state */
+.navigation__mobile-toggle[aria-expanded='true'] .navigation__hamburger-line:nth-child(1) {
+  @apply top-4 rotate-45;
+}
+
+.navigation__mobile-toggle[aria-expanded='true'] .navigation__hamburger-line:nth-child(2) {
   @apply opacity-0;
 }
 
-.navigation__mobile-toggle--active .navigation__hamburger-line:nth-child(3) {
-  @apply transform -rotate-45 -translate-y-2;
+.navigation__mobile-toggle[aria-expanded='true'] .navigation__hamburger-line:nth-child(3) {
+  @apply top-4 -rotate-45;
 }
 
 .navigation__right {
-  @apply flex items-center space-x-6;
+  @apply flex items-center gap-4;
 }
 
 .navigation__search {
-  @apply flex-shrink-0;
+  @apply hidden sm:block;
 }
 
 .navigation__menu {
-  @apply hidden md:block;
-}
-
-.navigation__menu--open {
-  @apply block md:block;
+  @apply hidden lg:block;
 }
 
 .navigation__list {
-  @apply flex items-center space-x-6;
+  @apply flex items-center gap-6;
 }
 
 .navigation__item {
-  @apply list-none;
-}
-
-.navigation__contact {
-  @apply flex-shrink-0;
-}
-
-.navigation__theme {
-  @apply flex-shrink-0;
+  @apply relative;
 }
 
 .navigation__link {
-  @apply font-medium transition-all duration-300 px-4 py-2 rounded-full border-2 border-solid;
-  background-color: transparent;
-  border-color: var(--color-text-secondary);
-  color: var(--color-text-secondary);
-}
-
-.navigation__link:hover {
-  background-color: var(--color-text-secondary);
-  color: var(--color-text-inverse);
-  border-color: var(--color-text-secondary);
+  @apply font-medium text-gray-700 dark:text-gray-300 transition-colors duration-200 hover:text-primary-black dark:hover:text-white relative;
 }
 
 .navigation__link--active {
-  @apply font-medium px-4 py-2 rounded-full border-2 border-solid;
-  background-color: var(--color-secondary-main);
-  color: var(--color-secondary-contrast);
-  border-color: var(--color-secondary-main);
+  @apply text-primary-black dark:text-white font-semibold;
 }
 
-.navigation__link--active:hover {
-  background-color: var(--color-secondary-dark);
-  border-color: var(--color-secondary-dark);
+.navigation__link--active::after {
+  content: '';
+  @apply absolute -bottom-1 left-0 w-full h-0.5 bg-primary-purple rounded-full;
 }
 
-.navigation__link:focus {
-  @apply outline-none ring-2 ring-offset-2;
-  ring-color: var(--color-border-focus);
-  ring-offset-color: var(--color-background-primary);
-}
+/* Mobile Navigation */
+@media (max-width: 1023px) {
+  .navigation__menu {
+    @apply absolute top-full left-0 w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg;
+  }
 
-.navigation__actions {
-  @apply flex items-center space-x-4;
-}
-
-/* Mobile menu styles */
-@media (max-width: 768px) {
-  .navigation__right {
+  .navigation__menu[aria-hidden='true'] {
     @apply hidden;
   }
 
-  .navigation__menu {
-    @apply fixed inset-x-0 top-full left-0 border-t shadow-lg z-40 transform -translate-y-2 opacity-0 invisible transition-all duration-300 ease-in-out;
-    background-color: var(--color-background-secondary);
-    border-color: var(--color-border-primary);
-  }
-
-  .navigation__menu--open {
-    @apply transform translate-y-0 opacity-100 visible;
-  }
-
   .navigation__list {
-    @apply flex-col space-y-0 space-x-0 p-4;
+    @apply flex-col gap-0 py-4;
   }
 
   .navigation__item {
@@ -160,64 +129,14 @@
   }
 
   .navigation__link {
-    @apply block w-full px-4 py-3 text-left border-b last:border-b-0 rounded-none;
-    border-color: var(--color-border-tertiary);
-    background-color: transparent;
-    color: var(--color-text-secondary);
+    @apply block w-full px-6 py-3 text-left border-b border-gray-100 dark:border-gray-800 last:border-b-0;
   }
 
-  .navigation__link:hover {
-    background-color: var(--color-text-secondary);
-    color: var(--color-text-inverse);
+  .navigation__link--active::after {
+    @apply hidden;
   }
 
   .navigation__link--active {
-    background-color: var(--color-secondary-main);
-    color: var(--color-secondary-contrast);
-    border-color: var(--color-secondary-main);
-  }
-
-  /* Mobile search and theme toggle */
-  .navigation__search,
-  .navigation__contact,
-  .navigation__theme {
-    @apply block w-full px-4 py-3 text-left border-b last:border-b-0;
-    border-color: var(--color-border-tertiary);
-  }
-
-  .navigation__search {
-    @apply flex justify-center;
-  }
-
-  .navigation__theme {
-    @apply flex justify-center;
-  }
-}
-
-/* Prevent body scroll when mobile menu is open */
-body.navigation-open {
-  @apply overflow-hidden;
-}
-
-/* Accessibility improvements */
-@media (prefers-reduced-motion: reduce) {
-  .navigation__link,
-  .navigation__hamburger-line,
-  .navigation__menu {
-    @apply transition-none;
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .navigation__link {
-    @apply border-2 border-solid;
-    border-color: var(--color-text-secondary);
-  }
-
-  .navigation__link:focus,
-  .navigation__link--active {
-    @apply border-2 border-solid;
-    border-color: var(--color-text-primary);
+    @apply bg-gray-50 dark:bg-gray-800;
   }
 }

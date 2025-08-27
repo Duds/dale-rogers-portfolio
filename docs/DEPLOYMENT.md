@@ -12,7 +12,28 @@ This portfolio site is deployed using **Azure Static Web Apps (SWA)**, which pro
 - **Production URL**: https://wonderful-pond-07724bc03.1.azurestaticapps.net
 - **Preview URL**: https://wonderful-pond-07724bc03-preview.westeurope.1.azurestaticapps.net
 - **Status**: ✅ **LIVE & AUTOMATED** - CI/CD pipeline working successfully
-- **Last Deployment**: December 2024 (commit `495f581`)
+- **Last Deployment**: December 2024 (commit `0796c20`)
+- **Current Version**: v0.0.2
+
+## Versioning and Environment Identification
+
+### Version Display
+
+The site includes version information in multiple places:
+
+1. **Navigation Badge**: Shows `v0.0.2 prod` in the top navigation
+2. **Console Logs**: Version info logged to browser console
+3. **Meta Tags**: Version, build time, and environment in HTML head
+4. **Environment Colors**:
+   - 🟢 **Green**: Production environment
+   - 🟡 **Yellow**: Preview environment
+   - 🔵 **Blue**: Development environment
+
+### Environment URLs
+
+- **Production**: `wonderful-pond-07724bc03.1.azurestaticapps.net` (Main branch)
+- **Preview**: `wonderful-pond-07724bc03-preview.westeurope.1.azurestaticapps.net` (Preview branch)
+- **Development**: Local development server
 
 ## Why Azure Static Web Apps?
 
@@ -32,14 +53,32 @@ This portfolio site is deployed using **Azure Static Web Apps (SWA)**, which pro
 
 ### Deployment Flow
 
-1. **GitHub Push** → Triggers GitHub Actions workflow
+1. **GitHub Push** → Triggers appropriate workflow (Preview or Production)
 2. **Build** → `pnpm install && pnpm build`
 3. **Deploy** → Files uploaded to Azure Static Web Apps
 4. **CDN** → Content distributed globally
 
 ## Deployment Methods
 
-### Method 1: Direct Deployment (CLI)
+### Method 1: GitHub Actions (Automated) ✅ WORKING
+
+**Two Separate Workflows:**
+
+#### Production Workflow (`.github/workflows/azure-static-web-apps.yml`)
+
+- **Trigger**: Push to `main` branch
+- **Environment**: Production
+- **URL**: `wonderful-pond-07724bc03.1.azurestaticapps.net`
+- **Status**: ✅ **FULLY AUTOMATED**
+
+#### Preview Workflow (`.github/workflows/azure-static-web-apps-preview.yml`)
+
+- **Trigger**: Push to `preview` branch
+- **Environment**: Preview
+- **URL**: `wonderful-pond-07724bc03-preview.westeurope.1.azurestaticapps.net`
+- **Status**: ✅ **FULLY AUTOMATED**
+
+### Method 2: Direct CLI Deployment
 
 Use this method for immediate deployments or testing:
 
@@ -62,21 +101,6 @@ az staticwebapp secrets list \
   --output tsv
 ```
 
-### Method 2: GitHub Actions (Automated) ✅ WORKING
-
-**Prerequisites:**
-
-- GitHub repository connected to Azure Static Web Apps
-- `AZURE_STATIC_WEB_APPS_API_TOKEN` secret configured in GitHub
-
-**Automatic Deployment:**
-
-1. Push changes to `main` branch
-2. GitHub Actions automatically builds and deploys
-3. Site updates within 5-8 minutes
-
-**Current Status**: ✅ **FULLY AUTOMATED** - Every push to main triggers deployment
-
 ## Setup Instructions
 
 ### 1. Azure Static Web Apps (Already Configured)
@@ -88,12 +112,22 @@ Your Azure Static Web App is already set up with:
 - **Location**: Australia East
 - **Source**: GitHub repository integration
 
-### 2. GitHub Actions Workflow ✅ CONFIGURED
+### 2. GitHub Actions Workflows ✅ CONFIGURED
+
+#### Production Workflow
 
 The `.github/workflows/azure-static-web-apps.yml` workflow automatically:
 
 - Builds the project with `pnpm run build`
-- Deploys to Azure Static Web Apps
+- Deploys to Azure Static Web Apps **Production** environment
+- Handles preview deployments for pull requests
+
+#### Preview Workflow
+
+The `.github/workflows/azure-static-web-apps-preview.yml` workflow automatically:
+
+- Builds the project with `pnpm run build`
+- Deploys to Azure Static Web Apps **Preview** environment
 - Handles preview deployments for pull requests
 
 **Required GitHub Secret:**
@@ -107,6 +141,7 @@ The `.github/workflows/azure-static-web-apps.yml` workflow automatically:
 - ✅ **Caching**: Optimized pnpm store caching for faster builds
 - ✅ **Build Paths**: Correctly configured app_location and output_location
 - ✅ **Automated**: No manual intervention required
+- ✅ **Environment Separation**: Clear separation between preview and production
 
 ### 3. Environment Variables
 
@@ -156,12 +191,10 @@ export default defineConfig({
 - **Caching**: Optimized cache headers for assets
 - **Security**: Headers and redirects
 
-### `.github/workflows/azure-static-web-apps.yml`
+### GitHub Workflows
 
-- **Build**: Node.js 20 + pnpm setup
-- **Deploy**: Automatic deployment to Azure
-- **Preview**: PR-based preview deployments
-- **Caching**: Optimized pnpm store caching
+- **`.github/workflows/azure-static-web-apps.yml`**: Production deployment workflow
+- **`.github/workflows/azure-static-web-apps-preview.yml`**: Preview deployment workflow
 
 ## Performance Features
 
@@ -241,6 +274,7 @@ az staticwebapp show \
 - **Removed**: Server-side API routes
 - **Added**: Static output configuration
 - **Added**: Azure Static Web Apps workflow
+- **Added**: Separate preview and production workflows
 
 ### Benefits
 
@@ -248,6 +282,7 @@ az staticwebapp show \
 - **Faster**: Direct file serving from CDN
 - **Cheaper**: Pay-per-use pricing
 - **Reliable**: Azure-managed infrastructure
+- **Clear**: Separate preview and production environments
 
 ## Future Considerations
 
@@ -276,6 +311,7 @@ For deployment issues:
 ---
 
 **Last Updated**: December 2024
-**Version**: 2.2 (Azure Static Web Apps - Live & Automated)
+**Version**: 2.3 (Azure Static Web Apps - Live & Automated with Preview/Production)
 **Status**: ✅ Production Deployed with Automated CI/CD
-**Last Deployment**: Commit `495f581` - December 2024
+**Last Deployment**: Commit `0796c20` - December 2024
+**Current Version**: v0.0.2
