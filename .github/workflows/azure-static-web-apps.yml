@@ -1,18 +1,17 @@
 name: Deploy to Production
 
 on:
+  # Production deployments should ONLY happen after successful release workflow
+  # This ensures version control and prevents direct deployments
   workflow_run:
     workflows: ['Automated Release']
     types: [completed]
-    branches: [main]
-  # Keep direct push trigger for manual deployments if needed
-  push:
     branches: [main]
 
 jobs:
   buildAndDeploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.name == 'push' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Build and Deploy
     steps:
       - name: Checkout
