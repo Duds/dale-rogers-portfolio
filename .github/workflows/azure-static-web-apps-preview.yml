@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.AZURE_STATIC_WEB_APPS_GITHUB_TOKEN }}
+          token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
