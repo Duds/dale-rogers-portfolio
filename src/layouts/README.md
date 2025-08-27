@@ -4,7 +4,7 @@ This directory contains the main layout templates used across the portfolio site
 
 ## Available Layouts
 
-### Main Layout (`Layout.astro`)
+### Main Layout (`BaseLayout.astro`)
 
 - The primary layout template used across all pages
 - Includes:
@@ -21,17 +21,17 @@ This directory contains the main layout templates used across the portfolio site
 
 ```astro
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<Layout title="Page Title">
+<BaseLayout title="Page Title">
   <!-- Page content goes here -->
-</Layout>
+</BaseLayout>
 ```
 
 ## Structure
 
-The main layout (`Layout.astro`) provides:
+The main layout (`BaseLayout.astro`) provides:
 
 1. **Document Structure**
    - HTML5 doctype

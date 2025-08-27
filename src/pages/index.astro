@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '@/layouts/Layout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/sections/home/Hero.astro';
 import AboutSection from '@/components/sections/home/AboutSection.astro';
 import CaseStudiesBento from '@/components/sections/home/CaseStudiesBento.astro';
@@ -72,7 +72,7 @@ if (!heroContent || !aboutContent || !servicesTextContent || !valuesContent || !
 }
 ---
 
-<Layout title="Home">
+<BaseLayout title="Home">
   <Hero
     title={heroContent.title || ''}
     subtitle={heroContent.subtitle || ''}
@@ -91,4 +91,4 @@ if (!heroContent || !aboutContent || !servicesTextContent || !valuesContent || !
     buttonLink={valuesContent.buttonLink}
   />
   <PartnerLogos title={partnersContent.title} logos={partnersContent.logos || []} />
-</Layout>
+</BaseLayout>

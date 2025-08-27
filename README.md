@@ -79,7 +79,7 @@ pnpm run lint
 
 ## 🌐 Deployment
 
-### Azure Static Web Apps
+### Azure Static Web Apps ✅ LIVE
 
 This site is deployed using **Azure Static Web Apps**, which provides:
 
@@ -87,6 +87,12 @@ This site is deployed using **Azure Static Web Apps**, which provides:
 - **Global CDN**: Edge locations worldwide
 - **HTTPS**: Automatic SSL/TLS certificates
 - **Cost-effective**: Pay-per-use pricing
+
+### Current Deployment Status
+
+- **Production URL**: [https://wonderful-pond-07724bc03.1.azurestaticapps.net](https://wonderful-pond-07724bc03.1.azurestaticapps.net)
+- **Preview URL**: [https://wonderful-pond-07724bc03-preview.westeurope.1.azurestaticapps.net](https://wonderful-pond-07724bc03-preview.westeurope.1.azurestaticapps.net)
+- **Resource**: `dale-rogers-portfolio` in `dale-rogers-portfolio-rg`
 
 ### Deployment Flow
 
@@ -100,6 +106,14 @@ This site is deployed using **Azure Static Web Apps**, which provides:
 - **`.github/workflows/azure-static-web-apps.yml`**: CI/CD workflow
 - **`staticwebapp.config.json`**: Azure SWA configuration
 - **`astro.config.mjs`**: Astro static output configuration
+
+### Quick Deploy
+
+```bash
+# Build and deploy directly
+pnpm run build:swa
+npx @azure/static-web-apps-cli@latest deploy dist --deployment-token YOUR_TOKEN
+```
 
 ## 📁 Project Structure
 

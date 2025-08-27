@@ -1,25 +1,25 @@
 ---
-import { getCollection } from "astro:content";
-import type { GetStaticPaths } from "astro";
-import Layout from "@/layouts/Layout.astro";
-import Container from "@/components/layout/Container.astro";
-import TagList from "@/components/ui/TagList.astro";
-import FormattedDate from "@/components/ui/FormattedDate.astro";
-import Icon from "@/components/ui/Icon.astro";
-import CaseStudyCard from "@/components/features/case-studies/components/CaseStudyCard.astro";
-import Heading from "@/components/ui/Heading.astro";
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Container from '@/components/layout/Container.astro';
+import TagList from '@/components/ui/TagList.astro';
+import FormattedDate from '@/components/ui/FormattedDate.astro';
+import Icon from '@/components/ui/Icon.astro';
+import CaseStudyCard from '@/components/features/case-studies/components/CaseStudyCard.astro';
+import Heading from '@/components/ui/Heading.astro';
 
 export const prerender = true;
 
 export const getStaticPaths = (async () => {
-  const serviceEntries = await getCollection("services");
+  const serviceEntries = await getCollection('services');
 
   console.log(
-    "Available service entries:",
-    serviceEntries.map((entry) => entry.slug)
+    'Available service entries:',
+    serviceEntries.map(entry => entry.slug)
   );
 
-  return serviceEntries.map((entry) => ({
+  return serviceEntries.map(entry => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
@@ -29,8 +29,8 @@ const { entry } = Astro.props;
 
 // Check if entry exists before rendering
 if (!entry) {
-  console.error("Entry not found. Available entries:", Astro.params);
-  return Astro.redirect("/");
+  console.error('Entry not found. Available entries:', Astro.params);
+  return Astro.redirect('/');
 }
 
 const { Content } = await entry.render();
@@ -42,22 +42,20 @@ if (
   Array.isArray(entry.data.relatedCaseStudies) &&
   entry.data.relatedCaseStudies.length > 0
 ) {
-  const allCaseStudies = await getCollection("case-studies");
+  const allCaseStudies = await getCollection('case-studies');
   const caseStudySlugs = entry.data.relatedCaseStudies;
-  relatedCaseStudies = allCaseStudies.filter((study) =>
-    caseStudySlugs.includes(study.slug)
-  );
+  relatedCaseStudies = allCaseStudies.filter(study => caseStudySlugs.includes(study.slug));
 }
 
 const quickFacts = [
   {
-    icon: "calendar",
-    label: "Published",
+    icon: 'calendar',
+    label: 'Published',
     value: entry.data.pubDate,
     isDate: true,
   },
-  { icon: "user", label: "Author", value: entry.data.author },
-  { icon: "tag", label: "Type", value: entry.data.serviceType },
+  { icon: 'user', label: 'Author', value: entry.data.author },
+  { icon: 'tag', label: 'Type', value: entry.data.serviceType },
 ];
 
 // Page metadata
@@ -65,7 +63,7 @@ const title = `${entry.data.title} | Dale Rogers`;
 const description = entry.data.description;
 ---
 
-<Layout title={title} description={description}>
+<BaseLayout title={title} description={description}>
   <main class="pt-0 pb-16">
     <!-- Hero Section -->
     <div class="px-4 sm:px-6 lg:px-8">
@@ -76,24 +74,16 @@ const description = entry.data.description;
           class="w-full h-full object-cover object-center rounded-b-3xl"
           loading="eager"
         />
-        <div
-          class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-b-3xl"
-        >
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-b-3xl">
         </div>
         <div class="absolute bottom-0 left-0 p-6 md:p-12">
           <div class="flex items-center gap-4 mb-2">
-            {
-              entry.data.icon && (
-                <Icon name={entry.data.icon} class="w-10 h-10 text-white" />
-              )
-            }
+            {entry.data.icon && <Icon name={entry.data.icon} class="w-10 h-10 text-white" />}
             <Heading level={1} class="text-white drop-shadow-lg">
               {entry.data.title}
             </Heading>
           </div>
-          <p
-            class="text-lg md:text-2xl text-white/90 font-body max-w-2xl drop-shadow"
-          >
+          <p class="text-lg md:text-2xl text-white/90 font-body max-w-2xl drop-shadow">
             {entry.data.description}
           </p>
         </div>
@@ -101,11 +91,9 @@ const description = entry.data.description;
     </div>
     <Container>
       <!-- Quick Facts -->
-      <div
-        class="flex flex-wrap gap-6 mb-10 justify-center md:justify-start text-lg"
-      >
+      <div class="flex flex-wrap gap-6 mb-10 justify-center md:justify-start text-lg">
         {
-          quickFacts.map((fact) => (
+          quickFacts.map(fact => (
             <div class="flex items-center gap-2 bg-neutral-100 dark:bg-neutral-800 px-4 py-2 rounded-lg shadow-sm text-xl">
               <Icon name={fact.icon} class="w-6 h-6 text-primary" />
               <span class="font-semibold text-neutral-800 dark:text-neutral-200">
@@ -125,22 +113,18 @@ const description = entry.data.description;
           <div class="mb-12">
             <h2 class="text-3xl font-black font-heading mb-6">Key Benefits</h2>
             <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {entry.data.benefits.map(
-                (benefit: { text: string; icon: string }) => (
-                  <li
-                    class="flex items-start gap-3 border border-grey-200 dark:border-grey-700 rounded-xl p-4 shadow-sm text-xl"
-                    style="background-color: var(--color-background-secondary);"
-                  >
-                    <Icon
-                      name={benefit.icon}
-                      class="w-7 h-7 text-secondary dark:text-secondary mt-1 shrink-0"
-                    />
-                    <span class="text-grey-800 dark:text-grey-200">
-                      {benefit.text}
-                    </span>
-                  </li>
-                )
-              )}
+              {entry.data.benefits.map((benefit: { text: string; icon: string }) => (
+                <li
+                  class="flex items-start gap-3 border border-grey-200 dark:border-grey-700 rounded-xl p-4 shadow-sm text-xl"
+                  style="background-color: var(--color-background-secondary);"
+                >
+                  <Icon
+                    name={benefit.icon}
+                    class="w-7 h-7 text-secondary dark:text-secondary mt-1 shrink-0"
+                  />
+                  <span class="text-grey-800 dark:text-grey-200">{benefit.text}</span>
+                </li>
+              ))}
             </ul>
           </div>
         )
@@ -158,9 +142,7 @@ const description = entry.data.description;
                       {idx + 1}
                     </span>
                     <h3 class="text-2xl font-bold mb-1">{step.title}</h3>
-                    <p class="text-grey-700 dark:text-grey-300 text-xl">
-                      {step.description}
-                    </p>
+                    <p class="text-grey-700 dark:text-grey-300 text-xl">{step.description}</p>
                   </li>
                 )
               )}
@@ -185,11 +167,9 @@ const description = entry.data.description;
       {
         relatedCaseStudies.length > 0 && (
           <div class="mt-16">
-            <h2 class="text-2xl font-bold font-heading mb-6">
-              Related Case Studies
-            </h2>
+            <h2 class="text-2xl font-bold font-heading mb-6">Related Case Studies</h2>
             <div class="grid gap-8 md:grid-cols-2">
-              {relatedCaseStudies.map((study) => (
+              {relatedCaseStudies.map(study => (
                 <CaseStudyCard
                   title={study.data.title}
                   description={study.data.description}
@@ -226,4 +206,4 @@ const description = entry.data.description;
       </div>
     </Container>
   </main>
-</Layout>
+</BaseLayout>

@@ -4,6 +4,14 @@
 
 This portfolio site is deployed using **Azure Static Web Apps (SWA)**, which provides a modern, serverless hosting solution that's perfect for static Astro sites.
 
+## Current Deployment Status ✅
+
+- **Azure Static Web App**: `dale-rogers-portfolio`
+- **Resource Group**: `dale-rogers-portfolio-rg`
+- **Location**: Australia East (West Europe)
+- **Production URL**: https://wonderful-pond-07724bc03.1.azurestaticapps.net
+- **Preview URL**: https://wonderful-pond-07724bc03-preview.westeurope.1.azurestaticapps.net
+
 ## Why Azure Static Web Apps?
 
 - **Simpler**: No Docker containers or server management
@@ -27,36 +35,67 @@ This portfolio site is deployed using **Azure Static Web Apps (SWA)**, which pro
 3. **Deploy** → Files uploaded to Azure Static Web Apps
 4. **CDN** → Content distributed globally
 
+## Deployment Methods
+
+### Method 1: Direct Deployment (CLI)
+
+Use this method for immediate deployments or testing:
+
+```bash
+# 1. Build the project
+pnpm run build:swa
+
+# 2. Deploy using Azure Static Web Apps CLI
+npx @azure/static-web-apps-cli@latest deploy dist \
+  --deployment-token YOUR_DEPLOYMENT_TOKEN
+```
+
+**Get Deployment Token:**
+
+```bash
+az staticwebapp secrets list \
+  --name dale-rogers-portfolio \
+  --resource-group dale-rogers-portfolio-rg \
+  --query "properties.apiKey" \
+  --output tsv
+```
+
+### Method 2: GitHub Actions (Automated)
+
+**Prerequisites:**
+
+- GitHub repository connected to Azure Static Web Apps
+- `AZURE_STATIC_WEB_APPS_API_TOKEN` secret configured in GitHub
+
+**Automatic Deployment:**
+
+1. Push changes to `main` branch
+2. GitHub Actions automatically builds and deploys
+3. Site updates within 2-3 minutes
+
 ## Setup Instructions
 
-### 1. Azure Static Web Apps
+### 1. Azure Static Web Apps (Already Configured)
 
-1. **Create SWA Resource**:
+Your Azure Static Web App is already set up with:
 
-   ```bash
-   az staticwebapp create \
-     --name dale-rogers-portfolio \
-     --resource-group your-resource-group \
-     --source https://github.com/yourusername/dale-rogers-portfolio \
-     --branch main \
-     --app-location "/" \
-     --output-location "dist"
-   ```
+- **Name**: `dale-rogers-portfolio`
+- **Resource Group**: `dale-rogers-portfolio-rg`
+- **Location**: Australia East
+- **Source**: GitHub repository integration
 
-2. **Configure Custom Domain**:
-   ```bash
-   az staticwebapp hostname add \
-     --name dale-rogers-portfolio \
-     --hostname dalerogers.com.au
-   ```
-
-### 2. GitHub Actions
+### 2. GitHub Actions Workflow
 
 The `.github/workflows/azure-static-web-apps.yml` workflow automatically:
 
 - Builds the project with `pnpm run build`
 - Deploys to Azure Static Web Apps
 - Handles preview deployments for pull requests
+
+**Required GitHub Secret:**
+
+- **Name**: `AZURE_STATIC_WEB_APPS_API_TOKEN`
+- **Value**: `738a2259881cbec5b79e544624dcf6c0f590d1b514486e00ba3febb38e9a3ee401-66ac9885-d6f2-4a49-8dcc-a7d90b493a05003302107724bc03`
 
 ### 3. Environment Variables
 
@@ -174,6 +213,11 @@ find dist/ -name "*.html" | head -5
 
 # Test local preview
 pnpm run preview
+
+# Check Azure Static Web App status
+az staticwebapp show \
+  --name dale-rogers-portfolio \
+  --resource-group dale-rogers-portfolio-rg
 ```
 
 ## Migration from Docker
@@ -220,4 +264,5 @@ For deployment issues:
 ---
 
 **Last Updated**: December 2024
-**Version**: 2.0 (Azure Static Web Apps)
+**Version**: 2.1 (Azure Static Web Apps - Live)
+**Status**: ✅ Production Deployed
