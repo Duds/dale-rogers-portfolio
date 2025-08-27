@@ -1,4 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="20" fill="#F27D72"/>
-  <text x="50" y="70" font-family="Arial" font-size="60" text-anchor="middle" fill="white">DR</text>
+  <!-- Background with rounded corners -->
+  <rect width="100" height="100" rx="20" fill="#324001"/>
+  
+  <!-- Service Design Icon - Connected nodes representing service ecosystem -->
+  <!-- Central hub -->
+  <circle cx="50" cy="50" r="8" fill="#72CEF2"/>
+  
+  <!-- Connected service nodes -->
+  <circle cx="25" cy="30" r="5" fill="#A6550F"/>
+  <circle cx="75" cy="30" r="5" fill="#A6550F"/>
+  <circle cx="25" cy="70" r="5" fill="#A6550F"/>
+  <circle cx="75" cy="70" r="5" fill="#A6550F"/>
+  
+  <!-- Connection lines showing service relationships -->
+  <line x1="50" y1="42" x2="25" y2="35" stroke="#72CEF2" stroke-width="2"/>
+  <line x1="50" y1="42" x2="75" y2="35" stroke="#72CEF2" stroke-width="2"/>
+  <line x1="50" y1="58" x2="25" y2="65" stroke="#72CEF2" stroke-width="2"/>
+  <line x1="50" y1="58" x2="75" y2="65" stroke="#72CEF2" stroke-width="2"/>
+  
+  <!-- Strategic thinking element - lightbulb representing ideas -->
+  <path d="M45 20 Q50 15 55 20 Q55 25 50 25 Q45 25 45 20" fill="#F2F2F2" opacity="0.8"/>
+  <circle cx="50" cy="22" r="1" fill="#324001"/>
 </svg> 
