@@ -12,7 +12,15 @@
 
 ## System Overview
 
-The portfolio is built as a server-side rendered Astro application with static pages and dynamic API routes for form handling.
+The portfolio is built as a **static Astro application** deployed on Azure Static Web Apps with automated CI/CD via GitHub Actions. The system has been migrated from server-side rendering to static generation for improved performance and reliability.
+
+## Current Deployment Architecture
+
+- **Hosting**: Azure Static Web Apps
+- **CI/CD**: GitHub Actions with automated deployment
+- **Build**: Static site generation with `astro build`
+- **Output**: Static HTML/CSS/JS files in `dist/` directory
+- **CDN**: Azure's global edge network for worldwide distribution
 
 ## Core Components
 
@@ -26,9 +34,12 @@ The portfolio is built as a server-side rendered Astro application with static p
 ### Backend Services
 
 - **Contact Form**:
-  - API Route: `/api/contact`
-  - Email Service: Nodemailer with Gmail SMTP
-  - Authentication: Google Workspace App Password
+  - **Status**: ❌ **REMOVED** - Migrated to static deployment
+  - **Previous**: API Route `/api/contact` with Nodemailer
+  - **Current**: Static form with client-side handling (planned enhancement)
+- **Email Service**:
+  - **Status**: ❌ **REMOVED** - No longer available in static deployment
+  - **Alternative**: Azure Functions or external form service (planned)
 
 ### Data Flow
 
@@ -56,10 +67,11 @@ src/
 
 ## External Dependencies
 
-- **Email**: Google Workspace (Gmail SMTP)
+- **Email**: ❌ **REMOVED** - Google Workspace (Gmail SMTP) - No longer used
 - **Analytics**: Umami (planned)
-- **Hosting**: CrazyDomains
-- **Domain**: dalerogers.com.au
+- **Hosting**: ✅ **Azure Static Web Apps** - Migrated from CrazyDomains
+- **Domain**: dalerogers.com.au (planned Azure integration)
+- **CI/CD**: ✅ **GitHub Actions** - Automated deployment pipeline
 
 ## Security Considerations
 
@@ -128,14 +140,9 @@ Feature-specific components organised by domain:
 2. **Import Conventions**
 
    ```astro
-   // Import UI components
-   import { Button } from '@/components/ui/Button.astro';
-
-   // Import layout components
-   import { Container } from '@/components/layout/Container.astro';
-
-   // Import feature components
-   import { CaseStudyCard } from '@/components/features/case-studies/components/CaseStudyCard.astro';
+   // Import UI components import {Button} from '@/components/ui/Button.astro'; // Import layout
+   components import {Container} from '@/components/layout/Container.astro'; // Import feature components
+   import {CaseStudyCard} from '@/components/features/case-studies/components/CaseStudyCard.astro';
    ```
 
 3. **Component Organisation**

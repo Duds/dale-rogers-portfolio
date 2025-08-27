@@ -1,0 +1,190 @@
+# Deployment Rules
+
+## Overview
+
+This rule ensures proper deployment procedures and documentation maintenance for the Dale Rogers Portfolio project.
+
+## Mandatory Pre-Deployment Documentation Updates
+
+Before any deployment (commit and push), ALL of the following documentation files MUST be updated:
+
+### Required Documentation Files
+
+1. **`README.md`** - Main project documentation
+2. **`docs/DEPLOYMENT.md`** - Deployment procedures and status
+3. **`docs/CHANGELOG.md`** - Change tracking and version history
+4. **`docs/ARCHITECTURE.md`** - System architecture and design decisions
+5. **`docs/DEVELOPMENT.md`** - Development standards and procedures
+
+### Documentation Update Requirements
+
+- **Status Updates**: Current deployment status must be accurate
+- **Version Information**: Latest version numbers and commit hashes
+- **Configuration Changes**: Any deployment config changes documented
+- **Troubleshooting**: Recent issues and solutions documented
+- **Timestamps**: Last updated dates must be current
+
+## Deployment Workflow
+
+### 1. Pre-Deployment Checklist
+
+- [ ] All required documentation files updated
+- [ ] Current deployment status documented
+- [ ] Recent changes reflected in changelog
+- [ ] Configuration changes documented
+- [ ] Troubleshooting steps updated if needed
+
+### 2. Documentation Update Process
+
+```bash
+# Update documentation files
+# 1. README.md - Current status and deployment info
+# 2. DEPLOYMENT.md - Deployment procedures and current status
+# 3. CHANGELOG.md - Version history and recent changes
+# 4. ARCHITECTURE.md - System design and decisions
+# 5. DEVELOPMENT.md - Standards and procedures
+
+# Verify all documentation is current
+git status
+git diff docs/
+```
+
+### 3. Commit and Deploy
+
+```bash
+# Add all changes including documentation
+git add .
+
+# Commit with conventional commit message
+git commit -m "type: description of changes"
+
+# Push to trigger automated deployment
+git push origin main
+```
+
+## Documentation Standards
+
+### README.md Requirements
+
+- Current deployment status (✅ LIVE, 🚧 BUILDING, ❌ FAILED)
+- Production and preview URLs
+- Resource names and locations
+- Deployment method (Direct, GitHub Actions, etc.)
+
+### DEPLOYMENT.md Requirements
+
+- Current deployment status and URLs
+- Recent deployment history (commit hashes)
+- Configuration file status
+- Troubleshooting steps for common issues
+- Performance metrics and monitoring
+
+### CHANGELOG.md Requirements
+
+- Version numbers with dates
+- Recent changes categorized (Added, Changed, Fixed, Removed)
+- Technical details for significant changes
+- Deployment-related changes highlighted
+
+## Deployment Methods
+
+### Method 1: GitHub Actions (Primary)
+
+- **Trigger**: Push to `main` branch
+- **Status**: ✅ **FULLY AUTOMATED**
+- **Timeline**: 5-8 minutes end-to-end
+- **Monitoring**: GitHub Actions tab
+
+### Method 2: Direct CLI Deployment
+
+- **Use Case**: Testing, emergency deployments
+- **Command**: `npx @azure/static-web-apps-cli@latest deploy dist --deployment-token TOKEN`
+- **Status**: Manual intervention required
+
+## Current Deployment Status
+
+- **Azure Static Web App**: `dale-rogers-portfolio`
+- **Resource Group**: `dale-rogers-portfolio-rg`
+- **Production URL**: https://wonderful-pond-07724bc03.1.azurestaticapps.net
+- **Status**: ✅ **LIVE & AUTOMATED**
+- **Last Deployment**: Commit `495f581` - December 2024
+
+## Error Prevention
+
+### Common Documentation Issues
+
+1. **Outdated URLs**: Ensure all Azure URLs are current
+2. **Stale Status**: Update deployment status indicators
+3. **Missing Changes**: Document all recent modifications
+4. **Version Mismatch**: Keep version numbers synchronized
+
+### Validation Commands
+
+```bash
+# Check documentation status
+git status docs/
+
+# Verify documentation changes
+git diff docs/
+
+# Check for outdated references
+grep -r "wonderful-pond" docs/
+grep -r "495f581" docs/
+```
+
+## Enforcement
+
+### Before Every Deployment
+
+1. **Documentation Review**: All required files must be updated
+2. **Status Verification**: Current deployment status documented
+3. **Change Documentation**: Recent modifications reflected
+4. **Commit Message**: Conventional commit format required
+
+### Failure Conditions
+
+Deployment will be blocked if:
+- Any required documentation file is outdated
+- Current deployment status is not documented
+- Recent changes are not reflected in changelog
+- Configuration changes are not documented
+
+## Examples
+
+### ✅ Correct Pre-Deployment
+
+```bash
+# 1. Update all documentation files
+# 2. Verify current status
+# 3. Commit all changes
+git add .
+git commit -m "feat: add new service page and update deployment docs"
+git push origin main
+```
+
+### ❌ Incorrect Pre-Deployment
+
+```bash
+# Missing documentation updates
+git add src/
+git commit -m "feat: add new service page"
+git push origin main  # Will fail deployment rule
+```
+
+## Support
+
+For deployment issues:
+1. Check GitHub Actions logs
+2. Review Azure Static Web Apps diagnostics
+3. Consult deployment documentation
+4. Contact Azure support if needed
+
+---
+
+**Rule Version**: 1.0
+**Last Updated**: December 2024
+**Enforcement**: Mandatory for all deployments
+description:
+globs:
+alwaysApply: true
+---

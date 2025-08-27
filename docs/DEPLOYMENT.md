@@ -11,6 +11,8 @@ This portfolio site is deployed using **Azure Static Web Apps (SWA)**, which pro
 - **Location**: Australia East (West Europe)
 - **Production URL**: https://wonderful-pond-07724bc03.1.azurestaticapps.net
 - **Preview URL**: https://wonderful-pond-07724bc03-preview.westeurope.1.azurestaticapps.net
+- **Status**: ✅ **LIVE & AUTOMATED** - CI/CD pipeline working successfully
+- **Last Deployment**: December 2024 (commit `495f581`)
 
 ## Why Azure Static Web Apps?
 
@@ -60,7 +62,7 @@ az staticwebapp secrets list \
   --output tsv
 ```
 
-### Method 2: GitHub Actions (Automated)
+### Method 2: GitHub Actions (Automated) ✅ WORKING
 
 **Prerequisites:**
 
@@ -71,7 +73,9 @@ az staticwebapp secrets list \
 
 1. Push changes to `main` branch
 2. GitHub Actions automatically builds and deploys
-3. Site updates within 2-3 minutes
+3. Site updates within 5-8 minutes
+
+**Current Status**: ✅ **FULLY AUTOMATED** - Every push to main triggers deployment
 
 ## Setup Instructions
 
@@ -84,7 +88,7 @@ Your Azure Static Web App is already set up with:
 - **Location**: Australia East
 - **Source**: GitHub repository integration
 
-### 2. GitHub Actions Workflow
+### 2. GitHub Actions Workflow ✅ CONFIGURED
 
 The `.github/workflows/azure-static-web-apps.yml` workflow automatically:
 
@@ -96,6 +100,13 @@ The `.github/workflows/azure-static-web-apps.yml` workflow automatically:
 
 - **Name**: `AZURE_STATIC_WEB_APPS_API_TOKEN`
 - **Value**: `738a2259881cbec5b79e544624dcf6c0f590d1b514486e00ba3febb38e9a3ee401-66ac9885-d6f2-4a49-8dcc-a7d90b493a05003302107724bc03`
+
+**Workflow Features:**
+
+- ✅ **pnpm Support**: Properly configured for pnpm package manager
+- ✅ **Caching**: Optimized pnpm store caching for faster builds
+- ✅ **Build Paths**: Correctly configured app_location and output_location
+- ✅ **Automated**: No manual intervention required
 
 ### 3. Environment Variables
 
@@ -150,6 +161,7 @@ export default defineConfig({
 - **Build**: Node.js 20 + pnpm setup
 - **Deploy**: Automatic deployment to Azure
 - **Preview**: PR-based preview deployments
+- **Caching**: Optimized pnpm store caching
 
 ## Performance Features
 
@@ -264,5 +276,6 @@ For deployment issues:
 ---
 
 **Last Updated**: December 2024
-**Version**: 2.1 (Azure Static Web Apps - Live)
-**Status**: ✅ Production Deployed
+**Version**: 2.2 (Azure Static Web Apps - Live & Automated)
+**Status**: ✅ Production Deployed with Automated CI/CD
+**Last Deployment**: Commit `495f581` - December 2024

@@ -1,15 +1,47 @@
 ---
 description: Cursor Rules Location
-globs: 
-alwaysApply: false
----
----
-description: Cursor Rules Location
 globs: *.mdc
 ---
-# Cursor Rules Location
+# Cursor Rules Location and Overview
 
 Rules for placing and organizing Cursor rule files in the repository.
+
+## Available Rules
+
+### Core Development Rules
+- **`development_standards.mdc`** - Core development standards and best practices
+- **`component_organization.mdc`** - Component organization and structure standards
+- **`theme_system.mdc`** - Theme system and styling standards
+- **`accessibility.mdc`** - Accessibility standards and WCAG compliance
+- **`performance.mdc`** - Performance optimization standards
+- **`github_workflow.mdc`** - GitHub workflow and issue management rules
+
+### Content and Layout Rules
+- **`content_changes.mdc`** - Content change management standards
+- **`content_collections.mdc`** - Content collections handling
+- **`layout_patterns.mdc`** - Layout pattern standards
+- **`mdc.mdc`** - Guidelines for creating .mdc rule files
+
+### Deployment and Documentation Rules
+- **`deployment.mdc`** - **NEW** Deployment procedures and documentation requirements
+- **`update_docs.mdc`** - Documentation maintenance standards
+
+## Deployment Rule Overview
+
+The **`deployment.mdc`** rule is **MANDATORY** and ensures:
+
+✅ **Pre-deployment documentation updates** for all required files  
+✅ **Current deployment status** accurately documented  
+✅ **Recent changes** reflected in changelog  
+✅ **Configuration changes** properly documented  
+✅ **Deployment workflow** followed correctly  
+
+### Required Documentation Files (Must Update Before Deployment)
+1. `README.md` - Main project documentation
+2. `docs/DEPLOYMENT.md` - Deployment procedures and status
+3. `docs/CHANGELOG.md` - Change tracking and version history
+4. `docs/ARCHITECTURE.md` - System architecture and design decisions
+5. `docs/DEVELOPMENT.md` - Development standards and procedures
 
 <rule>
 name: cursor_rules_location
@@ -73,6 +105,11 @@ examples:
       # Good: Rule file in correct location
       .cursor/rules/my-rule.mdc
     output: "Correctly placed Cursor rule file"
+
+metadata:
+  priority: high
+  version: 1.0
+</rule>
 
 metadata:
   priority: high

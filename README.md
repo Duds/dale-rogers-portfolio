@@ -79,7 +79,7 @@ pnpm run lint
 
 ## 🌐 Deployment
 
-### Azure Static Web Apps ✅ LIVE
+### Azure Static Web Apps ✅ LIVE & AUTOMATED
 
 This site is deployed using **Azure Static Web Apps**, which provides:
 
@@ -93,6 +93,7 @@ This site is deployed using **Azure Static Web Apps**, which provides:
 - **Production URL**: [https://wonderful-pond-07724bc03.1.azurestaticapps.net](https://wonderful-pond-07724bc03.1.azurestaticapps.net)
 - **Preview URL**: [https://wonderful-pond-07724bc03-preview.westeurope.1.azurestaticapps.net](https://wonderful-pond-07724bc03-preview.westeurope.1.azurestaticapps.net)
 - **Resource**: `dale-rogers-portfolio` in `dale-rogers-portfolio-rg`
+- **Status**: ✅ Production deployed with automated CI/CD
 
 ### Deployment Flow
 

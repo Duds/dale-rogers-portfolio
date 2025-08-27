@@ -38,6 +38,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Purpose-built**: Optimized for static sites and JAMstack applications
 - **Automatic**: CI/CD integration with GitHub for seamless deployments
 
+## [0.0.2] - 2024-12-XX
+
+### Added
+
+- **Automated CI/CD Pipeline**: Fully functional GitHub Actions workflow for Azure deployment
+- **pnpm Integration**: Proper pnpm support in GitHub Actions with optimized caching
+- **Azure Deployment**: Direct deployment to Azure Static Web Apps with proper configuration
+- **Deployment Documentation**: Comprehensive deployment guides and troubleshooting
+
+### Changed
+
+- **GitHub Workflow**: Updated workflow to properly handle pnpm and Azure deployment paths
+- **Build Configuration**: Fixed app_location and output_location for correct Azure deployment
+- **Deployment Status**: Site now live and automatically deploying on every push to main
+- **Documentation**: Updated all deployment documentation to reflect current status
+
+### Fixed
+
+- **pnpm Support**: Resolved GitHub Actions workflow to properly use pnpm instead of npm
+- **Deployment Paths**: Fixed app_location and output_location configuration for Azure
+- **Build Caching**: Implemented proper pnpm store caching for faster GitHub Actions builds
+- **CI/CD Pipeline**: Resolved all workflow issues for successful automated deployment
+
+### Technical
+
+- **Workflow Configuration**: Proper pnpm setup with store path detection and caching
+- **Azure Integration**: Correct deployment paths and skip_app_build configuration
+- **Performance**: Optimized build times with pnpm caching in GitHub Actions
+- **Reliability**: Automated deployment pipeline now working consistently
+
 ## [0.0.1] - 2024-12-XX
 
 ### Added
@@ -98,17 +128,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Performance optimizations and lazy loading
 - SEO optimization with meta tags and sitemap
 - Testing setup with Playwright E2E tests
-
-### Changed
-
-- Migrated from Next.js to Astro for better static site performance
-- Updated to Tailwind CSS v4 with CSS-first configuration
-- Implemented professional design system with semantic color tokens
-- Enhanced component architecture with proper TypeScript types
-- Improved build process and development workflow
-
-### Removed
-
-- Legacy Next.js components and configurations
-- Unused dependencies and build tools
-- Outdated styling approaches and CSS frameworks
