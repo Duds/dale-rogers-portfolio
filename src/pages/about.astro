@@ -3,46 +3,39 @@ import Layout from '@/layouts/BaseLayout.astro';
 import Button from '@/components/ui/Button.astro';
 import Card from '@/components/ui/Card.astro';
 import Container from '@/components/layout/Container.astro';
-import OptimizedImage from '@/components/ui/OptimizedImage.astro';
 import '@/styles/components/about-section.css';
 
 export const prerender = true;
-
-// Image imports can be added here once we have them
-const profileImage =
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070&auto=format&fit=crop'; // Professional business portrait
 ---
 
 <Layout title="About Me | Dale Rogers">
   <main class="pt-32 md:pt-40">
     <!-- Hero Section -->
     <Container class="mb-24">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h1
-            class="font-display text-5xl md:text-6xl lg:text-7xl text-primary dark:text-primary mb-6"
-          >
-            About me
-          </h1>
-          <p class="text-2xl md:text-3xl text-neutral-600 dark:text-neutral-300 mb-8">
-            I'm a dreamer, designer, tinkerer and doer. I fell in love with service and strategic
-            design because it is the place, I can create impact.
+      <div class="max-w-4xl mx-auto text-center">
+        <h1
+          class="font-display text-5xl md:text-6xl lg:text-7xl text-primary dark:text-primary mb-6"
+        >
+          About me
+        </h1>
+        <p class="text-2xl md:text-3xl text-neutral-600 dark:text-neutral-300 mb-8">
+          I'm a dreamer, designer, tinkerer and doer. I fell in love with service and strategic
+          design because it is the place I can create impact.
+        </p>
+        <p class="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
+          I dig into an idea to determine what is authentic, human, and relevant. Then I use all the
+          tools of tech and design to bring it to life. To create a solution and design that is
+          tangible, experiential, supportive and sustainable.
+        </p>
+        <div class="bg-neutral-100 dark:bg-neutral-800/50 rounded-3xl p-8 md:p-12">
+          <h2 class="font-display text-2xl md:text-3xl text-primary dark:text-primary mb-4">
+            Service Design Philosophy
+          </h2>
+          <p class="text-lg text-neutral-600 dark:text-neutral-300">
+            I believe that great service design happens at the intersection of human needs, business
+            strategy, and technical possibility. Every service touchpoint is an opportunity to build
+            trust, create value, and make someone's day a little better.
           </p>
-          <p class="text-xl text-neutral-600 dark:text-neutral-300">
-            I dig into an idea to determine what is authentic, human, and relevant. Then I use all
-            the tools of tech and design to bring it to life. To create a solution and design that
-            is tangible, experiential, supportive and sustainable.
-          </p>
-        </div>
-        <div class="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
-          <OptimizedImage
-            src={profileImage}
-            alt="Dale Rogers - Professional business portrait"
-            width={800}
-            height={800}
-            priority={true}
-            class="object-cover w-full h-full"
-          />
         </div>
       </div>
     </Container>
@@ -50,26 +43,39 @@ const profileImage =
     <!-- Location Section -->
     <Container class="mb-24">
       <div class="bg-neutral-100 dark:bg-neutral-800/50 rounded-3xl p-8 md:p-12">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 class="font-display text-3xl md:text-4xl text-primary dark:text-primary mb-6">
-              I'm in Canberra, Australia
-            </h2>
-            <p class="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
-              But I'm not constrained by geography or time zones. Collaboration is key! I've helped
-              organisations in Australia, and the US use the power of design to create a positive
-              social impact with technology.
-            </p>
-            <Button variant="primary" href="/contact">Get in touch</Button>
+        <div class="max-w-4xl mx-auto">
+          <h2
+            class="font-display text-3xl md:text-4xl text-primary dark:text-primary mb-6 text-center"
+          >
+            I'm in Canberra, Australia
+          </h2>
+          <p class="text-xl text-neutral-600 dark:text-neutral-300 mb-8 text-center">
+            But I'm not constrained by geography or time zones. Collaboration is key! I've helped
+            organisations in Australia, and the US use the power of design to create a positive
+            social impact with technology.
+          </p>
+          <div class="grid md:grid-cols-2 gap-8 mt-12">
+            <div class="bg-white dark:bg-neutral-700 rounded-2xl p-6">
+              <h3 class="font-display text-xl text-primary dark:text-primary mb-3">
+                Local Expertise
+              </h3>
+              <p class="text-neutral-600 dark:text-neutral-300">
+                Deep understanding of Australian government, education, and business contexts.
+                Experience with local accessibility standards and regional requirements.
+              </p>
+            </div>
+            <div class="bg-white dark:bg-neutral-700 rounded-2xl p-6">
+              <h3 class="font-display text-xl text-primary dark:text-primary mb-3">
+                Global Perspective
+              </h3>
+              <p class="text-neutral-600 dark:text-neutral-300">
+                International collaboration experience. Understanding of diverse cultural contexts
+                and global service design best practices.
+              </p>
+            </div>
           </div>
-          <div class="relative aspect-video rounded-2xl overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1591944900066-2b52169560c2?q=80&w=2940&auto=format&fit=crop"
-              alt="Canberra cityscape with Parliament House and Lake Burley Griffin"
-              class="object-cover w-full h-full"
-              width="800"
-              height="450"
-            />
+          <div class="text-center mt-8">
+            <Button variant="primary" href="/contact">Get in touch</Button>
           </div>
         </div>
       </div>
@@ -138,6 +144,50 @@ const profileImage =
             professional.
           </p>
         </Card>
+      </div>
+    </Container>
+
+    <!-- Service Design Approach Section -->
+    <Container class="mb-24">
+      <div class="bg-primary dark:bg-primary text-primary-contrast rounded-3xl p-8 md:p-12">
+        <h2 class="font-display text-3xl md:text-4xl mb-6 text-center">
+          My Service Design Approach
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div class="text-center">
+            <div
+              class="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"
+            >
+              <span class="text-2xl">🔍</span>
+            </div>
+            <h3 class="font-display text-xl mb-2">Research & Discovery</h3>
+            <p class="text-sm opacity-90">
+              Deep user research, stakeholder mapping, and service ecosystem analysis
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"
+            >
+              <span class="text-2xl">🎯</span>
+            </div>
+            <h3 class="font-display text-xl mb-2">Strategy & Design</h3>
+            <p class="text-sm opacity-90">
+              Service blueprints, journey mapping, and strategic service architecture
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"
+            >
+              <span class="text-2xl">🚀</span>
+            </div>
+            <h3 class="font-display text-xl mb-2">Implementation</h3>
+            <p class="text-sm opacity-90">
+              Prototyping, testing, and building organisational capacity for ongoing improvement
+            </p>
+          </div>
+        </div>
       </div>
     </Container>
 
