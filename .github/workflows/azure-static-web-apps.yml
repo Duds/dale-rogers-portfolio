@@ -58,7 +58,8 @@ jobs:
           api_location: ''
           output_location: ''
           skip_app_build: true
-          deployment_environment: production
+          # Remove deployment_environment to use branch-based deployment
+          # Azure will automatically deploy to the appropriate environment based on the branch
 
   close_production_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -70,3 +71,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: 'close'
+          app_location: 'dist'
