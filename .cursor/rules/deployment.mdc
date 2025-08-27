@@ -1,3 +1,8 @@
+---
+description: This rule is all about deployment and documentation
+alwaysApply: false
+---
+
 # Deployment Rules
 
 ## Overview
@@ -144,6 +149,7 @@ grep -r "495f581" docs/
 ### Failure Conditions
 
 Deployment will be blocked if:
+
 - Any required documentation file is outdated
 - Current deployment status is not documented
 - Recent changes are not reflected in changelog
@@ -174,17 +180,8 @@ git push origin main  # Will fail deployment rule
 ## Support
 
 For deployment issues:
+
 1. Check GitHub Actions logs
 2. Review Azure Static Web Apps diagnostics
 3. Consult deployment documentation
 4. Contact Azure support if needed
-
----
-
-**Rule Version**: 1.0
-**Last Updated**: December 2024
-**Enforcement**: Mandatory for all deployments
-description:
-globs:
-alwaysApply: true
----

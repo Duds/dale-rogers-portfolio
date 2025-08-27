@@ -1,14 +1,19 @@
+---
+description: This rule is all about PostCSS and should be applied whenever CSS is being considered
+alwaysApply: false
+---
+
 # No PostCSS Rule
 
 ## 🚫 PostCSS is Forbidden
 
-**PostCSS is NOT allowed** in this project. We use Tailwind CSS v4 with the Vite plugin for optimal performance and developer experience.
+**PostCSS is NOT allowed** in this project. We use Tailwind CSS v5 with the Vite plugin for optimal performance and developer experience.
 
 ## ✅ Required Configuration
 
-### Tailwind CSS v4 Setup
+### Tailwind CSS v5 Setup
 
-**Always configure Tailwind CSS v4 inside `astro.config.mjs`:**
+**Always configure Tailwind CSS v5 inside `astro.config.mjs`:**
 
 ```typescript
 // astro.config.mjs - CORRECT
@@ -27,13 +32,15 @@ export default defineConfig({
 ### CSS Import Structure
 
 **Main CSS file (`src/styles/global.css`):**
+
 ```css
-@import "./generated-tokens.css";
-@import "tailwindcss";
+@import './generated-tokens.css';
+@import 'tailwindcss';
 /* Other imports must come after Tailwind import */
 ```
 
 **Component CSS files:**
+
 ```css
 @reference "tailwindcss";
 
@@ -125,4 +132,5 @@ If you encounter PostCSS-related code:
 description:
 globs:
 alwaysApply: true
+
 ---
