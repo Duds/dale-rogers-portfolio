@@ -2,8 +2,8 @@ module.exports = {
   extends: ['@commitlint/config-conventional'],
   rules: {
     // Increase line length limits to accommodate semantic-release changelogs
-    'body-max-line-length': [2, 'always', 300],
-    'footer-max-line-length': [2, 'always', 300],
+    'body-max-line-length': [2, 'always', 500],
+    'footer-max-line-length': [2, 'always', 500],
     'footer-leading-blank': [1, 'always'],
     
     // Be more lenient with automated releases
