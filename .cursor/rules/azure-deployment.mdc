@@ -1,0 +1,164 @@
+# Azure Static Web Apps Deployment Rules
+
+## 🚨 **CRITICAL: Azure Configuration Must Be Verified First**
+
+**BEFORE making any changes to Azure deployment workflows or configuration:**
+
+1. **ALWAYS check the current Azure configuration** using Azure CLI
+2. **Document the exact Azure setup** before making changes
+3. **Verify environment names and URLs** are correct
+4. **Confirm branch mappings** are properly configured
+
+## 🏗️ **Azure Static Web App Configuration**
+
+### **Current Azure Setup (VERIFIED)**
+- **App Name**: `dale-rogers-portfolio`
+- **Resource Group**: `dale-rogers-portfolio-rg`
+- **Location**: `West Europe`
+- **SKU**: `Free`
+- **Default Branch**: `main`
+
+### **Environments (VERIFIED)**
+1. **Default Environment** (Production)
+   - **Name**: `default`
+   - **URL**: `https://wonderful-pond-07724bc03.1.azurestaticapps.net`
+   - **Branch**: `main`
+   - **Purpose**: Production deployment
+
+2. **Preview Environment**
+   - **Name**: `preview`
+   - **URL**: `https://wonderful-pond-07724bc03-preview.westeurope.1.azurestaticapps.net`
+   - **Branch**: `preview`
+   - **Purpose**: Preview deployment
+
+## 🔄 **Branch Mapping Rules**
+
+### **Azure Automatic Branch Mapping**
+- **`main` branch** → **`default` environment** (Production)
+- **`preview` branch** → **`preview` environment**
+
+### **Workflow Branch Triggers**
+- **Production workflow**: Trigger on `main` branch pushes
+- **Preview workflow**: Trigger on `preview` branch pushes
+- **Both workflows**: Trigger after "Automated Release" completion
+
+## 🚀 **Workflow Configuration Rules**
+
+### **Required Parameters**
+```yaml
+- name: Deploy
+  uses: Azure/static-web-apps-deploy@v1
+  with:
+    azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+    action: 'upload'
+    app_location: 'dist' # Built app content directory
+    output_location: '' # No additional output processing needed
+    skip_app_build: true
+    app_name: 'dale-rogers-portfolio' # MUST match Azure app name
+    deployment_environment: 'default' # For production workflow
+    # OR deployment_environment: 'preview' # For preview workflow
+```
+
+### **Environment-Specific Configuration**
+- **Production Workflow**: `deployment_environment: 'default'`
+- **Preview Workflow**: `deployment_environment: 'preview'`
+
+## 🔑 **Secrets Management**
+
+### **Required GitHub Secrets**
+- **`AZURE_STATIC_WEB_APPS_API_TOKEN`**: Azure Static Web Apps deployment token
+- **NO OTHER AZURE TOKENS NEEDED**
+
+### **Secret Rules**
+- **NEVER reference non-existent secrets** in workflows
+- **ALWAYS verify secret exists** before using in workflows
+- **Use only the verified Azure token** for deployment
+
+## 📁 **Build Configuration Rules**
+
+### **Astro Build Output**
+- **Source**: `dist/` folder (Astro build output)
+- **App Location**: `dist` (built app content)
+- **Output Location**: `''` (no additional processing)
+- **Skip Build**: `true` (build happens in GitHub Actions)
+
+### **Environment Variables**
+```yaml
+env:
+  ASTRO_COMMIT_HASH: ${{ github.sha }}
+  ASTRO_BRANCH: ${{ github.ref_name }}
+  ASTRO_ENVIRONMENT: production # or preview
+```
+
+## 🚨 **Deployment Rules**
+
+### **Deployment Order**
+1. **Automated Release** must complete successfully
+2. **Production Deployment** targets `default` environment
+3. **Preview Deployment** targets `preview` environment
+4. **Both deployments run in parallel** after release completion
+
+### **Environment Targeting**
+- **Production workflow**: MUST deploy to `default` environment
+- **Preview workflow**: MUST deploy to `preview` environment
+- **NEVER mix environments** between workflows
+
+## 🔍 **Verification Commands**
+
+### **Azure Configuration Check**
+```bash
+# Verify Azure Static Web App
+az staticwebapp show --name dale-rogers-portfolio
+
+# List environments
+az staticwebapp environment list --name dale-rogers-portfolio
+
+# Check environment details
+az staticwebapp environment show --name dale-rogers-portfolio --environment-name default
+az staticwebapp environment show --name dale-rogers-portfolio --environment-name preview
+```
+
+### **Workflow Status Check**
+```bash
+# Check deployment workflows
+gh run list --workflow="Deploy to Production"
+gh run list --workflow="Deploy to Preview"
+
+# Check workflow logs
+gh run view [RUN_ID] --log
+```
+
+## ❌ **Common Mistakes to Avoid**
+
+1. **Using wrong environment names** (`production` instead of `default`)
+2. **Referencing non-existent secrets** (`AZURE_STATIC_WEB_APPS_GITHUB_TOKEN`)
+3. **Missing `app_name` parameter** in deployment step
+4. **Incorrect `deployment_environment` values**
+5. **Mixing environment configurations** between workflows
+
+## ✅ **Before Committing Azure Changes**
+
+- [ ] Azure configuration verified with Azure CLI
+- [ ] Environment names match Azure configuration exactly
+- [ ] Required secrets exist and are referenced correctly
+- [ ] Workflow branch triggers are correct
+- [ ] Deployment environment targeting is correct
+- [ ] Build configuration matches Astro output structure
+
+## 🔗 **Related Documentation**
+
+- [Azure Deployment Documentation](../docs/AZURE_DEPLOYMENT.md)
+- [Deployment Process](../docs/DEPLOYMENT.md)
+- [Release Process](../docs/RELEASE_PROCESS.md)
+
+---
+
+**Rule Version**: 1.0
+**Last Updated**: August 27, 2025
+**Azure App**: `dale-rogers-portfolio`
+**Environments**: `default` (Production), `preview` (Preview)
+**Status**: ACTIVE - Must be followed for all Azure changes
+description:
+globs:
+alwaysApply: true
+---

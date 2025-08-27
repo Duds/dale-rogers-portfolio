@@ -20,6 +20,7 @@ This portfolio site is deployed using **Azure Static Web Apps (SWA)**, which pro
 ### Version Badge
 
 The portfolio now includes a version badge in the footer that displays:
+
 - **Version Number**: Current package version (e.g., v0.0.2)
 - **Environment**: Development, Preview, or Production
 - **Build Info**: Hover tooltip shows branch and commit hash
@@ -35,6 +36,7 @@ The system automatically detects the deployment environment:
 ### Build-Time Variables
 
 GitHub Actions workflows inject the following environment variables:
+
 - `ASTRO_COMMIT_HASH`: Git commit SHA for version tracking
 - `ASTRO_BRANCH`: Source branch name
 - `ASTRO_ENVIRONMENT`: Deployment environment (preview/production)
@@ -152,6 +154,10 @@ The `.github/workflows/azure-static-web-apps-preview.yml` workflow automatically
 - ✅ **Build Paths**: Correctly configured app_location and output_location
 - ✅ **Automated**: No manual intervention required
 - ✅ **Environment Separation**: Clear separation between preview and production
+
+### 📚 **Azure Deployment Documentation**
+
+For complete Azure deployment details, configuration, and troubleshooting, see [AZURE_DEPLOYMENT.md](./AZURE_DEPLOYMENT.md)
 
 ### 3. Environment Variables
 
