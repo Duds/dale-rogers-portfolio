@@ -1,7 +1,7 @@
 {
   "name": "dale-rogers-portfolio",
   "type": "module",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "private": true,
   "packageManager": "pnpm@10.14.0",
   "scripts": {
