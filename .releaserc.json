@@ -21,36 +21,6 @@
     [
       "@semantic-release/github",
       {
-        "assets": [
-          {
-            "path": "dist/**/*.html",
-            "label": "Portfolio HTML Files"
-          },
-          {
-            "path": "dist/**/*.css",
-            "label": "Portfolio CSS Files"
-          },
-          {
-            "path": "dist/**/*.js",
-            "label": "Portfolio JavaScript Files"
-          },
-          {
-            "path": "dist/**/*.svg",
-            "label": "Portfolio SVG Assets"
-          },
-          {
-            "path": "dist/**/*.png",
-            "label": "Portfolio PNG Assets"
-          },
-          {
-            "path": "dist/**/*.jpg",
-            "label": "Portfolio JPG Assets"
-          },
-          {
-            "path": "dist/**/*.woff2",
-            "label": "Portfolio Font Files"
-          }
-        ],
         "releasedLabels": "released on @{release}"
       }
     ]
