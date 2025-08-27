@@ -10,5 +10,10 @@
 }
 
 .header--solid {
-  @apply bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md shadow-sm;
+  @apply backdrop-blur-md shadow-sm;
+  background-color: color-mix(in srgb, var(--color-background-secondary) 90%, transparent);
+}
+
+:root[data-theme='dark'] .header--solid {
+  background-color: color-mix(in srgb, var(--color-background-secondary) 90%, transparent);
 }
