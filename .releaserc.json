@@ -106,9 +106,6 @@
     "commitGroupsSort": "title",
     "commitsSort": "header",
     "noteGroupsSort": "title",
-    "notesSort": "text",
-    "mainTemplate": "# {{version}} ({{date}})\n\n{{#if @root.linkCompare~}}\n[Compare Changes]({{compareUrl previousTag tag}})\n{{~/if}}\n\n{{#each groups}}\n## {{title}}\n{{#each commits}}\n{{> commit root=@root}}\n{{/each}}\n\n{{/each}}\n{{#if @root.linkReferences~}}\n{{#each references}}\n[{{repository.name}}#{{commit}}]({{href}}) {{commitMessage}}\n{{/each}}\n{{/if}}",
-    "commitPartial": "* {{#if scope}}**{{scope}}:** {{/if}}{{subject}}{{#if references}} ({{#each references}}{{#if @root.linkReferences}}[{{repository.name}}#{{commit}}]({{href}}){{else}}{{repository.name}}#{{commit}}{{/if}}{{#unless @last}}, {{/unless}}{{/each}}){{/if}}\n",
-    "noteTemplate": "{{#if @root.linkReferences~}}\n{{#each references}}[{{repository.name}}#{{commit}}]({{href}}) {{commitMessage}}{{/each}}\n{{else}}\n{{#each references}}{{repository.name}}#{{commit}} {{commitMessage}}{{/each}}\n{{/if}}\n{{/if}}"
+    "notesSort": "text"
   }
 }
