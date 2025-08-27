@@ -40,7 +40,12 @@ const isActive = (href: string): boolean => {
 };
 ---
 
-<nav class={combinedClasses} role="navigation" aria-label="Main navigation">
+<nav
+  class={combinedClasses}
+  role="navigation"
+  aria-label="Main navigation"
+  data-environment={Astro.url.hostname.includes('preview') ? 'preview' : 'prod'}
+>
   <Container>
     <div class="navigation__content">
       <!-- Brand/Logo -->
@@ -50,7 +55,9 @@ const isActive = (href: string): boolean => {
         <div class="navigation__version">
           <span class="version-badge">
             v0.0.2
-            <span class="version-environment">prod</span>
+            <span class="version-environment">
+              {Astro.url.hostname.includes('preview') ? 'preview' : 'prod'}
+            </span>
           </span>
         </div>
       </div>
