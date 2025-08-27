@@ -61,3 +61,4 @@ jobs:
           app_location: 'dist' # Built app content directory
           output_location: '' # No additional output processing needed
           skip_app_build: true
+          deployment_environment: 'preview' # Deploy to preview environment
