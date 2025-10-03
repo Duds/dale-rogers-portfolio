@@ -1,11 +1,11 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
-import Container from "@/components/layout/Container.astro";
-import { type CollectionEntry, getCollection } from "astro:content";
-import CaseStudyHero from "@/components/features/case-studies/components/CaseStudyHero.astro";
+import BaseLayout from './BaseLayout.astro';
+import Container from '@/components/layout/Container.astro';
+import { type CollectionEntry, getCollection } from 'astro:content';
+import CaseStudyHero from '@/components/features/case-studies/components/CaseStudyHero.astro';
 
 interface Props {
-  caseStudy: CollectionEntry<"case-studies">;
+  caseStudy: CollectionEntry<'case-studies'>;
 }
 
 const { caseStudy } = Astro.props;
@@ -25,20 +25,19 @@ const {
 } = caseStudy.data;
 
 // Related case studies: simple match by overlapping tags, exclude current
-const allCaseStudies = await getCollection("case-studies");
+const allCaseStudies = await getCollection('case-studies');
 const related = allCaseStudies
-  .filter((s) => s.slug !== caseStudy.slug)
-  .map((s) => ({
+  .filter((s: CollectionEntry<'case-studies'>) => s.slug !== caseStudy.slug)
+  .map((s: CollectionEntry<'case-studies'>) => ({
     slug: s.slug,
     title: s.data.title,
     coverImage: s.data.coverImage,
     client: s.data.client,
     industry: s.data.industry,
-    score: (s.data.tags || []).filter((t: string) => (tags || []).includes(t))
-      .length,
+    score: (s.data.tags || []).filter((t: string) => (tags || []).includes(t)).length,
   }))
-  .filter((r) => r.score > 0)
-  .sort((a, b) => b.score - a.score)
+  .filter((r: { score: number }) => r.score > 0)
+  .sort((a: { score: number }, b: { score: number }) => b.score - a.score)
   .slice(0, 3);
 ---
 
@@ -61,9 +60,7 @@ const related = allCaseStudies
       <!-- Enhanced Project Overview Grid -->
       <div class="case-study-layout__overview-grid">
         <!-- Project Details -->
-        <div
-          class="case-study-layout__overview-card case-study-layout__overview-card--details"
-        >
+        <div class="case-study-layout__overview-card case-study-layout__overview-card--details">
           <div class="case-study-layout__overview-header">
             <svg
               class="case-study-layout__overview-icon"
@@ -97,9 +94,7 @@ const related = allCaseStudies
         </div>
 
         <!-- Challenge Card -->
-        <div
-          class="case-study-layout__overview-card case-study-layout__overview-card--challenge"
-        >
+        <div class="case-study-layout__overview-card case-study-layout__overview-card--challenge">
           <div class="case-study-layout__overview-header">
             <svg
               class="case-study-layout__overview-icon"
@@ -120,9 +115,7 @@ const related = allCaseStudies
         </div>
 
         <!-- Solution Card -->
-        <div
-          class="case-study-layout__overview-card case-study-layout__overview-card--solution"
-        >
+        <div class="case-study-layout__overview-card case-study-layout__overview-card--solution">
           <div class="case-study-layout__overview-header">
             <svg
               class="case-study-layout__overview-icon"
@@ -143,9 +136,7 @@ const related = allCaseStudies
         </div>
 
         <!-- Results Card -->
-        <div
-          class="case-study-layout__overview-card case-study-layout__overview-card--results"
-        >
+        <div class="case-study-layout__overview-card case-study-layout__overview-card--results">
           <div class="case-study-layout__overview-header">
             <svg
               class="case-study-layout__overview-icon"
@@ -166,7 +157,7 @@ const related = allCaseStudies
             {
               Array.isArray(results) ? (
                 <ul class="case-study-layout__overview-results-list">
-                  {results.map((result) => (
+                  {results.map(result => (
                     <li class="case-study-layout__overview-results-item">
                       <svg
                         class="case-study-layout__overview-results-icon"
@@ -210,7 +201,7 @@ const related = allCaseStudies
               </p>
             </div>
             <div class="case-study-layout__related-grid">
-              {related.map((r) => (
+              {related.map(r => (
                 <a
                   href={`/work/${r.slug}`}
                   class="case-study-layout__related-card group"
@@ -233,9 +224,7 @@ const related = allCaseStudies
                     <p class="case-study-layout__related-meta">
                       {r.client} · {r.industry}
                     </p>
-                    <h3 class="case-study-layout__related-title-text">
-                      {r.title}
-                    </h3>
+                    <h3 class="case-study-layout__related-title-text">{r.title}</h3>
                   </div>
                 </a>
               ))}
@@ -281,7 +270,7 @@ const related = allCaseStudies
 
   .case-study-layout__overview-title {
     @apply text-2xl font-bold;
-color: var(--color-text-primary);
+    color: var(--color-text-primary);
   }
 
   .case-study-layout__overview-icon {
@@ -294,20 +283,22 @@ color: var(--color-text-primary);
 
   .case-study-layout__overview-item {
     @apply flex items-center justify-between py-4 px-5 rounded-xl backdrop-blur-sm;
-background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.7);
   }
 
   .case-study-layout__overview-label {
-    @apply font-semibold text-neutral-600 dark:text-neutral-400 text-sm uppercase tracking-wide;
+    @apply font-semibold text-sm uppercase tracking-wide;
+    color: var(--color-text-secondary);
   }
 
   .case-study-layout__overview-value {
     @apply font-semibold;
-color: var(--color-text-primary);
+    color: var(--color-text-primary);
   }
 
   .case-study-layout__overview-content {
-    @apply text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed;
+    @apply text-lg leading-relaxed;
+    color: var(--color-text-secondary);
   }
 
   .case-study-layout__overview-results-list {
@@ -315,7 +306,8 @@ color: var(--color-text-primary);
   }
 
   .case-study-layout__overview-results-item {
-    @apply flex items-start gap-4 text-neutral-700 dark:text-neutral-300;
+    @apply flex items-start gap-4;
+    color: var(--color-text-secondary);
   }
 
   .case-study-layout__overview-results-icon {
@@ -328,11 +320,13 @@ color: var(--color-text-primary);
   }
 
   .case-study-layout__related-title {
-    @apply text-3xl font-bold text-neutral-900 dark:text-white mb-4;
+    @apply text-3xl font-bold mb-4;
+    color: var(--color-text-primary);
   }
 
   .case-study-layout__related-subtitle {
-    @apply text-xl text-neutral-600 dark:text-neutral-400;
+    @apply text-xl;
+    color: var(--color-text-secondary);
   }
 
   .case-study-layout__related-grid {
@@ -466,28 +460,28 @@ color: var(--color-text-primary);
 
 <script>
   // Add Heading components to content headings
-  document.addEventListener("DOMContentLoaded", () => {
-    const content = document.querySelector(".case-study-content");
+  document.addEventListener('DOMContentLoaded', () => {
+    const content = document.querySelector('.case-study-content');
     if (!content) return;
 
     // Replace h2 elements with Heading components
-    content.querySelectorAll("h2").forEach((h2) => {
-      const heading = document.createElement("astro-heading");
-      heading.setAttribute("level", "2");
-      heading.setAttribute("font", "dm-sans");
-      heading.setAttribute("size", "3xl");
-      heading.setAttribute("class", "font-normal");
+    content.querySelectorAll('h2').forEach(h2 => {
+      const heading = document.createElement('astro-heading');
+      heading.setAttribute('level', '2');
+      heading.setAttribute('font', 'dm-sans');
+      heading.setAttribute('size', '3xl');
+      heading.setAttribute('class', 'font-normal');
       heading.innerHTML = h2.innerHTML;
       h2.replaceWith(heading);
     });
 
     // Replace h3 elements with Heading components
-    content.querySelectorAll("h3").forEach((h3) => {
-      const heading = document.createElement("astro-heading");
-      heading.setAttribute("level", "3");
-      heading.setAttribute("font", "dm-sans");
-      heading.setAttribute("size", "4xl");
-      heading.setAttribute("class", "font-normal");
+    content.querySelectorAll('h3').forEach(h3 => {
+      const heading = document.createElement('astro-heading');
+      heading.setAttribute('level', '3');
+      heading.setAttribute('font', 'dm-sans');
+      heading.setAttribute('size', '4xl');
+      heading.setAttribute('class', 'font-normal');
       heading.innerHTML = h3.innerHTML;
       h3.replaceWith(heading);
     });

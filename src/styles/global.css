@@ -7,6 +7,35 @@
 @theme {
   --default-transition-duration: 150ms;
   --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Consistency Classes - Semantic utility classes for consistent design */
+  --heading-primary: 'text-5xl md:text-6xl lg:text-7xl mb-6 font-display';
+  --heading-secondary: 'text-3xl md:text-4xl mb-6 font-display';
+  --heading-tertiary: 'text-2xl mb-4 font-display';
+  --heading-quaternary: 'text-xl mb-3 font-display';
+
+  --body-large: 'text-xl md:text-2xl mb-8 font-body';
+  --body-medium: 'text-lg mb-6 font-body';
+  --body-standard: 'text-base mb-4 font-body';
+  --body-small: 'text-sm mb-3 font-body';
+
+  --page-main: 'pt-32 md:pt-40 pb-16 md:pb-24';
+  --page-section: 'mb-24';
+  --page-section-small: 'mb-16';
+  --page-section-large: 'mb-32';
+
+  --content-narrow: 'max-w-3xl mx-auto';
+  --content-standard: 'max-w-4xl mx-auto';
+  --content-wide: 'max-w-6xl mx-auto';
+
+  --consistency-card: 'rounded-2xl p-6 md:p-8 shadow-lg border transition-all duration-300';
+  --consistency-section: 'rounded-3xl p-8 md:p-12';
+  --consistency-button: 'inline-block px-8 py-4 rounded-full font-semibold transition-colors';
+  --consistency-link: 'hover:underline transition-colors duration-200';
+
+  --grid-2: 'grid md:grid-cols-2 gap-8';
+  --grid-3: 'grid md:grid-cols-2 lg:grid-cols-3 gap-8';
+  --grid-4: 'grid md:grid-cols-2 lg:grid-cols-4 gap-6';
 }
 
 /* Configure dark mode to use data-theme attribute */
@@ -126,9 +155,21 @@
     /* Custom classes removed: bg-white text-black dark:bg-black dark:text-white */
   }
 
-  /* Focus outline for keyboard navigation */
+  /* Enhanced focus indicators for accessibility */
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-blue-500;
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --color-text-primary: #000000;
+      --color-text-secondary: #1a1a1a;
+      --color-background-primary: #ffffff;
+      --color-border-focus: #000000;
+    }
   }
 
   /* Selection styles */

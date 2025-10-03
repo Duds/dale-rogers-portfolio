@@ -1,6 +1,6 @@
 ---
-import SectionContainer from "@/components/layout/SectionContainer.astro";
-import "@/styles/components/partner-logos.css";
+import SectionContainer from '@/components/layout/SectionContainer.astro';
+import '@/styles/components/partner-logos.css';
 
 /**
  * Represents a client logo with associated metadata
@@ -27,48 +27,48 @@ interface Props {
 // Default logos array with all partners - theme-aware versions
 const defaultLogos: PartnerLogo[] = [
   {
-    name: "University of Canberra",
-    url: "/images/logos/university-of-canberra.png",
-    alt: "University of Canberra logo",
-    website: "https://www.canberra.edu.au",
+    name: 'University of Canberra',
+    url: '/images/logos/university-of-canberra.png',
+    alt: 'University of Canberra logo',
+    website: 'https://www.canberra.edu.au',
   },
   {
-    name: "Tasmanian Department of Education",
-    url: "/images/logos/tas-education-children-young-people.svg",
-    alt: "Tasmanian Department of Education, Children and Young People logo",
-    website: "https://www.education.tas.gov.au",
+    name: 'Tasmanian Department of Education',
+    url: '/images/logos/tas-education-children-young-people.svg',
+    alt: 'Tasmanian Department of Education, Children and Young People logo',
+    website: 'https://www.education.tas.gov.au',
   },
   {
-    name: "BHP",
-    url: "/images/logos/bhp.svg",
-    alt: "BHP logo",
-    website: "https://www.bhp.com",
+    name: 'BHP',
+    url: '/images/logos/bhp.svg',
+    alt: 'BHP logo',
+    website: 'https://www.bhp.com',
   },
   {
-    name: "Holden",
-    url: "/images/logos/holden.svg",
-    alt: "Holden logo",
+    name: 'Holden',
+    url: '/images/logos/holden.svg',
+    alt: 'Holden logo',
   },
   {
-    name: "Rio Tinto",
-    url: "/images/logos/rio-tinto.svg",
-    alt: "Rio Tinto logo",
-    website: "https://www.riotinto.com",
+    name: 'Rio Tinto',
+    url: '/images/logos/rio-tinto.svg',
+    alt: 'Rio Tinto logo',
+    website: 'https://www.riotinto.com',
   },
   {
-    name: "Transport for NSW",
-    url: "/images/logos/transport-nsw.svg",
-    alt: "Transport for NSW logo",
-    website: "https://www.transport.nsw.gov.au",
+    name: 'Transport for NSW',
+    url: '/images/logos/transport-nsw.svg',
+    alt: 'Transport for NSW logo',
+    website: 'https://www.transport.nsw.gov.au',
   },
 ];
 
-const { title = "Trusted by", logos = defaultLogos } = Astro.props;
+const { title = 'Trusted by', logos = defaultLogos } = Astro.props;
 
 // Function to get theme-appropriate logo URL
 function getLogoUrl(logoUrl: string): { light: string; dark: string } {
-  const extension = logoUrl.substring(logoUrl.lastIndexOf("."));
-  const baseName = logoUrl.substring(0, logoUrl.lastIndexOf("."));
+  const extension = logoUrl.substring(logoUrl.lastIndexOf('.'));
+  const baseName = logoUrl.substring(0, logoUrl.lastIndexOf('.'));
 
   return {
     light: logoUrl,
@@ -82,20 +82,15 @@ function getLogoUrl(logoUrl: string): { light: string; dark: string } {
     <h2 class="partner-logos-heading">{title}</h2>
     <div class="partner-logos-list">
       {
-        logos.map((logo) => {
+        logos.map(logo => {
           const logoUrls = getLogoUrl(logo.url);
           return (
             <a
-              href={logo.website || "#"}
-              target={logo.website ? "_blank" : "_self"}
-              rel={logo.website ? "noopener noreferrer" : ""}
-              class:list={[
-                "partner-logo-link",
-                !logo.website ? "pointer-events-none" : "",
-              ]}
-              aria-label={
-                logo.website ? `Visit ${logo.name}'s website` : logo.name
-              }
+              href={logo.website || '#'}
+              target={logo.website ? '_blank' : '_self'}
+              rel={logo.website ? 'noopener noreferrer' : ''}
+              class:list={['partner-logo-link', !logo.website ? 'pointer-events-none' : '']}
+              aria-label={logo.website ? `Visit ${logo.name}'s website` : logo.name}
             >
               {/* Light theme logo */}
               <img

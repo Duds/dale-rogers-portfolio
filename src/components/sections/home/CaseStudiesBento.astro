@@ -1,8 +1,8 @@
 ---
-import Container from "@/components/layout/Container.astro";
-import type { HTMLAttributes } from "astro/types";
-import { getCollection } from "astro:content";
-import Heading from "@/components/ui/Heading.astro";
+import Container from '@/components/layout/Container.astro';
+import type { HTMLAttributes } from 'astro/types';
+import { getCollection } from 'astro:content';
+import Heading from '@/components/ui/Heading.astro';
 
 /**
  * Interface for case study data
@@ -23,18 +23,18 @@ interface CaseStudy {
 /**
  * Props for the CaseStudiesBento component
  */
-interface Props extends HTMLAttributes<"section"> {
+interface Props extends HTMLAttributes<'section'> {
   /** Array of featured case studies */
   featuredCaseStudies?: CaseStudy[];
 }
 
 // Get case studies from the content collection
-const allCaseStudies = await getCollection("case-studies");
+const allCaseStudies = await getCollection('case-studies');
 const featuredCaseStudies = allCaseStudies
-  .filter((study) => study.data.featured)
+  .filter(study => study.data.featured)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3)
-  .map((study) => ({
+  .map(study => ({
     title: study.data.title,
     client: study.data.client,
     coverImage: study.data.coverImage,
@@ -45,12 +45,12 @@ const featuredCaseStudies = allCaseStudies
 // Ensure we have exactly 3 featured case studies
 while (featuredCaseStudies.length < 3) {
   featuredCaseStudies.push({
-    title: "Coming Soon",
-    client: "Various Clients",
+    title: 'Coming Soon',
+    client: 'Various Clients',
     coverImage:
-      "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1600&auto=format&fit=crop",
-    tags: ["Service Design", "UX Research", "Digital"],
-    slug: "coming-soon",
+      'https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1600&auto=format&fit=crop',
+    tags: ['Service Design', 'UX Research', 'Digital'],
+    slug: 'coming-soon',
   });
 }
 
@@ -59,13 +59,10 @@ const [firstStudy, secondStudy, thirdStudy] = featuredCaseStudies;
 const { class: className, ...props } = Astro.props;
 ---
 
-<section class:list={["case-studies-bento w-full py-20", className]} {...props}>
+<section class:list={['case-studies-bento w-full py-20', className]} {...props}>
   <Container contentMargin={true}>
     <div class="text-center mb-16">
-      <Heading
-        level={2}
-        class="text-neutral-400 dark:text-neutral-500 mb-4 font-normal text-2xl"
-      >
+      <Heading level={2} class="text-neutral-400 dark:text-neutral-500 mb-4 font-normal text-2xl">
         Case Studies
       </Heading>
       <Heading level={3} class="text-4xl md:text-5xl lg:text-6xl font-bold">
@@ -102,7 +99,7 @@ const { class: className, ...props } = Astro.props;
                 {firstStudy.title}
               </h3>
               <div class="flex flex-wrap gap-2">
-                {firstStudy.tags.map((tag) => (
+                {firstStudy.tags.map(tag => (
                   <span class="text-xs text-neutral-600 dark:text-neutral-400 px-2 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800">
                     {tag}
                   </span>
@@ -135,11 +132,14 @@ const { class: className, ...props } = Astro.props;
                 <span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   {secondStudy.client}
                 </span>
-                <h3 class="text-xl font-bold transition-colors" style="color: var(--color-text-primary);">
+                <h3
+                  class="text-xl font-bold transition-colors"
+                  style="color: var(--color-text-primary);"
+                >
                   {secondStudy.title}
                 </h3>
                 <div class="flex flex-wrap gap-2">
-                  {secondStudy.tags.map((tag) => (
+                  {secondStudy.tags.map(tag => (
                     <span class="text-xs text-neutral-600 dark:text-neutral-400 px-2 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800">
                       {tag}
                     </span>
@@ -171,11 +171,14 @@ const { class: className, ...props } = Astro.props;
                 <span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   {thirdStudy.client}
                 </span>
-                <h3 class="text-xl font-bold transition-colors" style="color: var(--color-text-primary);">
+                <h3
+                  class="text-xl font-bold transition-colors"
+                  style="color: var(--color-text-primary);"
+                >
                   {thirdStudy.title}
                 </h3>
                 <div class="flex flex-wrap gap-2">
-                  {thirdStudy.tags.map((tag) => (
+                  {thirdStudy.tags.map(tag => (
                     <span class="text-xs text-neutral-600 dark:text-neutral-400 px-2 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800">
                       {tag}
                     </span>

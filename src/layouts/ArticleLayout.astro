@@ -1,12 +1,12 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
-import Container from "@/components/layout/Container.astro";
-import { type CollectionEntry } from "astro:content";
-import TagList from "@/components/ui/TagList.astro";
-import FormattedDate from "@/components/ui/FormattedDate.astro";
+import BaseLayout from './BaseLayout.astro';
+import Container from '@/components/layout/Container.astro';
+import { type CollectionEntry } from 'astro:content';
+import TagList from '@/components/ui/TagList.astro';
+import FormattedDate from '@/components/ui/FormattedDate.astro';
 
 interface Props {
-  article: CollectionEntry<"articles">;
+  article: CollectionEntry<'articles'>;
 }
 
 const { article } = Astro.props;
@@ -17,8 +17,8 @@ const { title, description, pubDate, tags, coverImage, author } = article.data;
   <Container>
     <article class="prose prose-lg dark:prose-invert mx-auto pt-24">
       <header class="mb-12">
-        <h1 class="text-4xl font-bold mb-6">{title}</h1>
-        <div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
+        <h1 class="heading-primary">{title}</h1>
+        <div class="flex items-center gap-4" style="color: var(--color-text-secondary);">
           <FormattedDate date={pubDate} />
           <span>by {author}</span>
         </div>
@@ -50,7 +50,8 @@ const { title, description, pubDate, tags, coverImage, author } = article.data;
   }
 
   .article-content :global(blockquote) {
-    @apply border-l-4 border-blue-500 pl-4 italic my-8;
+    @apply border-l-4 pl-4 italic my-8;
+    border-color: var(--color-primary-main);
   }
 
   .article-content :global(pre) {
@@ -59,25 +60,31 @@ const { title, description, pubDate, tags, coverImage, author } = article.data;
 
   .article-content :global(h2) {
     @apply text-3xl font-bold mt-12 mb-6;
+    color: var(--color-text-primary);
   }
 
   .article-content :global(h3) {
     @apply text-2xl font-bold mt-8 mb-4;
+    color: var(--color-text-primary);
   }
 
   .article-content :global(p) {
     @apply mb-6 leading-relaxed;
+    color: var(--color-text-secondary);
   }
 
   .article-content :global(ul) {
     @apply list-disc list-inside mb-6;
+    color: var(--color-text-secondary);
   }
 
   .article-content :global(ol) {
     @apply list-decimal list-inside mb-6;
+    color: var(--color-text-secondary);
   }
 
   .article-content :global(a) {
-    @apply text-blue-500 hover:underline;
+    @apply hover:underline;
+    color: var(--color-primary-main);
   }
 </style>

@@ -32,5 +32,8 @@
   },
   "mimeTypes": {
     ".json": "text/json"
+  },
+  "customDomains": {
+    "notes": "Custom domains are configured in Azure Portal under Static Web App > Custom domains. DNS records should point to: wonderful-pond-07724bc03.1.azurestaticapps.net"
   }
 }

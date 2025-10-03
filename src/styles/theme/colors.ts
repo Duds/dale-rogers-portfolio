@@ -61,8 +61,8 @@ const deepGet = (obj: ColorTree, path: string): unknown => {
 
 export const colors: DeepReadonly<ColorTree> = {
   primary: { main: '#2563EB', light: '#3B82F6', dark: '#1E40AF', contrast: '#FFFFFF' },
-  secondary: { main: '#06B6D4', light: '#22D3EE', dark: '#0E7490', contrast: '#00212A' },
-  accent: { main: '#F97316', light: '#FB923C', dark: '#C2410C', contrast: '#FFFFFF' },
+  secondary: { main: '#06B6D4', light: '#0891B2', dark: '#0E7490', contrast: '#00212A' },
+  accent: { main: '#F97316', light: '#EA580C', dark: '#C2410C', contrast: '#FFFFFF' },
 
   background: {
     primary: '#F8FAFC',
@@ -78,7 +78,7 @@ export const colors: DeepReadonly<ColorTree> = {
     tertiary: '#475569',
     disabled: '#94A3B8',
     inverse: '#FFFFFF',
-    muted: '#64748B',
+    muted: '#475569',
   },
 
   border: {
@@ -112,8 +112,8 @@ export const colors: DeepReadonly<ColorTree> = {
 
 export const darkColors: DeepReadonly<ColorTree> = {
   primary: { main: '#60A5FA', light: '#93C5FD', dark: '#3B82F6', contrast: '#0A0F1A' },
-  secondary: { main: '#22D3EE', light: '#67E8F9', dark: '#06B6D4', contrast: '#07161B' },
-  accent: { main: '#FB923C', light: '#FDBA74', dark: '#F97316', contrast: '#0A0F1A' },
+  secondary: { main: '#22D3EE', light: '#0891B2', dark: '#06B6D4', contrast: '#07161B' },
+  accent: { main: '#EA580C', light: '#FDBA74', dark: '#F97316', contrast: '#0A0F1A' },
 
   background: {
     primary: '#0B1220',
@@ -127,7 +127,7 @@ export const darkColors: DeepReadonly<ColorTree> = {
     primary: '#F8FAFC',
     secondary: '#E2E8F0',
     tertiary: '#CBD5E1',
-    disabled: '#64748B',
+    disabled: '#475569',
     inverse: '#0B1220',
     muted: '#94A3B8',
   },
@@ -154,7 +154,7 @@ export const darkColors: DeepReadonly<ColorTree> = {
     colored: 'rgba(96, 165, 250, 0.25)',
   },
 
-  brand: { highlight: '#22D3EE', subtle: '#0B1220', emphasis: '#F8FAFC' },
+  brand: { highlight: '#0891B2', subtle: '#0B1220', emphasis: '#F8FAFC' },
 
   utility: { transparent: 'transparent', current: 'currentColor', inherit: 'inherit' },
 } as const;

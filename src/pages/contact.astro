@@ -6,19 +6,24 @@ import { Mail, Linkedin, BookOpen } from 'lucide-astro';
 
 export const prerender = true;
 
-// Define brand color classes (adjust if your theme uses different names)
+// Define brand color classes using theme tokens
 const purpleColor = 'text-purple-600 dark:text-purple-400';
 const orangeColor = 'text-orange-600 dark:text-orange-400';
 const greenColor = 'text-green-600 dark:text-green-400';
-const blackColor = 'text-neutral-900 dark:text-neutral-100'; // Theme-aware black/white
 ---
 
 <BaseLayout title="Contact | Dale Rogers">
   <main class="pt-32 md:pt-40">
     <!-- Hero Section -->
     <Container fullWidth class="mb-16">
-      <div class="relative overflow-hidden rounded-3xl bg-neutral-950">
-        <div class="absolute inset-0 bg-gradient-to-br from-neutral-900/70 to-neutral-900/50 z-10">
+      <div
+        class="relative overflow-hidden rounded-3xl"
+        style="background-color: var(--color-background-dark);"
+      >
+        <div
+          class="absolute inset-0 z-10"
+          style="background: linear-gradient(to bottom right, rgba(0,0,0,0.7), rgba(0,0,0,0.5));"
+        >
         </div>
         <img
           src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2940&auto=format&fit=crop"
@@ -33,7 +38,7 @@ const blackColor = 'text-neutral-900 dark:text-neutral-100'; // Theme-aware blac
               Ready to transform your service delivery? Get in touch and let me help you achieve
               your goals.
             </h1>
-            <p class="text-xl md:text-2xl text-neutral-200 max-w-2xl">
+            <p class="text-xl md:text-2xl max-w-2xl" style="color: var(--color-text-inverse);">
               Ready to transform your service delivery? Whether you're looking for strategic
               guidance, service design expertise, or support with digital transformation, I'm here
               to help turn your vision into reality.
@@ -49,12 +54,12 @@ const blackColor = 'text-neutral-900 dark:text-neutral-100'; // Theme-aware blac
         <!-- Left Column: Info -->
         <div class="space-y-8">
           <div class="prose prose-xl dark:prose-invert max-w-none space-y-8">
-            <p class="lead">
+            <p class="lead" style="color: var(--color-text-primary);">
               Ready to transform your service delivery? Whether you're looking for strategic
               guidance, service design expertise, or support with digital transformation, I'm here
               to help turn your vision into reality.
             </p>
-            <p>
+            <p style="color: var(--color-text-secondary);">
               With expertise in service design and a track record of successful projects across
               government, education, and private sectors, I bring a strategic approach to every
               collaboration.
@@ -68,6 +73,7 @@ const blackColor = 'text-neutral-900 dark:text-neutral-100'; // Theme-aware blac
                 id="contact-email"
                 href="#"
                 class="text-lg font-semibold hover:underline transition-colors duration-200"
+                style="color: var(--color-text-primary);"
                 aria-label="Email address"
               >
                 [Loading...]
@@ -80,6 +86,7 @@ const blackColor = 'text-neutral-900 dark:text-neutral-100'; // Theme-aware blac
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-lg font-semibold hover:underline transition-colors duration-200"
+                style="color: var(--color-text-primary);"
                 aria-label="LinkedIn profile"
               >
                 linkedin.com/in/dale-rogers
@@ -92,6 +99,7 @@ const blackColor = 'text-neutral-900 dark:text-neutral-100'; // Theme-aware blac
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-lg font-semibold hover:underline transition-colors duration-200"
+                style="color: var(--color-text-primary);"
                 aria-label="Medium profile"
               >
                 medium.com/@dale-rogers
@@ -100,16 +108,18 @@ const blackColor = 'text-neutral-900 dark:text-neutral-100'; // Theme-aware blac
           </div>
 
           <div class="pt-4 prose prose-xl dark:prose-invert max-w-none">
-            <h2 class:list={[blackColor, '!mb-4']}>Availability</h2>
+            <h2 class="!mb-4" style="color: var(--color-text-primary);">Availability</h2>
             <div class="space-y-4 not-prose">
               <div>
-                <h3 class:list={[blackColor, 'font-medium']}>Office Hours (AEST)</h3>
+                <h3 class="font-medium" style="color: var(--color-text-primary);">
+                  Office Hours (AEST)
+                </h3>
                 <p class="text-lg text-neutral-600 dark:text-neutral-300">
                   Monday - Friday: 09:00 - 17:00
                 </p>
               </div>
               <div>
-                <h3 class:list={[blackColor, 'font-medium']}>Response Time</h3>
+                <h3 class="font-medium" style="color: var(--color-text-primary);">Response Time</h3>
                 <p class="text-lg text-neutral-600 dark:text-neutral-300">
                   Same-day response during business hours<br />
                   24-hour response for urgent matters
@@ -121,7 +131,9 @@ const blackColor = 'text-neutral-900 dark:text-neutral-100'; // Theme-aware blac
 
         <!-- Right Column: Contact Form -->
         <div class="bg-neutral-50 dark:bg-neutral-800/50 rounded-3xl p-8 lg:p-12">
-          <h2 class:list={[blackColor, 'font-display text-3xl mb-8']}>Send a Message</h2>
+          <h2 class="font-display text-3xl mb-8" style="color: var(--color-text-primary);">
+            Send a Message
+          </h2>
           <form class="space-y-6" id="contact-form">
             <div>
               <label for="name" class="block text-neutral-900 dark:text-neutral-100 mb-2 text-sm"
@@ -186,7 +198,7 @@ const blackColor = 'text-neutral-900 dark:text-neutral-100'; // Theme-aware blac
     <Container class="mb-24" fullWidth>
       <div class="bg-neutral-50 dark:bg-neutral-800/50 rounded-3xl p-8 lg:p-12">
         <div class="prose prose-xl dark:prose-invert max-w-none">
-          <h2 class:list={[blackColor, '!mb-6']}>Location & Collaboration</h2>
+          <h2 class="!mb-6" style="color: var(--color-text-primary);">Location & Collaboration</h2>
           <p class="!mb-8">
             Strategically based in Canberra, Australia's capital, I'm perfectly positioned to serve
             both government and private sector clients. While I conduct most client meetings

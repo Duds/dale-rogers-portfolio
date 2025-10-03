@@ -1,7 +1,7 @@
 ---
-import Container from "@/components/layout/Container.astro";
-import Button from "@/components/ui/Button.astro";
-import "@/styles/components/services.css";
+import Container from '@/components/layout/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import '@/styles/components/services.css';
 
 interface Service {
   title: string;
@@ -11,15 +11,15 @@ interface Service {
 }
 
 interface ServiceData extends Service {
-  variant: "primary" | "secondary" | "accent" | "brand";
+  variant: 'primary' | 'secondary' | 'accent' | 'brand';
 }
 
-const getVariantClasses = (variant: ServiceData["variant"]) => {
+const getVariantClasses = (variant: ServiceData['variant']) => {
   const variants = {
-    primary: "services-card--primary",
-    secondary: "services-card--secondary",
-    accent: "services-card--accent",
-    brand: "services-card--brand",
+    primary: 'services-card--primary',
+    secondary: 'services-card--secondary',
+    accent: 'services-card--accent',
+    brand: 'services-card--brand',
   };
   return variants[variant];
 };
@@ -27,37 +27,32 @@ const getVariantClasses = (variant: ServiceData["variant"]) => {
 // Define services with their variants and Unsplash images
 const services: ServiceData[] = [
   {
-    title: "Service Design",
-    description:
-      "Creating seamless experiences that work for users and organisations",
-    imageUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&fit=crop",
-    link: "/services/service-design",
-    variant: "primary",
+    title: 'Service Design',
+    description: 'Creating seamless experiences that work for users and organisations',
+    imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&fit=crop',
+    link: '/services/service-design',
+    variant: 'primary',
   },
   {
-    title: "Digital Strategy",
-    description: "Aligning technology with your business objectives",
-    imageUrl:
-      "https://images.unsplash.com/photo-1553484771-047a44eee27a?q=80&w=2940&fit=crop",
-    link: "/services/digital-strategy",
-    variant: "secondary",
+    title: 'Digital Strategy',
+    description: 'Aligning technology with your business objectives',
+    imageUrl: 'https://images.unsplash.com/photo-1553484771-047a44eee27a?q=80&w=2940&fit=crop',
+    link: '/services/digital-strategy',
+    variant: 'secondary',
   },
   {
-    title: "Research & Testing",
-    description: "Understanding your users through evidence-based insights",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2940&fit=crop",
-    link: "/services/research-testing",
-    variant: "accent",
+    title: 'Research & Testing',
+    description: 'Understanding your users through evidence-based insights',
+    imageUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2940&fit=crop',
+    link: '/services/research-testing',
+    variant: 'accent',
   },
   {
-    title: "Training & Capability",
-    description: "Building design capability in your organisation",
-    imageUrl:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2940&fit=crop",
-    link: "/services/training-capability",
-    variant: "brand",
+    title: 'Training & Capability',
+    description: 'Building design capability in your organisation',
+    imageUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2940&fit=crop',
+    link: '/services/training-capability',
+    variant: 'brand',
   },
 ];
 ---
@@ -66,10 +61,8 @@ const services: ServiceData[] = [
   <Container fullWidth={true}>
     <div class="services-container">
       <div class="col-span-12 lg:col-span-4">
-        <h2 class="services-heading">Services</h2>
-        <p class="services-title">
-          Designing services that people trust and teams can deliver.
-        </p>
+        <h2 class="heading-tertiary">Services</h2>
+        <p class="body-large">Designing services that people trust and teams can deliver.</p>
       </div>
       <div class="col-span-12 lg:col-span-8 flex items-end justify-end">
         <Button variant="primary" href="/services">
@@ -91,10 +84,7 @@ const services: ServiceData[] = [
     <div class="services-list">
       {
         services?.map((service: ServiceData) => (
-          <a
-            href={service.link}
-            class={`services-card ${getVariantClasses(service.variant)}`}
-          >
+          <a href={service.link} class={`services-card ${getVariantClasses(service.variant)}`}>
             <div class="services-card-image">
               <img
                 src={service.imageUrl}
