@@ -11,6 +11,7 @@ A modern, accessible portfolio website built with Astro, showcasing service desi
 - **Accessibility**: WCAG AA compliant with proper ARIA support
 - **Responsive**: Mobile-first design that works on all devices
 - **Australian Standards**: Localized content and regional considerations
+- **Automated Workflow**: Cursor hook system for safe, semantic branch management
 
 ## 🏗️ Architecture
 
@@ -116,6 +117,33 @@ pnpm run build:swa
 npx @azure/static-web-apps-cli@latest deploy dist --deployment-token YOUR_TOKEN
 ```
 
+## 🤖 Automated Development Workflow
+
+This project uses a **Cursor hook system** for safe, automated branch management:
+
+### Features
+
+- **Semantic Branching**: Automatic `type/scope/description__DDMMYYYY` branch creation
+- **Guard Rails**: Protects sensitive files and prevents dangerous operations
+- **Maturity Budgets**: Configurable change size limits (bootstrap/normal/strict)
+- **Auto-Merge**: Successful changes automatically merge to `develop`
+- **Security**: Redacts sensitive content from AI context
+
+### Quick Start
+
+1. **Open Cursor chat** and describe your change
+2. **System creates** semantic feature branch automatically
+3. **Make changes** within whitelisted paths
+4. **Click Stop** to commit and merge to `develop`
+
+### Configuration
+
+- **Maturity**: Currently set to "normal" (40 files, 4,000 lines max)
+- **Whitelisted**: `src/`, `docs/`, `tests/`, `scripts/`, configuration files
+- **Protected**: `.env*`, `.github/`, lock files, build outputs
+
+See [Cursor Hook System Documentation](docs/CURSOR_HOOK_SYSTEM.md) for complete details.
+
 ## 📁 Project Structure
 
 ```
@@ -127,6 +155,7 @@ src/
 ├── styles/         # CSS and theme files
 └── types/          # TypeScript type definitions
 
+.cursor/            # Cursor hook system configuration
 public/             # Static assets
 docs/               # Project documentation
 tests/              # Playwright E2E tests
@@ -288,6 +317,7 @@ This portfolio uses **semantic-release** for automated version management:
 - **Version synchronization** across all components
 
 ### **Commit Types**
+
 - `feat:` → Minor version bump (new features)
 - `fix:` → Patch version bump (bug fixes)
 - `docs:` → Patch version bump (documentation)

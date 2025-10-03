@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeReadFile": [{ "command": "hooks/solo-guard.py", "args": ["beforeReadFile"] }],
+    "beforeWriteFile": [{ "command": "hooks/solo-guard.py", "args": ["beforeWriteFile"] }],
+    "beforeShellExecution": [
+      { "command": "hooks/solo-guard.py", "args": ["beforeShellExecution"] }
+    ],
+    "beforeSubmitPrompt": [{ "command": "hooks/solo-guard.py", "args": ["beforeSubmitPrompt"] }],
+    "stop": [{ "command": "hooks/solo-guard.py", "args": ["stop"] }]
+  }
+}

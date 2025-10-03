@@ -1,0 +1,48 @@
+{
+  "maturity": "normal",
+  "write_whitelist": [
+    "^src/.*",
+    "^docs/.*",
+    "^tests/.*",
+    "^scripts/.*",
+    "^public/.*",
+    "^static/.*",
+    "^astro\\.config\\.mjs$",
+    "^tailwind\\.config\\.ts$",
+    "^tsconfig\\.json$",
+    "^package\\.json$",
+    "^pnpm-lock\\.yaml$",
+    "^staticwebapp\\.config\\.json$",
+    "^playwright\\.config\\.ts$",
+    "^vitest\\.config\\.ts$",
+    "^CHANGELOG\\.md$",
+    "^README\\.md$",
+    "^TODO\\.md$"
+  ],
+  "protected_paths": [
+    "^\\.env.*",
+    "^\\.github/.*",
+    ".*lock\\.(json|ya?ml)$",
+    "^\\.cursor/.*",
+    "^node_modules/.*",
+    "^\\.next/.*",
+    "^dist/.*",
+    "^build/.*",
+    "^storybook-static/.*",
+    "^test-results/.*",
+    "^reports/.*",
+    "^image-audit-report\\.json$",
+    "^portfolio-deploy\\.zip$"
+  ],
+  "delete_feature_branch_after_merge": true,
+  "budgets": {
+    "bootstrap": { "max_files": 200, "max_lines": 20000 },
+    "normal": { "max_files": 40, "max_lines": 4000 },
+    "strict": { "max_files": 12, "max_lines": 600 }
+  },
+  "branch_naming": {
+    "types": ["feat", "fix", "refactor", "docs", "test", "chore", "style", "perf"],
+    "scopes": ["ui", "layout", "content", "theme", "docs", "scripts", "tests", "config", "deploy"],
+    "date_format": "DDMMYYYY"
+  }
+}
