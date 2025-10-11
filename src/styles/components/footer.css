@@ -5,10 +5,10 @@
   background-color: var(--color-background-primary);
 }
 
-/* Footer inner container - ALWAYS olive background for consistent branding */
+/* Footer inner container - Using primary-dark for consistent branding */
 .footer-inner {
   @apply rounded-3xl p-8 md:p-12;
-  background-color: var(--color-primary-dark); /* Always olive #1F2A00 */
+  background-color: var(--color-primary-dark);
 }
 
 .footer__content {
@@ -23,7 +23,7 @@
 
 .footer__acknowledgement-text {
   @apply text-sm md:text-base leading-relaxed max-w-4xl mx-auto;
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
 /* Slogan Section */
@@ -34,12 +34,12 @@
 
 .footer__slogan-text {
   @apply text-2xl md:text-3xl font-bold mb-3;
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
 .footer__slogan-subtitle {
   @apply text-base md:text-lg;
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
 .footer__main {
@@ -52,12 +52,12 @@
 
 .footer__title {
   @apply text-3xl md:text-4xl font-bold;
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
 .footer__description {
   @apply text-lg;
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
 .footer__actions {
@@ -74,7 +74,7 @@
 
 .footer__section-title {
   @apply text-lg font-semibold mb-4;
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
 .footer__link-list {
@@ -83,11 +83,11 @@
 
 .footer__link {
   @apply transition-colors duration-300;
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
 .footer__link:hover {
-  color: #E8E0D9; /* Slightly muted white on hover for interaction feedback */
+  color: var(--color-accent-light);
 }
 
 .footer__bottom {
@@ -96,7 +96,7 @@
 }
 
 .footer__copyright {
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
 .footer__legal {
@@ -105,32 +105,32 @@
 
 .footer__legal-link {
   @apply transition-colors duration-300;
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
 .footer__legal-link:hover {
-  color: #E8E0D9; /* Slightly muted white on hover for interaction feedback */
+  color: var(--color-accent-light);
 }
 
-/* Footer heading styles - LIGHT for maximum contrast on dark background */
+/* Footer heading styles - Using primary contrast for consistency */
 .footer-heading {
   @apply text-lg font-semibold mb-4;
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
-/* Footer link styles - LIGHT for good contrast on dark background */
+/* Footer link styles - Using primary contrast with accent hover */
 .footer-link {
   @apply transition-colors duration-300;
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
 .footer-link:hover {
-  color: #E8E0D9; /* Slightly muted white on hover for interaction feedback */
+  color: var(--color-accent-light);
 }
 
-/* Footer copyright styles - LIGHT for good contrast on dark background */
+/* Footer copyright styles - Using primary contrast */
 .footer-copyright {
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
 /* Footer heart styles - ACCENT for good contrast on dark background */
@@ -138,20 +138,20 @@
   color: var(--color-accent-main);
 }
 
-/* Footer main heading - ALWAYS white on olive background */
+/* Footer main heading - Using primary contrast */
 .footer-main-heading {
-  color: #FFFFFF !important; /* Always white on olive background */
+  color: var(--color-primary-contrast) !important;
 }
 
-/* Acknowledgement text - LIGHT for good contrast on dark background */
+/* Acknowledgement text - Using primary contrast */
 .text-footer-text-secondary {
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
-/* Acknowledgement slogan - LIGHT for maximum contrast on dark background */
+/* Acknowledgement slogan - Using primary contrast */
 .acknowledgement-slogan {
   @apply font-medium text-xl;
-  color: #FFFFFF; /* Always white on olive background */
+  color: var(--color-primary-contrast);
 }
 
 /* Copyright section styles - inherits body background */
@@ -165,7 +165,7 @@
   color: var(--color-text-secondary);
 }
 
-:root[data-theme="dark"] .copyright-text {
+:root[data-theme='dark'] .copyright-text {
   color: var(--color-text-disabled);
 }
 
@@ -174,6 +174,6 @@
   color: var(--color-accent-main);
 }
 
-:root[data-theme="dark"] .copyright-heart {
+:root[data-theme='dark'] .copyright-heart {
   color: var(--color-accent-light);
 }

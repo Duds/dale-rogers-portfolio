@@ -1,0 +1,284 @@
+---
+description: Aesthetic consistency standards based on Phase 1 improvements
+globs: ['src/**/*.{astro,ts,tsx,css}']
+alwaysApply: true
+---
+
+# Aesthetic Standards - Phase 1 Implementation
+
+**Status**: Active - Enforces Phase 1 aesthetic improvements
+**Reference**: `docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md`
+
+## Color Palette: Service Design Leader
+
+### MANDATORY: Use Theme Tokens Only
+
+❌ **NEVER use hardcoded colors**:
+
+```css
+/* FORBIDDEN */
+color: #ffffff;
+background: #0f2851;
+border-color: #d97706;
+```
+
+✅ **ALWAYS use theme tokens**:
+
+```css
+/* CORRECT */
+color: var(--color-primary-contrast);
+background: var(--color-primary-main);
+border-color: var(--color-secondary-main);
+```
+
+### Color Usage Guidelines
+
+**Primary (Deep Navy #0F2851)**: 60% of usage
+
+- Headings and titles
+- Navigation background
+- Primary buttons and CTAs
+- Strong emphasis text
+
+**Secondary (Warm Rust #D97706)**: 30% of usage
+
+- Call-to-action buttons
+- Links and interactive elements
+- Warm accents and highlights
+- Success state indicators
+
+**Accent (Sage Green #059669)**: 10% of usage
+
+- Success states
+- Secondary CTAs
+- Growth/transformation highlights
+- Service-related iconography
+
+### Token Reference
+
+See: `src/styles/theme/colors.ts`
+
+**Available tokens**:
+
+- `var(--color-primary-main)`, `var(--color-primary-light)`, `var(--color-primary-dark)`
+- `var(--color-secondary-main)`, `var(--color-secondary-light)`, `var(--color-secondary-dark)`
+- `var(--color-accent-main)`, `var(--color-accent-light)`, `var(--color-accent-dark)`
+- `var(--color-text-primary)`, `var(--color-text-secondary)`, `var(--color-text-tertiary)`
+- `var(--color-background-primary)`, `var(--color-background-secondary)`
+
+**Full documentation**: `docs/COLOR_PALETTE_OPTIONS.md`
+
+## Animation System
+
+### MANDATORY: Use Unified Animation System
+
+❌ **NEVER create duplicate keyframes**:
+
+```css
+/* FORBIDDEN - duplicates existing animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+```
+
+✅ **ALWAYS use existing animations**:
+
+```html
+<!-- Use utility classes -->
+<div class="animate-fade-in-up">Content</div>
+
+<!-- Or reference keyframes -->
+<style>
+  .my-component {
+    animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+</style>
+```
+
+### Available Animations
+
+**Entrance animations**:
+
+- `.animate-fade-in-up` - Fade in from below (most common)
+- `.animate-fade-in` - Simple opacity fade
+- `.animate-scale-in` - Scale up while fading
+- `.animate-slide-in-right` - Slide from left
+- `.animate-slide-in-left` - Slide from right
+
+**Interaction animations**:
+
+- `.hover-lift` - Lift effect for cards/buttons
+- `.hover-scale` - Scale effect for images
+- `.hover-glow` - Glow effect for interactive elements
+
+**Loading states**:
+
+- `.loading-pulse` - Pulse animation
+- `.loading-spin` - Spin animation
+- `.skeleton` - Skeleton loading effect
+
+**Scroll-triggered**:
+
+```html
+<div data-fade>Fades in when scrolled into view</div>
+```
+
+### Animation System Files
+
+- **TypeScript**: `src/styles/theme/animations.ts`
+- **CSS Utilities**: `src/styles/animations.css`
+- **Documentation**: `docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md#4-unified-animation-system`
+
+### Accessibility REQUIREMENT
+
+✅ **ALWAYS respect reduced motion**:
+
+```css
+/* This is automatic in animations.css, but if adding custom animations: */
+@media (prefers-reduced-motion: reduce) {
+  .my-animation {
+    animation: none;
+  }
+}
+```
+
+## Inline Styles
+
+### FORBIDDEN: No Inline Styles
+
+❌ **NEVER use style attribute**:
+
+```astro
+<!-- FORBIDDEN -->
+<Heading style="color: var(--color-text-primary);">Title</Heading>
+<div style="padding: 20px;">Content</div>
+```
+
+✅ **ALWAYS use CSS classes**:
+
+```astro
+<!-- CORRECT -->
+<Heading class="hero-headline">Title</Heading>
+<div class="p-5">Content</div>
+```
+
+### Process for Removing Inline Styles
+
+1. Identify the inline style
+2. Create appropriate CSS class in component stylesheet
+3. Replace style attribute with class
+4. Import component stylesheet
+
+**Example**: See `src/components/sections/home/Hero.astro` and `src/styles/components/hero.css`
+
+## Component Styling Pattern
+
+### Required Structure
+
+1. **Component file** (`.astro`, `.tsx`)
+   - Import component stylesheet
+   - Use only classes, no inline styles
+   - Use theme tokens via classes
+
+2. **Component stylesheet** (`src/styles/components/[name].css`)
+   - All component-specific styles
+   - Use theme tokens via `var(--color-*)`
+   - Include dark mode variants
+
+3. **TypeScript types** (if needed)
+   - Define prop interfaces
+   - Export types for reuse
+
+### Example: Proper Component Structure
+
+```astro
+---
+// src/components/ui/MyComponent.astro
+import '@/styles/components/my-component.css';
+
+interface Props {
+  title: string;
+  variant?: 'primary' | 'secondary';
+}
+
+const { title, variant = 'primary' } = Astro.props;
+---
+
+<div class={`my-component my-component--${variant}`}>
+  <h2 class="my-component__title">{title}</h2>
+</div>
+```
+
+```css
+/* src/styles/components/my-component.css */
+@reference "tailwindcss";
+
+.my-component {
+  @apply rounded-lg p-6;
+  background-color: var(--color-background-secondary);
+}
+
+.my-component__title {
+  @apply text-2xl font-bold;
+  color: var(--color-text-primary);
+}
+
+.my-component--primary {
+  border-left: 4px solid var(--color-primary-main);
+}
+
+.my-component--secondary {
+  border-left: 4px solid var(--color-secondary-main);
+}
+
+/* Dark mode */
+:root[data-theme='dark'] .my-component {
+  background-color: var(--color-background-tertiary);
+}
+```
+
+## Pre-Commit Checklist
+
+Before committing ANY style-related changes:
+
+- [ ] No hardcoded colors (search for `#` in CSS)
+- [ ] No inline `style` attributes in components
+- [ ] Animation uses unified system (no duplicate keyframes)
+- [ ] Component has dedicated stylesheet in `src/styles/components/`
+- [ ] Dark mode styles included (`:root[data-theme="dark"]`)
+- [ ] Accessibility considered (contrast, reduced motion)
+- [ ] Theme tokens used consistently
+
+## Linting Violations
+
+**Auto-fix where possible**:
+
+```bash
+# Check for hardcoded colors
+grep -r "#[0-9A-F]\{6\}" src/styles/components/ --exclude-dir=node_modules
+
+# Check for inline styles
+grep -r "style=" src/components/ --exclude-dir=node_modules
+```
+
+## References
+
+**Complete Implementation**: `docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md`
+**Color Strategy**: `docs/COLOR_PALETTE_OPTIONS.md`
+**Animation System**: `src/styles/theme/animations.ts` + `src/styles/animations.css`
+**Migration Examples**: See footer and hero components
+
+## Enforcement
+
+These standards are **MANDATORY** for all new code and should be applied when refactoring existing code.
+
+**Priority**: HIGH
+**Version**: 1.0 (January 2025)
+**Owner**: Design System Team

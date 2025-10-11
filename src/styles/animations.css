@@ -1,0 +1,404 @@
+/**
+ * Unified Animation System - CSS
+ * Keyframes and utility classes for consistent animations
+ */
+
+/* ========================================
+   KEYFRAME DEFINITIONS
+   ======================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Fade In Up - Most common entrance animation */
+.animate-fade-in-up {
+  animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 300ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 400ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 400ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+.animate-bounce {
+  animation: bounce 1000ms ease infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2000ms ease infinite;
+}
+
+.animate-spin {
+  animation: spin 1000ms linear infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 12000ms linear infinite;
+}
+
+/* ========================================
+   DURATION MODIFIERS
+   ======================================== */
+
+.duration-fast {
+  animation-duration: 200ms;
+}
+
+.duration-normal {
+  animation-duration: 300ms;
+}
+
+.duration-slow {
+  animation-duration: 500ms;
+}
+
+.duration-slower {
+  animation-duration: 700ms;
+}
+
+/* ========================================
+   DELAY UTILITIES
+   ======================================== */
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+.delay-600 {
+  animation-delay: 600ms;
+}
+
+.delay-700 {
+  animation-delay: 700ms;
+}
+
+.delay-800 {
+  animation-delay: 800ms;
+}
+
+/* ========================================
+   TRANSITION UTILITIES
+   ======================================== */
+
+.transition-colors {
+  transition:
+    color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-transform {
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.transition-shadow {
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-all {
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   FADE IN ON SCROLL PATTERN
+   ======================================== */
+
+/* Initial state for scroll-triggered animations */
+[data-fade] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 600ms cubic-bezier(0, 0, 0.2, 1),
+    transform 600ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Visible state when in viewport */
+[data-fade].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   STAGGERED ANIMATIONS
+   ======================================== */
+
+/* Children with stagger delays */
+.stagger-children > * {
+  animation-delay: calc(var(--stagger-index, 0) * 80ms);
+}
+
+/* Manual stagger classes for nth-child targeting */
+.stagger-1 {
+  animation-delay: 80ms;
+}
+.stagger-2 {
+  animation-delay: 160ms;
+}
+.stagger-3 {
+  animation-delay: 240ms;
+}
+.stagger-4 {
+  animation-delay: 320ms;
+}
+.stagger-5 {
+  animation-delay: 400ms;
+}
+.stagger-6 {
+  animation-delay: 480ms;
+}
+.stagger-7 {
+  animation-delay: 560ms;
+}
+.stagger-8 {
+  animation-delay: 640ms;
+}
+.stagger-9 {
+  animation-delay: 720ms;
+}
+
+/* ========================================
+   ACCESSIBILITY: REDUCED MOTION
+   ======================================== */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Ensure immediate visibility for reduced motion */
+  [data-fade] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ========================================
+   HOVER EFFECTS
+   ======================================== */
+
+/* Lift effect for cards and buttons */
+.hover-lift {
+  transition:
+    transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Scale effect for interactive elements */
+.hover-scale {
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Subtle glow effect */
+.hover-glow {
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(var(--color-accent-main-rgb, 217, 119, 6), 0.3);
+}
+
+/* ========================================
+   FOCUS EFFECTS
+   ======================================== */
+
+/* Enhanced focus ring */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  transition: outline-offset 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.focus-ring:focus-visible {
+  outline-offset: 4px;
+}
+
+/* ========================================
+   LOADING STATES
+   ======================================== */
+
+.loading-pulse {
+  animation: pulse 2000ms ease infinite;
+}
+
+.loading-spin {
+  animation: spin 1000ms linear infinite;
+}
+
+/* Skeleton loading effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-background-tertiary) 0%,
+    var(--color-interactive-hover) 50%,
+    var(--color-background-tertiary) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1500ms ease-in-out infinite;
+}
+
+/* ========================================
+   PAGE TRANSITIONS
+   ======================================== */
+
+.page-enter {
+  animation: fadeIn 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-exit {
+  animation: fadeIn 200ms cubic-bezier(0.4, 0, 1, 1) reverse;
+}
+
+/* ========================================
+   CSS CUSTOM PROPERTIES FOR JS CONTROL
+   ======================================== */
+
+:root {
+  --animation-duration-fast: 200ms;
+  --animation-duration-normal: 300ms;
+  --animation-duration-slow: 500ms;
+  --animation-easing-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animation-stagger-base: 80ms;
+}

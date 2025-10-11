@@ -1,8 +1,9 @@
 ---
 // Hero section component
-import Button from "@/components/ui/Button.astro";
-import Heading from "@/components/ui/Heading.astro";
-import Container from "@/components/layout/Container.astro";
+import Button from '@/components/ui/Button.astro';
+import Heading from '@/components/ui/Heading.astro';
+import Container from '@/components/layout/Container.astro';
+import '@/styles/components/hero.css';
 
 /**
  * Hero section for the home page
@@ -12,7 +13,7 @@ import Container from "@/components/layout/Container.astro";
  */
 
 // Dramatic slogan with line breaks for visual impact
-const slogan = "Service\nDesign\nStrategy";
+const slogan = 'Service\nDesign\nStrategy';
 const description =
   "I'm Dale Rogers, a service designer and strategy consultant, helping organisations transform how they deliver value. With decades of experience, I bridge the gap between human needs and organisational goals.";
 ---
@@ -24,11 +25,10 @@ const description =
       <div class="flex flex-col justify-center">
         <Heading
           level={1}
-          class="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight"
-style="color: var(--color-text-primary);"
+          class="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight hero-headline"
         >
           {
-            slogan.split("\n").map((line, i) => (
+            slogan.split('\n').map((line, i) => (
               <>
                 {i > 0 && <br />}
                 {line}
@@ -40,9 +40,7 @@ style="color: var(--color-text-primary);"
 
       <!-- Right Column -->
       <div class="flex flex-col justify-end">
-        <p
-          class="text-2xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl"
-        >
+        <p class="text-2xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl">
           {description}
         </p>
         <div>

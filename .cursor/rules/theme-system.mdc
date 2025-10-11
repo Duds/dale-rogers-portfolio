@@ -1,42 +1,74 @@
 ---
-description:
-globs:
+description: Theme system and styling standards - Service Design Leader palette
+globs: ['src/**/*.{astro,ts,tsx,css}']
 alwaysApply: true
 ---
+
 # Theme System Rules
+
+**Status**: Updated for Phase 1 (January 2025)
+**Reference**: `docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md`
 
 ## Token Usage
 
-1. **Design Tokens**
+1. **Design Tokens (MANDATORY)**
    - All design values must come from theme tokens
-   - No hardcoded colors, spacing, or shadows
+   - **NO hardcoded colors, spacing, or shadows**
    - Use `src/styles/theme` as single source of truth
+   - See: `docs/COLOR_PALETTE_OPTIONS.md` for palette strategy
 
 2. **Component Styles**
    - Component-specific styles in `src/styles/components`
    - Use Tailwind classes with theme tokens
    - Follow component style naming convention
+   - Include dark mode support
 
 3. **Global Styles**
    - Only global styles in `global.css`
    - No component-specific styles in global files
    - Use `@layer` directives appropriately
 
-## Implementation
+## Service Design Leader Color Palette
+
+**ACTIVE PALETTE** (Implemented January 2025)
+
+### Color Strategy
+
+- **Primary (Deep Navy #0F2851)**: 60% - Authority & Strategy
+- **Secondary (Warm Rust #D97706)**: 30% - Approachability & Australian Identity
+- **Accent (Sage Green #059669)**: 10% - Growth & Service
 
 ### Theme Token Structure
+
 ```typescript
 // src/styles/theme/colors.ts
 export const colors = {
+  // Service Design Leader Palette
   primary: {
-    black: '#10100F',
-    purple: '#AF8ABF',
-    // ...
-  }
+    main: '#0F2851', // Deep Navy - trust, authority
+    light: '#1a3a6e', // Lighter navy
+    dark: '#0a1d3a', // Darker navy
+    contrast: '#FFFFFF', // White text
+  },
+  secondary: {
+    main: '#D97706', // Warm Rust - approachable, Australian
+    light: '#F59E0B', // Lighter rust
+    dark: '#B45309', // Darker rust
+    contrast: '#FFFFFF',
+  },
+  accent: {
+    main: '#059669', // Sage Green - growth, service
+    light: '#10B981', // Lighter sage
+    dark: '#047857', // Darker sage
+    contrast: '#FFFFFF',
+  },
 } as const;
 ```
 
+**Full palette**: See `src/styles/theme/colors.ts`
+
 ### Component Style Structure
+
 ```css
 /* src/styles/components/button.css */
 @layer components {
@@ -47,55 +79,137 @@ export const colors = {
 ```
 
 ### Component Implementation
+
 ```typescript
 // src/components/ui/Button.astro
+import '@/styles/components/button.css';
+
 const variantStyles = {
-  primary: [
-    "bg-primary-black",
-    "text-white",
-    "hover:bg-primary-purple"
-  ].join(" ")
+  primary: 'button--primary', // Uses var(--color-primary-main)
+  secondary: 'button--secondary', // Uses var(--color-secondary-main)
+  accent: 'button--accent', // Uses var(--color-accent-main)
 };
 ```
+
+```css
+/* src/styles/components/button.css */
+.button--primary {
+  background-color: var(--color-primary-main);
+  color: var(--color-primary-contrast);
+}
+
+.button--primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Dark mode automatically handled via token changes */
+```
+
+## Animation System
+
+**MANDATORY**: Use unified animation system (January 2025)
+
+### Available Files
+
+- **TypeScript**: `src/styles/theme/animations.ts`
+- **CSS Utilities**: `src/styles/animations.css`
+- **Documentation**: `docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md#4-unified-animation-system`
+
+### Usage
+
+```html
+<!-- Utility classes -->
+<div class="animate-fade-in-up">Content</div>
+
+<!-- With delay -->
+<div class="animate-fade-in-up delay-200">Content</div>
+
+<!-- Scroll-triggered -->
+<div data-fade>Fades when scrolled into view</div>
+```
+
+**Rule**: Never create duplicate keyframes. Use existing animations.
 
 ## Checklist
 
 Before committing changes:
-- [ ] Using theme tokens for all design values
-- [ ] Component styles in correct location
-- [ ] No hardcoded values
-- [ ] Dark mode support
+
+- [ ] Using theme tokens for all design values (no `#` colors)
+- [ ] Component styles in `src/styles/components/`
+- [ ] No hardcoded values anywhere
+- [ ] Dark mode support included
+- [ ] Animation uses unified system
+- [ ] No inline `style` attributes
 - [ ] TypeScript types updated
 - [ ] Documentation updated
 
 ## Examples
 
 ### ✅ Correct Usage
-```typescript
-// Using theme tokens
-"bg-primary-black text-white"
-"shadow-soft hover:shadow-elevated"
-"p-4 md:p-6"
+
+```css
+/* Using theme tokens */
+background: var(--color-primary-main);
+color: var(--color-text-primary);
+border: 1px solid var(--color-border-primary);
+
+/* Using unified animations */
+.my-element {
+  animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
 ```
 
 ### ❌ Incorrect Usage
-```typescript
-// Hardcoded values
-"bg-[#000000]"
-"shadow-[0_4px_6px_rgba(0,0,0,0.1)]"
-"padding: 16px"
+
+```css
+/* FORBIDDEN - Hardcoded colors */
+background: #0f2851;
+color: #ffffff;
+border: 1px solid #e2e8f0;
+
+/* FORBIDDEN - Duplicate animations */
+@keyframes fadeInUp {
+  /* ... */
+}
+
+/* FORBIDDEN - Inline styles */
+```
+
+```astro
+<!-- FORBIDDEN -->
+<div style="color: var(--color-text-primary);"></div>
 ```
 
 ## Migration Notes
 
-1. When updating existing components:
+1. **When updating existing components**:
    - Move styles to component CSS file
-   - Replace hardcoded values with tokens
-   - Add dark mode support
+   - Replace ALL hardcoded values with tokens
+   - Add dark mode support (`:root[data-theme="dark"]`)
+   - Remove any inline styles
+   - Use unified animation system
    - Update documentation
 
-2. When creating new components:
+2. **When creating new components**:
    - Use theme tokens from start
-   - Create component CSS file
+   - Create component CSS file in `src/styles/components/`
+   - Import component CSS in component file
    - Add to component index
-   - Include documentation
+   - Include dark mode styles
+   - Use animation utilities
+   - Write documentation
+
+## References
+
+**Implementation Guide**: `docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md`
+**Color Strategy**: `docs/COLOR_PALETTE_OPTIONS.md`
+**Color Tokens**: `src/styles/theme/colors.ts`
+**Animation System**: `src/styles/theme/animations.ts` + `src/styles/animations.css`
+**Aesthetic Standards**: `.cursor/rules/aesthetic-standards.mdc`
+
+## Enforcement
+
+These standards are **MANDATORY**. All new code must follow these patterns.
+
+**Priority**: HIGH
+**Version**: 2.0 (Updated January 2025)

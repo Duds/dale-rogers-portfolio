@@ -60,16 +60,17 @@ const deepGet = (obj: ColorTree, path: string): unknown => {
 // ---------- Tokens (same shape) ----------
 
 export const colors: DeepReadonly<ColorTree> = {
-  primary: { main: '#2563EB', light: '#3B82F6', dark: '#1E40AF', contrast: '#FFFFFF' },
-  secondary: { main: '#06B6D4', light: '#22D3EE', dark: '#0E7490', contrast: '#00212A' },
-  accent: { main: '#F97316', light: '#FB923C', dark: '#C2410C', contrast: '#FFFFFF' },
+  // Service Design Leader Palette - Deep Navy + Warm Rust + Sage Green
+  primary: { main: '#0F2851', light: '#1a3a6e', dark: '#0a1d3a', contrast: '#FFFFFF' },
+  secondary: { main: '#D97706', light: '#F59E0B', dark: '#B45309', contrast: '#FFFFFF' },
+  accent: { main: '#059669', light: '#10B981', dark: '#047857', contrast: '#FFFFFF' },
 
   background: {
     primary: '#F8FAFC',
     secondary: '#FFFFFF',
     tertiary: '#F1F5F9',
     elevated: '#FFFFFF',
-    overlay: 'rgba(2, 6, 23, 0.55)',
+    overlay: 'rgba(15, 40, 81, 0.55)',
   },
 
   text: {
@@ -85,42 +86,43 @@ export const colors: DeepReadonly<ColorTree> = {
     primary: '#E2E8F0',
     secondary: '#CBD5E1',
     tertiary: '#F1F5F9',
-    focus: '#38BDF8',
+    focus: '#059669',
     error: '#DC2626',
   },
 
-  state: { success: '#16A34A', warning: '#D97706', error: '#DC2626', info: '#2563EB' },
+  state: { success: '#059669', warning: '#D97706', error: '#DC2626', info: '#0F2851' },
 
   interactive: {
     hover: '#F1F5F9',
     active: '#E2E8F0',
-    selected: '#E0F2FE',
+    selected: '#ECFDF5',
     focus: '#F8FAFC',
   },
 
   shadow: {
-    light: 'rgba(2, 6, 23, 0.06)',
-    medium: 'rgba(2, 6, 23, 0.12)',
-    heavy: 'rgba(2, 6, 23, 0.20)',
-    colored: 'rgba(37, 99, 235, 0.12)',
+    light: 'rgba(15, 40, 81, 0.06)',
+    medium: 'rgba(15, 40, 81, 0.12)',
+    heavy: 'rgba(15, 40, 81, 0.20)',
+    colored: 'rgba(15, 40, 81, 0.12)',
   },
 
-  brand: { highlight: '#06B6D4', subtle: '#F0F9FF', emphasis: '#0F172A' },
+  brand: { highlight: '#D97706', subtle: '#FFFBEB', emphasis: '#0F2851' },
 
   utility: { transparent: 'transparent', current: 'currentColor', inherit: 'inherit' },
 } as const;
 
 export const darkColors: DeepReadonly<ColorTree> = {
+  // Service Design Leader Dark Mode - Lighter versions for dark backgrounds
   primary: { main: '#60A5FA', light: '#93C5FD', dark: '#3B82F6', contrast: '#0A0F1A' },
-  secondary: { main: '#22D3EE', light: '#67E8F9', dark: '#06B6D4', contrast: '#07161B' },
-  accent: { main: '#FB923C', light: '#FDBA74', dark: '#F97316', contrast: '#0A0F1A' },
+  secondary: { main: '#FB923C', light: '#FDBA74', dark: '#F97316', contrast: '#0A0F1A' },
+  accent: { main: '#34D399', light: '#6EE7B7', dark: '#10B981', contrast: '#0A0F1A' },
 
   background: {
     primary: '#0B1220',
     secondary: '#0F172A',
     tertiary: '#111827',
     elevated: '#0F172A',
-    overlay: 'rgba(0, 0, 0, 0.65)',
+    overlay: 'rgba(11, 18, 32, 0.65)',
   },
 
   text: {
@@ -136,14 +138,14 @@ export const darkColors: DeepReadonly<ColorTree> = {
     primary: '#1F2937',
     secondary: '#273449',
     tertiary: '#0F172A',
-    focus: '#38BDF8',
+    focus: '#34D399',
     error: '#F87171',
   },
 
   interactive: {
     hover: '#111827',
     active: '#1F2937',
-    selected: '#0C4A6E',
+    selected: '#064E3B',
     focus: '#7C2D12',
   },
 
@@ -151,10 +153,10 @@ export const darkColors: DeepReadonly<ColorTree> = {
     light: 'rgba(0, 0, 0, 0.35)',
     medium: 'rgba(0, 0, 0, 0.55)',
     heavy: 'rgba(0, 0, 0, 0.75)',
-    colored: 'rgba(96, 165, 250, 0.25)',
+    colored: 'rgba(52, 211, 153, 0.25)',
   },
 
-  brand: { highlight: '#22D3EE', subtle: '#0B1220', emphasis: '#F8FAFC' },
+  brand: { highlight: '#FB923C', subtle: '#0B1220', emphasis: '#F8FAFC' },
 
   utility: { transparent: 'transparent', current: 'currentColor', inherit: 'inherit' },
 } as const;

@@ -1,0 +1,371 @@
+---
+description: Content voice and tone standards for all written content
+globs: ['src/content/**/*.{md,mdx}', 'src/pages/**/*.astro', '**/*.md']
+alwaysApply: true
+---
+
+# Content Voice Guidelines
+
+**Status**: Active - Enforces content voice standards
+**Reference**: `docs/CONTENT_VOICE_GUIDELINES.md` (18 pages)
+
+## Core Voice Principles
+
+### 1. First-Person Professional (MANDATORY)
+
+❌ **FORBIDDEN - Third person**:
+
+```markdown
+Dale Rogers is a service designer who helps organisations...
+Dale has worked with government agencies...
+```
+
+✅ **REQUIRED - First person**:
+
+```markdown
+I'm a service designer who helps organisations...
+I've worked with government agencies...
+```
+
+**Exception**: Third-person acceptable ONLY in:
+
+- Meta descriptions for SEO
+- Biography sections labeled "About Dale"
+- Client testimonials
+
+### 2. Confident Without Arrogance
+
+❌ **Too Tentative**:
+
+```markdown
+I've had the opportunity to work with some organisations...
+This approach sometimes seems to help...
+```
+
+❌ **Too Arrogant**:
+
+```markdown
+As one of Australia's leading service designers...
+I've revolutionized the industry...
+```
+
+✅ **Confident & Direct**:
+
+```markdown
+I've spent decades designing services for government and enterprise organisations.
+This approach consistently delivers measurable improvements.
+```
+
+### 3. Practical Over Academic
+
+❌ **Too Academic**:
+
+```markdown
+Service design employs ethnographic methodologies and systems thinking
+paradigms to conceptualize touchpoint orchestration within complex
+adaptive systems.
+```
+
+✅ **Practical & Clear**:
+
+```markdown
+Service design maps the entire journey—from first touchpoint to final
+outcome—identifying friction points and opportunities for improvement.
+```
+
+**Rule**: If you wouldn't say it in a client meeting, rewrite it.
+
+## Australian English (MANDATORY)
+
+### Spelling Requirements
+
+✅ **ALWAYS use Australian English**:
+
+- organise, realise, specialise (NOT -ize)
+- colour, behaviour, flavour (NOT -or)
+- centre, theatre (NOT -er)
+- travelled, modelled (double-L in past tense)
+
+### Formatting Standards
+
+- **Date**: DD/MM/YYYY (23/03/2024)
+- **Time**: 24-hour (14:30, not 2:30 PM)
+- **Currency**: $AUD or Australian dollars
+
+## Active Voice (MANDATORY)
+
+❌ **Passive voice**:
+
+```markdown
+The customer journey will be mapped, pain points will be identified,
+and solutions will be designed.
+```
+
+✅ **Active voice**:
+
+```markdown
+We'll map your customer journey, identify pain points, and design
+solutions that work.
+```
+
+**Target**: 80%+ active voice across all content.
+
+## Content Type Guidelines
+
+### Homepage / Hero
+
+**Tone**: Confident, Clear, Value-Focused
+
+**Template**:
+
+```
+[What I Do] for [Target Outcome]
+
+[Short value proposition]
+```
+
+**Example**:
+
+```
+Service Design for Strategic Transformation
+
+I help organisations transform how they deliver value, bridging
+human needs with strategic goals through decades of service design
+expertise.
+```
+
+### Case Studies
+
+**Tone**: Results-Oriented, Story-Driven, Evidence-Based
+
+**Structure**:
+
+1. **Challenge** - What the client faced
+2. **Approach** - How you tackled it
+3. **Outcomes** - What was achieved (quantify!)
+4. **Insights** - What you learned
+
+**Voice Guidelines**:
+
+- Lead with impact, not process
+- Use "we" for collaborative work
+- Use "I" for your specific contribution
+- Quantify outcomes where possible
+
+**Example Opening**:
+
+```markdown
+✅ STRONG:
+The Department faced a critical challenge: their fit-and-proper person
+assessment process took 8+ weeks, creating bottlenecks and frustration.
+
+❌ WEAK:
+This project involved working with a government department to improve
+their processes.
+```
+
+### Articles / Thought Leadership
+
+**Tone**: Insightful, Conversational, Authoritative
+
+**Opening Patterns**:
+
+```markdown
+✅ STRONG:
+Culture isn't something that happens to your organisation—it's
+something you design, intentionally and continuously.
+
+❌ WEAK:
+In this article, I will discuss the importance of culture in
+organisations.
+```
+
+### Services / Offerings
+
+**Tone**: Clear, Benefit-Focused, Actionable
+
+**Structure**:
+
+1. **What It Is** (clear definition)
+2. **When You Need It** (problem/opportunity)
+3. **How It Works** (process overview)
+4. **What You Get** (deliverables/outcomes)
+
+**Voice Guidelines**:
+
+- Address reader as "you"
+- Focus on benefits, not features
+- Use concrete examples
+
+## Vocabulary Guidelines
+
+### Preferred Terms
+
+| ✅ Use This    | ❌ Not This | Why               |
+| -------------- | ----------- | ----------------- |
+| Organisations  | Companies   | More inclusive    |
+| Users / People | End users   | More human        |
+| We / I / You   | One, they   | More direct       |
+| Challenge      | Problem     | More constructive |
+| Outcome        | Deliverable | Focus on impact   |
+| Improve        | Optimise    | Clearer intent    |
+| Create         | Develop     | More active       |
+| Help           | Assist      | More direct       |
+
+### Words to AVOID
+
+❌ **Avoid buzzwords**:
+
+- Leverage, utilize, synergy, paradigm, holistic (unless specifically appropriate)
+- Next-gen, cutting-edge, revolutionary, game-changing
+- Very, really, actually, just, simply (weak intensifiers)
+
+✅ **Use instead**:
+
+- Use, work, connection, approach, complete
+- Modern, effective, new, better
+- Specific metrics or remove entirely
+
+### Technical Terms
+
+**When to use jargon**:
+✅ Established service design terms (journey map, touchpoint, blueprint)
+✅ When writing for design practitioners
+✅ When it's the clearest term available
+
+**When to avoid jargon**:
+❌ When plain language works as well
+❌ When writing for general business audience
+❌ When it obscures rather than clarifies
+
+**Guideline**: Introduce technical terms with brief definitions on first use.
+
+## Quality Checklist
+
+Before publishing ANY content, verify:
+
+- [ ] **First person** (I/we), not third person
+- [ ] **Active voice** dominates (80%+ of sentences)
+- [ ] **Australian English** spelling throughout
+- [ ] **Specific examples** support claims
+- [ ] **Clear value proposition** for reader
+- [ ] **Scannable structure** (headings, bullets, short paragraphs)
+- [ ] **Call to action** where appropriate
+- [ ] **Consistent tone** for content type
+- [ ] **No unnecessary jargon** or buzzwords
+- [ ] **Authentic voice** (sounds like a real person)
+
+## Writing Style Guidelines
+
+### Paragraph Structure
+
+- **Maximum 3-4 sentences** per paragraph
+- **Lead with topic sentence**
+- **Support with evidence or example**
+- **Connect to next paragraph**
+
+### Sentence Length
+
+- **Vary for rhythm**: Mix short impact sentences with longer ones
+- **Average 15-20 words** per sentence
+- **Complex ideas**: Break into multiple simple sentences
+
+### Headings
+
+- **Clear hierarchy**: H1 → H2 → H3 (rarely deeper)
+- **Action-oriented or question-based** when appropriate
+- **Sentence case**, not Title Case
+- **Front-load keywords** for scannability
+
+## Common Violations
+
+### ❌ Violation Examples
+
+**Third-person reference**:
+
+```markdown
+Dale Rogers works with organisations to transform their services.
+```
+
+**Passive voice**:
+
+```markdown
+Services were designed to meet user needs.
+```
+
+**American English**:
+
+```markdown
+We specialize in behavior change and realize strategic goals.
+```
+
+**Buzzword overload**:
+
+```markdown
+We leverage cutting-edge methodologies to synergize holistic solutions.
+```
+
+### ✅ Correct Examples
+
+**First-person**:
+
+```markdown
+I work with organisations to transform their services.
+```
+
+**Active voice**:
+
+```markdown
+We designed services to meet user needs.
+```
+
+**Australian English**:
+
+```markdown
+We specialise in behaviour change and realise strategic goals.
+```
+
+**Plain language**:
+
+```markdown
+We use proven methods to create complete solutions.
+```
+
+## Auto-Checking
+
+**Search for common issues**:
+
+```bash
+# Check for third-person references
+grep -r "Dale Rogers" src/content/ --exclude-dir=node_modules
+
+# Check for American spelling
+grep -r "ize\|ization" src/content/ --exclude-dir=node_modules
+grep -r "behavior\|color\|center" src/content/ --exclude-dir=node_modules
+
+# Check for passive voice indicators
+grep -r "will be\|was\|were\|been" src/content/ --exclude-dir=node_modules
+```
+
+## Before/After Examples
+
+See `docs/CONTENT_VOICE_GUIDELINES.md` for 20+ detailed before/after examples covering:
+
+- Service descriptions
+- Case study openings
+- About sections
+- Article introductions
+
+## References
+
+**Complete Guidelines**: `docs/CONTENT_VOICE_GUIDELINES.md` (18 pages)
+**Quick Reference**: `IMPROVEMENTS_SUMMARY.md` - Section "Using Your New Assets"
+**Example Content**: Reviewed case studies and articles in `src/content/`
+
+## Enforcement
+
+These standards are **MANDATORY** for all new content and should be applied when updating existing content.
+
+**Priority**: HIGH
+**Version**: 1.0 (January 2025)
+**Owner**: Content Team

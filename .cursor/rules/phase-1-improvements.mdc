@@ -1,0 +1,379 @@
+---
+description: Master rule for Phase 1 aesthetic improvements - Service Design Leader
+globs: ['src/**/*', 'docs/**/*']
+alwaysApply: true
+---
+
+# Phase 1 Aesthetic Improvements - Master Rule
+
+**Status**: ACTIVE (January 2025)
+**Version**: 1.0
+**Priority**: CRITICAL
+
+## Overview
+
+This rule enforces the Phase 1 aesthetic improvements that establish the Service Design Leader brand identity. All development must follow these standards.
+
+## Quick Reference
+
+### 🎨 Color Palette: Service Design Leader
+
+**MANDATORY COLOR USAGE**:
+
+- **Primary (Deep Navy #0F2851)**: 60% - Headings, navigation, primary actions
+- **Secondary (Warm Rust #D97706)**: 30% - CTAs, links, warm accents
+- **Accent (Sage Green #059669)**: 10% - Success, highlights, growth
+
+**Rule**: NEVER use hardcoded colors. ALWAYS use `var(--color-*)` tokens.
+
+### ✍️ Content Voice
+
+**MANDATORY VOICE**:
+
+- **First-person professional** ("I help..." NOT "Dale helps...")
+- **Active voice** (80%+ of sentences)
+- **Australian English** (organise, colour, centre)
+- **Confident without arrogance**
+- **Practical over academic**
+
+### 🎬 Animation System
+
+**MANDATORY ANIMATIONS**:
+
+- Use unified animation system (`src/styles/animations.css`)
+- NEVER duplicate keyframes
+- ALWAYS respect `prefers-reduced-motion`
+- Use utility classes: `.animate-fade-in-up`, `.hover-lift`, etc.
+
+### 🚫 Inline Styles
+
+**FORBIDDEN**: Never use `style` attributes in components.
+**REQUIRED**: Always use CSS classes in dedicated component stylesheets.
+
+## Implementation Rules
+
+### Rule 1: No Hardcoded Colors
+
+❌ **VIOLATION**:
+
+```css
+.my-component {
+  color: #ffffff;
+  background: #0f2851;
+}
+```
+
+```astro
+<div style="color: var(--color-text-primary);"></div>
+```
+
+✅ **CORRECT**:
+
+```css
+.my-component {
+  color: var(--color-primary-contrast);
+  background: var(--color-primary-main);
+}
+```
+
+```astro
+<div class="my-component"></div>
+```
+
+### Rule 2: Use Unified Animation System
+
+❌ **VIOLATION**:
+
+```css
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+```
+
+✅ **CORRECT**:
+
+```html
+<div class="animate-fade-in-up">Content</div>
+```
+
+```css
+.my-component {
+  animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+```
+
+### Rule 3: First-Person Content Voice
+
+❌ **VIOLATION**:
+
+```markdown
+Dale Rogers is a service designer who specializes in behavior change.
+```
+
+✅ **CORRECT**:
+
+```markdown
+I'm a service designer who specialises in behaviour change.
+```
+
+### Rule 4: Component Stylesheet Pattern
+
+❌ **VIOLATION**:
+
+```astro
+---
+// Component without stylesheet
+---
+
+<div style="padding: 20px;">
+  <h2 style="color: var(--color-text-primary);">Title</h2>
+</div>
+```
+
+✅ **CORRECT**:
+
+```astro
+---
+import '@/styles/components/my-component.css';
+---
+
+<div class="my-component">
+  <h2 class="my-component__title">Title</h2>
+</div>
+```
+
+```css
+/* src/styles/components/my-component.css */
+.my-component {
+  @apply p-5;
+}
+
+.my-component__title {
+  color: var(--color-text-primary);
+}
+
+:root[data-theme='dark'] .my-component__title {
+  color: var(--color-text-primary);
+}
+```
+
+## Related Rules
+
+**MUST READ**:
+
+- `.cursor/rules/aesthetic-standards.mdc` - Complete aesthetic standards
+- `.cursor/rules/content-voice.mdc` - Content voice guidelines
+- `.cursor/rules/theme-system.mdc` - Theme and color system
+
+## Documentation References
+
+### Planning & Strategy
+
+- **`IMPROVEMENTS_SUMMARY.md`** - Executive summary (START HERE)
+- **`docs/COLOR_PALETTE_OPTIONS.md`** - Color strategy and rationale
+- **`docs/HERO_REDESIGN.md`** - Hero section specifications
+- **`docs/CONTENT_VOICE_GUIDELINES.md`** - Voice and tone standards
+
+### Implementation
+
+- **`docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md`** - Complete technical details
+- **`src/styles/theme/colors.ts`** - Color tokens
+- **`src/styles/theme/animations.ts`** - Animation system (TypeScript)
+- **`src/styles/animations.css`** - Animation utilities
+
+### Examples
+
+- **Footer**: `src/styles/components/footer.css` - Token conversion example
+- **Hero**: `src/components/sections/home/Hero.astro` + `src/styles/components/hero.css` - Inline style removal example
+- **Button**: `src/components/ui/Button.astro` + `src/styles/components/button.css` - Proper component pattern
+
+## Pre-Commit Checklist
+
+Before committing ANY changes:
+
+### Colors & Styling
+
+- [ ] No hardcoded colors (search for `#` in CSS files)
+- [ ] All colors use `var(--color-*)` tokens
+- [ ] No inline `style` attributes in components
+- [ ] Component has dedicated stylesheet in `src/styles/components/`
+- [ ] Dark mode styles included
+
+### Animations
+
+- [ ] No duplicate keyframe definitions
+- [ ] Using unified animation system
+- [ ] `prefers-reduced-motion` respected
+
+### Content
+
+- [ ] First-person voice ("I" not "Dale")
+- [ ] Active voice (80%+)
+- [ ] Australian English spelling
+- [ ] No buzzwords or unnecessary jargon
+
+### General
+
+- [ ] TypeScript types updated
+- [ ] Documentation updated
+- [ ] Tests pass
+- [ ] Linter errors fixed
+
+## Auto-Verification
+
+Run these checks before committing:
+
+```bash
+# Check for hardcoded colors in CSS
+grep -r "#[0-9A-F]\{6\}" src/styles/components/ --color=always
+
+# Check for inline styles in components
+grep -r 'style=' src/components/ --color=always
+
+# Check for third-person references
+grep -r "Dale Rogers" src/content/ --color=always
+
+# Check for American English
+grep -r "ize\|ization\|behavior\|color[^-]" src/content/ --color=always
+```
+
+## Common Violations & Fixes
+
+### Violation: Hardcoded Color
+
+```css
+/* BEFORE */
+.footer-heading {
+  color: #ffffff;
+}
+
+/* AFTER */
+.footer-heading {
+  color: var(--color-primary-contrast);
+}
+```
+
+### Violation: Inline Style
+
+```astro
+<!-- BEFORE -->
+<Heading style="color: var(--color-text-primary);">
+  <!-- AFTER -->
+  <Heading class="hero-headline" /></Heading
+>
+```
+
+```css
+/* Add to component CSS */
+.hero-headline {
+  color: var(--color-text-primary);
+}
+```
+
+### Violation: Third-Person Content
+
+```markdown
+<!-- BEFORE -->
+
+Dale Rogers works with organisations to transform their services.
+
+<!-- AFTER -->
+
+I work with organisations to transform their services.
+```
+
+### Violation: Duplicate Animation
+
+```css
+/* BEFORE */
+@keyframes fadeInUp { /* ... */ }
+.my-component { animation: fadeInUp 0.6s; }
+
+/* AFTER */
+/* Remove @keyframes, use utility class */
+<div class="animate-fade-in-up">
+```
+
+## Success Criteria
+
+✅ **Code Quality**:
+
+- 0 hardcoded colors
+- 0 inline styles
+- 0 duplicate animations
+- 100% theme token usage
+
+✅ **Content Quality**:
+
+- 100% first-person voice
+- 80%+ active voice
+- 100% Australian English
+- Consistent tone across content types
+
+✅ **Visual Quality**:
+
+- Consistent Service Design Leader palette
+- Smooth, accessible animations
+- Proper dark mode support
+- Professional polish
+
+## Phase Status
+
+### ✅ Phase 1 Complete (January 2025)
+
+- [x] Color palette resolved (Service Design Leader)
+- [x] Footer hardcoded colors converted
+- [x] Inline styles removed from Hero
+- [x] Unified animation system created
+- [x] Comprehensive documentation written
+
+### 📋 Phase 2 Planned (Week 3-4)
+
+- [ ] Content voice audit and revision
+- [ ] Image component consolidation
+- [ ] Typography refinement
+- [ ] Animation migration
+
+### 📋 Phase 3 Planned (Week 5-6)
+
+- [ ] Hero section full redesign
+- [ ] Case study card enhancement
+- [ ] Navigation polish
+
+## Getting Help
+
+**Questions about**:
+
+- **Colors**: See `docs/COLOR_PALETTE_OPTIONS.md` or `.cursor/rules/aesthetic-standards.mdc`
+- **Content**: See `docs/CONTENT_VOICE_GUIDELINES.md` or `.cursor/rules/content-voice.mdc`
+- **Animations**: See `docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md#4-unified-animation-system`
+- **Implementation**: See `docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md`
+
+**Can't find something?**: Check `docs/INDEX.md` for complete documentation index.
+
+## Enforcement
+
+These standards are **MANDATORY** for:
+
+- ✅ All new code
+- ✅ All refactored code
+- ✅ All content updates
+- ✅ All style changes
+
+**Non-compliance will be flagged in code review.**
+
+---
+
+**Remember**: Your portfolio is a service design case study. Every choice demonstrates your expertise.
+
+**Priority**: CRITICAL
+**Owner**: All contributors
+**Review**: Quarterly
+**Last Updated**: January 2025

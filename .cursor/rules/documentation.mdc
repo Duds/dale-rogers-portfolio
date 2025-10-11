@@ -1,196 +1,247 @@
 ---
-description:
-globs: **/*.md", "**/*.astro", "**/*.tsx
+description: Standards for implementing documentation across the site - Updated January 2025
+globs: ['**/*.md', '**/*.astro', '**/*.tsx']
 alwaysApply: false
----
- ---
-description: Standards for implementing documentation across the site
-globs: ["**/*.md", "**/*.astro", "**/*.tsx"]
 ---
 
 # Documentation Standards
 
-@context {
-    "type": "guidelines",
-    "purpose": "documentation_standards",
-    "format_version": "1.0.0"
-}
+**Status**: Updated January 2025 with Phase 1 documentation
+**Reference**: `docs/INDEX.md` for complete documentation index
 
-@structure {
-    "required_sections": [
-        "code_comments",
-        "component_documentation",
-        "api_documentation",
-        "readme_standards"
-    ]
-}
+## Phase 1 Documentation (January 2025)
 
-## Code Comments
+### New Required Documentation
 
-@rules [
-    {
-        "id": "comment_style",
-        "rule": "Use consistent comment style",
-        "severity": "error"
-    },
-    {
-        "id": "complex_logic",
-        "rule": "Document complex logic",
-        "severity": "error"
-    },
-    {
-        "id": "todo_comments",
-        "rule": "Use TODO comments",
-        "severity": "warning"
-    }
-]
+All developers must be familiar with:
 
-### 1. Implementation
-- Use consistent comment style
-- Document complex logic
-- Use TODO comments
-- Explain non-obvious code
+1. **`IMPROVEMENTS_SUMMARY.md`** - Executive summary of Phase 1 improvements
+   - Color palette (Service Design Leader)
+   - Animation system
+   - Content voice guidelines
+   - Implementation checklist
 
-### 2. Examples
+2. **`docs/COLOR_PALETTE_OPTIONS.md`** - Color strategy and rationale
+   - Three palette options
+   - Chosen: Service Design Leader
+   - Usage guidelines (60% primary, 30% secondary, 10% accent)
+
+3. **`docs/CONTENT_VOICE_GUIDELINES.md`** - Voice and tone standards
+   - First-person professional
+   - Australian English requirements
+   - Content type guidelines
+   - Before/after examples
+
+4. **`docs/HERO_REDESIGN.md`** - Hero section specifications
+   - Typography hierarchy
+   - Responsive behavior
+   - Animation specifications
+
+5. **`docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md`** - Technical implementation
+   - Code changes summary
+   - Migration guides
+   - Testing requirements
+
+### Documentation Index
+
+**Master Index**: `docs/INDEX.md` - Contains links to all 30+ documentation files
+
+Quick navigation by use case:
+
+- **Writing content**: Start with `docs/CONTENT_VOICE_GUIDELINES.md`
+- **Designing components**: Start with `docs/HERO_REDESIGN.md`
+- **Implementing changes**: Start with `docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md`
+- **Onboarding**: Start with `IMPROVEMENTS_SUMMARY.md`
+
+## Code Documentation Requirements
+
+### Component Documentation
+
+All components must include:
+
+````typescript
+/**
+ * Component description in Australian English
+ * @component ComponentName
+ * @example
+ * ```tsx
+ * <ComponentName prop="value" />
+ * ```
+ * @accessibility
+ * - ARIA roles: [list roles]
+ * - Keyboard navigation: [describe]
+ */
+````
+
+### TypeScript Documentation
+
 ```typescript
-/**
- * Calculates the total price including tax
- * @param price - Base price in AUD
- * @param taxRate - Tax rate as decimal (e.g. 0.1 for 10%)
- * @returns Total price including tax
- */
-function calculateTotal(price: number, taxRate: number): number {
-  return price * (1 + taxRate);
-}
-```
-
-## Component Documentation
-
-@rules [
-    {
-        "id": "component_description",
-        "rule": "Document component purpose",
-        "severity": "error"
-    },
-    {
-        "id": "props_documentation",
-        "rule": "Document all props",
-        "severity": "error"
-    },
-    {
-        "id": "usage_examples",
-        "rule": "Include usage examples",
-        "severity": "warning"
-    }
-]
-
-### 1. Implementation
-- Document component purpose
-- Document all props
-- Include usage examples
-- Show variants
-
-### 2. Example
-```astro
----
-/**
- * Button component for primary actions
- *
- * @prop {string} variant - Button style variant
- * @prop {string} size - Button size
- * @prop {boolean} disabled - Disabled state
- */
 interface Props {
-  variant: 'primary' | 'secondary' | 'outline';
-  size: 'sm' | 'md' | 'lg';
-  disabled?: boolean;
+  /** Description of the prop in Australian English */
+  requiredProp: string;
+  /** Optional prop with default value */
+  optionalProp?: string;
 }
----
 ```
 
-## API Documentation
+### CSS Documentation
 
-@rules [
-    {
-        "id": "endpoint_documentation",
-        "rule": "Document all endpoints",
-        "severity": "error"
-    },
-    {
-        "id": "request_response",
-        "rule": "Document request/response format",
-        "severity": "error"
-    },
-    {
-        "id": "error_handling",
-        "rule": "Document error handling",
-        "severity": "warning"
-    }
-]
-
-### 1. Implementation
-- Document all endpoints
-- Document request/response format
-- Document error handling
-- Include examples
-
-### 2. Example
-```typescript
-/**
- * @api {get} /api/users/:id Get user by ID
- * @apiName GetUser
- * @apiGroup Users
- *
- * @apiParam {Number} id User's unique ID
- *
- * @apiSuccess {String} name User's name
- * @apiSuccess {String} email User's email
- *
- * @apiError UserNotFound The user was not found
+```css
+/* Component: Button
+ * Purpose: Reusable button with multiple variants
+ * Tokens: Uses var(--color-primary-main), var(--color-secondary-main)
+ * Dark mode: Supported via :root[data-theme="dark"]
  */
+.button {
+  /* styles */
+}
 ```
 
-## README Standards
+## Content Documentation
 
-@rules [
-    {
-        "id": "project_overview",
-        "rule": "Include project overview",
-        "severity": "error"
-    },
-    {
-        "id": "installation",
-        "rule": "Document installation steps",
-        "severity": "error"
-    },
-    {
-        "id": "usage_guide",
-        "rule": "Include usage guide",
-        "severity": "warning"
-    }
-]
+### Markdown Files
 
-### 1. Implementation
-- Include project overview
-- Document installation steps
-- Include usage guide
-- Document configuration
+All markdown files must:
 
-### 2. Example
-```markdown
-# Project Name
+- Use Australian English spelling
+- Follow first-person voice for Dale's content
+- Include frontmatter with metadata
+- Use proper heading hierarchy
+- Include examples where appropriate
 
-## Overview
-Brief description of the project and its purpose.
+### Voice Guidelines Reference
 
-## Installation
-```bash
-npm install
-npm run dev
-```
+When writing ANY content, follow: `docs/CONTENT_VOICE_GUIDELINES.md`
 
-## Usage
-Detailed usage instructions and examples.
+**Key Rules**:
 
-## Configuration
-Environment variables and confi
+- First person ("I help..." not "Dale helps...")
+- Active voice (80%+)
+- Australian English (organise, colour, centre)
+- Confident without arrogance
+- Practical over academic
+
+## Documentation Updates
+
+### When to Update Documentation
+
+**ALWAYS update documentation when**:
+
+- Adding new features
+- Changing existing behavior
+- Updating design system
+- Modifying color palette
+- Changing component interfaces
+- Adding new patterns
+
+### Documentation Files to Update
+
+When making changes, consider updating:
+
+- `README.md` - If project setup changes
+- `CHANGELOG.md` - For all notable changes
+- `docs/ARCHITECTURE.md` - For architectural changes
+- `docs/COMPONENTS.md` - For component changes
+- `docs/THEME.md` - For theme/design changes
+- Component-specific docs - For component updates
+
+## Documentation Checklist
+
+Before committing:
+
+- [ ] Code comments added for complex logic
+- [ ] Component documentation updated
+- [ ] TypeScript types documented
+- [ ] README updated (if needed)
+- [ ] CHANGELOG updated
+- [ ] Architecture docs updated (if needed)
+- [ ] Australian English used throughout
+- [ ] Examples provided where helpful
+- [ ] Links to related documentation added
+
+## Quality Standards
+
+### Writing Style
+
+- **Clear and concise**: Avoid unnecessary complexity
+- **Australian English**: Use proper spelling and formatting
+- **Consistent voice**: Follow voice guidelines
+- **Scannable**: Use headings, bullets, short paragraphs
+- **Examples**: Include practical examples
+
+### Technical Accuracy
+
+- **Code examples**: Must be valid and tested
+- **Links**: Must be current and working
+- **Screenshots**: Must be up-to-date
+- **APIs**: Must match implementation
+
+### Maintenance
+
+- **Review quarterly**: Check for outdated content
+- **Update on changes**: Keep docs in sync with code
+- **Archive old docs**: Move outdated docs to archive
+- **Version docs**: Tag docs with version numbers
+
+## Documentation Navigation
+
+### By Role
+
+**For Content Writers**:
+
+1. `docs/CONTENT_VOICE_GUIDELINES.md`
+2. `docs/CONTENT.md`
+3. `IMPROVEMENTS_SUMMARY.md`
+
+**For Developers**:
+
+1. `docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md`
+2. `docs/DEVELOPMENT.md`
+3. `docs/COMPONENTS.md`
+
+**For Designers**:
+
+1. `docs/COLOR_PALETTE_OPTIONS.md`
+2. `docs/HERO_REDESIGN.md`
+3. `docs/LAYOUT_PATTERNS.md`
+
+### By Task
+
+**Implementing Phase 1**:
+
+1. Read: `IMPROVEMENTS_SUMMARY.md`
+2. Reference: `docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md`
+3. Follow: `.cursor/rules/phase-1-improvements.mdc`
+
+**Writing Content**:
+
+1. Read: `docs/CONTENT_VOICE_GUIDELINES.md`
+2. Follow: `.cursor/rules/content-voice.mdc`
+3. Check: Quality checklist in voice guidelines
+
+**Styling Components**:
+
+1. Read: `docs/COLOR_PALETTE_OPTIONS.md`
+2. Reference: `src/styles/theme/colors.ts`
+3. Follow: `.cursor/rules/aesthetic-standards.mdc`
+
+## References
+
+**All Documentation**: `docs/INDEX.md`
+**Phase 1 Summary**: `IMPROVEMENTS_SUMMARY.md`
+**Implementation Guide**: `docs/AESTHETIC_IMPROVEMENTS_IMPLEMENTATION.md`
+**Voice Guidelines**: `docs/CONTENT_VOICE_GUIDELINES.md`
+**Color Strategy**: `docs/COLOR_PALETTE_OPTIONS.md`
+
+## Enforcement
+
+Documentation standards are **MANDATORY** for:
+
+- All new features
+- All significant changes
+- All refactoring work
+- All content updates
+
+**Priority**: HIGH
+**Version**: 2.0 (Updated January 2025)
+**Owner**: All contributors

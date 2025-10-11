@@ -1,0 +1,64 @@
+@reference "tailwindcss";
+
+/* Professional Hero Component Styles */
+.hero {
+  @apply pt-32 md:pt-40 pb-20 md:pb-32;
+}
+
+.hero__grid {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center;
+}
+
+.hero__content {
+  @apply space-y-8;
+}
+
+.hero__kicker {
+  @apply text-sm md:text-base font-medium tracking-wide uppercase;
+  color: var(--color-secondary-main);
+  letter-spacing: 0.1em;
+}
+
+.hero__headline {
+  @apply flex flex-col space-y-2;
+}
+
+.hero__headline-primary {
+  @apply text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight;
+  color: var(--color-text-primary);
+  text-wrap: balance;
+}
+
+.hero__headline-secondary {
+  @apply text-3xl md:text-5xl lg:text-6xl font-semibold leading-tight;
+  color: var(--color-text-secondary);
+  text-wrap: balance;
+}
+
+.hero__description {
+  @apply text-xl md:text-2xl leading-relaxed max-w-2xl;
+  color: var(--color-text-tertiary);
+}
+
+.hero__actions {
+  @apply flex flex-col sm:flex-row gap-4;
+}
+
+/* Current hero-headline class for backwards compatibility */
+.hero-headline {
+  color: var(--color-text-primary);
+}
+
+/* Dark mode */
+:root[data-theme='dark'] .hero__headline-primary,
+:root[data-theme='dark'] .hero-headline {
+  color: var(--color-text-primary);
+}
+
+:root[data-theme='dark'] .hero__headline-secondary {
+  color: var(--color-text-disabled);
+}
+
+:root[data-theme='dark'] .hero__kicker {
+  color: var(--color-secondary-light);
+}
