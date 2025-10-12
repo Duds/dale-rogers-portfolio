@@ -1,10 +1,10 @@
 ---
-title: "The Five Key Principles of Service Design"
-description: "An exploration of the fundamental principles that guide effective service design"
+title: 'The Five Key Principles of Service Design'
+description: 'An exploration of the fundamental principles that guide effective service design'
 pubDate: 2024-04-11
-tags: ["Service Design", "Principles", "Methodology"]
-author: "Dale Rogers"
-coverImage: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop"
+tags: ['Service Design', 'Principles', 'Methodology']
+author: 'Dale Rogers'
+coverImage: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop'
 ---
 
 # The Five Key Principles of Service Design
@@ -24,7 +24,7 @@ Service design puts users at the center of the process. This means:
 
 Service design is a collaborative process that involves:
 
-- Working with stakeholders across the organization
+- Working with stakeholders across the organisation
 - Engaging users in the design process
 - Facilitating workshops and co-design sessions
 - Building shared understanding and ownership
@@ -66,4 +66,4 @@ These principles provide a foundation for creating services that are:
 - Sustainable
 - Adaptable
 
-By applying these principles, organizations can create services that truly meet user needs and deliver value.
+By applying these principles, organisations can create services that truly meet user needs and deliver value.
