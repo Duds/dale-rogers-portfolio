@@ -137,18 +137,18 @@
 
 /* Dark theme overrides using TypeScript theme tokens */
 :root[data-theme='dark'] {
-  --color-primary-main: #60a5fa;
-  --color-primary-light: #93c5fd;
-  --color-primary-dark: #3b82f6;
-  --color-primary-contrast: #0a0f1a;
+  --color-primary-main: #1e3a5f;
+  --color-primary-light: #2a4a70;
+  --color-primary-dark: #0f2851;
+  --color-primary-contrast: #ffffff;
   --color-secondary-main: #fb923c;
   --color-secondary-light: #fdba74;
   --color-secondary-dark: #f97316;
-  --color-secondary-contrast: #0a0f1a;
+  --color-secondary-contrast: #ffffff;
   --color-accent-main: #34d399;
   --color-accent-light: #6ee7b7;
   --color-accent-dark: #10b981;
-  --color-accent-contrast: #0a0f1a;
+  --color-accent-contrast: #ffffff;
   --color-background-primary: #0b1220;
   --color-background-secondary: #0f172a;
   --color-background-tertiary: #111827;

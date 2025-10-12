@@ -112,10 +112,10 @@ export const colors: DeepReadonly<ColorTree> = {
 } as const;
 
 export const darkColors: DeepReadonly<ColorTree> = {
-  // Service Design Leader Dark Mode - Lighter versions for dark backgrounds
-  primary: { main: '#60A5FA', light: '#93C5FD', dark: '#3B82F6', contrast: '#0A0F1A' },
-  secondary: { main: '#FB923C', light: '#FDBA74', dark: '#F97316', contrast: '#0A0F1A' },
-  accent: { main: '#34D399', light: '#6EE7B7', dark: '#10B981', contrast: '#0A0F1A' },
+  // Service Design Leader Dark Mode - Deep Navy maintained for brand consistency
+  primary: { main: '#1E3A5F', light: '#2A4A70', dark: '#0F2851', contrast: '#FFFFFF' },
+  secondary: { main: '#FB923C', light: '#FDBA74', dark: '#F97316', contrast: '#FFFFFF' },
+  accent: { main: '#34D399', light: '#6EE7B7', dark: '#10B981', contrast: '#FFFFFF' },
 
   background: {
     primary: '#0B1220',
