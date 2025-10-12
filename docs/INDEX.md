@@ -277,14 +277,16 @@ All documentation is version controlled alongside code. Major updates should be 
 Historical documentation preserved for reference:
 
 - **[Archive Overview](./archive/README.md)** - Guide to archived documents
-- **[Phase 1 Implementation](./archive/phase-1/)** - Complete Phase 1 reports (January 2025)
-- **[Theme Evolution](./archive/theme-evolution/)** - Historical theme documentation
+- **[Phase 1 Implementation](./archive/phase-1/)** - Complete Phase 1 reports (6 documents)
+- **[Phase 3 Implementation](./archive/phase-3/)** - Complete Phase 3 reports (3 documents)
+- **[Theme Evolution](./archive/theme-evolution/)** - Historical theme documentation (3 documents)
+- **[Project Summary](./archive/COMPLETE_PROJECT_SUMMARY.md)** - Overall project completion summary
 
 **Note**: Archived documents are complete and final. For current documentation, see sections above.
 
 ---
 
-**Last Updated**: January 2025
-**Document Count**: 35+ documents (active), 7 archived
+**Last Updated**: October 2025
+**Document Count**: 35+ documents (active), 13 archived
 **Total Pages**: 200+ pages
-**Status**: Phase 1 Complete ✅, Documentation Organized ✅
+**Status**: Phase 1-3 Complete ✅, Documentation Organized ✅
