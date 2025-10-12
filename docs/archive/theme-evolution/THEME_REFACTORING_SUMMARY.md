@@ -144,19 +144,19 @@ secondary: "bg-secondary text-white hover:bg-secondary/80",
 **Before (Complex):**
 
 ```typescript
-"bg-primary-DEFAULT"; // Nested object
-"text-secondary-green"; // Nested object
-"bg-surface/50"; // Complex surface system
-"text-text-secondary"; // Complex text system
+'bg-primary-DEFAULT'; // Nested object
+'text-secondary-green'; // Nested object
+'bg-surface/50'; // Complex surface system
+'text-text-secondary'; // Complex text system
 ```
 
 **After (Simple):**
 
 ```typescript
-"bg-primary"; // Flat color
-"text-secondary"; // Flat color
-"bg-grey-50"; // Simple grey scale
-"text-grey-600"; // Simple grey scale
+'bg-primary'; // Flat color
+'text-secondary'; // Flat color
+'bg-grey-50'; // Simple grey scale
+'text-grey-600'; // Simple grey scale
 ```
 
 ### **Duration System Simplification**
@@ -164,16 +164,16 @@ secondary: "bg-secondary text-white hover:bg-secondary/80",
 **Before (Complex):**
 
 ```typescript
-"duration-200"; // Numeric duration
-"duration-500"; // Numeric duration
-"duration-700"; // Numeric duration
+'duration-200'; // Numeric duration
+'duration-500'; // Numeric duration
+'duration-700'; // Numeric duration
 ```
 
 **After (Simple):**
 
 ```typescript
-"duration-normal"; // Semantic duration
-"duration-slow"; // Semantic duration
+'duration-normal'; // Semantic duration
+'duration-slow'; // Semantic duration
 ```
 
 ### **Shadow System Simplification**
@@ -181,15 +181,15 @@ secondary: "bg-secondary text-white hover:bg-secondary/80",
 **Before (Complex):**
 
 ```typescript
-"shadow-soft dark:shadow-soft-dark"; // Complex shadow system
-"hover:shadow-elevated dark:hover:shadow-elevated-dark";
+'shadow-soft dark:shadow-soft-dark'; // Complex shadow system
+'hover:shadow-elevated dark:hover:shadow-elevated-dark';
 ```
 
 **After (Simple):**
 
 ```typescript
-"shadow-md dark:shadow-lg"; // Standard shadows
-"hover:shadow-xl dark:hover:shadow-xl";
+'shadow-md dark:shadow-lg'; // Standard shadows
+'hover:shadow-xl dark:hover:shadow-xl';
 ```
 
 ## **✅ Benefits Achieved**

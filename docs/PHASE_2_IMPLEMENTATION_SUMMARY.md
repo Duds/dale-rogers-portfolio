@@ -22,7 +22,7 @@ Phase 2 refines the visual systems established in Phase 1, delivering:
 
 ### 1. Content Voice Audit ✅
 
-**Document**: `CONTENT_VOICE_AUDIT.md`
+**Document**: `CONTENT_VOICE_GUIDELINES.md` (includes audit findings in appendix)
 
 **Findings**:
 
@@ -290,7 +290,7 @@ p {
 
 ### New Files (2)
 
-1. `CONTENT_VOICE_AUDIT.md` - Comprehensive audit report
+1. `CONTENT_VOICE_GUIDELINES.md` - Enhanced with implementation history and audit appendix
 2. `src/components/ui/Image.astro` - Unified image component
 3. `docs/PHASE_2_IMPLEMENTATION_PLAN.md` - Implementation plan
 4. `docs/PHASE_2_IMPLEMENTATION_SUMMARY.md` - This document
@@ -477,8 +477,8 @@ p {
 - **Status**: FULLY IMPLEMENTED (12 January 2025)
 - **Files Modified**: 12 content files (6 articles, 2 case studies, 4 services)
 - **Changes Made**: 150+ Australian English corrections, 10+ buzzword removals, 15+ passive→active conversions
-- **Details**: See `CONTENT_VOICE_IMPLEMENTATION_SUMMARY.md`
-- **Tool**: Automated script created in audit document
+- **Details**: See `CONTENT_VOICE_GUIDELINES.md` (Implementation History section)
+- **Tool**: Automated script included in guidelines document
 
 ### Image Component Migration
 
@@ -591,9 +591,11 @@ animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
 
 ## Documentation Created
 
-1. **CONTENT_VOICE_AUDIT.md** - Complete audit with 150+ issues
+1. **CONTENT_VOICE_GUIDELINES.md** - Enhanced with audit findings and implementation history (150+ issues documented)
 2. **PHASE_2_IMPLEMENTATION_PLAN.md** - Detailed implementation roadmap
 3. **PHASE_2_IMPLEMENTATION_SUMMARY.md** - This document
+
+**Note**: Original audit documents archived in `docs/archive/phase-1/` for historical reference.
 
 **Total**: 3 new documents, ~15 pages
 
@@ -643,11 +645,11 @@ animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
 
 ### Apply Content Corrections
 
-Use the script in `CONTENT_VOICE_AUDIT.md` to systematically apply Australian English corrections:
+Use the script in `CONTENT_VOICE_GUIDELINES.md` (Maintenance & Tools section) to systematically apply Australian English corrections:
 
 ```bash
 # Review the script first
-cat CONTENT_VOICE_AUDIT.md
+# See: docs/CONTENT_VOICE_GUIDELINES.md - Maintenance & Tools section
 
 # Apply corrections (with backup)
 # Run systematic find-replace

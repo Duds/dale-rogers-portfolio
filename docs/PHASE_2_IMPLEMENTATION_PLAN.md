@@ -281,7 +281,7 @@ grep -r "@keyframes" src/styles/components/
 4. Apply corrections systematically
 5. Verify changes maintain meaning
 
-**Audit Report**: Create `CONTENT_VOICE_AUDIT.md` with findings
+**Audit Report**: See `CONTENT_VOICE_GUIDELINES.md` (includes implementation history and audit findings in appendix)
 
 ---
 
@@ -350,7 +350,7 @@ grep -r "@keyframes" src/styles/components/
 ### Documentation
 
 1. `PHASE_2_IMPLEMENTATION_PLAN.md` - This document
-2. `CONTENT_VOICE_AUDIT.md` - Audit findings
+2. `CONTENT_VOICE_GUIDELINES.md` - Voice standards (includes audit findings and implementation history)
 3. `IMAGE_COMPONENT_MIGRATION.md` - Migration guide
 4. `PHASE_2_TEST_REPORT.md` - Testing results
 

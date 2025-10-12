@@ -38,3 +38,11 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 src/content.backup-*/
+
+# Generated reports
+*-report.json
+*-report.html
+*.backup-*
+
+# Deployment artifacts
+*.zip

@@ -17,7 +17,7 @@ Three distinct color palette options for Dale Rogers' portfolio, each with strat
 - Accent: `#F97316` (Coral Orange)
 - **Vibe**: Modern, tech-forward, energetic
 
-**Documented** (`docs/THEME_PROFESSIONAL.md`):
+**Previously Documented** (see `docs/archive/theme-evolution/THEME_PROFESSIONAL.md` for historical reference):
 
 - Primary: `#1F2937` (Deep Charcoal)
 - Secondary: `#3B82F6` (Professional Blue)
@@ -375,7 +375,7 @@ Conservative - Low Risk - Traditional
 ### Phase 1: Update Core Files
 
 - [ ] `src/styles/theme/colors.ts` - Implement chosen palette
-- [ ] `docs/THEME_PROFESSIONAL.md` - Update documentation
+- [ ] `docs/THEME.md` - Update documentation with new palette
 - [ ] `tailwind.config.ts` - Sync Tailwind config
 - [ ] `src/styles/generated-tokens.css` - Regenerate tokens
 

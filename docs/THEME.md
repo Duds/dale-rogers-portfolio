@@ -8,9 +8,9 @@ This document provides an overview of the portfolio's design system documentatio
 
 ### **Current Theme System**
 
-- **[THEME_PROFESSIONAL.md](./THEME_PROFESSIONAL.md)** - **🎯 ACTIVE** Professional theme system inspired by Index Ventures
-- **[THEME_SIMPLIFIED.md](./THEME_SIMPLIFIED.md)** - Previous simplified theme system (archived)
-- **[THEME.md](./THEME.md)** - This overview document
+- **[THEME.md](./THEME.md)** - This overview document (ACTIVE)
+- **[THEME_MIGRATION.md](./THEME_MIGRATION.md)** - Migration reference and guidelines
+- **[Theme Evolution Archive](./archive/theme-evolution/)** - Historical theme documentation (THEME_PROFESSIONAL.md, THEME_SIMPLIFIED.md, THEME_REFACTORING_SUMMARY.md)
 
 ## **🎨 Current Theme: Professional Design System**
 
@@ -72,36 +72,29 @@ The portfolio now uses a **Professional Design System** inspired by the sophisti
 
 ## **📖 Documentation Structure**
 
-### **THEME_PROFESSIONAL.md** (Active)
+### **THEME.md** (This Document - Active)
 
-- Complete professional theme system documentation
-- Color palette with usage guidelines
-- Typography system with examples
-- Spacing, shadows, and radius specifications
+- Overview of the design system
+- Current theme characteristics and approach
+- Color palette, typography, and spacing overview
+- Migration and evolution history
 - Implementation guidelines and examples
 - Migration guide from previous themes
 
-### **THEME_SIMPLIFIED.md** (Archived)
+### **Historical Documentation** (Archived)
 
-- Previous simplified theme system
+- [Theme Evolution Archive](./archive/theme-evolution/) - THEME_PROFESSIONAL.md, THEME_SIMPLIFIED.md, THEME_REFACTORING_SUMMARY.md
 - Reference for migration and comparison
 - Historical context for design decisions
-
-### **THEME.md** (This Document)
-
-- Overview and navigation guide
-- Current theme status and characteristics
-- Theme evolution history
-- Documentation structure
 
 ## **🚀 Getting Started**
 
 ### **For New Developers**
 
-1. **Read**: [THEME_PROFESSIONAL.md](./THEME_PROFESSIONAL.md) for complete system overview
-2. **Explore**: Color palette and typography examples
-3. **Implement**: Use provided code examples and guidelines
-4. **Reference**: Token naming conventions and usage rules
+1. **Read**: [THEME.md](./THEME.md) (this document) for current system overview
+2. **Migrate**: [THEME_MIGRATION.md](./THEME_MIGRATION.md) for migration guidelines
+3. **Explore**: Color palette and typography in implementation files (`src/styles/theme/`)
+4. **Reference**: Token naming conventions in CSS files and TypeScript theme definitions
 
 ### **For Designers**
 
@@ -191,4 +184,4 @@ The portfolio now uses a **Professional Design System** inspired by the sophisti
 
 **The Professional Design System provides a solid foundation for building a sophisticated, business-focused portfolio that conveys expertise and credibility.** 🎨✨
 
-For complete details, see [THEME_PROFESSIONAL.md](./THEME_PROFESSIONAL.md).
+For historical context and evolution details, see the [Theme Evolution Archive](./archive/theme-evolution/).

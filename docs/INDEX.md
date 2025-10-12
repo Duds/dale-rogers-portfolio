@@ -24,7 +24,7 @@
 - **[SITE_MAP.md](../SITE_MAP.md)** - Complete site structure
 - **[CHANGELOG.md](../CHANGELOG.md)** - Version history
 
-### Recent Improvements (New!)
+### Recent Improvements
 
 - **[IMPROVEMENTS_SUMMARY.md](../IMPROVEMENTS_SUMMARY.md)** ⭐ **START HERE**
   - Executive summary of all improvements
@@ -37,6 +37,8 @@
   - Testing requirements
   - Migration guides
 
+- **[Phase 1 Archive](./archive/phase-1/)** - Historical implementation reports (completed January 2025)
+
 ### Design System
 
 #### Color & Theming
@@ -47,10 +49,9 @@
   - Chosen: Service Design Leader palette
   - Dark mode specifications
 
-- **[THEME.md](./THEME.md)** - Theme system overview
-- **[THEME_PROFESSIONAL.md](./THEME_PROFESSIONAL.md)** - Professional theme details
-- **[THEME_SIMPLIFIED.md](./THEME_SIMPLIFIED.md)** - Previous theme (archived)
-- **[THEME_REFACTORING_SUMMARY.md](./THEME_REFACTORING_SUMMARY.md)** - Theme evolution
+- **[THEME.md](./THEME.md)** - Current theme system overview
+- **[THEME_MIGRATION.md](./THEME_MIGRATION.md)** - Migration reference and guidelines
+- **[Theme Evolution Archive](./archive/theme-evolution/)** - Historical theme documentation
 
 #### Layout & Components
 
@@ -66,14 +67,16 @@
 
 ### Content Guidelines
 
-- **[CONTENT_VOICE_GUIDELINES.md](./CONTENT_VOICE_GUIDELINES.md)** ⭐ **NEW**
-  - Voice principles (18 pages)
+- **[CONTENT_VOICE_GUIDELINES.md](./CONTENT_VOICE_GUIDELINES.md)** ⭐ **COMPREHENSIVE**
+  - Voice principles and standards
   - Content type guidelines
   - Australian English standards
   - Writing style rules
   - Before/after examples
+  - Implementation history (January 2025)
+  - Maintenance tools and audit process
 
-- **[CONTENT.md](./CONTENT.md)** - Content standards
+- **[CONTENT.md](./CONTENT.md)** - Content management standards
 - **[content-changes.md](../.cursor/rules/content-changes.md)** - Content vs code changes
 
 ### Architecture & Development
@@ -193,7 +196,7 @@
 1. [COLOR_PALETTE_OPTIONS.md](./COLOR_PALETTE_OPTIONS.md) - Color strategy
 2. [HERO_REDESIGN.md](./HERO_REDESIGN.md) - Design specifications
 3. [LAYOUT_PATTERNS.md](./LAYOUT_PATTERNS.md) - Layout standards
-4. [THEME_PROFESSIONAL.md](./THEME_PROFESSIONAL.md) - Theme system
+4. [THEME.md](./THEME.md) - Current theme system
 
 ### For Content Writers
 
@@ -269,7 +272,19 @@ All documentation is version controlled alongside code. Major updates should be 
 
 ---
 
+## 📦 Archived Documentation
+
+Historical documentation preserved for reference:
+
+- **[Archive Overview](./archive/README.md)** - Guide to archived documents
+- **[Phase 1 Implementation](./archive/phase-1/)** - Complete Phase 1 reports (January 2025)
+- **[Theme Evolution](./archive/theme-evolution/)** - Historical theme documentation
+
+**Note**: Archived documents are complete and final. For current documentation, see sections above.
+
+---
+
 **Last Updated**: January 2025
-**Document Count**: 30+ documents
+**Document Count**: 35+ documents (active), 7 archived
 **Total Pages**: 200+ pages
-**Status**: Phase 1 Complete ✅
+**Status**: Phase 1 Complete ✅, Documentation Organized ✅

@@ -294,8 +294,7 @@ Successfully transformed the Dale Rogers portfolio from a generic site into a di
 4. Full homepage
 5. Footer
 
-**Dark Mode**: 6. Hero section  
-7. Case studies bento grid 8. Navigation bar 9. Full homepage 10. Footer (corrected colors)
+**Dark Mode**: 6. Hero section 7. Case studies bento grid 8. Navigation bar 9. Full homepage 10. Footer (corrected colors)
 
 **Location**: `.playwright-mcp/` directory
 
