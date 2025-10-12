@@ -1,22 +1,24 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/layout/Container.astro';
-import SectionHeading from '@/components/ui/SectionHeading.astro';
+import Heading from '@/components/ui/Heading.astro';
+import '@/styles/components/section.css';
 ---
 
 <BaseLayout
-  title="Cookie Policy | Dale Rogers Design"
+  title="Cookie Policy | Dale Rogers"
   description="Cookie Policy for Dale Rogers Design website."
 >
-  <Container>
-    <div class="max-w-4xl mx-auto py-20">
-      <SectionHeading
-        heading="Cookie Policy"
-        subheading="Last Updated: 10/11/2023"
-        alignment="left"
-      />
+  <section class="section">
+    <Container narrow>
+      <div class="section__header section__header--left">
+        <Heading level={1} variant="section" align="left">Cookie Policy</Heading>
+        <p style="color: var(--color-text-tertiary); font-size: 0.875rem; margin-top: 1rem;">
+          Last Updated: 10/11/2023
+        </p>
+      </div>
 
-      <div class="prose prose-lg dark:prose-invert mt-10">
+      <div class="prose prose-lg dark:prose-invert" style="color: var(--color-text-secondary);">
         <h2 class="text-2xl font-semibold mt-8 mb-4">Introduction</h2>
         <p class="mb-4">
           This Cookie Policy explains how Dale Rogers Design ("the business", "the service", or
@@ -105,7 +107,7 @@ import SectionHeading from '@/components/ui/SectionHeading.astro';
           <li>By visiting our website: dalerogers.com.au/contact</li>
         </ul>
       </div>
-    </div>
-  </Container>
+    </Container>
+  </section>
 </BaseLayout>
 export const prerender = true;

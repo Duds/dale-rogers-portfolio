@@ -1,21 +1,26 @@
 ---
-import { getCollection } from "astro:content";
-import type { GetStaticPaths } from "astro";
-import type { CollectionEntry } from "astro:content";
+/**
+ * Articles Index Page - Springboards-inspired design
+ * Grid of article cards with modern layout
+ */
 
-import Layout from "@/layouts/BaseLayout.astro";
-import ArticleCard from "@/components/features/articles/components/ArticleCard.astro";
-import Pagination from "@/components/ui/Pagination.astro";
-import PageHeader from "@/components/ui/PageHeader.astro";
-import Container from "@/components/layout/Container.astro";
-import "@/styles/components/articles-page.css";
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+
+import Layout from '@/layouts/BaseLayout.astro';
+import CardArticle from '@/components/ui/CardArticle.astro';
+import Pagination from '@/components/ui/Pagination.astro';
+import Heading from '@/components/ui/Heading.astro';
+import Container from '@/components/layout/Container.astro';
+import '@/styles/components/section.css';
 
 export const prerender = true;
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const ITEMS_PER_PAGE = 6;
 
-  const articles = await getCollection("articles", ({ data }) => !data.draft);
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
 
   const sortedArticles = articles.sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -28,7 +33,7 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 
 interface Props {
   page: {
-    data: CollectionEntry<"articles">[];
+    data: CollectionEntry<'articles'>[];
     currentPage: number;
     lastPage: number;
   };
@@ -37,58 +42,64 @@ interface Props {
 const { page } = Astro.props as Props;
 
 const getPageUrl = (pageNum: number) => {
-  return pageNum === 1 ? "/articles" : `/articles/${pageNum}`;
+  return pageNum === 1 ? '/articles/1' : `/articles/${pageNum}`;
+};
+
+// Helper function to format date
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-AU', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  });
+};
+
+// Helper function to calculate reading time
+const calculateReadingTime = (content: string) => {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return `${minutes} min read`;
 };
 ---
 
 <Layout
-  title="Articles | Dale Rogers - Service Designer and Digital Strategist"
-  description="Thoughts and insights on service design, digital strategy, and technology"
+  title="Articles & Insights | Dale Rogers - Service Designer"
+  description="Thoughts and insights on service design, digital strategy, and solving complex problems."
 >
-  <Container narrow={true}>
-    <PageHeader
-      title="Articles"
-      description="Thoughts and insights on service design, digital strategy, and technology"
-    />
-  </Container>
-
-  <Container>
-    <div class="articles-page">
-      <!-- Results Summary -->
-      <div class="articles-results-summary">
-        <p class="articles-results-summary__text">
-          Showing <span class="articles-results-summary__count">
-            {page.data.length}
-          </span> of {page.data.length * page.lastPage} articles
-          {
-            page.lastPage > 1 &&
-              ` (Page ${page.currentPage} of ${page.lastPage})`
-          }
+  <section class="section">
+    <Container>
+      <!-- Page Header -->
+      <div class="section__header">
+        <Heading level={1} variant="hero" kicker="Insights">Articles & Thoughts</Heading>
+        <p class="section__subtitle">
+          Thoughts and insights on service design, digital strategy, and solving complex problems.
         </p>
       </div>
 
+      <!-- Results Summary -->
+      {
+        page.lastPage > 1 && (
+          <div style="text-align: center; margin-bottom: 2rem;">
+            <p style="color: var(--color-text-tertiary); font-size: 0.875rem;">
+              Page {page.currentPage} of {page.lastPage}
+            </p>
+          </div>
+        )
+      }
+
       <!-- Articles Grid -->
-      <div
-        class="articles-grid"
-        id="articles-grid"
-        role="list"
-        aria-label="Articles"
-        aria-live="polite"
-        aria-atomic="false"
-      >
+      <div class="cards-grid cards-grid--3" role="list" aria-label="Articles">
         {
-          page.data.map((article) => (
-            <div role="listitem" class="articles-grid__item">
-              <ArticleCard
-                title={article.data.title}
-                description={article.data.description}
-                pubDate={article.data.pubDate}
-                author={article.data.author}
-                tags={article.data.tags}
-                href={`/articles/${article.slug}`}
-                coverImage={article.data.coverImage}
-              />
-            </div>
+          page.data.map(article => (
+            <CardArticle
+              title={article.data.title}
+              excerpt={article.data.description}
+              date={formatDate(article.data.pubDate)}
+              image={article.data.coverImage}
+              href={`/articles/${article.slug}`}
+              tags={article.data.tags}
+            />
           ))
         }
       </div>
@@ -96,45 +107,15 @@ const getPageUrl = (pageNum: number) => {
       <!-- Pagination -->
       {
         page.lastPage > 1 && (
-          <Pagination
-            currentPage={page.currentPage}
-            totalPages={page.lastPage}
-            getPageUrl={getPageUrl}
-          />
-        )
-      }
-
-      <!-- Enhanced Empty State -->
-      {
-        page.data.length === 0 && (
-          <div class="empty-state" role="status" aria-live="polite">
-            <div class="empty-state__content">
-              <div class="empty-state__icon">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                  />
-                </svg>
-              </div>
-              <h3 class="empty-state__title">No Articles Yet</h3>
-              <p class="empty-state__description">
-                I'm currently working on some exciting content. Check back soon
-                for new articles and insights!
-              </p>
-            </div>
+          <div style="margin-top: 4rem;">
+            <Pagination
+              currentPage={page.currentPage}
+              totalPages={page.lastPage}
+              getPageUrl={getPageUrl}
+            />
           </div>
         )
       }
-    </div>
-  </Container>
+    </Container>
+  </section>
 </Layout>
-
-
