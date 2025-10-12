@@ -2,9 +2,11 @@
 /**
  * @fileoverview Container component for consistent content width and spacing.
  * Provides professional layout structure with responsive design.
+ * Now includes Springboards-inspired layout variants (full-bleed, split, asymmetric)
  */
 
-import "@/styles/components/container.css";
+import '@/styles/components/container.css';
+import '@/styles/components/section.css';
 
 interface Props {
   /** Additional CSS classes */
@@ -13,28 +15,56 @@ interface Props {
   fullWidth?: boolean;
   /** Whether to apply narrow width layout */
   narrow?: boolean;
+  /** Whether to apply wide width layout */
+  wide?: boolean;
   /** Whether to apply content margin variant (consistent margins for content sections) */
   contentMargin?: boolean;
+  /** Whether to apply full-bleed layout (breaks out of container) */
+  fullBleed?: boolean;
+  /** Whether to apply split layout (2 columns) */
+  split?: boolean;
+  /** Whether to apply asymmetric layout (40/60) */
+  asymmetric?: boolean;
+  /** Whether to apply reverse asymmetric layout (60/40) */
+  asymmetricReverse?: boolean;
 }
 
 const {
   class: className,
   fullWidth = false,
   narrow = false,
+  wide = false,
   contentMargin = false,
+  fullBleed = false,
+  split = false,
+  asymmetric = false,
+  asymmetricReverse = false,
 } = Astro.props;
 
-const baseClasses = "container";
-const widthClasses = fullWidth
-  ? "container--full"
-  : narrow
-    ? "container--narrow"
-    : contentMargin
-      ? "container--content-margin"
-      : "container--standard";
-const combinedClasses = [baseClasses, widthClasses, className]
+const baseClasses = 'container';
+const widthClasses = fullBleed
+  ? 'section-full-bleed'
+  : fullWidth
+    ? 'container--full'
+    : wide
+      ? 'container--wide'
+      : narrow
+        ? 'container--narrow'
+        : contentMargin
+          ? 'container--content-margin'
+          : 'container--standard';
+
+const layoutClasses = split
+  ? 'section-split'
+  : asymmetric
+    ? 'section-asymmetric'
+    : asymmetricReverse
+      ? 'section-asymmetric--reverse'
+      : '';
+
+const combinedClasses = [baseClasses, widthClasses, layoutClasses, className]
   .filter(Boolean)
-  .join(" ");
+  .join(' ');
 ---
 
 <div class={combinedClasses}>

@@ -4,41 +4,47 @@
  * Supports multiple variants and inherits all standard HTML button/anchor attributes.
  */
 
-import type { ButtonProps } from "./types";
-import "@/styles/components/button.css";
+import type { ButtonProps } from './types';
+import '@/styles/components/button.css';
 
 interface Props extends ButtonProps {}
 
 const {
   id,
   href,
-  variant = "primary",
-  ghostColour = "primary",
+  variant = 'primary',
+  size = 'md',
+  ghostColour = 'primary',
   class: className,
   ...rest
 } = Astro.props;
 
-const baseStyles = "button";
-const ghostColourStyles: Record<NonNullable<Props["ghostColour"]>, string> = {
-  primary:
-    "border-primary text-primary hover:border-primary dark:border-white dark:text-white dark:hover:border-white",
-  secondary:
-    "border-secondary text-secondary hover:border-secondary dark:border-secondary dark:text-secondary dark:hover:border-secondary",
-  accent:
-    "border-accent text-accent hover:border-accent dark:border-accent dark:text-accent dark:hover:border-accent",
-  grey:
-    "border-grey-600 text-grey-600 hover:border-grey-700 dark:border-grey-300 dark:text-grey-300 dark:hover:border-grey-200",
+const baseStyles = 'button';
+const sizeStyles: Record<NonNullable<Props['size']>, string> = {
+  sm: 'button--sm',
+  md: 'button--md',
+  lg: 'button--lg',
+  xl: 'button--xl',
 };
-const variantStyles: Record<NonNullable<Props["variant"]>, string> = {
-  primary: "button--primary",
-  secondary: "button--secondary",
-  accent: "button--accent",
-  grey: "button--grey",
+const ghostColourStyles: Record<NonNullable<Props['ghostColour']>, string> = {
+  primary:
+    'border-primary text-primary hover:border-primary dark:border-white dark:text-white dark:hover:border-white',
+  secondary:
+    'border-secondary text-secondary hover:border-secondary dark:border-secondary dark:text-secondary dark:hover:border-secondary',
+  accent:
+    'border-accent text-accent hover:border-accent dark:border-accent dark:text-accent dark:hover:border-accent',
+  grey: 'border-grey-600 text-grey-600 hover:border-grey-700 dark:border-grey-300 dark:text-grey-300 dark:hover:border-grey-200',
+};
+const variantStyles: Record<NonNullable<Props['variant']>, string> = {
+  primary: 'button--primary',
+  secondary: 'button--secondary',
+  accent: 'button--accent',
+  grey: 'button--grey',
   ghost: `button--ghost ${ghostColourStyles[ghostColour]}`,
 };
-const combinedClasses = [baseStyles, variantStyles[variant], className]
+const combinedClasses = [baseStyles, variantStyles[variant], sizeStyles[size], className]
   .filter(Boolean)
-  .join(" ");
+  .join(' ');
 ---
 
 {

@@ -1,0 +1,117 @@
+/**
+ * Footer Modern - Springboards-inspired minimal footer
+ * Centered, clean design with essential information
+ */
+
+@reference "tailwindcss";
+
+.footer-modern {
+  background-color: var(--color-background-secondary);
+  border-top: 1px solid var(--color-border-primary);
+  padding: 4rem 0 2rem;
+}
+
+/* Acknowledgement of Country */
+.footer-modern__acknowledgement {
+  @apply text-center max-w-3xl mx-auto mb-16;
+}
+
+.footer-modern__acknowledgement-text {
+  @apply text-base md:text-lg mb-4;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.footer-modern__acknowledgement-slogan {
+  @apply text-lg font-semibold;
+  color: var(--color-text-primary);
+}
+
+/* CTA Section */
+.footer-modern__cta {
+  @apply text-center mb-16;
+}
+
+.footer-modern__cta-heading {
+  @apply text-3xl md:text-5xl font-black mb-8;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* Links Section */
+.footer-modern__links {
+  @apply text-center mb-12;
+}
+
+.footer-modern__nav {
+  @apply flex flex-wrap justify-center gap-6 md:gap-8 mb-6;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.footer-modern__link {
+  @apply text-base font-semibold transition-colors duration-200;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.footer-modern__link:hover {
+  color: var(--color-secondary-main);
+}
+
+.footer-modern__social {
+  @apply flex justify-center gap-6;
+}
+
+.footer-modern__social-link {
+  @apply text-sm font-medium transition-colors duration-200;
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+}
+
+.footer-modern__social-link:hover {
+  color: var(--color-secondary-main);
+}
+
+/* Copyright */
+.footer-modern__copyright {
+  @apply text-center py-8 border-t;
+  border-color: var(--color-border-primary);
+}
+
+.footer-modern__copyright p {
+  @apply text-sm;
+  color: var(--color-text-tertiary);
+  margin-bottom: 1rem;
+}
+
+.footer-modern__meta {
+  @apply flex flex-col md:flex-row justify-center items-center gap-4;
+}
+
+.footer-modern__meta p {
+  @apply text-xs;
+  color: var(--color-text-tertiary);
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-modern {
+    padding: 3rem 0 1.5rem;
+  }
+
+  .footer-modern__acknowledgement {
+    @apply mb-12;
+  }
+
+  .footer-modern__cta {
+    @apply mb-12;
+  }
+
+  .footer-modern__cta-heading {
+    @apply text-2xl md:text-4xl;
+  }
+}

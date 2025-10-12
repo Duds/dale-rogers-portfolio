@@ -60,103 +60,103 @@ const deepGet = (obj: ColorTree, path: string): unknown => {
 // ---------- Tokens (same shape) ----------
 
 export const colors: DeepReadonly<ColorTree> = {
-  // Service Design Leader Palette - Deep Navy + Warm Rust + Sage Green
-  primary: { main: '#0F2851', light: '#1a3a6e', dark: '#0a1d3a', contrast: '#FFFFFF' },
-  secondary: { main: '#D97706', light: '#F59E0B', dark: '#B45309', contrast: '#FFFFFF' },
-  accent: { main: '#059669', light: '#10B981', dark: '#047857', contrast: '#FFFFFF' },
+  // Springboards-Inspired Palette - Dark First with Vibrant Accents
+  primary: { main: '#0A0B0D', light: '#111214', dark: '#000000', contrast: '#FFFFFF' },
+  secondary: { main: '#00D9FF', light: '#33E3FF', dark: '#00A8CC', contrast: '#000000' },
+  accent: { main: '#FF6B35', light: '#FF8A5B', dark: '#E54D1F', contrast: '#FFFFFF' },
 
   background: {
-    primary: '#F8FAFC',
-    secondary: '#FFFFFF',
-    tertiary: '#F1F5F9',
-    elevated: '#FFFFFF',
-    overlay: 'rgba(15, 40, 81, 0.55)',
+    primary: '#0A0B0D',
+    secondary: '#111214',
+    tertiary: '#1A1B1F',
+    elevated: '#1E1F23',
+    overlay: 'rgba(10, 11, 13, 0.85)',
   },
 
   text: {
-    primary: '#0F172A',
-    secondary: '#334155',
-    tertiary: '#475569',
-    disabled: '#94A3B8',
-    inverse: '#FFFFFF',
-    muted: '#64748B',
+    primary: '#FFFFFF',
+    secondary: '#E5E7EB',
+    tertiary: '#9CA3AF',
+    disabled: '#6B7280',
+    inverse: '#0A0B0D',
+    muted: '#D1D5DB',
   },
 
   border: {
-    primary: '#E2E8F0',
-    secondary: '#CBD5E1',
-    tertiary: '#F1F5F9',
-    focus: '#059669',
-    error: '#DC2626',
+    primary: '#1F2937',
+    secondary: '#374151',
+    tertiary: '#111214',
+    focus: '#00D9FF',
+    error: '#EF4444',
   },
 
-  state: { success: '#059669', warning: '#D97706', error: '#DC2626', info: '#0F2851' },
+  state: { success: '#10B981', warning: '#F59E0B', error: '#EF4444', info: '#00D9FF' },
 
   interactive: {
-    hover: '#F1F5F9',
-    active: '#E2E8F0',
-    selected: '#ECFDF5',
-    focus: '#F8FAFC',
+    hover: '#1A1B1F',
+    active: '#1E1F23',
+    selected: '#1A3A4A',
+    focus: '#111214',
   },
 
   shadow: {
-    light: 'rgba(15, 40, 81, 0.06)',
-    medium: 'rgba(15, 40, 81, 0.12)',
-    heavy: 'rgba(15, 40, 81, 0.20)',
-    colored: 'rgba(15, 40, 81, 0.12)',
+    light: 'rgba(0, 0, 0, 0.15)',
+    medium: 'rgba(0, 0, 0, 0.25)',
+    heavy: 'rgba(0, 0, 0, 0.40)',
+    colored: 'rgba(0, 217, 255, 0.20)',
   },
 
-  brand: { highlight: '#D97706', subtle: '#FFFBEB', emphasis: '#0F2851' },
+  brand: { highlight: '#00D9FF', subtle: '#0A1A20', emphasis: '#FFFFFF' },
 
   utility: { transparent: 'transparent', current: 'currentColor', inherit: 'inherit' },
 } as const;
 
 export const darkColors: DeepReadonly<ColorTree> = {
-  // Service Design Leader Dark Mode - Deep Navy maintained for brand consistency
-  primary: { main: '#1E3A5F', light: '#2A4A70', dark: '#0F2851', contrast: '#FFFFFF' },
-  secondary: { main: '#FB923C', light: '#FDBA74', dark: '#F97316', contrast: '#FFFFFF' },
-  accent: { main: '#34D399', light: '#6EE7B7', dark: '#10B981', contrast: '#FFFFFF' },
+  // Light Mode (Alternative) - Clean and Minimal
+  primary: { main: '#F8FAFC', light: '#FFFFFF', dark: '#E5E7EB', contrast: '#0A0B0D' },
+  secondary: { main: '#0891B2', light: '#06B6D4', dark: '#0E7490', contrast: '#FFFFFF' },
+  accent: { main: '#EA580C', light: '#F97316', dark: '#C2410C', contrast: '#FFFFFF' },
 
   background: {
-    primary: '#0B1220',
-    secondary: '#0F172A',
-    tertiary: '#111827',
-    elevated: '#0F172A',
-    overlay: 'rgba(11, 18, 32, 0.65)',
+    primary: '#FFFFFF',
+    secondary: '#F9FAFB',
+    tertiary: '#F3F4F6',
+    elevated: '#FFFFFF',
+    overlay: 'rgba(255, 255, 255, 0.90)',
   },
 
   text: {
-    primary: '#F8FAFC',
-    secondary: '#E2E8F0',
-    tertiary: '#CBD5E1',
-    disabled: '#64748B',
-    inverse: '#0B1220',
-    muted: '#94A3B8',
+    primary: '#111827',
+    secondary: '#374151',
+    tertiary: '#6B7280',
+    disabled: '#9CA3AF',
+    inverse: '#FFFFFF',
+    muted: '#4B5563',
   },
 
   border: {
-    primary: '#1F2937',
-    secondary: '#273449',
-    tertiary: '#0F172A',
-    focus: '#34D399',
-    error: '#F87171',
+    primary: '#E5E7EB',
+    secondary: '#D1D5DB',
+    tertiary: '#F3F4F6',
+    focus: '#0891B2',
+    error: '#DC2626',
   },
 
   interactive: {
-    hover: '#111827',
-    active: '#1F2937',
-    selected: '#064E3B',
-    focus: '#7C2D12',
+    hover: '#F3F4F6',
+    active: '#E5E7EB',
+    selected: '#E0F2FE',
+    focus: '#F9FAFB',
   },
 
   shadow: {
-    light: 'rgba(0, 0, 0, 0.35)',
-    medium: 'rgba(0, 0, 0, 0.55)',
-    heavy: 'rgba(0, 0, 0, 0.75)',
-    colored: 'rgba(52, 211, 153, 0.25)',
+    light: 'rgba(0, 0, 0, 0.05)',
+    medium: 'rgba(0, 0, 0, 0.10)',
+    heavy: 'rgba(0, 0, 0, 0.20)',
+    colored: 'rgba(8, 145, 178, 0.15)',
   },
 
-  brand: { highlight: '#FB923C', subtle: '#0B1220', emphasis: '#F8FAFC' },
+  brand: { highlight: '#0891B2', subtle: '#F0FDFA', emphasis: '#111827' },
 
   utility: { transparent: 'transparent', current: 'currentColor', inherit: 'inherit' },
 } as const;

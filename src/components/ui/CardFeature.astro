@@ -1,0 +1,60 @@
+---
+/**
+ * @fileoverview Feature Card component for offerings/services
+ * Springboards-inspired large cards with icon, title, description, and CTA
+ */
+
+import Button from './Button.astro';
+import '@/styles/components/card.css';
+
+interface Props {
+  /** Icon (emoji or SVG name) */
+  icon?: string;
+  /** Card title */
+  title: string;
+  /** Short description */
+  description: string;
+  /** List of features/benefits */
+  features?: string[];
+  /** CTA button text */
+  ctaText?: string;
+  /** CTA button link */
+  ctaHref?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const { icon, title, description, features = [], ctaText, ctaHref, class: className } = Astro.props;
+
+const classes = ['card-feature', className].filter(Boolean).join(' ');
+---
+
+<div class={classes}>
+  {icon && <div class="card-feature__icon">{icon}</div>}
+
+  <h3 class="card-feature__title">{title}</h3>
+
+  <p class="card-feature__description">{description}</p>
+
+  {
+    features.length > 0 && (
+      <div class="card-feature__features">
+        {features.map(feature => (
+          <div class="card-feature__feature-item">{feature}</div>
+        ))}
+      </div>
+    )
+  }
+
+  {
+    ctaText && ctaHref && (
+      <div class="card-feature__cta">
+        <Button href={ctaHref} variant="ghost" size="md">
+          {ctaText}
+        </Button>
+      </div>
+    )
+  }
+
+  <slot />
+</div>

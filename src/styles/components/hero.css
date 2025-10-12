@@ -1,103 +1,107 @@
-@reference "tailwindcss";
-
-/* Hero Section - Phase 3 Redesign
- * Implements detailed specifications from docs/HERO_REDESIGN.md
- * Features: Clear typography hierarchy, dual CTAs, staggered animations
+/**
+ * Hero Section - Springboards-inspired bold, centered layout
+ * Massive typography with impactful CTAs
  */
 
-.hero {
-  @apply pt-32 md:pt-40 pb-20 md:pb-32;
+@reference "tailwindcss";
+
+.hero-modern {
+  @apply min-h-screen flex items-center justify-center text-center px-4 md:px-6;
+  background-color: var(--color-background-primary);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Grid Layout - Two columns on desktop */
-.hero__grid {
-  @apply grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center;
+/* Background gradient effect */
+.hero-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(255, 107, 53, 0.08) 0%, transparent 50%);
+  pointer-events: none;
 }
 
-/* Content Column */
-.hero__content {
-  @apply flex flex-col;
-  gap: 2rem; /* Generous spacing between elements */
+.hero-modern__content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* 1. Headline Container */
-.hero__headline {
-  @apply flex flex-col;
-  gap: 0.5rem;
-}
-
-/* 2. Primary Headline - "Service Design" */
-.hero__headline-primary {
-  @apply text-5xl md:text-7xl lg:text-8xl font-extrabold;
+.hero-modern__headline {
+  @apply text-display mb-6 md:mb-8;
   color: var(--color-text-primary);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-  animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  animation-delay: 200ms;
-  opacity: 0;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* 3. Secondary Headline - "for Strategic Transformation" */
-.hero__headline-secondary {
-  @apply text-3xl md:text-5xl lg:text-6xl font-semibold;
+.hero-modern__subheadline {
+  @apply text-xl md:text-2xl lg:text-3xl mb-12 md:mb-16;
   color: var(--color-text-secondary);
-  line-height: 1.2;
-  text-wrap: balance;
-  animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  animation-delay: 300ms;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
   opacity: 0;
 }
 
-/* 4. Description - Value Proposition */
-.hero__description {
-  @apply text-xl md:text-2xl font-normal leading-relaxed max-w-2xl;
-  color: var(--color-text-tertiary);
-  animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  animation-delay: 400ms;
+.hero-modern__actions {
+  @apply flex flex-wrap gap-4 justify-center items-center;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
   opacity: 0;
 }
 
-/* 5. Call-to-Action Buttons */
-.hero__actions {
-  @apply flex flex-col sm:flex-row gap-4;
-  animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  animation-delay: 500ms;
-  opacity: 0;
-}
-
-/* Visual Column - Intentionally empty for breathing room */
-.hero__visual {
-  @apply hidden lg:block;
-}
-
-/* Dark Mode Overrides */
-:root[data-theme='dark'] .hero__headline-primary {
-  color: var(--color-text-primary);
-}
-
-:root[data-theme='dark'] .hero__headline-secondary {
-  color: var(--color-text-disabled);
-}
-
-:root[data-theme='dark'] .hero__description {
-  color: var(--color-text-muted);
-}
-
-/* Reduced Motion Support */
-@media (prefers-reduced-motion: reduce) {
-  .hero__headline-primary,
-  .hero__headline-secondary,
-  .hero__description,
-  .hero__actions {
-    animation: none;
+/* Animation keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Focus States for Accessibility */
-.hero__actions a:focus-visible {
-  outline: 2px solid var(--color-border-focus);
-  outline-offset: 2px;
-  border-radius: 0.5rem;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-modern {
+    @apply min-h-[90vh];
+  }
+
+  .hero-modern__headline {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+}
+
+/* Optional: Scroll indicator */
+.hero-modern__scroll-indicator {
+  @apply absolute bottom-8 left-1/2 transform -translate-x-1/2;
+  animation: bounce 2s infinite;
+  color: var(--color-text-tertiary);
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  40% {
+    transform: translate(-50%, 10px);
+  }
+  60% {
+    transform: translate(-50%, 5px);
+  }
 }

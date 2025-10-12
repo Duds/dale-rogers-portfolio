@@ -1,16 +1,20 @@
 @reference "tailwindcss";
 
-/* Professional Navigation Component Styles - Phase 3 Enhanced */
+/* Springboards-inspired Navigation - Clean, Modern, Sticky */
 .navigation {
-  @apply backdrop-blur-md sticky top-0 z-50 border-b;
-  background-color: color-mix(in srgb, var(--color-background-primary) 92%, transparent);
-  border-color: var(--color-border-tertiary);
+  @apply sticky top-0 z-50 border-b;
+  background-color: color-mix(in srgb, var(--color-background-primary) 95%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: var(--color-border-primary);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
-/* Dark theme support */
-:root[data-theme='dark'] .navigation {
-  background-color: color-mix(in srgb, var(--color-background-primary) 95%, transparent);
-  border-color: var(--color-border-primary);
+.navigation--scrolled {
+  background-color: color-mix(in srgb, var(--color-background-primary) 98%, transparent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Removed .navigation__container as it's no longer needed - Container component handles layout */
@@ -24,8 +28,9 @@
 }
 
 .navigation__logo {
-  @apply text-2xl font-bold transition-colors duration-300;
+  @apply text-2xl md:text-3xl font-black transition-colors duration-200;
   color: var(--color-text-primary);
+  letter-spacing: -0.01em;
 }
 
 .navigation__logo:hover {
@@ -104,28 +109,43 @@
 }
 
 .navigation__link {
-  @apply font-medium transition-all duration-300 px-4 py-2 rounded-full;
+  @apply font-semibold transition-all duration-200 px-4 py-2;
   background-color: transparent;
-  border: 2px solid var(--color-text-secondary);
   color: var(--color-text-secondary);
+  position: relative;
+  text-decoration: none;
+}
+
+.navigation__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-secondary-main);
+  transition:
+    width 0.2s ease,
+    left 0.2s ease;
 }
 
 .navigation__link:hover {
-  background-color: var(--color-text-primary);
-  color: var(--color-primary-contrast);
-  border: 2px solid var(--color-text-primary);
+  color: var(--color-text-primary);
+}
+
+.navigation__link:hover::after {
+  width: 100%;
+  left: 0;
 }
 
 .navigation__link--active {
-  @apply font-semibold px-4 py-2 rounded-full;
-  background-color: var(--color-secondary-main);
-  color: white;
-  border: 2px solid var(--color-secondary-main);
+  @apply font-bold;
+  color: var(--color-secondary-main);
 }
 
-.navigation__link--active:hover {
-  background-color: var(--color-secondary-dark);
-  border: 2px solid var(--color-secondary-dark);
+.navigation__link--active::after {
+  width: 100%;
+  left: 0;
 }
 
 .navigation__link:focus-visible {

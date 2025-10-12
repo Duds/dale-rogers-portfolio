@@ -1,97 +1,44 @@
 ---
+/**
+ * Homepage - Springboards-inspired design
+ * Completely refactored with new component system
+ */
+
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/sections/home/Hero.astro';
-import AboutSection from '@/components/sections/home/AboutSection.astro';
-import CaseStudiesBento from '@/components/sections/home/CaseStudiesBento.astro';
-import FeaturedServicesSlider from '@/components/sections/home/FeaturedServicesSlider.astro';
-import Services from '@/components/sections/home/Services.astro';
-import ServicesText from '@/components/sections/home/ServicesText.astro';
-import MyValues from '@/components/sections/home/MyValues.astro';
+import Offerings from '@/components/sections/home/Offerings.astro';
+import WorkShowcase from '@/components/sections/home/WorkShowcase.astro';
+import Philosophy from '@/components/sections/home/Philosophy.astro';
 import PartnerLogos from '@/components/sections/home/PartnerLogos.astro';
 
 export const prerender = true;
 
-// Define interfaces based on your config.ts schemas
-interface Logo {
-  name: string;
-  url: string;
-  alt: string;
-}
-
-interface Value {
-  name: string;
-  description: string;
-  icon: string;
-}
-
-interface HomeSectionContent {
-  title?: string;
-  subtitle?: string;
-  ctaText?: string;
-  paragraphs?: string[];
-  image?: string;
-  imageUrl?: string;
-  buttonText?: string;
-  buttonLink?: string;
-  skills?: string[];
-  values?: Value[];
-  logos?: Logo[];
-  [key: string]: unknown;
-}
+// Fetch partner logos from content if still used
+const siteContent = await getCollection('site-content');
+const homeEntry = siteContent.find(entry => entry.id === 'home');
 
 interface HomeSection {
   section: string;
-  content: HomeSectionContent;
+  content: {
+    title?: string;
+    logos?: Array<{ name: string; url: string; alt: string }>;
+    [key: string]: unknown;
+  };
 }
 
-// Fetch content, rely on inference but check structure
-const siteContent = await getCollection('site-content');
-const homeEntry = siteContent.find(
-  entry => entry.id === 'home' // Use ID for data collections (filename)
-);
-
-// More robust check for data structure
-if (!homeEntry?.data || typeof homeEntry.data !== 'object' || !Array.isArray(homeEntry.data)) {
-  throw new Error('Home content not found or invalid format: Expected an array');
-}
-
-// Assert type after check - data is the array of sections
-const homeSections = homeEntry.data as HomeSection[];
-
-const heroContent = homeSections.find(section => section.section === 'hero')?.content;
-const aboutContent = homeSections.find(section => section.section === 'about')?.content;
-const servicesTextContent = homeSections.find(
-  section => section.section === 'services-text'
-)?.content;
-const valuesContent = homeSections.find(section => section.section === 'values')?.content;
+const homeSections = (homeEntry?.data || []) as HomeSection[];
 const partnersContent = homeSections.find(section => section.section === 'partners')?.content;
-
-if (!heroContent || !aboutContent || !servicesTextContent || !valuesContent || !partnersContent) {
-  throw new Error('Required content sections not found');
-}
 ---
 
-<BaseLayout title="Home">
-  <Hero
-    title={heroContent.title || ''}
-    subtitle={heroContent.subtitle || ''}
-    ctaText={heroContent.ctaText || ''}
-  />
-  <FeaturedServicesSlider />
-  <AboutSection paragraphs={aboutContent['paragraphs'] || []} />
-  <CaseStudiesBento />
-  <Services />
-  <ServicesText content={servicesTextContent['paragraphs'] || []} />
-  <MyValues
-    title={valuesContent.title}
-    subtitle={valuesContent.subtitle}
-    imageUrl={valuesContent.imageUrl}
-    buttonText={valuesContent.buttonText}
-    buttonLink={valuesContent.buttonLink}
-  />
-  <PartnerLogos title={partnersContent.title} logos={partnersContent.logos || []} />
+<BaseLayout title="Service Design That Transforms | Dale Rogers">
+  <Hero />
+  <Offerings />
+  <WorkShowcase />
+  <Philosophy />
+  {
+    partnersContent?.logos && (
+      <PartnerLogos title={partnersContent.title || 'Trusted By'} logos={partnersContent.logos} />
+    )
+  }
 </BaseLayout>
-<!-- Preview deployment test - Wed Aug 27 10:46:43 AM AEST 2025 - Token updated via GitHub CLI -->
-<!-- Deployed successfully to Azure Static Web Preview deployment test - Wed Aug 27 11:11:24 AM AEST 2025
-- Production workflow now working -->

@@ -1,0 +1,78 @@
+---
+/**
+ * Offerings Section - Springboards-inspired services display
+ * Replaces Services, ServicesText, and FeaturedServicesSlider
+ * Grid of large offering cards
+ */
+
+import Heading from '@/components/ui/Heading.astro';
+import CardFeature from '@/components/ui/CardFeature.astro';
+import Container from '@/components/layout/Container.astro';
+import '@/styles/components/section.css';
+
+// Offerings data
+const offerings = [
+  {
+    icon: '🎯',
+    title: 'Service Strategy',
+    description: 'Define the vision, goals, and roadmap for transforming your service delivery.',
+    features: [
+      'Service blueprinting',
+      'Customer journey mapping',
+      'Stakeholder alignment workshops',
+    ],
+    ctaText: 'Learn More',
+    ctaHref: '/services/service-strategy',
+  },
+  {
+    icon: '🔍',
+    title: 'Research & Discovery',
+    description: 'Uncover insights about users, contexts, and opportunities for innovation.',
+    features: ['User research and interviews', 'Contextual inquiry', 'Data analysis and synthesis'],
+    ctaText: 'Learn More',
+    ctaHref: '/services/research',
+  },
+  {
+    icon: '✨',
+    title: 'Service Design',
+    description: 'Create and test new service experiences that deliver measurable value.',
+    features: ['Co-design workshops', 'Prototyping and testing', 'Implementation support'],
+    ctaText: 'Learn More',
+    ctaHref: '/services/service-design',
+  },
+  {
+    icon: '📊',
+    title: 'Transformation',
+    description: 'Build capability and drive adoption of service design practices.',
+    features: ['Team training and coaching', 'Process design', 'Change management'],
+    ctaText: 'Learn More',
+    ctaHref: '/services/transformation',
+  },
+];
+---
+
+<section class="section section--dark">
+  <Container>
+    <div class="section__header">
+      <Heading level={2} variant="section" kicker="What I Do"> Services & Offerings </Heading>
+      <p class="section__subtitle">
+        Comprehensive service design solutions from strategy to implementation.
+      </p>
+    </div>
+
+    <div class="cards-grid cards-grid--2">
+      {
+        offerings.map(offering => (
+          <CardFeature
+            icon={offering.icon}
+            title={offering.title}
+            description={offering.description}
+            features={offering.features}
+            ctaText={offering.ctaText}
+            ctaHref={offering.ctaHref}
+          />
+        ))
+      }
+    </div>
+  </Container>
+</section>

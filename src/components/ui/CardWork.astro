@@ -1,0 +1,51 @@
+---
+/**
+ * @fileoverview Work Card component for case studies
+ * Image-heavy card with overlay text
+ */
+
+import '@/styles/components/card.css';
+
+interface Props {
+  /** Card title */
+  title: string;
+  /** Client name */
+  client?: string;
+  /** Short excerpt */
+  excerpt?: string;
+  /** Background image */
+  image?: string;
+  /** Link to case study */
+  href: string;
+  /** Tags */
+  tags?: string[];
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const { title, client, excerpt, image, href, tags = [], class: className } = Astro.props;
+
+const classes = ['card-work', className].filter(Boolean).join(' ');
+---
+
+<a href={href} class={classes}>
+  {image && <img src={image} alt={title} class="card-work__image" loading="lazy" />}
+
+  <div class="card-work__overlay">
+    {client && <p class="card-work__client">{client}</p>}
+
+    <h3 class="card-work__title">{title}</h3>
+
+    {excerpt && <p class="card-work__excerpt">{excerpt}</p>}
+
+    {
+      tags.length > 0 && (
+        <div class="card-work__tags">
+          {tags.map(tag => (
+            <span class="card-work__tag">{tag}</span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</a>

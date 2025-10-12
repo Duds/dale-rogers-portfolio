@@ -1,62 +1,69 @@
 ---
 /**
- * @fileoverview Heading component for consistent typography hierarchy.
- * Supports multiple levels with professional styling and accessibility.
+ * @fileoverview Heading component with multiple variants for consistent typography
+ * Springboards-inspired bold, impactful headings
  */
 
 interface Props {
+  /** Heading level (h1-h6) */
   level?: 1 | 2 | 3 | 4 | 5 | 6;
+  /** Variant style */
+  variant?: 'display' | 'hero' | 'section' | 'subsection' | 'default';
+  /** Optional kicker text above heading */
+  kicker?: string;
+  /** Alignment */
+  align?: 'left' | 'center' | 'right';
+  /** Additional CSS classes */
   class?: string;
+  /** ID for heading anchor */
+  id?: string;
 }
 
-const { level = 1, class: className } = Astro.props;
+const {
+  level = 2,
+  variant = 'default',
+  kicker,
+  align = 'left',
+  class: className,
+  id,
+} = Astro.props;
 
-const baseClasses = "heading";
-const levelClasses = `heading--level-${level}`;
-const combinedClasses = [baseClasses, levelClasses, className]
+const Tag = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+const variantClasses = {
+  display: 'text-display',
+  hero: 'text-5xl md:text-6xl lg:text-7xl font-black tracking-tight',
+  section: 'text-4xl md:text-5xl lg:text-6xl font-black tracking-tight',
+  subsection: 'text-3xl md:text-4xl font-bold tracking-tight',
+  default: '',
+};
+
+const alignmentClasses = {
+  left: 'text-left',
+  center: 'text-center',
+  right: 'text-right',
+};
+
+const classes = [variantClasses[variant], alignmentClasses[align], className]
   .filter(Boolean)
-  .join(" ");
+  .join(' ');
 ---
 
-{
-  level === 1 && (
-    <h1 class={combinedClasses}>
-      <slot />
-    </h1>
-  )
-}
-{
-  level === 2 && (
-    <h2 class={combinedClasses}>
-      <slot />
-    </h2>
-  )
-}
-{
-  level === 3 && (
-    <h3 class={combinedClasses}>
-      <slot />
-    </h3>
-  )
-}
-{
-  level === 4 && (
-    <h4 class={combinedClasses}>
-      <slot />
-    </h4>
-  )
-}
-{
-  level === 5 && (
-    <h5 class={combinedClasses}>
-      <slot />
-    </h5>
-  )
-}
-{
-  level === 6 && (
-    <h6 class={combinedClasses}>
-      <slot />
-    </h6>
-  )
-}
+<div class={`heading-wrapper ${alignmentClasses[align]}`}>
+  {
+    kicker && (
+      <p class="text-kicker mb-4" style={{ color: 'var(--color-secondary-main)' }}>
+        {kicker}
+      </p>
+    )
+  }
+  <Tag class={classes} id={id} style={{ color: 'var(--color-text-primary)' }}>
+    <slot />
+  </Tag>
+</div>
+
+<style>
+  .heading-wrapper {
+    margin-bottom: 1.5rem;
+  }
+</style>

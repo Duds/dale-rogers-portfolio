@@ -23,14 +23,11 @@ const combinedClasses = [baseClasses, className].filter(Boolean).join(' ');
 // Get current path for active state detection
 const currentPath = Astro.url.pathname;
 
-// Navigation items
+// Navigation items - Simplified for Springboards style
 const navItems = [
   { href: '/work', text: 'Work', ariaLabel: 'View portfolio work' },
-  {
-    href: '/articles',
-    text: 'Articles',
-    ariaLabel: 'Read articles and insights',
-  },
+  { href: '/articles', text: 'Articles', ariaLabel: 'Read articles and insights' },
+  { href: '/contact', text: 'Contact', ariaLabel: 'Get in touch' },
 ];
 
 // Helper function to determine if a nav item is active
@@ -66,11 +63,6 @@ const isActive = (href: string): boolean => {
 
       <!-- All Navigation Items (Right Side) -->
       <div class="navigation__right">
-        <!-- Search Input -->
-        <div class="navigation__search">
-          <SearchInput />
-        </div>
-
         <!-- Navigation Menu -->
         <div class="navigation__menu" id="main-navigation" aria-labelledby="mobile-menu-button">
           <ul class="navigation__list" role="menubar">
@@ -95,20 +87,7 @@ const isActive = (href: string): boolean => {
           </ul>
         </div>
 
-        <!-- Contact Link -->
-        <div class="navigation__contact">
-          <a
-            href="/contact"
-            class="navigation__link"
-            role="menuitem"
-            aria-label="Get in touch"
-            aria-current={isActive('/contact') ? 'page' : undefined}
-          >
-            Contact
-          </a>
-        </div>
-
-        <!-- Theme Toggle -->
+        <!-- Theme Toggle (moved to end, subtle) -->
         <div class="navigation__theme">
           <ThemeToggle />
         </div>

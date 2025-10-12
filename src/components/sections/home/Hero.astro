@@ -1,65 +1,47 @@
 ---
-// Hero section component - Phase 3 Redesign
-import Button from '@/components/ui/Button.astro';
-import Container from '@/components/layout/Container.astro';
-import '@/styles/components/hero.css';
-
 /**
- * Hero section for the home page - Phase 3 Redesign
+ * Hero section - Springboards-inspired bold, centered layout
  * @component Hero
- * @description Displays leadership positioning with clear hierarchy: kicker, primary headline, secondary headline, description, and dual CTAs.
+ * @description Massive headline with centered layout and prominent CTAs
  * @australian-english
  * @accessibility Full WCAG AAA compliance with semantic HTML
  */
 
-// Content following Phase 3 specifications
-const primaryHeadline = 'Service Design';
-const secondaryHeadline = 'for Strategic Transformation';
-const description =
-  'I help organisations transform how they deliver value, bridging human needs with strategic goals through decades of service design expertise.';
+import Button from '@/components/ui/Button.astro';
+import '@/styles/components/hero.css';
+
+// Content - Punchy and impactful
+const headline = 'Service Design That Transforms';
+const subheadline = 'Designing services, not just interfaces. Creating value, not just artifacts.';
 ---
 
-<section class="hero" aria-label="Hero introduction">
-  <Container>
-    <div class="hero__grid">
-      <!-- Left Column: Main Content -->
-      <div class="hero__content">
-        <!-- Primary & Secondary Headlines -->
-        <h1 class="hero__headline">
-          <span class="hero__headline-primary">{primaryHeadline}</span>
-          <span class="hero__headline-secondary">{secondaryHeadline}</span>
-        </h1>
+<section class="hero-modern" aria-label="Hero introduction">
+  <div class="hero-modern__content">
+    <h1 class="hero-modern__headline">
+      {headline}
+    </h1>
 
-        <!-- Description: Value Proposition -->
-        <p class="hero__description">
-          {description}
-        </p>
+    <p class="hero-modern__subheadline">
+      {subheadline}
+    </p>
 
-        <!-- Call-to-Action Buttons -->
-        <nav class="hero__actions" aria-label="Primary actions">
-          <Button variant="primary" href="/work">
-            View my work
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </Button>
-          <Button variant="ghost" ghostColour="primary" href="/contact"> Get in touch </Button>
-        </nav>
-      </div>
-
-      <!-- Right Column: Visual Space -->
-      <div class="hero__visual" aria-hidden="true">
-        <!-- Intentionally left empty for breathing room -->
-      </div>
+    <div class="hero-modern__actions">
+      <Button variant="primary" size="xl" href="/work"> View Work </Button>
+      <Button variant="ghost" size="xl" href="/contact"> Get Started </Button>
     </div>
-  </Container>
+  </div>
+
+  <!-- Optional scroll indicator -->
+  <div class="hero-modern__scroll-indicator" aria-hidden="true">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path d="M12 5v14M19 12l-7 7-7-7"></path>
+    </svg>
+  </div>
 </section>

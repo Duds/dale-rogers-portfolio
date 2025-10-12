@@ -1,0 +1,77 @@
+---
+/**
+ * Philosophy Section - Merges About and Values sections
+ * Asymmetric layout with philosophy text and key principles
+ */
+
+import Heading from '@/components/ui/Heading.astro';
+import Container from '@/components/layout/Container.astro';
+import '@/styles/components/section.css';
+
+const principles = [
+  {
+    icon: '👥',
+    title: 'Human-Centered',
+    description: 'Start with people, not processes',
+  },
+  {
+    icon: '🔄',
+    title: 'Iterative',
+    description: 'Test, learn, and improve continuously',
+  },
+  {
+    icon: '🤝',
+    title: 'Collaborative',
+    description: 'Co-design with stakeholders',
+  },
+  {
+    icon: '📈',
+    title: 'Impact-Driven',
+    description: 'Focus on measurable outcomes',
+  },
+];
+---
+
+<section class="section section--accent">
+  <Container asymmetric>
+    <div>
+      <Heading level={2} variant="subsection" kicker="How I Work" align="left">
+        Service Design Philosophy
+      </Heading>
+      <div
+        style="color: var(--color-text-secondary); font-size: 1.125rem; line-height: 1.7; margin-top: 1.5rem;"
+      >
+        <p style="margin-bottom: 1.5rem;">
+          I've spent decades helping organisations transform how they deliver value. Service design
+          isn't about making things look better—it's about making them work better.
+        </p>
+        <p style="margin-bottom: 1.5rem;">
+          Every service is a system. Every touchpoint is an opportunity. My approach bridges human
+          needs with strategic goals, turning insights into action and complexity into clarity.
+        </p>
+        <p>
+          I work with government agencies, enterprises, and organisations tackling wicked problems.
+          Together, we design services that people actually want to use.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div style="display: grid; gap: 2rem; margin-top: 2rem;">
+        {
+          principles.map(principle => (
+            <div style="display: flex; gap: 1rem; align-items: start;">
+              <div style="font-size: 2.5rem; line-height: 1;">{principle.icon}</div>
+              <div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.5rem;">
+                  {principle.title}
+                </h3>
+                <p style="color: var(--color-text-secondary);">{principle.description}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</section>

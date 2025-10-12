@@ -1,0 +1,65 @@
+---
+/**
+ * @fileoverview Article Card component for blog posts
+ * Text-focused card with metadata
+ */
+
+import '@/styles/components/card.css';
+
+interface Props {
+  /** Article title */
+  title: string;
+  /** Short excerpt */
+  excerpt?: string;
+  /** Publication date */
+  date?: string;
+  /** Reading time */
+  readingTime?: string;
+  /** Featured image */
+  image?: string;
+  /** Link to article */
+  href: string;
+  /** Tags */
+  tags?: string[];
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const { title, excerpt, date, readingTime, image, href, tags = [], class: className } = Astro.props;
+
+const classes = ['card-article', className].filter(Boolean).join(' ');
+---
+
+<article class={classes}>
+  {image && <img src={image} alt={title} class="card-article__image" loading="lazy" />}
+
+  {
+    (date || readingTime) && (
+      <div class="card-article__meta">
+        {date && <span class="card-article__date">{date}</span>}
+        {date && readingTime && <span>•</span>}
+        {readingTime && <span class="card-article__reading-time">{readingTime}</span>}
+      </div>
+    )
+  }
+
+  <h3 class="card-article__title">
+    <a href={href} style="text-decoration: none; color: inherit;">
+      {title}
+    </a>
+  </h3>
+
+  {excerpt && <p class="card-article__excerpt">{excerpt}</p>}
+
+  {
+    tags.length > 0 && (
+      <div class="card-article__tags">
+        {tags.map(tag => (
+          <span class="card-article__tag">{tag}</span>
+        ))}
+      </div>
+    )
+  }
+
+  <a href={href} class="card-article__link"> Read more → </a>
+</article>

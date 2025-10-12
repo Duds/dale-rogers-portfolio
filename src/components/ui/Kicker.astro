@@ -1,0 +1,27 @@
+---
+/**
+ * @fileoverview Kicker component for small uppercase labels above headings
+ * Springboards-inspired accent labels
+ */
+
+interface Props {
+  /** Additional CSS classes */
+  class?: string;
+  /** Color variant */
+  color?: 'secondary' | 'accent' | 'primary';
+}
+
+const { class: className, color = 'secondary' } = Astro.props;
+
+const colorStyles = {
+  secondary: 'var(--color-secondary-main)',
+  accent: 'var(--color-accent-main)',
+  primary: 'var(--color-primary-contrast)',
+};
+
+const classes = ['text-kicker', className].filter(Boolean).join(' ');
+---
+
+<p class={classes} style={{ color: colorStyles[color] }}>
+  <slot />
+</p>

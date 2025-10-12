@@ -1,0 +1,50 @@
+---
+/**
+ * Work Showcase Section - Springboards-inspired case study display
+ * Replaces CaseStudiesBento with uniform card grid
+ */
+
+import { getCollection } from 'astro:content';
+import Heading from '@/components/ui/Heading.astro';
+import CardWork from '@/components/ui/CardWork.astro';
+import Container from '@/components/layout/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import '@/styles/components/section.css';
+
+// Fetch featured case studies
+const allCaseStudies = await getCollection('case-studies');
+const featuredCaseStudies = allCaseStudies
+  .filter(study => study.data.featured)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 4);
+---
+
+<section class="section">
+  <Container>
+    <div class="section__header">
+      <Heading level={2} variant="section" kicker="Selected Projects"> Featured Work </Heading>
+      <p class="section__subtitle">
+        Real-world service design projects that delivered measurable impact.
+      </p>
+    </div>
+
+    <div class="cards-grid cards-grid--2">
+      {
+        featuredCaseStudies.map(study => (
+          <CardWork
+            title={study.data.title}
+            client={study.data.client}
+            excerpt={study.data.description}
+            image={study.data.image?.src}
+            href={`/work/${study.slug}`}
+            tags={study.data.tags}
+          />
+        ))
+      }
+    </div>
+
+    <div class="section__actions" style="margin-top: 3rem;">
+      <Button href="/work" variant="ghost" size="lg"> View All Work → </Button>
+    </div>
+  </Container>
+</section>
