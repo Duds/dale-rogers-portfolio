@@ -1,20 +1,26 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Container from '@/components/layout/Container.astro';
-import SectionHeading from '@/components/ui/SectionHeading.astro';
+import Heading from '@/components/ui/Heading.astro';
+import '@/styles/components/section.css';
 
 export const prerender = true;
 ---
 
 <BaseLayout
-  title="Colophon | Dale Rogers Design"
-  description="Details about the design and development of the Dale Rogers Design website."
+  title="Colophon | Dale Rogers"
+  description="Details about the design and development of the Dale Rogers website."
 >
-  <Container>
-    <div class="max-w-4xl mx-auto py-20">
-      <SectionHeading heading="Colophon" subheading="Last Updated: 10/11/2023" alignment="left" />
+  <section class="section">
+    <Container narrow>
+      <div class="section__header section__header--left">
+        <Heading level={1} variant="section" align="left">Colophon</Heading>
+        <p style="color: var(--color-text-tertiary); font-size: 0.875rem; margin-top: 1rem;">
+          Last Updated: 10/11/2023
+        </p>
+      </div>
 
-      <div class="prose prose-lg dark:prose-invert mt-10">
+      <div class="prose prose-lg dark:prose-invert" style="color: var(--color-text-secondary);">
         <section class="mb-8">
           <h2 class="text-2xl font-semibold mt-8 mb-4">About This Site</h2>
           <p>Want to take a look under the hood of this website? Wonder no more!</p>
@@ -134,6 +140,6 @@ export const prerender = true;
           </p>
         </section>
       </div>
-    </div>
-  </Container>
+    </Container>
+  </section>
 </BaseLayout>
