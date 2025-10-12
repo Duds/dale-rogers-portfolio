@@ -20,24 +20,13 @@
   gap: 2rem; /* Generous spacing between elements */
 }
 
-/* 1. Kicker - Personal Name */
-.hero__kicker {
-  @apply text-sm md:text-base font-medium uppercase;
-  color: var(--color-secondary-main);
-  letter-spacing: 0.1em;
-  font-weight: 500;
-  animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  animation-delay: 200ms;
-  opacity: 0;
-}
-
-/* 2. Headline Container */
+/* 1. Headline Container */
 .hero__headline {
   @apply flex flex-col;
   gap: 0.5rem;
 }
 
-/* 3. Primary Headline - "Service Design" */
+/* 2. Primary Headline - "Service Design" */
 .hero__headline-primary {
   @apply text-5xl md:text-7xl lg:text-8xl font-extrabold;
   color: var(--color-text-primary);
@@ -45,35 +34,35 @@
   letter-spacing: -0.02em;
   text-wrap: balance;
   animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  animation-delay: 300ms;
+  animation-delay: 200ms;
   opacity: 0;
 }
 
-/* 4. Secondary Headline - "for Strategic Transformation" */
+/* 3. Secondary Headline - "for Strategic Transformation" */
 .hero__headline-secondary {
   @apply text-3xl md:text-5xl lg:text-6xl font-semibold;
   color: var(--color-text-secondary);
   line-height: 1.2;
   text-wrap: balance;
   animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  animation-delay: 400ms;
+  animation-delay: 300ms;
   opacity: 0;
 }
 
-/* 5. Description - Value Proposition */
+/* 4. Description - Value Proposition */
 .hero__description {
   @apply text-xl md:text-2xl font-normal leading-relaxed max-w-2xl;
   color: var(--color-text-tertiary);
   animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  animation-delay: 500ms;
+  animation-delay: 400ms;
   opacity: 0;
 }
 
-/* 6. Call-to-Action Buttons */
+/* 5. Call-to-Action Buttons */
 .hero__actions {
   @apply flex flex-col sm:flex-row gap-4;
   animation: fadeInUp 600ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  animation-delay: 600ms;
+  animation-delay: 500ms;
   opacity: 0;
 }
 
@@ -83,10 +72,6 @@
 }
 
 /* Dark Mode Overrides */
-:root[data-theme='dark'] .hero__kicker {
-  color: var(--color-secondary-light);
-}
-
 :root[data-theme='dark'] .hero__headline-primary {
   color: var(--color-text-primary);
 }
@@ -101,7 +86,6 @@
 
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
-  .hero__kicker,
   .hero__headline-primary,
   .hero__headline-secondary,
   .hero__description,
