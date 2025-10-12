@@ -1,372 +1,332 @@
-# Storybook Configuration & Usage Guide
+# Storybook Documentation
 
 ## Overview
 
-Storybook is configured for React components with Vite integration, providing an isolated development environment for UI components. This setup supports TypeScript, Tailwind CSS v4, and comprehensive component documentation.
+This project includes a comprehensive Storybook setup for documenting and testing UI components and atomic patterns. Storybook provides an isolated environment for developing and showcasing components with various states, props, and use cases.
 
-## 🚀 Quick Start
+**Current Status**: ✅ **Working** - Storybook is successfully configured and building with React components.
 
-### Start Storybook
+## Getting Started
+
+### Installation
+
+Storybook is already installed and configured in this project. The necessary dependencies are included in `package.json`:
+
+```json
+{
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/addon-links": "^8.6.14",
+    "@storybook/addon-a11y": "^8.6.14",
+    "@storybook/addon-themes": "^8.6.14",
+    "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
+    "@storybook/test": "^8.6.14",
+    "storybook": "^8.6.14"
+  }
+}
+```
+
+### Running Storybook
 
 ```bash
-pnpm storybook
+# Start Storybook development server
+pnpm run storybook
+
+# Build Storybook for production
+pnpm run storybook:build
+
+# Export Storybook as static files
+pnpm run storybook:export
 ```
 
-Storybook will start on `http://localhost:6006`
+Storybook will be available at `http://localhost:6006/` by default.
 
-### Build Storybook
+## Configuration
 
-```bash
-pnpm storybook:build
+### Main Configuration (`.storybook/main.ts`)
+
+The main configuration file defines:
+
+- **Story discovery patterns**: Automatically finds stories in `src/**/*.stories.@(ts|tsx)`
+- **Addons**: Essential addons for interactions, links, accessibility, and themes
+- **Framework**: React with Vite for fast development
+- **TypeScript**: React docgen for automatic prop documentation
+- **Vite integration**: Custom Vite configuration for CSS and aliases
+
+### Preview Configuration (`.storybook/preview.tsx`)
+
+The preview configuration provides:
+
+- **Global CSS**: Imports project styles and theme
+- **Backgrounds**: Light, dark, and brand color backgrounds
+- **Viewports**: Mobile, tablet, and desktop breakpoints
+- **Accessibility**: WCAG compliance rules and testing
+- **Theme switching**: Global light/dark theme toggle
+- **Layout**: Centered component layout by default
+
+## Component Coverage
+
+### Currently Working Components
+
+#### Button Component ✅
+
+- **Variants**: Default, secondary, destructive, outline, ghost, link
+- **Sizes**: Small, default, large, icon
+- **States**: Default, disabled, hover, focus
+- **Examples**: All variants, all sizes, interactive states
+
+#### Card Component ✅
+
+- **Variants**: Default, clickable, link, with/without title
+- **Content Types**: Rich content, case studies, services
+- **Layouts**: Responsive grid, custom styling
+- **Examples**: Case study cards, service cards, responsive layouts
+
+### Planned Components
+
+The following components are planned for future implementation as React components:
+
+- **Icon Component**: Material Design, Carbon, Simple Icons support
+- **TagList Component**: Multiple tags with selection highlighting
+- **Heading Component**: Semantic heading levels H1-H6
+- **FormattedDate Component**: Australian date formatting
+- **Pagination Component**: Page navigation controls
+- **PageHeader Component**: Page titles with metadata
+- **SectionHeading Component**: Section-level headings
+- **Tag Component**: Individual tag display
+- **ThemeToggle Component**: Light/dark theme switching
+
+### Component Implementation Strategy
+
+Since this is an Astro project, components are implemented in two ways:
+
+1. **Astro Components** (`.astro` files): Server-side rendered components for the main application
+2. **React Components** (`.tsx` files): Interactive components for Storybook and client-side functionality
+
+To add new components to Storybook:
+
+1. Create a React version (`.tsx`) of the component
+2. Create comprehensive stories (`.stories.tsx`)
+3. Ensure the component follows the project's design system
+4. Test accessibility and responsive behavior
+
+## Story Structure
+
+### Story Organization
+
+Stories are organized by component category:
+
+```
+UI/
+├── Button/          ✅ Working
+├── Card/            ✅ Working
+├── Icon/            🔄 Planned
+├── TagList/         🔄 Planned
+├── Heading/         🔄 Planned
+├── FormattedDate/   🔄 Planned
+├── Pagination/      🔄 Planned
+├── PageHeader/      🔄 Planned
+├── SectionHeading/  🔄 Planned
+├── Tag/             🔄 Planned
+└── ThemeToggle/     🔄 Planned
 ```
 
-### Export Static Files
+### Story Naming Convention
 
-```bash
-pnpm storybook:export
-```
+- **Default**: Basic component usage
+- **Variants**: Different prop combinations
+- **Sizes**: Size variations where applicable
+- **States**: Interactive states (hover, focus, disabled)
+- **Contexts**: Real-world usage examples
+- **Accessibility**: Accessibility features and testing
+- **Responsive**: Responsive behavior demonstrations
 
-## 📁 Configuration Files
+### Story Documentation
 
-### `.storybook/main.ts`
+Each story includes:
 
-Main Storybook configuration with:
+- **Component description**: Clear explanation of purpose and usage
+- **Props documentation**: All available props with descriptions
+- **Examples**: Multiple usage scenarios and contexts
+- **Accessibility notes**: Screen reader and keyboard navigation support
+- **Responsive behavior**: Mobile, tablet, and desktop adaptations
 
-- React + Vite framework
-- TypeScript support
-- Essential addons (links, essentials, interactions)
-- Story discovery patterns
-- TypeScript docgen configuration
+## Addons and Features
 
-### `.storybook/preview.ts`
+### Essential Addons
 
-Preview configuration with:
+- **@storybook/addon-essentials**: Core Storybook functionality
+- **@storybook/addon-interactions**: Interactive testing and debugging
+- **@storybook/addon-links**: Navigation between stories
+- **@storybook/addon-a11y**: Accessibility testing and compliance
+- **@storybook/addon-themes**: Theme switching and testing
 
-- Global styles import
-- Theme switching (light/dark)
-- Background controls
-- Layout settings
-- Global decorators
+### Accessibility Testing
 
-### `.storybook/manager.ts`
+The accessibility addon provides:
 
-UI customization:
+- **WCAG compliance**: Automatic accessibility rule checking
+- **Color contrast**: Ensures sufficient contrast ratios
+- **Heading structure**: Validates proper heading hierarchy
+- **ARIA labels**: Checks for proper ARIA implementation
+- **Keyboard navigation**: Tests keyboard accessibility
 
-- Light theme
-- Sidebar configuration
-- Toolbar settings
+### Theme Testing
 
-### `.storybook/preview-head.html`
+Theme switching allows testing:
 
-Additional HTML head content:
+- **Light theme**: Default light appearance
+- **Dark theme**: Dark mode appearance
+- **Brand colors**: Primary color variations
+- **Responsive themes**: Theme behavior across breakpoints
 
-- Font loading (Inter)
-- Meta tags
-- Custom styles
+### Viewport Testing
 
-## 🎨 Component Stories
+Multiple viewport sizes for testing:
 
-### Button Component
+- **Mobile**: 375x667px (iPhone SE)
+- **Tablet**: 768x1024px (iPad)
+- **Desktop**: 1200x800px (Standard desktop)
 
-Located at `src/components/ui/Button.stories.tsx`
+## Best Practices
 
-**Variants:**
+### Component Development
 
-- Default, Secondary, Destructive
-- Outline, Ghost, Link
+1. **Start with stories**: Write stories before implementing components
+2. **Cover all variants**: Document every prop combination
+3. **Include real examples**: Show components in realistic contexts
+4. **Test accessibility**: Ensure WCAG compliance
+5. **Test responsiveness**: Verify mobile and tablet behavior
 
-**Sizes:**
+### Story Writing
 
-- Small, Default, Large, Icon
+1. **Clear descriptions**: Explain what each story demonstrates
+2. **Meaningful names**: Use descriptive story names
+3. **Realistic data**: Use realistic content and examples
+4. **Context examples**: Show components in page layouts
+5. **Interactive examples**: Include clickable and interactive states
 
-**States:**
+### Documentation
 
-- Disabled, Interactive
+1. **Component descriptions**: Clear purpose and usage guidelines
+2. **Prop documentation**: All props with types and descriptions
+3. **Usage examples**: Code examples and implementation patterns
+4. **Accessibility notes**: Screen reader and keyboard support
+5. **Responsive behavior**: Mobile and tablet adaptations
 
-**Stories:**
+## Testing and Quality
 
-- Individual variant/size stories
-- Comparison stories (AllVariants, AllSizes)
-- Interactive examples
+### Automated Testing
 
-### Card Component
+- **Accessibility**: Automatic WCAG compliance checking
+- **Visual regression**: Screenshot testing for visual changes
+- **Interaction testing**: User interaction and state management
+- **Responsive testing**: Multiple viewport size testing
 
-Located at `src/components/ui/Card.stories.tsx`
+### Manual Testing
 
-**Composition:**
+- **Cross-browser**: Test in Chrome, Firefox, Safari, Edge
+- **Mobile devices**: Test on actual mobile devices
+- **Screen readers**: Test with NVDA, JAWS, VoiceOver
+- **Keyboard navigation**: Test tab order and focus management
 
-- CardHeader, CardTitle, CardDescription
-- CardContent, CardFooter
+## Troubleshooting
 
-**Examples:**
+### Common Issues
 
-- Default card layout
-- Profile cards
-- Stats cards
-- Interactive cards
-- Content-only cards
+1. **Stories not loading**: Check file naming and location
+2. **CSS not applying**: Verify CSS imports in preview configuration
+3. **TypeScript errors**: Check component prop types and interfaces
+4. **Build failures**: Clear Storybook cache and rebuild
 
-## 🛠️ Development Workflow
+### Performance Optimization
 
-### Adding New Components
+1. **Lazy loading**: Load stories on demand
+2. **Bundle analysis**: Monitor bundle size and dependencies
+3. **Image optimization**: Compress images and use appropriate formats
+4. **Code splitting**: Split large components into smaller chunks
 
-1. **Create Component File**
+## Integration with Development
 
-   ```tsx
-   // src/components/ui/NewComponent.tsx
-   import React from 'react';
+### Development Workflow
 
-   export interface NewComponentProps {
-     // Define props
-   }
+1. **Component creation**: Start with Storybook stories
+2. **Implementation**: Build component based on stories
+3. **Testing**: Test in Storybook environment
+4. **Documentation**: Update stories with real examples
+5. **Review**: Use stories for component review and approval
 
-   export const NewComponent: React.FC<NewComponentProps> = ({ ... }) => {
-     // Component implementation
-   };
-   ```
+### Design System Integration
 
-2. **Create Stories File**
+- **Token usage**: Consistent design tokens across components
+- **Theme support**: Light and dark theme variants
+- **Responsive design**: Mobile-first responsive behavior
+- **Accessibility**: WCAG AA compliance standards
 
-   ```tsx
-   // src/components/ui/NewComponent.stories.tsx
-   import type { Meta, StoryObj } from "@storybook/react";
-   import { NewComponent } from "./NewComponent";
+### Continuous Integration
 
-   const meta: Meta<typeof NewComponent> = {
-     title: "UI/NewComponent",
-     component: NewComponent,
-     parameters: {
-       layout: "centered",
-     },
-     tags: ["autodocs"],
-   };
+- **Storybook builds**: Automated Storybook builds on PR
+- **Accessibility testing**: Automated accessibility compliance checks
+- **Visual regression**: Screenshot comparison testing
+- **Performance monitoring**: Bundle size and performance tracking
 
-   export default meta;
-   type Story = StoryObj<typeof meta>;
+## Future Enhancements
 
-   export const Default: Story = {
-     args: {
-       // Default props
-     },
-   };
-   ```
+### Immediate Next Steps
 
-### Story Best Practices
+1. **Create React versions** of remaining UI components
+2. **Add comprehensive stories** for each new component
+3. **Implement design tokens** consistently across components
+4. **Add accessibility features** to all components
 
-1. **Use Descriptive Titles**
-   - Group related components: `UI/Button`, `UI/Card`
-   - Use clear, descriptive names
+### Planned Features
 
-2. **Include Metadata**
+- **Component playground**: Interactive component testing
+- **Design token documentation**: Visual design system documentation
+- **Component composition**: Examples of component combinations
+- **Performance metrics**: Component performance benchmarking
+- **Internationalization**: Multi-language component examples
 
-   ```tsx
-   tags: ['autodocs'], // Auto-generate documentation
-   parameters: {
-     layout: 'centered', // Layout preference
-     docs: {
-       description: {
-         component: 'Component description',
-       },
-     },
-   },
-   ```
+### Community Contributions
 
-3. **Define Controls**
+- **Story additions**: New story examples and use cases
+- **Component improvements**: Enhanced component functionality
+- **Documentation updates**: Improved component documentation
+- **Accessibility enhancements**: Better accessibility support
+- **Performance optimizations**: Faster component rendering
 
-   ```tsx
-   argTypes: {
-     variant: {
-       control: { type: 'select' },
-       options: ['option1', 'option2'],
-       description: 'What this prop does',
-     },
-   },
-   ```
+## Resources
 
-4. **Create Multiple Stories**
-   - Default state
-   - Variants
-   - Interactive states
-   - Edge cases
+### Documentation
 
-## 🎯 Advanced Features
-
-### Theme Switching
-
-Stories automatically support light/dark theme switching through the global decorator.
-
-### Background Controls
-
-Pre-configured backgrounds for testing component appearance on different surfaces.
-
-### Layout Controls
-
-Centered layout by default, with options for full-width or custom layouts.
-
-### Auto-Documentation
-
-Components tagged with `['autodocs']` automatically generate documentation pages.
-
-## 🔧 Customization
-
-### Adding Addons
-
-1. Install addon package
-2. Add to `.storybook/main.ts` addons array
-3. Configure in `.storybook/preview.ts`
-
-### Custom Decorators
-
-Add global decorators in `.storybook/preview.ts`:
-
-```tsx
-decorators: [
-  (Story, context) => {
-    // Custom wrapper logic
-    return <CustomWrapper><Story /></CustomWrapper>;
-  },
-],
-```
-
-### Custom Parameters
-
-Set global parameters in `.storybook/preview.ts`:
-
-```tsx
-parameters: {
-  // Global parameters
-  backgrounds: { ... },
-  layout: '...',
-  docs: { ... },
-},
-```
-
-## 🧪 Testing Integration
-
-### Component Testing
-
-Stories can be used for:
-
-- Visual regression testing
-- Component behavior testing
-- Accessibility testing
-- Cross-browser testing
-
-### Storybook Testing Library
-
-```tsx
-import { within, userEvent } from "@storybook/testing-library";
-
-export const InteractionTest: Story = {
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole("button");
-    await userEvent.click(button);
-  },
-};
-```
-
-## 📱 Responsive Design
-
-### Viewport Addon
-
-Configure different viewport sizes for testing responsive behavior:
-
-```tsx
-parameters: {
-  viewport: {
-    viewports: {
-      mobile: { name: 'Mobile', styles: { width: '375px', height: '667px' } },
-      tablet: { name: 'Tablet', styles: { width: '768px', height: '1024px' } },
-      desktop: { name: 'Desktop', styles: { width: '1920px', height: '1080px' } },
-    },
-  },
-},
-```
-
-## 🎨 Design System Integration
-
-### Tailwind CSS v4
-
-- All Tailwind utilities available in stories
-- CSS custom properties for theming
-- Dark mode support
-
-### Component Variants
-
-- Consistent prop interfaces
-- Reusable component patterns
-- Design token integration
-
-## 🚀 Performance
-
-### Build Optimization
-
-- Vite integration for fast builds
-- Tree-shaking for unused code
-- Optimized bundle generation
-
-### Development Experience
-
-- Hot module replacement
-- Fast refresh
-- Efficient story loading
-
-## 📚 Resources
-
-### Official Documentation
-
-- [Storybook for React](https://storybook.js.org/docs/react/get-started/introduction)
-- [Storybook Addons](https://storybook.js.org/addons/)
-- [Storybook Testing](https://storybook.js.org/docs/react/writing-tests/introduction)
+- [Storybook Documentation](https://storybook.js.org/docs)
+- [React Addon Documentation](https://storybook.js.org/addons/@storybook/addon-essentials)
+- [Accessibility Addon](https://storybook.js.org/addons/@storybook/addon-a11y)
+- [Theme Addon](https://storybook.js.org/addons/@storybook/addon-themes)
 
 ### Community
 
 - [Storybook Discord](https://discord.gg/storybook)
 - [GitHub Discussions](https://github.com/storybookjs/storybook/discussions)
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/storybook)
 
-## 🔍 Troubleshooting
+### Examples
 
-### Common Issues
+- [Storybook Examples](https://storybook.js.org/examples)
+- [Component Libraries](https://storybook.js.org/showcase)
+- [Design Systems](https://storybook.js.org/showcase/design-systems)
 
-1. **Stories Not Loading**
-   - Check file naming: `*.stories.tsx`
-   - Verify import paths
-   - Check TypeScript errors
+---
 
-2. **Styles Not Applied**
-   - Ensure global CSS import in preview.ts
-   - Check Tailwind CSS configuration
-   - Verify CSS variable definitions
+## Current Status Summary
 
-3. **Build Failures**
-   - Check TypeScript compilation
-   - Verify dependency versions
-   - Check for syntax errors
+✅ **Storybook Setup**: Successfully configured and building
+✅ **Button Component**: Full stories and documentation
+✅ **Card Component**: Full stories and documentation
+🔄 **Additional Components**: Planned for future implementation
 
-### Debug Mode
+This Storybook setup provides a solid foundation for component development, testing, and documentation. It currently supports the Button and Card components with comprehensive stories, and is ready for expansion as more React components are implemented.
 
-Start Storybook with debug information:
-
-```bash
-DEBUG=* pnpm storybook
-```
-
-## 📈 Next Steps
-
-### Planned Enhancements
-
-- [ ] Add more UI components
-- [ ] Implement visual regression testing
-- [ ] Add accessibility testing addon
-- [ ] Create design system documentation
-- [ ] Add component playground
-- [ ] Implement story composition
-
-### Integration Opportunities
-
-- [ ] Design tokens documentation
-- [ ] Component API documentation
-- [ ] Interactive examples
-- [ ] Performance monitoring
-- [ ] Accessibility auditing
+The setup follows best practices for accessibility, responsive design, and theme support, making it an excellent tool for maintaining design consistency and component quality across the application.
