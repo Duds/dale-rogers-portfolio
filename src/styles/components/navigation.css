@@ -104,28 +104,28 @@
 }
 
 .navigation__link {
-  @apply font-medium transition-all duration-300 px-4 py-2 rounded-full border-2 border-solid;
+  @apply font-medium transition-all duration-300 px-4 py-2 rounded-full;
   background-color: transparent;
-  border-color: var(--color-border-secondary);
+  border: 2px solid var(--color-text-secondary);
   color: var(--color-text-secondary);
 }
 
 .navigation__link:hover {
   background-color: var(--color-text-primary);
   color: var(--color-primary-contrast);
-  border-color: var(--color-text-primary);
+  border: 2px solid var(--color-text-primary);
 }
 
 .navigation__link--active {
-  @apply font-semibold px-4 py-2 rounded-full border-2 border-solid;
+  @apply font-semibold px-4 py-2 rounded-full;
   background-color: var(--color-secondary-main);
   color: white;
-  border-color: var(--color-secondary-main);
+  border: 2px solid var(--color-secondary-main);
 }
 
 .navigation__link--active:hover {
   background-color: var(--color-secondary-dark);
-  border-color: var(--color-secondary-dark);
+  border: 2px solid var(--color-secondary-dark);
 }
 
 .navigation__link:focus-visible {
@@ -164,10 +164,15 @@
   }
 
   .navigation__link {
-    @apply block w-full px-4 py-3 text-left border-b last:border-b-0 rounded-none;
-    border-color: var(--color-border-tertiary);
+    @apply block w-full px-4 py-3 text-left rounded-none;
     background-color: transparent;
     color: var(--color-text-secondary);
+    border: none;
+    border-bottom: 1px solid var(--color-border-tertiary);
+  }
+
+  .navigation__link:last-child {
+    border-bottom: none;
   }
 
   .navigation__link:hover {
@@ -178,7 +183,11 @@
   .navigation__link--active {
     background-color: var(--color-secondary-main);
     color: white;
-    border-color: var(--color-secondary-main);
+    border-bottom: 1px solid var(--color-secondary-main);
+  }
+
+  .navigation__link--active:last-child {
+    border-bottom: none;
   }
 
   /* Mobile search and theme toggle */
