@@ -26,11 +26,11 @@ find src/content -type f \( -name "*.mdx" -o -name "*.md" \) | while IFS= read -
   if [[ $file == *"backup"* ]]; then
     continue
   fi
-  
+
   # Create a temporary file for comparison
   TEMP_FILE="${file}.temp"
   cp "$file" "$TEMP_FILE"
-  
+
   # Apply replacements (macOS sed requires '' after -i)
   sed -i '' \
     -e 's/\borganizations\b/organisations/g' \
@@ -82,13 +82,13 @@ find src/content -type f \( -name "*.mdx" -o -name "*.md" \) | while IFS= read -
     -e 's/\bmaximized\b/maximised/g' \
     -e 's/\bmaximizing\b/maximising/g' \
     "$file"
-  
+
   # Check if file was modified
   if ! diff "$TEMP_FILE" "$file" > /dev/null 2>&1; then
     echo "✅ Updated: $(basename "$file")"
     TOTAL_CHANGES=$((TOTAL_CHANGES + 1))
   fi
-  
+
   # Clean up
   rm -f "$TEMP_FILE"
 done
