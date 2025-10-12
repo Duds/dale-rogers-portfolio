@@ -1,0 +1,211 @@
+---
+/**
+ * Unified Image Component
+ * Consolidates functionality from OptimizedImage, ResponsiveImage, LazyImage, and ImageCache
+ *
+ * @component Image
+ * @example
+ * ```astro
+ * <Image
+ *   src="/images/hero.jpg"
+ *   alt="Hero image"
+ *   width={1200}
+ *   height={600}
+ *   priority={true}
+ * />
+ * ```
+ */
+
+export interface Props {
+  /** Image source path (relative to public/ or absolute URL) */
+  src: string;
+  /** Alt text for accessibility (REQUIRED) */
+  alt: string;
+  /** Image width in pixels */
+  width?: number;
+  /** Image height in pixels */
+  height?: number;
+  /** Additional CSS classes */
+  class?: string;
+  /** Priority loading for above-the-fold images */
+  priority?: boolean;
+  /** Responsive sizes attribute */
+  sizes?: string;
+  /** Image quality (1-100, default 80) */
+  quality?: number;
+  /** Loading strategy */
+  loading?: 'lazy' | 'eager';
+  /** Object fit CSS property */
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+}
+
+const {
+  src,
+  alt,
+  width = 1200,
+  height = 800,
+  class: className = '',
+  priority = false,
+  sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
+  quality = 80,
+  loading = 'lazy',
+  objectFit = 'cover',
+} = Astro.props;
+
+// Determine loading strategy
+const loadingAttr = priority ? 'eager' : loading;
+const fetchPriority = priority ? 'high' : 'auto';
+
+// Generate responsive image sizes for Unsplash images
+const generateResponsiveUrls = (baseUrl: string) => {
+  const responsiveSizes = [400, 800, 1200, 1600, 2000];
+  return responsiveSizes.map(size => ({
+    width: size,
+    url: baseUrl.includes('unsplash.com')
+      ? baseUrl.replace(/w=\d+/, `w=${size}`).replace(/q=\d+/, `q=${quality}`)
+      : `${baseUrl}?w=${size}`,
+  }));
+};
+
+const isUnsplash = src.includes('unsplash.com');
+const responsiveUrls = isUnsplash ? generateResponsiveUrls(src) : [];
+
+// Generate srcset for local images
+const generateSrcSet = (imagePath: string, baseWidth: number) => {
+  const sizes = [400, 800, 1200, 1600];
+  return sizes
+    .map(size => {
+      const ratio = size / baseWidth;
+      const actualWidth = Math.round(baseWidth * ratio);
+      return `${imagePath}?w=${actualWidth} ${actualWidth}w`;
+    })
+    .join(', ');
+};
+
+const imagePath = src.startsWith('/') ? src : `/images/${src}`;
+---
+
+<picture class={`image ${className}`}>
+  {
+    isUnsplash && responsiveUrls.length > 0 && (
+      <>
+        {/* WebP format for Unsplash */}
+        <source
+          type="image/webp"
+          srcset={responsiveUrls.map(url => `${url.url}&fm=webp ${url.width}w`).join(', ')}
+          sizes={sizes}
+        />
+
+        {/* JPEG format for Unsplash */}
+        <source
+          srcset={responsiveUrls.map(url => `${url.url} ${url.width}w`).join(', ')}
+          sizes={sizes}
+        />
+      </>
+    )
+  }
+
+  {
+    !isUnsplash && (
+      <>
+        {/* WebP format for local images */}
+        <source
+          type="image/webp"
+          srcset={generateSrcSet(imagePath.replace(/\.(png|jpg|jpeg)$/i, '.webp'), width)}
+          sizes={sizes}
+        />
+
+        {/* Original format for local images */}
+        <source srcset={generateSrcSet(imagePath, width)} sizes={sizes} />
+      </>
+    )
+  }
+
+  {/* Fallback image */}
+  <img
+    src={isUnsplash ? src : imagePath}
+    alt={alt}
+    width={width}
+    height={height}
+    class={`image__img object-${objectFit}`}
+    loading={loadingAttr}
+    decoding="async"
+    fetchpriority={fetchPriority}
+    data-image-component="unified"
+  />
+</picture>
+
+<style>
+  @reference "tailwindcss";
+
+  .image {
+    @apply block w-full h-full;
+  }
+
+  .image__img {
+    @apply w-full h-full transition-opacity duration-300;
+  }
+
+  /* Progressive loading effect */
+  .image__img[loading='lazy'] {
+    opacity: 0;
+  }
+
+  .image__img[loading='lazy'].loaded {
+    opacity: 1;
+  }
+
+  /* High priority images load immediately */
+  .image__img[loading='eager'] {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  // Enhanced lazy loading with IntersectionObserver
+  function initImageLoading() {
+    const lazyImages = document.querySelectorAll(
+      'img[loading="lazy"][data-image-component="unified"]'
+    );
+
+    if (!lazyImages.length) return;
+
+    const imageObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+
+            // Add loaded class when image loads
+            img.addEventListener('load', () => {
+              img.classList.add('loaded');
+            });
+
+            // If image is already cached, add class immediately
+            if (img.complete) {
+              img.classList.add('loaded');
+            }
+
+            observer.unobserve(img);
+          }
+        });
+      },
+      {
+        threshold: 0.01,
+        rootMargin: '50px',
+      }
+    );
+
+    lazyImages.forEach(img => imageObserver.observe(img));
+  }
+
+  // Initialize on DOM content loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initImageLoading);
+  } else {
+    initImageLoading();
+  }
+
+  // Re-initialize on Astro page navigation
+  document.addEventListener('astro:page-load', initImageLoading);
+</script>

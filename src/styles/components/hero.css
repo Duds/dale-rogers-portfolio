@@ -14,9 +14,10 @@
 }
 
 .hero__kicker {
-  @apply text-sm md:text-base font-medium tracking-wide uppercase;
+  @apply text-sm md:text-base font-medium uppercase;
   color: var(--color-secondary-main);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
+  font-weight: 600;
 }
 
 .hero__headline {
@@ -27,6 +28,8 @@
   @apply text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight;
   color: var(--color-text-primary);
   text-wrap: balance;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .hero__headline-secondary {

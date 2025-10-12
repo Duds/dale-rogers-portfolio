@@ -166,19 +166,10 @@
     animation-delay: 0.8s;
   }
   .articles-grid__item:nth-child(9) {
-    animation-delay: 0.9s;
+    animation-delay: 720ms;
   }
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  /* Keyframe defined in src/styles/animations.css - no duplication */
 
   /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
