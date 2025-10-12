@@ -9,7 +9,7 @@
   border-color: var(--color-border-primary);
 }
 
-:root[data-theme="dark"] .case-study-card {
+:root[data-theme='dark'] .case-study-card {
   background-color: var(--color-background-primary);
   border-color: var(--color-border-primary);
 }
@@ -27,7 +27,22 @@
 }
 
 .case-study-card__client-badge {
-  @apply absolute top-4 left-4 inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-black/90 text-neutral-900 dark:text-white backdrop-blur-sm;
+  @apply w-fit inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm shadow-lg border;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: var(--color-text-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+:root[data-theme='dark'] .case-study-card__client-badge {
+  background-color: rgba(0, 0, 0, 0.95);
+  color: var(--color-text-inverse);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.case-study-card__industry-badge {
+  @apply w-fit inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium backdrop-blur-sm shadow-lg;
+  background-color: var(--color-accent-main);
+  color: white;
 }
 
 .case-study-card__content {
@@ -35,7 +50,7 @@
 }
 
 .case-study-card__title {
-  @apply text-2xl font-bold leading-tight transition-colors duration-300 mb-4;
+  @apply text-2xl font-bold leading-tight transition-colors duration-300;
   color: var(--color-text-primary);
 }
 
@@ -43,20 +58,30 @@
   color: var(--color-secondary-main);
 }
 
-:root[data-theme="dark"] .case-study-card__title {
-  color: var(--color-text-inverse);
+.case-study-card:hover .case-study-card__title {
+  color: var(--color-secondary-main);
 }
 
-:root[data-theme="dark"] .case-study-card__title:hover {
-  color: var(--color-text-disabled);
+:root[data-theme='dark'] .case-study-card__title {
+  color: var(--color-text-primary);
+}
+
+:root[data-theme='dark'] .case-study-card__title:hover,
+:root[data-theme='dark'] .case-study-card:hover .case-study-card__title {
+  color: var(--color-secondary-light);
 }
 
 .case-study-card__description {
-  @apply text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed text-base;
+  @apply mb-8 leading-relaxed text-base;
+  color: var(--color-text-secondary);
+}
+
+:root[data-theme='dark'] .case-study-card__description {
+  color: var(--color-text-muted);
 }
 
 .case-study-card__metadata {
-  @apply space-y-4 mb-6;
+  @apply mb-8;
 }
 
 .case-study-card__metadata-grid {
@@ -64,53 +89,103 @@
 }
 
 .case-study-card__metadata-item {
-  @apply flex items-center justify-between py-2 px-3 bg-neutral-100 dark:bg-neutral-900 rounded-lg;
+  @apply flex items-center justify-between py-3 px-4 rounded-xl border;
+  background: linear-gradient(
+    to right,
+    var(--color-background-tertiary),
+    var(--color-background-secondary)
+  );
+  border-color: var(--color-border-primary);
+}
+
+:root[data-theme='dark'] .case-study-card__metadata-item {
+  background: linear-gradient(to right, rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.3));
+  border-color: var(--color-border-secondary);
 }
 
 .case-study-card__metadata-label {
-  @apply font-semibold text-neutral-600 dark:text-neutral-400 uppercase tracking-wide text-xs;
+  @apply font-semibold uppercase tracking-wide text-xs;
+  color: var(--color-text-secondary);
 }
 
 .case-study-card__metadata-value {
-  @apply text-neutral-900 dark:text-white font-medium;
+  @apply font-semibold;
+  color: var(--color-text-primary);
 }
 
 .case-study-card__tags {
-  @apply flex flex-wrap gap-2;
+  @apply flex flex-wrap gap-3;
 }
 
 .case-study-card__tag {
-  @apply transition-all duration-300;
+  @apply inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border;
+  background-color: var(--color-background-tertiary);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border-secondary);
 }
 
 .case-study-card__tag:hover {
   background-color: var(--color-secondary-main);
   color: white;
+  border-color: var(--color-secondary-main);
+}
+
+:root[data-theme='dark'] .case-study-card__tag {
+  background-color: var(--color-background-tertiary);
+  color: var(--color-text-muted);
+  border-color: var(--color-border-secondary);
+}
+
+:root[data-theme='dark'] .case-study-card__tag:hover {
+  background-color: var(--color-secondary-main);
+  color: white;
+  border-color: var(--color-secondary-main);
+}
+
+.case-study-card__tag-overflow {
+  @apply inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium;
+  background-color: var(--color-background-tertiary);
+  color: var(--color-text-tertiary);
 }
 
 .case-study-card__link-section {
-  @apply mt-6 pt-4 border-t border-neutral-200 dark:border-neutral-600;
+  @apply pt-4 border-t;
+  border-color: var(--color-border-primary);
 }
 
 .case-study-card__link {
-  @apply inline-flex items-center text-sm font-semibold transition-colors duration-300 group-hover:underline;
+  @apply inline-flex items-center text-sm font-semibold transition-all duration-300;
   color: var(--color-secondary-main);
 }
 
-.case-study-card__link:hover {
+.case-study-card__link:hover,
+.case-study-card:hover .case-study-card__link {
   color: var(--color-secondary-dark);
+  text-decoration: underline;
 }
 
-:root[data-theme="dark"] .case-study-card__link {
-  color: var(--color-text-disabled);
+.case-study-card__link:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
 }
 
-:root[data-theme="dark"] .case-study-card__link:hover {
+:root[data-theme='dark'] .case-study-card__link {
+  color: var(--color-secondary-light);
+}
+
+:root[data-theme='dark'] .case-study-card__link:hover,
+:root[data-theme='dark'] .case-study-card:hover .case-study-card__link {
   color: var(--color-accent-light);
 }
 
 .case-study-card__link-icon {
-  @apply w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1;
+  @apply w-4 h-4 ml-2 transition-transform duration-300;
+}
+
+.case-study-card__link:hover .case-study-card__link-icon,
+.case-study-card:hover .case-study-card__link-icon {
+  @apply translate-x-1;
 }
 
 /* Case Study Layout */
@@ -163,7 +238,7 @@
   color: var(--color-secondary-main);
 }
 
-:root[data-theme="dark"] .case-study-layout__overview-icon {
+:root[data-theme='dark'] .case-study-layout__overview-icon {
   color: var(--color-text-disabled);
 }
 
@@ -208,7 +283,7 @@
   color: var(--color-state-success);
 }
 
-:root[data-theme="dark"] .case-study-layout__overview-results-icon {
+:root[data-theme='dark'] .case-study-layout__overview-results-icon {
   color: var(--color-accent-light);
 }
 
@@ -236,7 +311,7 @@
   background-color: var(--color-background-tertiary);
 }
 
-:root[data-theme="dark"] .case-study-content :global(blockquote) {
+:root[data-theme='dark'] .case-study-content :global(blockquote) {
   color: var(--color-text-disabled);
   background-color: var(--color-background-tertiary);
 }
@@ -295,11 +370,11 @@
   color: var(--color-secondary-dark);
 }
 
-:root[data-theme="dark"] .case-study-content :global(a) {
+:root[data-theme='dark'] .case-study-content :global(a) {
   color: var(--color-text-disabled);
 }
 
-:root[data-theme="dark"] .case-study-content :global(a):hover {
+:root[data-theme='dark'] .case-study-content :global(a):hover {
   color: var(--color-accent-light);
 }
 
@@ -327,6 +402,45 @@
   @apply my-12 border-t border-neutral-400 dark:border-neutral-600;
 }
 
+/* Bento Grid Case Study Cards (Homepage) */
+.bento-card-focus:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.bento-card-client {
+  @apply text-sm font-medium;
+  color: var(--color-text-secondary);
+}
+
+:root[data-theme='dark'] .bento-card-client {
+  color: var(--color-text-muted);
+}
+
+.bento-card-title {
+  @apply text-2xl font-bold transition-colors;
+  color: var(--color-text-primary);
+}
+
+.group:hover .bento-card-title {
+  color: var(--color-secondary-main);
+}
+
+:root[data-theme='dark'] .group:hover .bento-card-title {
+  color: var(--color-secondary-light);
+}
+
+.bento-card-tag {
+  @apply text-xs px-2 py-1 rounded-full;
+  background-color: var(--color-background-tertiary);
+  color: var(--color-text-secondary);
+}
+
+:root[data-theme='dark'] .bento-card-tag {
+  background-color: var(--color-background-tertiary);
+  color: var(--color-text-muted);
+}
+
 /* Work Index Page */
 .work-container {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20;
@@ -345,7 +459,7 @@
   color: var(--color-secondary-main);
 }
 
-:root[data-theme="dark"] .case-studies-grid :global(.group:hover h3 a) {
+:root[data-theme='dark'] .case-studies-grid :global(.group:hover h3 a) {
   color: var(--color-text-disabled);
 }
 

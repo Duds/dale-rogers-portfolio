@@ -1,14 +1,15 @@
 @reference "tailwindcss";
 
-/* Professional Navigation Component Styles */
+/* Professional Navigation Component Styles - Phase 3 Enhanced */
 .navigation {
-  @apply backdrop-blur-md sticky top-0 z-50;
-  background-color: color-mix(in srgb, var(--color-background-primary) 90%, transparent);
+  @apply backdrop-blur-md sticky top-0 z-50 border-b;
+  background-color: color-mix(in srgb, var(--color-background-primary) 92%, transparent);
+  border-color: var(--color-border-tertiary);
 }
 
 /* Dark theme support */
 :root[data-theme='dark'] .navigation {
-  background-color: color-mix(in srgb, var(--color-background-primary) 90%, transparent);
+  background-color: color-mix(in srgb, var(--color-background-primary) 95%, transparent);
   border-color: var(--color-border-primary);
 }
 
@@ -36,10 +37,12 @@
   @apply md:hidden flex flex-col items-center justify-center w-10 h-10 p-2 bg-transparent border-none cursor-pointer;
 }
 
-.navigation__mobile-toggle:focus {
-  @apply outline-none ring-2 ring-offset-2;
-  ring-color: var(--color-border-focus);
-  ring-offset-color: var(--color-background-primary);
+.navigation__mobile-toggle:focus-visible {
+  @apply outline-none;
+  box-shadow:
+    0 0 0 2px var(--color-background-primary),
+    0 0 0 4px var(--color-border-focus);
+  border-radius: 0.5rem;
 }
 
 .navigation__hamburger {
@@ -103,20 +106,20 @@
 .navigation__link {
   @apply font-medium transition-all duration-300 px-4 py-2 rounded-full border-2 border-solid;
   background-color: transparent;
-  border-color: var(--color-text-secondary);
+  border-color: var(--color-border-secondary);
   color: var(--color-text-secondary);
 }
 
 .navigation__link:hover {
-  background-color: var(--color-text-secondary);
-  color: var(--color-text-inverse);
-  border-color: var(--color-text-secondary);
+  background-color: var(--color-text-primary);
+  color: var(--color-primary-contrast);
+  border-color: var(--color-text-primary);
 }
 
 .navigation__link--active {
-  @apply font-medium px-4 py-2 rounded-full border-2 border-solid;
+  @apply font-semibold px-4 py-2 rounded-full border-2 border-solid;
   background-color: var(--color-secondary-main);
-  color: var(--color-secondary-contrast);
+  color: white;
   border-color: var(--color-secondary-main);
 }
 
@@ -125,10 +128,11 @@
   border-color: var(--color-secondary-dark);
 }
 
-.navigation__link:focus {
-  @apply outline-none ring-2 ring-offset-2;
-  ring-color: var(--color-border-focus);
-  ring-offset-color: var(--color-background-primary);
+.navigation__link:focus-visible {
+  @apply outline-none;
+  box-shadow:
+    0 0 0 2px var(--color-background-primary),
+    0 0 0 4px var(--color-border-focus);
 }
 
 .navigation__actions {
@@ -167,13 +171,13 @@
   }
 
   .navigation__link:hover {
-    background-color: var(--color-text-secondary);
-    color: var(--color-text-inverse);
+    background-color: var(--color-interactive-hover);
+    color: var(--color-text-primary);
   }
 
   .navigation__link--active {
     background-color: var(--color-secondary-main);
-    color: var(--color-secondary-contrast);
+    color: white;
     border-color: var(--color-secondary-main);
   }
 
