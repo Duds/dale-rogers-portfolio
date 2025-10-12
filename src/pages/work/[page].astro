@@ -94,8 +94,8 @@ const getPageUrl = (pageNum: number) => {
           <div style="margin-top: 4rem;">
             <Pagination
               currentPage={page.currentPage}
-              lastPage={page.lastPage}
-              urlPattern="/work/{page}"
+              totalPages={page.lastPage}
+              getPageUrl={getPageUrl}
             />
           </div>
         )
