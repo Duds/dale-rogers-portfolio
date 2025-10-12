@@ -369,12 +369,14 @@ See `docs/CONTENT_VOICE_GUIDELINES.md` for 20+ detailed before/after examples co
 These standards are **MANDATORY** for all new content and should be applied when updating existing content.
 
 **Implementation Status**: ✅ COMPLETE (12 January 2025)
+
 - 12 files updated
-- 150+ spelling corrections  
+- 150+ spelling corrections
 - 15+ passive→active conversions
 - 10+ buzzword removals
 
 **Maintenance**: See `CONTENT_VOICE_MAINTENANCE_GUIDELINES.md` for:
+
 - Quarterly audit process
 - Automated check scripts
 - Common mistakes & fixes

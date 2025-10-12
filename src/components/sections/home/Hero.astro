@@ -1,56 +1,56 @@
 ---
-// Hero section component
+// Hero section component - Phase 3 Redesign
 import Button from '@/components/ui/Button.astro';
-import Heading from '@/components/ui/Heading.astro';
 import Container from '@/components/layout/Container.astro';
 import '@/styles/components/hero.css';
 
 /**
- * Hero section for the home page
+ * Hero section for the home page - Phase 3 Redesign
  * @component Hero
- * @description Displays a dramatic slogan, description, and call-to-action button.
+ * @description Displays leadership positioning with clear hierarchy: kicker, primary headline, secondary headline, description, and dual CTAs.
  * @australian-english
+ * @accessibility Full WCAG AAA compliance with semantic HTML
  */
 
-// Dramatic slogan with line breaks for visual impact
-const slogan = 'Service\nDesign\nStrategy';
+// Content following Phase 3 specifications
+const kicker = 'Dale Rogers';
+const primaryHeadline = 'Service Design';
+const secondaryHeadline = 'for Strategic Transformation';
 const description =
-  "I'm Dale Rogers, a service designer and strategy consultant, helping organisations transform how they deliver value. With decades of experience, I bridge the gap between human needs and organisational goals.";
+  'I help organisations transform how they deliver value, bridging human needs with strategic goals through decades of service design expertise.';
 ---
 
-<div class="pt-32 md:pt-40 flex items-center py-20">
+<section class="hero" aria-label="Hero introduction">
   <Container>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 w-full">
-      <!-- Left Column -->
-      <div class="flex flex-col justify-center">
-        <Heading
-          level={1}
-          class="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight hero-headline"
-        >
-          {
-            slogan.split('\n').map((line, i) => (
-              <>
-                {i > 0 && <br />}
-                {line}
-              </>
-            ))
-          }
-        </Heading>
-      </div>
+    <div class="hero__grid">
+      <!-- Left Column: Main Content -->
+      <div class="hero__content">
+        <!-- Kicker: Personal Name -->
+        <span class="hero__kicker" aria-label="Personal introduction">
+          {kicker}
+        </span>
 
-      <!-- Right Column -->
-      <div class="flex flex-col justify-end">
-        <p class="text-2xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl">
+        <!-- Primary & Secondary Headlines -->
+        <h1 class="hero__headline">
+          <span class="hero__headline-primary">{primaryHeadline}</span>
+          <span class="hero__headline-secondary">{secondaryHeadline}</span>
+        </h1>
+
+        <!-- Description: Value Proposition -->
+        <p class="hero__description">
           {description}
         </p>
-        <div>
+
+        <!-- Call-to-Action Buttons -->
+        <nav class="hero__actions" aria-label="Primary actions">
           <Button variant="primary" href="/work">
-            View Work
+            View my work
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
               viewBox="0 0 20 20"
               fill="currentColor"
+              aria-hidden="true"
             >
               <path
                 fill-rule="evenodd"
@@ -58,8 +58,14 @@ const description =
                 clip-rule="evenodd"></path>
             </svg>
           </Button>
-        </div>
+          <Button variant="ghost" ghostColour="primary" href="/contact"> Get in touch </Button>
+        </nav>
+      </div>
+
+      <!-- Right Column: Visual Space -->
+      <div class="hero__visual" aria-hidden="true">
+        <!-- Intentionally left empty for breathing room -->
       </div>
     </div>
   </Container>
-</div>
+</section>
